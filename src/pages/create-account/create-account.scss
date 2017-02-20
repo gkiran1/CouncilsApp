@@ -1,0 +1,37 @@
+
+ion-input{
+    padding-bottom:10px;
+}
+.createBtn{
+    margin-top: 20px;
+}
+.createBtn button:disabled{
+color:#222;
+}
+.cancelBtn{
+    font-size: 14px;
+}
+ion-list ion-item .mainheading{
+    margin-top: 50px;
+    font-size:15px;
+}
+ion-list ion-item .subtext1{
+    margin-top:10px;
+    font-size:12px;
+
+}
+ion-list ion-item .subtext2{
+    font-size:12px;
+
+}
+ion-content ion-item ion-label{
+    color:#a9aaad;
+}
+ion-list ion-item{
+    border-bottom-color: #f4f4f4;
+
+}
+.inputtype {
+    font-size:12px;
+}
+
