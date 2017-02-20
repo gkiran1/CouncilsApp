@@ -1,0 +1,38 @@
+
+  <!--<ion-header>
+    <ion-navbar>
+      
+    </ion-navbar>
+    </ion-header>-->
+<ion-content >
+  <ion-list inset>
+    <ion-item text-center text-wrap >
+      <h1 class="mainheading" color="dark"><b>Create Account</b></h1>
+      <p class="subtext1">Choose an email and password</p>
+        <p class="subtext2">to create your Councils account</p>
+    </ion-item>
+  </ion-list>
+  <form class="formcontent" (ngSubmit)="createAccount()" #createAccountForm="ngForm">
+    <ion-item >
+      <ion-label class="inputtype" floating> Email</ion-label>
+      <ion-input  type="email" name="email" [(ngModel)]="newUser.email" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="inputtype" floating> Password</ion-label>
+      <ion-input  type="password" name="password" [(ngModel)]="newUser.password" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="inputtype" floating> LDS org username</ion-label>
+      <ion-input  type="text" name="ldsusername" [(ngModel)]="newUser.ldsusername" required></ion-input>
+    </ion-item>
+    <div class="createBtn">
+      <button ion-button block clear color="secondary" type="submit" [disabled]="!createAccountForm.form.valid">Create Account</button>
+    </div>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button class="cancelBtn" ion-button clear color="secondary" block (click)="cancel()">Cancel</button>
+  </ion-toolbar>
+</ion-footer>
+

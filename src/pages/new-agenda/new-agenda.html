@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title text-center>New Agenda</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form>
+        <ion-item>
+            <ion-label floating>Council</ion-label>
+            <ion-select [(ngModel)]="council" name="council">
+                <ion-option *ngFor="let council of councils" [value]="council" required>{{council}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label floating>Date</ion-label>
+                    <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="date" name="date" required></ion-datetime>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-label floating>Time</ion-label>
+                    <ion-datetime displayFormat="HH:mm a" [(ngModel)]="time" name="time" required></ion-datetime>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-item>
+            <ion-label floating>Opening Hymn</ion-label>
+            <ion-select [(ngModel)]="council" name="openingHymn">
+                <ion-option *ngFor="let value of OpeningHymn" [value]="value" required>{{value}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Opening Prayer</ion-label>
+            <ion-select [(ngModel)]="council" name="openingPrayer">
+                <ion-option *ngFor="let value of OpeningPrayer" [value]="value" required>{{value}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Spiritual Thought</ion-label>
+            <ion-select [(ngModel)]="spiritualThought" name="spiritualThought">
+                <ion-option *ngFor="let value of spiritualThought" [value]="value" required>{{value}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>High Counselor</ion-label>
+            <ion-select [(ngModel)]="highCounselor" name="highCounselor">
+                <ion-option *ngFor="let value of highCounselor" [value]="value" required>{{value}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Review Assignments</ion-label>
+            <ion-select [(ngModel)]="reviewAssignments" name="reviewAssignments">
+                <ion-option *ngFor="let value of reviewAssignments" [value]="value" required>{{value}}</ion-option>
+            </ion-select>
+        </ion-item>
+    </form>
+</ion-content>
