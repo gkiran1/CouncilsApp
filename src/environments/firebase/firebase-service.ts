@@ -54,8 +54,17 @@ export class FirebaseService {
                 createddate: user.createddate,
                 lastupdateddate: user.lastupdateddate,
                 isactive: user.isactive
-            });
+            }).then(() => user.councils.forEach(counc => {
+                this.createUserCouncils(uid, counc);
+            }));
     }
+    createUserCouncils(userUid: string, council: string) {
+        this.rootRef.child('usercouncils').push({
+            userid: userUid,
+            councilid: council
+        })
+    }
+
     validateUser(email: string, password: string) {
         return this.fireAuth.signInWithEmailAndPassword(email, password)
             .then((authenticatedUser) => { return authenticatedUser.uid })
@@ -79,23 +88,41 @@ export class FirebaseService {
     }
 
     createInvitee(invitee: Invitee) {
-        return this.rootRef.child('invitees').push(
-            {
-                email: invitee.email,
-                firstname: invitee.firstname,
-                lastname: invitee.lastname,
-                calling: invitee.calling,
-                unittype: invitee.unittype,
-                unitnumber: invitee.unitnumber,
-                councils: invitee.councils,
-                createdby: invitee.createdby,
-                createddate: invitee.createddate,
-                lastupdateddate: invitee.lastupdateddate,
-                isactive: true
-            })
-            .then(response => response)
-            .catch(err => { throw err });
+
+        var inviteee = this.rootRef.child('invitees').orderByChild('email').equalTo(invitee.email);
+        return inviteee.once("value", function (snap) {
+            if (!snap.exists()) {
+                firebase.database().ref().child('invitees').push(
+                    {
+                        email: invitee.email,
+                        firstname: invitee.firstname,
+                        lastname: invitee.lastname,
+                        calling: invitee.calling,
+                        unittype: invitee.unittype,
+                        unitnumber: invitee.unitnumber,
+                        councils: invitee.councils,
+                        createdby: invitee.createdby,
+                        createddate: invitee.createddate,
+                        lastupdateddate: invitee.lastupdateddate,
+                        isactive: true
+                    })
+                    .then(() => {
+                        return "User is successfully invited..."
+                    })
+                    .catch(err => { throw err });
+            }
+        }).then((res) => {
+            console.log(res.val());
+            if (res.val()) {
+                throw "User has already invited..."
+            }
+            else {
+                return "User is successfully invited..."
+            }
+
+        }).catch(err => { throw err });
     }
+
     getCouncilsByKey(councilType: string): Observable<Council[]> {
         return this.af.database.list('councils', {
             query: {
