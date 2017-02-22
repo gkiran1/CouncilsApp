@@ -123,7 +123,7 @@ export class FirebaseService {
         }).catch(err => { throw err });
     }
 
-    getCouncilsByKey(councilType: string): Observable<Council[]> {
+    getCouncilsByType(councilType: string): Observable<Council[]> {
         return this.af.database.list('councils', {
             query: {
                 orderByChild: 'counciltype',
@@ -132,4 +132,47 @@ export class FirebaseService {
         }).map(results => results);
     }
 
+    getCouncilByKey(key: string): Observable<Council[]> {
+        return this.af.database.list('councils', {
+            query: {
+                orderByKey: true,
+                equalTo: key
+            }
+        }).map(results => results);
+    }
+    getUsersByUnitNumber(unitnumber: number): Observable<User[]> {
+        return this.af.database.list('users', {
+            query: {
+                orderByChild: 'unitnumber',
+                equalTo: unitnumber
+            }
+        });
+    }
+     getUsersByCouncil(councilid: string): Observable<User[]> {
+        return this.af.database.list('usercouncils', {
+            query: {
+                orderByChild: 'councilid',
+                equalTo: councilid
+            }
+        });
+    }
+    createAssigment(assignment: any) {
+        return this.rootRef.child('assignments').push(
+            {
+                assigneddate: assignment.assigneddate,
+                assignedtime: assignment.assignedtime,
+                assignedto: assignment.assigneduser,
+                council: assignment.assignedcouncil,
+                createdby: assignment.createdby,
+                createddate: assignment.createddate,
+                description: assignment.description,
+                isactive: assignment.isactive,
+                lastupdateddate: assignment.lastupdateddate,
+                notes: assignment.notes
+            })
+            .then(() => {
+                return "assignment created successfully..."
+            })
+            .catch(err => { throw err });
+    }
 }
