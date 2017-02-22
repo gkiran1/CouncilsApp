@@ -17,7 +17,7 @@
 
       <ion-item class="listbtn1 !important">
         <b>Councils</b>
-        <button color="secondary" ion-button icon-only clear item-right (click)="councilsPage()">
+        <button color="secondary" *ngIf="(userObj | async)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
          <ion-icon name="add-circle-outline" ></ion-icon>
         </button>
       </ion-item>
