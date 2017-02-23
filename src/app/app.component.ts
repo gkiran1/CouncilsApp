@@ -7,6 +7,7 @@ import { CouncilLoginPage } from '../pages/councillogin/councillogin';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { InviteMemberPage } from '../pages/invite/invite';
+import { NewCouncilPage } from '../pages/new-council/new-council'
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`

@@ -37,7 +37,6 @@ export class CouncilLoginPage {
 
     public forgotPassword() {
 
-        this.nav.push(WelcomePage);
     }
 
     noAccount() {

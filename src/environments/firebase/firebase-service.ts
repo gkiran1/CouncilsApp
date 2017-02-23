@@ -7,7 +7,7 @@ import { Headers, Http, Response } from "@angular/http";
 //import { Observable } from 'rxjs/Observable';
 import { Invitee } from '../../pages/invite/invitee.model';
 import { Observable, Subject } from "rxjs/Rx";
-import { Council } from '../../providers/councils.provider';
+import { Council } from '../../pages/new-council/council';
 
 @Injectable()
 export class FirebaseService {
@@ -104,5 +104,58 @@ export class FirebaseService {
             }
         }).map(results => results);
     }
+
+        getUsersByUnitNumber(unitnumber: number): Observable<User[]> {
+        return this.af.database.list('users', {
+            query: {
+                orderByChild: 'unitnumber',
+                equalTo: unitnumber
+            }
+        });
+    }
+
+    createCouncil(council: Council) {
+        firebase.database().ref().child('councils').push(
+            {
+                council: council.council,
+                firstname: council.counciltype
+            })
+            .then(() => {
+                return "User is successfully invited..."
+            })
+            .catch(err => { throw err });
+    }
+
+    createUserCouncils(userUid: string, council: string) {
+        this.rootRef.child('usercouncils').push({
+            userid: userUid,
+            councilid: council
+        });
+
+    }
+
+    createCouncils(council: Council) {
+        var counRef = this.rootRef.child('councils').orderByChild('council_counciltype').equalTo(council.council + '_' + council.counciltype).limitToFirst(1);
+        return counRef.once('value').then(function (snapshot) {
+            if (snapshot.val()) {
+                // invalid council: Council already exists..
+                return false;
+            }
+            else {
+                return firebase.database().ref().child('councils').push(
+                    {
+                        council: council.council,
+                        counciltype: council.counciltype,
+                        council_counciltype: council.council + '_' + council.counciltype
+                    }).then(res => {
+                        return res.key;
+                    }).catch(err => {
+                        throw err;
+                    });
+            }
+        }).catch(err => { throw err });
+    }
+
+
 
 }

@@ -15,10 +15,11 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
 import { AppService } from '../providers/app-service';
-import { Elastic } from '../directives/elastic'; 
+import { Elastic } from '../directives/elastic';
 import { NewAgenda } from '../pages/new-agenda/new-agenda';
 import { InviteMemberPage } from '../pages/invite/invite';
 import { InvitationSuccessPage } from '../pages/invite/success';
+import { NewCouncilPage } from '../pages/new-council/new-council'
 
 @NgModule({
   declarations: [
@@ -34,8 +35,10 @@ import { InvitationSuccessPage } from '../pages/invite/success';
     Elastic,
     NewAgenda,
     InviteMemberPage,
-    InvitationSuccessPage
-   
+    InvitationSuccessPage,
+    NewCouncilPage
+
+
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -54,9 +57,11 @@ import { InvitationSuccessPage } from '../pages/invite/success';
     NewAssignmentPage,
     NewAgenda,
     InviteMemberPage,
-    InvitationSuccessPage
+    InvitationSuccessPage,
+    NewCouncilPage
+
 
   ],
-  providers: [AuthService,AppService,FirebaseService]
+  providers: [AuthService, AppService, FirebaseService]
 })
 export class AppModule { }
