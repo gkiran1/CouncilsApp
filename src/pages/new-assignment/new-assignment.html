@@ -12,37 +12,37 @@
   <form (ngSubmit)="createAssignment()" #newAssignmentForm="ngForm">
     <ion-item>
       <ion-label floating>Description</ion-label>
-      <ion-input type="text" name="description" [(ngModel)]="description" required></ion-input>
+      <ion-input type="text" name="description" [(ngModel)]="assignment.description" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Assign to</ion-label>
-      <ion-select [(ngModel)]="assignTo" name="assignTo">
-        <ion-option *ngFor="let member of members" [value]="member.name" required>{{member.name}}</ion-option>
+      <ion-select [(ngModel)]="assignment.assigneduser" name="assigneduser" (ionChange)="assignedMemberChange()">
+        <ion-option *ngFor="let user of users" [value]="user" required>{{user.firstname}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label floating>Council</ion-label>
-      <ion-select [(ngModel)]="council" name="council">
-        <ion-option *ngFor="let council of councils" [value]="council" required>{{council}}</ion-option>
+      <ion-select [(ngModel)]="assignment.assigedcouncil" name="assigedcouncil">
+        <ion-option *ngFor="let c of councils" [value]="c.$key" required>{{c.council}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-row>
       <ion-col>
         <ion-item>
           <ion-label floating>Date</ion-label>
-          <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="date" name="date" required></ion-datetime>
+          <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="assignment.date" name="date" required></ion-datetime>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
           <ion-label floating>Time</ion-label>
-          <ion-datetime displayFormat="HH:mm a" [(ngModel)]="time" name="time" required></ion-datetime>
+          <ion-datetime displayFormat="HH:mm a" [(ngModel)]="assignment.time" name="time" required></ion-datetime>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-item>
       <ion-label floating>Notes</ion-label>
-      <ion-textarea name="notes" [(ngModel)]="notes" elastic required></ion-textarea>
+      <ion-textarea name="notes" [(ngModel)]="assignment.notes" elastic required></ion-textarea>
     </ion-item>
   </form>
 </ion-content>

@@ -19,6 +19,8 @@ import { Elastic } from '../directives/elastic';
 import { NewAgenda } from '../pages/new-agenda/new-agenda';
 import { InviteMemberPage } from '../pages/invite/invite';
 import { InvitationSuccessPage } from '../pages/invite/success';
+import { NewCouncilDiscussionPage } from '../pages/new-council-discussion/new-council-discussion';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { InvitationSuccessPage } from '../pages/invite/success';
     Elastic,
     NewAgenda,
     InviteMemberPage,
-    InvitationSuccessPage
+    InvitationSuccessPage,
+    NewCouncilDiscussionPage
    
   ],
   imports: [
@@ -54,7 +57,8 @@ import { InvitationSuccessPage } from '../pages/invite/success';
     NewAssignmentPage,
     NewAgenda,
     InviteMemberPage,
-    InvitationSuccessPage
+    InvitationSuccessPage,
+    NewCouncilDiscussionPage
 
   ],
   providers: [AuthService,AppService,FirebaseService]

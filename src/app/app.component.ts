@@ -7,12 +7,13 @@ import { CouncilLoginPage } from '../pages/councillogin/councillogin';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { InviteMemberPage } from '../pages/invite/invite';
+import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage =CouncilLoginPage;
+  rootPage = InviteMemberPage;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {

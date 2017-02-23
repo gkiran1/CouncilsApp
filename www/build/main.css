@@ -21528,5 +21528,13 @@ page-register .login-content .register-btn {
 
 .listbtn2 {
   font-size: 17pt !important;
-  color: #3cb18a;
+  color: #3cb18a !important;
+}
+
+.classcolor {
+  color: #3cb18a !important;
+}
+
+.cancelcolor {
+  color: #35373A !important;
 }
