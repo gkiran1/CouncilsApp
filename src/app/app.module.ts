@@ -15,11 +15,12 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
 import { AppService } from '../providers/app-service';
-import { Elastic } from '../directives/elastic'; 
+import { Elastic } from '../directives/elastic';
 import { NewAgenda } from '../pages/new-agenda/new-agenda';
 import { InviteMemberPage } from '../pages/invite/invite';
 import { InvitationSuccessPage } from '../pages/invite/success';
 import { NewCouncilDiscussionPage } from '../pages/new-council-discussion/new-council-discussion';
+import { CouncilAssignmentPage } from '../pages/council-assignments/council-assignments';
 
 
 @NgModule({
@@ -37,8 +38,9 @@ import { NewCouncilDiscussionPage } from '../pages/new-council-discussion/new-co
     NewAgenda,
     InviteMemberPage,
     InvitationSuccessPage,
-    NewCouncilDiscussionPage
-   
+    NewCouncilDiscussionPage,
+    CouncilAssignmentPage
+
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -58,9 +60,10 @@ import { NewCouncilDiscussionPage } from '../pages/new-council-discussion/new-co
     NewAgenda,
     InviteMemberPage,
     InvitationSuccessPage,
-    NewCouncilDiscussionPage
+    NewCouncilDiscussionPage,
+    CouncilAssignmentPage
 
   ],
-  providers: [AuthService,AppService,FirebaseService]
+  providers: [AuthService, AppService, FirebaseService]
 })
 export class AppModule { }

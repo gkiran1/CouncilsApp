@@ -159,13 +159,8 @@ export class FirebaseService {
     createAssigment(assignment: any) {
         return this.rootRef.child('assignments').push(
             {
-<<<<<<< HEAD
-                assigneddate: assignment.date,
-                assignedtime: assignment.time,
-=======
                 assigneddate: assignment.assigneddate,
                 assignedtime: assignment.assignedtime,
->>>>>>> origin/Sprint1
                 assignedto: assignment.assigneduser,
                 council: assignment.assignedcouncil,
                 createdby: assignment.createdby,

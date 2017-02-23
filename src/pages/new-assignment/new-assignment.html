@@ -3,6 +3,7 @@
     <!--<button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>-->
+     <ion-icon class="cancel-font" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
     <ion-title text-center>
       New Assignment
     </ion-title>
@@ -16,21 +17,13 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Assign to</ion-label>
-<<<<<<< HEAD
-      <ion-select [(ngModel)]="assignment.assigneduser" name="assigneduser" (ionChange)="assignedMemberChange()">
-=======
       <ion-select [(ngModel)]="temp.assigneduser" name="assigneduser" (ionChange)="assignedMemberChange()">
->>>>>>> origin/Sprint1
         <ion-option *ngFor="let user of users" [value]="user" required>{{user.firstname}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label floating>Council</ion-label>
-<<<<<<< HEAD
-      <ion-select [(ngModel)]="assignment.assigedcouncil" name="assigedcouncil">
-=======
       <ion-select [(ngModel)]="assignment.assignedcouncil" name="assigedcouncil">
->>>>>>> origin/Sprint1
         <ion-option *ngFor="let c of councils" [value]="c.$key" required>{{c.council}}</ion-option>
       </ion-select>
     </ion-item>
@@ -38,21 +31,13 @@
       <ion-col>
         <ion-item>
           <ion-label floating>Date</ion-label>
-<<<<<<< HEAD
-          <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="assignment.date" name="date" required></ion-datetime>
-=======
           <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="assignment.assigneddate" name="assigneddate" required></ion-datetime>
->>>>>>> origin/Sprint1
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
           <ion-label floating>Time</ion-label>
-<<<<<<< HEAD
-          <ion-datetime displayFormat="HH:mm a" [(ngModel)]="assignment.time" name="time" required></ion-datetime>
-=======
           <ion-datetime displayFormat="HH:mm a" [(ngModel)]="assignment.assignedtime" name="assignedtime" required></ion-datetime>
->>>>>>> origin/Sprint1
         </ion-item>
       </ion-col>
     </ion-row>
