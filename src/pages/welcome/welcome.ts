@@ -6,9 +6,13 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
 import { NewAgenda } from '../new-agenda/new-agenda';
 import { NewAssignmentPage } from '../new-assignment/new-assignment';
+
+import { NewCouncilPage } from '../new-council/new-council'
+
 // import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';
 import { CouncilAssignmentPage } from '../council-assignments/council-assignments';
+
 
 
 @Component({
@@ -46,7 +50,9 @@ export class WelcomePage {
           cssClass: "classcolor",
           handler: () => {
             this.menuctrl.close();
-            // this.nav.push(NewCouncilPage);
+
+            this.nav.push(NewCouncilPage);
+
           }
         },
         {
@@ -61,8 +67,10 @@ export class WelcomePage {
           cssClass: "classcolor",
 
           handler: () => {
+
             this.menuctrl.close();
             this.nav.setRoot(InviteMemberPage);
+
           }
         },
         {

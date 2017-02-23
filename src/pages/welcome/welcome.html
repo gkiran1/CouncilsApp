@@ -18,7 +18,10 @@
       <ion-item class="listbtn1 !important">
         <b>Councils</b>
         <button color="secondary" *ngIf="(userObj | async)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
-         <ion-icon name="add-circle-outline" ></ion-icon>
+         <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+
+
+     
         </button>
       </ion-item>
 
@@ -67,14 +70,18 @@
       </ion-item>
 
       <ion-item>
-        <button ion-button color="secondary" class="listbtn2" clear >
+
+        <button ion-button color="secondary" class="listbtn2" clear (click)="privatePage()">
+
          Private
         </button>
       </ion-item>
 
       <ion-item class="listbtn1">
         <b>Assignments</b>
-        <button color="secondary" ion-button icon-only clear item-right (click)="assignmentsPage()">
+
+        <button color="secondary" ion-button icon-only clear item-right menuToggle (click)="assignmentsPage()">
+
          <ion-icon name="add-circle-outline" ></ion-icon>
         </button>
       </ion-item>
@@ -86,7 +93,9 @@
       </ion-item>
 
       <ion-item>
-        <button ion-button color="secondary" class="listbtn2" clear >
+
+        <button ion-button color="secondary" class="listbtn2" clear (click)="myPage()">
+
          My
         </button>
       </ion-item>

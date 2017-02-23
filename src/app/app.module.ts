@@ -19,8 +19,12 @@ import { Elastic } from '../directives/elastic';
 import { NewAgenda } from '../pages/new-agenda/new-agenda';
 import { InviteMemberPage } from '../pages/invite/invite';
 import { InvitationSuccessPage } from '../pages/invite/success';
+
+import { NewCouncilPage } from '../pages/new-council/new-council'
+
 import { NewCouncilDiscussionPage } from '../pages/new-council-discussion/new-council-discussion';
 import { CouncilAssignmentPage } from '../pages/council-assignments/council-assignments';
+
 
 
 @NgModule({
@@ -38,8 +42,13 @@ import { CouncilAssignmentPage } from '../pages/council-assignments/council-assi
     NewAgenda,
     InviteMemberPage,
     InvitationSuccessPage,
+
+    NewCouncilPage
+
+
     NewCouncilDiscussionPage,
     CouncilAssignmentPage
+
 
   ],
   imports: [
@@ -60,8 +69,13 @@ import { CouncilAssignmentPage } from '../pages/council-assignments/council-assi
     NewAgenda,
     InviteMemberPage,
     InvitationSuccessPage,
+
+    NewCouncilPage
+
+
     NewCouncilDiscussionPage,
     CouncilAssignmentPage
+
 
   ],
   providers: [AuthService, AppService, FirebaseService]
