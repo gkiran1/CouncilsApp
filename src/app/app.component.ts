@@ -7,13 +7,17 @@ import { CouncilLoginPage } from '../pages/councillogin/councillogin';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { InviteMemberPage } from '../pages/invite/invite';
-import { NewCouncilPage } from '../pages/new-council/new-council'
+import { NewCouncilPage } from '../pages/new-council/new-council';
+import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
+import { CouncilAssignmentPage } from '../pages/council-assignments/council-assignments';
+
+
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage =CouncilLoginPage;
+  rootPage = CouncilLoginPage;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {

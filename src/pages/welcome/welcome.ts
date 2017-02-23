@@ -6,7 +6,14 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
 import { NewAgenda } from '../new-agenda/new-agenda';
 import { NewAssignmentPage } from '../new-assignment/new-assignment';
+
 import { NewCouncilPage } from '../new-council/new-council'
+
+// import { NewCouncilPage } from '../new-council/new-council';
+import { InviteMemberPage } from '../invite/invite';
+import { CouncilAssignmentPage } from '../council-assignments/council-assignments';
+
+
 
 @Component({
   selector: 'welcome',
@@ -43,7 +50,9 @@ export class WelcomePage {
           cssClass: "classcolor",
           handler: () => {
             this.menuctrl.close();
+
             this.nav.push(NewCouncilPage);
+
           }
         },
         {
@@ -58,7 +67,10 @@ export class WelcomePage {
           cssClass: "classcolor",
 
           handler: () => {
-            console.log('Archive clicked');
+
+            this.menuctrl.close();
+            this.nav.setRoot(InviteMemberPage);
+
           }
         },
         {
@@ -112,12 +124,46 @@ export class WelcomePage {
   }
 
   assignmentsPage() {
-    this.nav.setRoot(NewAssignmentPage);
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Assignments',
+      cssClass: "cancelcolor",
+      buttons: [
+        {
+          text: 'Council',
+          cssClass: "classcolor",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.setRoot(NewAssignmentPage);
+          }
+        },
+        {
+          text: 'Private',
+          cssClass: "classcolor",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.setRoot(NewAssignmentPage);
+          }
+        },
+        {
+          text: 'Cancel',
+          cssClass: "cancelcolor",
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
   }
-  // pages: Array<{ title: string, component: any }>;
-  // openPage(page) {
-  //   // Reset the content nav to have just this page
-  //   // we wouldn't want the back button to show in this scenario
-  //   this.nav.setRoot(page.component);
-  // }
+  activePage() {
+  }
+  notesPage() { }
+  upcomingPage() { }
+  pastPage() { }
+  discussionsPage() { }
+
+  viewCouncilAssignments(){
+    this.nav.setRoot(CouncilAssignmentPage);
+  }
 }

@@ -10,6 +10,7 @@ export class User {
     ldsusername: string;
     unittype: string;
     unitnumber: number;
+    councils: string[];
     avatar: string;
     isadmin: boolean;
     createdby: string;
@@ -27,6 +28,7 @@ export class User {
         this.ldsusername = user.ldsusername;
         this.unittype = user.unittype;
         this.unitnumber = user.unitnumber;
+        this.councils = user.councils;
         this.avatar = user.avatar;
         this.isadmin = user.isadmin;
         this.createdby = user.createdby;
@@ -41,12 +43,13 @@ export class User {
 export class AppService {
     user: FirebaseObjectObservable<User>;
     uid;
-    constructor(public af:AngularFire) {
+    constructor(public af: AngularFire) {
         this.af.auth.subscribe(auth => {
             this.uid = auth.uid;
             this.user = this.af.database.object('/users/' + auth.uid);
         });
-         
+        // this.user = this.af.database.object('/users/CcvXnVmIEuMcajPYGqZCKPPyA6z1')
+        // this.uid = 'CcvXnVmIEuMcajPYGqZCKPPyA6z1'
     }
     setUser(user: FirebaseObjectObservable<any>) {
         this.user = user;

@@ -54,8 +54,12 @@ export class FirebaseService {
                 createddate: user.createddate,
                 lastupdateddate: user.lastupdateddate,
                 isactive: user.isactive
-            });
+            }).then(() => user.councils.forEach(counc => {
+                this.createUserCouncils(uid, counc);
+            }));
     }
+   
+
     validateUser(email: string, password: string) {
         return this.fireAuth.signInWithEmailAndPassword(email, password)
             .then((authenticatedUser) => { return authenticatedUser.uid })
@@ -79,24 +83,42 @@ export class FirebaseService {
     }
 
     createInvitee(invitee: Invitee) {
-        return this.rootRef.child('invitees').push(
-            {
-                email: invitee.email,
-                firstname: invitee.firstname,
-                lastname: invitee.lastname,
-                calling: invitee.calling,
-                unittype: invitee.unittype,
-                unitnumber: invitee.unitnumber,
-                councils: invitee.councils,
-                createdby: invitee.createdby,
-                createddate: invitee.createddate,
-                lastupdateddate: invitee.lastupdateddate,
-                isactive: true
-            })
-            .then(response => response)
-            .catch(err => { throw err });
+
+        var inviteee = this.rootRef.child('invitees').orderByChild('email').equalTo(invitee.email);
+        return inviteee.once("value", function (snap) {
+            if (!snap.exists()) {
+                firebase.database().ref().child('invitees').push(
+                    {
+                        email: invitee.email,
+                        firstname: invitee.firstname,
+                        lastname: invitee.lastname,
+                        calling: invitee.calling,
+                        unittype: invitee.unittype,
+                        unitnumber: invitee.unitnumber,
+                        councils: invitee.councils,
+                        createdby: invitee.createdby,
+                        createddate: invitee.createddate,
+                        lastupdateddate: invitee.lastupdateddate,
+                        isactive: true
+                    })
+                    .then(() => {
+                        return "User is successfully invited..."
+                    })
+                    .catch(err => { throw err });
+            }
+        }).then((res) => {
+            console.log(res.val());
+            if (res.val()) {
+                throw "User has already invited..."
+            }
+            else {
+                return "User is successfully invited..."
+            }
+
+        }).catch(err => { throw err });
     }
-    getCouncilsByKey(councilType: string): Observable<Council[]> {
+
+    getCouncilsByType(councilType: string): Observable<Council[]> {
         return this.af.database.list('councils', {
             query: {
                 orderByChild: 'counciltype',
@@ -105,7 +127,17 @@ export class FirebaseService {
         }).map(results => results);
     }
 
-        getUsersByUnitNumber(unitnumber: number): Observable<User[]> {
+
+    getCouncilByKey(key: string): Observable<Council[]> {
+        return this.af.database.list('councils', {
+            query: {
+                orderByKey: true,
+                equalTo: key
+            }
+        }).map(results => results);
+    }
+    getUsersByUnitNumber(unitnumber: number): Observable<User[]> {
+
         return this.af.database.list('users', {
             query: {
                 orderByChild: 'unitnumber',
@@ -113,6 +145,7 @@ export class FirebaseService {
             }
         });
     }
+
 
     createCouncil(council: Council) {
         firebase.database().ref().child('councils').push(
@@ -157,5 +190,34 @@ export class FirebaseService {
     }
 
 
+
+
+     getUsersByCouncil(councilid: string): Observable<User[]> {
+        return this.af.database.list('usercouncils', {
+            query: {
+                orderByChild: 'councilid',
+                equalTo: councilid
+            }
+        });
+    }
+    createAssigment(assignment: any) {
+        return this.rootRef.child('assignments').push(
+            {
+                assigneddate: assignment.assigneddate,
+                assignedtime: assignment.assignedtime,
+                assignedto: assignment.assigneduser,
+                council: assignment.assignedcouncil,
+                createdby: assignment.createdby,
+                createddate: assignment.createddate,
+                description: assignment.description,
+                isactive: assignment.isactive,
+                lastupdateddate: assignment.lastupdateddate,
+                notes: assignment.notes
+            })
+            .then(() => {
+                return "assignment created successfully..."
+            })
+            .catch(err => { throw err });
+    }
 
 }

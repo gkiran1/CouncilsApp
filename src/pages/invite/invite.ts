@@ -4,7 +4,8 @@ import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AlertController, NavController } from 'ionic-angular';
 import { AppService } from '../../providers/app-service';
-import { InvitationSuccessPage } from './success'
+import { InvitationSuccessPage } from './success';
+import { WelcomePage } from '../welcome/welcome';
 
 @Component({
     templateUrl: 'invite.html'
@@ -23,7 +24,7 @@ export class InviteMemberPage {
             this.invite.createddate = new Date().toString();
             this.invite.lastupdateddate = new Date().toString();
             this.invite.isactive = true;
-            this.fs.getCouncilsByKey(res.unittype).subscribe(councils => {
+            this.fs.getCouncilsByType(res.unittype).subscribe(councils => {
                 this.council = councils;
                 console.log(councils, this.invite.councils);
             });
@@ -38,7 +39,7 @@ export class InviteMemberPage {
         console.log(this.invite.councils);
 
         this.fs.createInvitee(this.invite)
-            .then(res => this.navctrl.push(InvitationSuccessPage))
+            .then(res => this.navctrl.setRoot(InvitationSuccessPage))
             .catch(err => this.showAlert(err))
     }
 
@@ -49,6 +50,10 @@ export class InviteMemberPage {
             buttons: ['OK']
         });
         alert.present();
+    }
+
+    close() {
+        this.navctrl.setRoot(WelcomePage)
     }
 
 }

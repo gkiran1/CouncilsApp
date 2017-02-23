@@ -12,7 +12,7 @@ import { Invitee } from '../invite/invitee.model';
 import { Observable, Subject } from "rxjs/Rx";
 import { WelcomePage } from '../welcome/welcome';
 import { AlertController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+import { CouncilLoginPage } from '../councillogin/councillogin';
 
 @Component({
   templateUrl: 'create-account.html'
@@ -54,13 +54,21 @@ export class CreateAccountPage {
         this.newUser.isactive = true;
 
         // after verifying and filling properties create new user.
+        let flag = false;
         this.firebaseService.signupNewUser(this.newUser)
           .then(res => {
             //onSuccess redirect to welcome page
-            this.showAlert('success', 'Account Created Successfully..<br/> Redirecting to login Page..');
-            //this.navCtrl.push(WelcomePage);
+            flag = true;
+
           })
-          .catch(err => this.showAlert('failure', err.message))
+          .catch(err => this.showAlert('failure', err.message));
+        let v = setInterval(() => {
+          if (flag) {
+            this.showAlert('success', 'Account Created Successfully..<br/> Redirecting to login Page..');
+            this.navCtrl.push(CouncilLoginPage);
+            clearInterval(v);
+          }
+        }, 50);
 
       } else {
         this.showAlert('failure', 'you are not invited!');
@@ -76,13 +84,11 @@ export class CreateAccountPage {
       buttons: ['OK']
     });
     alert.present();
-    if (reason === 'success') this.navCtrl.push(LoginPage);
   }
 
 
   cancel() {
-    //this.navCtrl.setRoot(WelcomePage);
-    this.navCtrl.setRoot(NewAssignmentPage);
+    this.navCtrl.pop();
   }
 
 }

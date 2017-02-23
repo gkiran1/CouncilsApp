@@ -6,7 +6,6 @@ import { Headers, Http, Response } from "@angular/http";
 import { AuthService } from '../../providers/auth-service';
 import { DisplayPage } from '../display/display';
 import { WelcomePage } from '../welcome/welcome';
-import { AppService } from '../../providers/app-service';
 import { CreateAccountPage } from '../create-account/create-account';
 import { NewAgenda } from '../new-agenda/new-agenda';
 import { Observable } from 'rxjs/Rx';
@@ -30,12 +29,12 @@ export class CouncilLoginPage {
         public firebaseService: FirebaseService,
         public alertCtrl: AlertController,
         public http: Http,
-        private navParams: NavParams,
-        public appService: AppService) {
+        private navParams: NavParams) {
      }
 
 
     public forgotPassword() {
+
 
     }
 
@@ -71,7 +70,6 @@ export class CouncilLoginPage {
             buttons: ['OK']
         });
         alert.present();
-        if (reason === 'success') this.nav.push(WelcomePage);
     }
 
 }
