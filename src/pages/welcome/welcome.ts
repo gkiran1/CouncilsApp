@@ -6,7 +6,12 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
 import { NewAgenda } from '../new-agenda/new-agenda';
 import { NewAssignmentPage } from '../new-assignment/new-assignment';
+<<<<<<< HEAD
 //import { NewCouncilPage } from '../new-council/new-council'
+=======
+import { NewCouncilPage } from '../new-council/new-council';
+import { InviteMemberPage } from '../invite/invite';
+>>>>>>> origin/Sprint1
 
 @Component({
   selector: 'welcome',
@@ -58,7 +63,8 @@ export class WelcomePage {
           cssClass: "classcolor",
 
           handler: () => {
-            console.log('Archive clicked');
+            this.menuctrl.close();
+            this.nav.setRoot(InviteMemberPage);
           }
         },
         {

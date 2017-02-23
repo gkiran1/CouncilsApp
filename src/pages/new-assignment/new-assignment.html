@@ -9,20 +9,28 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <form (ngSubmit)="createAssignment()" #newAssignmentForm="ngForm">
+  <form #newAssignmentForm="ngForm">
     <ion-item>
       <ion-label floating>Description</ion-label>
       <ion-input type="text" name="description" [(ngModel)]="assignment.description" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Assign to</ion-label>
+<<<<<<< HEAD
       <ion-select [(ngModel)]="assignment.assigneduser" name="assigneduser" (ionChange)="assignedMemberChange()">
+=======
+      <ion-select [(ngModel)]="temp.assigneduser" name="assigneduser" (ionChange)="assignedMemberChange()">
+>>>>>>> origin/Sprint1
         <ion-option *ngFor="let user of users" [value]="user" required>{{user.firstname}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label floating>Council</ion-label>
+<<<<<<< HEAD
       <ion-select [(ngModel)]="assignment.assigedcouncil" name="assigedcouncil">
+=======
+      <ion-select [(ngModel)]="assignment.assignedcouncil" name="assigedcouncil">
+>>>>>>> origin/Sprint1
         <ion-option *ngFor="let c of councils" [value]="c.$key" required>{{c.council}}</ion-option>
       </ion-select>
     </ion-item>
@@ -30,13 +38,21 @@
       <ion-col>
         <ion-item>
           <ion-label floating>Date</ion-label>
+<<<<<<< HEAD
           <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="assignment.date" name="date" required></ion-datetime>
+=======
+          <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="assignment.assigneddate" name="assigneddate" required></ion-datetime>
+>>>>>>> origin/Sprint1
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
           <ion-label floating>Time</ion-label>
+<<<<<<< HEAD
           <ion-datetime displayFormat="HH:mm a" [(ngModel)]="assignment.time" name="time" required></ion-datetime>
+=======
+          <ion-datetime displayFormat="HH:mm a" [(ngModel)]="assignment.assignedtime" name="assignedtime" required></ion-datetime>
+>>>>>>> origin/Sprint1
         </ion-item>
       </ion-col>
     </ion-row>
@@ -49,10 +65,10 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons left>
-    <button ion-button clear color="danger" (click)="cancel()">Cancel</button>
+      <button ion-button clear color="danger" (click)="cancel()">Cancel</button>
     </ion-buttons>
     <ion-buttons end>
-    <button ion-button clear color="secondary" type="submit" [disabled]="!newAssignmentForm.form.valid">Create</button>
+      <button ion-button clear color="secondary" (click)="createAssignment()" [disabled]="!newAssignmentForm.form.valid">Create</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
