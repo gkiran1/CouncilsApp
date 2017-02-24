@@ -89,15 +89,13 @@
       <ion-item>
         <button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="viewCouncilAssignments()">
          Council
-        </button>
+        </button> {{councilAssignmentsCount | async}}
       </ion-item>
 
       <ion-item>
-
-        <button ion-button color="secondary" class="listbtn2" clear (click)="myPage()">
-
+        <button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="viewMyAssignments()">
          My
-        </button>
+        </button> {{myAssignmentsCount | async}}
       </ion-item>
 
     </ion-list>

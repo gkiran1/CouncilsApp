@@ -1,7 +1,7 @@
 {
   "config": {
-  "ionic_source_map": "source-map"
-},
+    "ionic_source_map": "source-map"
+  },
   "name": "councils",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "2.2.1",
     "@angular/platform-server": "2.2.1",
     "@ionic/storage": "1.1.7",
+    "angular2-moment": "^1.2.0",
     "angularfire2": "^2.0.0-beta.7",
     "firebase": "^3.6.9",
     "ionic-angular": "2.0.0",
@@ -44,6 +45,9 @@
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": ["andriod", "ios"],
+  "cordovaPlatforms": [
+    "andriod",
+    "ios"
+  ],
   "description": "Councils App"
 }

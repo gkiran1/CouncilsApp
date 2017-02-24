@@ -58,7 +58,7 @@ export class FirebaseService {
                 this.createUserCouncils(uid, counc);
             }));
     }
-   
+
 
     validateUser(email: string, password: string) {
         return this.fireAuth.signInWithEmailAndPassword(email, password)
@@ -146,7 +146,6 @@ export class FirebaseService {
         });
     }
 
-
     createCouncil(council: Council) {
         firebase.database().ref().child('councils').push(
             {
@@ -189,10 +188,7 @@ export class FirebaseService {
         }).catch(err => { throw err });
     }
 
-
-
-
-     getUsersByCouncil(councilid: string): Observable<User[]> {
+    getUsersByCouncil(councilid: string): Observable<User[]> {
         return this.af.database.list('usercouncils', {
             query: {
                 orderByChild: 'councilid',
@@ -220,4 +216,20 @@ export class FirebaseService {
             .catch(err => { throw err });
     }
 
+    getAssignmentsByUserKey(userkey: string): FirebaseListObservable<any[]> {
+        return this.af.database.list('assignments', {
+            query: {
+                orderByChild: 'assignedto',
+                equalTo: userkey
+            }
+        });
+    }
+    getAssignmentsByCouncil(council: string): FirebaseListObservable<any[]> {
+        return this.af.database.list('assignments', {
+            query: {
+                orderByChild: 'council',
+                equalTo: council
+            }
+        });
+    }
 }

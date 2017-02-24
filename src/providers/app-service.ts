@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 export class User {
+    $key: string;
     name: string;
     email: string;
     firstname: string;
@@ -20,6 +21,7 @@ export class User {
     calling: string;
 
     constructor(user) {
+        this.$key = user.$key;
         this.name = user.name;
         this.email = user.email;
         this.firstname = user.firstname;

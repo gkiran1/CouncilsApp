@@ -18,8 +18,8 @@ export class NewAssignmentPage {
     description: '',
     assigneduser: '',
     assignedcouncil: '',
-    assigneddate: '',
-    assignedtime: '',
+    assigneddate: new Date(),
+    assignedtime: new Date(),
     createdby: '',
     createddate: '',
     isactive: false, //default false
@@ -58,7 +58,7 @@ export class NewAssignmentPage {
       //   });
       // }
 
-      this.assignment.createdby = user.createdby;
+      this.assignment.createdby = user.$key;
       this.assignment.isactive = user.isactive;
     });
   }
@@ -79,12 +79,23 @@ export class NewAssignmentPage {
     this.nav.setRoot(WelcomePage);
   }
   createAssignment() {
+    let formattedAssignmentObj = {
 
-    this.assignment.createddate = new Date().toDateString();
-    this.assignment.lastupdateddate = new Date().toDateString();
+      assigneddate: new Date(this.assignment.assigneddate).toDateString(),
+      assignedtime: new Date(this.assignment.assignedtime).toTimeString(),
+      createddate: new Date().toDateString(),
+      lastupdateddate: new Date().toDateString(),
 
-    this.firebaseservice.createAssigment(this.assignment)
-      .then(res => { this.showAlert('Assignmentcreated successfully..'); this.nav.setRoot(WelcomePage) })
+      createdby: this.assignment.createdby,
+      description: this.assignment.description,
+      assigneduser: this.assignment.assigneduser,
+      assignedcouncil: this.assignment.assignedcouncil,
+      isactive: this.assignment.isactive,
+      notes: this.assignment.notes
+    }
+
+    this.firebaseservice.createAssigment(formattedAssignmentObj)
+      .then(res => { this.showAlert('Assignment created successfully..'); this.nav.setRoot(WelcomePage) })
       .catch(err => this.showAlert(err))
   }
   showAlert(errText) {
@@ -95,5 +106,5 @@ export class NewAssignmentPage {
     });
     alert.present();
   }
-  
+
 }

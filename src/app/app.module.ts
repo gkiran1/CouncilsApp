@@ -23,7 +23,9 @@ import { InvitationSuccessPage } from '../pages/invite/success';
 import { NewCouncilPage } from '../pages/new-council/new-council'
 
 import { NewCouncilDiscussionPage } from '../pages/new-council-discussion/new-council-discussion';
-import { CouncilAssignmentPage } from '../pages/council-assignments/council-assignments';
+import { CouncilAssignmentsPage } from '../pages/council-assignments/council-assignments';
+import { MyAssignmentsPage } from '../pages/my-assignments/my-assignments';
+import { MomentModule } from 'angular2-moment';
 
 
 
@@ -42,16 +44,15 @@ import { CouncilAssignmentPage } from '../pages/council-assignments/council-assi
     NewAgenda,
     InviteMemberPage,
     InvitationSuccessPage,
-
-    NewCouncilPage
-
-
+    NewCouncilPage,
     NewCouncilDiscussionPage,
-    CouncilAssignmentPage
+    CouncilAssignmentsPage,
+    MyAssignmentsPage
 
 
   ],
   imports: [
+    MomentModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FirebaseConfig)
   ],
@@ -69,12 +70,10 @@ import { CouncilAssignmentPage } from '../pages/council-assignments/council-assi
     NewAgenda,
     InviteMemberPage,
     InvitationSuccessPage,
-
-    NewCouncilPage
-
-
+    NewCouncilPage,
     NewCouncilDiscussionPage,
-    CouncilAssignmentPage
+    CouncilAssignmentsPage,
+    MyAssignmentsPage
 
 
   ],

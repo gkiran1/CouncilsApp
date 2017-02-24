@@ -9,7 +9,7 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { InviteMemberPage } from '../pages/invite/invite';
 import { NewCouncilPage } from '../pages/new-council/new-council';
 import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
-import { CouncilAssignmentPage } from '../pages/council-assignments/council-assignments';
+import { CouncilAssignmentsPage } from '../pages/council-assignments/council-assignments';
 
 
 
