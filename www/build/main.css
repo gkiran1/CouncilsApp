@@ -21471,6 +21471,10 @@ ion-content ion-item ion-label {
   color: #a9aaad;
 }
 
+.cancel-font {
+  font-size: 50px;
+}
+
 page-register .login-content {
   background: white;
 }
