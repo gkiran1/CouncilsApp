@@ -9,25 +9,24 @@ import { NewAssignmentPage } from '../new-assignment/new-assignment';
 
 import { NewCouncilPage } from '../new-council/new-council'
 
-// import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';
 import { CouncilAssignmentsPage } from '../council-assignments/council-assignments';
 import { MyAssignmentsPage } from '../my-assignments/my-assignments';
-
-
+import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 
 @Component({
   selector: 'welcome',
   templateUrl: 'welcome.html',
-  providers:[MyAssignmentsPage,CouncilAssignmentsPage]
+  providers:[MyAssignmentsPage,CouncilAssignmentsPage,ActiveCouncilsPage]
 })
 export class WelcomePage {
+  activeCouncilsCount;
   myAssignmentsCount;
   councilAssignmentsCount
   @ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
-  constructor(public af: AngularFire, public appService: AppService, public actionSheetCtrl: ActionSheetController, public menuctrl: MenuController, public myassignmentpage:MyAssignmentsPage,public councilAssignmentsPage:CouncilAssignmentsPage) {
+  constructor(public af: AngularFire, public appService: AppService, public actionSheetCtrl: ActionSheetController, public menuctrl: MenuController, public myassignmentpage:MyAssignmentsPage,public councilAssignmentsPage:CouncilAssignmentsPage,public activeCouncilsPage:ActiveCouncilsPage) {
     this.af.auth.subscribe(auth => {
       this.userObj = this.af.database.object('/users/' + auth.uid);
       // appService.setUser(this.userObj);
@@ -35,12 +34,11 @@ export class WelcomePage {
       // var currentUser = JSON.parse(localStorage.getItem('currentUser'));
       // var lastname = currentUser.lastname;
       // console.log("currentUser==",currentUser);
-
     });
+    this.activeCouncilsCount = activeCouncilsPage.getCount();
     this.myAssignmentsCount = myassignmentpage.getCount();
     this.councilAssignmentsCount = councilAssignmentsPage.getCount();
    
-
     // this.pages = [
     //   { title: 'Home Page', component: HomePage }
     // ];
@@ -124,6 +122,9 @@ export class WelcomePage {
     actionSheet.present();
   }
 
+ activePage() {
+    this.nav.setRoot(ActiveCouncilsPage);
+  }
 
   agendasPage() {
     this.nav.setRoot(NewAgenda);
@@ -161,8 +162,6 @@ export class WelcomePage {
     });
 
     actionSheet.present();
-  }
-  activePage() {
   }
   notesPage() { }
   upcomingPage() { }

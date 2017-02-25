@@ -11,8 +11,6 @@ import { NewCouncilPage } from '../pages/new-council/new-council';
 import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
 import { CouncilAssignmentsPage } from '../pages/council-assignments/council-assignments';
 
-
-
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })

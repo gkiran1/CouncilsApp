@@ -24,21 +24,17 @@ export class DisplayPage {
      this.registerCredentials.email = navParams.data.email;
      this.registerCredentials.ldsorgusername = navParams.data.ldsorgusername;
       // this.userName = this.appService.user.firstname;
-      // console.log('constructor', this.userName);
-     
-     
-      // menu.enable(true);
-    
-     
+      // console.log('constructor', this.userName);    
+      // menu.enable(true);      
    }
+
    click(){
     // setTimeout(() => {
     //     this.userName = this.firebaseService.usr.firstname;
     //   },50000);
      // this.userName = this.appService.user.firstname;
-      console.log('click', this.userName);
+      // console.log('click', this.userName);
    }
-
 
     // openMenu() {
     //   this.menu.open();

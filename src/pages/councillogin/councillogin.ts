@@ -11,7 +11,6 @@ import { NewAgenda } from '../new-agenda/new-agenda';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../../user/user';
 
-
 @Component({
     selector: 'page-councillogin',
     templateUrl: 'councillogin.html',
@@ -19,7 +18,6 @@ import { User } from '../../user/user';
 })
 
 export class CouncilLoginPage {
-
     loading: Loading;
     loginCredentials = { email: '', password: '' };
     user: Observable<User>;
@@ -32,22 +30,16 @@ export class CouncilLoginPage {
         private navParams: NavParams) {
      }
 
-
     public forgotPassword() {
-
 
     }
 
     noAccount() {
-
-
         this.nav.push(CreateAccountPage);
-
     }
 
     public login() {
         this.validateUser(this.loginCredentials);
-
     }
 
     private validateUser(loginCredentials) {

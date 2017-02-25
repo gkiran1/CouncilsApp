@@ -232,4 +232,14 @@ export class FirebaseService {
             }
         });
     }
+
+     getUserCounilKeysByUserKey(userkey: string): FirebaseListObservable<any[]> {
+        return this.af.database.list('usercouncils', {
+            query: {
+                orderByChild: 'userid',
+                equalTo: userkey
+            }
+        });
+    }
+    
 }

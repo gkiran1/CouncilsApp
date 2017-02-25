@@ -24,17 +24,17 @@
       <ion-label>Who do you want to add to this council?</ion-label>
     </ion-item>
 
-    <div *ngFor="let user of users">
-      <ion-list *ngIf="!(user.isadmin)">
-        <ion-item>
-          <ion-label>
-            <h2>{{user.firstname}} {{user.lastname}}</h2>
-            <p>{{user.calling}}</p>
-          </ion-label>
-          <ion-checkbox [(ngModel)]="user.selected" color="secondary" item-right name="selectedUser"></ion-checkbox>
-        </ion-item>
-      </ion-list>
-    </div>
+    <ion-list>
+      <ion-item *ngFor="let user of users">
+        <ion-label>
+          <h2>{{user.firstname}} {{user.lastname}}</h2>
+          <p>{{user.calling}}</p>
+        </ion-label>
+        <!--<ion-radio [(ngModel)]="user"  [value]="user.$key"></ion-radio>-->
+        <ion-checkbox [(ngModel)]="user.selected" color="secondary" item-right name="selectedUser"></ion-checkbox>
+
+      </ion-item>
+    </ion-list>
   </form>
 </ion-content>
 

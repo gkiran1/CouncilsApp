@@ -1,4 +1,4 @@
-<ion-menu [content]="content" >
+<ion-menu [content]="content">
   <ion-header>
     <ion-navbar hideBackButton="true">
       <ion-item style="border: none !important">
@@ -8,27 +8,22 @@
         <h2>{{(userObj | async)?.firstname}}</h2>
         <p>{{(userObj | async)?.calling}} - {{(userObj | async)?.unitnumber}}</p>
       </ion-item>
-
     </ion-navbar>
   </ion-header>
 
   <ion-content>
     <ion-list no-lines>
-
       <ion-item class="listbtn1 !important">
         <b>Councils</b>
         <button color="secondary" *ngIf="(userObj | async)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
-         <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
-
-
-     
+         <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>   
         </button>
       </ion-item>
 
       <ion-item>
-        <button ion-button color="secondary" class="listbtn2" clear (click)="activePage()">
+        <button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="activePage()">
            Active
-        </button>
+        </button>{{activeCouncilsCount | async}}
       </ion-item>
 
       <ion-item>
@@ -64,24 +59,20 @@
       </ion-item>
 
       <ion-item>
-        <button ion-button color="secondary" class="listbtn2" clear >
+        <button ion-button color="secondary" class="listbtn2" clear>
          Council
         </button>
       </ion-item>
 
       <ion-item>
-
         <button ion-button color="secondary" class="listbtn2" clear (click)="privatePage()">
-
          Private
         </button>
       </ion-item>
 
       <ion-item class="listbtn1">
         <b>Assignments</b>
-
         <button color="secondary" ion-button icon-only clear item-right menuToggle (click)="assignmentsPage()">
-
          <ion-icon name="add-circle-outline" ></ion-icon>
         </button>
       </ion-item>
@@ -99,7 +90,6 @@
       </ion-item>
 
     </ion-list>
-
   </ion-content>
 </ion-menu>
 

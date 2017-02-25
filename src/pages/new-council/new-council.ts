@@ -18,15 +18,15 @@ export class NewCouncilPage {
   // users: FirebaseObjectObservable<any>;
   users: any;
   newCouncil: Council = new Council();
-  unittype: string
-
+  unittype: string;
+  userId: string;
 
   constructor(public af: AngularFire, public firebaseservice: FirebaseService, public appservice: AppService) {
     //  this.af.auth.subscribe(auth => {
     //       this.userObj = this.af.database.object('/users/' + auth.uid);
     this.appservice.getUser().subscribe(user => {
-      console.log("user==",user);
       this.unittype = user.unittype;
+      this.userId = user.$key;
       let subscribe = this.firebaseservice.getUsersByUnitNumber(user.unitnumber).subscribe(users => {
         this.users = users;
 
@@ -37,7 +37,7 @@ export class NewCouncilPage {
 
   createCouncil() {
     var selectedUserIds: string[] = [];
-
+    selectedUserIds.push(this.userId);
     this.newCouncil.counciltype = this.unittype;
 
     this.users.forEach(user => {
