@@ -20,7 +20,7 @@
       <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': selectedIdx == i}"></ion-icon>
       <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>
       <h1>{{item.description}}</h1>
-      <p><span>{{item.council}}</span><span style="position: absolute;right: 0">{{item.createddate | amCalendar}}</span>
+      <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | amCalendar}}</span>
       </p>
     </ion-item>
   </ion-list>

@@ -202,7 +202,8 @@ export class FirebaseService {
                 assigneddate: assignment.assigneddate,
                 assignedtime: assignment.assignedtime,
                 assignedto: assignment.assigneduser,
-                council: assignment.assignedcouncil,
+                councilid: assignment.councilid,
+                councilname: assignment.councilname,
                 createdby: assignment.createdby,
                 createddate: assignment.createddate,
                 description: assignment.description,
@@ -224,16 +225,16 @@ export class FirebaseService {
             }
         });
     }
-    getAssignmentsByCouncil(council: string): FirebaseListObservable<any[]> {
+    getAssignmentsByCouncil(councilid: string): FirebaseListObservable<any[]> {
         return this.af.database.list('assignments', {
             query: {
-                orderByChild: 'council',
-                equalTo: council
+                orderByChild: 'councilid',
+                equalTo: councilid
             }
         });
     }
 
-     getUserCounilKeysByUserKey(userkey: string): FirebaseListObservable<any[]> {
+    getUserCounilKeysByUserKey(userkey: string): FirebaseListObservable<any[]> {
         return this.af.database.list('usercouncils', {
             query: {
                 orderByChild: 'userid',
@@ -241,5 +242,5 @@ export class FirebaseService {
             }
         });
     }
-    
+
 }

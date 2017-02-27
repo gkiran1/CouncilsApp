@@ -28,7 +28,6 @@ import { MyAssignmentsPage } from '../pages/my-assignments/my-assignments';
 import { MomentModule } from 'angular2-moment';
 import { ActivityPage } from '../pages/activity/activity'
 import { ActiveCouncilsPage } from '../pages/activecouncils/activecouncils'
-// import { MomentModule } from 'angular2-moment';
 
 @NgModule({
   declarations: [
@@ -54,7 +53,7 @@ import { ActiveCouncilsPage } from '../pages/activecouncils/activecouncils'
   ],
 
   imports: [
-    // MomentModule,
+    MomentModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FirebaseConfig)
   ],

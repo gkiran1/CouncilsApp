@@ -5,7 +5,8 @@ import { User } from '../../user/user';
 
 import { AlertController, NavController } from 'ionic-angular';
 import { WelcomePage } from '../welcome/welcome';
-
+import { Council } from '../new-council/council'
+import * as moment from 'moment';
 
 @Component({
   templateUrl: 'new-assignment.html'
@@ -17,7 +18,7 @@ export class NewAssignmentPage {
   assignment = {
     description: '',
     assigneduser: '',
-    assignedcouncil: '',
+    assignedcouncil: new Council(),
     assigneddate: new Date(),
     assignedtime: new Date(),
     createdby: '',
@@ -65,7 +66,7 @@ export class NewAssignmentPage {
   assignedMemberChange() {
     this.councils = [];
     this.assignment.assigneduser = this.temp.assigneduser.$key;
-    this.assignment.assignedcouncil = '';
+    this.assignment.assignedcouncil = new Council();
 
     this.temp.assigneduser.councils.forEach(key => {
       this.firebaseservice.getCouncilByKey(key).subscribe(council => this.councils.push(...council));
@@ -81,15 +82,16 @@ export class NewAssignmentPage {
   createAssignment() {
     let formattedAssignmentObj = {
 
-      assigneddate: new Date(this.assignment.assigneddate).toDateString(),
-      assignedtime: new Date(this.assignment.assignedtime).toTimeString(),
-      createddate: new Date().toDateString(),
-      lastupdateddate: new Date().toDateString(),
+      assigneddate: new Date(this.assignment.assigneddate).toISOString(),
+      assignedtime: moment(this.assignment.assignedtime, 'hh:mmA').format('hh:mmA'),
+      createddate: new Date().toISOString(),
+      lastupdateddate: new Date().toISOString(),
 
       createdby: this.assignment.createdby,
       description: this.assignment.description,
       assigneduser: this.assignment.assigneduser,
-      assignedcouncil: this.assignment.assignedcouncil,
+      councilid: this.assignment.assignedcouncil.$key,
+      councilname: this.assignment.assignedcouncil.council,
       isactive: this.assignment.isactive,
       notes: this.assignment.notes
     }

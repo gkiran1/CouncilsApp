@@ -136,15 +136,7 @@ export class WelcomePage {
       cssClass: "cancelcolor",
       buttons: [
         {
-          text: 'Council',
-          cssClass: "classcolor",
-          handler: () => {
-            this.menuctrl.close();
-            this.nav.setRoot(NewAssignmentPage);
-          }
-        },
-        {
-          text: 'Private',
+          text: 'New Assignment',
           cssClass: "classcolor",
           handler: () => {
             this.menuctrl.close();

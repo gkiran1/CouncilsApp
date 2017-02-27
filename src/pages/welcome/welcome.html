@@ -3,7 +3,8 @@
     <ion-navbar hideBackButton="true">
       <ion-item style="border: none !important">
         <ion-avatar item-left>
-          <img src="assets/icon/jesusimg.png" class="avatarImage" />
+          <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="(userObj | async)?.avatar"/>
+          <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj | async)?.avatar"/>
         </ion-avatar>
         <h2>{{(userObj | async)?.firstname}}</h2>
         <p>{{(userObj | async)?.calling}} - {{(userObj | async)?.unitnumber}}</p>
@@ -72,7 +73,7 @@
 
       <ion-item class="listbtn1">
         <b>Assignments</b>
-        <button color="secondary" ion-button icon-only clear item-right menuToggle (click)="assignmentsPage()">
+        <button color="secondary" ion-button icon-only clear item-right (click)="assignmentsPage()">
          <ion-icon name="add-circle-outline" ></ion-icon>
         </button>
       </ion-item>
