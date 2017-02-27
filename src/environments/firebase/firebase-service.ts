@@ -242,4 +242,28 @@ export class FirebaseService {
         });
     }
 
+    getAboutus() {
+        var aboutusRef = this.rootRef.child('aboutus/-Kd9xpkjKGqdLVdNB_Gj');
+        return aboutusRef.once('value').then(function (snapshot) {
+            return snapshot.val();
+        });
+    }
+
+    saveFeedback(comments, createdBy, createdDate) {
+        this.rootRef.child('feedback').push({
+            "comments": comments,
+            "createdby": createdBy,
+            "createddate": createdDate
+        });
+    }
+
+    signOut() {
+        this.af.auth.unsubscribe();
+        return firebase.auth().signOut().then(function () {
+            console.log('Sign-out successful'); // Sign-out successful.
+        }).catch(err => {
+            throw err;
+        })
+    }
+
 }

@@ -1,0 +1,36 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title text-center>About</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<table>
+		<tr>
+			<td>
+				<h5>Councils</h5>
+			</td>
+			<td>
+				<ion-textarea [(ngModel)]="SoftwareVersion"></ion-textarea>
+			</td>
+		</tr>
+	</table>
+	<h5>Terms of use</h5>
+	<ion-textarea [(ngModel)]="TermsOfUse"></ion-textarea>
+	<h5>Privacy policy</h5>
+	<ion-textarea [(ngModel)]="PrivacyPolicy"></ion-textarea>
+	<h5>Contact</h5>
+
+
+	<table>
+		<tr>
+			<td>Email: <a>{{Email}}</a></td>
+		</tr>
+		<tr>
+			<td>Web: <a>{{WebAddress}}</a></td>
+		</tr>
+		<tr>
+			<td>Phone: <a>{{Phone}}</a></td>
+		</tr>
+	</table>
+</ion-content>

@@ -19,15 +19,16 @@ import { Elastic } from '../directives/elastic';
 import { NewAgenda } from '../pages/new-agenda/new-agenda';
 import { InviteMemberPage } from '../pages/invite/invite';
 import { InvitationSuccessPage } from '../pages/invite/success';
-
 import { NewCouncilPage } from '../pages/new-council/new-council'
-
 import { NewCouncilDiscussionPage } from '../pages/new-council-discussion/new-council-discussion';
 import { CouncilAssignmentsPage } from '../pages/council-assignments/council-assignments';
 import { MyAssignmentsPage } from '../pages/my-assignments/my-assignments';
 import { MomentModule } from 'angular2-moment';
 import { ActivityPage } from '../pages/activity/activity'
 import { ActiveCouncilsPage } from '../pages/activecouncils/activecouncils'
+import { AboutPage } from '../pages/about/about';
+import { SubmitFeedbackPage } from '../pages/feedback/submit-feedback/submit-feedback';
+import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-feedback';
 
 @NgModule({
   declarations: [
@@ -45,11 +46,14 @@ import { ActiveCouncilsPage } from '../pages/activecouncils/activecouncils'
     InviteMemberPage,
     InvitationSuccessPage,
     NewCouncilPage,
-     ActivityPage,
+    ActivityPage,
     ActiveCouncilsPage,
     NewCouncilDiscussionPage,
     CouncilAssignmentsPage,
-    MyAssignmentsPage
+    MyAssignmentsPage,
+    AboutPage,
+    SubmitFeedbackPage,
+    ThanksFeedbackPage
   ],
 
   imports: [
@@ -73,13 +77,16 @@ import { ActiveCouncilsPage } from '../pages/activecouncils/activecouncils'
     InviteMemberPage,
     InvitationSuccessPage,
     NewCouncilPage,
-     ActivityPage,
+    ActivityPage,
     ActiveCouncilsPage,
     NewCouncilDiscussionPage,
     CouncilAssignmentsPage,
-    MyAssignmentsPage
+    MyAssignmentsPage,
+    AboutPage,
+    SubmitFeedbackPage,
+    ThanksFeedbackPage
   ],
-  
+
   providers: [AuthService, AppService, FirebaseService]
 })
 export class AppModule { }

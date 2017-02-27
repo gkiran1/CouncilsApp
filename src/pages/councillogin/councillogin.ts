@@ -28,10 +28,10 @@ export class CouncilLoginPage {
         public alertCtrl: AlertController,
         public http: Http,
         private navParams: NavParams) {
-     }
+    }
 
     public forgotPassword() {
-
+       // this.nav.push(WelcomePage);
     }
 
     noAccount() {
@@ -45,7 +45,7 @@ export class CouncilLoginPage {
     private validateUser(loginCredentials) {
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
-            .then(uid => {flag = true})
+            .then(uid => { flag = true })
             .catch(err => this.showAlert('failure', err.message));
         let v = setInterval(() => {
             if (flag) {

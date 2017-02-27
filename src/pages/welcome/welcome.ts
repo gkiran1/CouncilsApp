@@ -13,20 +13,34 @@ import { InviteMemberPage } from '../invite/invite';
 import { CouncilAssignmentsPage } from '../council-assignments/council-assignments';
 import { MyAssignmentsPage } from '../my-assignments/my-assignments';
 import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
+import { AboutPage } from '../about/about';
+import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
+import { FirebaseService } from '../../environments/firebase/firebase-service';
+import { CouncilLoginPage } from '../councillogin/councillogin';
 
 @Component({
   selector: 'welcome',
   templateUrl: 'welcome.html',
-  providers:[MyAssignmentsPage,CouncilAssignmentsPage,ActiveCouncilsPage]
+  providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage]
 })
+
 export class WelcomePage {
+
   activeCouncilsCount;
   myAssignmentsCount;
   councilAssignmentsCount
   @ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
-  constructor(public af: AngularFire, public appService: AppService, public actionSheetCtrl: ActionSheetController, public menuctrl: MenuController, public myassignmentpage:MyAssignmentsPage,public councilAssignmentsPage:CouncilAssignmentsPage,public activeCouncilsPage:ActiveCouncilsPage) {
+
+  constructor(public af: AngularFire,
+    public appService: AppService,
+    public actionSheetCtrl: ActionSheetController,
+    public menuctrl: MenuController,
+    public myassignmentpage: MyAssignmentsPage,
+    public councilAssignmentsPage: CouncilAssignmentsPage,
+    public activeCouncilsPage: ActiveCouncilsPage,
+    private firebaseService: FirebaseService, ) {
     this.af.auth.subscribe(auth => {
       this.userObj = this.af.database.object('/users/' + auth.uid);
       // appService.setUser(this.userObj);
@@ -38,7 +52,7 @@ export class WelcomePage {
     this.activeCouncilsCount = activeCouncilsPage.getCount();
     this.myAssignmentsCount = myassignmentpage.getCount();
     this.councilAssignmentsCount = councilAssignmentsPage.getCount();
-   
+
     // this.pages = [
     //   { title: 'Home Page', component: HomePage }
     // ];
@@ -122,7 +136,7 @@ export class WelcomePage {
     actionSheet.present();
   }
 
- activePage() {
+  activePage() {
     this.nav.setRoot(ActiveCouncilsPage);
   }
 
@@ -163,7 +177,26 @@ export class WelcomePage {
   viewCouncilAssignments() {
     this.nav.setRoot(CouncilAssignmentsPage);
   }
+
   viewMyAssignments() {
     this.nav.setRoot(MyAssignmentsPage);
   }
+
+  viewSubmitFeedbackPage() {
+    this.nav.push(SubmitFeedbackPage);
+  }
+
+  viewAboutPage() {
+    this.nav.push(AboutPage);
+  }
+
+  signOut() {
+    this.firebaseService.signOut().then(() => {
+      this.nav.setRoot(CouncilLoginPage);
+    }).catch(err => {
+      console.log('Some Error with Sign Out...!!');
+      this.nav.setRoot(CouncilLoginPage);
+    })
+  }
+
 }
