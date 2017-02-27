@@ -19,19 +19,19 @@
             <ion-input type="password" name="password" [(ngModel)]="loginCredentials.password" required></ion-input>
           </ion-item>
 
-
           <div class="loginBtn">
-            <button ion-button block clear color="secondary" type="submit" [disabled]="!loginForm.form.valid">Log In</button>
+            <button ion-button block clear color="secondary" type="submit" [disabled]="!loginForm.form.valid" text-capitalize>Log In</button>
           </div>
         </form>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-toolbar>
+          <button class="clickBtn" ion-button clear color="secondary" block text-capitalize (click)="forgotPassword()">Forgot password?</button>
+          <button class="clickBtn" ion-button clear color="secondary" block text-capitalize (click)="noAccount()">Don't have an account?</button>
+        </ion-toolbar>
+      </ion-col>
+    </ion-row>
   </ion-grid>
-
-  <ion-footer>
-    <ion-toolbar>
-      <button class="clickBtn" ion-button clear color="secondary" block (click)="forgotPassword()">Forgot password?</button>
-      <button class="clickBtn" ion-button clear color="secondary" block (click)="noAccount()">Don't have an account?</button>
-    </ion-toolbar>
-  </ion-footer>
 </ion-content>
