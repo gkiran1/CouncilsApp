@@ -200,7 +200,6 @@ export class FirebaseService {
         return this.rootRef.child('assignments').push(
             {
                 assigneddate: assignment.assigneddate,
-                assignedtime: assignment.assignedtime,
                 assignedto: assignment.assigneduser,
                 councilid: assignment.councilid,
                 councilname: assignment.councilname,

@@ -82,8 +82,7 @@ export class NewAssignmentPage {
   createAssignment() {
     let formattedAssignmentObj = {
 
-      assigneddate: new Date(this.assignment.assigneddate).toISOString(),
-      assignedtime: moment(this.assignment.assignedtime, 'hh:mmA').format('hh:mmA'),
+      assigneddate: moment(this.assignment.assigneddate + ' ' + this.assignment.assignedtime, "YYYY-MM-DD hh:mmA").toISOString(),
       createddate: new Date().toISOString(),
       lastupdateddate: new Date().toISOString(),
 
