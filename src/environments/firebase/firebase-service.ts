@@ -266,4 +266,12 @@ export class FirebaseService {
         })
     }
 
+    updateCouncilsInUser(userUid: string, newCouncils: string[]) {
+        return this.rootRef.child('users/' + userUid).update({ councils: newCouncils }).then(() => {
+            return "councils in user updated successfully..."
+        }).catch(err => {
+            throw err;
+        })
+    }
+
 }
