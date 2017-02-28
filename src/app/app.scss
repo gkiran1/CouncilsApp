@@ -18,7 +18,8 @@
 
 
 
-    font-family: "Gotham Medium";
+
+    font-family: "Gotham-Medium";
 
 src:url('../assets/fonts/GOTHMMED.eot');
     src:url('../assets/fonts/GOTHMMED.eot') format('embedded-opentype'),
@@ -30,8 +31,9 @@ src:url('../assets/fonts/GOTHMMED.eot');
 
 }
 
+
 @font-face {
-    font-family: "Bernina Regular";
+    font-family: "Bernina-Regular";
     src:url('../assets/fonts/BerninaSans-Regular.eot');
     src:url('../assets/fonts/BerninaSans-Regular.eot') format('embedded-opentype'),
         url('../assets/fonts/BerninaSans-Regular.woff') format('woff'),
@@ -42,21 +44,81 @@ src:url('../assets/fonts/GOTHMMED.eot');
 }
 
 @font-face {
-    font-family: "Bernina SemiBold";
+    font-family: "Bernina-SemiBold";
     src:url('../assets/fonts/BerninaSans-SemiBold.eot');
     src:url('../assets/fonts/BerninaSans-SemiBold.eot') format('embedded-opentype'),
         url('../assets/fonts/BerninaSans-SemiBold.woff') format('woff'),
         url('../assets/fonts/BerninaSans-SemiBold.ttf') format('truetype'),
         url('../assets/fonts/BerninaSans-SemiBold.svg') format('svg');
-    font-weight: normal;
+    font-weight: 600;
     font-style: normal;
 }
 
-ion-title {
-    font-family: "Gotham Medium";
-    
+@font-face {
+    font-family: "Bernina-Bold";
+    src:url('../assets/fonts/BerninaSans-SemiBold.eot');
+    src:url('../assets/fonts/BerninaSans-SemiBold.eot') format('embedded-opentype'),
+        url('../assets/fonts/BerninaSans-SemiBold.woff') format('woff'),
+        url('../assets/fonts/BerninaSans-SemiBold.ttf') format('truetype'),
+        url('../assets/fonts/BerninaSans-SemiBold.svg') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+body {
+    padding: 0.5em !important;
+}
+
+ .toolbar-title-md, .toolbar-title-ios {
+    font-family: "Bernina-Bold", sans-serif;
+    font-size: 1.35em !important;
     color : #35373A !important;
 }
+
+.nocontent-message {
+    font-family: "Benina-Regular", sans-serif;
+    font-size: 1.35em;
+    color: #a9aaac;
+
+}
+
+.header-md, .header-ios {
+    display: block;
+    line-height: 5.18em;
+    text-align: center;
+    background: #FFFFFF;
+    border-bottom: 1px solid #dcd9d8;
+}
+
+h3 {
+    font-family: Bernina-Regular, sans-serif;
+    font-size: 1.35em !important;
+    color: #35373a !important;
+}
+
+.subtitle {
+    font-family: Bernina-Regular, sans-serif;
+    font-size: 1.35em !important;
+    color: #35373a !important;
+}
+
+
+.footer-md, .footer-ios {
+    background: #FFFFFF;
+}
+
+button, .button-md, .button-ios {
+  
+  font-family: "Bernina-Regular", sans-serif;
+  font-size: 1.35em;
+  text-transform: capitalize !important;
+  color: #3CB18A;
+}
+
+
+
+
 
 
 

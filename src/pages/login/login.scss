@@ -1,31 +1,45 @@
 page-login{
-ion-input{
-    padding-bottom:10px;
+    .login-title {
+        font-family: Gothm-Medium, sans-serif;
+        font-size: 2.3em;
+        color: #35373A;
+    }
+.login-header {
+    display: block;
+    margin-top: 30pt;
+    text-align: center;
+    
 }
-.loginBtn{
-    margin-top: 50px;
+
+.login-subheader {
+    display: block;
+    position:relative;
+    margin-top: 14pt;
+    text-align: center;
+    
 }
-.loginBtn button:disabled{
+
+.login-button-container {
+    padding-top:12pt;
+    text-align: center;
+    margin: auto;
+}
+
+.login-button {
+    width: 160pt;
+    height: 72pt;
+    margin: auto;
+}
+
+
+.login-button:disabled, .login-button button:disabled{
 color:#222;
 }
-.clickBtn{
-    font-size: 14px;
-}
-ion-list ion-item .mainheading{
-    margin-top: 50px;
-    font-size:15px;
-    font-family: Gotham Medium;
-}
-ion-list ion-item .subtext1{
-    margin-top:10px;
-    font-size:12px;
-    font-family: Bernina Regular;
 
+.item-md, .item-ios {
+    padding: 0 1em !important;
 }
-ion-list ion-item .subtext2{
-    font-size:12px;
 
-}
 ion-content ion-item ion-label{
     color:#a9aaad;
 }
@@ -33,12 +47,12 @@ ion-list ion-item{
     border-bottom-color: #f4f4f4;
 }
 .inputtype {
-    font-size:12px;
-    font-family: Bernina;
-
+    
+    font-family: "Bernina-Regular", sans-serif;
+    font-size:0.75em;
 }
 span.button-inner{
-font-family: Bernina;
+
 text-transform: none;
 }
 }

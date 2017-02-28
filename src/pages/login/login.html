@@ -1,11 +1,13 @@
 <ion-content>
-  <ion-list inset>
-    <ion-item text-center text-wrap>
-      <h1 class="mainheading" color="dark"><b>Log In</b></h1>
-      <p class="subtext1">Log in to your Councils account</p>
+  <div class="login-header">
+    
+      <span class="login-title">Log In</span>
+      <div class="login-subheader">
+      <h3>Log in to your Councils account</h3>
+      </div>
       <!--<p class="subtext2">to create your Councils account</p>-->
-    </ion-item>
-  </ion-list>
+    
+  </div>
 
   <form class="formcontent" (ngSubmit)="login()" #loginForm="ngForm">
     <ion-item>
@@ -17,15 +19,15 @@
       <ion-input type="password" name="password" [(ngModel)]="loginCredentials.password" required></ion-input>
     </ion-item>
 
-    <div class="loginBtn">
-      <button ion-button block clear color="secondary" type="submit" [disabled]="!loginForm.form.valid" text-capitalize>Log In</button>
+    <div class="login-button-container">
+      <button ion-button block clear color="secondary" class="login-button" type="submit" [disabled]="!loginForm.form.valid" text-capitalize>Log In</button>
     </div>
   </form>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <button class="clickBtn" ion-button clear color="secondary" block text-capitalize (click)="forgotPassword()">Forgot password?</button>
-    <button class="clickBtn" ion-button clear color="secondary" block text-capitalize (click)="noAccount()">Don't have an account?</button>
+    <button ion-button clear color="secondary" block text-capitalize (click)="forgotPassword()">Forgot password?</button>
+    <button ion-button clear color="secondary" block text-capitalize (click)="noAccount()">Don't have an account?</button>
   </ion-toolbar>
 </ion-footer>
