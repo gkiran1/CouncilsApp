@@ -16,7 +16,7 @@ import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { LoginPage } from '../login/login';
+import { GoodbyePage } from '../signout/goodbye';
 
 @Component({
   selector: 'welcome',
@@ -42,6 +42,7 @@ export class WelcomePage {
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService, ) {
     this.af.auth.subscribe(auth => {
+      console.log('text================>', auth.uid, )
       this.userObj = this.af.database.object('/users/' + auth.uid);
       // appService.setUser(this.userObj);
 
@@ -191,12 +192,12 @@ export class WelcomePage {
   }
 
   signOut() {
-    this.firebaseService.signOut().then(() => {
-      this.nav.setRoot(LoginPage);
-    }).catch(err => {
-      console.log('Some Error with Sign Out...!!');
-      this.nav.setRoot(LoginPage);
-    })
+    //this.firebaseService.signOut().then(() => {
+    this.nav.setRoot(GoodbyePage);
+    // }).catch(err => {
+    //   console.log('Some Error with Sign Out...!!');
+    //this.nav.setRoot(GoodbyePage);
+    // })
   }
 
 }
