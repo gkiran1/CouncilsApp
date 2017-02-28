@@ -9,7 +9,6 @@ import { AngularFireModule } from 'angularfire2';
 import { FirebaseConfig } from './../environments/firebase/firebase-config';
 import { FirebaseService } from './../environments/firebase/firebase-service';
 import { DisplayPage } from '../pages/display/display';
-import { CouncilLoginPage } from '../pages/councillogin/councillogin';
 import * as firebase from 'firebase';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { CreateAccountPage } from '../pages/create-account/create-account';
@@ -37,7 +36,6 @@ import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-fee
     LoginPage,
     RegisterPage,
     DisplayPage,
-    CouncilLoginPage,
     WelcomePage,
     CreateAccountPage,
     NewAssignmentPage,
@@ -69,7 +67,6 @@ import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-fee
     LoginPage,
     RegisterPage,
     DisplayPage,
-    CouncilLoginPage,
     WelcomePage,
     CreateAccountPage,
     NewAssignmentPage,

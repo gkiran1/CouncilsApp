@@ -4,7 +4,7 @@ import { RegisterPage } from '../register/register';
  import { AuthService } from '../../providers/auth-service';
  import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import { CouncilLoginPage } from '../councillogin/councillogin';
+import { LoginPage } from '../login/login';
 import{FirebaseService} from '../../environments/firebase/firebase-service'
  import { AppService } from '../../providers/app-service';
 
@@ -14,7 +14,7 @@ import{FirebaseService} from '../../environments/firebase/firebase-service'
 })
 export class DisplayPage {
   // @ViewChild(Nav) nav: Nav;
-   //rootPage = CouncilLoginPage;
+   //rootPage = LoginPage;
 
    //displaypage:DisplayPage;
    userName;

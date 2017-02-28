@@ -1,64 +1,36 @@
-page-login {
- 
-  .login-content {
-    background: white;
-  height: 100%;
-    .logo-row {
-      padding-top: 50px;
-      padding-bottom: 20px;
-    }
-    .title{
-     color:black;
-      font-size: 1px;
- }
- .header{
-     color: black;
-      font-size: 10px;
-     
-     
- }
- 
-    .login-box {
-      background:white;
-      padding: 20px 20px 0px 20px;
-      margin-top: 30px;
-    }
- 
-    ion-row {
-       align-items: center;
-       text-align: center;
-     }
- 
-     ion-item {
-         border-radius: 30px !important;
-         padding-left: 30px !important;
-         font-size: 0.9em;
-         margin-bottom: 10px;
-         border: 1px solid #ffffff;
-         border-bottom: 0px !important;
-         box-shadow: none !important;
-     }
- 
-     .signup-col {
-       margin: 0px 16px 0px 16px;
-       padding-bottom: 20px;
-     }
- 
-     .item-inner {
-       border-bottom-color: #ffffff !important;
-       box-shadow: none !important;
-     }
- 
-     .submit-btn {
-       background: #51CFB1;
-       border-radius: 30px !important;
-       border: 1px solid #ffffff;
-     }
- 
-     .register-btn {
-       color: #51CFB1;
-       font-size: 0.8em;
-     }
-  }
- 
+page-login{
+ion-input{
+    padding-bottom:10px;
+}
+.loginBtn{
+    margin-top: 50px;
+}
+.loginBtn button:disabled{
+color:#222;
+}
+.clickBtn{
+    font-size: 14px;
+}
+ion-list ion-item .mainheading{
+    margin-top: 50px;
+    font-size:15px;
+}
+ion-list ion-item .subtext1{
+    margin-top:10px;
+    font-size:12px;
+
+}
+ion-list ion-item .subtext2{
+    font-size:12px;
+
+}
+ion-content ion-item ion-label{
+    color:#a9aaad;
+}
+ion-list ion-item{
+    border-bottom-color: #f4f4f4;
+}
+.inputtype {
+    font-size:12px;
+}
 }

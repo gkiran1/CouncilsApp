@@ -12,7 +12,7 @@ import { Invitee } from '../invite/invitee.model';
 import { Observable, Subject } from "rxjs/Rx";
 import { WelcomePage } from '../welcome/welcome';
 import { AlertController } from 'ionic-angular';
-import { CouncilLoginPage } from '../councillogin/councillogin';
+import { LoginPage } from '../login/login';
 
 @Component({
   templateUrl: 'create-account.html'
@@ -65,7 +65,7 @@ export class CreateAccountPage {
         let v = setInterval(() => {
           if (flag) {
             this.showAlert('success', 'Account Created Successfully..<br/> Redirecting to login Page..');
-            this.navCtrl.push(CouncilLoginPage);
+            this.navCtrl.push(LoginPage);
             clearInterval(v);
           }
         }, 50);

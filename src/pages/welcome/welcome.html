@@ -23,13 +23,13 @@
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="activePage()">
+				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="activePage()" text-capitalize>
            Active
         </button>{{activeCouncilsCount | async}}
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear (click)="notesPage()">
+				<button ion-button color="secondary" class="listbtn2" clear (click)="notesPage()" text-capitalize>
            Notes
         </button>
 			</ion-item>
@@ -42,13 +42,13 @@
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear (click)="upcomingPage()">
+				<button ion-button color="secondary" class="listbtn2" clear (click)="upcomingPage()" text-capitalize>
          Upcoming
         </button>
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear (click)="pastPage()">
+				<button ion-button color="secondary" class="listbtn2" clear (click)="pastPage()" text-capitalize>
          Past
         </button>
 			</ion-item>
@@ -61,13 +61,13 @@
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear>
+				<button ion-button color="secondary" class="listbtn2" clear text-capitalize>
          Council
         </button>
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear (click)="privatePage()">
+				<button ion-button color="secondary" class="listbtn2" clear (click)="privatePage()" text-capitalize>
          Private
         </button>
 			</ion-item>
@@ -81,13 +81,13 @@
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="viewCouncilAssignments()">
+				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="viewCouncilAssignments()" text-capitalize>
          Council
         </button> {{councilAssignmentsCount | async}}
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="viewMyAssignments()">
+				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="viewMyAssignments()" text-capitalize>
          My
         </button> {{myAssignmentsCount | async}}
 			</ion-item>

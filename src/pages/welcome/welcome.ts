@@ -16,7 +16,7 @@ import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { CouncilLoginPage } from '../councillogin/councillogin';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'welcome',
@@ -192,10 +192,10 @@ export class WelcomePage {
 
   signOut() {
     this.firebaseService.signOut().then(() => {
-      this.nav.setRoot(CouncilLoginPage);
+      this.nav.setRoot(LoginPage);
     }).catch(err => {
       console.log('Some Error with Sign Out...!!');
-      this.nav.setRoot(CouncilLoginPage);
+      this.nav.setRoot(LoginPage);
     })
   }
 
