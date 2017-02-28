@@ -31,7 +31,6 @@ export class LoginPage {
     }
 
     public forgotPassword() {
-        this.nav.push(WelcomePage);
     }
 
     noAccount() {
