@@ -14,10 +14,12 @@ color:#222;
 ion-list ion-item .mainheading{
     margin-top: 50px;
     font-size:15px;
+    font-family: Gotham;
 }
 ion-list ion-item .subtext1{
     margin-top:10px;
     font-size:12px;
+    font-family: Bernina;
 
 }
 ion-list ion-item .subtext2{
@@ -32,5 +34,11 @@ ion-list ion-item{
 }
 .inputtype {
     font-size:12px;
+    font-family: Bernina;
+
+}
+span.button-inner{
+font-family: Bernina;
+text-transform: none;
 }
 }
