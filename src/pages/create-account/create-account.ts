@@ -71,7 +71,7 @@ export class CreateAccountPage {
         }, 50);
 
       } else {
-        this.showAlert('failure', 'you are not invited!');
+        this.showAlert('failure', 'You are not invited!');
       }
 
     });
