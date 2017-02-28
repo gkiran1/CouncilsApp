@@ -10,7 +10,7 @@ import * as moment from 'moment';
 
 @Component({
   templateUrl: 'new-assignment.html',
-  selector:'new-assignment-page'
+  selector: 'new-assignment-page'
 })
 export class NewAssignmentPage {
   minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
@@ -80,6 +80,11 @@ export class NewAssignmentPage {
   cancel() {
     this.nav.setRoot(WelcomePage);
   }
+  isTimeEntered = false;
+  timeEntered() {
+    console.log('time changed::', this.assignment.assignedtime);
+    this.isTimeEntered = true;
+  }
   createAssignment() {
     let formattedAssignmentObj = {
 
@@ -96,12 +101,14 @@ export class NewAssignmentPage {
       notes: this.assignment.notes
     }
 
-    if(moment(formattedAssignmentObj.assigneddate).isBefore(moment())){
+    if (!this.isTimeEntered) {
+      this.showAlert('Please enter Time field');
+    } else if (moment(formattedAssignmentObj.assigneddate).isBefore(moment())) {
       this.showAlert('Assignment Date/Time cannot be in past');
-    }else{
-       this.firebaseservice.createAssigment(formattedAssignmentObj)
-      .then(res => { this.showAlert('Assignment created successfully..'); this.nav.setRoot(WelcomePage) })
-      .catch(err => this.showAlert(err))
+    } else {
+      this.firebaseservice.createAssigment(formattedAssignmentObj)
+        .then(res => { this.showAlert('Assignment created successfully..'); this.nav.setRoot(WelcomePage) })
+        .catch(err => this.showAlert(err))
     }
   }
 

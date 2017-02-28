@@ -41,7 +41,7 @@
       <ion-col>
         <ion-item>
           <ion-label floating>Time</ion-label>
-          <ion-datetime displayFormat="hh:mmA" [(ngModel)]="assignment.assignedtime" name="assignedtime" required></ion-datetime>
+          <ion-datetime displayFormat="hh:mmA" [(ngModel)]="assignment.assignedtime" name="assignedtime" (ionChange)="timeEntered()" required></ion-datetime>
         </ion-item>
       </ion-col>
     </ion-row>
