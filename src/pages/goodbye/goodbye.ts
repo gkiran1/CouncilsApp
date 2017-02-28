@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
 @Component({
-    selector: 'goodbye',
+    selector: 'page-goodbye',
     templateUrl: 'goodbye.html'
 })
 

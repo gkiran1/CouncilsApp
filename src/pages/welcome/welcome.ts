@@ -16,7 +16,7 @@ import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { GoodbyePage } from '../signout/goodbye';
+import { GoodbyePage } from '../goodbye/goodbye';
 
 @Component({
   selector: 'welcome',

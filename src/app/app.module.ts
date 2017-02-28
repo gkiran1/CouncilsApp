@@ -28,7 +28,7 @@ import { ActiveCouncilsPage } from '../pages/activecouncils/activecouncils'
 import { AboutPage } from '../pages/about/about';
 import { SubmitFeedbackPage } from '../pages/feedback/submit-feedback/submit-feedback';
 import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-feedback';
-import { GoodbyePage } from '../pages/signout/goodbye';
+import { GoodbyePage } from '../pages/goodbye/goodbye';
 
 @NgModule({
   declarations: [
