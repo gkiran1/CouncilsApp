@@ -192,12 +192,9 @@ export class WelcomePage {
   }
 
   signOut() {
-    //this.firebaseService.signOut().then(() => {
+    this.firebaseService.signOut()
     this.nav.setRoot(GoodbyePage);
-    // }).catch(err => {
-    //   console.log('Some Error with Sign Out...!!');
-    //this.nav.setRoot(GoodbyePage);
-    // })
   }
+
 
 }

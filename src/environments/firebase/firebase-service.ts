@@ -12,11 +12,12 @@ import { Council } from '../../pages/new-council/council';
 @Injectable()
 export class FirebaseService {
 
-    fireAuth = firebase.auth();
-    rootRef = firebase.database().ref();
-    usr: any;
+    fireAuth: any;
+    rootRef: any;
+
     constructor(private af: AngularFire) {
-        this.usr = null;
+        this.fireAuth = firebase.auth();
+        this.rootRef = firebase.database().ref();
     }
 
     signupNewUser(user) {
@@ -258,12 +259,7 @@ export class FirebaseService {
     }
 
     signOut() {
-        this.af.auth.unsubscribe();
-        return firebase.auth().signOut().then(function () {
-            console.log('Sign-out successful'); // Sign-out successful.
-        }).catch(err => {
-            throw err;
-        })
+        this.fireAuth.logout;
     }
 
     updateCouncilsInUser(userUid: string, newCouncils: string[]) {
