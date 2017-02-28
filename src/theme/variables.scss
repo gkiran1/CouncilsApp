@@ -30,7 +30,7 @@ $font-path: "../assets/fonts";
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
-); 
+);
 
 
 
@@ -78,9 +78,19 @@ $font-path: "../assets/fonts";
 
 @import "roboto";
 @import "noto-sans";
-$label-md-text-color-focused:#32b38a; 
-$label-ios-text-color-focused:#32b38a; 
-$label-wp-text-color-focused:#32b38a; 
+$label-md-text-color-focused:#32b38a;
+$label-ios-text-color-focused:#32b38a;
+$label-wp-text-color-focused:#32b38a;
 
-// $label-wp-menu-color-focused:#32b38a; 
+// $label-wp-menu-color-focused:#32b38a;
+
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "Gotham";
+    src: url("../assets/fonts/Gotham.ttf");
+}
+@font-face {
+    font-family: "Bernina";
+    src: url("../assets/fonts/Bernina.ttf");
+}
 
