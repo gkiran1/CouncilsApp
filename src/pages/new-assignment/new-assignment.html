@@ -33,7 +33,7 @@
       <ion-col>
         <ion-item>
           <ion-label floating>Date</ion-label>
-          <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="assignment.assigneddate" name="assigneddate" required></ion-datetime>
+          <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" max="2117-12-31" [(ngModel)]="assignment.assigneddate" name="assigneddate" required></ion-datetime>
         </ion-item>
       </ion-col>
       <ion-col>
@@ -51,11 +51,6 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-buttons left>
-      <button ion-button clear color="danger" text-capitalize (click)="cancel()">Cancel</button>
-    </ion-buttons>
-    <ion-buttons end>
-      <button ion-button clear color="secondary" (click)="createAssignment()" text-capitalize [disabled]="!newAssignmentForm.form.valid">Create</button>
-    </ion-buttons>
+      <button ion-button clear block color="secondary" (click)="createAssignment()" text-capitalize [disabled]="!newAssignmentForm.form.valid">Create</button>
   </ion-toolbar>
 </ion-footer>

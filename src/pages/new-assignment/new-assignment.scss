@@ -1,6 +1,12 @@
-ion-content ion-item ion-label{
-    color:#a9aaad;
-}
-.cancel-font{
-    font-size: 50px;
+new-assignment-page{
+  
+    .cancel-font{
+        font-size: 50px;
+    }
+    ion-col{
+        padding: 0;
+    }
+     button:disabled{
+        color:#222;
+    }
 }

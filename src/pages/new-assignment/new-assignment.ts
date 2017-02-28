@@ -9,17 +9,18 @@ import { Council } from '../new-council/council'
 import * as moment from 'moment';
 
 @Component({
-  templateUrl: 'new-assignment.html'
+  templateUrl: 'new-assignment.html',
+  selector:'new-assignment-page'
 })
 export class NewAssignmentPage {
-
+  minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
   users: Array<Object>;
   councils = [];
   assignment = {
     description: '',
     assigneduser: '',
     assignedcouncil: new Council(),
-    assigneddate: new Date(),
+    assigneddate: moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD'),
     assignedtime: new Date(),
     createdby: '',
     createddate: '',
@@ -60,7 +61,7 @@ export class NewAssignmentPage {
       // }
 
       this.assignment.createdby = user.$key;
-      this.assignment.isactive = user.isactive;
+      this.assignment.isactive = false;
     });
   }
   assignedMemberChange() {
@@ -95,10 +96,15 @@ export class NewAssignmentPage {
       notes: this.assignment.notes
     }
 
-    this.firebaseservice.createAssigment(formattedAssignmentObj)
+    if(moment(formattedAssignmentObj.assigneddate).isBefore(moment())){
+      this.showAlert('Assignment Date/Time cannot be in past');
+    }else{
+       this.firebaseservice.createAssigment(formattedAssignmentObj)
       .then(res => { this.showAlert('Assignment created successfully..'); this.nav.setRoot(WelcomePage) })
       .catch(err => this.showAlert(err))
+    }
   }
+
   showAlert(errText) {
     let alert = this.alertCtrl.create({
       title: '',

@@ -1,0 +1,62 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+@font-face {
+
+
+
+    font-family: "Gothm Medium";
+
+src:url('../assets/fonts/GOTHMMED.eot');
+    src:url('../assets/fonts/GOTHMMED.eot') format('embedded-opentype'),
+        url('../assets/fonts/GOTHMMED.woff') format('woff'),
+        url('../assets/fonts/GOTHMMED.ttf') format('truetype'),
+        url('../assets/fonts/GOTHMMED.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: "Bernina Regular";
+    src:url('../assets/fonts/BerninaSans-Regular.eot');
+    src:url('../assets/fonts/BerninaSans-Regular.eot') format('embedded-opentype'),
+        url('../assets/fonts/BerninaSans-Regular.woff') format('woff'),
+        url('../assets/fonts/BerninaSans-Regular.ttf') format('truetype'),
+        url('../assets/fonts/BerninaSans-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Bernina SemiBold";
+    src:url('../assets/fonts/BerninaSans-SemiBold.eot');
+    src:url('../assets/fonts/BerninaSans-SemiBold.eot') format('embedded-opentype'),
+        url('../assets/fonts/BerninaSans-SemiBold.woff') format('woff'),
+        url('../assets/fonts/BerninaSans-SemiBold.ttf') format('truetype'),
+        url('../assets/fonts/BerninaSans-SemiBold.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+ion-title {
+    font-family: "Gothm Medium";
+    
+    color : #35373A !important;
+}
+
+
+

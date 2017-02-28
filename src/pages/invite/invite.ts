@@ -8,7 +8,8 @@ import { InvitationSuccessPage } from './success';
 import { WelcomePage } from '../welcome/welcome';
 
 @Component({
-    templateUrl: 'invite.html'
+    templateUrl: 'invite.html',
+    selector:'invite-page'
 })
 export class InviteMemberPage {
     invite: Invitee;
