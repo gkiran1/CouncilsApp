@@ -15,42 +15,35 @@ import { Council } from './council'
 })
 
 export class NewCouncilPage {
-  // users: FirebaseObjectObservable<any>;
+  currentUser: any;
   users: any;
   newCouncil: Council = new Council();
-  unittype: string;
-  userId: string;
 
   constructor(public af: AngularFire, public firebaseservice: FirebaseService, public appservice: AppService) {
-    //  this.af.auth.subscribe(auth => {
-    //       this.userObj = this.af.database.object('/users/' + auth.uid);
     this.appservice.getUser().subscribe(user => {
-      this.unittype = user.unittype;
-      this.userId = user.$key;
+      this.currentUser = user;
       let subscribe = this.firebaseservice.getUsersByUnitNumber(user.unitnumber).subscribe(users => {
         this.users = users;
-
         subscribe.unsubscribe();
       });
     });
   }
 
   createCouncil() {
-    var selectedUserIds: string[] = [];
-    selectedUserIds.push(this.userId);
-    this.newCouncil.counciltype = this.unittype;
-
-    this.users.forEach(user => {
-      if (user.selected === true) {
-        selectedUserIds.push(user.$key);
-      }
-    });
-
+    this.newCouncil.counciltype = this.currentUser.unittype;
     this.firebaseservice.createCouncils(this.newCouncil).then(res => {
       if (res != false) {
-        selectedUserIds.forEach(usrId => {
-          this.firebaseservice.createUserCouncils(usrId, res);
-        })
+        this.currentUser.councils.push(res);
+        this.firebaseservice.createUserCouncils(this.currentUser.$key, res);
+        this.firebaseservice.updateCouncilsInUser(this.currentUser.$key, this.currentUser.councils);
+
+        this.users.forEach(user => {
+          if (user.selected === true) {
+            this.firebaseservice.createUserCouncils(user.$key, res);
+            user.councils.push(res);
+            this.firebaseservice.updateCouncilsInUser(user.$key, user.councils);
+          }
+        });
       }
       else {
         alert('Council already exists.');
