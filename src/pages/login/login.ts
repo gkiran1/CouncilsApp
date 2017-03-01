@@ -45,7 +45,7 @@ export class LoginPage {
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
             .then(uid => { flag = true })
-            .catch(err => this.showAlert('failure', err.message));
+            .catch(err => this.showAlert('failure', 'Invalid Password.'));
         let v = setInterval(() => {
             if (flag) {
                 this.nav.push(WelcomePage);
