@@ -15,4 +15,5 @@ export class User {
     createddate: any;
     lastupdateddate: string;
     isactive: boolean;
+    councilnames: string;
 }
