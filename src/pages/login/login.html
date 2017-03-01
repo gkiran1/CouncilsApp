@@ -9,7 +9,7 @@
     
   </div>
 
-  <form class="formcontent" (ngSubmit)="login()" #loginForm="ngForm">
+  <form class="formcontent" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
     <ion-item>
       <ion-label class="inputtype" floating> Email</ion-label>
       <ion-input type="email" name="email" [(ngModel)]="loginCredentials.email" required></ion-input>
