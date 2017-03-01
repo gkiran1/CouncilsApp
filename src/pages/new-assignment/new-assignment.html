@@ -3,12 +3,16 @@
     <!--<button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>-->
-    <ion-item style="border: none !important">
-    <ion-icon class="cancel-font" item-left color="secondary" name="close" (click)="cancel()"></ion-icon>
-    <ion-title>
+    <ion-row>
+      <ion-col class="header-col" width-10>
+    <ion-icon class="cancel-font" item-left color="secondary"  ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
+      </ion-col>
+      <ion-col width-90>
+    <h3 >
       New Assignment
-    </ion-title>
-    </ion-item>
+    </h3>
+      </ion-col>
+    </ion-row>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -18,7 +22,7 @@
       <ion-input type="text" name="description" formControlName="description" ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Assign to</ion-label>
+      <ion-label >Assign to</ion-label>
       <ion-select name="assigneduser" (ionChange)="assignedMemberChange(assignmentForm.value)" formControlName="assigneduser">
         <ng-container *ngFor="let user of users">
           <ion-option *ngIf="user.$key!=appservice.uid" [value]="user" >{{user.firstname}}</ion-option>
