@@ -28,7 +28,7 @@
 			<ion-list *ngIf="!(user.isadmin)">
 				<ion-item>
 					<ion-label>
-						<h2>{{user.firstname}} {{user.lastname}}</h2>
+						<h2 class="username"><b>{{user.firstname}} {{user.lastname}}</b></h2>
 						<h2>{{user.councilnames}}</h2>
 					</ion-label>
 					<ion-checkbox [(ngModel)]="user.selected" color="secondary" item-right name="selectedUser"></ion-checkbox>
