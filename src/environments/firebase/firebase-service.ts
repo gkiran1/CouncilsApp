@@ -49,6 +49,7 @@ export class FirebaseService {
                 unittype: user.unittype,
                 unitnumber: user.unitnumber,
                 councils: user.councils,
+                calling: user.calling,
                 avatar: user.avatar,
                 isadmin: user.isadmin,
                 createdby: user.createdby,

@@ -47,6 +47,7 @@ export class CreateAccountPage {
         this.newUser.unitnumber = invitee.unitnumber;
         this.newUser.avatar = "avatar"; // time being hard coded..later need to work..
         this.newUser.councils = invitee.councils;
+        this.newUser.calling = invitee.calling;
         this.newUser.isadmin = false;
         this.newUser.createdby = invitee.createdby;
         this.newUser.createddate = '';
