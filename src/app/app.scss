@@ -91,6 +91,12 @@ body {
     border-bottom: 1px solid #dcd9d8;
 }
 
+h1 {
+    font-family: Gotham-Medium, sans-serif;
+    font-size: 2.4em !important;
+    color: #35373a !important;
+}
+
 h3 {
     font-family: Bernina-Regular, sans-serif;
     font-size: 1.35em !important;
@@ -114,6 +120,22 @@ button, .button-md, .button-ios {
   font-size: 1.35em;
   text-transform: capitalize !important;
   color: #3CB18A;
+}
+
+.content-center {
+    height: 100%; /* Or 100vh */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.status-button-container {
+    display: block;
+    position: relative;
+    padding-top: 128pt;
+    margin: auto;
 }
 
 

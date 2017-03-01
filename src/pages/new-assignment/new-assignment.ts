@@ -7,6 +7,7 @@ import { AlertController, NavController } from 'ionic-angular';
 import { WelcomePage } from '../welcome/welcome';
 import { Council } from '../new-council/council'
 import * as moment from 'moment';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   templateUrl: 'new-assignment.html',
@@ -16,27 +17,13 @@ export class NewAssignmentPage {
   minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
   users: Array<Object>;
   councils = [];
-  assignment = {
-    description: '',
-    assigneduser: '',
-    assignedcouncil: new Council(),
-    assigneddate: moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD'),
-    assignedtime: new Date(),
-    createdby: '',
-    createddate: '',
-    isactive: false, //default false
-    lastupdateddate: '',
-    notes: ''
-  }
+  assignmentForm: FormGroup;
   //This is required to store assingeduser object in UI inorder to fetch related councils.
-  temp = {
-    assigneduser: new User,
-  }
   usercouncils = [];
   arrayWithUserKeys = [];
 
 
-  constructor(public appservice: AppService, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
+  constructor(fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
     appservice.getUser().subscribe(user => {
       let subscribe = this.firebaseservice.getUsersByUnitNumber(user.unitnumber).subscribe(users => {
         this.users = users;
@@ -60,50 +47,53 @@ export class NewAssignmentPage {
       //   });
       // }
 
-      this.assignment.createdby = user.$key;
-      this.assignment.isactive = false;
+
+      this.assignmentForm = fb.group({
+        description: ['', Validators.required],
+        assigneduser: ['', Validators.required],
+        assignedcouncil: [new Council(), Validators.required],
+        assigneddate: [moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD'), Validators.required],
+        assignedtime: ['', Validators.required],
+        createdby: user.$key,
+        createddate: '',
+        isactive: false, //default false
+        lastupdateddate: '',
+        notes: ['', Validators.required]
+      });
+
     });
   }
-  assignedMemberChange() {
+  assignedMemberChange(value) {
     this.councils = [];
-    this.assignment.assigneduser = this.temp.assigneduser.$key;
-    this.assignment.assignedcouncil = new Council();
-
-    this.temp.assigneduser.councils.forEach(key => {
+    (<FormControl>this.assignmentForm.controls['assignedcouncil']).setValue(new Council());
+    value.assigneduser.councils.forEach(key => {
       this.firebaseservice.getCouncilByKey(key).subscribe(council => this.councils.push(...council));
     });
-
-    console.log('member changed', this.assignment.assigneduser, 'councils===>', this.councils);
+    console.log('member changed::', value);
   }
-
 
   cancel() {
     this.nav.setRoot(WelcomePage);
   }
-  isTimeEntered = false;
-  timeEntered() {
-    console.log('time changed::', this.assignment.assignedtime);
-    this.isTimeEntered = true;
-  }
-  createAssignment() {
+
+  createAssignment(value) {
+    console.log('======================>assignmentForm.value', value);
     let formattedAssignmentObj = {
 
-      assigneddate: moment(this.assignment.assigneddate + ' ' + this.assignment.assignedtime, "YYYY-MM-DD hh:mmA").toISOString(),
+      assigneddate: moment(value.assigneddate + ' ' + value.assignedtime, "YYYY-MM-DD hh:mmA").toISOString(),
       createddate: new Date().toISOString(),
       lastupdateddate: new Date().toISOString(),
 
-      createdby: this.assignment.createdby,
-      description: this.assignment.description,
-      assigneduser: this.assignment.assigneduser,
-      councilid: this.assignment.assignedcouncil.$key,
-      councilname: this.assignment.assignedcouncil.council,
-      isactive: this.assignment.isactive,
-      notes: this.assignment.notes
+      createdby: value.createdby,
+      description: value.description,
+      assigneduser: value.assigneduser.$key,
+      councilid: value.assignedcouncil.$key,
+      councilname: value.assignedcouncil.council,
+      isactive: value.isactive,
+      notes: value.notes
     }
-
-    if (!this.isTimeEntered) {
-      this.showAlert('Please enter Time field');
-    } else if (moment(formattedAssignmentObj.assigneddate).isBefore(moment())) {
+    console.log('======================>formattedAssignmentObj', formattedAssignmentObj);
+    if (moment(formattedAssignmentObj.assigneddate).isBefore(moment())) {
       this.showAlert('Assignment Date/Time cannot be in past');
     } else {
       this.firebaseservice.createAssigment(formattedAssignmentObj)

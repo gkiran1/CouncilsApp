@@ -29,6 +29,7 @@ import { AboutPage } from '../pages/about/about';
 import { SubmitFeedbackPage } from '../pages/feedback/submit-feedback/submit-feedback';
 import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-feedback';
 import { GoodbyePage } from '../pages/goodbye/goodbye';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { GoodbyePage } from '../pages/goodbye/goodbye';
 
   imports: [
     MomentModule,
+    FormsModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FirebaseConfig)
   ],
