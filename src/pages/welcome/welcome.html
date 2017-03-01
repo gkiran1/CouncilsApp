@@ -14,8 +14,8 @@
 
 	<ion-content>
 		<ion-list no-lines>
-			<ion-item class="listbtn1 !important">
-				<b>Councils</b>
+			<ion-item >
+				<ion-label class="listbtn1">Councils</ion-label>
 				<button color="secondary" *ngIf="(userObj | async)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
 
          <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>   
@@ -24,8 +24,8 @@
 
 			<ion-item>
 				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="activePage()" text-capitalize>
-           Active
-        </button>{{activeCouncilsCount | async}}
+           Active <span class="count">{{activeCouncilsCount | async}}</span>
+        </button>
 			</ion-item>
 
 			<ion-item>
@@ -34,8 +34,8 @@
         </button>
 			</ion-item>
 
-			<ion-item class="listbtn1">
-				<b>Agendas</b>
+			<ion-item >
+				<ion-label class="listbtn1">Agendas</ion-label>
 				<button color="secondary" ion-button icon-only clear item-right menuToggle (click)="agendasPage()">
          <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
         </button>
@@ -53,8 +53,9 @@
         </button>
 			</ion-item>
 
-			<ion-item class="listbtn1">
-				<b>Discussions</b>
+			<ion-item>
+				<ion-label class="listbtn1">Discussions</ion-label>
+
 				<button color="secondary" ion-button icon-only clear item-right (click)="discussionsPage()">
          <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
         </button>
@@ -72,8 +73,8 @@
         </button>
 			</ion-item>
 
-			<ion-item class="listbtn1">
-				<b>Assignments</b>
+			<ion-item>
+				<ion-label class="listbtn1">Assignments</ion-label>
 				<button color="secondary" ion-button icon-only clear item-right (click)="assignmentsPage()">
 
          <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
@@ -82,18 +83,18 @@
 
 			<ion-item>
 				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="viewCouncilAssignments()" text-capitalize>
-         Council
-        </button> {{councilAssignmentsCount | async}}
+         Council <span class="count">{{councilAssignmentsCount | async}}</span>
+        </button> 
 			</ion-item>
 
 			<ion-item>
 				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="viewMyAssignments()" text-capitalize>
-         My
-        </button> {{myAssignmentsCount | async}}
+         My <span class="count">{{myAssignmentsCount | async}}</span>
+        </button>
 			</ion-item>
 
-			<ion-item class="listbtn1">
-				<b>Settings</b>
+			<ion-item>
+				<ion-label class="listbtn1">Settings</ion-label>
 			</ion-item>
 
 			<ion-item>

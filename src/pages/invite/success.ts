@@ -5,6 +5,7 @@ import { InviteMemberPage } from './invite';
 import { WelcomePage } from '../welcome/welcome';
 
 @Component({
+    selector:'page-success',
     templateUrl: 'success.html'
 })
 export class InvitationSuccessPage {

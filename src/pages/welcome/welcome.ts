@@ -18,7 +18,7 @@ import { GoodbyePage } from '../goodbye/goodbye';
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'welcome',
+    selector: 'page-welcome',
   templateUrl: 'welcome.html',
   providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage]
 })

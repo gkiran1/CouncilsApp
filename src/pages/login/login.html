@@ -12,11 +12,11 @@
   <form class="formcontent" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
     <ion-item>
       <ion-label class="inputtype" floating> Email</ion-label>
-      <ion-input type="email" name="email" [(ngModel)]="loginCredentials.email" required></ion-input>
+      <ion-input type="email" name="email" id="email" [(ngModel)]="loginCredentials.email" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label class="inputtype" floating> Password</ion-label>
-      <ion-input type="password" name="password" [(ngModel)]="loginCredentials.password" required></ion-input>
+      <ion-input type="password" name="password" name="password" [(ngModel)]="loginCredentials.password" required></ion-input>
     </ion-item>
 
     <div class="login-button-container">
