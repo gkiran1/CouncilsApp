@@ -1,7 +1,7 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar hideBackButton >
         <ion-item>
-            <ion-icon item-left color="secondary" ios="ios-close" md="md-close" (click)="close()"></ion-icon>
+            <ion-icon item-left color="secondary" name="close" (click)="close()"></ion-icon>
             <ion-title text-center>Invite Members</ion-title>
         </ion-item>
     </ion-navbar>
@@ -12,7 +12,7 @@
             <ion-item-divider color="light"></ion-item-divider>
             <ion-item>
                 <ion-label floating>Email</ion-label>
-                <ion-input type="text" name="email" [(ngModel)]="invite.email" required></ion-input>
+                <ion-input type="email" name="email" [(ngModel)]="invite.email" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label floating>First Name</ion-label>

@@ -58,7 +58,7 @@ export class NewAssignmentPage {
         createddate: '',
         isactive: false, //default false
         lastupdateddate: '',
-        notes: ['', Validators.required]
+        notes: ''
       });
 
     });

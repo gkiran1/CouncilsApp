@@ -88,7 +88,7 @@ export class WelcomePage {
           handler: () => {
 
             this.menuctrl.close();
-            this.nav.setRoot(InviteMemberPage);
+            this.nav.push(InviteMemberPage);
 
           }
         },
