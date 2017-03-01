@@ -10,4 +10,11 @@ council-assignments{
     .item-wp ion-icon[item-left] + .item-inner, .item-wp ion-icon[item-left] + .item-input{
         margin-left:5px;
     }
+    .text-content{
+       position:absolute;
+       top:50%;
+       width: 100%;
+       margin:auto;
+       color:map-get($colors, light-gray);
+    }
 }
