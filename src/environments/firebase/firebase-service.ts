@@ -259,7 +259,11 @@ export class FirebaseService {
     }
 
     signOut() {
-        this.fireAuth.logout;
+        return this.fireAuth.signOut().then(() => {
+            console.log('Sign Out successfully..')
+        }).catch(err => {
+            throw err;
+        });
     }
 
     updateCouncilsInUser(userUid: string, newCouncils: string[]) {

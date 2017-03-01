@@ -1,11 +1,7 @@
 page-goodbye{
-    h2.text-content{
-    // position:absolute;
-   padding-top:50% !important;
-   font-family:Gotham Medium;
-    }
-    p{
-        font-family: Bernina Regular;
-
+    .page-message {
+        display: block;
+        position:relative;
+        padding-top: 14pt;
     }
 }

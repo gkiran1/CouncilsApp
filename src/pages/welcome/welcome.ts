@@ -6,9 +6,7 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
 import { NewAgenda } from '../new-agenda/new-agenda';
 import { NewAssignmentPage } from '../new-assignment/new-assignment';
-
-import { NewCouncilPage } from '../new-council/new-council'
-
+import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';
 import { CouncilAssignmentsPage } from '../council-assignments/council-assignments';
 import { MyAssignmentsPage } from '../my-assignments/my-assignments';
@@ -17,6 +15,7 @@ import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { GoodbyePage } from '../goodbye/goodbye';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'welcome',
@@ -32,6 +31,7 @@ export class WelcomePage {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
+  userSubscription: Subscription;
 
   constructor(public af: AngularFire,
     public appService: AppService,
@@ -41,7 +41,7 @@ export class WelcomePage {
     public councilAssignmentsPage: CouncilAssignmentsPage,
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService, ) {
-    this.af.auth.subscribe(auth => {
+    this.userSubscription = this.af.auth.subscribe(auth => {
       console.log('text================>', auth.uid, )
       this.userObj = this.af.database.object('/users/' + auth.uid);
       // appService.setUser(this.userObj);
@@ -192,9 +192,15 @@ export class WelcomePage {
   }
 
   signOut() {
-    this.firebaseService.signOut()
-    this.nav.setRoot(GoodbyePage);
+    this.appService.userSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
+    this.firebaseService.signOut().then(() => {
+      console.log('Sign Out successfully..')
+      this.nav.setRoot(GoodbyePage);
+    }).catch(err => {
+      this.nav.setRoot(GoodbyePage);
+      alert(err);
+    })
   }
-
 
 }
