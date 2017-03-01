@@ -138,6 +138,14 @@ button, .button-md, .button-ios {
     margin: auto;
 }
 
+.action-sheet-md .action-sheet-group .button-inner {
+    -webkit-justify-content: center !important; 
+    -ms-flex-pack: center !important;
+    justify-content: center !important; 
+}
+.action-sheet-md .action-sheet-title {
+        text-align: center !important;
+}
 
 
 
