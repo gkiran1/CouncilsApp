@@ -7,4 +7,49 @@ new-assignment-page{
       font-family:Bernina-Regular;
     }
 
+    .input-has-focus .label-md[floating], .input-has-value .label-md[floating]{
+
+      color:#3CB18A;
+    }
+.item-md.item-input.input-has-focus .item-inner {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
+
+.list-md .item-input.input-has-focus:last-child {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
+
+.list-md .item-input.input-has-focus:last-child .item-inner {
+  box-shadow: none;
+}
+
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
+
+.list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
+
+.list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child .item-inner {
+  box-shadow: none;
+}
+
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
+
+.list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
+.item-md.item-block .item-inner,.item-ios.item-block .item-inner,.item-ios.item-block .item-inner{
+  border-bottom:none !important;
+}
+
 }

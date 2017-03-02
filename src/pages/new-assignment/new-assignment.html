@@ -22,7 +22,7 @@
       <ion-input type="text" name="description" formControlName="description"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Assign to</ion-label>
+      <ion-label floating color="secondary">Assign to</ion-label>
       <ion-select name="assigneduser" (ionChange)="assignedMemberChange(assignmentForm.value)" formControlName="assigneduser">
         <ng-container *ngFor="let user of users">
           <ion-option *ngIf="user.$key!=appservice.uid" [value]="user">{{user.firstname}}</ion-option>
@@ -30,7 +30,7 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label floating>Council</ion-label>
+      <ion-label floating color="secondary">Council</ion-label>
       <ion-select name="assignedcouncil" formControlName="assignedcouncil">
         <ion-option *ngFor="let c of councils" [value]="c">{{c.council}}</ion-option>
       </ion-select>
@@ -38,7 +38,7 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label floating>Date</ion-label>
+          <ion-label floating >Date</ion-label>
           <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" max="2117-12-31" name="assigneddate" formControlName="assigneddate"></ion-datetime>
         </ion-item>
       </ion-col>
