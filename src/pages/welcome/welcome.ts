@@ -18,7 +18,7 @@ import { GoodbyePage } from '../goodbye/goodbye';
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'welcome',
+    selector: 'page-welcome',
   templateUrl: 'welcome.html',
   providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage]
 })
@@ -42,7 +42,6 @@ export class WelcomePage {
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService, ) {
     this.userSubscription = this.af.auth.subscribe(auth => {
-      console.log('text================>', auth.uid, )
       this.userObj = this.af.database.object('/users/' + auth.uid);
       // appService.setUser(this.userObj);
 
@@ -62,28 +61,26 @@ export class WelcomePage {
   councilsPage() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Councils',
-      cssClass: "cancelcolor",
       buttons: [
         {
           text: 'Create Council',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
 
-            this.nav.push(NewCouncilPage);
+            this.nav.setRoot(NewCouncilPage);
 
           }
         },
         {
           text: 'Create Note',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
           handler: () => {
-            console.log('Archive clicked');
           }
         },
         {
           text: 'Invite Members',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
 
           handler: () => {
 
@@ -94,15 +91,14 @@ export class WelcomePage {
         },
         {
           text: 'Inactivate Members',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
 
           handler: () => {
-            console.log('Archive clicked');
           }
         },
         {
           text: 'Edit Members',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
 
           handler: () => {
             console.log('Archive clicked');
@@ -110,25 +106,22 @@ export class WelcomePage {
         },
         {
           text: 'Reactivate Members',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
 
           handler: () => {
-            console.log('Archive clicked');
           }
         },
         {
           text: 'Transfers Admin Rights',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
 
           handler: () => {
-            console.log('Archive clicked');
           }
         },
         {
           text: 'Cancel',
-          cssClass: "cancelcolor",
+          cssClass: "actionsheet-cancel",
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]
@@ -148,11 +141,10 @@ export class WelcomePage {
   assignmentsPage() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Assignments',
-      cssClass: "cancelcolor",
       buttons: [
         {
           text: 'New Assignment',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
             this.nav.setRoot(NewAssignmentPage);
@@ -160,9 +152,8 @@ export class WelcomePage {
         },
         {
           text: 'Cancel',
-          cssClass: "cancelcolor",
+          cssClass: "actionsheet-cancel",
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]
@@ -174,6 +165,7 @@ export class WelcomePage {
   upcomingPage() { }
   pastPage() { }
   discussionsPage() { }
+  privatePage(){}
 
   viewCouncilAssignments() {
     this.nav.setRoot(CouncilAssignmentsPage);

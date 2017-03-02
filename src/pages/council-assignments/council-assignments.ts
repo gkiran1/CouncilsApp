@@ -5,6 +5,7 @@ import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Subject } from 'rxjs/Subject';
 import { AngularFire } from 'angularfire2';
+import { NewAssignmentPage } from '../new-assignment/new-assignment';
 
 @Component({
   templateUrl: 'council-assignments.html',
@@ -42,6 +43,7 @@ export class CouncilAssignmentsPage {
   }
   selectedIdx;
   assignmentSelected(assignment, index) {
+    this.navCtrl.push(NewAssignmentPage,{assignment:assignment});
     this.selectedIdx = index;
     console.log('assignmentSelected', assignment);
   }

@@ -7,7 +7,8 @@ import { User } from '../../user/user';
 import { Observable } from 'rxjs/Rx';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Council } from './council'
-
+import {  NavController } from 'ionic-angular';
+import { WelcomePage } from '../welcome/welcome';
 
 @Component({
   selector: 'new-council',
@@ -18,15 +19,30 @@ export class NewCouncilPage {
   currentUser: any;
   users: any;
   newCouncil: Council = new Council();
+  userCouncils: any;
 
-  constructor(public af: AngularFire, public firebaseservice: FirebaseService, public appservice: AppService) {
+  constructor(public af: AngularFire, public firebaseservice: FirebaseService, public appservice: AppService,public nav: NavController) {
     this.appservice.getUser().subscribe(user => {
       this.currentUser = user;
       let subscribe = this.firebaseservice.getUsersByUnitNumber(user.unitnumber).subscribe(users => {
+        users.forEach(usr => {
+          var userCouncilNames: string[] = [];
+          usr.councils.forEach(e => {
+            this.firebaseservice.getCouncilByKey(e).subscribe((councilObj) => {
+              councilObj.forEach(counObj => {
+                userCouncilNames.push(councilObj[0].council);
+                usr.councilnames = userCouncilNames.join(', ');
+              });
+            });
+          });
+        });
         this.users = users;
         subscribe.unsubscribe();
       });
     });
+  }
+  cancel() {
+    this.nav.setRoot(WelcomePage);
   }
 
   createCouncil() {

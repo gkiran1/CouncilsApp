@@ -54,6 +54,8 @@ export class LoginPage {
         }, 50);
     }
 
+
+
     showAlert(reason, text) {
         let alert = this.alertCtrl.create({
             title: '',

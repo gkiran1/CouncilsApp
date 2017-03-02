@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { User } from '../../user/user';
-
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { WelcomePage } from '../welcome/welcome';
-import { Council } from '../new-council/council'
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -15,18 +12,68 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class NewAssignmentPage {
   minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
-  users: Array<Object>;
+  users = [];
   councils = [];
   assignmentForm: FormGroup;
   //This is required to store assingeduser object in UI inorder to fetch related councils.
   usercouncils = [];
   arrayWithUserKeys = [];
+  isNewAssignment = true;
 
 
-  constructor(fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
+  constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
+    let assignment = navParams.get('assignment');
+    if (assignment) {
+      this.isNewAssignment = false;
+      this.assignmentForm = fb.group({
+        description: [assignment.description, Validators.required],
+        assigneduser: ['', Validators.required],
+        assignedcouncil: ['', Validators.required],
+        assigneddate: [assignment.assigneddate, Validators.required],
+        assignedtime: [assignment.assigneddate, Validators.required],
+        createdby: assignment.createdby,
+        createddate: assignment.createddate,
+        isactive: assignment.isactive, //default false
+        lastupdateddate: assignment.lastupdateddate,
+        notes: assignment.notes
+      });
+    } else {
+      this.assignmentForm = fb.group({
+        description: ['', Validators.required],
+        assigneduser: ['', Validators.required],
+        assignedcouncil: ['', Validators.required],
+        assigneddate: [moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD'), Validators.required],
+        assignedtime: ['', Validators.required],
+        createdby: '',
+        createddate: '',
+        isactive: false, //default false
+        lastupdateddate: '',
+        notes: ''
+      });
+    }
     appservice.getUser().subscribe(user => {
+      (<FormControl>this.assignmentForm.controls['createdby']).setValue(user.$key);
+
       let subscribe = this.firebaseservice.getUsersByUnitNumber(user.unitnumber).subscribe(users => {
         this.users = users;
+        if (assignment) {
+          firebaseservice.findUserByKey(assignment.assignedto).subscribe(u => {
+            this.users.forEach(e => {
+              if (e.$key == u.$key) {
+                (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(e);
+                this.updateCouncils(e);
+                firebaseservice.getCouncilByKey(assignment.councilid).subscribe(council => {
+                  this.councils.forEach(c => {
+                    //use council[0] to get council since its return type is FirebaseListObservable and just contains one council object. 
+                    if (c.$key == council[0].$key) {
+                      (<FormControl>this.assignmentForm.controls['assignedcouncil']).setValue(c);
+                    }
+                  });
+                });
+              }
+            });
+          });
+        }
         subscribe.unsubscribe();
       });
       // if (user.isadmin) {
@@ -46,30 +93,18 @@ export class NewAssignmentPage {
       //     });
       //   });
       // }
-
-
-      this.assignmentForm = fb.group({
-        description: ['', Validators.required],
-        assigneduser: ['', Validators.required],
-        assignedcouncil: [new Council(), Validators.required],
-        assigneddate: [moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD'), Validators.required],
-        assignedtime: ['', Validators.required],
-        createdby: user.$key,
-        createddate: '',
-        isactive: false, //default false
-        lastupdateddate: '',
-        notes: ''
-      });
-
     });
   }
   assignedMemberChange(value) {
     this.councils = [];
-    (<FormControl>this.assignmentForm.controls['assignedcouncil']).setValue(new Council());
-    value.assigneduser.councils.forEach(key => {
+    (<FormControl>this.assignmentForm.controls['assignedcouncil']).setValue('');
+    this.updateCouncils(value.assigneduser);
+    console.log('member changed::', value);
+  }
+  updateCouncils(userObj) {
+    userObj.councils.forEach(key => {
       this.firebaseservice.getCouncilByKey(key).subscribe(council => this.councils.push(...council));
     });
-    console.log('member changed::', value);
   }
 
   cancel() {

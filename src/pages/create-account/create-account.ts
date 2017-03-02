@@ -28,9 +28,12 @@ export class CreateAccountPage {
   constructor(public navCtrl: NavController, public firebaseService: FirebaseService, public alertCtrl: AlertController) { }
 
   createAccount() {
-
+    // password validation
+        if (!(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/).test(this.newUser.password))) {
+            this.showAlert('failure', 'Password  should be minimum of 6 characters long and must contain atleast one uppercase character and a digit and should not contain any spaces.')
+        }
     // username@domain.com
-
+    else{
     this.invitee$ = this.firebaseService.findInviteeByEmail(this.newUser.email);
     this.invitee$.subscribe(invitee => {
 
@@ -76,6 +79,7 @@ export class CreateAccountPage {
       }
 
     });
+    }
   }
 
   showAlert(reason, text) {

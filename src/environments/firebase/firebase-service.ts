@@ -134,10 +134,12 @@ export class FirebaseService {
         return this.af.database.list('councils', {
             query: {
                 orderByKey: true,
-                equalTo: key
+                equalTo: key,
+                limitToFirst: 1
             }
         }).map(results => results);
     }
+
     getUsersByUnitNumber(unitnumber: number): Observable<User[]> {
 
         return this.af.database.list('users', {

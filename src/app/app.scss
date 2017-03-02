@@ -15,12 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @font-face {
-
-
-
-
-    font-family: "Gotham-Medium";
-
+   font-family: "Gotham-Medium";
 src:url('../assets/fonts/GOTHMMED.eot');
     src:url('../assets/fonts/GOTHMMED.eot') format('embedded-opentype'),
         url('../assets/fonts/GOTHMMED.woff') format('woff'),
@@ -68,6 +63,11 @@ src:url('../assets/fonts/GOTHMMED.eot');
 
 body {
     padding: 0.5em !important;
+    font-family: 'Bernina-Regular', sans-serif;
+}
+
+input[type=text] {
+     font-family: 'Bernina-Regular', sans-serif;
 }
 
  .toolbar-title-md, .toolbar-title-ios {
@@ -85,7 +85,7 @@ body {
 
 .header-md, .header-ios {
     display: block;
-    line-height: 5.18em;
+    
     text-align: center;
     background: #FFFFFF;
     border-bottom: 1px solid #dcd9d8;
@@ -138,9 +138,49 @@ button, .button-md, .button-ios {
     margin: auto;
 }
 
+.action-sheet-md .action-sheet-group .button-inner {
+    -webkit-justify-content: center !important; 
+    -ms-flex-pack: center !important;
+    justify-content: center !important; 
+}
+.action-sheet-md .action-sheet-title {
+        text-align: center !important;
+}
+
+p{
+    font-family:  Bernina-Regular, sans-serif;
+}
+
+    .cancel-font{
+        font-size: 35pt;
+    }
+
+    .ion-md-close {
+        font-size: 24pt;
+        position: absolute;
+        top:15px;
+    }
+    ion-header ion-col{
+        padding: 0;
+    }
+    
+
+.header-col{
+  display: flex;
+    /* align-items: center; */
+    justify-content: center;
+  
+}
+ion-header ion-col h3{
+    font-weight: bold;
+     font-family: "Bernina-Bold", sans-serif;
+    font-size: 1.35em !important;
+    color : #35373A !important;
+}
 
 
-
-
-
-
+.action-sheet-ios .action-sheet-title{
+     font-family:Bernina-SemiBold !important;
+    font-size: 1.08em !important;
+    color:#35373A !important;    
+}
