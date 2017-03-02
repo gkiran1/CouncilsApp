@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <!--<button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>-->
@@ -8,8 +8,11 @@
         <ion-icon class="cancel-font" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
-        <h3>
+        <h3 *ngIf="isNewAssignment">
           New Assignment
+        </h3>
+        <h3 *ngIf="!isNewAssignment">
+          Assignment
         </h3>
       </ion-col>
     </ion-row>
@@ -40,8 +43,8 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label floating >Date</ion-label>
-          <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" max="2117-12-31" name="assigneddate" formControlName="assigneddate"></ion-datetime>
+          <ion-label floating>Date</ion-label>
+          <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" [max]="2120"  name="assigneddate" formControlName="assigneddate"></ion-datetime>
         </ion-item>
       </ion-col>
       <ion-col>
@@ -58,7 +61,23 @@
   </form>
 </ion-content>
 <ion-footer>
-  <ion-toolbar>
-    <button ion-button clear block color="secondary" (click)="createAssignment(assignmentForm.value)" text-capitalize [disabled]="!assignmentForm.valid">Create</button>
-  </ion-toolbar>
+
+  <ng-container *ngIf="isNewAssignment">
+    <ion-toolbar>
+      <button ion-button clear block color="secondary" (click)="createAssignment(assignmentForm.value)" text-capitalize [disabled]="!assignmentForm.valid">Create</button>
+    </ion-toolbar>
+  </ng-container>
+  <ng-container *ngIf="!isNewAssignment">
+    <ion-toolbar>
+      <ion-buttons start>
+        <button ion-button color="danger">Delete</button>
+      </ion-buttons>
+      <button ion-button clear block color="secondary" [disabled]="!assignmentForm.valid">Complete</button>
+      <ion-buttons end>
+        <button ion-button color="secondary">Edit</button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ng-container>
+
+
 </ion-footer>
