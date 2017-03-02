@@ -19,6 +19,7 @@ import { User } from '../../user/user';
 
 export class LoginPage {
     loading: Loading;
+    isClicked = true;
     loginCredentials = { email: '', password: '' };
     user: Observable<User>;
     constructor(
@@ -38,14 +39,22 @@ export class LoginPage {
     }
 
     public login() {
-        this.validateUser(this.loginCredentials);
+        if (this.isClicked) {
+            this.validateUser(this.loginCredentials);
+        }
+        this.isClicked = false;
     }
 
     private validateUser(loginCredentials) {
+
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
             .then(uid => { flag = true })
-            .catch(err => this.showAlert('failure', 'Your Emailid or Password is incorrect.'));
+            .catch(err => {
+                this.isClicked = true;
+                this.showAlert('failure', 'Your Emailid or Password is incorrect.');
+                
+            });
         let v = setInterval(() => {
             if (flag) {
                 this.nav.setRoot(WelcomePage);
