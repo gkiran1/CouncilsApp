@@ -184,3 +184,11 @@ ion-header ion-col h3{
     font-size: 1.08em !important;
     color:#35373A !important;    
 }
+
+.picker-opt {
+    text-overflow: initial !important;
+}
+
+.picker-md .picker-toolbar-cancel {
+        flex: 1 !important;
+}
