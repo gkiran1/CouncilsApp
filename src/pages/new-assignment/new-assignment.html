@@ -5,12 +5,12 @@
     </button>-->
     <ion-row>
       <ion-col class="header-col" width-10>
-    <ion-icon class="cancel-font" item-left color="secondary"  ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
+        <ion-icon class="cancel-font" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
       </ion-col>
-      <ion-col width-90>
-    <h3 >
-      New Assignment
-    </h3>
+      <ion-col width-80>
+        <h3>
+          New Assignment
+        </h3>
       </ion-col>
     </ion-row>
   </ion-navbar>
@@ -19,27 +19,27 @@
   <form [formGroup]="assignmentForm" (ngSubmit)="assignmentForm.value">
     <ion-item>
       <ion-label floating>Description</ion-label>
-      <ion-input type="text" name="description" formControlName="description" ></ion-input>
+      <ion-input type="text" name="description" formControlName="description"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label >Assign to</ion-label>
+      <ion-label floating>Assign to</ion-label>
       <ion-select name="assigneduser" (ionChange)="assignedMemberChange(assignmentForm.value)" formControlName="assigneduser">
         <ng-container *ngFor="let user of users">
-          <ion-option *ngIf="user.$key!=appservice.uid" [value]="user" >{{user.firstname}}</ion-option>
+          <ion-option *ngIf="user.$key!=appservice.uid" [value]="user">{{user.firstname}}</ion-option>
         </ng-container>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label floating>Council</ion-label>
       <ion-select name="assignedcouncil" formControlName="assignedcouncil">
-        <ion-option *ngFor="let c of councils" [value]="c" >{{c.council}}</ion-option>
+        <ion-option *ngFor="let c of councils" [value]="c">{{c.council}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-row>
       <ion-col>
         <ion-item>
           <ion-label floating>Date</ion-label>
-          <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" max="2117-12-31" name="assigneddate" formControlName="assigneddate" ></ion-datetime>
+          <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" max="2117-12-31" name="assigneddate" formControlName="assigneddate"></ion-datetime>
         </ion-item>
       </ion-col>
       <ion-col>
@@ -51,12 +51,12 @@
     </ion-row>
     <ion-item>
       <ion-label floating>Notes</ion-label>
-      <ion-textarea name="notes"elastic formControlName="notes"></ion-textarea>
+      <ion-textarea name="notes" elastic formControlName="notes"></ion-textarea>
     </ion-item>
   </form>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-      <button ion-button clear block color="secondary" (click)="createAssignment(assignmentForm.value)" text-capitalize [disabled]="!assignmentForm.valid">Create</button>
+    <button ion-button clear block color="secondary" (click)="createAssignment(assignmentForm.value)" text-capitalize [disabled]="!assignmentForm.valid">Create</button>
   </ion-toolbar>
 </ion-footer>

@@ -1,17 +1,5 @@
 new-assignment-page{
   
-    .cancel-font{
-        font-size: 50px;
-    }
-
-    .ion-md-close {
-        font-size: 24pt;
-        position: absolute;
-        top:15px;
-    }
-    ion-col{
-        padding: 0;
-    }
      button:disabled{
         color:#222;
     }
@@ -54,18 +42,5 @@ new-assignment-page{
 }
 .item-md.item-block .item-inner,.item-ios.item-block .item-inner,.item-ios.item-block .item-inner{
   border-bottom:none !important;
-}
-
-.header-col{
-  display: flex;
-    /* align-items: center; */
-    justify-content: center;
-  
-}
-ion-col h3{
-    font-weight: bold;
-     font-family: "Bernina-Bold", sans-serif;
-    font-size: 1.35em !important;
-    color : #35373A !important;
 }
 }

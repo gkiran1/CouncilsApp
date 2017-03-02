@@ -68,6 +68,11 @@ src:url('../assets/fonts/GOTHMMED.eot');
 
 body {
     padding: 0.5em !important;
+    font-family: 'Bernina-Regular', sans-serif;
+}
+
+input[type=text] {
+     font-family: 'Bernina-Regular', sans-serif;
 }
 
  .toolbar-title-md, .toolbar-title-ios {
@@ -151,6 +156,29 @@ p{
     font-family:  Bernina-Regular, sans-serif;
 }
 
+    .cancel-font{
+        font-size: 35pt;
+    }
 
+    .ion-md-close {
+        font-size: 24pt;
+        position: absolute;
+        top:15px;
+    }
+    ion-header ion-col{
+        padding: 0;
+    }
+    
 
-
+.header-col{
+  display: flex;
+    /* align-items: center; */
+    justify-content: center;
+  
+}
+ion-header ion-col h3{
+    font-weight: bold;
+     font-family: "Bernina-Bold", sans-serif;
+    font-size: 1.35em !important;
+    color : #35373A !important;
+}
