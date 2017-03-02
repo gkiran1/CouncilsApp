@@ -1,7 +1,19 @@
 <ion-header>
-    <ion-navbar>
-        <ion-icon name="close" (click)="close()"></ion-icon>
-        <ion-title text-center>Invite Members</ion-title>
+    <ion-navbar hideBackButton>
+        <!--<ion-item>
+            <ion-icon item-left color="secondary" name="close" (click)="close()"></ion-icon>
+            <ion-title text-center>Invite Members</ion-title>
+        </ion-item>-->
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="cancel-font" color="secondary" ios="ios-close" md="md-close" (click)="close()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <h3>
+                    Invite Members
+                </h3>
+            </ion-col>
+        </ion-row>
     </ion-navbar>
 </ion-header>
 <ion-content>
