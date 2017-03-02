@@ -48,7 +48,7 @@ export class LoginPage {
             .catch(err => this.showAlert('failure', 'Your Emailid or Password is incorrect.'));
         let v = setInterval(() => {
             if (flag) {
-                this.nav.push(WelcomePage);
+                this.nav.setRoot(WelcomePage);
                 clearInterval(v);
             }
         }, 50);
