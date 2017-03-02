@@ -21276,6 +21276,24 @@ sub {
   }
 }
 
+.customIcon {
+  font-size: 1.7em;
+}
+
+council-assignments ion-icon.active {
+  display: none;
+}
+
+council-assignments .list-md[inset], council-assignments .list-ios[inset], council-assignments .list-wp[inset] {
+  margin: 0 16px 0 0;
+}
+
+council-assignments .item-md ion-icon[item-left] + .item-inner, council-assignments .item-md ion-icon[item-left] + .item-input,
+council-assignments .item-ios ion-icon[item-left] + .item-inner, council-assignments .item-ios ion-icon[item-left] + .item-input,
+council-assignments .item-wp ion-icon[item-left] + .item-inner, council-assignments .item-wp ion-icon[item-left] + .item-input {
+  margin-left: 5px;
+}
+
 ion-input {
   padding-bottom: 10px;
 }
@@ -21378,9 +21396,9 @@ page-display .welcometext {
 }
 
 page-display .image {
-  float: right;
-  width: 60%;
-  padding-right: 30px;
+  margin-top: 30%;
+  width: 239pt;
+  height: 203pt;
 }
 
 page-display .content {
@@ -21389,6 +21407,12 @@ page-display .content {
 
 page-display .welcometext {
   text-align: center;
+}
+
+page-display .henry {
+  font-family: "Bernina Sans Regular";
+  font-size: 10 pt;
+  color: #a9aaac;
 }
 
 page-home .centerAlign {
@@ -21467,8 +21491,34 @@ page-login .login-content .register-btn {
   font-size: 0.8em;
 }
 
+my-assignments ion-icon.active {
+  display: none;
+}
+
+my-assignments .list-md[inset], my-assignments .list-ios[inset], my-assignments .list-wp[inset] {
+  margin: 0 16px 0 0;
+}
+
+my-assignments .item-md ion-icon[item-left] + .item-inner, my-assignments .item-md ion-icon[item-left] + .item-input,
+my-assignments .item-ios ion-icon[item-left] + .item-inner, my-assignments .item-ios ion-icon[item-left] + .item-input,
+my-assignments .item-wp ion-icon[item-left] + .item-inner, my-assignments .item-wp ion-icon[item-left] + .item-input {
+  margin-left: 5px;
+}
+
+my-assignments .item-md, my-assignments .item-ios, my-assignments .item-wp {
+  padding-left: 0;
+}
+
 ion-content ion-item ion-label {
   color: #a9aaad;
+}
+
+.cancel-font {
+  font-size: 50px;
+}
+
+.createbtn button:disabled {
+  color: #222;
 }
 
 page-register .login-content {
@@ -21537,4 +21587,9 @@ page-register .login-content .register-btn {
 
 .cancelcolor {
   color: #35373A !important;
+}
+
+.signOutbtn {
+  color: red;
+  font-size: 15pt;
 }

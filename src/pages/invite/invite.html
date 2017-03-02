@@ -1,9 +1,19 @@
 <ion-header>
-    <ion-navbar>
-        <ion-item>
-            <ion-icon item-left color="secondary" ios="ios-close" md="md-close" (click)="close()"></ion-icon>
+    <ion-navbar hideBackButton>
+        <!--<ion-item>
+            <ion-icon item-left color="secondary" name="close" (click)="close()"></ion-icon>
             <ion-title text-center>Invite Members</ion-title>
-        </ion-item>
+        </ion-item>-->
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="cancel-font" color="secondary" ios="ios-close" md="md-close" (click)="close()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <h3>
+                    Invite Members
+                </h3>
+            </ion-col>
+        </ion-row>
     </ion-navbar>
 </ion-header>
 <ion-content>
@@ -12,7 +22,7 @@
             <ion-item-divider color="light"></ion-item-divider>
             <ion-item>
                 <ion-label floating>Email</ion-label>
-                <ion-input type="text" name="email" [(ngModel)]="invite.email" required></ion-input>
+                <ion-input type="email" name="email" [(ngModel)]="invite.email" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label floating>First Name</ion-label>
@@ -43,5 +53,6 @@
     </form>
 </ion-content>
 <ion-footer>
-    <button ion-button type="submit" (click)="inviteMember()" clear block color="secondary" [disabled]="!InviteMemberForm.form.valid">Invite</button>
+    <button ion-button type="submit" (click)="inviteMember()" clear block color="secondary" text-capitalize [disabled]="!InviteMemberForm.form.valid"
+        text-capitalize>Invite</button>
 </ion-footer>

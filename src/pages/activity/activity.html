@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>
+      New Council
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="createCouncil()" #newCouncilForm="ngForm">
+    <ion-item>
+      <ion-label>Choose a name for your council:</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" name="council" [(ngModel)]="newCouncil.council" maxlength="25" placeholder="Council Name" clearInput
+        required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h6>Must be 25 characters or less</h6>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Who do you want to add to this council?</ion-label>
+    </ion-item>
+
+    <ion-list>
+      <ion-item *ngFor="let user of users">
+        <ion-label>
+          <h2>{{user.firstname}} {{user.lastname}}</h2>
+          <p>{{user.calling}}</p>
+        </ion-label>
+        <!--<ion-radio [(ngModel)]="user"  [value]="user.$key"></ion-radio>-->
+        <ion-checkbox [(ngModel)]="user.selected" color="secondary" item-right name="selectedUser"></ion-checkbox>
+
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="createbtn" text-center>
+    <button ion-button clear color="secondary" type="submit" (click)="createCouncil()" [disabled]="!newCouncilForm.form.valid" text-capitalize>Create</button>
+  </ion-toolbar>
+</ion-footer>

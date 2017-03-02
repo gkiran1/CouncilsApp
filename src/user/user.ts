@@ -1,5 +1,5 @@
 export class User {
-    $key:string;
+    $key: string;
     firstname: string;
     lastname: string;
     email: string;
@@ -8,10 +8,12 @@ export class User {
     unittype: string;
     unitnumber: number;
     councils: string[];
+    calling: string;
     avatar: string;
     isadmin: boolean;
     createdby: string;
     createddate: any;
     lastupdateddate: string;
     isactive: boolean;
+    councilnames: string;
 }

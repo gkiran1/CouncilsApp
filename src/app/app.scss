@@ -1,0 +1,214 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+@font-face {
+   font-family: "Gotham-Medium";
+src:url('../assets/fonts/GOTHMMED.eot');
+    src:url('../assets/fonts/GOTHMMED.eot') format('embedded-opentype'),
+        url('../assets/fonts/GOTHMMED.woff') format('woff'),
+        url('../assets/fonts/GOTHMMED.ttf') format('truetype'),
+        url('../assets/fonts/GOTHMMED.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: "Bernina-Regular";
+    src:url('../assets/fonts/BerninaSans-Regular.eot');
+    src:url('../assets/fonts/BerninaSans-Regular.eot') format('embedded-opentype'),
+        url('../assets/fonts/BerninaSans-Regular.woff') format('woff'),
+        url('../assets/fonts/BerninaSans-Regular.ttf') format('truetype'),
+        url('../assets/fonts/BerninaSans-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Bernina-SemiBold";
+    src:url('../assets/fonts/BerninaSans-SemiBold.eot');
+    src:url('../assets/fonts/BerninaSans-SemiBold.eot') format('embedded-opentype'),
+        url('../assets/fonts/BerninaSans-SemiBold.woff') format('woff'),
+        url('../assets/fonts/BerninaSans-SemiBold.ttf') format('truetype'),
+        url('../assets/fonts/BerninaSans-SemiBold.svg') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Bernina-Bold";
+    src:url('../assets/fonts/BerninaSans-SemiBold.eot');
+    src:url('../assets/fonts/BerninaSans-SemiBold.eot') format('embedded-opentype'),
+        url('../assets/fonts/BerninaSans-SemiBold.woff') format('woff'),
+        url('../assets/fonts/BerninaSans-SemiBold.ttf') format('truetype'),
+        url('../assets/fonts/BerninaSans-SemiBold.svg') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+body {
+    padding: 0.5em !important;
+    font-family: 'Bernina-Regular', sans-serif;
+}
+
+input[type=text] {
+     font-family: 'Bernina-Regular', sans-serif;
+}
+
+ .toolbar-title-md, .toolbar-title-ios {
+    font-family: "Bernina-Bold", sans-serif;
+    font-size: 1.35em !important;
+    color : #35373A !important;
+}
+
+.nocontent-message {
+    font-family: "Benina-Regular", sans-serif;
+    font-size: 1.35em;
+    color: #a9aaac;
+
+}
+
+.header-md, .header-ios {
+    display: block;
+    
+    text-align: center;
+    background: #FFFFFF;
+    border-bottom: 1px solid #dcd9d8;
+}
+
+h1 {
+    font-family: Gotham-Medium, sans-serif;
+    font-size: 2.4em !important;
+    color: #35373a !important;
+}
+
+h3 {
+    font-family: Bernina-Regular, sans-serif;
+    font-size: 1.35em !important;
+    color: #35373a !important;
+}
+
+.subtitle {
+    font-family: Bernina-Regular, sans-serif;
+    font-size: 1.35em !important;
+    color: #35373a !important;
+}
+
+
+.footer-md, .footer-ios {
+    background: #FFFFFF;
+}
+
+button, .button-md, .button-ios {
+  
+  font-family: "Bernina-Regular", sans-serif;
+  font-size: 1.35em;
+  text-transform: capitalize !important;
+  color: #3CB18A;
+}
+
+.content-center {
+    height: 100%; /* Or 100vh */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.status-button-container {
+    display: block;
+    position: relative;
+    padding-top: 128pt;
+    margin: auto;
+}
+
+.action-sheet-md .action-sheet-group .button-inner {
+    -webkit-justify-content: center !important; 
+    -ms-flex-pack: center !important;
+    justify-content: center !important; 
+}
+.action-sheet-md .action-sheet-title {
+        text-align: center !important;
+}
+
+p{
+    font-family:  Bernina-Regular, sans-serif;
+}
+
+    .cancel-font{
+        font-size: 35pt;
+    }
+
+    .ion-md-close {
+        font-size: 24pt;
+        position: absolute;
+        top:15px;
+    }
+    ion-header ion-col{
+        padding: 0;
+    }
+    
+
+.header-col{
+  display: flex;
+    /* align-items: center; */
+    justify-content: center;
+  
+}
+ion-header ion-col h3{
+    font-weight: bold;
+     font-family: "Bernina-Bold", sans-serif;
+    font-size: 1.35em !important;
+    color : #35373A !important;
+}
+
+
+.action-sheet-ios .action-sheet-title{
+     font-family:Bernina-SemiBold !important;
+    font-size: 1.08em !important;
+    color:#35373A !important;    
+}
+
+.picker-opt {
+    text-overflow: initial !important;
+}
+
+.picker-md .picker-toolbar-cancel {
+        flex: 1 !important;
+}
+.picker-md .picker-button, .picker-md .picker-button.activated{
+
+    color:#3CB18A!important;
+}
+.picker-ios .picker-button, .picker-ios .picker-button.activated{
+
+    color:#3CB18A!important;
+}
+.picker-md .picker-prefix, .picker-md .picker-suffix, .picker-md .picker-opt.picker-opt-selected{
+    color:#3CB18A!important;
+}
+
+.input-has-focus .label-md[floating],
+    .input-has-value .label-md[floating] {
+        color: #3CB18A;
+    }
+    .input-has-focus .label-ios[floating],
+    .input-has-value .label-ios[floating] {
+        color: #3CB18A;
+    }

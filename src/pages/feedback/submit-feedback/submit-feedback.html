@@ -1,0 +1,21 @@
+<ion-header text-center>
+	<ion-navbar>
+		<ion-title text-center>
+			Feedback
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content padding text-center>
+	<form (ngSubmit)="submitFeedback()" #newFeedbackForm="ngForm">
+		<h3>What can we improve?</h3>
+		<h6>Please give us your feedback.</h6>
+		<ion-item>
+			<ion-textarea name="feedback" [(ngModel)]="feedback" elastic required placeholder="Type your feedback here"></ion-textarea>
+		</ion-item>
+	</form>
+</ion-content>
+<ion-footer>
+	<ion-toolbar class="createbtn" text-center>
+		<button ion-button clear color="secondary" type="submit" (click)="submitFeedback()" text-capitalize [disabled]="!newFeedbackForm.form.valid">Submit Feedback</button>
+	</ion-toolbar>
+</ion-footer>

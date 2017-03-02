@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { Subscription } from "rxjs";
 
 export class User {
+    $key: string;
     name: string;
     email: string;
     firstname: string;
@@ -20,6 +22,7 @@ export class User {
     calling: string;
 
     constructor(user) {
+        this.$key = user.$key;
         this.name = user.name;
         this.email = user.email;
         this.firstname = user.firstname;
@@ -43,18 +46,20 @@ export class User {
 export class AppService {
     user: FirebaseObjectObservable<User>;
     uid;
+    userSubscription: Subscription;
+
     constructor(public af: AngularFire) {
-        this.af.auth.subscribe(auth => {
+        this.userSubscription = this.af.auth.subscribe(auth => {
             this.uid = auth.uid;
             this.user = this.af.database.object('/users/' + auth.uid);
         });
-        // this.user = this.af.database.object('/users/CcvXnVmIEuMcajPYGqZCKPPyA6z1')
-        // this.uid = 'CcvXnVmIEuMcajPYGqZCKPPyA6z1'
     }
+
     setUser(user: FirebaseObjectObservable<any>) {
         this.user = user;
         console.log('User details updated in AppService===>', this.user);
     }
+    
     getUser(): FirebaseObjectObservable<User> {
         return this.user;
     }

@@ -12,11 +12,12 @@ import { Council } from '../../pages/new-council/council';
 @Injectable()
 export class FirebaseService {
 
-    fireAuth = firebase.auth();
-    rootRef = firebase.database().ref();
-    usr: any;
+    fireAuth: any;
+    rootRef: any;
+
     constructor(private af: AngularFire) {
-        this.usr = null;
+        this.fireAuth = firebase.auth();
+        this.rootRef = firebase.database().ref();
     }
 
     signupNewUser(user) {
@@ -48,6 +49,7 @@ export class FirebaseService {
                 unittype: user.unittype,
                 unitnumber: user.unitnumber,
                 councils: user.councils,
+                calling: user.calling,
                 avatar: user.avatar,
                 isadmin: user.isadmin,
                 createdby: user.createdby,
@@ -58,7 +60,7 @@ export class FirebaseService {
                 this.createUserCouncils(uid, counc);
             }));
     }
-   
+
 
     validateUser(email: string, password: string) {
         return this.fireAuth.signInWithEmailAndPassword(email, password)
@@ -132,10 +134,12 @@ export class FirebaseService {
         return this.af.database.list('councils', {
             query: {
                 orderByKey: true,
-                equalTo: key
+                equalTo: key,
+                limitToFirst: 1
             }
         }).map(results => results);
     }
+
     getUsersByUnitNumber(unitnumber: number): Observable<User[]> {
 
         return this.af.database.list('users', {
@@ -145,7 +149,6 @@ export class FirebaseService {
             }
         });
     }
-
 
     createCouncil(council: Council) {
         firebase.database().ref().child('councils').push(
@@ -189,10 +192,7 @@ export class FirebaseService {
         }).catch(err => { throw err });
     }
 
-
-
-
-     getUsersByCouncil(councilid: string): Observable<User[]> {
+    getUsersByCouncil(councilid: string): Observable<User[]> {
         return this.af.database.list('usercouncils', {
             query: {
                 orderByChild: 'councilid',
@@ -204,9 +204,9 @@ export class FirebaseService {
         return this.rootRef.child('assignments').push(
             {
                 assigneddate: assignment.assigneddate,
-                assignedtime: assignment.assignedtime,
                 assignedto: assignment.assigneduser,
-                council: assignment.assignedcouncil,
+                councilid: assignment.councilid,
+                councilname: assignment.councilname,
                 createdby: assignment.createdby,
                 createddate: assignment.createddate,
                 description: assignment.description,
@@ -218,6 +218,63 @@ export class FirebaseService {
                 return "assignment created successfully..."
             })
             .catch(err => { throw err });
+    }
+
+    getAssignmentsByUserKey(userkey: string): FirebaseListObservable<any[]> {
+        return this.af.database.list('assignments', {
+            query: {
+                orderByChild: 'assignedto',
+                equalTo: userkey
+            }
+        });
+    }
+    getAssignmentsByCouncil(councilid: string): FirebaseListObservable<any[]> {
+        return this.af.database.list('assignments', {
+            query: {
+                orderByChild: 'councilid',
+                equalTo: councilid
+            }
+        });
+    }
+
+    getUserCounilKeysByUserKey(userkey: string): FirebaseListObservable<any[]> {
+        return this.af.database.list('usercouncils', {
+            query: {
+                orderByChild: 'userid',
+                equalTo: userkey
+            }
+        });
+    }
+
+    getAboutus() {
+        var aboutusRef = this.rootRef.child('aboutus/-Kd9xpkjKGqdLVdNB_Gj');
+        return aboutusRef.once('value').then(function (snapshot) {
+            return snapshot.val();
+        });
+    }
+
+    saveFeedback(comments, createdBy, createdDate) {
+        this.rootRef.child('feedback').push({
+            "comments": comments,
+            "createdby": createdBy,
+            "createddate": createdDate
+        });
+    }
+
+    signOut() {
+        return this.fireAuth.signOut().then(() => {
+            console.log('Sign Out successfully..')
+        }).catch(err => {
+            throw err;
+        });
+    }
+
+    updateCouncilsInUser(userUid: string, newCouncils: string[]) {
+        return this.rootRef.child('users/' + userUid).update({ councils: newCouncils }).then(() => {
+            return "councils in user updated successfully..."
+        }).catch(err => {
+            throw err;
+        })
     }
 
 }

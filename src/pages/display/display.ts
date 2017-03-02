@@ -4,7 +4,7 @@ import { RegisterPage } from '../register/register';
  import { AuthService } from '../../providers/auth-service';
  import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import { CouncilLoginPage } from '../councillogin/councillogin';
+import { LoginPage } from '../login/login';
 import{FirebaseService} from '../../environments/firebase/firebase-service'
  import { AppService } from '../../providers/app-service';
 
@@ -14,7 +14,7 @@ import{FirebaseService} from '../../environments/firebase/firebase-service'
 })
 export class DisplayPage {
   // @ViewChild(Nav) nav: Nav;
-   //rootPage = CouncilLoginPage;
+   //rootPage = LoginPage;
 
    //displaypage:DisplayPage;
    userName;
@@ -24,21 +24,17 @@ export class DisplayPage {
      this.registerCredentials.email = navParams.data.email;
      this.registerCredentials.ldsorgusername = navParams.data.ldsorgusername;
       // this.userName = this.appService.user.firstname;
-      // console.log('constructor', this.userName);
-     
-     
-      // menu.enable(true);
-    
-     
+      // console.log('constructor', this.userName);    
+      // menu.enable(true);      
    }
+
    click(){
     // setTimeout(() => {
     //     this.userName = this.firebaseService.usr.firstname;
     //   },50000);
      // this.userName = this.appService.user.firstname;
-      console.log('click', this.userName);
+      // console.log('click', this.userName);
    }
-
 
     // openMenu() {
     //   this.menu.open();

@@ -12,7 +12,7 @@ import { Invitee } from '../invite/invitee.model';
 import { Observable, Subject } from "rxjs/Rx";
 import { WelcomePage } from '../welcome/welcome';
 import { AlertController } from 'ionic-angular';
-import { CouncilLoginPage } from '../councillogin/councillogin';
+import { LoginPage } from '../login/login';
 
 @Component({
   templateUrl: 'create-account.html'
@@ -28,9 +28,12 @@ export class CreateAccountPage {
   constructor(public navCtrl: NavController, public firebaseService: FirebaseService, public alertCtrl: AlertController) { }
 
   createAccount() {
-
+    // password validation
+        if (!(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/).test(this.newUser.password))) {
+            this.showAlert('failure', 'Password  should be minimum of 6 characters long and must contain atleast one uppercase character and a digit and should not contain any spaces.')
+        }
     // username@domain.com
-
+    else{
     this.invitee$ = this.firebaseService.findInviteeByEmail(this.newUser.email);
     this.invitee$.subscribe(invitee => {
 
@@ -47,6 +50,7 @@ export class CreateAccountPage {
         this.newUser.unitnumber = invitee.unitnumber;
         this.newUser.avatar = "avatar"; // time being hard coded..later need to work..
         this.newUser.councils = invitee.councils;
+        this.newUser.calling = invitee.calling;
         this.newUser.isadmin = false;
         this.newUser.createdby = invitee.createdby;
         this.newUser.createddate = '';
@@ -65,16 +69,17 @@ export class CreateAccountPage {
         let v = setInterval(() => {
           if (flag) {
             this.showAlert('success', 'Account Created Successfully..<br/> Redirecting to login Page..');
-            this.navCtrl.push(CouncilLoginPage);
+            this.navCtrl.push(LoginPage);
             clearInterval(v);
           }
         }, 50);
 
       } else {
-        this.showAlert('failure', 'you are not invited!');
+        this.showAlert('failure', 'You are not invited!');
       }
 
     });
+    }
   }
 
   showAlert(reason, text) {

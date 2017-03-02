@@ -9,7 +9,6 @@ import { AngularFireModule } from 'angularfire2';
 import { FirebaseConfig } from './../environments/firebase/firebase-config';
 import { FirebaseService } from './../environments/firebase/firebase-service';
 import { DisplayPage } from '../pages/display/display';
-import { CouncilLoginPage } from '../pages/councillogin/councillogin';
 import * as firebase from 'firebase';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { CreateAccountPage } from '../pages/create-account/create-account';
@@ -19,13 +18,18 @@ import { Elastic } from '../directives/elastic';
 import { NewAgenda } from '../pages/new-agenda/new-agenda';
 import { InviteMemberPage } from '../pages/invite/invite';
 import { InvitationSuccessPage } from '../pages/invite/success';
-
 import { NewCouncilPage } from '../pages/new-council/new-council'
-
 import { NewCouncilDiscussionPage } from '../pages/new-council-discussion/new-council-discussion';
-import { CouncilAssignmentPage } from '../pages/council-assignments/council-assignments';
-
-
+import { CouncilAssignmentsPage } from '../pages/council-assignments/council-assignments';
+import { MyAssignmentsPage } from '../pages/my-assignments/my-assignments';
+import { MomentModule } from 'angular2-moment';
+import { ActivityPage } from '../pages/activity/activity'
+import { ActiveCouncilsPage } from '../pages/activecouncils/activecouncils'
+import { AboutPage } from '../pages/about/about';
+import { SubmitFeedbackPage } from '../pages/feedback/submit-feedback/submit-feedback';
+import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-feedback';
+import { GoodbyePage } from '../pages/goodbye/goodbye';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,6 @@ import { CouncilAssignmentPage } from '../pages/council-assignments/council-assi
     LoginPage,
     RegisterPage,
     DisplayPage,
-    CouncilLoginPage,
     WelcomePage,
     CreateAccountPage,
     NewAssignmentPage,
@@ -42,19 +45,25 @@ import { CouncilAssignmentPage } from '../pages/council-assignments/council-assi
     NewAgenda,
     InviteMemberPage,
     InvitationSuccessPage,
-
-    NewCouncilPage
-
-
+    NewCouncilPage,
+    ActivityPage,
+    ActiveCouncilsPage,
     NewCouncilDiscussionPage,
-    CouncilAssignmentPage
-
-
+    CouncilAssignmentsPage,
+    MyAssignmentsPage,
+    AboutPage,
+    SubmitFeedbackPage,
+    ThanksFeedbackPage,
+    GoodbyePage
   ],
+
   imports: [
+    MomentModule,
+    FormsModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FirebaseConfig)
   ],
+
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -62,22 +71,24 @@ import { CouncilAssignmentPage } from '../pages/council-assignments/council-assi
     LoginPage,
     RegisterPage,
     DisplayPage,
-    CouncilLoginPage,
     WelcomePage,
     CreateAccountPage,
     NewAssignmentPage,
     NewAgenda,
     InviteMemberPage,
     InvitationSuccessPage,
-
-    NewCouncilPage
-
-
+    NewCouncilPage,
+    ActivityPage,
+    ActiveCouncilsPage,
     NewCouncilDiscussionPage,
-    CouncilAssignmentPage
-
-
+    CouncilAssignmentsPage,
+    MyAssignmentsPage,
+    AboutPage,
+    SubmitFeedbackPage,
+    ThanksFeedbackPage,
+    GoodbyePage
   ],
+
   providers: [AuthService, AppService, FirebaseService]
 })
 export class AppModule { }

@@ -1,64 +1,95 @@
-page-login {
- 
-  .login-content {
-    background: white;
-  height: 100%;
-    .logo-row {
-      padding-top: 50px;
-      padding-bottom: 20px;
+page-login{
+    .login-title {
+        font-family: Gothm-Medium, sans-serif;
+        font-size: 2.3em;
+        color: #35373A;
     }
-    .title{
-     color:black;
-      font-size: 1px;
- }
- .header{
-     color: black;
-      font-size: 10px;
-     
-     
- }
- 
-    .login-box {
-      background:white;
-      padding: 20px 20px 0px 20px;
-      margin-top: 30px;
-    }
- 
-    ion-row {
-       align-items: center;
-       text-align: center;
-     }
- 
-     ion-item {
-         border-radius: 30px !important;
-         padding-left: 30px !important;
-         font-size: 0.9em;
-         margin-bottom: 10px;
-         border: 1px solid #ffffff;
-         border-bottom: 0px !important;
-         box-shadow: none !important;
-     }
- 
-     .signup-col {
-       margin: 0px 16px 0px 16px;
-       padding-bottom: 20px;
-     }
- 
-     .item-inner {
-       border-bottom-color: #ffffff !important;
-       box-shadow: none !important;
-     }
- 
-     .submit-btn {
-       background: #51CFB1;
-       border-radius: 30px !important;
-       border: 1px solid #ffffff;
-     }
- 
-     .register-btn {
-       color: #51CFB1;
-       font-size: 0.8em;
-     }
-  }
- 
+.login-header {
+    display: block;
+    margin-top: 30pt;
+    text-align: center;
+    
+}
+
+.login-subheader {
+    display: block;
+    position:relative;
+    margin-top: 14pt;
+    text-align: center;
+    
+}
+
+.login-button-container {
+    padding-top:12pt;
+    text-align: center;
+    margin: auto;
+}
+
+.login-button {
+    width: 160pt;
+    height: 72pt;
+    margin: auto;
+}
+
+
+.login-button:disabled, .login-button button:disabled{
+color:#222;
+}
+
+.item-md, .item-ios {
+    padding: 0 1em !important;
+}
+
+ion-content ion-item ion-label{
+    color:#a9aaad;
+}
+ion-list ion-item{
+    border-bottom-color: #f4f4f4;
+}
+.inputtype {
+    
+    font-family: "Bernina-Regular", sans-serif;
+    font-size:0.75em;
+}
+span.button-inner{
+
+text-transform: none;
+}
+.item-md.item-input.input-has-focus .item-inner {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
+
+.list-md .item-input.input-has-focus:last-child {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
+
+.list-md .item-input.input-has-focus:last-child .item-inner {
+  box-shadow: none;
+}
+
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
+
+.list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
+
+.list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child .item-inner {
+  box-shadow: none;
+}
+
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
+
+.list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child {
+  border-bottom-color: #DEDEDE !important;
+  box-shadow: none !important;
+}
 }

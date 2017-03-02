@@ -1,59 +1,83 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <!--<button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>-->
-     <ion-icon class="cancel-font" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
-    <ion-title text-center>
-      New Assignment
-    </ion-title>
+    <ion-row>
+      <ion-col class="header-col" width-10>
+        <ion-icon class="cancel-font" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
+      </ion-col>
+      <ion-col width-80>
+        <h3 *ngIf="isNewAssignment">
+          New Assignment
+        </h3>
+        <h3 *ngIf="!isNewAssignment">
+          Assignment
+        </h3>
+      </ion-col>
+    </ion-row>
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <form #newAssignmentForm="ngForm">
+  <form [formGroup]="assignmentForm" (ngSubmit)="assignmentForm.value">
     <ion-item>
       <ion-label floating>Description</ion-label>
-      <ion-input type="text" name="description" [(ngModel)]="assignment.description" required></ion-input>
+      <ion-input type="text" name="description" formControlName="description"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Assign to</ion-label>
-      <ion-select [(ngModel)]="temp.assigneduser" name="assigneduser" (ionChange)="assignedMemberChange()">
-        <ion-option *ngFor="let user of users" [value]="user" required>{{user.firstname}}</ion-option>
+      <ion-label *ngIf="!assigneduser">Assign to</ion-label>
+      <ion-label floating color="secondary" *ngIf="assigneduser">Assign to</ion-label>
+      <ion-select name="assigneduser" (ionChange)="assignedMemberChange(assignmentForm.value)" [(ngModel)]='assigneduser' formControlName="assigneduser">
+        <ng-container *ngFor="let user of users">
+          <ion-option *ngIf="user.$key!=appservice.uid" [value]="user">{{user.firstname}}</ion-option>
+        </ng-container>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label floating>Council</ion-label>
-      <ion-select [(ngModel)]="assignment.assignedcouncil" name="assigedcouncil">
-        <ion-option *ngFor="let c of councils" [value]="c.$key" required>{{c.council}}</ion-option>
+       <ion-label *ngIf="!assignedcouncil">Council</ion-label>
+      <ion-label floating color="secondary" *ngIf="assignedcouncil">Council</ion-label>
+      <ion-select name="assignedcouncil" [(ngModel)]='assignedcouncil' formControlName="assignedcouncil">
+        <ion-option *ngFor="let c of councils" [value]="c">{{c.council}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-row>
       <ion-col>
         <ion-item>
           <ion-label floating>Date</ion-label>
-          <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="assignment.assigneddate" name="assigneddate" required></ion-datetime>
+          <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" [max]="2120"  name="assigneddate" formControlName="assigneddate"></ion-datetime>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
           <ion-label floating>Time</ion-label>
-          <ion-datetime displayFormat="HH:mm a" [(ngModel)]="assignment.assignedtime" name="assignedtime" required></ion-datetime>
+          <ion-datetime displayFormat="hh:mma" name="assignedtime" formControlName="assignedtime"></ion-datetime>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-item>
       <ion-label floating>Notes</ion-label>
-      <ion-textarea name="notes" [(ngModel)]="assignment.notes" elastic required></ion-textarea>
+      <ion-textarea name="notes" elastic formControlName="notes"></ion-textarea>
     </ion-item>
   </form>
 </ion-content>
 <ion-footer>
-  <ion-toolbar>
-    <ion-buttons left>
-      <button ion-button clear color="danger" (click)="cancel()">Cancel</button>
-    </ion-buttons>
-    <ion-buttons end>
-      <button ion-button clear color="secondary" (click)="createAssignment()" [disabled]="!newAssignmentForm.form.valid">Create</button>
-    </ion-buttons>
-  </ion-toolbar>
+
+  <ng-container *ngIf="isNewAssignment">
+    <ion-toolbar>
+      <button ion-button clear block color="secondary" (click)="createAssignment(assignmentForm.value)" text-capitalize [disabled]="!assignmentForm.valid">Create</button>
+    </ion-toolbar>
+  </ng-container>
+  <ng-container *ngIf="!isNewAssignment">
+    <ion-toolbar>
+      <ion-buttons start>
+        <button ion-button color="danger">Delete</button>
+      </ion-buttons>
+      <button ion-button clear block color="secondary" [disabled]="!assignmentForm.valid">Complete</button>
+      <ion-buttons end>
+        <button ion-button color="secondary">Edit</button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ng-container>
+
+
 </ion-footer>
