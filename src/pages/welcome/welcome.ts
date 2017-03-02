@@ -135,7 +135,7 @@ export class WelcomePage {
   }
 
   agendasPage() {
-    this.nav.setRoot(NewAgenda);
+    //this.nav.setRoot(NewAgenda);
   }
 
   assignmentsPage() {

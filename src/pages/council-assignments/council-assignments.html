@@ -21,7 +21,7 @@
       <ion-item (click)="assignmentSelected(item, i)" *ngFor="let item of councilAssignmentsArray; let i = index" [attr.data-index]="i">
         <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': selectedIdx == i}"></ion-icon>
         <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>
-        <h1>{{item.description}}</h1>
+        <h3>{{item.description}}</h3>
         <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | amCalendar}}</span>
         </p>
       </ion-item>
