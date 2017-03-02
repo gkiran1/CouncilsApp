@@ -62,11 +62,10 @@ export class WelcomePage {
   councilsPage() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Councils',
-      cssClass: "cancelcolor",
       buttons: [
         {
           text: 'Create Council',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
 
@@ -76,14 +75,13 @@ export class WelcomePage {
         },
         {
           text: 'Create Note',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
           handler: () => {
-            console.log('Archive clicked');
           }
         },
         {
           text: 'Invite Members',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
 
           handler: () => {
 
@@ -94,15 +92,14 @@ export class WelcomePage {
         },
         {
           text: 'Inactivate Members',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
 
           handler: () => {
-            console.log('Archive clicked');
           }
         },
         {
           text: 'Edit Members',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
 
           handler: () => {
             console.log('Archive clicked');
@@ -110,7 +107,7 @@ export class WelcomePage {
         },
         {
           text: 'Reactivate Members',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
 
           handler: () => {
             console.log('Archive clicked');
@@ -118,17 +115,15 @@ export class WelcomePage {
         },
         {
           text: 'Transfers Admin Rights',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
 
           handler: () => {
-            console.log('Archive clicked');
           }
         },
         {
           text: 'Cancel',
-          cssClass: "cancelcolor",
+          cssClass: "actionsheet-cancel",
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]
@@ -148,11 +143,10 @@ export class WelcomePage {
   assignmentsPage() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Assignments',
-      cssClass: "cancelcolor",
       buttons: [
         {
           text: 'New Assignment',
-          cssClass: "classcolor",
+          cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
             this.nav.setRoot(NewAssignmentPage);
@@ -160,9 +154,8 @@ export class WelcomePage {
         },
         {
           text: 'Cancel',
-          cssClass: "cancelcolor",
+          cssClass: "actionsheet-cancel",
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]

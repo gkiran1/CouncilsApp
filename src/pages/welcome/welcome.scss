@@ -16,7 +16,7 @@ margin-left: 7%;
 
 .listbtn2{
 font-size: 1.42em !important;
-font-family:Bernina-regular !important;
+font-family:Bernina-Regular !important;
 color:#3cb18a !important;
 }
 
@@ -33,11 +33,18 @@ b{
      color:#a9aaac;
     margin-left:13px;
 }
-
-// .title-ios{
-//     position: absolute;
-//     top: 15pt;
-// }
-
-
-}//page-welcome
+.item-ios.item-block .item-inner,.item-md.item-block .item-inner{
+    border:none !important;
+}
+}
+.actionsheet-items{
+    color: #3cb18a !important;
+    font-family:Bernina-Regular !important;
+    font-size: 1.42em !important;
+}
+.actionsheet-cancel{
+    color:#35373A !important;
+    font-family:Bernina-Regular !important;
+    font-size: 1.42em !important;
+    
+}
