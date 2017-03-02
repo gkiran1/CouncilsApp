@@ -90,7 +90,7 @@ input[type=text] {
 
 .header-md, .header-ios {
     display: block;
-    line-height: 5.18em;
+    
     text-align: center;
     background: #FFFFFF;
     border-bottom: 1px solid #dcd9d8;
@@ -181,4 +181,12 @@ ion-header ion-col h3{
      font-family: "Bernina-Bold", sans-serif;
     font-size: 1.35em !important;
     color : #35373A !important;
+}
+
+.classcolor{
+    color: #3cb18a !important;
+}
+
+.cancelcolor{
+    color:#35373A !important;
 }
