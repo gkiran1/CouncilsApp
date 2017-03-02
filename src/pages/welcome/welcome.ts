@@ -174,6 +174,7 @@ export class WelcomePage {
   upcomingPage() { }
   pastPage() { }
   discussionsPage() { }
+  privatePage(){}
 
   viewCouncilAssignments() {
     this.nav.setRoot(CouncilAssignmentsPage);

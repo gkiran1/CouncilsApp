@@ -43,20 +43,15 @@ export class LoginPage {
 
     private validateUser(loginCredentials) {
         let flag = false;
-               if (!(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/).test(this.loginCredentials.password))) {
-            this.showAlert('failure', 'Password  should be minimum of 6 characters long and must contain atleast one uppercase character and a digit and should not contain any spaces.')
-        }
-        else {
-            this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
-                .then(uid => { flag = true })
-                .catch(err => this.showAlert('failure', err.message));
-            let v = setInterval(() => {
-                if (flag) {
-                    this.nav.push(WelcomePage);
-                    clearInterval(v);
-                }
-            }, 50);
-        }
+        this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
+            .then(uid => { flag = true })
+            .catch(err => this.showAlert('failure', 'Your Emailid or Password is incorrect.'));
+        let v = setInterval(() => {
+            if (flag) {
+                this.nav.push(WelcomePage);
+                clearInterval(v);
+            }
+        }, 50);
     }
 
 
