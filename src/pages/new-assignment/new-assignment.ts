@@ -108,7 +108,12 @@ export class NewAssignmentPage {
   }
 
   cancel() {
-    this.nav.setRoot(WelcomePage);
+    if(this.isNewAssignment){
+      this.nav.setRoot(WelcomePage);
+    }else{
+      this.nav.pop();
+    }
+    
   }
 
   createAssignment(value) {
