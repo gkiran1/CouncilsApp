@@ -15,12 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @font-face {
-
-
-
-
-    font-family: "Gotham-Medium";
-
+   font-family: "Gotham-Medium";
 src:url('../assets/fonts/GOTHMMED.eot');
     src:url('../assets/fonts/GOTHMMED.eot') format('embedded-opentype'),
         url('../assets/fonts/GOTHMMED.woff') format('woff'),
@@ -183,10 +178,9 @@ ion-header ion-col h3{
     color : #35373A !important;
 }
 
-.classcolor{
-    color: #3cb18a !important;
-}
 
-.cancelcolor{
-    color:#35373A !important;
+.action-sheet-ios .action-sheet-title{
+     font-family:Bernina-SemiBold !important;
+    font-size: 1.08em !important;
+    color:#35373A !important;    
 }

@@ -33,10 +33,10 @@
 		</ion-item>
 
 		<!--<div *ngFor="let user of users">-->
-		<ion-list inset *ngFor="let user of users">
-			<ng-container *ngIf="!(user.isadmin)">
+		<ion-list inset >
+			<ng-container *ngFor="let user of users" >
 
-				<ion-item>
+				<ion-item *ngIf="!(user.isadmin)">
 					<ion-label>
 						<h2 class="username"><b>{{user.firstname}} {{user.lastname}}</b></h2>
 						<h2>{{user.councilnames}}</h2>
