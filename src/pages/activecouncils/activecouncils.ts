@@ -7,9 +7,11 @@ import { User } from '../../user/user';
 import { Observable, Subject } from 'rxjs/Rx';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Council } from '../new-council/council';
+import { NavController } from 'ionic-angular';
+import { WelcomePage } from '../welcome/welcome';
 
 @Component({
-    selector: 'activecouncils',
+    selector: 'page-activecouncils',
     templateUrl: 'activecouncils.html'
 })
 
@@ -18,7 +20,7 @@ export class ActiveCouncilsPage {
     myCouncils = [];
     count$ = new Subject();
 
-    constructor(public af: AngularFire, public firebaseservice: FirebaseService, public appservice: AppService) {
+    constructor(public af: AngularFire, public firebaseservice: FirebaseService, public appservice: AppService,public nav: NavController) {
         this.appservice.getUser().subscribe(user => {
             this.myCouncils = [];
             user.councils.forEach(e => {
@@ -29,7 +31,9 @@ export class ActiveCouncilsPage {
             });
         });
     }
-
+ cancel() {
+    this.nav.setRoot(WelcomePage);
+  }
     getCount() {
         return this.count$;
     }

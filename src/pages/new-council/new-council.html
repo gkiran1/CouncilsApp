@@ -2,8 +2,10 @@
 	<ion-navbar>
 		<ion-row>
 			<ion-col class="header-col" width-10>
+				<ion-icon class="cancel-font" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back" (click)="cancel()"></ion-icon>
 			</ion-col>
 			<ion-col width-80>
+
 				<h3>
 					New Council
 				</h3>
@@ -30,8 +32,10 @@
 			<ion-label>Who do you want to add to this council?</ion-label>
 		</ion-item>
 
-		<div *ngFor="let user of users">
-			<ion-list *ngIf="!(user.isadmin)">
+		<!--<div *ngFor="let user of users">-->
+		<ion-list inset *ngFor="let user of users">
+			<ng-container *ngIf="!(user.isadmin)">
+
 				<ion-item>
 					<ion-label>
 						<h2 class="username"><b>{{user.firstname}} {{user.lastname}}</b></h2>
@@ -39,8 +43,9 @@
 					</ion-label>
 					<ion-checkbox [(ngModel)]="user.selected" color="secondary" item-right name="selectedUser"></ion-checkbox>
 				</ion-item>
-			</ion-list>
-		</div>
+			</ng-container>
+		</ion-list>
+		<!--</div>-->
 	</form>
 </ion-content>
 

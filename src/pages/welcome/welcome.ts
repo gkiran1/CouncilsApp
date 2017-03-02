@@ -42,7 +42,6 @@ export class WelcomePage {
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService, ) {
     this.userSubscription = this.af.auth.subscribe(auth => {
-      console.log('text================>', auth.uid, )
       this.userObj = this.af.database.object('/users/' + auth.uid);
       // appService.setUser(this.userObj);
 
@@ -69,7 +68,7 @@ export class WelcomePage {
           handler: () => {
             this.menuctrl.close();
 
-            this.nav.push(NewCouncilPage);
+            this.nav.setRoot(NewCouncilPage);
 
           }
         },
@@ -110,7 +109,6 @@ export class WelcomePage {
           cssClass: "actionsheet-items",
 
           handler: () => {
-            console.log('Archive clicked');
           }
         },
         {
