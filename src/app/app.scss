@@ -192,3 +192,14 @@ ion-header ion-col h3{
 .picker-md .picker-toolbar-cancel {
         flex: 1 !important;
 }
+.picker-md .picker-button, .picker-md .picker-button.activated{
+
+    color:#3CB18A!important;
+}
+.picker-ios .picker-button, .picker-ios .picker-button.activated{
+
+    color:#3CB18A!important;
+}
+.picker-md .picker-prefix, .picker-md .picker-suffix, .picker-md .picker-opt.picker-opt-selected{
+    color:#3CB18A!important;
+}
