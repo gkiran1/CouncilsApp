@@ -19,7 +19,7 @@ import { User } from '../../user/user';
 
 export class LoginPage {
     loading: Loading;
-    loginCredentials = { email: 'tbharati7@gmail.com', password: 'mightydoll@12345' };
+    loginCredentials = { email: '', password: '' };
     user: Observable<User>;
     constructor(
         public nav: NavController,
