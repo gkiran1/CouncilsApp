@@ -19,12 +19,13 @@ export class NewAssignmentPage {
   usercouncils = [];
   arrayWithUserKeys = [];
   isNewAssignment = true;
-
+  assignmentKey = '';
 
   constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
     let assignment = navParams.get('assignment');
     if (assignment) {
       this.isNewAssignment = false;
+      this.assignmentKey = assignment.$key;
       this.assignmentForm = fb.group({
         description: [assignment.description, Validators.required],
         assigneduser: ['', Validators.required],
@@ -35,7 +36,8 @@ export class NewAssignmentPage {
         createddate: assignment.createddate,
         isactive: assignment.isactive, //default false
         lastupdateddate: assignment.lastupdateddate,
-        notes: assignment.notes
+        notes: assignment.notes,
+        isCompleted: assignment.isCompleted
       });
     } else {
       this.assignmentForm = fb.group({
@@ -48,7 +50,8 @@ export class NewAssignmentPage {
         createddate: '',
         isactive: false, //default false
         lastupdateddate: '',
-        notes: ''
+        notes: '',
+        isCompleted: false
       });
     }
     appservice.getUser().subscribe(user => {
@@ -108,30 +111,33 @@ export class NewAssignmentPage {
   }
 
   cancel() {
-    if(this.isNewAssignment){
+    if (this.isNewAssignment) {
       this.nav.setRoot(WelcomePage);
-    }else{
+    } else {
       this.nav.pop();
     }
-    
+
   }
 
-  createAssignment(value) {
-    console.log('======================>assignmentForm.value', value);
-    let formattedAssignmentObj = {
-
+  formatAssignmentObj(value) {
+    return {
       assigneddate: moment(value.assigneddate + ' ' + value.assignedtime, "YYYY-MM-DD hh:mmA").toISOString(),
       createddate: new Date().toISOString(),
       lastupdateddate: new Date().toISOString(),
-
       createdby: value.createdby,
       description: value.description,
       assigneduser: value.assigneduser.$key,
       councilid: value.assignedcouncil.$key,
       councilname: value.assignedcouncil.council,
       isactive: value.isactive,
-      notes: value.notes
+      notes: value.notes,
+      isCompleted: value.isCompleted
     }
+  }
+
+  createAssignment(value) {
+    console.log('======================>assignmentForm.value', value);
+    let formattedAssignmentObj = this.formatAssignmentObj(value);
     console.log('======================>formattedAssignmentObj', formattedAssignmentObj);
     if (moment(formattedAssignmentObj.assigneddate).isBefore(moment())) {
       this.showAlert('Assignment Date/Time cannot be in past');
@@ -149,6 +155,29 @@ export class NewAssignmentPage {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  complete(value) {
+    if (value.isCompleted) {
+      this.showAlert('This assignment is already completed');
+    } else {
+      value.isCompleted = true;
+      let formattedAssignmentObj = this.formatAssignmentObj(value);
+      this.firebaseservice.updateAssignment(formattedAssignmentObj, this.assignmentKey)
+        .then(res => { console.log(res); this.showAlert('Assignment marked as completed!'); this.nav.pop(); })
+        .catch(err => { console.error(err); this.showAlert('Unable to updated the Assignment, please try after some time') })
+    }
+  }
+  edit(value) {
+    let formattedAssignmentObj = this.formatAssignmentObj(value);
+    this.firebaseservice.updateAssignment(formattedAssignmentObj, this.assignmentKey)
+      .then(res => { console.log(res); this.showAlert('Assignment has been updated') })
+      .catch(err => { console.error(err); this.showAlert('Unable to updated the Assignment, please try after some time') })
+  }
+  delete() {
+    this.firebaseservice.removeAssignment(this.assignmentKey)
+      .then(res => { console.log(res); this.showAlert('Assignment has been deleted'); this.nav.pop(); })
+      .catch(err => { console.error(err); this.showAlert('Unable to delete the Assignment, please try after some time') })
   }
 
 }

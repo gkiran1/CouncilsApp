@@ -70,11 +70,11 @@
   <ng-container *ngIf="!isNewAssignment">
     <ion-toolbar>
       <ion-buttons start>
-        <button ion-button color="danger">Delete</button>
+        <button ion-button color="danger" (click)="delete(assignmentForm.value)">Delete</button>
       </ion-buttons>
-      <button ion-button clear block color="secondary" [disabled]="!assignmentForm.valid">Complete</button>
+      <button ion-button clear block color="secondary" [disabled]="!assignmentForm.valid" (click)="complete(assignmentForm.value)">Complete</button>
       <ion-buttons end>
-        <button ion-button color="secondary">Edit</button>
+        <button ion-button color="secondary" [disabled]="!assignmentForm.valid" (click)="edit(assignmentForm.value)">Edit</button>
       </ion-buttons>
     </ion-toolbar>
   </ng-container>
