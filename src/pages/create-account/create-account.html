@@ -21,13 +21,13 @@
             <ion-input  type="text" name="ldsusername" [(ngModel)]="newUser.ldsusername" id="ldsusername" required></ion-input>
     </ion-item>
     <div class="createBtn">
-      <button ion-button block clear color="secondary" type="submit" text-capitalize [disabled]="!createAccountForm.form.valid" text-capitalize>Create Account</button>
+      <button ion-button block clear color="secondary" name="CreateAccount" type="submit" text-capitalize [disabled]="!createAccountForm.form.valid" text-capitalize>Create Account</button>
     </div>
   </form>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <button class="cancelBtn" ion-button clear color="secondary" block text-capitalize (click)="cancel()" text-capitalize>Cancel</button>
+    <button class="cancelBtn" ion-button clear color="secondary" name="Cancel" block text-capitalize (click)="cancel()" text-capitalize>Cancel</button>
   </ion-toolbar>
 </ion-footer>
 
