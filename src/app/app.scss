@@ -213,3 +213,6 @@ ion-header ion-col h3{
     .input-has-value .label-ios[floating] {
         color: #3CB18A;
     }
+    .scroll-content {
+        overflow-y:auto !important
+    }
