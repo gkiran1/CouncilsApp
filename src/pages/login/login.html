@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content has-footer="true">
   <div class="login-header">
     
       <span class="login-title">Log In</span>
@@ -16,18 +16,18 @@
     </ion-item>
     <ion-item>
       <ion-label class="inputtype" floating> Password</ion-label>
-      <ion-input type="password" name="password" name="password" [(ngModel)]="loginCredentials.password" required></ion-input>
+      <ion-input type="password" id="password" name="password" [(ngModel)]="loginCredentials.password" required></ion-input>
     </ion-item>
 
     <div class="login-button-container">
-      <button ion-button block clear color="secondary" class="login-button" type="submit" [disabled]="!loginForm.form.valid" text-capitalize>Log In</button>
+      <button name="loginbtn" id="loginbtn" ion-button block clear color="secondary" class="login-button" type="submit" [disabled]="!loginForm.form.valid" text-capitalize>Log In</button>
     </div>
   </form>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button clear color="secondary" block text-capitalize (click)="forgotPassword()">Forgot password?</button>
-    <button ion-button clear color="secondary" block text-capitalize (click)="noAccount()">Don't have an account?</button>
+    <button ion-button clear color="secondary" name="forgotPassword" block text-capitalize (click)="forgotPassword()">Forgot password?</button>
+    <button ion-button clear color="secondary" name="noAccount" block text-capitalize (click)="noAccount()">Don't have an account?</button>
   </ion-toolbar>
 </ion-footer>

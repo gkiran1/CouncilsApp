@@ -212,7 +212,8 @@ export class FirebaseService {
                 description: assignment.description,
                 isactive: assignment.isactive,
                 lastupdateddate: assignment.lastupdateddate,
-                notes: assignment.notes
+                notes: assignment.notes,
+                isCompleted: assignment.isCompleted
             })
             .then(() => {
                 return "assignment created successfully..."
@@ -275,6 +276,30 @@ export class FirebaseService {
         }).catch(err => {
             throw err;
         })
+    }
+    updateAssignment(assignment, assignmentKey) {
+        console.log('assignment.$key', assignmentKey);
+        return this.af.database.list('assignments').update(assignmentKey, {
+            assigneddate: assignment.assigneddate,
+            assignedto: assignment.assigneduser,
+            councilid: assignment.councilid,
+            councilname: assignment.councilname,
+            createdby: assignment.createdby,
+            createddate: assignment.createddate,
+            description: assignment.description,
+            isactive: assignment.isactive,
+            lastupdateddate: assignment.lastupdateddate,
+            notes: assignment.notes,
+            isCompleted: assignment.isCompleted
+        })
+            .then(() => {
+                return "Assignment has been updated!"
+            })
+            .catch(err => { throw err });
+    }
+    removeAssignment(assignmentKey) {
+        console.log('assignment.$key', assignmentKey);
+        return this.af.database.object('assignments/' + assignmentKey).remove();
     }
 
 }

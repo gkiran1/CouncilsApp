@@ -1,4 +1,4 @@
-<ion-menu [content]="content" type="overlay">
+<ion-menu name="menu" [content]="content" type="overlay">
 	<ion-header>
 		<ion-navbar hideBackButton="true">
 			<ion-item style="border: none !important">
@@ -16,20 +16,20 @@
 		<ion-list no-lines>
 			<ion-item >
 				<ion-label class="listbtn1">Councils</ion-label>
-				<button color="secondary" *ngIf="(userObj | async)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
+				<button color="secondary" name="councilsPage" *ngIf="(userObj | async)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
 
-         <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>   
+         <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>   
         </button>
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="activePage()" text-capitalize>
+				<button ion-button color="secondary" class="listbtn2" name="activePage" clear menuToggle (click)="activePage()" text-capitalize>
            Active <span class="count">{{activeCouncilsCount | async}}</span>
         </button>
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear (click)="notesPage()" text-capitalize>
+				<button ion-button color="secondary" name="notesPage" class="listbtn2" clear (click)="notesPage()" text-capitalize>
            Notes
         </button>
 			</ion-item>
@@ -75,22 +75,16 @@
 
 			<ion-item>
 				<ion-label class="listbtn1">Assignments</ion-label>
-				<button color="secondary" ion-button icon-only clear item-right (click)="assignmentsPage()">
+				<button color="secondary" name="assignmentsPage" ion-button icon-only clear item-right (click)="assignmentsPage()">
 
-         <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+         <ion-icon name="assignmentscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
         </button>
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="viewCouncilAssignments()" text-capitalize>
+				<button ion-button color="secondary" class="listbtn2" clear menuToggle name="viewCouncilAssignments" (click)="viewCouncilAssignments()" text-capitalize>
          Council <span class="count">{{councilAssignmentsCount | async}}</span>
         </button> 
-			</ion-item>
-
-			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="viewMyAssignments()" text-capitalize>
-         My <span class="count">{{myAssignmentsCount | async}}</span>
-        </button>
 			</ion-item>
 
 			<ion-item>
@@ -98,13 +92,13 @@
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear menuToggle text-capitalize (click)="viewSubmitFeedbackPage()">
+				<button ion-button color="secondary" name="Feedback" class="listbtn2" clear menuToggle text-capitalize (click)="viewSubmitFeedbackPage()">
          Submit Feedback
         </button>
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear menuToggle text-capitalize (click)="viewAboutPage()">
+				<button ion-button color="secondary" name="About"class="listbtn2" clear menuToggle text-capitalize (click)="viewAboutPage()">
          About
         </button>
 			</ion-item>
@@ -113,7 +107,7 @@
 	</ion-content>
 
 	<ion-footer text-center>
-		<button ion-button class="signOutbtn" clear menuToggle text-capitalize (click)="signOut()">
+		<button ion-button class="signOutbtn" name="SignOut" clear menuToggle text-capitalize (click)="signOut()">
          Sign Out  
         </button>
 	</ion-footer>

@@ -153,6 +153,7 @@ p{
 
     .cancel-font{
         font-size: 24pt;
+
     }
 
     .ion-md-close {
@@ -211,4 +212,7 @@ ion-header ion-col h3{
     .input-has-focus .label-ios[floating],
     .input-has-value .label-ios[floating] {
         color: #3CB18A;
+    }
+    .scroll-content {
+        overflow-y:auto !important
     }
