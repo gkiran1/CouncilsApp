@@ -31,6 +31,30 @@ import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-fee
 import { GoodbyePage } from '../pages/goodbye/goodbye';
 import { FormsModule } from '@angular/forms';
 
+//Ionic Push Module
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+
+//Cloud Settings - Push Messaging
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '15fb1041'
+  },
+  'push': {
+    'sender_id': '619253720821',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#343434'
+      }
+    }
+  }
+};
+
+//Cloud Settings - Push Messaging
+
 @NgModule({
   declarations: [
     MyApp,
@@ -61,7 +85,9 @@ import { FormsModule } from '@angular/forms';
     MomentModule,
     FormsModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(FirebaseConfig)
+    AngularFireModule.initializeApp(FirebaseConfig),
+    //Cloud Module Imports
+    CloudModule.forRoot(cloudSettings)
   ],
 
   bootstrap: [IonicApp],
