@@ -1,8 +1,16 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title text-center>
-			New Council
-		</ion-title>
+		<ion-row>
+			<ion-col class="header-col" width-10>
+				<ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back" (click)="cancel()"></ion-icon>
+			</ion-col>
+			<ion-col width-80>
+
+				<h3>
+					New Council
+				</h3>
+			</ion-col>
+		</ion-row>
 	</ion-navbar>
 </ion-header>
 
@@ -24,22 +32,25 @@
 			<ion-label>Who do you want to add to this council?</ion-label>
 		</ion-item>
 
-		<div *ngFor="let user of users">
-			<ion-list *ngIf="!(user.isadmin)">
-				<ion-item>
+		<!--<div *ngFor="let user of users">-->
+		<ion-list inset >
+			<ng-container *ngFor="let user of users" >
+
+				<ion-item *ngIf="!(user.isadmin)">
 					<ion-label>
 						<h2 class="username"><b>{{user.firstname}} {{user.lastname}}</b></h2>
 						<h2>{{user.councilnames}}</h2>
 					</ion-label>
-					<ion-checkbox [(ngModel)]="user.selected" color="secondary" item-right name="selectedUser"></ion-checkbox>
+					<ion-checkbox [(ngModel)]="user.selected" color="secondary" name="checkbox" item-right name="selectedUser"></ion-checkbox>
 				</ion-item>
-			</ion-list>
-		</div>
+			</ng-container>
+		</ion-list>
+		<!--</div>-->
 	</form>
 </ion-content>
 
 <ion-footer>
 	<ion-toolbar class="createbtn" text-center>
-		<button ion-button clear color="secondary" type="submit" (click)="createCouncil()" [disabled]="!newCouncilForm.form.valid">Create</button>
+		<button ion-button clear color="secondary" name="Create" type="submit" (click)="createCouncil()" [disabled]="!newCouncilForm.form.valid">Create</button>
 	</ion-toolbar>
 </ion-footer>

@@ -8,19 +8,12 @@ page-display{
 }
 .moreicon{
     color:#32b38a;
-    // float: right;
-    // align-content: center;
-    
-    // padding-left: 100px;
 }
 .welcometext{
     text-align: center;
-    // padding-right: 50px;
 }
-.image{
-       margin-top: 30%;
-    width:239pt;
-    height: 203pt;
+.image {
+        margin-top: 21%;
 }
 .content{
     text-align: center;
@@ -30,9 +23,22 @@ page-display{
      text-align: center;
 }
 .henry {
-    font-family: "Bernina Sans Regular";
+    
     font-size:10 pt; 
     color: #a9aaac;
+     font-family:Bernina-Regular; 
 }
+
+.least{
+        font-size:14pt;
+        color:#35373a; 
+        font-family:Bernina-Regular;    
+}
+.matt{
+    font-size:13pt;
+     color: #a9aaac;
+
+}
+
 
 }

@@ -7,6 +7,8 @@ import { User } from '../../user/user';
 import { Observable } from 'rxjs/Rx';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Council } from './council'
+import { AlertController, NavController } from 'ionic-angular';
+import { WelcomePage } from '../welcome/welcome';
 
 @Component({
   selector: 'new-council',
@@ -19,7 +21,8 @@ export class NewCouncilPage {
   newCouncil: Council = new Council();
   userCouncils: any;
 
-  constructor(public af: AngularFire, public firebaseservice: FirebaseService, public appservice: AppService) {
+  constructor(public af: AngularFire, public firebaseservice: FirebaseService,
+    public appservice: AppService, public nav: NavController, public alertCtrl: AlertController) {
     this.appservice.getUser().subscribe(user => {
       this.currentUser = user;
       let subscribe = this.firebaseservice.getUsersByUnitNumber(user.unitnumber).subscribe(users => {
@@ -39,6 +42,9 @@ export class NewCouncilPage {
       });
     });
   }
+  cancel() {
+    this.nav.setRoot(WelcomePage);
+  }
 
   createCouncil() {
     this.newCouncil.counciltype = this.currentUser.unittype;
@@ -55,6 +61,8 @@ export class NewCouncilPage {
             this.firebaseservice.updateCouncilsInUser(user.$key, user.councils);
           }
         });
+        this.showAlert('Council created successfully..');
+        this.nav.setRoot(WelcomePage);
       }
       else {
         alert('Council already exists.');
@@ -63,6 +71,16 @@ export class NewCouncilPage {
       alert(err);
     })
   }
+
+  showAlert(errText) {
+    let alert = this.alertCtrl.create({
+      title: '',
+      subTitle: errText,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
 
 }
 

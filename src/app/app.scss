@@ -15,12 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @font-face {
-
-
-
-
-    font-family: "Gotham-Medium";
-
+   font-family: "Gotham-Medium";
 src:url('../assets/fonts/GOTHMMED.eot');
     src:url('../assets/fonts/GOTHMMED.eot') format('embedded-opentype'),
         url('../assets/fonts/GOTHMMED.woff') format('woff'),
@@ -90,7 +85,7 @@ input[type=text] {
 
 .header-md, .header-ios {
     display: block;
-    line-height: 5.18em;
+    
     text-align: center;
     background: #FFFFFF;
     border-bottom: 1px solid #dcd9d8;
@@ -158,6 +153,7 @@ p{
 
     .cancel-font{
         font-size: 35pt;
+        padding-top: 5px !important;
     }
 
     .ion-md-close {
@@ -182,3 +178,41 @@ ion-header ion-col h3{
     font-size: 1.35em !important;
     color : #35373A !important;
 }
+
+
+.action-sheet-ios .action-sheet-title{
+     font-family:Bernina-SemiBold !important;
+    font-size: 1.08em !important;
+    color:#35373A !important;    
+}
+
+.picker-opt {
+    text-overflow: initial !important;
+}
+
+.picker-md .picker-toolbar-cancel {
+        flex: 1 !important;
+}
+.picker-md .picker-button, .picker-md .picker-button.activated{
+
+    color:#3CB18A!important;
+}
+.picker-ios .picker-button, .picker-ios .picker-button.activated{
+
+    color:#3CB18A!important;
+}
+.picker-md .picker-prefix, .picker-md .picker-suffix, .picker-md .picker-opt.picker-opt-selected{
+    color:#3CB18A!important;
+}
+
+.input-has-focus .label-md[floating],
+    .input-has-value .label-md[floating] {
+        color: #3CB18A;
+    }
+    .input-has-focus .label-ios[floating],
+    .input-has-value .label-ios[floating] {
+        color: #3CB18A;
+    }
+    .scroll-content {
+        overflow-y:auto !important
+    }
