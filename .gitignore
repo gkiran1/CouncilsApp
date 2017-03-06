@@ -3,3 +3,6 @@ platforms/*
 plugins/*
 www/*
 www/build/*
+/www
+/www/*
+www

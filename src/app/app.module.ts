@@ -28,6 +28,8 @@ import { ActiveCouncilsPage } from '../pages/activecouncils/activecouncils'
 import { AboutPage } from '../pages/about/about';
 import { SubmitFeedbackPage } from '../pages/feedback/submit-feedback/submit-feedback';
 import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-feedback';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { ChangePasswordPage } from '../pages/edit-profile/change-password';
 import { GoodbyePage } from '../pages/goodbye/goodbye';
 import { FormsModule } from '@angular/forms';
 
@@ -78,6 +80,8 @@ const cloudSettings: CloudSettings = {
     AboutPage,
     SubmitFeedbackPage,
     ThanksFeedbackPage,
+    EditProfilePage,
+    ChangePasswordPage,
     GoodbyePage
   ],
 
@@ -112,6 +116,8 @@ const cloudSettings: CloudSettings = {
     AboutPage,
     SubmitFeedbackPage,
     ThanksFeedbackPage,
+    EditProfilePage,
+    ChangePasswordPage,
     GoodbyePage
   ],
 

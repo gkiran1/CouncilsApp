@@ -20,12 +20,25 @@ import {
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
+
 export class MyApp {
-  rootPage = LoginPage;
+  rootPage: any;
 
   constructor(platform: Platform, public push:Push, public alertCtrl: AlertController) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
+
+      var securityToken = localStorage.getItem('securityToken');
+      var isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
+
+      if ((securityToken == null || securityToken == 'null') &&
+        (isUserLoggedIn == 'null' || isUserLoggedIn == null || isUserLoggedIn == 'false')) {
+        this.rootPage = LoginPage;
+      }
+      else {
+        this.rootPage = WelcomePage;
+      }
+
 
       //Push Register to App
        this.push.register().then((t: PushToken) => {
@@ -48,6 +61,7 @@ export class MyApp {
       title: '',
       subTitle: errText,
       buttons: ['OK']
+
     });
     alert.present();
   }
