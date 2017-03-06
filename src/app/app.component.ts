@@ -13,12 +13,24 @@ import { CouncilAssignmentsPage } from '../pages/council-assignments/council-ass
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
+
 export class MyApp {
-  rootPage = LoginPage;
+  rootPage: any;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
+
+      var securityToken = localStorage.getItem('securityToken');
+      var isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
+
+      if ((securityToken == null || securityToken == 'null') &&
+        (isUserLoggedIn == 'null' || isUserLoggedIn == null || isUserLoggedIn == 'false')) {
+        this.rootPage = LoginPage;
+      }
+      else {
+        this.rootPage = WelcomePage;
+      }
     });
   }
 }

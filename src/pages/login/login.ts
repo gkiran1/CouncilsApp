@@ -44,7 +44,11 @@ export class LoginPage {
     private validateUser(loginCredentials) {
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
-            .then(uid => { flag = true })
+            .then(uid => {
+                flag = true;
+                localStorage.setItem('securityToken', uid);
+                localStorage.setItem('isUserLoggedIn', 'true');
+            })
             .catch(err => this.showAlert('failure', 'Your Emailid or Password is incorrect.'));
         let v = setInterval(() => {
             if (flag) {
@@ -53,7 +57,6 @@ export class LoginPage {
             }
         }, 50);
     }
-
 
     showAlert(reason, text) {
         let alert = this.alertCtrl.create({

@@ -189,8 +189,12 @@ export class WelcomePage {
   signOut() {
     this.appService.userSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
+    this.councilAssignmentsPage.userSubscription.unsubscribe();
+    this.activeCouncilsPage.userSubscription.unsubscribe();
+    localStorage.setItem('securityToken', null);
+    localStorage.setItem('isUserLoggedIn', 'false');
     this.firebaseService.signOut().then(() => {
-      console.log('Sign Out successfully..')
+      console.log('Sign Out successfully..');
       this.nav.setRoot(GoodbyePage);
     }).catch(err => {
       this.nav.setRoot(GoodbyePage);
