@@ -276,5 +276,19 @@ export class FirebaseService {
             throw err;
         })
     }
+    updateProfile(userUid: string, firstname, lastname, email, ldsusername) {
+        return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, ldsusername }).then(() => {
+            return "user profile updated successfully..."
+        }).catch(err => {
+            throw err;
+        })
+    }
+    // resetPassword(user) {
+    //    return this.fireAuth.signInWithEmailAndPassword(user.email,user.password).then(() => {
+    //         return "your old password matched.."
+    //     }).catch(err => {
+    //         throw err;
+    //     })
+    // }
 
 }

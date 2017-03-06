@@ -1,0 +1,55 @@
+<ion-header text-center>
+    <ion-navbar>
+        <ion-title text-center>
+            <b>Edit Profile</b>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form>
+        <ion-row>
+            <ion-col>
+                <button class="cameraBtn">
+            <ion-icon name="camera"></ion-icon>
+        </button>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-label floating>First Name</ion-label>
+                    <ion-input type="text" name="firstname" [(ngModel)]="profile.firstname"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Last Name</ion-label>
+                    <ion-input type="text" name="lastname" [(ngModel)]="profile.lastname"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" name="email" [(ngModel)]="profile.email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Phone</ion-label>
+            <ion-input type="text" name="phone"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>LDS.org username</ion-label>
+            <ion-input type="text" name="ldsusername" [(ngModel)]="profile.ldsusername"></ion-input>
+        </ion-item>
+        <ion-row>
+            <button ion-button class="changepassword" clear text-capitalize name="changepassword">
+         Change Password
+        </button>
+            <ion-buttons end>
+                <button (click)="viewChangePasswordPage()"> 
+                <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </button>
+            </ion-buttons>
+        </ion-row>
+        <ion-footer text-center>
+            <button ion-button class="saveBtn" clear text-capitalize name="savebtn" (click)="editProfile()">
+         Save
+        </button>
+        </ion-footer>
+    </form>
+</ion-content>

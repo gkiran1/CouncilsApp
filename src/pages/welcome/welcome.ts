@@ -13,12 +13,13 @@ import { MyAssignmentsPage } from '../my-assignments/my-assignments';
 import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { GoodbyePage } from '../goodbye/goodbye';
 import { Subscription } from "rxjs";
 
 @Component({
-    selector: 'page-welcome',
+  selector: 'page-welcome',
   templateUrl: 'welcome.html',
   providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage]
 })
@@ -174,7 +175,7 @@ export class WelcomePage {
   upcomingPage() { }
   pastPage() { }
   discussionsPage() { }
-  privatePage(){}
+  privatePage() { }
 
   viewCouncilAssignments() {
     this.nav.setRoot(CouncilAssignmentsPage);
@@ -187,7 +188,9 @@ export class WelcomePage {
   viewSubmitFeedbackPage() {
     this.nav.push(SubmitFeedbackPage);
   }
-
+  viewEditProfilePage() {
+    this.nav.push(EditProfilePage);
+  }
   viewAboutPage() {
     this.nav.push(AboutPage);
   }
