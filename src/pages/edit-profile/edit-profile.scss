@@ -1,18 +1,21 @@
 // .item-md.item-block .item-inner{
 //     border-bottom:none !important;
 // }
- .item-md.item-input.input-has-focus .item-inner {
-  border-bottom-color: #DEDEDE !important;
-  box-shadow: none !important;
- }
- .cameraBtn{
-    margin-top: 24pt;
-    margin-left: 20pt;
+.item-md.item-input.input-has-focus .item-inner {
+    border-bottom-color: #DEDEDE !important;
+    box-shadow: none !important;
+}
+
+.cameraBtn {
+    margin-top: 10pt;
+    margin-left: 5pt;
     width: 100px;
     height: 100px;
     border-radius: 112pt;
- }
- .changepassword{
-     color:#35373A;
- }
- 
+    background-color: white;
+    border: 1px solid #e8e9eb;
+}
+
+.changepassword {
+    color: #35373A;
+}
