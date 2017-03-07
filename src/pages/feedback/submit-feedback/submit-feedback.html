@@ -22,15 +22,16 @@
             </ion-col>
         </ion-row>
         <ion-item>
-            <ion-textarea rows="6" name="feedback" [(ngModel)]="feedback" elastic required placeholder="Type your feedback here"></ion-textarea>
+            <ion-textarea name="feedback" [(ngModel)]="feedback" elastic required placeholder="Type your feedback here"></ion-textarea>
         </ion-item>
-        <ion-row class='row6'>
-            <ion-col>
-            </ion-col>
-        </ion-row>
     </form>
 </ion-content>
+
 <ion-footer>
+    <ion-row class="row6">
+        <ion-col>
+        </ion-col>
+    </ion-row>
     <ion-toolbar class="createbtn" text-center>
         <button ion-button clear color="secondary" type="submit" (click)="submitFeedback()" text-capitalize [disabled]="!newFeedbackForm.form.valid">Submit Feedback</button>
     </ion-toolbar>
