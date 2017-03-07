@@ -10,6 +10,7 @@ import { CreateAccountPage } from '../create-account/create-account';
 import { NewAgenda } from '../new-agenda/new-agenda';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../../user/user';
+import { NgZone } from '@angular/core';
 
 @Component({
     selector: 'page-login',
@@ -27,7 +28,8 @@ export class LoginPage {
         public firebaseService: FirebaseService,
         public alertCtrl: AlertController,
         public http: Http,
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private zone: NgZone) {
     }
 
     public forgotPassword() {
@@ -52,7 +54,9 @@ export class LoginPage {
             .catch(err => this.showAlert('failure', 'Your Emailid or Password is incorrect.'));
         let v = setInterval(() => {
             if (flag) {
-                this.nav.setRoot(WelcomePage);
+                this.zone.run(() => {
+                    this.nav.setRoot(WelcomePage);
+                });
                 clearInterval(v);
             }
         }, 50);

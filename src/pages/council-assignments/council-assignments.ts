@@ -24,43 +24,44 @@ export class CouncilAssignmentsPage {
 
   constructor(public navCtrl: NavController, public fs: FirebaseService, public af: AngularFire) {
     this.userSubscription = this.af.auth.subscribe(auth => {
-      this.af.database.object('/users/' + auth.uid).subscribe(usr => {
-        this.user = usr;
-        af.database.list('/assignments')
-          .subscribe(assignments => {
-            const councilAssignments = assignments.filter(assignment => {
-              return this.user.councils.includes(assignment.councilid);
+      if (auth !== null) {
+        this.af.database.object('/users/' + auth.uid).subscribe(usr => {
+          this.user = usr;
+          af.database.list('/assignments')
+            .subscribe(assignments => {
+              const councilAssignments = assignments.filter(assignment => {
+                return this.user.councils.includes(assignment.councilid);
+              });
+
+              const personalAssignment = assignments.filter(assignment => {
+                return assignment.assignedto === auth.uid;
+              });
+
+              this.councilAssignmentsArray = [];
+              this.completedAssignmentsArray = [];
+              this.personalAssignmentArray = [];
+
+              councilAssignments.forEach(e => {
+                if (e.isCompleted) {
+                  this.completedAssignmentsArray.push(e);
+                } else {
+                  this.councilAssignmentsArray.push(e);
+                }
+              });
+
+              personalAssignment.forEach(e => {
+                if (e.isCompleted) {
+                  this.completedAssignmentsArray.push(e);
+                } else {
+                  this.personalAssignmentArray.push(e);
+                }
+              });
+
+              // this.councilAssignmentsArray = assignments;
+              this.subject.next(this.councilAssignmentsArray.length + this.personalAssignmentArray.length + this.completedAssignmentsArray.length);
             });
-
-            const personalAssignment = assignments.filter(assignment => {
-              return assignment.assignedto === auth.uid;
-            });
-
-            this.councilAssignmentsArray = [];
-            this.completedAssignmentsArray = [];
-            this.personalAssignmentArray = [];
-
-            councilAssignments.forEach(e => {
-              if (e.isCompleted) {
-                this.completedAssignmentsArray.push(e);
-              } else {
-                this.councilAssignmentsArray.push(e);
-              }
-            });
-
-            personalAssignment.forEach(e => {
-              if (e.isCompleted) {
-                this.completedAssignmentsArray.push(e);
-              } else {
-                this.personalAssignmentArray.push(e);
-              }
-            });
-
-            // this.councilAssignmentsArray = assignments;
-            this.subject.next(this.councilAssignmentsArray.length + this.personalAssignmentArray.length + this.completedAssignmentsArray.length);
-          });
-      })
-
+        })
+      }
     });
   }
 

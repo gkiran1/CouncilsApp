@@ -43,20 +43,13 @@ export class WelcomePage {
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService, ) {
     this.userSubscription = this.af.auth.subscribe(auth => {
-      this.userObj = this.af.database.object('/users/' + auth.uid);
-      // appService.setUser(this.userObj);
-
-      // var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      // var lastname = currentUser.lastname;
-      // console.log("currentUser==",currentUser);
+      if (auth !== null) {
+        this.userObj = this.af.database.object('/users/' + auth.uid);
+        this.activeCouncilsCount = activeCouncilsPage.getCount();
+        this.myAssignmentsCount = myassignmentpage.getCount();
+        this.councilAssignmentsCount = councilAssignmentsPage.getCount();
+      }
     });
-    this.activeCouncilsCount = activeCouncilsPage.getCount();
-    this.myAssignmentsCount = myassignmentpage.getCount();
-    this.councilAssignmentsCount = councilAssignmentsPage.getCount();
-
-    // this.pages = [
-    //   { title: 'Home Page', component: HomePage }
-    // ];
   }
 
   councilsPage() {

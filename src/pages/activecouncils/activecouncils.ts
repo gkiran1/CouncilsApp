@@ -25,23 +25,25 @@ export class ActiveCouncilsPage {
 
     constructor(public af: AngularFire, public firebaseservice: FirebaseService, public appservice: AppService, public nav: NavController) {
         this.userSubscription = this.af.auth.subscribe(auth => {
-            this.user = this.af.database.object('/users/' + auth.uid);
-            this.user.subscribe(user => {
-                this.myCouncils = [];
-                user.councils.forEach(e => {
-                    this.firebaseservice.getCouncilByKey(e).subscribe(councilObj => {
-                        this.myCouncils.push(...councilObj);
-                        this.count$.next(user.councils.length);
+            if (auth !== null) {
+                this.user = this.af.database.object('/users/' + auth.uid);
+                this.user.subscribe(user => {
+                    this.myCouncils = [];
+                    user.councils.forEach(e => {
+                        this.firebaseservice.getCouncilByKey(e).subscribe(councilObj => {
+                            this.myCouncils.push(...councilObj);
+                            this.count$.next(user.councils.length);
+                        });
                     });
                 });
-            });
+            }
         });
     }
 
     cancel() {
         this.nav.setRoot(WelcomePage);
     }
-    
+
     getCount() {
         return this.count$;
     }
