@@ -1,4 +1,4 @@
-<ion-menu name="menu" [content]="content" type="overlay">
+<ion-menu name="menu" id="menu" [content]="content" type="overlay">
 	<ion-header>
 		<ion-navbar hideBackButton="true">
 			<ion-item style="border: none !important">
@@ -14,7 +14,7 @@
 
 	<ion-content>
 		<ion-list no-lines>
-			<ion-item >
+			<ion-item>
 				<ion-label class="listbtn1">Councils</ion-label>
 				<button color="secondary" name="councilsPage" *ngIf="(userObj | async)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
 
@@ -34,7 +34,7 @@
         </button>
 			</ion-item>
 
-			<ion-item >
+			<ion-item>
 				<ion-label class="listbtn1">Agendas</ion-label>
 				<button color="secondary" ion-button icon-only clear item-right menuToggle (click)="agendasPage()">
          <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
@@ -82,9 +82,10 @@
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" class="listbtn2" clear menuToggle name="viewCouncilAssignments" (click)="viewCouncilAssignments()" text-capitalize>
+				<button ion-button color="secondary" class="listbtn2" clear menuToggle name="viewCouncilAssignments" (click)="viewCouncilAssignments()"
+					text-capitalize>
          Council <span class="count">{{councilAssignmentsCount | async}}</span>
-        </button> 
+        </button>
 			</ion-item>
 
 			<ion-item>
@@ -104,7 +105,7 @@
 			</ion-item>
 
 			<ion-item>
-				<button ion-button color="secondary" name="About"class="listbtn2" clear menuToggle text-capitalize (click)="viewAboutPage()">
+				<button ion-button color="secondary" name="About" class="listbtn2" clear menuToggle text-capitalize (click)="viewAboutPage()">
          About
         </button>
 			</ion-item>
