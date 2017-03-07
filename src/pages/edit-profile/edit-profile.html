@@ -5,8 +5,7 @@
         </ion-title>
     </ion-navbar>
 </ion-header>
-<ion-content>
-    <form>
+<ion-content  has-footer='true' overflow-scroll='true'>
         <ion-row>
             <ion-col>
                 <button class="cameraBtn">
@@ -30,7 +29,7 @@
         </ion-item>
         <ion-item>
             <ion-label floating>Phone</ion-label>
-            <ion-input type="text" name="phone"></ion-input>
+            <ion-input type="text" name="phone" [(ngModel)]="profile.phone"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>LDS.org username</ion-label>
@@ -46,10 +45,9 @@
             </button>
             </ion-buttons>
         </ion-row>
-        <ion-footer text-center>
-            <button ion-button class="saveBtn" clear text-capitalize name="savebtn" (click)="editProfile()">
+</ion-content>
+<ion-footer text-center>
+    <button ion-button class="saveBtn" clear text-capitalize name="savebtn" (click)="editProfile()">
          Save
         </button>
-        </ion-footer>
-    </form>
-</ion-content>
+</ion-footer>

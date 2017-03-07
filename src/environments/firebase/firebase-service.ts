@@ -301,8 +301,8 @@ export class FirebaseService {
         console.log('assignment.$key', assignmentKey);
         return this.af.database.object('assignments/' + assignmentKey).remove();
     }
-    updateProfile(userUid: string, firstname, lastname, email, ldsusername) {
-        return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, ldsusername }).then(() => {
+    updateProfile(userUid: string, firstname, lastname, email, phone, ldsusername) {
+        return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername }).then(() => {
             return "user profile updated successfully..."
         }).catch(err => {
             throw err;
