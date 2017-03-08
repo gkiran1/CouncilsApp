@@ -18,7 +18,7 @@
 				<ion-label class="listbtn1">Councils</ion-label>
 				<button color="secondary" name="councilsPage" *ngIf="(userObj | async)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
 
-         <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>   
+         <ion-icon id="councilscircle" name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>   
         </button>
 			</ion-item>
 
@@ -37,7 +37,7 @@
 			<ion-item>
 				<ion-label class="listbtn1">Agendas</ion-label>
 				<button color="secondary" ion-button icon-only clear item-right menuToggle (click)="agendasPage()">
-         <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+         <ion-icon id="agendascircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
         </button>
 			</ion-item>
 
@@ -57,7 +57,7 @@
 				<ion-label class="listbtn1">Discussions</ion-label>
 
 				<button color="secondary" ion-button icon-only clear item-right (click)="discussionsPage()">
-         <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+         <ion-icon id="discussionscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
         </button>
 			</ion-item>
 
@@ -77,15 +77,15 @@
 				<ion-label class="listbtn1">Assignments</ion-label>
 				<button color="secondary" name="assignmentsPage" ion-button icon-only clear item-right (click)="assignmentsPage()">
 
-         <ion-icon name="assignmentscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+         <ion-icon id="assignmentscircle" name="assignmentscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
         </button>
 			</ion-item>
 
 			<ion-item>
 				<button ion-button color="secondary" class="listbtn2" clear menuToggle name="viewCouncilAssignments" (click)="viewCouncilAssignments()"
 					text-capitalize>
-         Council <span class="count">{{councilAssignmentsCount | async}}</span>
-        </button>
+					Council <span class="count">{{councilAssignmentsCount | async}}</span>
+					</button>
 			</ion-item>
 
 			<ion-item>
