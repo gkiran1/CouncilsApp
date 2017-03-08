@@ -39,6 +39,9 @@ export class ChangePasswordPage {
         });
         alert.present();
     }
+    cancel(){
+        this.navCtrl.push(EditProfilePage);
+    }
     changePassword() {
         //validate the user..to check password is correct or not.
         this.firebaseService.validateUser(this.profile.email, this.password.oldpassword).then(res => {
