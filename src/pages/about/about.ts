@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
+import { WelcomePage } from '../welcome/welcome';
+
 
 @Component({
     selector: 'about',
@@ -28,5 +30,10 @@ export class AboutPage {
             this.Phone = res.phone;
         })
     }
+
+      cancel() {
+    this.navCtrl.setRoot(WelcomePage);
+  }
+
 
 }
