@@ -16,10 +16,11 @@
 		<ion-list no-lines>
 			<ion-item>
 				<ion-label class="listbtn1">Councils</ion-label>
-				<button color="secondary" name="councilsPage" *ngIf="(userObj | async)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
+				<button color="secondary" id="councilscirclebtn" name="councilsPage" *ngIf="(userObj | async)?.isadmin" ion-button icon-only
+					clear item-right (click)="councilsPage()">
 
-         <ion-icon id="councilscircle" name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>   
-        </button>
+					<ion-icon id="councilscircle" name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+					</button>
 			</ion-item>
 
 			<ion-item>
@@ -36,7 +37,7 @@
 
 			<ion-item>
 				<ion-label class="listbtn1">Agendas</ion-label>
-				<button color="secondary" ion-button icon-only clear item-right menuToggle (click)="agendasPage()">
+				<button color="secondary" id="agendascirclebtn" ion-button icon-only clear item-right menuToggle (click)="agendasPage()">
          <ion-icon id="agendascircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
         </button>
 			</ion-item>
@@ -56,7 +57,7 @@
 			<ion-item>
 				<ion-label class="listbtn1">Discussions</ion-label>
 
-				<button color="secondary" ion-button icon-only clear item-right (click)="discussionsPage()">
+				<button color="secondary" id="discussionscirclebtn" ion-button icon-only clear item-right (click)="discussionsPage()">
          <ion-icon id="discussionscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
         </button>
 			</ion-item>
@@ -75,7 +76,7 @@
 
 			<ion-item>
 				<ion-label class="listbtn1">Assignments</ion-label>
-				<button color="secondary" name="assignmentsPage" ion-button icon-only clear item-right (click)="assignmentsPage()">
+				<button color="secondary" id="assignmentscirclebtn" name="assignmentsPage" ion-button icon-only clear item-right (click)="assignmentsPage()">
 
          <ion-icon id="assignmentscircle" name="assignmentscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
         </button>
