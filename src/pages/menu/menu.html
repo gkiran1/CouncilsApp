@@ -3,18 +3,16 @@
         <ion-navbar hideBackButton="true">
             <ion-item style="border: none !important">
                 <ion-row>
-                    <ion-col style="margin: auto">
+                    <ion-col style="margin: auto" width-46>
                         <ion-avatar item-left>
                             <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="(userObj | async)?.avatar" />
                             <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj | async)?.avatar" />
                         </ion-avatar>
                     </ion-col>
-                    <ion-col style="margin: auto">
-                        <ion-icon ios="ios-star-outline" md="md-star-outline"></ion-icon>
-                    </ion-col>
+
                     <ion-col style="margin: auto">
                         <ion-row class='user1'>
-                            {{(userObj | async)?.firstname}}
+                            <ion-icon ios="ios-star-outline" md="md-star-outline"></ion-icon>{{(userObj | async)?.firstname}}
                         </ion-row>
                         <ion-row class='user2'>
                             <p>{{(userObj | async)?.calling}} - {{(userObj | async)?.unitnumber}}</p>
