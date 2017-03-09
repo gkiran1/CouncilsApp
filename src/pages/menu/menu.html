@@ -2,12 +2,25 @@
     <ion-header>
         <ion-navbar hideBackButton="true">
             <ion-item style="border: none !important">
-                <ion-avatar item-left>
-                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="(userObj | async)?.avatar" />
-                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj | async)?.avatar" />
-                </ion-avatar>
-                <h2>{{(userObj | async)?.firstname}}</h2>
-                <p>{{(userObj | async)?.calling}} - {{(userObj | async)?.unitnumber}}</p>
+                <ion-row>
+                    <ion-col>
+                        <ion-avatar item-left>
+                            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="(userObj | async)?.avatar" />
+                            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj | async)?.avatar" />
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col>
+                        <ion-icon ios="ios-star-outline" md="md-star-outline"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                        <ion-row>
+                            <h2>{{(userObj | async)?.firstname}}</h2>
+                        </ion-row>
+                        <ion-row>
+                            <p>{{(userObj | async)?.calling}} - {{(userObj | async)?.unitnumber}}</p>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
             </ion-item>
         </ion-navbar>
     </ion-header>
