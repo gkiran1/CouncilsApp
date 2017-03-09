@@ -51,6 +51,28 @@ page-welcome {
         width: 48pt;
         height: 48pt;
     }
+    .user1 {
+        font-family: Bernina-Regular;
+        font-size: 17pt;
+        color: #3cb18a !important;
+    }
+    .user2 {
+        font-family: Bernina-Regular;
+        font-size: 15pt;
+        color: #a9aaac !important;
+    }
+    ion-icon {
+        color: #3cb18a
+    }
+    .list {
+        margin-top: 16pt;
+    }
+    .button-md {
+        height: 44pt;
+    }
+    .button-ios {
+        height: 44pt;
+    }
 }
 
 .actionsheet-items {
