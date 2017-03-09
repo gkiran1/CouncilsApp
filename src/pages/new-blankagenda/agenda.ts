@@ -1,6 +1,7 @@
 export class Agenda {
     $key: string;
     agendacouncil: string;
+    councilid:string;
     agendadate: string;
     agendatime: string;
     openinghymnby: string;

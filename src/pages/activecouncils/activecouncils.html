@@ -1,8 +1,9 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <ion-row>
       <ion-col class="header-col" width-10>
-        <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back" (click)="cancel()"></ion-icon>
+        <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+          (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
 
@@ -11,21 +12,22 @@
         </h3>
       </ion-col>
     </ion-row>
-
-    <!--<ion-title text-center>
-      Active Councils
-    </ion-title>-->
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list inset>
     <ng-container *ngIf="myCouncils.length">
-       <ion-item *ngFor="let item of myCouncils">
-      {{item.council}}
-    </ion-item>
+
+        <ion-item (click)="usersincouncils(item.$key,item.council)" class="council-styles" *ngFor="let item of myCouncils">
+        <ion-label class="council-styles">{{item.council}}</ion-label>
+        <button ion-button item-right clear>
+      <ion-icon class="icon-style" name="arrow-forward"></ion-icon>
+      </button>
+      </ion-item>
+
     </ng-container>
-   <ng-container *ngIf="!myCouncils.length">
+    <ng-container *ngIf="!myCouncils.length">
       <p class="text-content">There are no active councils</p>
     </ng-container>
   </ion-list>

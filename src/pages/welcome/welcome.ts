@@ -4,7 +4,7 @@ import { HomePage } from '../home/home';
 import { DisplayPage } from '../display/display';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
-import { NewAgenda } from '../new-agenda/new-agenda';
+import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
 import { NewAssignmentPage } from '../new-assignment/new-assignment';
 import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';
@@ -16,6 +16,8 @@ import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback'
 import { EditProfilePage } from '../edit-profile/edit-profile';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { GoodbyePage } from '../goodbye/goodbye';
+import { AgendasPage } from '../agendas/agendas';
+
 import { Subscription } from "rxjs";
 
 @Component({
@@ -42,14 +44,19 @@ export class WelcomePage {
     public councilAssignmentsPage: CouncilAssignmentsPage,
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService, ) {
+
     this.userSubscription = this.af.auth.subscribe(auth => {
-      if (auth !== null) {
-        this.userObj = this.af.database.object('/users/' + auth.uid);
-        this.activeCouncilsCount = activeCouncilsPage.getCount();
-        this.myAssignmentsCount = myassignmentpage.getCount();
-        this.councilAssignmentsCount = councilAssignmentsPage.getCount();
-      }
+      this.userObj = this.af.database.object('/users/' + auth.uid);
+
+      this.userObj.subscribe(usr => {
+        localStorage.setItem('unitType', usr.unittype)
+        localStorage.setItem('unitNumber', usr.unitnumber.toString())
+        localStorage.setItem('userCouncils', usr.councils.toString())
+      });    
     });
+    this.activeCouncilsCount = activeCouncilsPage.getCount();
+    this.myAssignmentsCount = myassignmentpage.getCount();
+    this.councilAssignmentsCount = councilAssignmentsPage.getCount();  
   }
 
   councilsPage() {
@@ -125,11 +132,11 @@ export class WelcomePage {
   }
 
   activePage() {
-    this.nav.setRoot(ActiveCouncilsPage);
+    this.nav.push(ActiveCouncilsPage);
   }
 
   agendasPage() {
-    //this.nav.setRoot(NewAgenda);
+    this.nav.push(NewBlankAgendaPage);
   }
 
   assignmentsPage() {
@@ -141,7 +148,7 @@ export class WelcomePage {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.setRoot(NewAssignmentPage);
+            this.nav.push(NewAssignmentPage);
           }
         },
         {
@@ -156,7 +163,10 @@ export class WelcomePage {
     actionSheet.present();
   }
   notesPage() { }
-  upcomingPage() { }
+  
+  upcomingPage() {
+    this.nav.push(AgendasPage);
+  }
   pastPage() { }
   discussionsPage() { }
   privatePage() { }

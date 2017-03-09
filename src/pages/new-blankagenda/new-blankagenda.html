@@ -1,0 +1,96 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+                    (click)="cancel()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <h3>
+                    New Blank Agenda
+                </h3>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+
+    <form [formGroup]="blankagendaForm" (ngSubmit)="blankagendaForm.value">
+
+        <ion-item>
+            <ion-label floating>Council</ion-label>
+            <ion-select name="assignedcouncil" (ionChange)="assignedMemberChange(blankagendaForm.value)" [(ngModel)]='assignedcouncil'
+                formControlName="assignedcouncil">
+                <ion-option *ngFor="let c of councils" [value]="c">{{c.council}}</ion-option>
+                </ion-select>
+        </ion-item>
+
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label floating>Date</ion-label>
+                    <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" [max]="2120" name="assigneddate" formControlName="assigneddate"></ion-datetime>
+                </ion-item>
+            </ion-col>
+
+            <ion-col>
+                <ion-item>
+                    <ion-label floating>Time</ion-label>
+                    <ion-datetime displayFormat="hh:mma" name="assignedtime" formControlName="assignedtime"></ion-datetime>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-item>
+            <ion-label floating>Opening Hymn</ion-label>
+            <ion-select name="openinghymn" [(ngModel)]='openinghymn' formControlName="openinghymn">
+                <ng-container *ngFor="let user of users">
+                    <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Opening Prayer</ion-label>
+            <ion-select name="openingprayer" [(ngModel)]='openingprayer' formControlName="openingprayer">
+                <ng-container *ngFor="let user of users">
+                    <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Spiritual Thought</ion-label>
+            <ion-select name="spiritualthought" [(ngModel)]='spiritualthought' formControlName="spiritualthought">
+                <ng-container *ngFor="let user of users">
+                    <ion-option *ngIf="user.$key!=appservice.uid" [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>High Counselor Remarks</ion-label>
+            <ion-select name="highcounselorremarks" [(ngModel)]='highcounselorremarks' formControlName="highcounselorremarks">
+                <ng-container *ngFor="let user of users">
+                    <ion-option *ngIf="user.$key!=appservice.uid" [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Review Assignments</ion-label>
+            <ion-select name="reviewassignments" [(ngModel)]='reviewassignments' formControlName="reviewassignments">
+                <ng-container *ngFor="let user of users">
+                    <ion-option *ngIf="user.$key!=appservice.uid" [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
+    </form>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button clear block color="secondary" (click)="createagenda(blankagendaForm.value)" text-capitalize [disabled]="!blankagendaForm.valid">Create</button>
+    </ion-toolbar>
+</ion-footer>

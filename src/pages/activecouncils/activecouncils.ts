@@ -9,7 +9,10 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 import { Council } from '../new-council/council';
 import { NavController } from 'ionic-angular';
 import { WelcomePage } from '../welcome/welcome';
+
 import { Subscription } from "rxjs";
+import { CouncilUsersPage } from '../councilusers/councilusers';
+
 
 @Component({
     selector: 'page-activecouncils',
@@ -47,5 +50,7 @@ export class ActiveCouncilsPage {
     getCount() {
         return this.count$;
     }
-
+    usersincouncils(myCouncils, council) {
+        this.nav.push(CouncilUsersPage, { myCouncils: myCouncils, council: council });
+    }
 }

@@ -6,4 +6,15 @@ page-activecouncils{
        margin:auto;
        color:map-get($colors, light-gray);
     }
+     .council-styles{
+      font-family: Bernina-Regular !important;
+      font-size: 1.2em !important;
+      color: #35373a !important;
+    }
+    .icon-style{
+    color:#A9AAAC;
+    width: 0.66em;
+    height: 1.08em;
+    }
+   
 }

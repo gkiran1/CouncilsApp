@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="cancel-font" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back" (click)="cancel()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+
+                <h3>
+                   {{council}}
+                </h3>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-item *ngFor="let user of usersArray">
+        <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
+       <p> <span>{{user.calling}}</span></p>
+    </ion-item>
+   
+</ion-content>

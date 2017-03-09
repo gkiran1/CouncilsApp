@@ -15,7 +15,7 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
 import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
 import { AppService } from '../providers/app-service';
 import { Elastic } from '../directives/elastic';
-import { NewAgenda } from '../pages/new-agenda/new-agenda';
+import {NewBlankAgendaPage } from '../pages/new-blankagenda/new-blankagenda';
 import { InviteMemberPage } from '../pages/invite/invite';
 import { InvitationSuccessPage } from '../pages/invite/success';
 import { NewCouncilPage } from '../pages/new-council/new-council'
@@ -32,6 +32,8 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ChangePasswordPage } from '../pages/edit-profile/change-password';
 import { GoodbyePage } from '../pages/goodbye/goodbye';
 import { FormsModule } from '@angular/forms';
+import { CouncilUsersPage } from '../pages/councilusers/councilusers';
+import {AgendasPage } from '../pages/agendas/agendas';
 
 //Ionic Push Module
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
@@ -68,7 +70,7 @@ const cloudSettings: CloudSettings = {
     CreateAccountPage,
     NewAssignmentPage,
     Elastic,
-    NewAgenda,
+    NewBlankAgendaPage,
     InviteMemberPage,
     InvitationSuccessPage,
     NewCouncilPage,
@@ -80,9 +82,13 @@ const cloudSettings: CloudSettings = {
     AboutPage,
     SubmitFeedbackPage,
     ThanksFeedbackPage,
+
     EditProfilePage,
     ChangePasswordPage,
-    GoodbyePage
+    GoodbyePage,
+    CouncilUsersPage,
+    AgendasPage
+
   ],
 
   imports: [
@@ -104,7 +110,7 @@ const cloudSettings: CloudSettings = {
     WelcomePage,
     CreateAccountPage,
     NewAssignmentPage,
-    NewAgenda,
+    NewBlankAgendaPage,
     InviteMemberPage,
     InvitationSuccessPage,
     NewCouncilPage,
@@ -118,7 +124,10 @@ const cloudSettings: CloudSettings = {
     ThanksFeedbackPage,
     EditProfilePage,
     ChangePasswordPage,
-    GoodbyePage
+    GoodbyePage,
+    CouncilUsersPage,
+    AgendasPage
+
   ],
 
   providers: [AuthService, AppService, FirebaseService]
