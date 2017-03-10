@@ -18,7 +18,7 @@ import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { GoodbyePage } from '../goodbye/goodbye';
 import { AgendasPage } from '../agendas/agendas';
 import { Subscription } from "rxjs";
-import { NewCouncilDiscussionPage } from '../new-council-discussion/new-council-discussion';
+import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
 
 @Component({
   selector: 'page-welcome',

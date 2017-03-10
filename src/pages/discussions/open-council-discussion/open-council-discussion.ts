@@ -9,8 +9,9 @@ import { FirebaseService } from '../../environments/firebase/firebase-service';
   templateUrl: 'open-council-discussion.html'
 })
 export class OpenCouncilDiscussionPage {
-    title = '';
+    discussion;
     constructor(public navparams:NavParams){
-        this.title = navparams.get('title');
+        this.discussion = navparams.get('discussion');
+        console.log('discussion in open',this.discussion);
     }
 }

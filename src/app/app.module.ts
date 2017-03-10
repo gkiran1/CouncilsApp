@@ -15,11 +15,11 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
 import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
 import { AppService } from '../providers/app-service';
 import { Elastic } from '../directives/elastic';
-import {NewBlankAgendaPage } from '../pages/new-blankagenda/new-blankagenda';
+import { NewBlankAgendaPage } from '../pages/new-blankagenda/new-blankagenda';
 import { InviteMemberPage } from '../pages/invite/invite';
 import { InvitationSuccessPage } from '../pages/invite/success';
 import { NewCouncilPage } from '../pages/new-council/new-council'
-import { NewCouncilDiscussionPage } from '../pages/new-council-discussion/new-council-discussion';
+import { NewCouncilDiscussionPage } from '../pages/discussions/new-council-discussion/new-council-discussion';
 import { CouncilAssignmentsPage } from '../pages/council-assignments/council-assignments';
 import { MyAssignmentsPage } from '../pages/my-assignments/my-assignments';
 import { MomentModule } from 'angular2-moment';
@@ -33,8 +33,8 @@ import { ChangePasswordPage } from '../pages/edit-profile/change-password';
 import { GoodbyePage } from '../pages/goodbye/goodbye';
 import { FormsModule } from '@angular/forms';
 import { CouncilUsersPage } from '../pages/councilusers/councilusers';
-import {AgendasPage } from '../pages/agendas/agendas';
-
+import { AgendasPage } from '../pages/agendas/agendas';
+import { OpenCouncilDiscussionPage } from '../pages/discussions/open-council-discussion/open-council-discussion'
 //Ionic Push Module
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
@@ -87,7 +87,8 @@ const cloudSettings: CloudSettings = {
     ChangePasswordPage,
     GoodbyePage,
     CouncilUsersPage,
-    AgendasPage
+    AgendasPage,
+    OpenCouncilDiscussionPage
 
   ],
 
@@ -126,7 +127,8 @@ const cloudSettings: CloudSettings = {
     ChangePasswordPage,
     GoodbyePage,
     CouncilUsersPage,
-    AgendasPage
+    AgendasPage,
+    OpenCouncilDiscussionPage
 
   ],
 

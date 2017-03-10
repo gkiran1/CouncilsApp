@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { AppService } from '../../providers/app-service';
-import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { OpenCouncilDiscussionPage } from './open-council-discussion';
+import { AppService } from '../../../providers/app-service';
+import { FirebaseService } from '../../../environments/firebase/firebase-service';
+import { OpenCouncilDiscussionPage } from '../open-council-discussion/open-council-discussion';
 import * as moment from 'moment';
 
 @Component({
@@ -32,17 +32,17 @@ export class NewCouncilDiscussionPage {
   create(value) {
     value.createdDate = moment().toISOString();
     console.log('create method', value);
-    this.firebaseservice.createDiscussion(value)
-    .then(res=>{
-      console.log(res);
-    })
-    .catch(err=>{
-      console.log(err);
-      alert(err);
-    })
-    // this.nav.push(OpenCouncilDiscussionPage,{
-    //   title:this.discussion.topic
-    // });
+    // this.firebaseservice.createDiscussion(value)
+    // .then(res=>{
+    //   console.log(res);
+    // })
+    // .catch(err=>{
+    //   console.log(err);
+    //   alert(err);
+    // })
+    this.nav.push(OpenCouncilDiscussionPage,{
+      discussion:value
+    });
   }
   cancel() {
     this.nav.pop();
