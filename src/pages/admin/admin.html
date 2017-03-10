@@ -1,0 +1,44 @@
+<ion-header>
+	<ion-navbar>
+		<ion-buttons left>
+			<button ion-button menuToggle>
+      <ion-icon class="menuicon" name="menu" ></ion-icon>
+    </button>
+		</ion-buttons>
+
+		<ion-title class="admintext"><b>Admin</b></ion-title>
+		<ion-buttons end>
+			<button ion-button>
+      <ion-icon class="notificationsicon" name="notifications-outline" ></ion-icon>
+    </button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list inset>
+		<ng-container>
+			<ion-item>
+				Active Councils
+			</ion-item>
+			<ion-item>
+				Create Council
+			</ion-item>
+			<ion-item>
+				Invite Member
+			</ion-item>
+			<ion-item (click)="getCouncilsUsers()">
+				Inactivate Member
+			</ion-item>
+			<ion-item>
+				Edit Member
+			</ion-item>
+			<ion-item>
+				Reactivate Member
+			</ion-item>
+			<ion-item>
+				Transfer Admin Rights
+			</ion-item>
+		</ng-container>
+	</ion-list>
+</ion-content>

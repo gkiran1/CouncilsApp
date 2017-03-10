@@ -37,6 +37,8 @@ import { AgendasPage } from '../pages/agendas/agendas';
 import { OpenCouncilDiscussionPage } from '../pages/discussions/open-council-discussion/open-council-discussion'
 //Ionic Push Module
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { AdminPage } from '../pages/admin/admin.component';
+import { InactivateMembersPage } from '../pages/inactivatemembers/inactivatemembers.component';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -82,14 +84,14 @@ const cloudSettings: CloudSettings = {
     AboutPage,
     SubmitFeedbackPage,
     ThanksFeedbackPage,
-
     EditProfilePage,
     ChangePasswordPage,
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
-    OpenCouncilDiscussionPage
-
+    OpenCouncilDiscussionPage,
+    AdminPage,
+    InactivateMembersPage
   ],
 
   imports: [
@@ -128,8 +130,9 @@ const cloudSettings: CloudSettings = {
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
-    OpenCouncilDiscussionPage
-
+    OpenCouncilDiscussionPage,
+    AdminPage,
+    InactivateMembersPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]

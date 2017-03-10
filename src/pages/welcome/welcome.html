@@ -111,6 +111,12 @@
         </button>
 			</ion-item>
 
+			<ion-item *ngIf="(userObj | async)?.isadmin" >
+				<button ion-button color="secondary" name="About" class="listbtn2" clear menuToggle text-capitalize (click)="viewAdminPage()">
+					 Admin
+			    </button>
+			</ion-item>
+
 		</ion-list>
 	</ion-content>
 

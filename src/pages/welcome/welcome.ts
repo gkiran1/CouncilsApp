@@ -19,6 +19,7 @@ import { GoodbyePage } from '../goodbye/goodbye';
 import { AgendasPage } from '../agendas/agendas';
 import { Subscription } from "rxjs";
 import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
+import { AdminPage } from '../admin/admin.component';
 
 @Component({
   selector: 'page-welcome',
@@ -212,11 +213,17 @@ export class WelcomePage {
   viewSubmitFeedbackPage() {
     this.nav.push(SubmitFeedbackPage);
   }
+
   viewEditProfilePage() {
     this.nav.push(EditProfilePage);
   }
+
   viewAboutPage() {
     this.nav.push(AboutPage);
+  }
+
+  viewAdminPage() {
+    this.nav.setRoot(AdminPage);
   }
 
   signOut() {

@@ -1,0 +1,25 @@
+<ion-header>
+	<ion-navbar>
+		<ion-row>
+			<ion-col width-80>
+				<h3>
+					Inactivate Members
+				</h3>
+			</ion-col>
+		</ion-row>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list inset>
+		<ng-container *ngIf="users.length">
+			<ion-item *ngFor="let user of users">
+				<h3>{{user.firstname}} {{user.lastname}}</h3>
+				<p><span>{{user.councilnames}}</span></p>
+				<button ion-button item-right clear>
+      <ion-icon  name="arrow-forward"></ion-icon>
+      </button>
+			</ion-item>
+		</ng-container>
+	</ion-list>
+</ion-content>
