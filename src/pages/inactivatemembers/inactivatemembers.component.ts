@@ -6,7 +6,7 @@ import { NavController } from 'ionic-angular';
 
 @Component({
     templateUrl: 'inactivatemembers.html',
-    selector: 'inactivatemembers.page'
+    selector: 'inactivatemembers-page'
 })
 
 export class InactivateMembersPage {

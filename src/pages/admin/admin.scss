@@ -1,16 +1,22 @@
-admin-page{
-
-.menuicon{
-    color: #32b38a;
-}
-
-.admintext{
-    text-align: center;
-}
-
-.notificationsicon{
-    color: #32b38a;
-    margin-left: 10px;
-}
-
+admin-page {
+    .menuicon {
+        color: #32b38a;
+    }
+    .admintext {
+        text-align: center;
+    }
+    .notificationsicon {
+        color: #32b38a;
+        margin-left: 10px;
+    }
+    .icon-style {
+        color: #A9AAAC !important;
+        width: 0.66em;
+        height: 1.08em;
+    }
+    .label-styles {
+        font-family: Bernina-Regular !important;
+        font-size: 1.2em !important;
+        color: #35373a !important;
+    }
 }
