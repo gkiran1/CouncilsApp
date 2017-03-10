@@ -140,6 +140,11 @@ export class FirebaseService {
         }).map(results => results);
     }
 
+    //use below method to retreive council object by passing its id;
+    getCouncilByCouncilKey(key: string): FirebaseObjectObservable<any> {
+        return this.af.database.object('councils/' + key);
+    }
+
     getUsersByUnitNumber(unitnumber: number): Observable<User[]> {
 
         return this.af.database.list('users', {
@@ -372,11 +377,25 @@ export class FirebaseService {
                 orderByChild: 'councilid',
                 equalTo: councilId
             }
-        }).map(res=>res);
+        }).map(res => res);
     }
-    getAgendas(){
+    getAgendas() {
         return this.af.database.list('agendas');
     }
 
+    createDiscussion(discussion: any) {
+        return this.rootRef.child('discussions').push(
+            {
+                topic: discussion.topic,
+                councilid: discussion.councilid,
+                createdDate: discussion.createdDate,
+                createdBy: discussion.createdBy,
+                isActive: discussion.isActive
+            })
+            .then(() => {
+                return "discussion created successfully..."
+            })
+            .catch(err => { throw err });
+    }
 
 }

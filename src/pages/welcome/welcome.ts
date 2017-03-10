@@ -17,8 +17,8 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { GoodbyePage } from '../goodbye/goodbye';
 import { AgendasPage } from '../agendas/agendas';
-
 import { Subscription } from "rxjs";
+import { NewCouncilDiscussionPage } from '../new-council-discussion/new-council-discussion';
 
 @Component({
   selector: 'page-welcome',
@@ -52,11 +52,11 @@ export class WelcomePage {
         localStorage.setItem('unitType', usr.unittype)
         localStorage.setItem('unitNumber', usr.unitnumber.toString())
         localStorage.setItem('userCouncils', usr.councils.toString())
-      });    
+      });
     });
     this.activeCouncilsCount = activeCouncilsPage.getCount();
     this.myAssignmentsCount = myassignmentpage.getCount();
-    this.councilAssignmentsCount = councilAssignmentsPage.getCount();  
+    this.councilAssignmentsCount = councilAssignmentsPage.getCount();
   }
 
   councilsPage() {
@@ -163,12 +163,42 @@ export class WelcomePage {
     actionSheet.present();
   }
   notesPage() { }
-  
+
   upcomingPage() {
     this.nav.push(AgendasPage);
   }
   pastPage() { }
-  discussionsPage() { }
+  discussionsPage() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Discussions',
+      buttons: [
+        {
+          text: 'Council',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewCouncilDiscussionPage);
+          }
+        },
+        {
+          text: 'Private',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewCouncilDiscussionPage);
+          }
+        },
+        {
+          text: 'Cancel',
+          cssClass: "actionsheet-cancel",
+          handler: () => {
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
+  }
   privatePage() { }
 
   viewCouncilAssignments() {

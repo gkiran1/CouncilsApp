@@ -6,3 +6,4 @@ www/build/*
 /www
 /www/*
 www
+npm-debug.log
