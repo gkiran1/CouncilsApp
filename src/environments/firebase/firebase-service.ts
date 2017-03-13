@@ -141,11 +141,6 @@ export class FirebaseService {
         }).map(results => results);
     }
 
-    //use below method to retreive council object by passing its id;
-    getCouncilByCouncilKey(key: string): FirebaseObjectObservable<any> {
-        return this.af.database.object('councils/' + key);
-    }
-
     getUsersByUnitNumber(unitnumber: number): Observable<User[]> {
 
         return this.af.database.list('users', {
@@ -198,7 +193,7 @@ export class FirebaseService {
         }).catch(err => { throw err });
     }
 
-    getUsersByCouncil(councilid: string): Observable<any[]> {
+    getUsersByCouncil(councilid: string): Observable<User[]> {
         return this.af.database.list('usercouncils', {
             query: {
                 orderByChild: 'councilid',
@@ -206,19 +201,6 @@ export class FirebaseService {
             }
         });
     }
-
-    getUsersByKey(key: string): Observable<any[]> {
-        return this.af.database.list('users', {
-            query: {
-                orderByKey: true,
-                equalTo: key,
-                limitToFirst: 1
-            }
-        }).map(results => results);
-    }
-
-
-
     createAssigment(assignment: any) {
         return this.rootRef.child('assignments').push(
             {
@@ -296,15 +278,6 @@ export class FirebaseService {
             throw err;
         })
     }
-
-    updateIsactiveInUser(userUid: string, isactive: boolean) {
-        return this.rootRef.child('users/' + userUid).update({ isactive: isactive }).then(() => {
-            return "isactive in user updated successfully..."
-        }).catch(err => {
-            throw err;
-        })
-    }
-
     updateAssignment(assignment, assignmentKey) {
         console.log('assignment.$key', assignmentKey);
         return this.af.database.list('assignments').update(assignmentKey, {
@@ -343,69 +316,4 @@ export class FirebaseService {
             throw err;
         })
     }
-    getAllCouncils(counciltype: string): FirebaseListObservable<any[]> {
-        return this.af.database.list('councils', {
-            query: {
-                orderByChild: 'counciltype',
-                equalTo: counciltype
-            }
-        });
-    }
-
-    createAgenda(agenda: any) {
-        console.log(agenda);
-        console.log(agenda.assignedcouncil.council);
-        console.log(agenda.assignedcouncil.$key);
-        console.log("agendadate", agenda.agendadate);
-        console.log("openinghymn", agenda.openinghymn.$key);
-        console.log("openingprayer", agenda.openingprayer.$key);
-        console.log("spiritualthought", agenda.spiritualthought.$key);
-
-
-        return this.rootRef.child('agendas').push({
-            agendacouncil: agenda.assignedcouncil.council,
-            councilid: agenda.assignedcouncil.$key,
-            agendadate: agenda.assigneddate,
-            agendatime: agenda.assignedtime,
-            openinghymn: agenda.openinghymn.$key,
-            openingprayer: agenda.openingprayer.$key,
-            spiritualthought: agenda.spiritualthought.$key,
-            highcounselorremarks: agenda.highcounselorremarks.$key,
-            reviewassignments: agenda.reviewassignments.$key,
-            createdby: agenda.createdby,
-            createddate: agenda.createddate,
-
-            lastupdateddate: agenda.lastupdateddate,
-            isactive: agenda.isactive
-        })
-    }
-
-    getAgendasByCouncilId(councilId: string) {
-        return this.af.database.list('agendas', {
-            query: {
-                orderByChild: 'councilid',
-                equalTo: councilId
-            }
-        }).map(res => res);
-    }
-    getAgendas() {
-        return this.af.database.list('agendas');
-    }
-
-    createDiscussion(discussion: any) {
-        return this.rootRef.child('discussions').push(
-            {
-                topic: discussion.topic,
-                councilid: discussion.councilid,
-                createdDate: discussion.createdDate,
-                createdBy: discussion.createdBy,
-                isActive: discussion.isActive
-            })
-            .then(() => {
-                return "discussion created successfully..."
-            })
-            .catch(err => { throw err });
-    }
-
-
 }
