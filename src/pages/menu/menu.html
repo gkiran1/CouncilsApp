@@ -1,18 +1,18 @@
 <ion-menu name="menu" id="menu" [content]="content" type="overlay">
     <ion-header>
+    </ion-header>
+    <ion-content>
         <ion-navbar hideBackButton="true">
             <ion-item style="border: none !important">
                 <ion-row>
-                    <ion-col style="margin: auto" width-46>
-                        <ion-avatar item-left>
-                            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="(userObj | async)?.avatar" />
-                            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj | async)?.avatar" />
-                        </ion-avatar>
-                    </ion-col>
+                    <ion-avatar item-left>
+                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="(userObj | async)?.avatar" />
+                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj | async)?.avatar" />
+                    </ion-avatar>
 
-                    <ion-col style="margin: auto">
+                    <ion-col style="margin-left: 16pt">
                         <ion-row class='user1'>
-                            <ion-icon ios="ios-star-outline" md="md-star-outline"></ion-icon>{{(userObj | async)?.firstname}}
+                            {{(userObj | async)?.firstname}}
                         </ion-row>
                         <ion-row class='user2'>
                             <p>{{(userObj | async)?.calling}} - {{(userObj | async)?.unitnumber}}</p>
@@ -21,8 +21,7 @@
                 </ion-row>
             </ion-item>
         </ion-navbar>
-    </ion-header>
-    <ion-content>
+
         <ion-list no-lines>
             <ion-item>
                 <ion-label class="listbtn1">Council</ion-label>
