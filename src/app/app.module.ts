@@ -38,7 +38,8 @@ import { OpenCouncilDiscussionPage } from '../pages/discussions/open-council-dis
 //Ionic Push Module
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { AdminPage } from '../pages/admin/admin.component';
-import { InactivateMembersPage } from '../pages/inactivatemembers/inactivatemembers.component';
+import { InactivateMembersPage } from '../pages/inactivatemembers/inactivate-members/inactivatemembers.component';
+import { MemberInactivatedPage } from '../pages/inactivatemembers/member-inactivated/memberinactivated.component';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -91,7 +92,8 @@ const cloudSettings: CloudSettings = {
     AgendasPage,
     OpenCouncilDiscussionPage,
     AdminPage,
-    InactivateMembersPage
+    InactivateMembersPage,
+    MemberInactivatedPage
   ],
 
   imports: [
@@ -132,7 +134,8 @@ const cloudSettings: CloudSettings = {
     AgendasPage,
     OpenCouncilDiscussionPage,
     AdminPage,
-    InactivateMembersPage
+    InactivateMembersPage,
+    MemberInactivatedPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]

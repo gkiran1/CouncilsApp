@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { AppService } from '../../providers/app-service';
-import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { User } from '../../user/user';
+import { AppService } from '../../../providers/app-service';
+import { FirebaseService } from '../../../environments/firebase/firebase-service';
+import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
-
+import { MemberInactivatedPage } from '../member-inactivated/memberinactivated.component';
 
 @Component({
     templateUrl: 'inactivatemembers.html',
@@ -39,8 +39,7 @@ export class InactivateMembersPage {
         });
     }
 
-    inactivatemember(user: User, index: any) {
-        console.log('index', index);
+    inactivatemember(user: User) {
         let actionSheet = this.actionSheetCtrl.create({
             buttons: [
                 {
@@ -50,8 +49,7 @@ export class InactivateMembersPage {
                         this.menuctrl.close();
                         this.firebaseService.updateIsactiveInUser(user.$key, false)
                             .then(() => {
-                                this.showAlert('member has been inactivated');
-                                this.users.splice(index, 1)
+                                this.nav.push(MemberInactivatedPage);
                             })
                             .catch(err => { this.showAlert('Unable to inactivate the member, please try after some time') })
                     }

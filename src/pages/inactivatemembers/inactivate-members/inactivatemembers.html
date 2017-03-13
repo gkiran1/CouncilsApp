@@ -17,18 +17,17 @@
 <ion-content>
 	<ion-list inset>
 		<ng-container *ngIf="users.length">
-			<ion-item *ngFor="let user of users; let i = index" [attr.data-index]="i">
+			<ion-item *ngFor="let user of users">
 				<ion-avatar item-left>
 					<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="(user.avatar)" />
 					<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user.avatar)" />
 				</ion-avatar>
 				<h3>{{user.firstname}} {{user.lastname}}</h3>
 				<p><span>{{user.councilnames}}</span></p>
-				<button ion-button item-right clear (click)="inactivatemember(user, i)">   
+				<button ion-button item-right clear (click)="inactivatemember(user)">   
                    <ion-icon color='secondary' ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon> 
                 </button>
 			</ion-item>
 		</ng-container>
-
 	</ion-list>
 </ion-content>

@@ -1,0 +1,18 @@
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { InviteMemberPage } from '../../invite/invite';
+
+@Component({
+    selector: 'member-inactivated',
+    templateUrl: 'memberinactivated.html'
+})
+
+export class MemberInactivatedPage {
+
+    constructor(public navCtrl: NavController) { }
+
+    goToInviteMembersPage() {
+        this.navCtrl.push(InviteMemberPage);
+    }
+
+}
