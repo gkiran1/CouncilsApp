@@ -19,10 +19,10 @@ export class InactivateMembersPage {
         private nav: NavController,
         private alertCtrl: AlertController,
         public actionSheetCtrl: ActionSheetController,
-        public menuctrl: MenuController, ) {
+        public menuctrl: MenuController) {
         this.appService.getUser().subscribe(usr => {
             this.firebaseService.getUsersByUnitNumber(usr.unitnumber).subscribe(usersObj => {
-
+                this.users = [];
                 usersObj.forEach(userObj => {
                     if (userObj.$key !== usr.$key && userObj.isactive === true) {
                         var userCouncilNames: string[] = [];
@@ -32,7 +32,6 @@ export class InactivateMembersPage {
                                 userObj.councilnames = userCouncilNames.join(', ');
                             });
                         });
-
                         this.users.push(userObj);
                     }
                 });
