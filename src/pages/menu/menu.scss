@@ -9,7 +9,9 @@ page-welcome {
         font-size: 13pt !important;
         color: #35373A !important;
         font-family: Bernina-SemiBold !important;
-        margin-left: 7%;
+        padding-left: 16pt;
+        margin: auto;
+        padding-right: 16pt;
     }
     .listbtn2 {
         font-size: 17pt !important;
@@ -70,9 +72,15 @@ page-welcome {
     }
     .button-md {
         height: 44pt;
+        padding-left: 16pt !important;
+        padding-right: 16pt !important;
+        margin: 0pt;
     }
     .button-ios {
         height: 44pt;
+        padding-left: 16pt !important;
+        padding-right: 16pt !important;
+        margin: 0pt;
     }
     .toolbar-md {
         padding: 0px !important;
@@ -85,10 +93,12 @@ page-welcome {
     .item-ios ion-thumbnail[item-left] {
         margin: 0;
     }
-    // ion-avatar {
-    //     width: 46pt;
-    //     height: 46pt;
-    // }
+    .item-md {
+        padding-left: 16px;
+    }
+    .item-ios {
+        padding-left: 16px;
+    }
 }
 
 .actionsheet-items {
