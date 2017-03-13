@@ -295,6 +295,15 @@ export class FirebaseService {
             throw err;
         })
     }
+
+    updateIsactiveInUser(userUid: string, isactive: boolean) {
+        return this.rootRef.child('users/' + userUid).update({ isactive: isactive }).then(() => {
+            return "isactive in user updated successfully..."
+        }).catch(err => {
+            throw err;
+        })
+    }
+
     updateAssignment(assignment, assignmentKey) {
         console.log('assignment.$key', assignmentKey);
         return this.af.database.list('assignments').update(assignmentKey, {
