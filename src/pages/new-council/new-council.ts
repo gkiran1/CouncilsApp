@@ -65,11 +65,10 @@ export class NewCouncilPage {
         this.nav.setRoot(WelcomePage);
       }
       else {
-        alert('Council already exists.');
+         this.showAlert('Council already exists.');
       }
-    }).catch(err => {
-      alert(err);
-    })
+    }).catch(err => this.showAlert(err))
+     
   }
 
   showAlert(errText) {

@@ -3,6 +3,9 @@ import { NavController } from 'ionic-angular';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
+import { WelcomePage } from '../welcome/welcome';
+import { AgendaPage } from '../agenda/agenda';
+
 
 @Component({
     templateUrl: 'agendas.html',
@@ -11,29 +14,24 @@ import { Observable } from 'rxjs/Observable';
 export class AgendasPage {
 
     agendasArray = [];
-    constructor(public navCtrl: NavController, public as: AppService, public firebaseservice: FirebaseService) {
 
+    constructor(public nav: NavController, public as: AppService, public firebaseservice: FirebaseService) {
         var councilsIds = localStorage.getItem('userCouncils').split(',');
-        console.log("councilsIds", councilsIds);
-
-        // councilsIds.forEach(councilId => {
-        //     console.log('councilId',councilId);
-        //     this.firebaseservice.getAgendasByCouncilId(councilId).subscribe(agendas => {
-        //         console.log("agendas", agendas);
-
-        //       //  this.agendasArray.push(agendas[0]);
-        //     });
-        // });
-
-
         councilsIds.forEach(councilId => {
-            this.firebaseservice.getAgendas().filter(agendas => {
-                return agendas.indexOf(councilId) !== -1;
-            }).subscribe(res=>{
-                console.log('res',res);
+            this.firebaseservice.getAgendasByCouncilId(councilId).subscribe(agendas => {
+                this.agendasArray.push(...agendas);
             });
         });
-      
+
     }
+
+ agendaSelected(agendaselected) {
+    this.nav.push(AgendaPage, { agendaselected: agendaselected });
+  }
+
+    cancel() {
+        this.nav.setRoot(WelcomePage);
+    }
+    
 }
 

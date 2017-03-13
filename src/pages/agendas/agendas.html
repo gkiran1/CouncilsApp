@@ -1,33 +1,36 @@
 <ion-header>
-    <ion-navbar hideBackButton="true"> 
-        <ion-row>
-            <ion-col class="header-col" width-10>
-                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
-                    (click)="cancel()"></ion-icon>
-            </ion-col>
-            <ion-col width-80>
-                <h3>
-                  Agendas
-                </h3>
-            </ion-col>
-        </ion-row>
-    </ion-navbar>
+  <ion-navbar>
+<ion-buttons left>
+      <button ion-button menuToggle>
+              <ion-icon class="menuicon" name="menu" color="secondary"></ion-icon>
+      <!--<ion-icon name="menu" color="secondary"></ion-icon>-->
+    </button>
+    </ion-buttons>
+    <h3 text-center><b>Agendas</b></h3>
+    <ion-buttons end>
+      <button ion-button>
+      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding center text-center>
-  <!--<ng-container *ngIf="(agendasArray | async)?.length">
+  <ng-container *ngIf="agendasArray.length">
     <ion-list inset>
-      <ion-item (click)="agendaSelected(item, i)" *ngFor="let item of agendasArray | async; let i = index" [attr.data-index]="i">
-        <ion-icon name="list" color="secondary" item-left [ngClass]="{'active': selectedIdx == i}"></ion-icon>
-        <ion-icon name="list" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>
-        <h3>{{item.assigneddate}}</h3>
-        <p><span>{{item.councilname}}</span>
+      <ion-item (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
+        <ion-icon name="list" color="secondary" item-left></ion-icon>
+        <!--<ion-icon name="list" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>-->
+        <p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
+        <button ion-button item-right clear>
+      <ion-icon class="icon-style" name="arrow-forward"></ion-icon>
+      </button>
+        <p><span class="agendacouncil-styles">{{item.agendacouncil}}</span>
         </p>
       </ion-item>
     </ion-list>
   </ng-container>
-  <ng-container *ngIf="!(agendasArray | async)?.length">
+  <ng-container *ngIf="!agendasArray.length">
     <p class="text-content">There are no agendas</p>
-  </ng-container>-->
+  </ng-container>
 </ion-content>
-    

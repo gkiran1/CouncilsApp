@@ -343,13 +343,6 @@ export class FirebaseService {
             throw err;
         })
     }
-    // resetPassword(user) {
-    //    return this.fireAuth.signInWithEmailAndPassword(user.email,user.password).then(() => {
-    //         return "your old password matched.."
-    //     }).catch(err => {
-    //         throw err;
-    //     })
-    // }
 
     getAllCouncils(counciltype: string): FirebaseListObservable<any[]> {
         return this.af.database.list('councils', {
@@ -361,15 +354,6 @@ export class FirebaseService {
     }
 
     createAgenda(agenda: any) {
-        console.log(agenda);
-        console.log(agenda.assignedcouncil.council);
-        console.log(agenda.assignedcouncil.$key);
-        console.log("agendadate", agenda.agendadate);
-        console.log("openinghymn", agenda.openinghymn.$key);
-        console.log("openingprayer", agenda.openingprayer.$key);
-        console.log("spiritualthought", agenda.spiritualthought.$key);
-
-
         return this.rootRef.child('agendas').push({
             agendacouncil: agenda.assignedcouncil.council,
             councilid: agenda.assignedcouncil.$key,
@@ -382,7 +366,6 @@ export class FirebaseService {
             reviewassignments: agenda.reviewassignments.$key,
             createdby: agenda.createdby,
             createddate: agenda.createddate,
-
             lastupdateddate: agenda.lastupdateddate,
             isactive: agenda.isactive
         })
@@ -394,12 +377,9 @@ export class FirebaseService {
                 orderByChild: 'councilid',
                 equalTo: councilId
             }
-        }).map(res => res);
+        })
     }
-    getAgendas() {
-        return this.af.database.list('agendas');
-    }
-
+ 
     createDiscussion(discussion: any) {
         return this.rootRef.child('discussions').push(
             {
@@ -413,6 +393,32 @@ export class FirebaseService {
                 return "discussion created successfully..."
             })
             .catch(err => { throw err });
+        }
+    
+
+    updateAgenda(agenda, agendaKey) {
+        return this.af.database.list('agendas').update(agendaKey, {
+            agendacouncil: agenda.assignedcouncil.council,
+            councilid: agenda.assignedcouncil.$key,
+            agendadate: agenda.assigneddate,
+          //  agendatime: agenda.assignedtime,
+            openinghymn: agenda.openinghymn.$key,
+            openingprayer: agenda.openingprayer.$key,
+            spiritualthought: agenda.spiritualthought.$key,
+            highcounselorremarks: agenda.highcounselorremarks.$key,
+            reviewassignments: agenda.reviewassignments.$key,
+            createdby: agenda.createdby,
+            createddate: agenda.createddate,
+            lastupdateddate: agenda.lastupdateddate,
+            isactive: agenda.isactive
+        }).then(() => {
+            return "Agenda has been updated."
+        }).catch(err => { throw err });
+    }
+
+    removeAgenda(agendaKey) {
+        console.log('agendas.$key', agendaKey);
+        return this.af.database.object('agendas/' + agendaKey).remove();
     }
 
 }

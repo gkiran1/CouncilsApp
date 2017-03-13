@@ -7,7 +7,6 @@ import { AuthService } from '../../providers/auth-service';
 import { DisplayPage } from '../display/display';
 import { WelcomePage } from '../welcome/welcome';
 import { CreateAccountPage } from '../create-account/create-account';
-import { NewAgenda } from '../new-agenda/new-agenda';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../../user/user';
 import { NgZone } from '@angular/core';

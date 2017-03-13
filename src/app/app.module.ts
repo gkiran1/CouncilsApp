@@ -35,6 +35,7 @@ import { FormsModule } from '@angular/forms';
 import { CouncilUsersPage } from '../pages/councilusers/councilusers';
 import { AgendasPage } from '../pages/agendas/agendas';
 import { OpenCouncilDiscussionPage } from '../pages/discussions/open-council-discussion/open-council-discussion'
+import { AgendaPage } from '../pages/agenda/agenda';
 //Ionic Push Module
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { AdminPage } from '../pages/admin/admin.component';
@@ -93,7 +94,9 @@ const cloudSettings: CloudSettings = {
     OpenCouncilDiscussionPage,
     AdminPage,
     InactivateMembersPage,
-    MemberInactivatedPage
+    MemberInactivatedPage,
+    AgendaPage
+
   ],
 
   imports: [
@@ -135,7 +138,9 @@ const cloudSettings: CloudSettings = {
     OpenCouncilDiscussionPage,
     AdminPage,
     InactivateMembersPage,
-    MemberInactivatedPage
+    MemberInactivatedPage,
+    AgendaPage
+
   ],
 
   providers: [AuthService, AppService, FirebaseService]

@@ -15,8 +15,6 @@ export class NewBlankAgendaPage {
   users = [];
   councils = [];
   blankagendaForm: FormGroup;
-  assignedcouncil: any;
-  //This is required to store assingeduser object in UI inorder to fetch related councils.
   usercouncils = [];
 
 
@@ -24,11 +22,12 @@ export class NewBlankAgendaPage {
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
     public nav: NavController) {
 
-    var unitType = localStorage.getItem('unitType')
-
-    this.firebaseservice.getAllCouncils(unitType).subscribe(councils => {
-      this.councils = councils;
-    });
+    var councilsIds = localStorage.getItem('userCouncils').split(',');
+    councilsIds.forEach(councilId => {
+      this.firebaseservice.getCouncilByKey(councilId).subscribe(councilObj => {
+        this.councils.push(...councilObj);
+      })
+    })
 
     this.blankagendaForm = fb.group({
       assignedcouncil: ['', Validators.required],
@@ -39,34 +38,20 @@ export class NewBlankAgendaPage {
       spiritualthought: ['', Validators.required],
       highcounselorremarks: ['', Validators.required],
       reviewassignments: ['', Validators.required],
-      createdby: '',
-      createddate: '',
-      isactive: false,
-      lastupdateddate: '',
-      notes: '',
-      isCompleted: false
-    });
-
-
-    appservice.getUser().subscribe(user => {
-      console.log("assignedcouncil", this.assignedcouncil);
-
-      let subscribe = this.firebaseservice.getCouncilsByType(user.unittype).subscribe(councils => {
-        console.log("user.unittype", user.unittype);
-        console.log("councils", councils);
-
-      });
+      createdby: localStorage.getItem('securityToken'),
+      createddate: new Date().toDateString(),
+      isactive: true,
+      lastupdateddate: ''
     });
   }
 
-  assignedMemberChange(value) {
+  assignedMemberChange(value) {    
     this.users = [];
     this.getUsersByCouncilId(value.assignedcouncil.$key).subscribe(usersObj => {
       usersObj.forEach(usrObj => {
         this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
           usrs.forEach(usr => {
             this.users.push(usr);
-            console.log('this.users', this.users);
           });
         });
       });
@@ -80,30 +65,28 @@ export class NewBlankAgendaPage {
   updateCouncils(councils) {
     councils.usercouncils.forEach(councilid => {
       this.firebaseservice.getUsersByCouncil(councilid).subscribe(usercouncils => this.usercouncils.push(...usercouncils));
-      console.log('usercouncils', this.usercouncils);
     });
   }
 
   agendasArray = [];
   createagenda(agenda) {
     // Main Code
-   this.firebaseservice.createAgenda(agenda);
+    this.firebaseservice.createAgenda(agenda)
+      .then(res => {
+        this.showAlert('Agenda created successfully.');
+        this.nav.push(WelcomePage)
+      })
+      .catch(err => this.showAlert(err))
+  }
 
-    // var councilsIds = localStorage.getItem('userCouncils').split(',');
-    //     console.log("councilsIds", councilsIds);
-    
-    // councilsIds.forEach(councilId => {
 
-    //   console.log(councilId);
-    //   this.firebaseservice.getAgendasByCouncilId(councilId).subscribe(agendas => {
-    //     console.log("agendas", agendas);
-
-    //     this.agendasArray.push(agendas[0]);
-        
-        // console.log("agendasArray", this.agendasArray);
-    //   })
-    // })
-    
+  showAlert(errText) {
+    let alert = this.alertCtrl.create({
+      title: '',
+      subTitle: errText,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   cancel() {

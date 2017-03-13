@@ -166,7 +166,7 @@ export class WelcomePage {
   notesPage() { }
 
   upcomingPage() {
-    this.nav.push(AgendasPage);
+    this.nav.setRoot(AgendasPage);
   }
   pastPage() { }
   discussionsPage() {
