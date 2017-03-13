@@ -36,7 +36,7 @@
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </button>
 			</ion-item>
-			<ion-item (click)="getCouncilsUsers()">
+			<ion-item (click)="getActiveUsers()">
 				<ion-label class="label-styles">Inactivate Member</ion-label>
 				<button ion-button item-right clear>   
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
@@ -48,7 +48,7 @@
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </button>
 			</ion-item>
-			<ion-item>
+			<ion-item (click)="getInactiveUsers()">
 				<ion-label class="label-styles">Reactivate Member</ion-label>
 				<button ion-button item-right clear>   
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>

@@ -3,14 +3,14 @@ import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
-import { MemberInactivatedPage } from '../member-inactivated/memberinactivated.component';
+import { MemberReactivatedPage } from '../member-reactivated/memberreactivated.component';
 
 @Component({
-    templateUrl: 'inactivatemembers.html',
-    selector: 'inactivatemembers-page'
+    templateUrl: 'reactivatemembers.html',
+    selector: 'reactivatemembers-page'
 })
 
-export class InactivateMembersPage {
+export class ReactivateMembersPage {
     users: User[] = [];
     userKeys = [];
 
@@ -24,7 +24,7 @@ export class InactivateMembersPage {
             this.firebaseService.getUsersByUnitNumber(usr.unitnumber).subscribe(usersObj => {
                 this.users = [];
                 usersObj.forEach(userObj => {
-                    if (userObj.$key !== usr.$key && userObj.isactive === true) {
+                    if (userObj.$key !== usr.$key && userObj.isactive === false) {
                         var userCouncilNames: string[] = [];
                         userObj.councils.forEach(councilId => {
                             this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
@@ -39,30 +39,12 @@ export class InactivateMembersPage {
         });
     }
 
-    inactivatemember(user: User) {
-        let actionSheet = this.actionSheetCtrl.create({
-            buttons: [
-                {
-                    text: 'Confirm Inactivation',
-                    cssClass: "actionsheet-items",
-                    handler: () => {
-                        this.menuctrl.close();
-                        this.firebaseService.inactivateUser(user.$key, false)
-                            .then(() => {
-                                this.nav.push(MemberInactivatedPage);
-                            })
-                            .catch(err => { this.showAlert('Unable to inactivate the member, please try after some time') });
-                    }
-                },
-                {
-                    text: 'Cancel',
-                    cssClass: "actionsheet-cancel",
-                    handler: () => {
-                    }
-                }
-            ]
-        });
-        actionSheet.present();
+    reactivatemember(user: User) {
+        this.firebaseService.reactivateUser(user.$key, true)
+            .then(() => {
+                this.nav.push(MemberReactivatedPage);
+            })
+            .catch(err => { this.showAlert('Unable to reactivate the member, please try after some time') });
     }
 
     cancel() {

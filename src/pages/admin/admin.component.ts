@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { InactivateMembersPage } from '../inactivatemembers/inactivate-members/inactivatemembers.component';
+import { ReactivateMembersPage } from '../reactivatemembers/reactivate-members/reactivatemembers.component';
 
 @Component({
     selector: 'admin-page',
@@ -11,8 +12,12 @@ export class AdminPage {
 
     constructor(private navCtrl: NavController) { }
 
-    getCouncilsUsers() {
+    getActiveUsers() {
         this.navCtrl.push(InactivateMembersPage);
+    }
+
+    getInactiveUsers() {
+        this.navCtrl.push(ReactivateMembersPage);
     }
 
 }

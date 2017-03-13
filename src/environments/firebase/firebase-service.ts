@@ -297,9 +297,17 @@ export class FirebaseService {
         })
     }
 
-    updateIsactiveInUser(userUid: string, isactive: boolean) {
+    inactivateUser(userUid: string, isactive: boolean) {
         return this.rootRef.child('users/' + userUid).update({ isactive: isactive }).then(() => {
-            return "isactive in user updated successfully..."
+            return "User inactivated successfully..."
+        }).catch(err => {
+            throw err;
+        })
+    }
+
+    reactivateUser(userUid: string, isactive: boolean) {
+        return this.rootRef.child('users/' + userUid).update({ isactive: isactive }).then(() => {
+            return "User reactivated successfully..."
         }).catch(err => {
             throw err;
         })
@@ -379,7 +387,7 @@ export class FirebaseService {
             }
         })
     }
- 
+
     createDiscussion(discussion: any) {
         return this.rootRef.child('discussions').push(
             {
@@ -397,15 +405,15 @@ export class FirebaseService {
                 return res.path.o[1];
             })
             .catch(err => { throw err });
-        }
-    
+    }
+
 
     updateAgenda(agenda, agendaKey) {
         return this.af.database.list('agendas').update(agendaKey, {
             agendacouncil: agenda.assignedcouncil.council,
             councilid: agenda.assignedcouncil.$key,
             agendadate: agenda.assigneddate,
-          //  agendatime: agenda.assignedtime,
+            //  agendatime: agenda.assignedtime,
             openinghymn: agenda.openinghymn.$key,
             openingprayer: agenda.openingprayer.$key,
             spiritualthought: agenda.spiritualthought.$key,

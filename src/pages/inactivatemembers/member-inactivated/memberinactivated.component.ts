@@ -11,8 +11,8 @@ export class MemberInactivatedPage {
 
     constructor(public navCtrl: NavController) { }
 
-    goToInviteMembersPage() {
-        this.navCtrl.push(InviteMemberPage);
+    goToInactivateMembersPage() {
+        this.navCtrl.pop();
     }
 
 }

@@ -41,6 +41,8 @@ import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { AdminPage } from '../pages/admin/admin.component';
 import { InactivateMembersPage } from '../pages/inactivatemembers/inactivate-members/inactivatemembers.component';
 import { MemberInactivatedPage } from '../pages/inactivatemembers/member-inactivated/memberinactivated.component';
+import { ReactivateMembersPage } from '../pages/reactivatemembers/reactivate-members/reactivatemembers.component';
+import { MemberReactivatedPage } from '../pages/reactivatemembers/member-reactivated/memberreactivated.component';
 import { CouncilDiscussionsListPage } from '../pages/discussions/council-discussions-list/council-discussions-list'
 
 //Cloud Settings - Push Messaging
@@ -96,9 +98,10 @@ const cloudSettings: CloudSettings = {
     AdminPage,
     InactivateMembersPage,
     MemberInactivatedPage,
+    ReactivateMembersPage,
+    MemberReactivatedPage,
     AgendaPage,
     CouncilDiscussionsListPage
-
   ],
 
   imports: [
@@ -141,9 +144,10 @@ const cloudSettings: CloudSettings = {
     AdminPage,
     InactivateMembersPage,
     MemberInactivatedPage,
+    ReactivateMembersPage,
+    MemberReactivatedPage,
     AgendaPage,
     CouncilDiscussionsListPage
-
   ],
 
   providers: [AuthService, AppService, FirebaseService]
