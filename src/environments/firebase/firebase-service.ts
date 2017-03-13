@@ -55,7 +55,8 @@ export class FirebaseService {
                 createdby: user.createdby,
                 createddate: user.createddate,
                 lastupdateddate: user.lastupdateddate,
-                isactive: user.isactive
+                isactive: user.isactive,
+                guestpicture: user.avatar
             }).then(() => user.councils.forEach(counc => {
                 this.createUserCouncils(uid, counc);
             }));
@@ -301,19 +302,18 @@ export class FirebaseService {
         console.log('assignment.$key', assignmentKey);
         return this.af.database.object('assignments/' + assignmentKey).remove();
     }
-    updateProfile(userUid: string, firstname, lastname, email, phone, ldsusername) {
-        return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername }).then(() => {
+    updateProfile(userUid: string, firstname, lastname, email, phone, ldsusername, guestpicture) {
+        return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername, guestpicture }).then(() => {
             return "user profile updated successfully..."
         }).catch(err => {
             throw err;
         })
     }
-    // resetPassword(user) {
-    //    return this.fireAuth.signInWithEmailAndPassword(user.email,user.password).then(() => {
-    //         return "your old password matched.."
-    //     }).catch(err => {
-    //         throw err;
-    //     })
-    // }
-
+    setAvatarInUser(avatar: any, userUid: string) {
+        return this.rootRef.child('users/' + userUid).update({ avatar: avatar }).then(() => {
+            return "user profile updated successfully..."
+        }).catch(err => {
+            throw err;
+        })
+    }
 }

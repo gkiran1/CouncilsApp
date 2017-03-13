@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Nav, NavController, AlertController } from 'ionic-angular';
+import { Nav, NavController, AlertController, ActionSheetController, MenuController } from 'ionic-angular';
 import { ChangePasswordPage } from '../edit-profile/change-password';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
@@ -7,6 +7,7 @@ import { WelcomePage } from '../welcome/welcome';
 import { User } from '../../user/user';
 import { Toast } from 'ionic-native';
 import { Camera } from 'ionic-native';
+import * as firebase from 'firebase';
 
 @Component({
     selector: 'edit-profile',
@@ -14,7 +15,9 @@ import { Camera } from 'ionic-native';
     providers: [FirebaseService]
 })
 export class EditProfilePage {
+    profilePictureRef: any;
     guestPicture: any;
+    imagePath: any;
     profile: User;
     $key: string;
     firstname: string;
@@ -23,8 +26,17 @@ export class EditProfilePage {
     password: string;
     ldsusername: string;
     phone: string;
-    constructor(public nav: NavController, public appService: AppService, private firebaseService: FirebaseService, public alertCtrl: AlertController,) {
+    avatar: string;
+    imageflag = true;
+    isChangeflag = false;
+    constructor(public nav: NavController,
+        public appService: AppService,
+        private firebaseService: FirebaseService,
+        public actionSheetCtrl: ActionSheetController,
+        public menuctrl: MenuController,
+        public alertCtrl: AlertController, ) {
         this.profile = new User;
+        this.profilePictureRef = firebase.storage().ref('/users/');
         appService.getUser().subscribe(user => {
             this.profile.firstname = user.firstname;
             this.profile.lastname = user.lastname;
@@ -32,13 +44,27 @@ export class EditProfilePage {
             this.profile.ldsusername = user.ldsusername;
             this.profile.$key = user.$key;
             this.profile.phone = user.phone;
+            this.profile.avatar = user.avatar;
         });
     }
     editProfile() {
         if ((new RegExp(/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/).test(this.profile.phone))) {
-            this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername).then(res =>
-                this.showAlert('success', 'User profile updated successfully.'))
-                .catch(err => this.showAlert('failure', err.message))
+            this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, this.guestPicture).then((savedPicture) => {
+                if (this.guestPicture != null) {
+                    this.profilePictureRef.child('profilePicture.png')
+                        .putString(this.guestPicture, 'base64', { contentType: 'image/png' })
+                        .then((savedPicture) => {
+                            // this.showAlert('picture',savedPicture.downloadURL);
+                            this.firebaseService.setAvatarInUser(savedPicture.downloadURL, this.profile.$key).then((res) => {                                
+                                this.showAlert('success', 'User profile updated successfully.')
+                                this.isChangeflag = false;
+                            }).catch(err => {                                
+                                this.showAlert('failure', err.message);
+                            })
+                        });
+                }
+                
+            }).catch(err => this.showAlert('failure', err.message))
         } else {
             this.showAlert('failure', 'please enter valid phone number.');
         }
@@ -47,7 +73,11 @@ export class EditProfilePage {
         this.nav.push(ChangePasswordPage);
     }
     cancel() {
-        this.nav.push(WelcomePage);
+        if (this.isChangeflag) {
+            this.showAlertPopup('failure', 'There are unsaved changes.do you want to discard it ?');
+        }else{
+            this.nav.push(WelcomePage);
+        }
     }
     showAlert(reason, text) {
         let alert = this.alertCtrl.create({
@@ -57,7 +87,52 @@ export class EditProfilePage {
         });
         alert.present();
     }
-    // to upload a picture to the firebase.
+    showAlertPopup(reason, text) {
+        let alert = this.alertCtrl.create({
+            title: '',
+            subTitle: text,
+            buttons: [                
+                { text: 'OK', handler: () => this.nav.push(WelcomePage) },
+                { text: 'Cancel'}
+            ]
+        });
+        alert.present();
+    }
+    // actions page when click on camera icon.
+    cameraActionsPage() {
+        let actionSheet = this.actionSheetCtrl.create({
+            title: '',
+            buttons: [
+                {
+                    text: 'Camera',
+                    icon: 'camera',
+                    cssClass: "actionsheet-items",
+                    handler: () => {
+                        this.menuctrl.close();
+                        this.takePicture();
+                    }
+                },
+                {
+                    text: 'Gallery',
+                    icon: 'albums',
+                    cssClass: "actionsheet-items",
+                    handler: () => {
+                        this.menuctrl.close();
+                        this.uploadPicture();
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    cssClass: "actionsheet-cancel",
+                    handler: () => {
+                    }
+                }
+            ]
+        });
+
+        actionSheet.present();
+    }
+    // to upload a picture from camera to the firebase.
     takePicture() {
         Camera.getPicture({
             quality: 95,
@@ -69,10 +144,36 @@ export class EditProfilePage {
             targetHeight: 500,
             saveToPhotoAlbum: true
         }).then(imageData => {
+            // alert('image data' + imageData);
             this.guestPicture = imageData;
+            this.imagePath = "data:image/jpeg;base64," + imageData;
+            this.imageflag = false;
+            this.isChangeflag = true;
+            // this.showAlert('success',this.imagePath);        
         }, error => {
             console.log("ERROR -> " + JSON.stringify(error));
         });
     }
-
+    // to upload a picture from gallery to the firebase.
+    uploadPicture() {
+        Camera.getPicture({
+            quality: 95,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            allowEdit: true,
+            encodingType: Camera.EncodingType.PNG,
+            targetWidth: 500,
+            targetHeight: 500,
+            saveToPhotoAlbum: false
+        }).then(imageData => {
+            // alert('image data' + imageData);
+            this.guestPicture = imageData;
+            this.imagePath = "data:image/jpeg;base64," + imageData;
+            this.imageflag = false;
+            this.isChangeflag = true;
+            // this.showAlert('success',this.imagePath);                       
+        }, error => {
+            console.log("ERROR -> " + JSON.stringify(error));
+        });
+    }
 }
