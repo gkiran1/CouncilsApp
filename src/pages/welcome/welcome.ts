@@ -20,6 +20,7 @@ import { AgendasPage } from '../agendas/agendas';
 import { Subscription } from "rxjs";
 import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
 import { AdminPage } from '../admin/admin.component';
+import { CouncilDiscussionsListPage } from '../discussions/council-discussions-list/council-discussions-list'
 
 @Component({
   selector: 'page-welcome',
@@ -199,6 +200,9 @@ export class WelcomePage {
     });
 
     actionSheet.present();
+  }
+  viewDiscussions(){
+    this.nav.push(CouncilDiscussionsListPage);
   }
   privatePage() { }
 

@@ -27,10 +27,10 @@
             <ion-item-divider item-wrap>
                 Which council will be discussing this topic?
             </ion-item-divider>
-            <ion-list radio-group id="councilid" name="councilid" formControlName="councilid">
+            <ion-list radio-group id="council" name="council" formControlName="council">
                 <ion-item *ngFor="let c of councils">
                     <ion-label color="dark">{{(c | async)?.council}}</ion-label>
-                    <ion-radio [value]="(c | async)?.$key" color="secondary" ></ion-radio>
+                    <ion-radio [value]="c | async" color="secondary" ></ion-radio>
                 </ion-item>
             </ion-list>
         </ion-item-group>

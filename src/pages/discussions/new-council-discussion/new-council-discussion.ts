@@ -19,30 +19,36 @@ export class NewCouncilDiscussionPage {
       user.councils.forEach(c => {
         this.councils.push(this.firebaseservice.getCouncilByCouncilKey(c));
       });
-    });
-    this.newCouncilDiscussionForm = fb.group({
-      topic: ['', Validators.compose([Validators.required,Validators.maxLength(25)])],
-      councilid: ['', Validators.required],
-      createdDate: '',
-      createdBy: appservice.uid,
-      isActive: true
-    });
 
+      this.newCouncilDiscussionForm = fb.group({
+        topic: ['', Validators.compose([Validators.required, Validators.maxLength(25)])],
+        council: ['', Validators.required],
+        createdDate: '',
+        createdBy: appservice.uid,
+        createdUser: user.firstname + ' ' + user.lastname,
+        isActive: true,
+        messages: [],
+        councilname: ''
+      });
+    });
   }
   create(value) {
     value.createdDate = moment().toISOString();
+    value.councilid = value.council.$key;
+    value.councilname = value.council.council;
     console.log('create method', value);
-    // this.firebaseservice.createDiscussion(value)
-    // .then(res=>{
-    //   console.log(res);
-    // })
-    // .catch(err=>{
-    //   console.log(err);
-    //   alert(err);
-    // })
-    this.nav.push(OpenCouncilDiscussionPage,{
-      discussion:value
-    });
+    this.firebaseservice.createDiscussion(value)
+      .then(discussionId => {
+        console.log("discussion created successfully...", discussionId);
+        this.nav.push(OpenCouncilDiscussionPage, {
+          discussion: discussionId
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        alert(err);
+      })
+
   }
   cancel() {
     this.nav.pop();

@@ -41,6 +41,7 @@ import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { AdminPage } from '../pages/admin/admin.component';
 import { InactivateMembersPage } from '../pages/inactivatemembers/inactivate-members/inactivatemembers.component';
 import { MemberInactivatedPage } from '../pages/inactivatemembers/member-inactivated/memberinactivated.component';
+import { CouncilDiscussionsListPage } from '../pages/discussions/council-discussions-list/council-discussions-list'
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -95,7 +96,8 @@ const cloudSettings: CloudSettings = {
     AdminPage,
     InactivateMembersPage,
     MemberInactivatedPage,
-    AgendaPage
+    AgendaPage,
+    CouncilDiscussionsListPage
 
   ],
 
@@ -139,7 +141,8 @@ const cloudSettings: CloudSettings = {
     AdminPage,
     InactivateMembersPage,
     MemberInactivatedPage,
-    AgendaPage
+    AgendaPage,
+    CouncilDiscussionsListPage
 
   ],
 

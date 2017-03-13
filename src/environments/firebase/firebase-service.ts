@@ -385,12 +385,16 @@ export class FirebaseService {
             {
                 topic: discussion.topic,
                 councilid: discussion.councilid,
+                councilname: discussion.councilname,
                 createdDate: discussion.createdDate,
+                createdUser: discussion.createdUser,
                 createdBy: discussion.createdBy,
-                isActive: discussion.isActive
+                isActive: discussion.isActive,
+                messages: discussion.messages
             })
-            .then(() => {
-                return "discussion created successfully..."
+            .then((res) => {
+                //to get a reference of newly added object -res.path.o[1]
+                return res.path.o[1];
             })
             .catch(err => { throw err });
         }
@@ -419,6 +423,28 @@ export class FirebaseService {
     removeAgenda(agendaKey) {
         console.log('agendas.$key', agendaKey);
         return this.af.database.object('agendas/' + agendaKey).remove();
+    }
+    getDiscussionsByCouncilId(councilId) {
+        return this.af.database.list('discussions', {
+            query: {
+                orderByChild: 'councilid',
+                equalTo: councilId
+            }
+        });
+    }
+    updateDiscussionChat(discussionId, msg) {
+        return this.af.database.list(`discussions/${discussionId}/messages`).push(msg);
+    }
+    getDiscussionByKey(key) {
+        return this.af.database.object(`discussions/${key}`);
+    }
+    getActiveUsersFromCouncil(councilId) {
+        return this.af.database.list('usercouncils', {
+            query: {
+                orderByChild: 'councilid',
+                equalTo: councilId
+            }
+        });
     }
 
 }

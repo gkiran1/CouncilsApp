@@ -1,8 +1,45 @@
 <ion-header>
-    <ion-navbar>
-        <h3>{{discussion.topic}}</h3>
+    <ion-navbar hideBackButton>
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <button ion-button clear>
+                 <ion-icon class="cancel-font" name="cancel" color="secondary" ios="ios-arrow-round-back" md="md-arrow-back" (click)="back()"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col width-80>
+                <h3>{{discussion.topic}}</h3>
+            </ion-col>
+        </ion-row>
     </ion-navbar>
 </ion-header>
-<ion-content padding>
-
+<ion-content id="content1">
+    <div class="chat-content">
+        <ion-item text-wrap>
+            <ion-label>
+                This discussion was created by <span ion-text color="secondary">{{discussion.createdUser}}</span> on {{discussion.createdDate |
+                amCalendar}}.There are {{activeusersCount}} active participants from the <span ion-text color="secondary">{{discussion.councilname}}</span>.
+            </ion-label>
+        </ion-item>
+        <ion-list>
+            <ion-item *ngFor="let msg of discussion.messages">
+                <ion-avatar item-left>
+                    <img [src]="msg.user_avatar" *ngIf="msg.user_avatar">
+                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!msg.user_avatar" />
+                </ion-avatar>
+                <h2>{{msg.user_firstname}} {{msg.user_lastname}}</h2>
+                <p>{{msg.timestamp | amCalendar}}</p>
+                <p>{{msg.text}}</p>
+            </ion-item>
+        </ion-list>
+    </div>
 </ion-content>
+<ion-footer>
+    <ion-row>
+        <ion-col width-80>
+            <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg"></ion-input>
+        </ion-col>
+        <ion-col width-20>
+            <button ion-button color="secondary" clear (click)="send()">Send</button>
+        </ion-col>
+    </ion-row>
+</ion-footer>
