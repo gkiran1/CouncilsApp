@@ -6,7 +6,7 @@
             <ion-item style="border: none !important">
                 <ion-row>
                     <ion-avatar item-left>
-                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="(userObj | async)?.avatar" />
+                        <img [src]="(userObj | async)?.avatar" class="avatarImage" *ngIf="(userObj | async)?.avatar" />
                         <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj | async)?.avatar" />
                     </ion-avatar>
 
