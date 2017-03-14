@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
-import { WelcomePage } from '../welcome/welcome';
+import { WelcomePage } from '../menu/menu';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 

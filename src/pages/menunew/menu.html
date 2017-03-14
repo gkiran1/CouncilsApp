@@ -1,0 +1,75 @@
+<ion-menu name="menu" id="menu" [content]="content" type="overlay">
+    <ion-header>
+    </ion-header>
+    <ion-content>
+        <ion-navbar hideBackButton="true">
+            <ion-item style="border: none !important">
+                <ion-row>
+                    <ion-avatar item-left>
+                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="(userObj | async)?.avatar" />
+                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj | async)?.avatar" />
+                    </ion-avatar>
+
+                    <ion-col style="margin-left: 16pt">
+                        <ion-row class='user1'>
+                            {{(userObj | async)?.firstname}}
+                        </ion-row>
+                        <ion-row class='user2'>
+                            <p>{{(userObj | async)?.calling}} - {{(userObj | async)?.unitnumber}}</p>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-navbar>
+        <!--<ion-list no-lines>
+            <button clear menuToggle ion-button class="listbtn2" name="AdminPage" block (click)="adminPage()" text-capitalize>
+                    <ion-icon name="star" item-left></ion-icon>Admin
+            </button>
+            <button clear menuToggle ion-button class="listbtn2" name="settingsPage" block (click)="settingsPage()" text-capitalize>
+                    <ion-icon name="settings" item-left></ion-icon>Settings
+            </button>
+            <button clear menuToggle ion-button class="listbtn2" name="DonationsPage" block (click)="donationsPage()" text-capitalize>
+                    <ion-icon name="dollar" item-left></ion-icon>Donations
+            </button>
+        </ion-list>-->
+
+        <ion-list no-lines>
+            <ion-row>
+                <ion-label class="listbtn1">Council</ion-label>
+                <button color="secondary" name="councilsPage" *ngIf="(userObj | async)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
+                    <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+                </button>
+            </ion-row>
+            <button clear menuToggle ion-button class="listbtn2" name="agendasPage" block (click)="agendasPage()" text-capitalize>
+                    Agendas
+                </button>
+
+            <button clear secondary class="listbtn2" ion-button name="discussionsPage" menuToggle block (click)="discussionsPage()" text-capitalize>Discussions
+                </button>
+
+            <button clear secondary class="listbtn2" name="assignmentsPage" ion-button block menuToggle (click)="assignmentsPage()" text-capitalize>
+                    Assignments
+                </button>
+            <button clear secondary class="listbtn2" name="filePage" ion-button block menuToggle (click)="filePage()" text-capitalize>
+                    Files
+                </button>
+            <ion-row>
+                <ion-label class="listbtn1">Private</ion-label>
+                <button ion-button icon-only clear item-right color="secondary" (click)="privatePage()" text-capitalize>
+                    <ion-icon name="privatecircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+                </button>
+            </ion-row>
+
+            <button clear menuToggle ion-button color="secondary" name="privatediscussionPage" class="listbtn2" block (click)="privatediscussionPage()" text-capitalize>Discussions</button>
+
+            <button clear menuToggle ion-button color="secondary" name="notesPage" class="listbtn2" clear block (click)="notesPage()" text-capitalize>Notes</button>
+
+        </ion-list>
+    </ion-content>
+    <ion-footer text-center>
+        <button ion-button class="signOutbtn" name="SignOut" clear menuToggle text-capitalize (click)="signOut()">
+            Sign Out
+        </button>
+    </ion-footer>
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -5,7 +5,7 @@ import * as firebase from 'firebase';
 import { Headers, Http, Response } from "@angular/http";
 import { AuthService } from '../../providers/auth-service';
 import { DisplayPage } from '../display/display';
-import { WelcomePage } from '../welcome/welcome';
+import { WelcomePage } from '../menu/menu';
 import { CreateAccountPage } from '../create-account/create-account';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../../user/user';

@@ -1,0 +1,123 @@
+page-welcome {
+    .noborder {
+        border: 0px !important;
+        border-bottom-color: transparent !important;
+        background-image: none !important;
+        border-bottom: none !important;
+    }
+    .listbtn1 {
+        font-size: 13pt !important;
+        color: #35373A !important;
+        font-family: Bernina-SemiBold !important;
+        padding-left: 16pt;
+        margin: auto;
+        padding-right: 16pt;
+    }
+    .listbtn2 {
+        font-size: 17pt !important;
+        font-family: Bernina-Regular !important;
+    }
+    b {
+        color: #35373a !important;
+        font-size: 13pt !important;
+        font-family: Bernina-Semibold, sans-serif;
+    }
+    .signOutbtn {
+        color: red;
+        font-size: 15pt;
+    }
+    .count {
+        color: #a9aaac;
+        margin-left: 13px;
+    }
+    .item-ios.item-block .item-inner,
+    .item-md.item-block .item-inner {
+        border: none !important;
+    }
+    .button-inner {
+        justify-content: flex-start;
+    }
+    .button-md.activated {
+        color: #FFFFFF;
+    }
+    .button-ios.activated {
+        color: #FFFFFF;
+    }
+    .item-md ion-avatar ion-img,
+    .item-md ion-avatar img {
+        width: 46pt;
+        height: 46pt;
+    }
+    .item-ios ion-avatar ion-img,
+    .item-ios ion-avatar img {
+        width: 46pt;
+        height: 46pt;
+    }
+    .user1 {
+        font-family: Bernina-Regular;
+        font-size: 17pt;
+        color: #3cb18a !important;
+        margin-bottom: 3pt;
+    }
+    .user2 {
+        font-family: Bernina-Regular;
+        font-size: 15pt;
+        color: #a9aaac !important;
+    }
+    ion-icon {
+        color: #3cb18a
+    }
+    .list {
+        margin-top: 16pt;
+    }
+    .button-md {
+        height: 44pt;
+        padding-left: 16pt !important;
+        padding-right: 16pt !important;
+        margin: 0pt;
+    }
+    .button-ios {
+        height: 44pt;
+        padding-left: 16pt !important;
+        padding-right: 16pt !important;
+        margin: 0pt;
+    }
+    .toolbar-md {
+        padding: 0px !important;
+    }
+    .item-md ion-avatar[item-left],
+    .item-md ion-thumbnail[item-left] {
+        margin: 0;
+    }
+    .item-ios ion-avatar[item-left],
+    .item-ios ion-thumbnail[item-left] {
+        margin: 0;
+    }
+    .item-md {
+        padding-left: 16px;
+    }
+    .item-ios {
+        padding-left: 16px;
+    }
+    .ion-md-dollar:before {
+        content: "$"
+    }
+    .ion-ios-dollar:before {
+        content: "$"
+    }
+    ion-icon {
+        padding-right: 16pt;
+    }
+}
+
+.actionsheet-items {
+    color: #3cb18a !important;
+    font-family: Bernina-Regular !important;
+    font-size: 1.42em !important;
+}
+
+.actionsheet-cancel {
+    color: #35373A !important;
+    font-family: Bernina-Regular !important;
+    font-size: 1.42em !important;
+}

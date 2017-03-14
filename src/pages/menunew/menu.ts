@@ -4,7 +4,7 @@ import { HomePage } from '../home/home';
 import { DisplayPage } from '../display/display';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
-import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
+import { NewAgenda } from '../new-agenda/new-agenda';
 import { NewAssignmentPage } from '../new-assignment/new-assignment';
 import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';
@@ -16,15 +16,11 @@ import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback'
 import { EditProfilePage } from '../edit-profile/edit-profile';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { GoodbyePage } from '../goodbye/goodbye';
-import { AgendasPage } from '../agendas/agendas';
 import { Subscription } from "rxjs";
-import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
-import { AdminPage } from '../admin/admin.component';
-import { CouncilDiscussionsListPage } from '../discussions/council-discussions-list/council-discussions-list'
 
 @Component({
   selector: 'page-welcome',
-  templateUrl: 'welcome.html',
+  templateUrl: 'menu.html',
   providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage]
 })
 
@@ -46,76 +42,49 @@ export class WelcomePage {
     public councilAssignmentsPage: CouncilAssignmentsPage,
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService, ) {
-
     this.userSubscription = this.af.auth.subscribe(auth => {
-      this.userObj = this.af.database.object('/users/' + auth.uid);
-
-      this.userObj.subscribe(usr => {
-        localStorage.setItem('unitType', usr.unittype)
-        localStorage.setItem('unitNumber', usr.unitnumber.toString())
-        localStorage.setItem('userCouncils', usr.councils.toString())
-      });
+      if (auth !== null) {
+        this.userObj = this.af.database.object('/users/' + auth.uid);
+        this.activeCouncilsCount = activeCouncilsPage.getCount();
+        this.myAssignmentsCount = myassignmentpage.getCount();
+        this.councilAssignmentsCount = councilAssignmentsPage.getCount();
+      }
     });
-    this.activeCouncilsCount = activeCouncilsPage.getCount();
-    this.myAssignmentsCount = myassignmentpage.getCount();
-    this.councilAssignmentsCount = councilAssignmentsPage.getCount();
   }
 
   councilsPage() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Councils',
+      title: 'Council',
       buttons: [
         {
-          text: 'Create Council',
+          text: 'Add Agenda',
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
 
-            this.nav.setRoot(NewCouncilPage);
+            //this.nav.setRoot(NewCouncilPage);
 
           }
         },
         {
-          text: 'Create Note',
+          text: 'Add Discussion',
           cssClass: "actionsheet-items",
           handler: () => {
           }
         },
         {
-          text: 'Invite Members',
+          text: 'Add Assignment',
           cssClass: "actionsheet-items",
 
           handler: () => {
 
             this.menuctrl.close();
-            this.nav.push(InviteMemberPage);
+            //this.nav.push(InviteMemberPage);
 
           }
         },
         {
-          text: 'Inactivate Members',
-          cssClass: "actionsheet-items",
-
-          handler: () => {
-          }
-        },
-        {
-          text: 'Edit Members',
-          cssClass: "actionsheet-items",
-
-          handler: () => {
-            console.log('Archive clicked');
-          }
-        },
-        {
-          text: 'Reactivate Members',
-          cssClass: "actionsheet-items",
-
-          handler: () => {
-          }
-        },
-        {
-          text: 'Transfers Admin Rights',
+          text: 'Add File',
           cssClass: "actionsheet-items",
 
           handler: () => {
@@ -134,23 +103,35 @@ export class WelcomePage {
   }
 
   activePage() {
-    this.nav.push(ActiveCouncilsPage);
+    this.nav.setRoot(ActiveCouncilsPage);
   }
 
   agendasPage() {
-    this.nav.push(NewBlankAgendaPage);
+     
   }
 
-  assignmentsPage() {
+
+
+  
+
+  privatePage() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Assignments',
+      title: 'Private',
       buttons: [
         {
-          text: 'New Assignment',
+          text: 'Add Discussion',
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewAssignmentPage);
+           // this.nav.setRoot(NewAssignmentPage);
+          }
+        },
+          {
+          text: 'Add Note',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+           // this.nav.setRoot(NewAssignmentPage);
           }
         },
         {
@@ -165,46 +146,10 @@ export class WelcomePage {
     actionSheet.present();
   }
   notesPage() { }
-
-  upcomingPage() {
-    this.nav.setRoot(AgendasPage);
-  }
+  upcomingPage() { }
   pastPage() { }
-  discussionsPage() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Discussions',
-      buttons: [
-        {
-          text: 'Council',
-          cssClass: "actionsheet-items",
-          handler: () => {
-            this.menuctrl.close();
-            this.nav.push(NewCouncilDiscussionPage);
-          }
-        },
-        {
-          text: 'Private',
-          cssClass: "actionsheet-items",
-          handler: () => {
-            this.menuctrl.close();
-            this.nav.push(NewCouncilDiscussionPage);
-          }
-        },
-        {
-          text: 'Cancel',
-          cssClass: "actionsheet-cancel",
-          handler: () => {
-          }
-        }
-      ]
-    });
-
-    actionSheet.present();
-  }
-  viewDiscussions(){
-    this.nav.push(CouncilDiscussionsListPage);
-  }
-  privatePage() { }
+  discussionsPage() { }
+  assignmentsPage() { }
 
   viewCouncilAssignments() {
     this.nav.setRoot(CouncilAssignmentsPage);
@@ -217,17 +162,11 @@ export class WelcomePage {
   viewSubmitFeedbackPage() {
     this.nav.push(SubmitFeedbackPage);
   }
-
   viewEditProfilePage() {
     this.nav.push(EditProfilePage);
   }
-
   viewAboutPage() {
     this.nav.push(AboutPage);
-  }
-
-  viewAdminPage() {
-    this.nav.setRoot(AdminPage);
   }
 
   signOut() {

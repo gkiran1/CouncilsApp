@@ -10,7 +10,7 @@ import { FirebaseConfig } from './../environments/firebase/firebase-config';
 import { FirebaseService } from './../environments/firebase/firebase-service';
 import { DisplayPage } from '../pages/display/display';
 import * as firebase from 'firebase';
-import { WelcomePage } from '../pages/welcome/welcome';
+import { WelcomePage } from '../pages/menu/menu';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
 import { AppService } from '../providers/app-service';
