@@ -432,14 +432,6 @@ export class FirebaseService {
         console.log('agendas.$key', agendaKey);
         return this.af.database.object('agendas/' + agendaKey).remove();
     }
-    getDiscussionsByCouncilId(councilId) {
-        return this.af.database.list('discussions', {
-            query: {
-                orderByChild: 'councilid',
-                equalTo: councilId
-            }
-        });
-    }
     updateDiscussionChat(discussionId, msg) {
         return this.af.database.list(`discussions/${discussionId}/messages`).push(msg);
     }
@@ -453,6 +445,9 @@ export class FirebaseService {
                 equalTo: councilId
             }
         });
+    }
+    getDiscussions(){
+        return this.af.database.list('discussions');
     }
 
 }
