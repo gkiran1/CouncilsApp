@@ -21,6 +21,7 @@ import { Subscription } from "rxjs";
 import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
 import { AdminPage } from '../admin/admin.component';
 import { CouncilDiscussionsListPage } from '../discussions/council-discussions-list/council-discussions-list'
+import { NewAgendaPage } from '../new-agenda/new-agenda';
 
 @Component({
   selector: 'page-welcome',
@@ -34,6 +35,7 @@ export class WelcomePage {
   myAssignmentsCount;
   councilAssignmentsCount;
   councilDiscussionsCount;
+  agendasCount;
   @ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
@@ -47,7 +49,8 @@ export class WelcomePage {
     public councilAssignmentsPage: CouncilAssignmentsPage,
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService,
-    public councilDiscussionsListPage:CouncilDiscussionsListPage ) {
+    public councilDiscussionsListPage:CouncilDiscussionsListPage,
+    public agendaPage: AgendasPage, ) {
 
     this.userSubscription = this.af.auth.subscribe(auth => {
       this.userObj = this.af.database.object('/users/' + auth.uid);
@@ -61,7 +64,11 @@ export class WelcomePage {
     this.activeCouncilsCount = activeCouncilsPage.getCount();
     this.myAssignmentsCount = myassignmentpage.getCount();
     this.councilAssignmentsCount = councilAssignmentsPage.getCount();
+
     this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
+
+    this.agendasCount = agendaPage.getCount();
+
   }
 
   councilsPage() {
@@ -141,7 +148,27 @@ export class WelcomePage {
   }
 
   agendasPage() {
-    this.nav.push(NewBlankAgendaPage);
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Council',
+      buttons: [
+        {
+          text: 'Add Agenda',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewAgendaPage);
+          }
+        },
+        {
+          text: 'Cancel',
+          cssClass: "actionsheet-cancel",
+          handler: () => {
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
   }
 
   assignmentsPage() {

@@ -10,7 +10,7 @@ import { FirebaseConfig } from './../environments/firebase/firebase-config';
 import { FirebaseService } from './../environments/firebase/firebase-service';
 import { DisplayPage } from '../pages/display/display';
 import * as firebase from 'firebase';
-import { WelcomePage } from '../pages/menu/menu';
+// import { WelcomePage } from '../pages/menu/menu';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
 import { AppService } from '../providers/app-service';
@@ -44,6 +44,7 @@ import { MemberInactivatedPage } from '../pages/inactivatemembers/member-inactiv
 import { ReactivateMembersPage } from '../pages/reactivatemembers/reactivate-members/reactivatemembers.component';
 import { MemberReactivatedPage } from '../pages/reactivatemembers/member-reactivated/memberreactivated.component';
 import { CouncilDiscussionsListPage } from '../pages/discussions/council-discussions-list/council-discussions-list'
+import { NewAgendaPage } from '../pages/new-agenda/new-agenda';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -73,7 +74,7 @@ const cloudSettings: CloudSettings = {
     LoginPage,
     RegisterPage,
     DisplayPage,
-    WelcomePage,
+    // WelcomePage,
     CreateAccountPage,
     NewAssignmentPage,
     Elastic,
@@ -101,7 +102,9 @@ const cloudSettings: CloudSettings = {
     ReactivateMembersPage,
     MemberReactivatedPage,
     AgendaPage,
-    CouncilDiscussionsListPage
+    CouncilDiscussionsListPage,
+    AgendaPage,
+    NewAgendaPage
   ],
 
   imports: [
@@ -120,7 +123,7 @@ const cloudSettings: CloudSettings = {
     LoginPage,
     RegisterPage,
     DisplayPage,
-    WelcomePage,
+    // WelcomePage,
     CreateAccountPage,
     NewAssignmentPage,
     NewBlankAgendaPage,
@@ -147,7 +150,10 @@ const cloudSettings: CloudSettings = {
     ReactivateMembersPage,
     MemberReactivatedPage,
     AgendaPage,
-    CouncilDiscussionsListPage
+    CouncilDiscussionsListPage,
+    AgendaPage,
+    NewAgendaPage
+
   ],
 
   providers: [AuthService, AppService, FirebaseService]
