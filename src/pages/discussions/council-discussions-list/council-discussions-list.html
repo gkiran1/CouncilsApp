@@ -16,13 +16,13 @@
 </ion-header>
 <ion-content>
     <ion-item-group>
-        <ng-container *ngIf="(discussions | async)?.length">
+        <ng-container *ngIf="discussions.length">
             <ion-item-divider></ion-item-divider>
-            <ion-item (click)="openDiscussion(item.$key)" *ngFor="let item of discussions | async">
+            <ion-item (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
                      <h3>{{item.topic}}</h3>
                   </ion-item>
         </ng-container>
-        <ng-container *ngIf="!(discussions | async)?.length">
+        <ng-container *ngIf="!discussions.length">
             <p class="text-content">There are no discussions</p>
         </ng-container>
     </ion-item-group>

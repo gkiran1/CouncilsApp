@@ -49,8 +49,8 @@ export class EditProfilePage {
     }
     editProfile() {
         if ((new RegExp(/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/).test(this.profile.phone))) {
-            this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, this.guestPicture).then((savedPicture) => {
-                if (this.guestPicture != null) {
+            if (this.guestPicture != null) {
+                this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, this.guestPicture).then((savedPicture) => {
                     this.profilePictureRef.child('profilePicture.png')
                         .putString(this.guestPicture, 'base64', { contentType: 'image/png' })
                         .then((savedPicture) => {
@@ -62,9 +62,16 @@ export class EditProfilePage {
                                 this.showAlert('failure', err.message);
                             })
                         });
-                }
+                }).catch(err => this.showAlert('failure', err.message))
+            }
+            else {
+                this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, this.profile.avatar).then((savedPicture) => {
+                    this.showAlert('success', 'User profile updated successfully.')
+                }).catch(err => this.showAlert('failure', err.message))
 
-            }).catch(err => this.showAlert('failure', err.message))
+            }
+
+
         } else {
             this.showAlert('failure', 'please enter valid phone number.');
         }

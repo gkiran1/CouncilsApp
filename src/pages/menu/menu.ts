@@ -25,14 +25,15 @@ import { CouncilDiscussionsListPage } from '../discussions/council-discussions-l
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage]
+  providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage,CouncilDiscussionsListPage]
 })
 
 export class WelcomePage {
 
   activeCouncilsCount;
   myAssignmentsCount;
-  councilAssignmentsCount
+  councilAssignmentsCount;
+  councilDiscussionsCount;
   @ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
@@ -45,7 +46,8 @@ export class WelcomePage {
     public myassignmentpage: MyAssignmentsPage,
     public councilAssignmentsPage: CouncilAssignmentsPage,
     public activeCouncilsPage: ActiveCouncilsPage,
-    private firebaseService: FirebaseService, ) {
+    private firebaseService: FirebaseService,
+    public councilDiscussionsListPage:CouncilDiscussionsListPage ) {
 
     this.userSubscription = this.af.auth.subscribe(auth => {
       this.userObj = this.af.database.object('/users/' + auth.uid);
@@ -59,6 +61,7 @@ export class WelcomePage {
     this.activeCouncilsCount = activeCouncilsPage.getCount();
     this.myAssignmentsCount = myassignmentpage.getCount();
     this.councilAssignmentsCount = councilAssignmentsPage.getCount();
+    this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
   }
 
   councilsPage() {
@@ -235,6 +238,7 @@ export class WelcomePage {
     this.userSubscription.unsubscribe();
     this.councilAssignmentsPage.userSubscription.unsubscribe();
     this.activeCouncilsPage.userSubscription.unsubscribe();
+    this.councilDiscussionsListPage.userSubscription.unsubscribe();
     localStorage.setItem('securityToken', null);
     localStorage.setItem('isUserLoggedIn', 'false');
     this.firebaseService.signOut().then(() => {

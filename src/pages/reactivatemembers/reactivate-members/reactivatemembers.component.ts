@@ -47,6 +47,22 @@ export class ReactivateMembersPage {
             .catch(err => { this.showAlert('Unable to reactivate the member, please try after some time') });
     }
 
+    reactivateAll() {
+        this.users.forEach((usr) => {
+            this.firebaseService.reactivateUser(usr.$key, true)
+                .then(() => {
+                    console.log('Member reactivated successfully..!!');
+                })
+                .catch(err => { this.showAlert('Unable to reactivate the member, please try after some time') });
+        });
+
+        if (this.users && this.users.length === 0) {
+            console.log(this.users);
+            this.showAlert('All the members are reactivated successfully..!!!');
+            this.nav.pop();
+        }
+    }
+
     cancel() {
         this.nav.pop();
     }
