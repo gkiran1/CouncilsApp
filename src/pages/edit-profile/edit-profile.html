@@ -12,8 +12,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content  has-footer='true' overflow-scroll='true'>
-    <ion-row class='empty'>
-    </ion-row>
+    <ion-item-divider class="empty"></ion-item-divider>
     <ion-row>
         <ion-col width-30>
             <ng-container *ngIf="!imageflag">
@@ -39,8 +38,7 @@
             </ion-item>
         </ion-col>
     </ion-row>
-    <ion-row class='empty'>
-    </ion-row>
+    <ion-item-divider class="empty"></ion-item-divider>
     <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input type="text" name="email" [(ngModel)]="profile.email"></ion-input>
@@ -53,8 +51,7 @@
         <ion-label floating>LDS.org username</ion-label>
         <ion-input type="text" name="ldsusername" [(ngModel)]="profile.ldsusername"></ion-input>
     </ion-item>
-    <ion-row class='empty'>
-    </ion-row>
+    <ion-item-divider class="empty"></ion-item-divider>
     <ion-row>
         <ion-item>
             <ion-label class="changepassword">
