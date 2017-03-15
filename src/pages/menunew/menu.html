@@ -6,16 +6,16 @@
             <ion-item style="border: none !important">
                 <ion-row>
                     <ion-avatar item-left>
-                        <img [src]="(userObj | async)?.avatar" class="avatarImage" *ngIf="(userObj | async)?.avatar" />
-                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj | async)?.avatar" />
+                        <img [src]="(userObj)?.avatar" class="avatarImage" *ngIf="(userObj)?.avatar" />
+                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj)?.avatar" />
                     </ion-avatar>
 
                     <ion-col style="margin-left: 16pt">
                         <ion-row class='user1'>
-                            {{(userObj | async)?.firstname}}
+                            {{(userObj)?.firstname}}
                         </ion-row>
                         <ion-row class='user2'>
-                            <p>{{(userObj | async)?.calling}} - {{(userObj | async)?.unitnumber}}</p>
+                            <p>{{(userObj)?.calling}} - {{(userObj)?.unitnumber}}</p>
                         </ion-row>
                     </ion-col>
                 </ion-row>
