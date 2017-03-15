@@ -446,11 +446,37 @@ export class FirebaseService {
             }
         });
     }
-    getDiscussions(){
+    getDiscussions() {
         return this.af.database.list('discussions');
     }
-    getUsers(){
+    getUsers() {
         return this.af.database.list('users');
+    }
+    createPrivateDiscussion(discussion: any) {
+        return this.rootRef.child('privatediscussions').push(
+            {
+                createdDate: discussion.createdDate,
+                createdUserId: discussion.createdUserId,
+                createdUserName: discussion.createdUserName,
+                otherUserId: discussion.otherUserId,
+                otherUserName: discussion.otherUserName,
+                isActive: discussion.isActive,
+                messages: discussion.messages
+            })
+            .then((res) => {
+                //to get a reference of newly added object -res.path.o[1]
+                return res.path.o[1];
+            })
+            .catch(err => { throw err });
+    }
+    getPrivateDiscussionByKey(key) {
+        return this.af.database.object(`privatediscussions/${key}`);
+    }
+    updatePrivateDiscussionChat(discussionId, msg) {
+        return this.af.database.list(`privatediscussions/${discussionId}/messages`).push(msg);
+    }
+    getPrivateDiscussions() {
+        return this.af.database.list('privatediscussions');
     }
 
 }

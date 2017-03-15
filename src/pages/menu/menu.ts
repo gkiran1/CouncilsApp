@@ -22,11 +22,13 @@ import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/
 import { AdminPage } from '../admin/admin.component';
 import { CouncilDiscussionsListPage } from '../discussions/council-discussions-list/council-discussions-list'
 import { NewAgendaPage } from '../new-agenda/new-agenda';
+import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/new-private-discussion';
+import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
 
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage]
+  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage, NewPrivateDiscussionPage]
 })
 
 export class WelcomePage {
@@ -52,7 +54,7 @@ export class WelcomePage {
     public agendaPage: AgendasPage) {
 
     this.userObj = null;
-    
+
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
         this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
@@ -217,7 +219,7 @@ export class WelcomePage {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewCouncilDiscussionPage);
+            this.nav.push(NewPrivateDiscussionPage);
           }
         },
         {
@@ -234,7 +236,9 @@ export class WelcomePage {
   viewDiscussions() {
     this.nav.push(CouncilDiscussionsListPage);
   }
-  privatePage() { }
+  viewPrivateDiscussions() {
+    this.nav.push(PrivateDiscussionsListPage);
+  }
 
   viewCouncilAssignments() {
     this.nav.setRoot(AssignmentsListPage);
@@ -251,7 +255,7 @@ export class WelcomePage {
   viewEditProfilePage() {
     this.nav.push(EditProfilePage);
   }
-  viewNewCouncilFilePage(){
+  viewNewCouncilFilePage() {
     this.nav.push(NewCouncilFilePage);
   }
 
