@@ -3,6 +3,7 @@ import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
+import { TransferCompletePage } from '../transfer-complete/transfercomplete.component';
 
 @Component({
     templateUrl: 'transferadminrights.html',
@@ -43,9 +44,9 @@ export class TransferAdminRightsPage {
     transferAdminRights(user) {
         this.firebaseService.transferAdminRights(this.currentAdminId, user.$key)
             .then(() => {
-                //this.nav.push(MemberReactivatedPage);
+                this.nav.push(TransferCompletePage);
             })
-            .catch(err => { this.showAlert('Unable to reactivate the member, please try after some time') });
+            .catch(err => { this.showAlert('Unable to transfer admin rights, please try after some time') });
     }
 
     showAlert(errText) {

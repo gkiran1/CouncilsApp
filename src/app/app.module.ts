@@ -55,6 +55,7 @@ import { Search } from '../pipes/search';
 import { NewPrivateDiscussionPage } from '../pages/discussions/new-private-discussion/new-private-discussion';
 import { OpenPrivateDiscussionPage } from '../pages/discussions/open-private-discussion/open-private-discussion';
 import { PrivateDiscussionsListPage } from '../pages/discussions/private-discussions-list/private-discussions-list';
+import { TransferCompletePage } from '../pages/transferadminrights/transfer-complete/transfercomplete.component';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -122,7 +123,8 @@ const cloudSettings: CloudSettings = {
     NewPrivateDiscussionPage,
     Search,
     OpenPrivateDiscussionPage,
-    PrivateDiscussionsListPage
+    PrivateDiscussionsListPage,
+    TransferCompletePage
   ],
 
   imports: [
@@ -177,7 +179,8 @@ const cloudSettings: CloudSettings = {
     TransferAdminRightsPage,
     NewPrivateDiscussionPage,
     OpenPrivateDiscussionPage,
-    PrivateDiscussionsListPage
+    PrivateDiscussionsListPage,
+    TransferCompletePage
   ],
 
   providers: [AuthService, AppService, FirebaseService]
