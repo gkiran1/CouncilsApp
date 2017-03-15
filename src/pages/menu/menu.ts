@@ -14,6 +14,7 @@ import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { NewCouncilFilePage } from '../files/new-council-file';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { GoodbyePage } from '../goodbye/goodbye';
 import { AgendasPage } from '../agendas/agendas';
@@ -54,7 +55,7 @@ export class WelcomePage {
     public agendaPage: AgendasPage) {
 
     this.userObj = null;
-
+    
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
         this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
@@ -253,6 +254,9 @@ export class WelcomePage {
 
   viewEditProfilePage() {
     this.nav.push(EditProfilePage);
+  }
+  viewNewCouncilFilePage(){
+    this.nav.push(NewCouncilFilePage);
   }
 
   viewAboutPage() {

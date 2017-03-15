@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <h3>New Council File</h3>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="newCouncilFileForm" (ngSubmit)="newCouncilFileForm.value">
+        <ion-item-group>
+            <ion-item-divider>
+                <ion-label>Which council will be viewing this file?</ion-label>
+            </ion-item-divider>
+            <ion-list radio-group id="council" name="council" formControlName="council">
+                <ion-item *ngFor="let c of councils">
+                    <ion-label color="dark">{{(c | async)?.council}}</ion-label>
+                    <ion-radio [value]="c | async" color="secondary"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </ion-item-group>
+    </form>
+</ion-content>
+
+<ion-footer>
+    <button ion-button color="secondary" clear block [disabled]="!newCouncilFileForm.valid" (click)="chooseFileActionsPage()">Choose File</button>
+</ion-footer>
