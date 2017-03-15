@@ -43,7 +43,10 @@ import { InactivateMembersPage } from '../pages/inactivatemembers/inactivate-mem
 import { MemberInactivatedPage } from '../pages/inactivatemembers/member-inactivated/memberinactivated.component';
 import { ReactivateMembersPage } from '../pages/reactivatemembers/reactivate-members/reactivatemembers.component';
 import { MemberReactivatedPage } from '../pages/reactivatemembers/member-reactivated/memberreactivated.component';
-import { CouncilDiscussionsListPage } from '../pages/discussions/council-discussions-list/council-discussions-list'
+import { CouncilDiscussionsListPage } from '../pages/discussions/council-discussions-list/council-discussions-list';
+import { SwiperModule } from '../pages/swiper/swiper.module';
+import { MaterialModule } from '@angular/material';
+
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -102,15 +105,18 @@ const cloudSettings: CloudSettings = {
     MemberReactivatedPage,
     AgendaPage,
     CouncilDiscussionsListPage
+    
   ],
 
   imports: [
+    MaterialModule.forRoot(),
     MomentModule,
     FormsModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FirebaseConfig),
     //Cloud Module Imports
-    CloudModule.forRoot(cloudSettings)
+    CloudModule.forRoot(cloudSettings),
+     SwiperModule 
   ],
 
   bootstrap: [IonicApp],
