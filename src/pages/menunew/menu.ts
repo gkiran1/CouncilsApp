@@ -1,4 +1,4 @@
-import { Component, ViewChild, Renderer } from '@angular/core';
+import { Component } from '@angular/core';
 import { Nav, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { DisplayPage } from '../display/display';
@@ -24,13 +24,15 @@ import { CouncilDiscussionsListPage } from '../discussions/council-discussions-l
 import { NewAgendaPage } from '../new-agenda/new-agenda';
 import { slide1Page } from '../slide1/slide1';
 import { slide2Page } from '../slide2/slide2';
+import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/new-private-discussion';
+import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
 import { Input, OnInit, OnChanges, SimpleChanges, ElementRef,  AfterViewChecked, AfterViewInit, NgZone } from '@angular/core';
 declare var Swiper: any;
 
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage]
+  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage, NewPrivateDiscussionPage]
 })
 
 export class WelcomePage implements OnInit{
@@ -247,7 +249,7 @@ export class WelcomePage implements OnInit{
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewCouncilDiscussionPage);
+            this.nav.push(NewPrivateDiscussionPage);
           }
         },
         {
@@ -264,7 +266,10 @@ export class WelcomePage implements OnInit{
   viewDiscussions() {
     this.nav.push(CouncilDiscussionsListPage);
   }
-  privatePage() { }
+  viewPrivateDiscussions() {
+    this.nav.push(PrivateDiscussionsListPage);
+  }
+
 
   viewCouncilAssignments() {
     this.nav.setRoot(AssignmentsListPage);
