@@ -108,6 +108,14 @@ page-welcome {
     ion-icon {
         padding-right: 16pt;
     }
+    .active {
+        opacity: 1;
+        background: #3cb18a;
+    }
+    .swiper-pagination {
+        position: relative;
+        bottom: 0;
+    }
 }
 
 .actionsheet-items {

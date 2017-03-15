@@ -1,11 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Renderer } from '@angular/core';
 import { Nav, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { DisplayPage } from '../display/display';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
 import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
-import { NewAssignmentPage } from '../new-assignment/new-assignment';
+import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
 import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';
 import { AssignmentsListPage } from '../assignments/assignments-list/assignments-list';
@@ -13,74 +13,141 @@ import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { NewCouncilFilePage } from '../files/new-council-file';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { GoodbyePage } from '../goodbye/goodbye';
+import { AgendasPage } from '../agendas/agendas';
 import { Subscription } from "rxjs";
+import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
+import { AdminPage } from '../admin/admin.component';
+import { CouncilDiscussionsListPage } from '../discussions/council-discussions-list/council-discussions-list'
+import { NewAgendaPage } from '../new-agenda/new-agenda';
+import { slide1Page } from '../slide1/slide1';
+import { slide2Page } from '../slide2/slide2';
+import { Input, OnInit, OnChanges, SimpleChanges, ElementRef,  AfterViewChecked, AfterViewInit, NgZone } from '@angular/core';
+declare var Swiper: any;
 
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage]
+  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage]
 })
 
-export class WelcomePage {
+export class WelcomePage implements OnInit{
+  step:boolean = true;
+  images: string[];
+ config: Object = {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev'
+      
+        };
 
   activeCouncilsCount;
   assignmentsCount;
-  @ViewChild(Nav) nav: Nav;
+  councilDiscussionsCount;
+  agendasCount;
+  //@ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
   userSubscription: Subscription;
 
-  constructor(public af: AngularFire,
+  constructor(public nav: NavController,
+    public af: AngularFire,
     public appService: AppService,
     public actionSheetCtrl: ActionSheetController,
     public menuctrl: MenuController,
     public assignmentsListPage: AssignmentsListPage,
     public activeCouncilsPage: ActiveCouncilsPage,
-    private firebaseService: FirebaseService, ) {
+    private firebaseService: FirebaseService,
+    public councilDiscussionsListPage: CouncilDiscussionsListPage,
+    public agendaPage: AgendasPage) {
+
+    this.userObj = null;
+    
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
-        this.userObj = this.af.database.object('/users/' + auth.uid);
-        this.activeCouncilsCount = activeCouncilsPage.getCount();
-        this.assignmentsCount = assignmentsListPage.getCount();
-      }
+        this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
+          this.userObj = usrs[0];
+          localStorage.setItem('unitType', usrs[0].unittype)
+          localStorage.setItem('unitNumber', usrs[0].unitnumber.toString())
+          localStorage.setItem('userCouncils', usrs[0].councils.toString())
+        });
+      };
     });
+
+    this.activeCouncilsCount = activeCouncilsPage.getCount();
+    this.assignmentsCount = assignmentsListPage.getCount();
+    this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
+    this.agendasCount = agendaPage.getCount();
+
   }
+  ngOnInit() {
+    }
+   loadImages() {
+        this.images = [
+            'http://api.randomuser.me/portraits/thumb/men/1.jpg',
+            'http://api.randomuser.me/portraits/thumb/men/2.jpg'
+                             
+        ];        
+    }
 
   councilsPage() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Council',
+      title: 'Councils',
       buttons: [
         {
-          text: 'Add Agenda',
+          text: 'Create Council',
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
 
-            //this.nav.setRoot(NewCouncilPage);
+            this.nav.setRoot(NewCouncilPage);
 
           }
         },
         {
-          text: 'Add Discussion',
+          text: 'Create Note',
           cssClass: "actionsheet-items",
           handler: () => {
           }
         },
         {
-          text: 'Add Assignment',
+          text: 'Invite Members',
           cssClass: "actionsheet-items",
 
           handler: () => {
 
             this.menuctrl.close();
-            //this.nav.push(InviteMemberPage);
+            this.nav.push(InviteMemberPage);
 
           }
         },
         {
-          text: 'Add File',
+          text: 'Inactivate Members',
+          cssClass: "actionsheet-items",
+
+          handler: () => {
+          }
+        },
+        {
+          text: 'Edit Members',
+          cssClass: "actionsheet-items",
+
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        },
+        {
+          text: 'Reactivate Members',
+          cssClass: "actionsheet-items",
+
+          handler: () => {
+          }
+        },
+        {
+          text: 'Transfers Admin Rights',
           cssClass: "actionsheet-items",
 
           handler: () => {
@@ -99,31 +166,51 @@ export class WelcomePage {
   }
 
   activePage() {
-    this.nav.setRoot(ActiveCouncilsPage);
+    this.nav.push(ActiveCouncilsPage);
+  }
+  getDataForTable($event: any){ 
+    $event.target.classList.add('active');
+    this.step=true;
+  }
+   getData($event: any){ 
+    $event.target.classList.add('active');
+    this.step=false;
   }
 
   agendasPage() {
-
-  }
-
-  privatePage() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Private',
+      title: 'Council',
       buttons: [
         {
-          text: 'Add Discussion',
+          text: 'Add Agenda',
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            // this.nav.setRoot(NewAssignmentPage);
+            this.nav.push(NewAgendaPage);
           }
         },
         {
-          text: 'Add Note',
+          text: 'Cancel',
+          cssClass: "actionsheet-cancel",
+          handler: () => {
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
+  }
+
+  assignmentsPage() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Assignments',
+      buttons: [
+        {
+          text: 'New Assignment',
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            // this.nav.setRoot(NewAssignmentPage);
+            this.nav.push(NewAssignmentPage);
           }
         },
         {
@@ -138,10 +225,46 @@ export class WelcomePage {
     actionSheet.present();
   }
   notesPage() { }
-  upcomingPage() { }
+
+  upcomingPage() {
+    this.nav.setRoot(AgendasPage);
+  }
   pastPage() { }
-  discussionsPage() { }
-  assignmentsPage() { }
+  discussionsPage() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Discussions',
+      buttons: [
+        {
+          text: 'Council',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewCouncilDiscussionPage);
+          }
+        },
+        {
+          text: 'Private',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewCouncilDiscussionPage);
+          }
+        },
+        {
+          text: 'Cancel',
+          cssClass: "actionsheet-cancel",
+          handler: () => {
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
+  }
+  viewDiscussions() {
+    this.nav.push(CouncilDiscussionsListPage);
+  }
+  privatePage() { }
 
   viewCouncilAssignments() {
     this.nav.setRoot(AssignmentsListPage);
@@ -154,11 +277,20 @@ export class WelcomePage {
   viewSubmitFeedbackPage() {
     this.nav.push(SubmitFeedbackPage);
   }
+
   viewEditProfilePage() {
     this.nav.push(EditProfilePage);
   }
+  viewNewCouncilFilePage(){
+    this.nav.push(NewCouncilFilePage);
+  }
+
   viewAboutPage() {
     this.nav.push(AboutPage);
+  }
+
+  viewAdminPage() {
+    this.nav.setRoot(AdminPage);
   }
 
   signOut() {
@@ -166,6 +298,7 @@ export class WelcomePage {
     this.userSubscription.unsubscribe();
     this.assignmentsListPage.userSubscription.unsubscribe();
     this.activeCouncilsPage.userSubscription.unsubscribe();
+    this.councilDiscussionsListPage.userSubscription.unsubscribe();
     localStorage.setItem('securityToken', null);
     localStorage.setItem('isUserLoggedIn', 'false');
     this.firebaseService.signOut().then(() => {
