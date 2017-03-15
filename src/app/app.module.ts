@@ -48,7 +48,7 @@ import { SwiperModule } from '../pages/swiper/swiper.module';
 import { NewAgendaPage } from '../pages/new-agenda/new-agenda';
 import { MaterialModule } from '@angular/material';
 import { NoAccessPage } from '../pages/noaccess/noaccess.component';
-
+import { TransferAdminRightsPage } from '../pages/transferadminrights/transfer-adminrights/transferadminrights.component';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -109,7 +109,8 @@ const cloudSettings: CloudSettings = {
     CouncilDiscussionsListPage,
     AgendaPage,
     NewAgendaPage,
-    NoAccessPage
+    NoAccessPage,
+    TransferAdminRightsPage
   ],
 
   imports: [
@@ -160,7 +161,8 @@ const cloudSettings: CloudSettings = {
     CouncilDiscussionsListPage,
     AgendaPage,
     NewAgendaPage,
-    NoAccessPage
+    NoAccessPage,
+    TransferAdminRightsPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]
