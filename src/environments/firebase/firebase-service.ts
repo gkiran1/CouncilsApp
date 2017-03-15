@@ -313,6 +313,16 @@ export class FirebaseService {
         })
     }
 
+    transferAdminRights(currentAdminId, futureAdminId) {
+        return this.rootRef.child('users/' + futureAdminId).update({ isadmin: true }).then(() => {
+            return this.rootRef.child('users/' + currentAdminId).update({ isadmin: false }).then(() => {
+                return "Admin rights transferred successfully..."
+            });
+        }).catch(err => {
+            throw err;
+        })
+    }
+
     updateAssignment(assignment, assignmentKey) {
         console.log('assignment.$key', assignmentKey);
         return this.af.database.list('assignments').update(assignmentKey, {
@@ -333,10 +343,12 @@ export class FirebaseService {
             })
             .catch(err => { throw err });
     }
+
     removeAssignment(assignmentKey) {
         console.log('assignment.$key', assignmentKey);
         return this.af.database.object('assignments/' + assignmentKey).remove();
     }
+
     updateProfile(userUid: string, firstname, lastname, email, phone, ldsusername, guestpicture) {
         return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername, guestpicture }).then(() => {
             return "user profile updated successfully..."

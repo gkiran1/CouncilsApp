@@ -12,6 +12,7 @@ import { AlertController, NavController, ActionSheetController, MenuController }
 export class TransferAdminRightsPage {
     users: User[] = [];
     userKeys = [];
+    currentAdminId: string;
 
     constructor(public appService: AppService,
         private firebaseService: FirebaseService,
@@ -20,6 +21,7 @@ export class TransferAdminRightsPage {
         public actionSheetCtrl: ActionSheetController,
         public menuctrl: MenuController) {
         this.appService.getUser().subscribe(usr => {
+            this.currentAdminId = usr.$key;
             this.firebaseService.getUsersByUnitNumber(usr.unitnumber).subscribe(usersObj => {
                 this.users = [];
                 usersObj.forEach(userObj => {
@@ -39,7 +41,20 @@ export class TransferAdminRightsPage {
     }
 
     transferAdminRights(user) {
+        this.firebaseService.transferAdminRights(this.currentAdminId, user.$key)
+            .then(() => {
+                //this.nav.push(MemberReactivatedPage);
+            })
+            .catch(err => { this.showAlert('Unable to reactivate the member, please try after some time') });
+    }
 
+    showAlert(errText) {
+        let alert = this.alertCtrl.create({
+            title: '',
+            subTitle: errText,
+            buttons: ['OK']
+        });
+        alert.present();
     }
 
     cancel() {
