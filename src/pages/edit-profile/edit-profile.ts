@@ -89,7 +89,7 @@ export class EditProfilePage {
         if (this.isChangeflag) {
             this.showAlertPopup('failure', 'There are unsaved changes.do you want to discard it ?');
         } else {
-            this.nav.push(WelcomePage);
+            this.nav.setRoot(WelcomePage);
         }
     }
     showAlert(reason, text) {
