@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { OpenCouncilDiscussionPage } from '../open-council-discussion/open-council-discussion';
+import { OpenPrivateDiscussionPage } from '../open-private-discussion/open-private-discussion';
 import * as moment from 'moment';
 
 @Component({
@@ -13,19 +13,18 @@ import * as moment from 'moment';
 export class NewPrivateDiscussionPage {
   NewPrivateDiscussionForm: FormGroup;
   users;
-  term:string = '';
+  term: string = '';
   constructor(fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
     appservice.getUser().subscribe(user => {
       this.firebaseservice.getUsers().subscribe(u => {
         this.users = u.filter(e => {
-           return e.councils.some(c => {
+          return e.councils.some(c => {
             return user.councils.indexOf(c) !== -1;
           });
         });
       });
       this.NewPrivateDiscussionForm = fb.group({
-        otherUserId: '',
-        otherUserName: '',
+        otherUser: '',
         createdDate: '',
         createdUserId: appservice.uid,
         createdUserName: user.firstname + ' ' + user.lastname,
@@ -35,26 +34,29 @@ export class NewPrivateDiscussionPage {
     });
   }
   create(value) {
-    console.log('NewPrivateDiscussionForm------------>',value);
-    // value.createdDate = moment().toISOString();
-    // this.firebaseservice.createDiscussion(value)
-    //   .then(discussionId => {
-    //     console.log("discussion created successfully...", discussionId);
-    //     this.nav.push(OpenCouncilDiscussionPage, {
-    //       discussion: discussionId
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //     alert(err);
-    //   })
+    value.otherUserId = value.otherUser.$key;
+    value.otherUserName = value.otherUser.firstname + ' ' + value.otherUser.lastname;
+    value.createdDate = moment().toISOString();
+    console.log('NewPrivateDiscussionForm------------>', value);
+
+    this.firebaseservice.createPrivateDiscussion(value)
+      .then(discussionId => {
+        console.log("discussion created successfully...", discussionId);
+        this.nav.push(OpenPrivateDiscussionPage, {
+          discussion: discussionId
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        alert(err);
+      })
 
   }
   cancel() {
     this.nav.pop();
   }
-  searchFn(event){
+  searchFn(event) {
     this.term = event.target.value;
-    console.log('search',event.target.value);
+    console.log('search', event.target.value);
   }
 }

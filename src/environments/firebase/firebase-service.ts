@@ -313,6 +313,16 @@ export class FirebaseService {
         })
     }
 
+    transferAdminRights(currentAdminId, futureAdminId) {
+        return this.rootRef.child('users/' + futureAdminId).update({ isadmin: true }).then(() => {
+            return this.rootRef.child('users/' + currentAdminId).update({ isadmin: false }).then(() => {
+                return "Admin rights transferred successfully..."
+            });
+        }).catch(err => {
+            throw err;
+        })
+    }
+
     updateAssignment(assignment, assignmentKey) {
         console.log('assignment.$key', assignmentKey);
         return this.af.database.list('assignments').update(assignmentKey, {
@@ -333,10 +343,12 @@ export class FirebaseService {
             })
             .catch(err => { throw err });
     }
+
     removeAssignment(assignmentKey) {
         console.log('assignment.$key', assignmentKey);
         return this.af.database.object('assignments/' + assignmentKey).remove();
     }
+
     updateProfile(userUid: string, firstname, lastname, email, phone, ldsusername, guestpicture) {
         return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername, guestpicture }).then(() => {
             return "user profile updated successfully..."
@@ -446,11 +458,37 @@ export class FirebaseService {
             }
         });
     }
-    getDiscussions(){
+    getDiscussions() {
         return this.af.database.list('discussions');
     }
-    getUsers(){
+    getUsers() {
         return this.af.database.list('users');
+    }
+    createPrivateDiscussion(discussion: any) {
+        return this.rootRef.child('privatediscussions').push(
+            {
+                createdDate: discussion.createdDate,
+                createdUserId: discussion.createdUserId,
+                createdUserName: discussion.createdUserName,
+                otherUserId: discussion.otherUserId,
+                otherUserName: discussion.otherUserName,
+                isActive: discussion.isActive,
+                messages: discussion.messages
+            })
+            .then((res) => {
+                //to get a reference of newly added object -res.path.o[1]
+                return res.path.o[1];
+            })
+            .catch(err => { throw err });
+    }
+    getPrivateDiscussionByKey(key) {
+        return this.af.database.object(`privatediscussions/${key}`);
+    }
+    updatePrivateDiscussionChat(discussionId, msg) {
+        return this.af.database.list(`privatediscussions/${discussionId}/messages`).push(msg);
+    }
+    getPrivateDiscussions() {
+        return this.af.database.list('privatediscussions');
     }
 
 }

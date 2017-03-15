@@ -10,6 +10,7 @@ import { CreateAccountPage } from '../create-account/create-account';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../../user/user';
 import { NgZone } from '@angular/core';
+import { NoAccessPage } from '../noaccess/noaccess.component';
 
 @Component({
     selector: 'page-login',
@@ -46,11 +47,21 @@ export class LoginPage {
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
             .then(uid => {
-                flag = true;
-                localStorage.setItem('securityToken', uid);
-                localStorage.setItem('isUserLoggedIn', 'true');
+                this.firebaseService.getUsersByKey(uid).subscribe(usrs => {
+                    if (usrs[0].isactive) {
+                        flag = true;
+                        localStorage.setItem('securityToken', uid);
+                        localStorage.setItem('isUserLoggedIn', 'true');
+                    }
+                    else {
+                        this.zone.run(() => {
+                            this.nav.setRoot(NoAccessPage);
+                        });
+                    }
+                })
             })
             .catch(err => this.showAlert('failure', 'Your Emailid or Password is incorrect.'));
+
         let v = setInterval(() => {
             if (flag) {
                 this.zone.run(() => {

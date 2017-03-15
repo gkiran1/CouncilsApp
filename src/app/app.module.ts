@@ -49,7 +49,12 @@ import { NewAgendaPage } from '../pages/new-agenda/new-agenda';
 import { MaterialModule } from '@angular/material';
 import { slide1Page } from '../pages/slide1/slide1';
 import { slide2Page } from '../pages/slide2/slide2';
-
+import { NoAccessPage } from '../pages/noaccess/noaccess.component';
+import { TransferAdminRightsPage } from '../pages/transferadminrights/transfer-adminrights/transferadminrights.component';
+import { Search } from '../pipes/search';
+import { NewPrivateDiscussionPage } from '../pages/discussions/new-private-discussion/new-private-discussion';
+import { OpenPrivateDiscussionPage } from '../pages/discussions/open-private-discussion/open-private-discussion';
+import { PrivateDiscussionsListPage } from '../pages/discussions/private-discussions-list/private-discussions-list';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -111,7 +116,13 @@ const cloudSettings: CloudSettings = {
     slide1Page,
     slide2Page,
     AgendaPage,
-    NewAgendaPage
+    NewAgendaPage,
+    NoAccessPage,
+    TransferAdminRightsPage,
+    NewPrivateDiscussionPage,
+    Search,
+    OpenPrivateDiscussionPage,
+    PrivateDiscussionsListPage
   ],
 
   imports: [
@@ -122,7 +133,7 @@ const cloudSettings: CloudSettings = {
     AngularFireModule.initializeApp(FirebaseConfig),
     //Cloud Module Imports
     CloudModule.forRoot(cloudSettings),
-     SwiperModule 
+    SwiperModule
   ],
 
   bootstrap: [IonicApp],
@@ -161,8 +172,12 @@ const cloudSettings: CloudSettings = {
     AgendaPage,
     CouncilDiscussionsListPage,
     AgendaPage,
-    NewAgendaPage
-
+    NewAgendaPage,
+    NoAccessPage,
+    TransferAdminRightsPage,
+    NewPrivateDiscussionPage,
+    OpenPrivateDiscussionPage,
+    PrivateDiscussionsListPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]
