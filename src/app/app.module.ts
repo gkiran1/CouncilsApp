@@ -47,6 +47,7 @@ import { CouncilDiscussionsListPage } from '../pages/discussions/council-discuss
 import { SwiperModule } from '../pages/swiper/swiper.module';
 import { NewAgendaPage } from '../pages/new-agenda/new-agenda';
 import { MaterialModule } from '@angular/material';
+import { NoAccessPage } from '../pages/noaccess/noaccess.component';
 
 
 //Cloud Settings - Push Messaging
@@ -106,9 +107,9 @@ const cloudSettings: CloudSettings = {
     MemberReactivatedPage,
     AgendaPage,
     CouncilDiscussionsListPage,
-    
     AgendaPage,
-    NewAgendaPage
+    NewAgendaPage,
+    NoAccessPage
   ],
 
   imports: [
@@ -119,7 +120,7 @@ const cloudSettings: CloudSettings = {
     AngularFireModule.initializeApp(FirebaseConfig),
     //Cloud Module Imports
     CloudModule.forRoot(cloudSettings),
-     SwiperModule 
+    SwiperModule
   ],
 
   bootstrap: [IonicApp],
@@ -158,8 +159,8 @@ const cloudSettings: CloudSettings = {
     AgendaPage,
     CouncilDiscussionsListPage,
     AgendaPage,
-    NewAgendaPage
-
+    NewAgendaPage,
+    NoAccessPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]
