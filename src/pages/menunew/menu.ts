@@ -4,7 +4,7 @@ import { HomePage } from '../home/home';
 import { DisplayPage } from '../display/display';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
-import { NewAgenda } from '../new-agenda/new-agenda';
+import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
 import { NewAssignmentPage } from '../new-assignment/new-assignment';
 import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';
@@ -107,12 +107,8 @@ export class WelcomePage {
   }
 
   agendasPage() {
-     
+
   }
-
-
-
-  
 
   privatePage() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -123,15 +119,15 @@ export class WelcomePage {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-           // this.nav.setRoot(NewAssignmentPage);
+            // this.nav.setRoot(NewAssignmentPage);
           }
         },
-          {
+        {
           text: 'Add Note',
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-           // this.nav.setRoot(NewAssignmentPage);
+            // this.nav.setRoot(NewAssignmentPage);
           }
         },
         {
