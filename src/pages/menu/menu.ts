@@ -26,7 +26,7 @@ import { NewAgendaPage } from '../new-agenda/new-agenda';
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage,CouncilDiscussionsListPage]
+  providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage,CouncilDiscussionsListPage,AgendasPage]
 })
 
 export class WelcomePage {
