@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { WelcomePage } from '../../menu/menu';
+import { NavParams, NavController } from 'ionic-angular';
+import { WelcomePage } from '../../menu/menu'
 
 @Component({
     selector: 'transfercomplete-page',
@@ -9,10 +9,13 @@ import { WelcomePage } from '../../menu/menu';
 
 export class TransferCompletePage {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) { }
+    newAdmin: any;
 
-    goToHome() {
-        this.navCtrl.push(WelcomePage);
+    constructor(public navParams: NavParams, public navCtrl: NavController) {
+        this.newAdmin = navParams.get('newAdmin');
     }
 
+    back() {
+        this.navCtrl.setRoot(WelcomePage);
+    }
 }

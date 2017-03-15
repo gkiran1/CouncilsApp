@@ -4,6 +4,7 @@ import { FirebaseService } from '../../../environments/firebase/firebase-service
 import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { TransferCompletePage } from '../transfer-complete/transfercomplete.component';
+import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
     templateUrl: 'transferadminrights.html',
@@ -12,41 +13,44 @@ import { TransferCompletePage } from '../transfer-complete/transfercomplete.comp
 
 export class TransferAdminRightsPage {
     users: User[] = [];
-    userKeys = [];
     currentAdminId: string;
 
-    constructor(public appService: AppService,
+    constructor(public af: AngularFire,
         private firebaseService: FirebaseService,
         private nav: NavController,
-        private alertCtrl: AlertController,
-        public actionSheetCtrl: ActionSheetController,
-        public menuctrl: MenuController) {
-        this.appService.getUser().subscribe(usr => {
-            this.currentAdminId = usr.$key;
-            this.firebaseService.getUsersByUnitNumber(usr.unitnumber).subscribe(usersObj => {
-                this.users = [];
-                usersObj.forEach(userObj => {
-                    if (userObj.$key !== usr.$key && userObj.isactive === true) {
-                        var userCouncilNames: string[] = [];
-                        userObj.councils.forEach(councilId => {
-                            this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
-                                userCouncilNames.push(councilObj[0].council);
-                                userObj.councilnames = userCouncilNames.join(', ');
-                            });
-                        });
-                        this.users.push(userObj);
-                    }
-                });
-            });
-        });
+        private alertCtrl: AlertController
+    ) {
+
+        this.af.auth.subscribe(auth => {
+            if (auth !== null) {
+                this.firebaseService.findUserByKey(auth.uid).subscribe(usr => {
+                    this.currentAdminId = usr.$key;
+                    this.firebaseService.getUsersByUnitNumber(usr.unitnumber).subscribe(usrs => {
+                        this.users = [];
+                        usrs.forEach(usrObj => {
+                            if (usrObj.$key !== this.currentAdminId && usrObj.isactive === true) {
+                                var userCouncilNames: string[] = [];
+                                usrObj.councils.forEach(councilId => {
+                                    this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
+                                        userCouncilNames.push(councilObj[0].council);
+                                        usrObj.councilnames = userCouncilNames.join(', ');
+                                    });
+                                });
+                                this.users.push(usrObj);
+                            }
+                        })
+                    })
+                })
+            }
+        })
     }
 
     transferAdminRights(user) {
         this.firebaseService.transferAdminRights(this.currentAdminId, user.$key)
             .then(() => {
-                this.nav.push(TransferCompletePage);
+                this.nav.push(TransferCompletePage, { newAdmin: user });
             })
-            .catch(err => { this.showAlert('Unable to transfer admin rights, please try after some time') });
+            .catch(err => { this.showAlert('Unable to transfer admin rights now, please try after some time') });
     }
 
     showAlert(errText) {
