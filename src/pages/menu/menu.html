@@ -43,7 +43,7 @@
 
             <ion-item>
                 <button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="upcomingPage()" text-capitalize>
-         Upcoming
+         Upcoming <span class="count">{{agendasCount | async}}</span>
         </button>
             </ion-item>
 
