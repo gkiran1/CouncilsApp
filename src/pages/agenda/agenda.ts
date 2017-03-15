@@ -57,6 +57,9 @@ export class AgendaPage {
           if (usrs[0].$key === agenda.reviewassignments) {
             (<FormControl>this.agendaForm.controls['reviewassignments']).setValue(usrs[0]);
           }
+          if (usrs[0].$key === agenda.temporalwelfare) {
+            (<FormControl>this.agendaForm.controls['temporalwelfare']).setValue(usrs[0]);
+          }
           this.users.push(usrs[0]);
         });
       });
@@ -71,6 +74,8 @@ export class AgendaPage {
       spiritualthought: ['', Validators.required],
       highcounselorremarks: ['', Validators.required],
       reviewassignments: ['', Validators.required],
+      temporalwelfare: ['', Validators.required],
+      spiritual: [agenda.spiritual, Validators.required],
       createdby: agenda.createdby,
       createddate: agenda.createddate,
       isactive: agenda.isactive,
@@ -111,6 +116,8 @@ export class AgendaPage {
       spiritualthought: value.spiritualthought,
       highcounselorremarks: value.highcounselorremarks,
       reviewassignments: value.reviewassignments,
+      spiritual: value.spiritual,
+      temporalwelfare: value.temporalwelfare,
       createdby: value.createdby,
       createddate: new Date().toISOString(),
       isactive: value.isactive,
@@ -121,14 +128,14 @@ export class AgendaPage {
   edit(value) {
     let formattedAgendaObj = this.formatAgendaObj(value);
     this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
-      .then(res => {this.showAlert('Agenda has been updated.');this.nav.pop(); })
-      .catch(err => {this.showAlert('Unable to updated the Agenda, please try after some time.')})
+      .then(res => { this.showAlert('Agenda has been updated.'); this.nav.pop(); })
+      .catch(err => { this.showAlert('Unable to updated the Agenda, please try after some time.') })
   }
 
   delete() {
     this.firebaseservice.removeAgenda(this.agendaKey)
-      .then(res => {this.showAlert('Agenda has been deleted.'); this.nav.pop(); })
-      .catch(err => {this.showAlert('Unable to delete the Agenda, please try after some time.')})
+      .then(res => { this.showAlert('Agenda has been deleted.'); this.nav.pop(); })
+      .catch(err => { this.showAlert('Unable to delete the Agenda, please try after some time.') })
   }
 
   showAlert(errText) {

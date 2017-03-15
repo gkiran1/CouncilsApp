@@ -384,10 +384,12 @@ export class FirebaseService {
             spiritualthought: agenda.spiritualthought.$key,
             highcounselorremarks: agenda.highcounselorremarks.$key,
             reviewassignments: agenda.reviewassignments.$key,
+            spiritual: agenda.spiritual,
+            temporalwelfare: agenda.temporalwelfare.$key,
             createdby: agenda.createdby,
             createddate: agenda.createddate,
             lastupdateddate: agenda.lastupdateddate,
-            isactive: agenda.isactive
+            isactive: agenda.isactive,
         })
     }
 
@@ -431,8 +433,9 @@ export class FirebaseService {
             spiritualthought: agenda.spiritualthought.$key,
             highcounselorremarks: agenda.highcounselorremarks.$key,
             reviewassignments: agenda.reviewassignments.$key,
+            spiritual: agenda.spiritual,
+            temporalwelfare: agenda.temporalwelfare.$key,
             createdby: agenda.createdby,
-            createddate: agenda.createddate,
             lastupdateddate: agenda.lastupdateddate,
             isactive: agenda.isactive
         }).then(() => {

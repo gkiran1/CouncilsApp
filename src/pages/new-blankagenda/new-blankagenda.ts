@@ -38,6 +38,8 @@ export class NewBlankAgendaPage {
       spiritualthought: ['', Validators.required],
       highcounselorremarks: ['', Validators.required],
       reviewassignments: ['', Validators.required],
+      spiritual: ['', Validators.required],
+      temporalwelfare:['',Validators.required],   
       createdby: localStorage.getItem('securityToken'),
       createddate: new Date().toDateString(),
       isactive: true,

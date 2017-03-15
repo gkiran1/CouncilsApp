@@ -19,11 +19,9 @@
     <form [formGroup]="agendaForm" (ngSubmit)="agendaForm.value">
 
         <ion-item>
-            <ion-label floating >Council</ion-label>
+            <ion-label floating>Council</ion-label>
             <ion-select name="assignedcouncil" (ionChange)="assignedMemberChange(agendaForm.value)" [(ngModel)]='assignedcouncil' formControlName="assignedcouncil">
-                <!--<ng-container >-->
-                    <ion-option *ngFor="let c of councils" [value]="c">{{c.council}}</ion-option>
-                <!--</ng-container>-->
+                <ion-option *ngFor="let c of councils" [value]="c">{{c.council}}</ion-option>
             </ion-select>
         </ion-item>
 
@@ -46,7 +44,7 @@
         </ion-row>
 
         <ion-item>
-         <ion-label floating>Opening Hymn</ion-label>
+            <ion-label floating>Opening Hymn</ion-label>
             <ion-select name="openinghymn" [(ngModel)]='openinghymn' formControlName="openinghymn">
                 <ng-container *ngFor="let user of users">
                     <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
@@ -90,6 +88,20 @@
             </ion-select>
         </ion-item>
 
+        <ion-item>
+            <ion-label floating>Spiritual</ion-label>
+            <ion-input type="text" name="spiritual" formControlName="spiritual" maxlength="500"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Temporal Welfare</ion-label>
+            <ion-select name="temporalwelfare" [(ngModel)]='temporalwelfare' formControlName="temporalwelfare">
+                <ng-container *ngFor="let user of users">
+                    <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+        
     </form>
 </ion-content>
 

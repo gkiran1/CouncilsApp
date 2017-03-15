@@ -86,6 +86,20 @@
             </ion-select>
         </ion-item>
 
+        <ion-item>
+            <ion-label floating>Spiritual</ion-label>
+            <ion-input type="text" name="spiritual" formControlName="spiritual" maxlength="500"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Temporal Welfare</ion-label>
+            <ion-select name="temporalwelfare" [(ngModel)]='temporalwelfare' formControlName="temporalwelfare">
+                <ng-container *ngFor="let user of users">
+                    <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
     </form>
 </ion-content>
 
