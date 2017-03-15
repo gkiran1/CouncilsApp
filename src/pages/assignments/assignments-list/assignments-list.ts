@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AppService } from '../../providers/app-service';
-import { FirebaseService } from '../../environments/firebase/firebase-service';
+import { AppService } from '../../../providers/app-service';
+import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { Subject } from 'rxjs/Subject';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { NewAssignmentPage } from '../new-assignment/new-assignment';
-import { User } from '../../user/user';
+import { User } from '../../../user/user';
 import { Subscription } from "rxjs";
 
 @Component({
-  templateUrl: 'council-assignments.html',
-  selector: 'council-assignments'
+  templateUrl: 'assignments-list.html',
+  selector: 'assignments-list'
 })
 
-export class CouncilAssignmentsPage {
+export class AssignmentsListPage {
   user;
   councilAssignmentsArray = [];
   completedAssignmentsArray = [];

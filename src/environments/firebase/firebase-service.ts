@@ -449,5 +449,8 @@ export class FirebaseService {
     getDiscussions(){
         return this.af.database.list('discussions');
     }
+    getUsers(){
+        return this.af.database.list('users');
+    }
 
 }

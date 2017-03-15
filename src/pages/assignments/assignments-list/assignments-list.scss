@@ -1,4 +1,4 @@
-council-assignments{
+assignments-list{
     ion-icon.active{
         display: none;
     }
@@ -16,5 +16,10 @@ council-assignments{
        width: 100%;
        margin:auto;
        color:map-get($colors, light-gray);
+    }
+     .icon-style{
+    color:#A9AAAC;
+    width: 0.66em;
+    height: 1.08em;
     }
 }

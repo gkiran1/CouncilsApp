@@ -5,15 +5,15 @@ import { DisplayPage } from '../display/display';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
 import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
-import { NewAssignmentPage } from '../new-assignment/new-assignment';
+import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
 import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';
-import { CouncilAssignmentsPage } from '../council-assignments/council-assignments';
-import { MyAssignmentsPage } from '../my-assignments/my-assignments';
+import { AssignmentsListPage } from '../assignments/assignments-list/assignments-list';
 import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { NewCouncilFilePage } from '../files/new-council-file';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { GoodbyePage } from '../goodbye/goodbye';
 import { AgendasPage } from '../agendas/agendas';
@@ -21,47 +21,54 @@ import { Subscription } from "rxjs";
 import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
 import { AdminPage } from '../admin/admin.component';
 import { CouncilDiscussionsListPage } from '../discussions/council-discussions-list/council-discussions-list'
+import { NewAgendaPage } from '../new-agenda/new-agenda';
 
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage,CouncilDiscussionsListPage]
+  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage]
 })
 
 export class WelcomePage {
 
   activeCouncilsCount;
-  myAssignmentsCount;
-  councilAssignmentsCount;
+  assignmentsCount;
   councilDiscussionsCount;
-  @ViewChild(Nav) nav: Nav;
+  agendasCount;
+  //@ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
   userSubscription: Subscription;
 
-  constructor(public af: AngularFire,
+  constructor(public nav: NavController,
+    public af: AngularFire,
     public appService: AppService,
     public actionSheetCtrl: ActionSheetController,
     public menuctrl: MenuController,
-    public myassignmentpage: MyAssignmentsPage,
-    public councilAssignmentsPage: CouncilAssignmentsPage,
+    public assignmentsListPage: AssignmentsListPage,
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService,
-    public councilDiscussionsListPage:CouncilDiscussionsListPage ) {
+    public councilDiscussionsListPage: CouncilDiscussionsListPage,
+    public agendaPage: AgendasPage) {
 
+    this.userObj = null;
+    
     this.userSubscription = this.af.auth.subscribe(auth => {
-      this.userObj = this.af.database.object('/users/' + auth.uid);
-
-      this.userObj.subscribe(usr => {
-        localStorage.setItem('unitType', usr.unittype)
-        localStorage.setItem('unitNumber', usr.unitnumber.toString())
-        localStorage.setItem('userCouncils', usr.councils.toString())
-      });
+      if (auth !== null) {
+        this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
+          this.userObj = usrs[0];
+          localStorage.setItem('unitType', usrs[0].unittype)
+          localStorage.setItem('unitNumber', usrs[0].unitnumber.toString())
+          localStorage.setItem('userCouncils', usrs[0].councils.toString())
+        });
+      };
     });
+
     this.activeCouncilsCount = activeCouncilsPage.getCount();
-    this.myAssignmentsCount = myassignmentpage.getCount();
-    this.councilAssignmentsCount = councilAssignmentsPage.getCount();
+    this.assignmentsCount = assignmentsListPage.getCount();
     this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
+    this.agendasCount = agendaPage.getCount();
+
   }
 
   councilsPage() {
@@ -141,7 +148,27 @@ export class WelcomePage {
   }
 
   agendasPage() {
-    this.nav.push(NewBlankAgendaPage);
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Council',
+      buttons: [
+        {
+          text: 'Add Agenda',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewAgendaPage);
+          }
+        },
+        {
+          text: 'Cancel',
+          cssClass: "actionsheet-cancel",
+          handler: () => {
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
   }
 
   assignmentsPage() {
@@ -204,17 +231,17 @@ export class WelcomePage {
 
     actionSheet.present();
   }
-  viewDiscussions(){
+  viewDiscussions() {
     this.nav.push(CouncilDiscussionsListPage);
   }
   privatePage() { }
 
   viewCouncilAssignments() {
-    this.nav.setRoot(CouncilAssignmentsPage);
+    this.nav.setRoot(AssignmentsListPage);
   }
 
   viewMyAssignments() {
-    this.nav.setRoot(MyAssignmentsPage);
+    this.nav.setRoot(AssignmentsListPage);
   }
 
   viewSubmitFeedbackPage() {
@@ -223,6 +250,9 @@ export class WelcomePage {
 
   viewEditProfilePage() {
     this.nav.push(EditProfilePage);
+  }
+  viewNewCouncilFilePage(){
+    this.nav.push(NewCouncilFilePage);
   }
 
   viewAboutPage() {
@@ -236,7 +266,7 @@ export class WelcomePage {
   signOut() {
     this.appService.userSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
-    this.councilAssignmentsPage.userSubscription.unsubscribe();
+    this.assignmentsListPage.userSubscription.unsubscribe();
     this.activeCouncilsPage.userSubscription.unsubscribe();
     this.councilDiscussionsListPage.userSubscription.unsubscribe();
     localStorage.setItem('securityToken', null);

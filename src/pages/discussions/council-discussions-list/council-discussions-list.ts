@@ -21,7 +21,7 @@ export class CouncilDiscussionsListPage {
           this.discussions = [];
           fs.getDiscussions().subscribe(discussions => {
             this.discussions = discussions.filter(discussion => {
-              return user.councils.indexOf(discussion.councilid) !== 0;
+              return user.councils.indexOf(discussion.councilid) !== -1;
             });
             this.subject.next(this.discussions.length);
           });

@@ -3,11 +3,11 @@
         <ion-navbar hideBackButton="true">
             <ion-item style="border: none !important">
                 <ion-avatar item-left>
-                    <img [src]="(userObj | async)?.avatar" class="avatarImage" *ngIf="(userObj | async)?.avatar" />
-                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj | async)?.avatar" />
+                    <img [src]="(userObj)?.avatar" class="avatarImage" *ngIf="(userObj)?.avatar" />
+                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj)?.avatar" />
                 </ion-avatar>
-                <h2>{{(userObj | async)?.firstname}}</h2>
-                <p>{{(userObj | async)?.calling}} - {{(userObj | async)?.unitnumber}}</p>
+                <h2>{{(userObj)?.firstname}}</h2>
+                <p>{{(userObj)?.calling}} - {{(userObj)?.unitnumber}}</p>
             </ion-item>
         </ion-navbar>
     </ion-header>
@@ -16,7 +16,7 @@
         <ion-list no-lines>
             <ion-item>
                 <ion-label class="listbtn1">Councils</ion-label>
-                <button color="secondary" id="councilscirclebtn" name="councilsPage" *ngIf="(userObj | async)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
+                <button color="secondary" id="councilscirclebtn" name="councilsPage" *ngIf="(userObj)?.isadmin" ion-button icon-only clear item-right (click)="councilsPage()">
 
 					<ion-icon id="councilscircle" name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
 					</button>
@@ -43,7 +43,7 @@
 
             <ion-item>
                 <button ion-button color="secondary" class="listbtn2" clear menuToggle (click)="upcomingPage()" text-capitalize>
-         Upcoming
+         Upcoming <span class="count">{{agendasCount | async}}</span>
         </button>
             </ion-item>
 
@@ -83,13 +83,20 @@
 
             <ion-item>
                 <button ion-button color="secondary" class="listbtn2" clear menuToggle name="viewCouncilAssignments" (click)="viewCouncilAssignments()" text-capitalize>
-					Council <span class="count">{{councilAssignmentsCount | async}}</span>
+					Council <span class="count">{{assignmentsCount | async}}</span>
 					</button>
             </ion-item>
 
-            <ion-item>
-                <ion-label class="listbtn1">Settings</ion-label>
-            </ion-item>
+			<ion-item>
+				<button ion-button color="secondary" class="listbtn2" clear menuToggle name="viewNewCouncilFilePage" (click)="viewNewCouncilFilePage()"
+					text-capitalize>
+					Files 
+					</button>
+			</ion-item>
+
+			<ion-item>
+				<ion-label class="listbtn1">Settings</ion-label>
+			</ion-item>
 
             <ion-item>
                 <button ion-button color="secondary" class="listbtn2" clear menuToggle text-capitalize (click)="viewEditProfilePage()">
@@ -109,7 +116,7 @@
         </button>
             </ion-item>
 
-            <ion-item *ngIf="(userObj | async)?.isadmin">
+            <ion-item *ngIf="(userObj)?.isadmin">
                 <button ion-button color="secondary" name="About" class="listbtn2" clear menuToggle text-capitalize (click)="viewAdminPage()">
 					 Admin
 			    </button>

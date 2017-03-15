@@ -12,7 +12,7 @@ import { DisplayPage } from '../pages/display/display';
 import * as firebase from 'firebase';
 import { WelcomePage } from '../pages/menu/menu';
 import { CreateAccountPage } from '../pages/create-account/create-account';
-import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
+import { NewAssignmentPage } from '../pages/assignments/new-assignment/new-assignment';
 import { AppService } from '../providers/app-service';
 import { Elastic } from '../directives/elastic';
 import { NewBlankAgendaPage } from '../pages/new-blankagenda/new-blankagenda';
@@ -20,8 +20,7 @@ import { InviteMemberPage } from '../pages/invite/invite';
 import { InvitationSuccessPage } from '../pages/invite/success';
 import { NewCouncilPage } from '../pages/new-council/new-council'
 import { NewCouncilDiscussionPage } from '../pages/discussions/new-council-discussion/new-council-discussion';
-import { CouncilAssignmentsPage } from '../pages/council-assignments/council-assignments';
-import { MyAssignmentsPage } from '../pages/my-assignments/my-assignments';
+import { AssignmentsListPage } from '../pages/assignments/assignments-list/assignments-list';
 import { MomentModule } from 'angular2-moment';
 import { ActivityPage } from '../pages/activity/activity'
 import { ActiveCouncilsPage } from '../pages/activecouncils/activecouncils'
@@ -29,6 +28,7 @@ import { AboutPage } from '../pages/about/about';
 import { SubmitFeedbackPage } from '../pages/feedback/submit-feedback/submit-feedback';
 import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-feedback';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { NewCouncilFilePage } from '../pages/files/new-council-file';
 import { ChangePasswordPage } from '../pages/edit-profile/change-password';
 import { GoodbyePage } from '../pages/goodbye/goodbye';
 import { FormsModule } from '@angular/forms';
@@ -45,6 +45,7 @@ import { ReactivateMembersPage } from '../pages/reactivatemembers/reactivate-mem
 import { MemberReactivatedPage } from '../pages/reactivatemembers/member-reactivated/memberreactivated.component';
 import { CouncilDiscussionsListPage } from '../pages/discussions/council-discussions-list/council-discussions-list';
 import { SwiperModule } from '../pages/swiper/swiper.module';
+import { NewAgendaPage } from '../pages/new-agenda/new-agenda';
 import { MaterialModule } from '@angular/material';
 
 
@@ -87,13 +88,13 @@ const cloudSettings: CloudSettings = {
     ActivityPage,
     ActiveCouncilsPage,
     NewCouncilDiscussionPage,
-    CouncilAssignmentsPage,
-    MyAssignmentsPage,
+    AssignmentsListPage,
     AboutPage,
     SubmitFeedbackPage,
     ThanksFeedbackPage,
     EditProfilePage,
     ChangePasswordPage,
+    NewCouncilFilePage,
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
@@ -104,8 +105,10 @@ const cloudSettings: CloudSettings = {
     ReactivateMembersPage,
     MemberReactivatedPage,
     AgendaPage,
-    CouncilDiscussionsListPage
+    CouncilDiscussionsListPage,
     
+    AgendaPage,
+    NewAgendaPage
   ],
 
   imports: [
@@ -136,13 +139,13 @@ const cloudSettings: CloudSettings = {
     ActivityPage,
     ActiveCouncilsPage,
     NewCouncilDiscussionPage,
-    CouncilAssignmentsPage,
-    MyAssignmentsPage,
+    AssignmentsListPage,
     AboutPage,
     SubmitFeedbackPage,
     ThanksFeedbackPage,
     EditProfilePage,
     ChangePasswordPage,
+    NewCouncilFilePage,
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
@@ -153,7 +156,10 @@ const cloudSettings: CloudSettings = {
     ReactivateMembersPage,
     MemberReactivatedPage,
     AgendaPage,
-    CouncilDiscussionsListPage
+    CouncilDiscussionsListPage,
+    AgendaPage,
+    NewAgendaPage
+
   ],
 
   providers: [AuthService, AppService, FirebaseService]

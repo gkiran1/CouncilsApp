@@ -8,6 +8,8 @@ import { User } from '../../user/user';
 import { Toast } from 'ionic-native';
 import { Camera } from 'ionic-native';
 import * as firebase from 'firebase';
+import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { Subscription } from "rxjs";
 
 @Component({
     selector: 'edit-profile',
@@ -18,7 +20,7 @@ export class EditProfilePage {
     profilePictureRef: any;
     guestPicture: any;
     imagePath: any;
-    profile: User;
+    profile: any;
     $key: string;
     firstname: string;
     lastname: string;
@@ -29,24 +31,28 @@ export class EditProfilePage {
     avatar: string;
     imageflag = true;
     isChangeflag = false;
-    constructor(public nav: NavController,
+    userSubscription: Subscription
+
+    constructor(public af: AngularFire, public nav: NavController,
         public appService: AppService,
         private firebaseService: FirebaseService,
         public actionSheetCtrl: ActionSheetController,
         public menuctrl: MenuController,
         public alertCtrl: AlertController) {
+
         this.profile = new User;
+
         this.profilePictureRef = firebase.storage().ref('/users/');
-        appService.getUser().subscribe(user => {
-            this.profile.firstname = user.firstname;
-            this.profile.lastname = user.lastname;
-            this.profile.email = user.email;
-            this.profile.ldsusername = user.ldsusername;
-            this.profile.$key = user.$key;
-            this.profile.phone = user.phone;
-            this.profile.avatar = user.avatar;
+
+        this.userSubscription = this.af.auth.subscribe(auth => {
+            if (auth !== null) {
+                this.af.database.object('/users/' + auth.uid).subscribe(user => {
+                    this.profile = user;
+                });
+            }
         });
     }
+
     editProfile() {
         if ((new RegExp(/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/).test(this.profile.phone))) {
             if (this.guestPicture != null) {
@@ -83,7 +89,7 @@ export class EditProfilePage {
         if (this.isChangeflag) {
             this.showAlertPopup('failure', 'There are unsaved changes.do you want to discard it ?');
         } else {
-            this.nav.push(WelcomePage);
+            this.nav.setRoot(WelcomePage);
         }
     }
     showAlert(reason, text) {
