@@ -26,7 +26,7 @@ import { NewAgendaPage } from '../new-agenda/new-agenda';
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage,CouncilDiscussionsListPage,AgendasPage]
+  providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage, CouncilDiscussionsListPage, AgendasPage]
 })
 
 export class WelcomePage {
@@ -36,12 +36,13 @@ export class WelcomePage {
   councilAssignmentsCount;
   councilDiscussionsCount;
   agendasCount;
-  @ViewChild(Nav) nav: Nav;
+  //@ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
   userSubscription: Subscription;
 
-  constructor(public af: AngularFire,
+  constructor(public nav: NavController,
+    public af: AngularFire,
     public appService: AppService,
     public actionSheetCtrl: ActionSheetController,
     public menuctrl: MenuController,
@@ -49,24 +50,26 @@ export class WelcomePage {
     public councilAssignmentsPage: CouncilAssignmentsPage,
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService,
-    public councilDiscussionsListPage:CouncilDiscussionsListPage,
-    public agendaPage: AgendasPage, ) {
+    public councilDiscussionsListPage: CouncilDiscussionsListPage,
+    public agendaPage: AgendasPage) {
+
+    this.userObj = null;
 
     this.userSubscription = this.af.auth.subscribe(auth => {
-      this.userObj = this.af.database.object('/users/' + auth.uid);
-
-      this.userObj.subscribe(usr => {
-        localStorage.setItem('unitType', usr.unittype)
-        localStorage.setItem('unitNumber', usr.unitnumber.toString())
-        localStorage.setItem('userCouncils', usr.councils.toString())
-      });
+      if (auth !== null) {
+        this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
+          this.userObj = usrs[0];
+          localStorage.setItem('unitType', usrs[0].unittype)
+          localStorage.setItem('unitNumber', usrs[0].unitnumber.toString())
+          localStorage.setItem('userCouncils', usrs[0].councils.toString())
+        });
+      };
     });
+
     this.activeCouncilsCount = activeCouncilsPage.getCount();
     this.myAssignmentsCount = myassignmentpage.getCount();
     this.councilAssignmentsCount = councilAssignmentsPage.getCount();
-
     this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
-
     this.agendasCount = agendaPage.getCount();
 
   }
@@ -231,7 +234,7 @@ export class WelcomePage {
 
     actionSheet.present();
   }
-  viewDiscussions(){
+  viewDiscussions() {
     this.nav.push(CouncilDiscussionsListPage);
   }
   privatePage() { }

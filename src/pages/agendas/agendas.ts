@@ -17,15 +17,16 @@ export class AgendasPage {
     //subject = new Subject();
     count$ = new Subject();
     constructor(public nav: NavController, public as: AppService, public firebaseservice: FirebaseService) {
-        var councilsIds = localStorage.getItem('userCouncils').split(',');
-        councilsIds.forEach(councilId => {
-            this.firebaseservice.getAgendasByCouncilId(councilId).subscribe(agendas => {
-                this.agendasArray.push(...agendas);
-                this.count$.next(this.agendasArray.length);
-                // this.subject.next(this.agendasArray.length);
+        if (localStorage.getItem('userCouncils') !== null) {
+            var councilsIds = localStorage.getItem('userCouncils').split(',');
+            councilsIds.forEach(councilId => {
+                this.firebaseservice.getAgendasByCouncilId(councilId).subscribe(agendas => {
+                    this.agendasArray.push(...agendas);
+                    this.count$.next(this.agendasArray.length);
+                    // this.subject.next(this.agendasArray.length);
+                });
             });
-        });
-
+        }
     }
 
     agendaSelected(agendaselected) {
