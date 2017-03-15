@@ -47,6 +47,8 @@ import { CouncilDiscussionsListPage } from '../pages/discussions/council-discuss
 import { SwiperModule } from '../pages/swiper/swiper.module';
 import { NewAgendaPage } from '../pages/new-agenda/new-agenda';
 import { MaterialModule } from '@angular/material';
+import { slide1Page } from '../pages/slide1/slide1';
+import { slide2Page } from '../pages/slide2/slide2';
 
 
 //Cloud Settings - Push Messaging
@@ -106,7 +108,8 @@ const cloudSettings: CloudSettings = {
     MemberReactivatedPage,
     AgendaPage,
     CouncilDiscussionsListPage,
-    
+    slide1Page,
+    slide2Page,
     AgendaPage,
     NewAgendaPage
   ],
