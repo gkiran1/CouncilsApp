@@ -5,11 +5,10 @@ import { DisplayPage } from '../display/display';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
 import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
-import { NewAssignmentPage } from '../new-assignment/new-assignment';
+import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
 import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';
-import { CouncilAssignmentsPage } from '../council-assignments/council-assignments';
-import { MyAssignmentsPage } from '../my-assignments/my-assignments';
+import { AssignmentsListPage } from '../assignments/assignments-list/assignments-list';
 import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
@@ -27,14 +26,13 @@ import { NewAgendaPage } from '../new-agenda/new-agenda';
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage, CouncilDiscussionsListPage, AgendasPage]
+  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage]
 })
 
 export class WelcomePage {
 
   activeCouncilsCount;
-  myAssignmentsCount;
-  councilAssignmentsCount;
+  assignmentsCount;
   councilDiscussionsCount;
   agendasCount;
   //@ViewChild(Nav) nav: Nav;
@@ -47,8 +45,7 @@ export class WelcomePage {
     public appService: AppService,
     public actionSheetCtrl: ActionSheetController,
     public menuctrl: MenuController,
-    public myassignmentpage: MyAssignmentsPage,
-    public councilAssignmentsPage: CouncilAssignmentsPage,
+    public assignmentsListPage: AssignmentsListPage,
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService,
     public councilDiscussionsListPage: CouncilDiscussionsListPage,
@@ -68,8 +65,7 @@ export class WelcomePage {
     });
 
     this.activeCouncilsCount = activeCouncilsPage.getCount();
-    this.myAssignmentsCount = myassignmentpage.getCount();
-    this.councilAssignmentsCount = councilAssignmentsPage.getCount();
+    this.assignmentsCount = assignmentsListPage.getCount();
     this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
     this.agendasCount = agendaPage.getCount();
 
@@ -241,11 +237,11 @@ export class WelcomePage {
   privatePage() { }
 
   viewCouncilAssignments() {
-    this.nav.setRoot(CouncilAssignmentsPage);
+    this.nav.setRoot(AssignmentsListPage);
   }
 
   viewMyAssignments() {
-    this.nav.setRoot(MyAssignmentsPage);
+    this.nav.setRoot(AssignmentsListPage);
   }
 
   viewSubmitFeedbackPage() {
@@ -270,7 +266,7 @@ export class WelcomePage {
   signOut() {
     this.appService.userSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
-    this.councilAssignmentsPage.userSubscription.unsubscribe();
+    this.assignmentsListPage.userSubscription.unsubscribe();
     this.activeCouncilsPage.userSubscription.unsubscribe();
     this.councilDiscussionsListPage.userSubscription.unsubscribe();
     localStorage.setItem('securityToken', null);

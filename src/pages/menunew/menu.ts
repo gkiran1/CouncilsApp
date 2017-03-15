@@ -8,8 +8,7 @@ import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
 import { NewAssignmentPage } from '../new-assignment/new-assignment';
 import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';
-import { CouncilAssignmentsPage } from '../council-assignments/council-assignments';
-import { MyAssignmentsPage } from '../my-assignments/my-assignments';
+import { AssignmentsListPage } from '../assignments/assignments-list/assignments-list';
 import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
@@ -21,14 +20,13 @@ import { Subscription } from "rxjs";
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [FirebaseService, MyAssignmentsPage, CouncilAssignmentsPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilAssignmentsPage]
+  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage]
 })
 
 export class WelcomePage {
 
   activeCouncilsCount;
-  myAssignmentsCount;
-  councilAssignmentsCount
+  assignmentsCount;
   @ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
@@ -38,16 +36,14 @@ export class WelcomePage {
     public appService: AppService,
     public actionSheetCtrl: ActionSheetController,
     public menuctrl: MenuController,
-    public myassignmentpage: MyAssignmentsPage,
-    public councilAssignmentsPage: CouncilAssignmentsPage,
+    public assignmentsListPage: AssignmentsListPage,
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService, ) {
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
         this.userObj = this.af.database.object('/users/' + auth.uid);
         this.activeCouncilsCount = activeCouncilsPage.getCount();
-        this.myAssignmentsCount = myassignmentpage.getCount();
-        this.councilAssignmentsCount = councilAssignmentsPage.getCount();
+        this.assignmentsCount = assignmentsListPage.getCount();
       }
     });
   }
@@ -148,11 +144,11 @@ export class WelcomePage {
   assignmentsPage() { }
 
   viewCouncilAssignments() {
-    this.nav.setRoot(CouncilAssignmentsPage);
+    this.nav.setRoot(AssignmentsListPage);
   }
 
   viewMyAssignments() {
-    this.nav.setRoot(MyAssignmentsPage);
+    this.nav.setRoot(AssignmentsListPage);
   }
 
   viewSubmitFeedbackPage() {
@@ -168,7 +164,7 @@ export class WelcomePage {
   signOut() {
     this.appService.userSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
-    this.councilAssignmentsPage.userSubscription.unsubscribe();
+    this.assignmentsListPage.userSubscription.unsubscribe();
     this.activeCouncilsPage.userSubscription.unsubscribe();
     localStorage.setItem('securityToken', null);
     localStorage.setItem('isUserLoggedIn', 'false');

@@ -7,8 +7,6 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
 import { WelcomePage } from '../pages/menu/menu';
 import { InviteMemberPage } from '../pages/invite/invite';
 import { NewCouncilPage } from '../pages/new-council/new-council';
-import { NewAssignmentPage } from '../pages/new-assignment/new-assignment';
-import { CouncilAssignmentsPage } from '../pages/council-assignments/council-assignments';
 
 //Ionic Push, Push Token Imports
 import {
