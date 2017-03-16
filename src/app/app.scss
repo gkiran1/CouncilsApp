@@ -240,3 +240,11 @@ button:disabled {
 .tabs-md[tabsPlacement="bottom"]>.tabbar::before {
     background-image: none;
 }
+
+.footer-md::before,
+.tabs-md[tabsPlacement="bottom"]>.tabbar::before {
+    top: 0px;
+    bottom: 0px;
+    height: 0px;
+    background-position: 0 0;
+}
