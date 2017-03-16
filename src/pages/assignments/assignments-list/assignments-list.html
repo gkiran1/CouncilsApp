@@ -23,7 +23,7 @@
         <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>
         <h3>{{item.description}}</h3>
         <ion-icon class="icon-style" item-right name="arrow-forward"></ion-icon>        
-        <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | amCalendar}}</span></p>
+        <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | customdateformat}}</span></p>
       </ion-item>
       <ion-item-divider>COUNCIL</ion-item-divider>
       <ion-item (click)="assignmentSelected(item, i)" *ngFor="let item of councilAssignmentsArray; let i = index" [attr.data-index]="i">
@@ -31,7 +31,7 @@
         <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>
         <h3>{{item.description}}</h3>
         <ion-icon class="icon-style" item-right name="arrow-forward"></ion-icon>      
-        <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | amCalendar}}</span></p>
+        <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | customdateformat}}</span></p>
      
       </ion-item>
       <ion-item-divider>COMPLETED</ion-item-divider>
@@ -40,7 +40,7 @@
         <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>
         <h3>{{item.description}}</h3>
         <ion-icon class="icon-style" item-right name="arrow-forward"></ion-icon>        
-        <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | amCalendar}}</span></p>
+        <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | customdateformat}}</span></p>
       </ion-item>
     </ng-container>
     <ng-container *ngIf="!(personalAssignmentArray.length || councilAssignmentsArray.length || completedAssignmentsArray.length)">
