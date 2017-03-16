@@ -4,6 +4,7 @@ import { FirebaseService } from '../../../environments/firebase/firebase-service
 import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { MemberReactivatedPage } from '../member-reactivated/memberreactivated.component';
+import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
     templateUrl: 'reactivatemembers.html',
@@ -19,23 +20,28 @@ export class ReactivateMembersPage {
         private nav: NavController,
         private alertCtrl: AlertController,
         public actionSheetCtrl: ActionSheetController,
-        public menuctrl: MenuController) {
-        this.appService.getUser().subscribe(usr => {
-            this.firebaseService.getUsersByUnitNumber(usr.unitnumber).subscribe(usersObj => {
-                this.users = [];
-                usersObj.forEach(userObj => {
-                    if (userObj.$key !== usr.$key && userObj.isactive === false) {
-                        var userCouncilNames: string[] = [];
-                        userObj.councils.forEach(councilId => {
-                            this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
-                                userCouncilNames.push(councilObj[0].council);
-                                userObj.councilnames = userCouncilNames.join(', ');
-                            });
+        public menuctrl: MenuController, public af: AngularFire) {
+
+        this.af.auth.subscribe(auth => {
+            if (auth !== null) {
+                this.firebaseService.findUserByKey(auth.uid).subscribe(usr => {
+                    this.firebaseService.getUsersByUnitNumber(usr.unitnumber).subscribe(usersObj => {
+                        this.users = [];
+                        usersObj.forEach(userObj => {
+                            if (userObj.$key !== usr.$key && userObj.isactive === false) {
+                                var userCouncilNames: string[] = [];
+                                userObj.councils.forEach(councilId => {
+                                    this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
+                                        userCouncilNames.push(councilObj[0].council);
+                                        userObj.councilnames = userCouncilNames.join(', ');
+                                    });
+                                });
+                                this.users.push(userObj);
+                            }
                         });
-                        this.users.push(userObj);
-                    }
+                    });
                 });
-            });
+            }
         });
     }
 
