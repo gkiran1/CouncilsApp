@@ -53,6 +53,7 @@ export class NewCouncilPage {
         this.currentUser.councils.push(res);
         this.firebaseservice.createUserCouncils(this.currentUser.$key, res);
         this.firebaseservice.updateCouncilsInUser(this.currentUser.$key, this.currentUser.councils);
+        localStorage.setItem('userCouncils', this.currentUser.councils.toString());
 
         this.users.forEach(user => {
           if (user.selected === true) {
@@ -61,14 +62,15 @@ export class NewCouncilPage {
             this.firebaseservice.updateCouncilsInUser(user.$key, user.councils);
           }
         });
+        
         this.showAlert('Council created successfully..');
         this.nav.setRoot(WelcomePage);
       }
       else {
-         this.showAlert('Council already exists.');
+        this.showAlert('Council already exists.');
       }
     }).catch(err => this.showAlert(err))
-     
+
   }
 
   showAlert(errText) {
