@@ -217,10 +217,26 @@ ion-header ion-col h3 {
 .scroll-content {
     overflow-y: auto !important
 }
+
 button:disabled {
     color: #222;
 }
-.item-divider-ios,.item-divider-md,.item-divider-wp{
+
+.item-divider-ios,
+.item-divider-md,
+.item-divider-wp {
     color: #35373A;
     background-color: #f7f7f7
+}
+
+.header-md,
+.header-ios {
+    border-bottom: none;
+}
+
+.header-md::after,
+.tabs-md[tabsPlacement="top"]>.tabbar::after,
+.footer-md::before,
+.tabs-md[tabsPlacement="bottom"]>.tabbar::before {
+    background-image: none;
 }
