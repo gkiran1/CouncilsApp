@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { DisplayPage } from '../display/display';
@@ -22,12 +22,8 @@ import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/
 import { AdminPage } from '../admin/admin.component';
 import { CouncilDiscussionsListPage } from '../discussions/council-discussions-list/council-discussions-list'
 import { NewAgendaPage } from '../new-agenda/new-agenda';
-import { slide1Page } from '../slide1/slide1';
-import { slide2Page } from '../slide2/slide2';
 import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/new-private-discussion';
 import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
-import { Input, OnInit, OnChanges, SimpleChanges, ElementRef,  AfterViewChecked, AfterViewInit, NgZone } from '@angular/core';
-declare var Swiper: any;
 
 @Component({
   selector: 'page-welcome',
@@ -35,16 +31,7 @@ declare var Swiper: any;
   providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage, NewPrivateDiscussionPage]
 })
 
-export class WelcomePage implements OnInit{
-  step:boolean = true;
-  images: string[];
- config: Object = {
-            pagination: '.swiper-pagination',
-            paginationClickable: true,
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev'
-      
-        };
+export class WelcomePage {
 
   activeCouncilsCount;
   assignmentsCount;
@@ -67,7 +54,7 @@ export class WelcomePage implements OnInit{
     public agendaPage: AgendasPage) {
 
     this.userObj = null;
-    
+
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
         this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
@@ -85,15 +72,6 @@ export class WelcomePage implements OnInit{
     this.agendasCount = agendaPage.getCount();
 
   }
-  ngOnInit() {
-    }
-   loadImages() {
-        this.images = [
-            'http://api.randomuser.me/portraits/thumb/men/1.jpg',
-            'http://api.randomuser.me/portraits/thumb/men/2.jpg'
-                             
-        ];        
-    }
 
   councilsPage() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -169,14 +147,6 @@ export class WelcomePage implements OnInit{
 
   activePage() {
     this.nav.push(ActiveCouncilsPage);
-  }
-  getDataForTable($event: any){ 
-    $event.target.classList.add('active');
-    this.step=true;
-  }
-   getData($event: any){ 
-    $event.target.classList.add('active');
-    this.step=false;
   }
 
   agendasPage() {
@@ -270,7 +240,6 @@ export class WelcomePage implements OnInit{
     this.nav.push(PrivateDiscussionsListPage);
   }
 
-
   viewCouncilAssignments() {
     this.nav.setRoot(AssignmentsListPage);
   }
@@ -286,7 +255,7 @@ export class WelcomePage implements OnInit{
   viewEditProfilePage() {
     this.nav.push(EditProfilePage);
   }
-  viewNewCouncilFilePage(){
+  viewNewCouncilFilePage() {
     this.nav.push(NewCouncilFilePage);
   }
 
