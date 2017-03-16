@@ -6,14 +6,15 @@
                 </button>
     </ion-row>
     <button clear menuToggle ion-button class="listbtn2" name="agendasPage" block (click)="agendasPage()" text-capitalize>
-                    Agendas
+                    Agendas <span class="count">{{agendasCount | async}}</span>
                 </button>
 
-    <button clear secondary class="listbtn2" ion-button name="discussionsPage" menuToggle block (click)="discussionsPage()" text-capitalize>Discussions
+    <button clear secondary class="listbtn2" ion-button name="discussionsPage" menuToggle block (click)="discussionsPage()" text-capitalize>
+        Discussions <span class="count">{{councilDiscussionsCount | async}}</span>
                 </button>
 
     <button clear secondary class="listbtn2" name="assignmentsPage" ion-button block menuToggle (click)="assignmentsPage()" text-capitalize>
-                    Assignments
+                    Assignments <span class="count">{{assignmentsCount | async}}</span>
                 </button>
     <button clear secondary class="listbtn2" name="filePage" ion-button block menuToggle (click)="filePage()" text-capitalize>
                     Files

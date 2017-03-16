@@ -30,11 +30,22 @@ import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/
 import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
 
 @Component({
-    templateUrl: 'slide2.html',
-    selector: 'slide2'
+  templateUrl: 'slide2.html',
+  selector: 'slide2',
+  providers: [AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage, NewPrivateDiscussionPage]
 })
 export class slide2Page {
-    constructor(public nav: NavController,
+
+  activeCouncilsCount;
+  assignmentsCount;
+  councilDiscussionsCount;
+  agendasCount;
+  //@ViewChild(Nav) nav: Nav;
+  rootPage: any = DisplayPage;
+  userObj: FirebaseObjectObservable<any>;
+  userSubscription: Subscription;
+
+  constructor(public nav: NavController,
     public af: AngularFire,
     public appService: AppService,
     public actionSheetCtrl: ActionSheetController,
@@ -45,10 +56,26 @@ export class slide2Page {
     public councilDiscussionsListPage: CouncilDiscussionsListPage,
     public agendaPage: AgendasPage) {
 
-  
+    this.userObj = null;
+
+    this.userSubscription = this.af.auth.subscribe(auth => {
+      if (auth !== null) {
+        this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
+          this.userObj = usrs[0];
+          localStorage.setItem('unitType', usrs[0].unittype)
+          localStorage.setItem('unitNumber', usrs[0].unitnumber.toString())
+          localStorage.setItem('userCouncils', usrs[0].councils.toString())
+        });
+      };
+    });
+
+    this.activeCouncilsCount = activeCouncilsPage.getCount();
+    this.assignmentsCount = assignmentsListPage.getCount();
+    this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
+    this.agendasCount = agendaPage.getCount();
 
   }
-    councilsPage() { debugger;
+  councilsPage() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Councils',
       buttons: [
@@ -57,8 +84,7 @@ export class slide2Page {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-
-            //this.nav.setRoot(NewCouncilPage);
+            this.nav.setRoot(NewAgendaPage);
 
           }
         },
@@ -66,6 +92,8 @@ export class slide2Page {
           text: 'Add Discussion',
           cssClass: "actionsheet-items",
           handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewCouncilDiscussionPage);
           }
         },
         {
@@ -75,8 +103,7 @@ export class slide2Page {
           handler: () => {
 
             this.menuctrl.close();
-           // this.nav.push(InviteMemberPage);
-
+            this.nav.push(NewAssignmentPage);
           }
         },
         {
@@ -98,4 +125,17 @@ export class slide2Page {
     actionSheet.present();
   }
 
+  agendasPage() {
+    this.nav.setRoot(AgendasPage);
+
+  }
+  discussionsPage() {
+    this.nav.push(CouncilDiscussionsListPage);
+
+  }
+  assignmentsPage() {
+    this.nav.push(AssignmentsListPage);
+
+  }
+ 
 }
