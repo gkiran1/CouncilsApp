@@ -3,6 +3,7 @@ import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { WelcomePage } from '../menu/menu';
+import { AgendasPage } from '../agendas/agendas';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -128,13 +129,13 @@ export class AgendaPage {
   edit(value) {
     let formattedAgendaObj = this.formatAgendaObj(value);
     this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
-      .then(res => { this.showAlert('Agenda has been updated.'); this.nav.pop(); })
+      .then(res => { this.showAlert('Agenda has been updated.'); this.nav.setRoot(AgendasPage); })
       .catch(err => { this.showAlert('Unable to updated the Agenda, please try after some time.') })
   }
 
   delete() {
     this.firebaseservice.removeAgenda(this.agendaKey)
-      .then(res => { this.showAlert('Agenda has been deleted.'); this.nav.pop(); })
+      .then(res => { this.showAlert('Agenda has been deleted.'); this.nav.setRoot(AgendasPage); })
       .catch(err => { this.showAlert('Unable to delete the Agenda, please try after some time.') })
   }
 

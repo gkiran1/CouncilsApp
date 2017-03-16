@@ -17,6 +17,7 @@ export class AgendasPage {
     //subject = new Subject();
     count$ = new Subject();
     constructor(public nav: NavController, public as: AppService, public firebaseservice: FirebaseService) {
+        this.agendasArray = [];
         if (localStorage.getItem('userCouncils') !== null) {
             var councilsIds = localStorage.getItem('userCouncils').split(',');
             councilsIds.forEach(councilId => {
