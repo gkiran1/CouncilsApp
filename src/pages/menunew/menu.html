@@ -39,13 +39,14 @@
         </md-card>-->
         <slide1 *ngIf=step></slide1>
         <slide2 *ngIf=!step></slide2>
+
+
+    </ion-content>
+    <ion-footer text-center>
         <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
             <span class="swiper-pagination-bullet " [class.active]=step (click)="$event.target.classList.contains('active') || getDataForTable($event)"></span>
             <span class="swiper-pagination-bullet" [class.active]=!step (click)="$event.target.classList.contains('active') || getData($event)"></span>
         </div>
-
-    </ion-content>
-    <ion-footer text-center>
         <button ion-button class="signOutbtn" name="SignOut" clear menuToggle text-capitalize (click)="signOut()">
             Sign Out
         </button>
