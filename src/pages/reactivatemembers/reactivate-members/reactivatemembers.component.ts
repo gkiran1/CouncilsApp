@@ -69,7 +69,7 @@ export class ReactivateMembersPage {
         }
     }
 
-    cancel() {
+    back() {
         this.nav.pop();
     }
 

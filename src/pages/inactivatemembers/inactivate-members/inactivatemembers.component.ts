@@ -71,7 +71,7 @@ export class InactivateMembersPage {
         actionSheet.present();
     }
 
-    cancel() {
+    back() {
         this.nav.pop();
     }
 
