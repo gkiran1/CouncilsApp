@@ -62,7 +62,7 @@ export class TransferAdminRightsPage {
         alert.present();
     }
 
-    cancel() {
+    back() {
         this.nav.pop();
     }
 
