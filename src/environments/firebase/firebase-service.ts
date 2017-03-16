@@ -8,6 +8,10 @@ import { Headers, Http, Response } from "@angular/http";
 import { Invitee } from '../../pages/invite/invitee.model';
 import { Observable, Subject } from "rxjs/Rx";
 import { Council } from '../../pages/new-council/council';
+import {
+    Auth, UserDetails, IDetailedError,
+    Push, PushToken
+} from '@ionic/cloud-angular';
 
 @Injectable()
 export class FirebaseService {
@@ -15,7 +19,7 @@ export class FirebaseService {
     fireAuth: any;
     rootRef: any;
 
-    constructor(private af: AngularFire) {
+    constructor(private af: AngularFire, public ionicAuth: Auth) {
         this.fireAuth = firebase.auth();
         this.rootRef = firebase.database().ref();
     }
@@ -26,15 +30,18 @@ export class FirebaseService {
                 // Sign in the user.
                 return this.fireAuth.signInWithEmailAndPassword(user.email, user.password)
                     .then((authenticatedUser) => {
-                        // Successful login, create user profile.
-                        return this.createAuthUser(user, authenticatedUser.uid);
+                        let details: UserDetails = { 'email': user.email, 'password': user.password };
+                        return this.ionicAuth.signup(details).then(() => {
+                            // Successful login in firebase and ionic, create user profile.
+                            this.createAuthUser(user, authenticatedUser.uid);
+                        }).catch(function (error) {
+                            throw error;
+                        })
                     }).catch(function (error) {
                         throw error;
-                        //alert(error.message);
                     });
             }).catch(function (error) {
                 throw error;
-                //alert(error.message);
             });
     }
 
@@ -62,10 +69,16 @@ export class FirebaseService {
             }));
     }
 
-
     validateUser(email: string, password: string) {
         return this.fireAuth.signInWithEmailAndPassword(email, password)
-            .then((authenticatedUser) => { return authenticatedUser.uid })
+            .then((authenticatedUser) => {
+                let details: UserDetails = { 'email': email, 'password': password };
+                return this.ionicAuth.login('basic', details).then(() => {
+                    return authenticatedUser.uid;
+                }).catch(err => {
+                    throw err;
+                })
+            })
             .catch(err => {
                 throw err;
             });
@@ -74,7 +87,6 @@ export class FirebaseService {
     findUserByKey(userUid: string): Observable<User> {
         return this.af.database.object('users/' + userUid).map(result => result);
     }
-
 
     findInviteeByEmail(email: string): Observable<Invitee> {
         return this.af.database.list('invitees', {
@@ -283,6 +295,7 @@ export class FirebaseService {
 
     signOut() {
         return this.fireAuth.signOut().then(() => {
+            this.ionicAuth.logout();
             console.log('Sign Out successfully..')
         }).catch(err => {
             throw err;

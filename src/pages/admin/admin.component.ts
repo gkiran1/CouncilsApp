@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { InactivateMembersPage } from '../inactivatemembers/inactivate-members/inactivatemembers.component';
 import { ReactivateMembersPage } from '../reactivatemembers/reactivate-members/reactivatemembers.component';
 import { TransferAdminRightsPage } from '../transferadminrights/transfer-adminrights/transferadminrights.component';
+import { InviteMemberPage } from '../invite/invite'
 
 @Component({
     selector: 'admin-page',
@@ -23,5 +24,9 @@ export class AdminPage {
 
     transferAdminRights() {
         this.navCtrl.push(TransferAdminRightsPage);
+    }
+
+    inviteMembers() {
+        this.navCtrl.push(InviteMemberPage);
     }
 }
