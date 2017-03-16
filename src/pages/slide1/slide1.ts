@@ -15,10 +15,13 @@ import { AdminPage } from '../admin/admin.component';
 })
 
 export class slide1Page {
-
+    isAdmin: boolean = false;
     constructor(public nav: NavController,
         public af: AngularFire) {
-
+        if (localStorage.getItem('isAdmin') === 'true') {
+            this.isAdmin = true;
+        }
+        console.log(this.isAdmin);
     }
 
     adminPage() {
