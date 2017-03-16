@@ -17,6 +17,15 @@
 
     <form [formGroup]="blankagendaForm" (ngSubmit)="blankagendaForm.value">
 
+        <!--<ion-list radio-group id="assignedcouncil" name="assignedcouncil" (ionChange)="assignedMemberChange(blankagendaForm.value)" [(ngModel)]='assignedcouncil'
+                formControlName="assignedcouncil">
+                <ion-item *ngFor="let c of councils| search:term" >{{c.council}}
+                 <ion-label color="dark">{{user.firstname}}</ion-label>
+                    <ion-radio [value]="c" color="secondary"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </ion-item-group>-->
+
         <ion-item>
             <ion-label floating>Council</ion-label>
             <ion-select name="assignedcouncil" (ionChange)="assignedMemberChange(blankagendaForm.value)" [(ngModel)]='assignedcouncil'
@@ -29,7 +38,16 @@
             <ion-col>
                 <ion-item>
                     <ion-label floating>Date</ion-label>
+
                     <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" [max]="2120" name="assigneddate" formControlName="assigneddate"></ion-datetime>
+
+                    <!--<ion-datetime displayFormat="DDDD, MMM D, YYYY, hh:mma" pickerFormat="DDDD, MMM D, YYYY, hh:mma" [min]="minDate" [max]="2120"
+                        name="assigneddate" formControlName="assigneddate" monthNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+                        monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec" dayNames="Mon, Tue, Wed, Thu, Fri, Sat, Sun"
+                        dayShortNames="Mon, Tue, Wed, Thu, Fri, Sat, Sun"></ion-datetime>-->
+
+                    <!--<ion-datetime displayFormat="DDDD MMM D, yyyy, hh:mma" pickerFormat="DDD MMM D, yyyy, hh:mma" [min]="minDate" [max]="2120"
+                        name="assigneddate" formControlName="assigneddate"></ion-datetime>-->
                 </ion-item>
             </ion-col>
 

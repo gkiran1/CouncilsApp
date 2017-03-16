@@ -56,6 +56,7 @@ import { NewPrivateDiscussionPage } from '../pages/discussions/new-private-discu
 import { OpenPrivateDiscussionPage } from '../pages/discussions/open-private-discussion/open-private-discussion';
 import { PrivateDiscussionsListPage } from '../pages/discussions/private-discussions-list/private-discussions-list';
 import { TransferCompletePage } from '../pages/transferadminrights/transfer-complete/transfercomplete.component';
+import { UnitTypeAgendaPage } from '../pages/unittype-agenda/unittype-agenda';
 import { CustomDateFormat } from '../pipes/custom-date-format';
 
 //Cloud Settings - Push Messaging
@@ -126,7 +127,8 @@ const cloudSettings: CloudSettings = {
     OpenPrivateDiscussionPage,
     PrivateDiscussionsListPage,
     TransferCompletePage,
-    CustomDateFormat
+    CustomDateFormat,
+    UnitTypeAgendaPage
   ],
 
   imports: [
@@ -182,7 +184,8 @@ const cloudSettings: CloudSettings = {
     NewPrivateDiscussionPage,
     OpenPrivateDiscussionPage,
     PrivateDiscussionsListPage,
-    TransferCompletePage
+    TransferCompletePage,
+    UnitTypeAgendaPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]

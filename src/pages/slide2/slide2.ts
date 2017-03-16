@@ -160,7 +160,7 @@ export class slide2Page {
   }
 
   agendasPage() {
-    this.nav.setRoot(AgendasPage);
+    this.nav.push(AgendasPage);
 
   }
   councilDiscussionsPage() {

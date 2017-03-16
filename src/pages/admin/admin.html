@@ -18,18 +18,19 @@
 <ion-content>
 	<ion-list inset>
 		<ng-container>
-			<ion-item>
+			<ion-item (click)="activeCouncils()">
 				<ion-label class="label-styles">Active Councils</ion-label>
 				<button ion-button item-right clear>   
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </button>
 			</ion-item>
-			<ion-item>
+			<ion-item (click)="createCouncils()">
 				<ion-label class="label-styles">Create Council</ion-label>
 				<button ion-button item-right clear>   
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </button>
 			</ion-item>
+
 			<ion-item (click)="inviteMembers()">
 				<ion-label class="label-styles"> Invite Member</ion-label>
 				<button ion-button item-right clear>   

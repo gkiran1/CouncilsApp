@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { WelcomePage } from '../menu/menu';
 import { AgendaPage } from '../agenda/agenda';
 import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
+import { UnitTypeAgendaPage } from '../unittype-agenda/unittype-agenda';
 
 @Component({
     templateUrl: 'new-agenda.html',
@@ -17,8 +18,8 @@ export class NewAgendaPage {
         this.unitType = localStorage.getItem('unitType');
     }
 
-    agenda() {
-        // this.nav.push(AgendaPage);
+    unittypeagenda() {
+         this.nav.push(UnitTypeAgendaPage);
     }
 
     blankagenda() {    

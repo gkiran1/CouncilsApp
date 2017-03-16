@@ -16,7 +16,7 @@
     <form [formGroup]="NewPrivateDiscussionForm" (ngSubmit)="NewPrivateDiscussionForm.value">
         <ion-item-group>
             <ion-list radio-group id="otheruser" name="otheruser" formControlName="otherUser">
-                <ion-item *ngFor="let user of users | search:term">
+                <ion-item *ngFor="let user of users | search:term:'firstname'">
                     <ion-label color="dark">{{user.firstname}}</ion-label>
                     <ion-radio [value]="user" color="secondary"></ion-radio>
                 </ion-item>
