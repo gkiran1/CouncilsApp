@@ -32,13 +32,14 @@ import { PrivateDiscussionsListPage } from '../discussions/private-discussions-l
 @Component({
   templateUrl: 'slide2.html',
   selector: 'slide2',
-  providers: [AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage, NewPrivateDiscussionPage]
+  providers: [AssignmentsListPage, ActiveCouncilsPage, CouncilDiscussionsListPage, AgendasPage, PrivateDiscussionsListPage]
 })
 export class slide2Page {
 
   activeCouncilsCount;
   assignmentsCount;
   councilDiscussionsCount;
+  privateDiscussionsCount
   agendasCount;
   //@ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
@@ -54,7 +55,8 @@ export class slide2Page {
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService,
     public councilDiscussionsListPage: CouncilDiscussionsListPage,
-    public agendaPage: AgendasPage) {
+    public agendaPage: AgendasPage,
+    public privateDiscussionsListPage:PrivateDiscussionsListPage) {
 
     this.userObj = null;
 
@@ -72,6 +74,7 @@ export class slide2Page {
     this.activeCouncilsCount = activeCouncilsPage.getCount();
     this.assignmentsCount = assignmentsListPage.getCount();
     this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
+    this.privateDiscussionsCount = privateDiscussionsListPage.getCount();
     this.agendasCount = agendaPage.getCount();
 
   }
@@ -124,18 +127,51 @@ export class slide2Page {
 
     actionSheet.present();
   }
+  privatePage(){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Private',
+      buttons: [
+        {
+          text: 'Add Discussion',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewPrivateDiscussionPage);
+          }
+        },
+        {
+          text: 'Add Note',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            // this.menuctrl.close();
+            // this.nav.push();
+          }
+        },
+        {
+          text: 'Cancel',
+          cssClass: "actionsheet-cancel",
+          handler: () => {
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
+  }
 
   agendasPage() {
     this.nav.setRoot(AgendasPage);
 
   }
-  discussionsPage() {
+  councilDiscussionsPage() {
     this.nav.push(CouncilDiscussionsListPage);
 
   }
   assignmentsPage() {
     this.nav.push(AssignmentsListPage);
-
+  }
+  privateDiscussionPage(){
+    this.nav.push(PrivateDiscussionsListPage);
   }
  
 }

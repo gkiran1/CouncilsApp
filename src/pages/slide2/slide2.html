@@ -9,7 +9,7 @@
                     Agendas <span class="count">{{agendasCount | async}}</span>
                 </button>
 
-    <button clear secondary class="listbtn2" ion-button name="discussionsPage" menuToggle block (click)="discussionsPage()" text-capitalize>
+    <button clear secondary class="listbtn2" ion-button name="discussionsPage" menuToggle block (click)="councilDiscussionsPage()" text-capitalize>
         Discussions <span class="count">{{councilDiscussionsCount | async}}</span>
                 </button>
 
@@ -26,7 +26,7 @@
                 </button>
     </ion-row>
 
-    <button clear menuToggle ion-button color="secondary" name="privatediscussionPage" class="listbtn2" block (click)="privatediscussionPage()" text-capitalize>Discussions</button>
+    <button clear menuToggle ion-button color="secondary" name="privatediscussionPage" class="listbtn2" block (click)="privateDiscussionPage()" text-capitalize>Discussions <span class="count">{{privateDiscussionsCount | async}}</span></button>
 
     <button clear menuToggle ion-button color="secondary" name="notesPage" class="listbtn2" clear block (click)="notesPage()" text-capitalize>Notes</button>
 
