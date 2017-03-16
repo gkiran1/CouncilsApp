@@ -36,7 +36,7 @@ export class NewCouncilDiscussionPage {
     value.createdDate = moment().toISOString();
     value.councilid = value.council.$key;
     value.councilname = value.council.council;
-    console.log('create method', value);
+    value.lastMsg = '';
     this.firebaseservice.createDiscussion(value)
       .then(discussionId => {
         console.log("discussion created successfully...", discussionId);
