@@ -18,7 +18,9 @@ export class TransferAdminRightsPage {
     constructor(public af: AngularFire,
         private firebaseService: FirebaseService,
         private nav: NavController,
-        private alertCtrl: AlertController
+        private alertCtrl: AlertController,
+        private actionSheetCtrl: ActionSheetController,
+        private menuctrl: MenuController
     ) {
 
         this.af.auth.subscribe(auth => {
@@ -45,13 +47,41 @@ export class TransferAdminRightsPage {
         })
     }
 
-    transferAdminRights(user) {
+    transferAdminRights1(user) {
         this.firebaseService.transferAdminRights(this.currentAdminId, user.$key)
             .then(() => {
                 this.nav.push(TransferCompletePage, { newAdmin: user });
             })
             .catch(err => { this.showAlert('Unable to transfer admin rights now, please try after some time') });
     }
+
+    transferAdminRights(user) {
+        let actionSheet = this.actionSheetCtrl.create({
+            buttons: [
+                {
+                    text: 'Confirm Transfer',
+                    cssClass: "actionsheet-items",
+                    handler: () => {
+                        this.menuctrl.close();
+                        this.firebaseService.transferAdminRights(this.currentAdminId, user.$key)
+                            .then(() => {
+                                localStorage.setItem('isAdmin', 'false');
+                                this.nav.push(TransferCompletePage, { newAdmin: user });
+                            })
+                            .catch(err => { this.showAlert('Unable to transfer admin rights now, please try after some time') });
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    cssClass: "actionsheet-cancel",
+                    handler: () => {
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    }
+
 
     showAlert(errText) {
         let alert = this.alertCtrl.create({
