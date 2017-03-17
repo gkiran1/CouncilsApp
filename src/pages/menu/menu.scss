@@ -112,12 +112,11 @@ page-welcome {
         opacity: 1;
         background: #3cb18a;
     }
-    .swiper-pagination {
-        position: relative;
-        bottom: 0;
-    }
     .swiper-pagination-bullet {
         margin-right: 10pt;
+    }
+    .swiper-pagination-bullet-active {
+        background: #3cb18a;
     }
 }
 

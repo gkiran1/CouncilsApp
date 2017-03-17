@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,ViewChild} from '@angular/core';
 import { Nav, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { DisplayPage } from '../display/display';
@@ -27,7 +27,8 @@ import { slide2Page } from '../slide2/slide2';
 import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/new-private-discussion';
 import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
 import { Input, OnInit, OnChanges, SimpleChanges, ElementRef,  AfterViewChecked, AfterViewInit, NgZone } from '@angular/core';
-declare var Swiper: any;
+import { Slides } from 'ionic-angular';
+
 
 @Component({
   selector: 'page-welcome',
@@ -36,6 +37,7 @@ declare var Swiper: any;
 })
 
 export class WelcomePage implements OnInit{
+  @ViewChild('switcher') switcher: Slides;
   step:boolean = true;
   images: string[];
  config: Object = {
@@ -86,7 +88,10 @@ export class WelcomePage implements OnInit{
 
   }
   ngOnInit() {
-    }
+  }
+  menuOpened() {
+    this.switcher.update();
+  }
    loadImages() {
         this.images = [
             'http://api.randomuser.me/portraits/thumb/men/1.jpg',
