@@ -16,6 +16,8 @@ import { AssignmentsListPage } from '../assignments/assignments-list/assignments
 import { CouncilDiscussionsListPage } from '../discussions/council-discussions-list/council-discussions-list'
 import { Subscription } from "rxjs";
 import { GoodbyePage } from '../goodbye/goodbye';
+import { WelcomePage } from '../menu/menu';
+
 @Component({
     selector: 'settings-page',
     templateUrl: 'settings.html',
@@ -59,5 +61,8 @@ export class SettingsPage {
             this.navCtrl.setRoot(GoodbyePage);
             alert(err);
         })
+    }
+    back() {
+        this.navCtrl.setRoot(WelcomePage);
     }
 }
