@@ -375,7 +375,6 @@ export class FirebaseService {
                     this.af.database.list(`discussions/${discussion.$key}/messages`).subscribe(messages => {
                         messages.forEach(message => {
                             if (userUid === message.userId) {
-                                console.log('discussion/messages========>', userUid, message.$key, avatar);
                                 this.af.database.object(`discussions/${discussion.$key}/messages/${message.$key}`).update({
                                     user_firstname: firstname,
                                     user_lastname: lastname,
@@ -411,7 +410,6 @@ export class FirebaseService {
                     this.af.database.list(`privatediscussions/${discussion.$key}/messages`).subscribe(messages => {
                         messages.forEach(message => {
                             if (userUid === message.userId) {
-                                console.log('privatediscussions/messages========>', userUid, message.$key, avatar);
                                 this.af.database.object(`privatediscussions/${discussion.$key}/messages/${message.$key}`).update({
                                     user_firstname: firstname,
                                     user_lastname: lastname,
