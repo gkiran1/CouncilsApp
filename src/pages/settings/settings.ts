@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController,ActionSheetController, MenuController } from 'ionic-angular';
+import { NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { InactivateMembersPage } from '../inactivatemembers/inactivate-members/inactivatemembers.component';
 import { ReactivateMembersPage } from '../reactivatemembers/reactivate-members/reactivatemembers.component';
 import { TransferAdminRightsPage } from '../transferadminrights/transfer-adminrights/transferadminrights.component';
@@ -24,16 +24,16 @@ import { GoodbyePage } from '../goodbye/goodbye';
 })
 
 export class SettingsPage {
-    userSubscription: Subscription;
-    constructor(private navCtrl: NavController,    
-    public appService: AppService,
-    public actionSheetCtrl: ActionSheetController,
-    public menuctrl: MenuController,
-    public assignmentsListPage: AssignmentsListPage,
-    public activeCouncilsPage: ActiveCouncilsPage,
-    private firebaseService: FirebaseService,
-    public councilDiscussionsListPage: CouncilDiscussionsListPage,
-    public agendaPage: AgendasPage) { }
+    // userSubscription: Subscription;
+    constructor(private navCtrl: NavController,
+        public appService: AppService,
+        public actionSheetCtrl: ActionSheetController,
+        public menuctrl: MenuController,
+        public assignmentsListPage: AssignmentsListPage,
+        public activeCouncilsPage: ActiveCouncilsPage,
+        private firebaseService: FirebaseService,
+        public councilDiscussionsListPage: CouncilDiscussionsListPage,
+        public agendaPage: AgendasPage) { }
 
     viewEditProfilePage() {
         this.navCtrl.push(EditProfilePage);
@@ -45,19 +45,19 @@ export class SettingsPage {
         this.navCtrl.push(AboutPage);
     }
     signOut() {
-    this.appService.userSubscription.unsubscribe();
-    this.userSubscription.unsubscribe();
-    this.assignmentsListPage.userSubscription.unsubscribe();
-    this.activeCouncilsPage.userSubscription.unsubscribe();
-    this.councilDiscussionsListPage.userSubscription.unsubscribe();
-    localStorage.setItem('securityToken', null);
-    localStorage.setItem('isUserLoggedIn', 'false');
-    this.firebaseService.signOut().then(() => {
-      console.log('Sign Out successfully..');
-      this.navCtrl.setRoot(GoodbyePage);
-    }).catch(err => {
-      this.navCtrl.setRoot(GoodbyePage);
-      alert(err);
-    })
-  }
+        this.appService.userSubscription.unsubscribe();
+        //  this.userSubscription.unsubscribe();
+        this.assignmentsListPage.userSubscription.unsubscribe();
+        this.activeCouncilsPage.userSubscription.unsubscribe();
+        this.councilDiscussionsListPage.userSubscription.unsubscribe();
+        localStorage.setItem('securityToken', null);
+        localStorage.setItem('isUserLoggedIn', 'false');
+        this.firebaseService.signOut().then(() => {
+            console.log('Sign Out successfully..');
+            this.navCtrl.setRoot(GoodbyePage);
+        }).catch(err => {
+            this.navCtrl.setRoot(GoodbyePage);
+            alert(err);
+        })
+    }
 }

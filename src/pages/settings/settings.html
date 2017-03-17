@@ -14,46 +14,52 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content>    
-            <ion-item-divider class="empty"></ion-item-divider>
-            <ion-item (click)="viewEditProfilePage()">
-                <ion-label class="label-styles">Edit Profile</ion-label>
-                <button ion-button item-right clear>   
+<ion-content>
+    <ion-item-divider class="empty"></ion-item-divider>
+    <ion-item (click)="viewEditProfilePage()">
+        <ion-label class="label-styles">Edit Profile</ion-label>
+        <button ion-button item-right clear>   
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </button>
-            </ion-item>
-            <ion-item-divider class="empty"></ion-item-divider>
-            <ion-item>
-                <ion-label class="label-styles">Push Notifications</ion-label>
-                <button ion-button item-right clear>   
+    </ion-item>
+    <ion-item-divider class="empty"></ion-item-divider>
+    <ion-item>
+        <ion-label class="label-styles">Push Notifications</ion-label>
+        <button ion-button item-right clear>   
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </button>
-            </ion-item>
-            <ion-item-divider class="empty"></ion-item-divider>
-            <ion-item>
-                <ion-label class="label-styles">Add Google Calender</ion-label>
-                <button ion-button item-right clear>   
+    </ion-item>
+    <ion-item-divider class="empty"></ion-item-divider>
+    <ion-item>
+        <ion-label class="label-styles">Add Google Calender</ion-label>
+        <button ion-button item-right clear>   
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </button>
-            </ion-item>
-            <ion-item-divider class="empty"></ion-item-divider>
-            <ion-item (click)="viewFeedbackPage()">
-                <ion-label class="label-styles">Submit Feedback</ion-label>
-                <button ion-button item-right clear>   
+    </ion-item>
+    <ion-item-divider class="empty"></ion-item-divider>
+    <ion-item (click)="viewFeedbackPage()">
+        <ion-label class="label-styles">Submit Feedback</ion-label>
+        <button ion-button item-right clear>   
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </button>
-            </ion-item>
-            <ion-item>
-                <ion-label class="label-styles">Rate Councils</ion-label>
-                <button ion-button item-right clear>   
+    </ion-item>
+    <ion-item>
+        <ion-label class="label-styles">Rate Councils</ion-label>
+        <button ion-button item-right clear>   
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </button>
-            </ion-item>
-            <ion-item (click)="viewAboutUSPage()">
-                <ion-label class="label-styles">About</ion-label>
-                <button ion-button item-right clear>   
+    </ion-item>
+    <ion-item (click)="viewAboutUSPage()">
+        <ion-label class="label-styles">About</ion-label>
+        <button ion-button item-right clear>   
            <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </button>
-            </ion-item>
-            <ion-item-divider class="empty"></ion-item-divider>                 
+    </ion-item>
+    <ion-item (click)="signOut()">
+        <ion-label class="signout">Sign Out</ion-label>
+        <button ion-button item-right clear>   
+           <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+        </button>
+    </ion-item>
+    <ion-item-divider class="empty"></ion-item-divider>
 </ion-content>

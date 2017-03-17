@@ -1,5 +1,6 @@
 settings-page {
-    .item-md.item-block .item-inner,.item-ios.item-block .item-inner{
+    .item-md.item-block .item-inner,
+    .item-ios.item-block .item-inner {
         border: none !important;
     }
     .menuicon {
@@ -22,9 +23,14 @@ settings-page {
         font-size: 1.2em !important;
         color: #35373a !important;
     }
-    .empty{    
-    height: 25pt;
-    background-color: #f7f7f7;
-    border: none !important;    
-}
+    .signout {
+        font-family: Bernina-Regular !important;
+        font-size: 1.2em !important;
+        color: #F13822 !important;
+    }
+    .empty {
+        height: 25pt;
+        background-color: #f7f7f7;
+        border: none !important;
+    }
 }
