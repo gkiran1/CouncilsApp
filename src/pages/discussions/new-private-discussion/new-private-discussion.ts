@@ -12,10 +12,18 @@ import * as moment from 'moment';
 })
 export class NewPrivateDiscussionPage {
   NewPrivateDiscussionForm: FormGroup;
-  users;
+  users = [];
   term: string = '';
   constructor(fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
     appservice.getUser().subscribe(user => {
+      // user.councils.forEach(council => {
+      //   this.users = [];
+      //   this.firebaseservice.getUsersByCouncil(council).subscribe(usercouncils => {
+      //     usercouncils.forEach(usercouncil => {
+      //       this.users.push(this.firebaseservice.getUserObjByKey(usercouncil.userid));
+      //     });
+      //   });
+      // });
       this.firebaseservice.getUsers().subscribe(u => {
         this.users = u.filter(e => {
           return e.councils.some(c => {
@@ -28,10 +36,10 @@ export class NewPrivateDiscussionPage {
         createdDate: '',
         createdUserId: appservice.uid,
         createdUserName: user.firstname + ' ' + user.lastname,
-        createdUserAvatar:user.avatar,
+        createdUserAvatar: user.avatar,
         isActive: true,
         messages: [],
-        lastMsg:''
+        lastMsg: ''
       });
     });
   }
