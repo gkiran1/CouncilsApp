@@ -118,6 +118,10 @@ page-welcome {
     .swiper-pagination-bullet-active {
         background: #3cb18a;
     }
+    .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets {
+        bottom: 20px;
+        position: fixed;
+    }
 }
 
 .actionsheet-items {
