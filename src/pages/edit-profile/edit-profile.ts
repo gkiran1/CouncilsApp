@@ -3,13 +3,14 @@ import { Nav, NavController, AlertController, ActionSheetController, MenuControl
 import { ChangePasswordPage } from '../edit-profile/change-password';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { WelcomePage } from '../menu/menu';
+//import { WelcomePage } from '../menu/menu';
 import { User } from '../../user/user';
 import { Toast } from 'ionic-native';
 import { Camera } from 'ionic-native';
 import * as firebase from 'firebase';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Subscription } from "rxjs";
+import { SettingsPage } from '../settings/settings';
 
 @Component({
     selector: 'edit-profile',
@@ -42,7 +43,7 @@ export class EditProfilePage {
 
         this.profile = new User;
 
-        this.profilePictureRef = firebase.storage().ref('/users/'+this.profile.$key);
+        this.profilePictureRef = firebase.storage().ref('/users/' + this.profile.$key);
 
         this.userSubscription = this.af.auth.subscribe(auth => {
             if (auth !== null) {
@@ -79,7 +80,7 @@ export class EditProfilePage {
         if (this.isChangeflag) {
             this.showAlertPopup('failure', 'There are unsaved changes.do you want to discard it ?');
         } else {
-            this.nav.setRoot(WelcomePage);
+            this.nav.setRoot(SettingsPage);
         }
     }
     showAlert(reason, text) {
@@ -95,7 +96,7 @@ export class EditProfilePage {
             title: '',
             subTitle: text,
             buttons: [
-                { text: 'OK', handler: () => this.nav.push(WelcomePage) },
+                { text: 'OK', handler: () => this.nav.push(SettingsPage) },
                 { text: 'Cancel' }
             ]
         });
