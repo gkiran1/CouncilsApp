@@ -28,7 +28,8 @@ import { AboutPage } from '../pages/about/about';
 import { SubmitFeedbackPage } from '../pages/feedback/submit-feedback/submit-feedback';
 import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-feedback';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
-import { NewCouncilFilePage } from '../pages/files/new-council-file';
+import { NewCouncilFilePage } from '../pages/files/new-council-file/new-council-file';
+import { OpenCouncilFilePage } from '../pages/files/open-council-file/open-council-file';
 import { ChangePasswordPage } from '../pages/edit-profile/change-password';
 import { GoodbyePage } from '../pages/goodbye/goodbye';
 import { FormsModule } from '@angular/forms';
@@ -39,6 +40,7 @@ import { AgendaPage } from '../pages/agenda/agenda';
 //Ionic Push Module
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { AdminPage } from '../pages/admin/admin.component';
+import { SettingsPage } from '../pages/settings/settings';
 import { InactivateMembersPage } from '../pages/inactivatemembers/inactivate-members/inactivatemembers.component';
 import { MemberInactivatedPage } from '../pages/inactivatemembers/member-inactivated/memberinactivated.component';
 import { ReactivateMembersPage } from '../pages/reactivatemembers/reactivate-members/reactivatemembers.component';
@@ -105,11 +107,13 @@ const cloudSettings: CloudSettings = {
     EditProfilePage,
     ChangePasswordPage,
     NewCouncilFilePage,
+    OpenCouncilFilePage,
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
     OpenCouncilDiscussionPage,
     AdminPage,
+    SettingsPage,
     InactivateMembersPage,
     MemberInactivatedPage,
     ReactivateMembersPage,
@@ -166,11 +170,13 @@ const cloudSettings: CloudSettings = {
     EditProfilePage,
     ChangePasswordPage,
     NewCouncilFilePage,
+    OpenCouncilFilePage,
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
     OpenCouncilDiscussionPage,
     AdminPage,
+    SettingsPage,
     InactivateMembersPage,
     MemberInactivatedPage,
     ReactivateMembersPage,

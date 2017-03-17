@@ -8,6 +8,7 @@ import { AgendaPage } from '../agenda/agenda';
 import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AdminPage } from '../admin/admin.component';
+import { SettingsPage } from '../settings/settings';
 
 @Component({
     templateUrl: 'slide1.html',
@@ -26,5 +27,8 @@ export class slide1Page {
 
     adminPage() {
         this.nav.setRoot(AdminPage);
+    }
+    settingsPage() {
+        this.nav.setRoot(SettingsPage);
     }
 }
