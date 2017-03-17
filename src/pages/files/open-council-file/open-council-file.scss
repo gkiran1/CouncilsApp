@@ -1,0 +1,28 @@
+open-council-file-page{
+    .ion-ios-arrow-round-back {
+        font-size: 36pt !important;
+    }
+    .ion-md-arrow-back{
+        position: absolute;
+        top: 15px;
+    }
+    ion-header .button-ios{
+        margin: 0;
+        padding: 0;
+        height: inherit;
+    }
+    ion-header .button-md{
+        margin: 0;
+        height: inherit;
+    }
+    ion-footer .button-md,ion-footer .button-ios{
+        padding: 0;
+    }
+    .image-content{
+        position: absolute;
+        bottom: 0;
+    }
+    .empty{    
+    height: 25pt;    
+}
+}

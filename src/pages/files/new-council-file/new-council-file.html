@@ -28,5 +28,5 @@
 </ion-content>
 
 <ion-footer>
-    <button ion-button color="secondary" clear block [disabled]="!newCouncilFileForm.valid" (click)="chooseFileActionsPage()">Choose File</button>
+    <button ion-button color="secondary" clear block [disabled]="!newCouncilFileForm.valid" (click)="chooseFileActionsPage(newCouncilFileForm.value)">Choose File</button>
 </ion-footer>
