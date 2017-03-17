@@ -21,7 +21,7 @@ import { WelcomePage } from '../menu/menu';
 @Component({
     selector: 'settings-page',
     templateUrl: 'settings.html',
-    providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage]
+    providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, CouncilDiscussionsListPage, AgendasPage]
 
 })
 

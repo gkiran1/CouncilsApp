@@ -166,14 +166,14 @@ export class slide2Page {
 
   }
   councilDiscussionsPage() {
-    this.nav.setRoot(CouncilDiscussionsListPage);
+    this.nav.push(CouncilDiscussionsListPage);
 
   }
   assignmentsPage() {
-    this.nav.setRoot(AssignmentsListPage);
+    this.nav.push(AssignmentsListPage);
   }
   privateDiscussionPage() {
-    this.nav.setRoot(PrivateDiscussionsListPage);
+    this.nav.push(PrivateDiscussionsListPage);
   }
 
 }
