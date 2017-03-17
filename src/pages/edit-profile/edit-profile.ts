@@ -42,7 +42,7 @@ export class EditProfilePage {
 
         this.profile = new User;
 
-        this.profilePictureRef = firebase.storage().ref('/users/');
+        this.profilePictureRef = firebase.storage().ref('/users/'+this.profile.$key);
 
         this.userSubscription = this.af.auth.subscribe(auth => {
             if (auth !== null) {

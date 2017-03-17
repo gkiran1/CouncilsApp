@@ -364,20 +364,58 @@ export class FirebaseService {
 
     updateProfile(userUid: string, firstname, lastname, email, phone, ldsusername, avatar) {
         return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername, avatar }).then(() => {
-            //user profile needs to be updated in discussions node as well.
+            // user profile needs to be updated in discussions node as well.
             this.af.database.list('discussions').subscribe(discussions => {
                 discussions.forEach(discussion => {
-                    if(userUid === discussion.createdBy){
+                    if (userUid === discussion.createdBy) {
                         this.af.database.object(`discussions/${discussion.$key}`).update({
-                            createdUser:firstname + ' ' + lastname
+                            createdUser: firstname + ' ' + lastname
                         });
                     }
                     this.af.database.list(`discussions/${discussion.$key}/messages`).subscribe(messages => {
                         messages.forEach(message => {
                             if (userUid === message.userId) {
+                                console.log('discussion/messages========>', userUid, message.$key, avatar);
                                 this.af.database.object(`discussions/${discussion.$key}/messages/${message.$key}`).update({
-                                    user_firstname:firstname,
-                                    user_lastname:lastname
+                                    user_firstname: firstname,
+                                    user_lastname: lastname,
+                                    user_avatar: avatar
+                                });
+                            }
+                        });
+                    });
+                });
+            });
+            //updating privatediscussions
+            this.af.database.list('privatediscussions').subscribe(discussions => {
+                discussions.forEach(discussion => {
+                    if (userUid === discussion.createdUserId) {
+                        this.af.database.object(`privatediscussions/${discussion.$key}`).update({
+                            createdUserAvatar: avatar,
+                            createdUserName: firstname + ' ' + lastname
+                        });
+                    }
+                    if (userUid === discussion.otherUserId) {
+                        this.af.database.object(`privatediscussions/${discussion.$key}`).update({
+                            otherUserAvatar: avatar,
+                            otherUserName: firstname + ' ' + lastname
+                        });
+                    }
+                    if (userUid === discussion.lastMsg.userId) {
+                        this.af.database.object(`privatediscussions/${discussion.$key}/lastMsg`).update({
+                            user_firstname: firstname,
+                            user_lastname: lastname,
+                            user_avatar: avatar
+                        });
+                    }
+                    this.af.database.list(`privatediscussions/${discussion.$key}/messages`).subscribe(messages => {
+                        messages.forEach(message => {
+                            if (userUid === message.userId) {
+                                console.log('privatediscussions/messages========>', userUid, message.$key, avatar);
+                                this.af.database.object(`privatediscussions/${discussion.$key}/messages/${message.$key}`).update({
+                                    user_firstname: firstname,
+                                    user_lastname: lastname,
+                                    user_avatar: avatar
                                 });
                             }
                         });
@@ -389,7 +427,7 @@ export class FirebaseService {
             throw err;
         })
     }
- 
+
     getAllCouncils(counciltype: string): FirebaseListObservable<any[]> {
         return this.af.database.list('councils', {
             query: {
