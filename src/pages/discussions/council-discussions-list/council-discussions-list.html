@@ -20,8 +20,8 @@
             <ion-item-divider></ion-item-divider>
             <ion-item (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
                 <h3 class="topic">{{item.topic}}</h3><span class="right-align"><ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></span>
-                <p>{{item.lastMsg.text}}</p>
-                <span>{{item.lastMsg.createdDate | customdateformat}}</span>
+                <p>{{item.lastMsg}}</p>
+                <span> {{item.councilname}}</span><span class="right-align">{{item.createdDate | customdateformat}}</span>
             </ion-item>
         </ng-container>
         <ng-container *ngIf="!discussions.length">

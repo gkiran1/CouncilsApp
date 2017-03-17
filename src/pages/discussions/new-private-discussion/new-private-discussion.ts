@@ -28,14 +28,17 @@ export class NewPrivateDiscussionPage {
         createdDate: '',
         createdUserId: appservice.uid,
         createdUserName: user.firstname + ' ' + user.lastname,
+        createdUserAvatar:user.avatar,
         isActive: true,
-        messages: []
+        messages: [],
+        lastMsg:''
       });
     });
   }
   create(value) {
     value.otherUserId = value.otherUser.$key;
     value.otherUserName = value.otherUser.firstname + ' ' + value.otherUser.lastname;
+    value.otherUserAvatar = value.otherUser.avatar;
     value.createdDate = moment().toISOString();
     console.log('NewPrivateDiscussionForm------------>', value);
 

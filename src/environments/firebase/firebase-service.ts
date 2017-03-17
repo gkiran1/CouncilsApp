@@ -425,7 +425,8 @@ export class FirebaseService {
                 createdUser: discussion.createdUser,
                 createdBy: discussion.createdBy,
                 isActive: discussion.isActive,
-                messages: discussion.messages
+                messages: discussion.messages,
+                lastMsg: discussion.lastMsg
             })
             .then((res) => {
                 //to get a reference of newly added object -res.path.o[1]
@@ -461,7 +462,10 @@ export class FirebaseService {
         return this.af.database.object('agendas/' + agendaKey).remove();
     }
     updateDiscussionChat(discussionId, msg) {
-        return this.af.database.list(`discussions/${discussionId}/messages`).push(msg);
+        return this.af.database.list(`discussions/${discussionId}/messages`).push(msg)
+            .then(() => {
+                return this.af.database.object(`discussions/${discussionId}`).update({ lastMsg: msg.text });
+            })
     }
     getDiscussionByKey(key) {
         return this.af.database.object(`discussions/${key}`);
@@ -486,10 +490,13 @@ export class FirebaseService {
                 createdDate: discussion.createdDate,
                 createdUserId: discussion.createdUserId,
                 createdUserName: discussion.createdUserName,
+                createdUserAvatar: discussion.createdUserAvatar,
                 otherUserId: discussion.otherUserId,
                 otherUserName: discussion.otherUserName,
+                otherUserAvatar: discussion.otherUserAvatar,
                 isActive: discussion.isActive,
-                messages: discussion.messages
+                messages: discussion.messages,
+                lastMsg: discussion.lastMsg
             })
             .then((res) => {
                 //to get a reference of newly added object -res.path.o[1]
@@ -501,7 +508,10 @@ export class FirebaseService {
         return this.af.database.object(`privatediscussions/${key}`);
     }
     updatePrivateDiscussionChat(discussionId, msg) {
-        return this.af.database.list(`privatediscussions/${discussionId}/messages`).push(msg);
+        return this.af.database.list(`privatediscussions/${discussionId}/messages`).push(msg)
+            .then(() => {
+                return this.af.database.object(`privatediscussions/${discussionId}`).update({ lastMsg: msg });
+            })
     }
     getPrivateDiscussions() {
         return this.af.database.list('privatediscussions');
