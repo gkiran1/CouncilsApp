@@ -362,21 +362,34 @@ export class FirebaseService {
         return this.af.database.object('assignments/' + assignmentKey).remove();
     }
 
-    updateProfile(userUid: string, firstname, lastname, email, phone, ldsusername, guestpicture) {
-        return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername, guestpicture }).then(() => {
+    updateProfile(userUid: string, firstname, lastname, email, phone, ldsusername, avatar) {
+        return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername, avatar }).then(() => {
+            //user profile needs to be updated in discussions node as well.
+            this.af.database.list('discussions').subscribe(discussions => {
+                discussions.forEach(discussion => {
+                    if(userUid === discussion.createdBy){
+                        this.af.database.object(`discussions/${discussion.$key}`).update({
+                            createdUser:firstname + ' ' + lastname
+                        });
+                    }
+                    this.af.database.list(`discussions/${discussion.$key}/messages`).subscribe(messages => {
+                        messages.forEach(message => {
+                            if (userUid === message.userId) {
+                                this.af.database.object(`discussions/${discussion.$key}/messages/${message.$key}`).update({
+                                    user_firstname:firstname,
+                                    user_lastname:lastname
+                                });
+                            }
+                        });
+                    });
+                });
+            });
             return "user profile updated successfully..."
         }).catch(err => {
             throw err;
         })
     }
-    setAvatarInUser(avatar: any, userUid: string) {
-        return this.rootRef.child('users/' + userUid).update({ avatar: avatar }).then(() => {
-            return "user profile updated successfully..."
-        }).catch(err => {
-            throw err;
-        })
-    }
-
+ 
     getAllCouncils(counciltype: string): FirebaseListObservable<any[]> {
         return this.af.database.list('councils', {
             query: {

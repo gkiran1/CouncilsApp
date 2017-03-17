@@ -55,29 +55,19 @@ export class EditProfilePage {
 
     editProfile() {
         if ((new RegExp(/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/).test(this.profile.phone))) {
-            if (this.guestPicture != null) {
-                this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, this.guestPicture).then((savedPicture) => {
-                    this.profilePictureRef.child('profilePicture.png')
-                        .putString(this.guestPicture, 'base64', { contentType: 'image/png' })
-                        .then((savedPicture) => {
-                            // this.showAlert('picture',savedPicture.downloadURL);
-                            this.firebaseService.setAvatarInUser(savedPicture.downloadURL, this.profile.$key).then((res) => {
-                                this.showAlert('success', 'User profile updated successfully.')
-                                this.isChangeflag = false;
-                            }).catch(err => {
-                                this.showAlert('failure', err.message);
-                            })
-                        });
-                }).catch(err => this.showAlert('failure', err.message))
-            }
-            else {
-                this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, this.profile.avatar).then((savedPicture) => {
-                    this.showAlert('success', 'User profile updated successfully.')
-                }).catch(err => this.showAlert('failure', err.message))
-
-            }
-
-
+            this.guestPicture = this.guestPicture || '';
+            this.profilePictureRef.child('profilePicture.png')
+                .putString(this.guestPicture, 'base64', { contentType: 'image/png' })
+                .then((savedPicture) => {
+                    // this.showAlert('picture',savedPicture.downloadURL);
+                    let avatar = this.guestPicture ? savedPicture.downloadURL : this.profile.avatar;
+                    this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, avatar).then(res => {
+                        this.showAlert('success', 'User profile updated successfully.')
+                        this.isChangeflag = false;
+                    }).catch(err => {
+                        this.showAlert('failure', err.message);
+                    })
+                });
         } else {
             this.showAlert('failure', 'please enter valid phone number.');
         }
