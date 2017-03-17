@@ -47,14 +47,6 @@ export class TransferAdminRightsPage {
         })
     }
 
-    transferAdminRights1(user) {
-        this.firebaseService.transferAdminRights(this.currentAdminId, user.$key)
-            .then(() => {
-                this.nav.push(TransferCompletePage, { newAdmin: user });
-            })
-            .catch(err => { this.showAlert('Unable to transfer admin rights now, please try after some time') });
-    }
-
     transferAdminRights(user) {
         let actionSheet = this.actionSheetCtrl.create({
             buttons: [
