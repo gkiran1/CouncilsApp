@@ -90,7 +90,9 @@ export class WelcomePage implements OnInit{
   ngOnInit() {
   }
   menuOpened() {
+    
     this.switcher.update();
+    this.switcher.initialSlide = 1;
   }
    loadImages() {
         this.images = [
