@@ -15,27 +15,26 @@
 
 </ion-header>
 <ion-content>
-    <ion-item-group>
-        <ng-container *ngIf="discussions.length">
-            <ion-item-divider></ion-item-divider>
-            <ion-item (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
-                <ion-avatar item-left *ngIf="uid === item.createdUserId">
-                    <img [src]="item.otherUserAvatar" *ngIf="item.otherUserAvatar">
-                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!item.otherUserAvatar" />
-                </ion-avatar>
-                <h3 class="topic" *ngIf="uid === item.createdUserId">{{item.otherUserName}}</h3>
-                <ion-avatar item-left *ngIf="uid !== item.createdUserId">
-                    <img [src]="item.createdUserAvatar" *ngIf="item.createdUserAvatar">
-                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!item.createdUserAvatar" />
-                </ion-avatar>
-                <h3 class="topic" *ngIf="uid !== item.createdUserId">{{item.createdUserName}}</h3>
-                <span class="right-align"><ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></span>
-                <p>{{item.lastMsg.text}}</p>
-                <p>{{item.lastMsg.timestamp | customdateformat}}</p>
-            </ion-item>
-        </ng-container>
-        <ng-container *ngIf="isListEmpty">
-            <p class="text-content">There are no discussions</p>
-        </ng-container>
-    </ion-item-group>
+
+    <ng-container *ngIf="discussions.length">
+        <ion-item (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
+            <ion-avatar item-left *ngIf="uid === item.createdUserId">
+                <img [src]="item.otherUserAvatar" *ngIf="item.otherUserAvatar">
+                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!item.otherUserAvatar" />
+            </ion-avatar>
+            <h3 class="topic" *ngIf="uid === item.createdUserId">{{item.otherUserName}}</h3>
+            <ion-avatar item-left *ngIf="uid !== item.createdUserId">
+                <img [src]="item.createdUserAvatar" *ngIf="item.createdUserAvatar">
+                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!item.createdUserAvatar" />
+            </ion-avatar>
+            <h3 class="topic" *ngIf="uid !== item.createdUserId">{{item.createdUserName}}</h3>
+            <span class="right-align"><ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></span>
+            <p>{{item.lastMsg.text}}</p>
+            <p>{{item.lastMsg.timestamp | customdateformat}}</p>
+        </ion-item>
+    </ng-container>
+    <ng-container *ngIf="isListEmpty">
+        <p class="text-content">There are no discussions</p>
+    </ng-container>
+
 </ion-content>
