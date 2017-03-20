@@ -19,6 +19,7 @@ open-private-discussion-page{
         padding: 0;
     }
     .chat-content{
-          bottom: 0;
+        position: absolute;
+        bottom: 0;
     }
 }

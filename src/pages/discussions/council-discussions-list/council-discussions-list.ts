@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { OpenCouncilDiscussionPage } from '../open-council-discussion/open-council-discussion'
 import { NavController } from 'ionic-angular';
-import { Subject } from 'rxjs/Subject';
+import { Subject, Subscription } from 'rxjs';
+import { AngularFire } from 'angularfire2';
 
 @Component({
   templateUrl: 'council-discussions-list.html',
@@ -10,26 +12,27 @@ import { Subject } from 'rxjs/Subject';
 })
 export class CouncilDiscussionsListPage {
   discussions;
-  count$ = new Subject();
-  isListEmpty = false;
-  constructor(fs: FirebaseService, public nav: NavController) {
-    if (localStorage.getItem('userCouncils')) {
-      let councilsIds = localStorage.getItem('userCouncils').split(',');
-      fs.getDiscussions().subscribe(discussions => {
-        this.discussions = discussions.filter(discussion => {
-          return councilsIds.indexOf(discussion.councilid) !== -1;
+  subject = new Subject();
+  userSubscription: Subscription;
+  constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController) {
+    this.userSubscription = this.af.auth.subscribe(auth => {
+      if (auth !== null) {
+        this.as.getUser().subscribe(user => {
+          this.discussions = [];
+          fs.getDiscussions().subscribe(discussions => {
+            this.discussions = discussions.filter(discussion => {
+              return user.councils.indexOf(discussion.councilid) !== -1;
+            });
+            this.subject.next(this.discussions.length);
+          });
         });
-        this.isListEmpty = this.discussions.length ? false : true;
-        this.count$.next(this.discussions.length);
-      });
-    }
+      }
+    });
   }
   openDiscussion(discussion) {
     this.nav.push(OpenCouncilDiscussionPage, { discussion: discussion })
   }
   getCount() {
-    return this.count$;
+    return this.subject;
   }
 }
-
-
