@@ -136,9 +136,7 @@ export class NewAssignmentPage {
   }
 
   createAssignment(value) {
-    console.log('======================>assignmentForm.value', value);
     let formattedAssignmentObj = this.formatAssignmentObj(value);
-    console.log('======================>formattedAssignmentObj', formattedAssignmentObj);
     if (moment(formattedAssignmentObj.assigneddate).isBefore(moment())) {
       this.showAlert('Assignment Date/Time cannot be in past');
     } else {

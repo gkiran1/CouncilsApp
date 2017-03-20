@@ -14,6 +14,7 @@ export class NewPrivateDiscussionPage {
   NewPrivateDiscussionForm: FormGroup;
   users = [];
   term: string = '';
+  isLoading = true;
   constructor(fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
     appservice.getUser().subscribe(user => {
       // user.councils.forEach(council => {
@@ -30,9 +31,10 @@ export class NewPrivateDiscussionPage {
             return user.councils.indexOf(c) !== -1;
           });
         });
+         this.isLoading = false;
       });
       this.NewPrivateDiscussionForm = fb.group({
-        otherUser: '',
+        otherUser: ['',Validators.required],
         createdDate: '',
         createdUserId: appservice.uid,
         createdUserName: user.firstname + ' ' + user.lastname,

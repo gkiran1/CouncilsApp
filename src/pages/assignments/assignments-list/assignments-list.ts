@@ -17,8 +17,7 @@ export class AssignmentsListPage {
   user;
   councilAssignmentsArray = [];
   completedAssignmentsArray = [];
-  personalAssignmentArray = [];
-  subject = new Subject();
+  count$ = new Subject();
   userSubscription: Subscription;
   selectedIdx;
 
@@ -33,14 +32,9 @@ export class AssignmentsListPage {
                 return this.user.councils.includes(assignment.councilid);
               });
 
-              const personalAssignment = assignments.filter(assignment => {
-                return assignment.assignedto === auth.uid;
-              });
-
               this.councilAssignmentsArray = [];
               this.completedAssignmentsArray = [];
-              this.personalAssignmentArray = [];
-
+     
               councilAssignments.forEach(e => {
                 if (e.isCompleted) {
                   this.completedAssignmentsArray.push(e);
@@ -49,16 +43,9 @@ export class AssignmentsListPage {
                 }
               });
 
-              personalAssignment.forEach(e => {
-                if (e.isCompleted) {
-                  this.completedAssignmentsArray.push(e);
-                } else {
-                  this.personalAssignmentArray.push(e);
-                }
-              });
-
               // this.councilAssignmentsArray = assignments;
-              this.subject.next(this.councilAssignmentsArray.length + this.personalAssignmentArray.length + this.completedAssignmentsArray.length);
+              let count = this.councilAssignmentsArray.length + this.completedAssignmentsArray.length;
+              this.count$.next(this.councilAssignmentsArray.length + this.completedAssignmentsArray.length);
             });
         })
       }
@@ -66,7 +53,7 @@ export class AssignmentsListPage {
   }
 
   getCount() {
-    return this.subject;
+    return this.count$;
   }
 
   assignmentSelected(assignment, index) {
