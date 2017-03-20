@@ -22,27 +22,30 @@ export class InactivateMembersPage {
         public actionSheetCtrl: ActionSheetController,
         public menuctrl: MenuController, public af: AngularFire) {
 
-        this.af.auth.subscribe(auth => {
-            if (auth !== null) {
-                this.firebaseService.findUserByKey(auth.uid).subscribe(usr => {
-                    this.firebaseService.getUsersByUnitNumber(usr.unitnumber).subscribe(usersObj => {
-                        this.users = [];
-                        usersObj.forEach(userObj => {
-                            if (userObj.$key !== usr.$key && userObj.isactive === true) {
-                                var userCouncilNames: string[] = [];
-                                userObj.councils.forEach(councilId => {
-                                    this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
-                                        userCouncilNames.push(councilObj[0].council);
-                                        userObj.councilnames = userCouncilNames.join(', ');
-                                    });
-                                });
-                                this.users.push(userObj);
-                            }
+        const userUid = localStorage.getItem('securityToken');
+        const unitNumber = Number(localStorage.getItem('unitNumber'));
+
+        // this.af.auth.subscribe(auth => {
+        // if (auth !== null) {
+        //   this.firebaseService.findUserByKey(auth.uid).subscribe(usr => {
+        this.firebaseService.getUsersByUnitNumber(unitNumber).subscribe(usersObj => {
+            this.users = [];
+            usersObj.forEach(userObj => {
+                if (userObj.$key !== userUid && userObj.isactive === true) {
+                    var userCouncilNames: string[] = [];
+                    userObj.councils.forEach(councilId => {
+                        this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
+                            userCouncilNames.push(councilObj[0].council);
+                            userObj.councilnames = userCouncilNames.join(', ');
                         });
                     });
-                });
-            }
+                    this.users.push(userObj);
+                }
+            });
         });
+        // });
+        // }
+        // });
     }
 
     inactivatemember(user: User) {
