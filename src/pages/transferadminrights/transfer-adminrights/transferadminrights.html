@@ -11,18 +11,15 @@
 		</ion-row>
 	</ion-navbar>
 </ion-header>
-
 <ion-content>
-	<ion-list inset>
-		<ng-container *ngIf="users.length">
-			<ion-item *ngFor="let user of users" (click)="transferAdminRights(user)">
-				<ion-avatar item-left>
-					<img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar" />
-					<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar" />
-				</ion-avatar>
-				<h3>{{user.firstname}} {{user.lastname}}</h3>
-				<p><span>{{user.councilnames}}</span></p>
-			</ion-item>
-		</ng-container>
+	<ion-list>
+		<ion-item *ngFor="let user of users" (click)="transferAdminRights(user)">
+			<ion-avatar item-left>
+				<img [src]="user.avatar" *ngIf="user.avatar">
+				<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+			</ion-avatar>
+			<h3>{{user.firstname}} {{user.lastname}}</h3>
+			<p><span>{{user.councilnames}}</span></p>
+		</ion-item>
 	</ion-list>
 </ion-content>

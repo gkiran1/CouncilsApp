@@ -11,22 +11,19 @@
         </ion-row>
     </ion-navbar>
 </ion-header>
-
 <ion-content>
-    <ion-list inset>
-        <ng-container *ngIf="users.length">
-            <ion-item *ngFor="let user of users">
-                <ion-avatar item-left>
-                    <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar" />
-                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar" />
-                </ion-avatar>
-                <h3>{{user.firstname}} {{user.lastname}}</h3>
-                <p><span>{{user.councilnames}}</span></p>
-                <button ion-button item-right clear (click)="reactivatemember(user)">   
+    <ion-list>
+        <ion-item *ngFor="let user of users">
+            <ion-avatar item-left>
+                <img [src]="user.avatar" *ngIf="user.avatar">
+                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+            </ion-avatar>
+            <h3>{{user.firstname}} {{user.lastname}}</h3>
+            <p><span>{{user.councilnames}}</span></p>
+            <button ion-button item-right clear (click)="reactivatemember(user)">   
                     <ion-icon color='secondary' ios="ios-arrow-dropleft" md="md-arrow-dropleft"></ion-icon>                 
-                </button>
-            </ion-item>
-        </ng-container>
+            </button>
+        </ion-item>
     </ion-list>
     <ion-footer text-center>
         <button ion-button clear color="secondary" (click)="reactivateAll()" text-capitalize [disabled]="!(users[0])">Reactivate All</button>
