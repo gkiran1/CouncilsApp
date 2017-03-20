@@ -11,10 +11,11 @@ import { AngularFire } from 'angularfire2';
   selector: 'private-discussions-list-page'
 })
 export class PrivateDiscussionsListPage {
-  discussions;
-  subject = new Subject();
+  discussions = [];
+  count$ = new Subject();
   userSubscription: Subscription;
   uid;
+  isListEmpty = false;
   constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController) {
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
@@ -28,7 +29,8 @@ export class PrivateDiscussionsListPage {
               }
               return false;
             });
-            this.subject.next(this.discussions.length);
+            this.isListEmpty = this.discussions ? false : true;
+            this.count$.next(this.discussions.length);
           });
         });
       }
@@ -38,6 +40,6 @@ export class PrivateDiscussionsListPage {
     this.nav.push(OpenPrivateDiscussionPage, { discussion: discussion })
   }
   getCount() {
-    return this.subject;
+    return this.count$;
   }
 }

@@ -34,7 +34,7 @@
                 <p>{{item.lastMsg.timestamp | customdateformat}}</p>
             </ion-item>
         </ng-container>
-        <ng-container *ngIf="!discussions.length">
+        <ng-container *ngIf="isListEmpty">
             <p class="text-content">There are no discussions</p>
         </ng-container>
     </ion-item-group>

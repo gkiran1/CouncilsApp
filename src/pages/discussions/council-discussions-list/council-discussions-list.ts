@@ -11,9 +11,10 @@ import { AngularFire } from 'angularfire2';
   selector: 'council-discussions-list-page'
 })
 export class CouncilDiscussionsListPage {
-  discussions;
-  subject = new Subject();
+  discussions = [];
+  count$ = new Subject();
   userSubscription: Subscription;
+  isListEmpty = false;
   constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController) {
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
@@ -23,7 +24,8 @@ export class CouncilDiscussionsListPage {
             this.discussions = discussions.filter(discussion => {
               return user.councils.indexOf(discussion.councilid) !== -1;
             });
-            this.subject.next(this.discussions.length);
+            this.isListEmpty = this.discussions ? false : true;
+            this.count$.next(this.discussions.length);
           });
         });
       }
@@ -33,6 +35,6 @@ export class CouncilDiscussionsListPage {
     this.nav.push(OpenCouncilDiscussionPage, { discussion: discussion })
   }
   getCount() {
-    return this.subject;
+    return this.count$;
   }
 }
