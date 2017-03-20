@@ -22,29 +22,24 @@ export class TransferAdminRightsPage {
         private actionSheetCtrl: ActionSheetController,
         private menuctrl: MenuController
     ) {
+        this.currentAdminId = localStorage.getItem('securityToken');
+        const unitNumber = Number(localStorage.getItem('unitNumber'));
+        this.users = [];
 
-        this.af.auth.subscribe(auth => {
-            if (auth !== null) {
-                this.firebaseService.findUserByKey(auth.uid).subscribe(usr => {
-                    this.currentAdminId = usr.$key;
-                    this.firebaseService.getUsersByUnitNumber(usr.unitnumber).subscribe(usrs => {
-                        this.users = [];
-                        usrs.forEach(usrObj => {
-                            if (usrObj.$key !== this.currentAdminId && usrObj.isactive === true) {
-                                var userCouncilNames: string[] = [];
-                                usrObj.councils.forEach(councilId => {
-                                    this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
-                                        userCouncilNames.push(councilObj[0].council);
-                                        usrObj.councilnames = userCouncilNames.join(', ');
-                                    });
-                                });
-                                this.users.push(usrObj);
-                            }
-                        })
-                    })
-                })
-            }
-        })
+        this.firebaseService.getUsersByUnitNumber(unitNumber).subscribe(usersObj => {
+            this.users = usersObj.filter(userObj => {
+                if (userObj.$key !== this.currentAdminId && userObj.isactive === true) {
+                    var userCouncilNames: string[] = [];
+                    userObj.councils.forEach(councilId => {
+                        this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
+                            userCouncilNames.push(councilObj[0].council);
+                            userObj.councilnames = userCouncilNames.join(', ');
+                        });
+                    });
+                    return userObj;
+                }
+            });
+        });
     }
 
     transferAdminRights(user) {
@@ -73,7 +68,6 @@ export class TransferAdminRightsPage {
         });
         actionSheet.present();
     }
-
 
     showAlert(errText) {
         let alert = this.alertCtrl.create({

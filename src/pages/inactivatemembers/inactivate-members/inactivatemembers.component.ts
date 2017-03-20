@@ -12,8 +12,7 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 })
 
 export class InactivateMembersPage {
-    users: User[] = [];
-    userKeys = [];
+    users: User[] = [];   
 
     constructor(public appService: AppService,
         private firebaseService: FirebaseService,
@@ -24,13 +23,10 @@ export class InactivateMembersPage {
 
         const userUid = localStorage.getItem('securityToken');
         const unitNumber = Number(localStorage.getItem('unitNumber'));
+        this.users = [];
 
-        // this.af.auth.subscribe(auth => {
-        // if (auth !== null) {
-        //   this.firebaseService.findUserByKey(auth.uid).subscribe(usr => {
         this.firebaseService.getUsersByUnitNumber(unitNumber).subscribe(usersObj => {
-            this.users = [];
-            usersObj.forEach(userObj => {
+            this.users = usersObj.filter(userObj => {
                 if (userObj.$key !== userUid && userObj.isactive === true) {
                     var userCouncilNames: string[] = [];
                     userObj.councils.forEach(councilId => {
@@ -39,13 +35,10 @@ export class InactivateMembersPage {
                             userObj.councilnames = userCouncilNames.join(', ');
                         });
                     });
-                    this.users.push(userObj);
+                    return userObj;
                 }
             });
         });
-        // });
-        // }
-        // });
     }
 
     inactivatemember(user: User) {
