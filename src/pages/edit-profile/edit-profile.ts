@@ -43,7 +43,7 @@ export class EditProfilePage {
 
         this.profile = new User;
 
-        this.profilePictureRef = firebase.storage().ref('/users/' + this.profile.$key);
+        this.profilePictureRef = firebase.storage().ref('/users/' + '/avatar/');
 
         this.userSubscription = this.af.auth.subscribe(auth => {
             if (auth !== null) {
@@ -57,7 +57,7 @@ export class EditProfilePage {
     editProfile() {
         if ((new RegExp(/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/).test(this.profile.phone))) {
             this.guestPicture = this.guestPicture || '';
-            this.profilePictureRef.child('profilePicture.png')
+            this.profilePictureRef.child(this.profile.$key)
                 .putString(this.guestPicture, 'base64', { contentType: 'image/png' })
                 .then((savedPicture) => {
                     // this.showAlert('picture',savedPicture.downloadURL);
