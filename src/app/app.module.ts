@@ -51,6 +51,7 @@ import { NewAgendaPage } from '../pages/new-agenda/new-agenda';
 import { MaterialModule } from '@angular/material';
 import { slide1Page } from '../pages/slide1/slide1';
 import { slide2Page } from '../pages/slide2/slide2';
+import { slide3Page } from '../pages/slide3/slide3';
 import { NoAccessPage } from '../pages/noaccess/noaccess.component';
 import { TransferAdminRightsPage } from '../pages/transferadminrights/transfer-adminrights/transferadminrights.component';
 import { Search } from '../pipes/search';
@@ -132,7 +133,8 @@ const cloudSettings: CloudSettings = {
     PrivateDiscussionsListPage,
     TransferCompletePage,
     CustomDateFormat,
-    UnitTypeAgendaPage
+    UnitTypeAgendaPage,
+    slide3Page
   ],
 
   imports: [
