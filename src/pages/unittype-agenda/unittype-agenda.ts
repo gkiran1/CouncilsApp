@@ -4,7 +4,7 @@ import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { WelcomePage } from '../menu/menu';
 import { NewAgendaPage } from '../new-agenda/new-agenda';
-import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
+import { AgendaLitePage } from '../agenda-lite/agenda-lite';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -37,7 +37,7 @@ export class UnitTypeAgendaPage {
 
     done(value) {
 
-        this.nav.push(NewBlankAgendaPage, { councilObj: value.council });
+        this.nav.push(AgendaLitePage, { councilObj: value.council });
     }
     searchFn(event) {
         this.term = event.target.value;

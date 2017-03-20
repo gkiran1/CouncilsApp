@@ -15,7 +15,7 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
 import { NewAssignmentPage } from '../pages/assignments/new-assignment/new-assignment';
 import { AppService } from '../providers/app-service';
 import { Elastic } from '../directives/elastic';
-import { NewBlankAgendaPage } from '../pages/new-blankagenda/new-blankagenda';
+import { AgendaLitePage } from '../pages/agenda-lite/agenda-lite';
 import { InviteMemberPage } from '../pages/invite/invite';
 import { InvitationSuccessPage } from '../pages/invite/success';
 import { NewCouncilPage } from '../pages/new-council/new-council'
@@ -36,7 +36,7 @@ import { FormsModule } from '@angular/forms';
 import { CouncilUsersPage } from '../pages/councilusers/councilusers';
 import { AgendasPage } from '../pages/agendas/agendas';
 import { OpenCouncilDiscussionPage } from '../pages/discussions/open-council-discussion/open-council-discussion'
-import { AgendaPage } from '../pages/agenda/agenda';
+import { AgendaLiteEditPage } from '../pages/agenda-lite-edit/agenda-lite-edit';
 //Ionic Push Module
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { AdminPage } from '../pages/admin/admin.component';
@@ -94,7 +94,7 @@ const cloudSettings: CloudSettings = {
     CreateAccountPage,
     NewAssignmentPage,
     Elastic,
-    NewBlankAgendaPage,
+    AgendaLitePage,
     InviteMemberPage,
     InvitationSuccessPage,
     NewCouncilPage,
@@ -119,11 +119,10 @@ const cloudSettings: CloudSettings = {
     MemberInactivatedPage,
     ReactivateMembersPage,
     MemberReactivatedPage,
-    AgendaPage,
     CouncilDiscussionsListPage,
     slide1Page,
     slide2Page,
-    AgendaPage,
+    AgendaLiteEditPage,
     NewAgendaPage,
     NoAccessPage,
     TransferAdminRightsPage,
@@ -158,7 +157,7 @@ const cloudSettings: CloudSettings = {
     WelcomePage,
     CreateAccountPage,
     NewAssignmentPage,
-    NewBlankAgendaPage,
+    AgendaLitePage,
     InviteMemberPage,
     InvitationSuccessPage,
     NewCouncilPage,
@@ -183,9 +182,8 @@ const cloudSettings: CloudSettings = {
     MemberInactivatedPage,
     ReactivateMembersPage,
     MemberReactivatedPage,
-    AgendaPage,
     CouncilDiscussionsListPage,
-    AgendaPage,
+    AgendaLiteEditPage,
     NewAgendaPage,
     NoAccessPage,
     TransferAdminRightsPage,

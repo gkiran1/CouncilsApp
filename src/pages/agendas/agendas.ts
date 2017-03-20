@@ -4,12 +4,12 @@ import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
 import { WelcomePage } from '../menu/menu';
-import { AgendaPage } from '../agenda/agenda';
+import { AgendaLiteEditPage } from '../agenda-lite-edit/agenda-lite-edit';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
     templateUrl: 'agendas.html',
-    selector: 'agendas'
+    selector: 'agendas-page'
 })
 export class AgendasPage {
 
@@ -31,7 +31,7 @@ export class AgendasPage {
     }
 
     agendaSelected(agendaselected) {
-        this.nav.push(AgendaPage, { agendaselected: agendaselected });
+        this.nav.push(AgendaLiteEditPage, { agendaselected: agendaselected });
     }
 
     getCount() {

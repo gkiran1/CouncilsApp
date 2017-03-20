@@ -1,14 +1,13 @@
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
 import { WelcomePage } from '../menu/menu';
-import { AgendaPage } from '../agenda/agenda';
 import { Component } from '@angular/core';
 import { Nav, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { DisplayPage } from '../display/display';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
-import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
+import { AgendaLitePage } from '../agenda-lite/agenda-lite';
 import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
 import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';

@@ -7,20 +7,25 @@ import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  templateUrl: 'new-blankagenda.html',
-  selector: 'new-blankagenda'
+  templateUrl: 'agenda-lite.html',
+  selector: 'agenda-lite'
 })
-export class NewBlankAgendaPage {
+export class AgendaLitePage {
   minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
   users = [];
+  assignmentslist = [];
+  completedassignmentslist=[];
   councils = [];
-  blankagendaForm: FormGroup;
+  newagendaliteForm: FormGroup;
   usercouncils = [];
+  term: string = '';
 
 
   constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
     public nav: NavController) {
+
+    // let council = navParams.get('councilObj');
 
     var councilsIds = localStorage.getItem('userCouncils').split(',');
     councilsIds.forEach(councilId => {
@@ -29,17 +34,16 @@ export class NewBlankAgendaPage {
       })
     })
 
-    this.blankagendaForm = fb.group({
+    this.newagendaliteForm = fb.group({
       assignedcouncil: ['', Validators.required],
       assigneddate: [moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD'), Validators.required],
-      assignedtime: ['', Validators.required],
       openinghymn: ['', Validators.required],
       openingprayer: ['', Validators.required],
       spiritualthought: ['', Validators.required],
-      highcounselorremarks: ['', Validators.required],
-      reviewassignments: ['', Validators.required],
-      spiritual: ['', Validators.required],
-      temporalwelfare:['',Validators.required],   
+      assignments: ['', Validators.required],
+      completedassignments: ['', Validators.required],
+      discussionitems: ['', Validators.required],
+      closingprayer: ['', Validators.required],
       createdby: localStorage.getItem('securityToken'),
       createddate: new Date().toDateString(),
       isactive: true,
@@ -47,8 +51,11 @@ export class NewBlankAgendaPage {
     });
   }
 
-  assignedMemberChange(value) {    
+  assignedMemberChange(value) {
     this.users = [];
+    this.assignmentslist = [];
+    this.completedassignmentslist = [];
+    
     this.getUsersByCouncilId(value.assignedcouncil.$key).subscribe(usersObj => {
       usersObj.forEach(usrObj => {
         this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
@@ -58,22 +65,38 @@ export class NewBlankAgendaPage {
         });
       });
     });
+    this.getAssignmentsByCouncilId(value.assignedcouncil.$key).subscribe(assignments=>{
+      assignments.forEach(assignObj=>{
+        if(assignObj.isCompleted){
+          this.completedassignmentslist.push(assignObj);
+        }
+        else{
+          this.assignmentslist.push(assignObj);
+          
+        }
+      });
+
+    });
   }
 
   getUsersByCouncilId(councilId: string) {
     return this.firebaseservice.getUsersByCouncil(councilId);
   }
 
-  updateCouncils(councils) {
-    councils.usercouncils.forEach(councilid => {
-      this.firebaseservice.getUsersByCouncil(councilid).subscribe(usercouncils => this.usercouncils.push(...usercouncils));
-    });
+  getAssignmentsByCouncilId(councilId: string) {
+    return this.firebaseservice.getAssignmentsByCouncil(councilId);
   }
+
+  // updateCouncils(councils) {
+  //   councils.usercouncils.forEach(councilid => {
+  //     this.firebaseservice.getUsersByCouncil(councilid).subscribe(usercouncils => this.usercouncils.push(...usercouncils));
+  //   });
+  // }
 
   agendasArray = [];
   createagenda(agenda) {
-    // Main Code
-    this.firebaseservice.createAgenda(agenda)
+       
+    this.firebaseservice.createAgendaLite(agenda)
       .then(res => {
         this.showAlert('Agenda created successfully.');
         this.nav.push(WelcomePage)
@@ -94,5 +117,7 @@ export class NewBlankAgendaPage {
   cancel() {
     this.nav.setRoot(WelcomePage);
   }
-
+  searchFn(event) {
+    this.term = event.target.value;
+  }
 }

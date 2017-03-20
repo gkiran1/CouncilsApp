@@ -435,23 +435,23 @@ export class FirebaseService {
         });
     }
 
-    createAgenda(agenda: any) {
+    createAgendaLite(agenda: any) {
         return this.rootRef.child('agendas').push({
             agendacouncil: agenda.assignedcouncil.council,
             councilid: agenda.assignedcouncil.$key,
             agendadate: agenda.assigneddate,
-            agendatime: agenda.assignedtime,
-            openinghymn: agenda.openinghymn.$key,
+            openinghymn: agenda.openinghymn,
             openingprayer: agenda.openingprayer.$key,
             spiritualthought: agenda.spiritualthought.$key,
-            highcounselorremarks: agenda.highcounselorremarks.$key,
-            reviewassignments: agenda.reviewassignments.$key,
-            spiritual: agenda.spiritual,
-            temporalwelfare: agenda.temporalwelfare.$key,
+            assignments: agenda.assignments.$key,
+            completedassignments: agenda.completedassignments.$key,
+            discussionitems: agenda.discussionitems,
+            closingprayer: agenda.closingprayer.$key,
             createdby: agenda.createdby,
             createddate: agenda.createddate,
             lastupdateddate: agenda.lastupdateddate,
             isactive: agenda.isactive,
+            islite: true
         })
     }
 
@@ -506,28 +506,31 @@ export class FirebaseService {
             });
     }
 
-    updateAgenda(agenda, agendaKey) {
+    updateAgendaLite(agenda, agendaKey) {
         return this.af.database.list('agendas').update(agendaKey, {
+
             agendacouncil: agenda.assignedcouncil.council,
             councilid: agenda.assignedcouncil.$key,
             agendadate: agenda.assigneddate,
-            //  agendatime: agenda.assignedtime,
-            openinghymn: agenda.openinghymn.$key,
+            // agendatime: agenda.assignedtime,
+            openinghymn: agenda.openinghymn,
             openingprayer: agenda.openingprayer.$key,
             spiritualthought: agenda.spiritualthought.$key,
-            highcounselorremarks: agenda.highcounselorremarks.$key,
-            reviewassignments: agenda.reviewassignments.$key,
-            spiritual: agenda.spiritual,
-            temporalwelfare: agenda.temporalwelfare.$key,
+            assignments: agenda.assignments.$key,
+            completedassignments: agenda.completedassignments.$key,
+            discussionitems: agenda.discussionitems,
+            closingprayer: agenda.closingprayer.$key,
             createdby: agenda.createdby,
+            createddate: agenda.createddate,
             lastupdateddate: agenda.lastupdateddate,
-            isactive: agenda.isactive
+            isactive: agenda.isactive,
+            islite: true
         }).then(() => {
-            return "Agenda has been updated."
+            return "Agenda Lite has been updated."
         }).catch(err => { throw err });
     }
 
-    removeAgenda(agendaKey) {
+    removeAgendaLite(agendaKey) {
         console.log('agendas.$key', agendaKey);
         return this.af.database.object('agendas/' + agendaKey).remove();
     }

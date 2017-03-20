@@ -4,8 +4,6 @@ import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
 import { WelcomePage } from '../menu/menu';
-import { AgendaPage } from '../agenda/agenda';
-import { NewBlankAgendaPage } from '../new-blankagenda/new-blankagenda';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AdminPage } from '../admin/admin.component';
 import { SettingsPage } from '../settings/settings';
