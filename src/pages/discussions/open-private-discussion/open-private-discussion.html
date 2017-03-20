@@ -21,7 +21,7 @@
             </ion-label>
         </ion-item>
         <ion-list>
-            <ion-item *ngFor="let msg of discussion.messages">
+            <ion-item *ngFor="let msg of discussion.messages" text-wrap>
                 <ion-avatar item-left>
                     <img [src]="msg.user_avatar" *ngIf="msg.user_avatar">
                     <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!msg.user_avatar" />

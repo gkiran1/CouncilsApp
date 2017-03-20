@@ -16,7 +16,7 @@
 </ion-header>
 <ion-content>
     <ion-item-group>
-        <ng-container *ngIf="discussions.length">
+        <ng-container *ngIf="count$ | async">
             <ion-item-divider></ion-item-divider>
             <ion-item (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
                 <ion-avatar item-left *ngIf="uid === item.createdUserId">
@@ -34,7 +34,7 @@
                 <p>{{item.lastMsg.timestamp | customdateformat}}</p>
             </ion-item>
         </ng-container>
-        <ng-container *ngIf="!discussions.length">
+        <ng-container *ngIf="!(count$ | async)">
             <p class="text-content">There are no discussions</p>
         </ng-container>
     </ion-item-group>

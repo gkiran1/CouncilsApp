@@ -51,7 +51,6 @@ export class SettingsPage {
         //  this.userSubscription.unsubscribe();
         this.assignmentsListPage.userSubscription.unsubscribe();
         this.activeCouncilsPage.userSubscription.unsubscribe();
-        this.councilDiscussionsListPage.userSubscription.unsubscribe();
         localStorage.setItem('securityToken', null);
         localStorage.setItem('isUserLoggedIn', 'false');
         this.firebaseService.signOut().then(() => {
