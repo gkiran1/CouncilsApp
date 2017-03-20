@@ -51,8 +51,7 @@ export class LoginPage {
                     if (usrs[0].isactive) {
                         flag = true;
                         localStorage.setItem('securityToken', uid);
-                        localStorage.setItem('isUserLoggedIn', 'true');
-                        localStorage.setItem('isAdmin', usrs[0].isadmin.toString());
+                        localStorage.setItem('isUserLoggedIn', 'true');                        
                     }
                     else {
                         this.zone.run(() => {

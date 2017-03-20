@@ -74,9 +74,10 @@ export class WelcomePage implements OnInit{
       if (auth !== null) {
         this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
           this.userObj = usrs[0];
-          localStorage.setItem('unitType', usrs[0].unittype)
-          localStorage.setItem('unitNumber', usrs[0].unitnumber.toString())
-          localStorage.setItem('userCouncils', usrs[0].councils.toString())
+          localStorage.setItem('unitType', usrs[0].unittype);
+          localStorage.setItem('unitNumber', usrs[0].unitnumber.toString());
+          localStorage.setItem('userCouncils', usrs[0].councils.toString());
+          localStorage.setItem('isAdmin', usrs[0].isadmin.toString());
         });
       };
     });
