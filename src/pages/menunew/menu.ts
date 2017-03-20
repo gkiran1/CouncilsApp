@@ -13,7 +13,7 @@ import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
 import { EditProfilePage } from '../edit-profile/edit-profile';
-import { NewCouncilFilePage } from '../files/new-council-file';
+import { NewCouncilFilePage } from '../files/new-council-file/new-council-file';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { GoodbyePage } from '../goodbye/goodbye';
 import { AgendasPage } from '../agendas/agendas';

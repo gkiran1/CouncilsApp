@@ -4,6 +4,7 @@ import { FirebaseService } from '../../../environments/firebase/firebase-service
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { ThanksFeedbackPage } from '../thanks-feedback/thanks-feedback';
 import { AppService } from '../../../providers/app-service';
+import { SettingsPage } from '../../settings/settings';
 
 @Component({
     selector: 'submit-feedback',
@@ -21,6 +22,10 @@ export class SubmitFeedbackPage {
     submitFeedback() {
         this.ser.saveFeedback(this.feedback, this.appSer.uid, new Date().toDateString());
         this.navCtrl.push(ThanksFeedbackPage);
+    }
+
+    back() {
+        this.navCtrl.setRoot(SettingsPage);
     }
 
 }

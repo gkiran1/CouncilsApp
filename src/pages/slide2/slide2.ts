@@ -17,7 +17,6 @@ import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { AboutPage } from '../about/about';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
 import { EditProfilePage } from '../edit-profile/edit-profile';
-import { NewCouncilFilePage } from '../files/new-council-file';
 import { GoodbyePage } from '../goodbye/goodbye';
 import { AgendasPage } from '../agendas/agendas';
 import { Subscription } from "rxjs";
@@ -26,6 +25,7 @@ import { AdminPage } from '../admin/admin.component';
 import { CouncilDiscussionsListPage } from '../discussions/council-discussions-list/council-discussions-list'
 import { NewAgendaPage } from '../new-agenda/new-agenda';
 import { slide1Page } from '../slide1/slide1';
+import { NewCouncilFilePage } from '../files/new-council-file/new-council-file';
 import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/new-private-discussion';
 import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
 
@@ -56,7 +56,7 @@ export class slide2Page {
     private firebaseService: FirebaseService,
     public councilDiscussionsListPage: CouncilDiscussionsListPage,
     public agendaPage: AgendasPage,
-    public privateDiscussionsListPage:PrivateDiscussionsListPage) {
+    public privateDiscussionsListPage: PrivateDiscussionsListPage) {
 
     this.userObj = null;
 
@@ -114,6 +114,8 @@ export class slide2Page {
           cssClass: "actionsheet-items",
 
           handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewCouncilFilePage);
           }
         },
         {
@@ -127,7 +129,7 @@ export class slide2Page {
 
     actionSheet.present();
   }
-  privatePage(){
+  privatePage() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Private',
       buttons: [
@@ -164,14 +166,14 @@ export class slide2Page {
 
   }
   councilDiscussionsPage() {
-    this.nav.setRoot(CouncilDiscussionsListPage);
+    this.nav.push(CouncilDiscussionsListPage);
 
   }
   assignmentsPage() {
-    this.nav.setRoot(AssignmentsListPage);
+    this.nav.push(AssignmentsListPage);
   }
-  privateDiscussionPage(){
-    this.nav.setRoot(PrivateDiscussionsListPage);
+  privateDiscussionPage() {
+    this.nav.push(PrivateDiscussionsListPage);
   }
- 
+
 }

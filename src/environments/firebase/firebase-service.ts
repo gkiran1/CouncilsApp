@@ -483,7 +483,28 @@ export class FirebaseService {
             })
             .catch(err => { throw err });
     }
-
+    saveFile(file: any,image:any) {
+        return this.rootRef.child('files').push(
+            {
+                // name: file.name,
+                councilid: file.councilid,
+                councilname: file.councilname,
+                createdDate: file.createdDate,
+                createdUser: file.createdUser,
+                createdBy: file.createdBy,
+                isActive: file.isActive,
+                images: image
+            })
+            .then((res) => {
+                console.log('result:'+res);
+                //to get a reference of newly added object -res.path.o[1]
+                return res.path.o[1];
+            })
+            .catch(err => {
+                console.log(err);
+                alert(err);
+            });
+    }
 
     updateAgenda(agenda, agendaKey) {
         return this.af.database.list('agendas').update(agendaKey, {
@@ -515,7 +536,7 @@ export class FirebaseService {
             .then(() => {
                 return this.af.database.object(`discussions/${discussionId}`).update({ lastMsg: msg.text });
             })
-    }
+    }    
     getDiscussionByKey(key) {
         return this.af.database.object(`discussions/${key}`);
     }
@@ -564,6 +585,9 @@ export class FirebaseService {
     }
     getPrivateDiscussions() {
         return this.af.database.list('privatediscussions');
+    }
+    getFilesByKey(key) {
+        return this.af.database.object(`files/${key}`);
     }
 
 }

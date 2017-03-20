@@ -16,10 +16,12 @@ import { AssignmentsListPage } from '../assignments/assignments-list/assignments
 import { CouncilDiscussionsListPage } from '../discussions/council-discussions-list/council-discussions-list'
 import { Subscription } from "rxjs";
 import { GoodbyePage } from '../goodbye/goodbye';
+import { WelcomePage } from '../menu/menu';
+
 @Component({
     selector: 'settings-page',
     templateUrl: 'settings.html',
-    providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage]
+    providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, CouncilDiscussionsListPage, AgendasPage]
 
 })
 
@@ -59,5 +61,8 @@ export class SettingsPage {
             this.navCtrl.setRoot(GoodbyePage);
             alert(err);
         })
+    }
+    back() {
+        this.navCtrl.setRoot(WelcomePage);
     }
 }
