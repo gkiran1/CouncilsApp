@@ -17,7 +17,7 @@
     <div class="chat-content">
         <ion-item text-wrap>
             <ion-label>
-                This discussion was created by <span ion-text color="secondary">{{discussion.createdUser}}</span> on {{discussion.createdDate |
+                This discussion was created by <span ion-text color="secondary">{{user.$key===discussion.createdBy?'You':discussion.createdUser}}</span> on {{discussion.createdDate |
                 amCalendar}}.There are {{activeusersCount}} active participants from the <span ion-text color="secondary">{{discussion.councilname}}</span>.
             </ion-label>
         </ion-item>
@@ -38,7 +38,7 @@
 <ion-footer>
     <ion-row>
         <ion-col width-80>
-            <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg"></ion-input>
+            <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (keyup)="keypresssed($event)"></ion-input>
         </ion-col>
         <ion-col width-20>
             <button ion-button color="secondary" clear (click)="send()">Send</button>

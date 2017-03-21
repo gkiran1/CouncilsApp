@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { Content } from 'ionic-angular';
+import { AngularFire } from 'angularfire2';
 
 @Component({
     templateUrl: 'open-private-discussion.html',
@@ -18,8 +19,14 @@ export class OpenPrivateDiscussionPage {
     msg = '';
     user;
     chatWith;
-    constructor(public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService) {
-        as.getUser().subscribe(user => this.user = user);
+    constructor(public af: AngularFire, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService) {
+        this.af.auth.subscribe(auth => {
+            if (auth !== null) {
+                this.af.database.object('/users/' + auth.uid).subscribe(usr => {
+                    this.user = usr;
+                });
+            }
+        });
         fs.getPrivateDiscussionByKey(navparams.get('discussion')).subscribe(discussion => {
             this.discussion = discussion;
             this.chatWith = discussion.createdUserId === this.user.$key ? discussion.otherUserName : discussion.createdUserName;

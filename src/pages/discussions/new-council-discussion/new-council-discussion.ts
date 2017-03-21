@@ -5,6 +5,7 @@ import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { OpenCouncilDiscussionPage } from '../open-council-discussion/open-council-discussion';
 import * as moment from 'moment';
+import { AngularFire } from 'angularfire2';
 
 @Component({
   templateUrl: 'new-council-discussion.html',
@@ -13,23 +14,27 @@ import * as moment from 'moment';
 export class NewCouncilDiscussionPage {
   newCouncilDiscussionForm: FormGroup;
   councils;
-  constructor(fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
-    appservice.getUser().subscribe(user => {
-      this.councils = [];
-      user.councils.forEach(c => {
-        this.councils.push(this.firebaseservice.getCouncilByCouncilKey(c));
-      });
+  constructor(public af: AngularFire, fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
+    this.af.auth.subscribe(auth => {
+      if (auth !== null) {
+        this.af.database.object('/users/' + auth.uid).subscribe(user => {
+          this.councils = [];
+          user.councils.forEach(c => {
+            this.councils.push(this.firebaseservice.getCouncilByCouncilKey(c));
+          });
 
-      this.newCouncilDiscussionForm = fb.group({
-        topic: ['', Validators.compose([Validators.required, Validators.maxLength(25)])],
-        council: ['', Validators.required],
-        createdDate: '',
-        createdBy: appservice.uid,
-        createdUser: user.firstname + ' ' + user.lastname,
-        isActive: true,
-        messages: [],
-        councilname: ''
-      });
+          this.newCouncilDiscussionForm = fb.group({
+            topic: ['', Validators.compose([Validators.required, Validators.maxLength(25)])],
+            council: ['', Validators.required],
+            createdDate: '',
+            createdBy: appservice.uid,
+            createdUser: user.firstname + ' ' + user.lastname,
+            isActive: true,
+            messages: [],
+            councilname: ''
+          });
+        });
+      }
     });
   }
   create(value) {

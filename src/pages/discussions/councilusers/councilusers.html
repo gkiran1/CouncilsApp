@@ -1,0 +1,6 @@
+
+<ion-content>
+    <ion-item *ngFor="let user of usersArray" (click)="dismiss()">
+        <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
+    </ion-item>
+</ion-content>

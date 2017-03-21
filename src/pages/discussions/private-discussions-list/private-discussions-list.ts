@@ -17,24 +17,20 @@ export class PrivateDiscussionsListPage {
   uid;
   isListEmpty = false;
   constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController) {
-    this.userSubscription = this.af.auth.subscribe(auth => {
-      if (auth !== null) {
-        this.as.getUser().subscribe(user => {
-          this.uid = user.$key;
-          this.discussions = [];
-          fs.getPrivateDiscussions().subscribe(discussions => {
-            this.discussions = discussions.filter(discussion => {
-              if (user.$key === discussion.createdUserId || user.$key === discussion.otherUserId) {
-                return true;
-              }
-              return false;
-            });
-            this.isListEmpty = this.discussions ? false : true;
-            this.count$.next(this.discussions.length);
-          });
+    if (localStorage.getItem('securityToken') !== null) {
+      this.uid = localStorage.getItem('securityToken');
+      this.discussions = [];
+      fs.getPrivateDiscussions().subscribe(discussions => {
+        this.discussions = discussions.filter(discussion => {
+          if (this.uid === discussion.createdUserId || this.uid === discussion.otherUserId) {
+            return true;
+          }
+          return false;
         });
-      }
-    });
+        this.isListEmpty = this.discussions.length ? false : true;
+        this.count$.next(this.discussions.length);
+      });
+    }
   }
   openDiscussion(discussion) {
     this.nav.push(OpenPrivateDiscussionPage, { discussion: discussion })
