@@ -26,7 +26,7 @@ import { slide1Page } from '../slide1/slide1';
 import { slide2Page } from '../slide2/slide2';
 import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/new-private-discussion';
 import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
-import { Input, OnInit, OnChanges, SimpleChanges, ElementRef,  AfterViewChecked, AfterViewInit, NgZone } from '@angular/core';
+import {  OnInit } from '@angular/core';
 import { Slides } from 'ionic-angular';
 
 
@@ -38,16 +38,6 @@ import { Slides } from 'ionic-angular';
 
 export class WelcomePage implements OnInit{
   @ViewChild('switcher') switcher: Slides;
-  step:boolean = true;
-  images: string[];
- config: Object = {
-            pagination: '.swiper-pagination',
-            paginationClickable: true,
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev'
-      
-        };
-
   activeCouncilsCount;
   assignmentsCount;
   councilDiscussionsCount;
@@ -97,13 +87,6 @@ export class WelcomePage implements OnInit{
       this.switcher.slideTo(1,0);
     },300);
   }
-   loadImages() {
-        this.images = [
-            'http://api.randomuser.me/portraits/thumb/men/1.jpg',
-            'http://api.randomuser.me/portraits/thumb/men/2.jpg'
-                             
-        ];        
-    }
 
   councilsPage() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -180,14 +163,7 @@ export class WelcomePage implements OnInit{
   activePage() {
     this.nav.push(ActiveCouncilsPage);
   }
-  getDataForTable($event: any){ 
-    $event.target.classList.add('active');
-    this.step=true;
-  }
-   getData($event: any){ 
-    $event.target.classList.add('active');
-    this.step=false;
-  }
+
 
   agendasPage() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -308,21 +284,5 @@ export class WelcomePage implements OnInit{
     this.nav.setRoot(AdminPage);
   }
 
-  signOut() {
-    this.appService.userSubscription.unsubscribe();
-    this.userSubscription.unsubscribe();
-    this.assignmentsListPage.userSubscription.unsubscribe();
-    this.activeCouncilsPage.userSubscription.unsubscribe();
-    this.councilDiscussionsListPage.userSubscription.unsubscribe();
-    localStorage.setItem('securityToken', null);
-    localStorage.setItem('isUserLoggedIn', 'false');
-    this.firebaseService.signOut().then(() => {
-      console.log('Sign Out successfully..');
-      this.nav.setRoot(GoodbyePage);
-    }).catch(err => {
-      this.nav.setRoot(GoodbyePage);
-      alert(err);
-    })
-  }
 
 }

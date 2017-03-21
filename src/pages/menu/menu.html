@@ -32,36 +32,8 @@
                 <slide3></slide3>
             </ion-slide>
         </ion-slides>
-        <!--<md-card>
-            <md-card-title>Demo</md-card-title>
-            <md-card-content>
-                <swiper [config]="config">
-                    <div class="swiper-wrapper">
-                        <img class="swiper-slide" *ngFor="let image of images" [src]="image">
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </swiper>
-            </md-card-content>
-            <md-card-actions>
-                <button md-raised-button color="primary" (click)="loadImages()">load images</button>
-            </md-card-actions>
-        </md-card>-->
-        <!--<slide1 *ngIf=step></slide1>
-        <slide2 *ngIf=!step></slide2>-->
-
-
     </ion-content>
     <ion-footer text-center>
-
-        <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-            <span class="swiper-pagination-bullet " [class.active]=step (click)="$event.target.classList.contains('active') || getDataForTable($event)"></span>
-            <span class="swiper-pagination-bullet" [class.active]=!step (click)="$event.target.classList.contains('active') || getData($event)"></span>
-        </div>-->
-        <!--<button ion-button class="signOutbtn" name="SignOut" clear menuToggle text-capitalize (click)="signOut()">
-            Sign Out
-        </button>-->
     </ion-footer>
 </ion-menu>
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
