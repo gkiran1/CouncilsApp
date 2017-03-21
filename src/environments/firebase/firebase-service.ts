@@ -496,7 +496,6 @@ export class FirebaseService {
                 images: image
             })
             .then((res) => {
-                console.log('result:'+res);
                 //to get a reference of newly added object -res.path.o[1]
                 return res.path.o[1];
             })
@@ -534,12 +533,69 @@ export class FirebaseService {
         console.log('agendas.$key', agendaKey);
         return this.af.database.object('agendas/' + agendaKey).remove();
     }
+
+    createAgenda(agenda: any) {
+        return this.rootRef.child('agendas').push({
+            agendacouncil: agenda.assignedcouncil.council,
+            councilid: agenda.assignedcouncil.$key,
+            agendadate: agenda.assigneddate,
+            openinghymn: agenda.openinghymn,
+            openingprayer: agenda.openingprayer.$key,
+            spiritualthought: agenda.spiritualthought.$key,
+            assignments: agenda.assignments.$key,
+            completedassignments: agenda.completedassignments.$key,
+            spiritualwelfare: agenda.spiritualwelfare,
+            temporalwelfare: agenda.temporalwelfare,
+            fellowshipitems: agenda.fellowshipitems,
+            missionaryitems: agenda.missionaryitems,
+            events: agenda.events,
+            closingprayer: agenda.closingprayer.$key,
+            createdby: agenda.createdby,
+            createddate: agenda.createddate,
+            // lastupdateddate: agenda.lastupdateddate,
+            isactive: agenda.isactive,
+            islite: false
+        })
+    }
+
+    updateAgenda(agenda, agendaKey) {
+        return this.af.database.list('agendas').update(agendaKey, {
+
+            agendacouncil: agenda.assignedcouncil.council,
+            councilid: agenda.assignedcouncil.$key,
+            agendadate: agenda.assigneddate,
+            openinghymn: agenda.openinghymn,
+            openingprayer: agenda.openingprayer.$key,
+            spiritualthought: agenda.spiritualthought.$key,
+            assignments: agenda.assignments.$key,
+            completedassignments: agenda.completedassignments.$key,
+            spiritualwelfare: agenda.spiritualwelfare,
+            temporalwelfare: agenda.temporalwelfare,
+            fellowshipitems: agenda.fellowshipitems,
+            missionaryitems: agenda.missionaryitems,
+            events: agenda.events,
+            closingprayer: agenda.closingprayer.$key,
+            createdby: agenda.createdby,
+            createddate: agenda.createddate,
+            lastupdateddate: agenda.lastupdateddate,
+            isactive: agenda.isactive,
+            islite: true
+        }).then(() => {
+            return "Agenda Lite has been updated."
+        }).catch(err => { throw err });
+    }
+
+    removeAgenda(agendaKey) {
+        console.log('agendas.$key', agendaKey);
+        return this.af.database.object('agendas/' + agendaKey).remove();
+    }
+
     updateDiscussionChat(discussionId, msg) {
         return this.af.database.list(`discussions/${discussionId}/messages`).push(msg)
             .then(() => {
                 return this.af.database.object(`discussions/${discussionId}`).update({ lastMsg: msg.text });
             })
-    }    
+    }
     getDiscussionByKey(key) {
         return this.af.database.object(`discussions/${key}`);
     }

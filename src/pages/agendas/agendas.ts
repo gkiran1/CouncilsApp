@@ -5,6 +5,7 @@ import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
 import { WelcomePage } from '../menu/menu';
 import { AgendaLiteEditPage } from '../agenda-lite-edit/agenda-lite-edit';
+import { AgendaEditPage } from '../agenda-edit/agenda-edit';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
@@ -14,7 +15,6 @@ import { Subject } from 'rxjs/Subject';
 export class AgendasPage {
 
     agendasArray = [];
-    //subject = new Subject();
     count$ = new Subject();
     constructor(public nav: NavController, public as: AppService, public firebaseservice: FirebaseService) {
         this.agendasArray = [];
@@ -24,14 +24,18 @@ export class AgendasPage {
                 this.firebaseservice.getAgendasByCouncilId(councilId).subscribe(agendas => {
                     this.agendasArray.push(...agendas);
                     this.count$.next(this.agendasArray.length);
-                    // this.subject.next(this.agendasArray.length);
                 });
             });
         }
     }
 
     agendaSelected(agendaselected) {
-        this.nav.push(AgendaLiteEditPage, { agendaselected: agendaselected });
+        if (agendaselected.islite) {
+            this.nav.push(AgendaLiteEditPage, { agendaselected: agendaselected });
+        }
+        else {
+            this.nav.push(AgendaEditPage, { agendaselected: agendaselected });
+        }
     }
 
     getCount() {

@@ -7,7 +7,7 @@
             </ion-col>
             <ion-col width-80>
                 <h3>
-                    New Agenda Lite
+                    Agenda
                 </h3>
             </ion-col>
         </ion-row>
@@ -15,10 +15,10 @@
 </ion-header>
 <ion-content>
 
-    <form [formGroup]="newagendaliteForm" (ngSubmit)="newagendaliteForm.value">
+    <form [formGroup]="agendaeditForm" (ngSubmit)="agendaeditForm.value">
         <ion-item>
             <ion-label floating>Council</ion-label>
-            <ion-select name="assignedcouncil" (ionChange)="assignedMemberChange(newagendaliteForm.value)" [(ngModel)]='assignedcouncil'
+            <ion-select name="assignedcouncil" (ionChange)="assignedMemberChange(agendaeditForm.value)" [(ngModel)]='assignedcouncil'
                 formControlName="assignedcouncil">
                 <ion-option *ngFor="let c of councils" [value]="c">{{c.council}}</ion-option>
                 </ion-select>
@@ -26,16 +26,9 @@
 
         <ion-item>
             <ion-label floating>Date & Time</ion-label>
-            <ion-datetime displayFormat="DDDD, MMM D, YYYY, hh:mma" pickerFormat="DDDD, MMM D, YYYY, hh:mma" [min]="minDate" [max]="2120" name="assigneddate"
+            <ion-datetime displayFormat="DDDD, MMM D, YYYY, hh:mma" pickerFormat="DDDD, MMM D, YYYY, hh:mma" [max]="2120" name="assigneddate"
                 formControlName="assigneddate" monthNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec" dayNames="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"></ion-datetime>
         </ion-item>
-
-        <!--<ion-row>
-            <ion-col>
-                <ion-item>
-                    <ion-label floating>Date</ion-label>
-
-                    <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" [max]="2120" name="assigneddate" formControlName="assigneddate"></ion-datetime>-->
 
         <ion-item>
             <ion-label floating>Opening Hymn</ion-label>
@@ -79,9 +72,28 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Discussion Items</ion-label>
-            <ion-textarea name="discussionitems" elastic formControlName="discussionitems" maxlength="500"></ion-textarea>
-            <!--<ion-input type="text" name="discussionitems" formControlName="discussionitems" maxlength="500"></ion-input>-->
+            <ion-label floating>Spiritual Welfare</ion-label>
+            <ion-textarea elastic name="spiritualwelfare" formControlName="spiritualwelfare" maxlength="500"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Temporal Welfare</ion-label>
+            <ion-textarea elastic name="temporalwelfare" formControlName="temporalwelfare" maxlength="500"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Fellowship Items</ion-label>
+            <ion-textarea elastic name="fellowshipitems" formControlName="fellowshipitems" maxlength="500"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Missionary Items</ion-label>
+            <ion-textarea elastic name="missionaryitems" formControlName="missionaryitems" maxlength="500"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Events</ion-label>
+            <ion-textarea elastic name="events" formControlName="events" maxlength="500"></ion-textarea>
         </ion-item>
 
         <ion-item>
@@ -98,6 +110,11 @@
 
 <ion-footer>
     <ion-toolbar>
-        <button ion-button clear block color="secondary" (click)="createagenda(newagendaliteForm.value)" text-capitalize [disabled]="!newagendaliteForm.valid">Create</button>
+        <ion-buttons start>
+            <button ion-button color="danger" (click)="delete(agendaeditForm.value)">Delete</button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button color="secondary" (click)="edit(agendaeditForm.value)">Edit</button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-footer>

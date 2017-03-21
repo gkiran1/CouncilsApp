@@ -86,13 +86,7 @@ export class AgendaLitePage {
   getAssignmentsByCouncilId(councilId: string) {
     return this.firebaseservice.getAssignmentsByCouncil(councilId);
   }
-
-  // updateCouncils(councils) {
-  //   councils.usercouncils.forEach(councilid => {
-  //     this.firebaseservice.getUsersByCouncil(councilid).subscribe(usercouncils => this.usercouncils.push(...usercouncils));
-  //   });
-  // }
-
+  
   agendasArray = [];
   createagenda(agenda) {
        

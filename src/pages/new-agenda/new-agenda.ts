@@ -5,7 +5,7 @@ import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
 import { WelcomePage } from '../menu/menu';
 import { AgendaLitePage } from '../agenda-lite/agenda-lite';
-import { UnitTypeAgendaPage } from '../unittype-agenda/unittype-agenda';
+import { AgendaPage } from '../agenda/agenda';
 
 @Component({
     templateUrl: 'new-agenda.html',
@@ -20,7 +20,7 @@ export class NewAgendaPage {
     }
 
     agenda() {    
-        this.nav.push(UnitTypeAgendaPage);
+        this.nav.push(AgendaPage);
     }
     
     cancel() {

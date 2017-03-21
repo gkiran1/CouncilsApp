@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
   selector: 'agenda-lite-edit'
 })
 export class AgendaLiteEditPage {
-  // minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
+   minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
   users = [];
   councils = [];
   assignmentslist = [];
@@ -90,7 +90,6 @@ export class AgendaLiteEditPage {
       completedassignments: ['', Validators.required],
       discussionitems: [agenda.discussionitems, Validators.required],
       closingprayer: ['', Validators.required],
-      spiritual: [agenda.spiritual, Validators.required],
       createdby: agenda.createdby,
       createddate: agenda.createddate,
       isactive: agenda.isactive,

@@ -35,8 +35,11 @@ import { GoodbyePage } from '../pages/goodbye/goodbye';
 import { FormsModule } from '@angular/forms';
 import { CouncilUsersPage } from '../pages/councilusers/councilusers';
 import { AgendasPage } from '../pages/agendas/agendas';
+import { AgendaPage } from '../pages/agenda/agenda';
 import { OpenCouncilDiscussionPage } from '../pages/discussions/open-council-discussion/open-council-discussion'
 import { AgendaLiteEditPage } from '../pages/agenda-lite-edit/agenda-lite-edit';
+import { AgendaEditPage } from '../pages/agenda-edit/agenda-edit';
+
 //Ionic Push Module
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { AdminPage } from '../pages/admin/admin.component';
@@ -112,6 +115,7 @@ const cloudSettings: CloudSettings = {
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
+    AgendaPage,
     OpenCouncilDiscussionPage,
     AdminPage,
     SettingsPage,
@@ -123,6 +127,7 @@ const cloudSettings: CloudSettings = {
     slide1Page,
     slide2Page,
     AgendaLiteEditPage,
+    AgendaEditPage,
     NewAgendaPage,
     NoAccessPage,
     TransferAdminRightsPage,
@@ -175,6 +180,8 @@ const cloudSettings: CloudSettings = {
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
+    AgendaPage,
+    AgendaEditPage,
     OpenCouncilDiscussionPage,
     AdminPage,
     SettingsPage,

@@ -1,7 +1,6 @@
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
 import { WelcomePage } from '../menu/menu';
-import { AgendaPage } from '../agenda/agenda';
 import { Component } from '@angular/core';
 import { Nav, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
