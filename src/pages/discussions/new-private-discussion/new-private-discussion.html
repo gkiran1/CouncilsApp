@@ -17,18 +17,18 @@
         <ion-item-group>
             <ion-list radio-group id="otheruser" name="otheruser" formControlName="otherUser">
                 <ng-container *ngFor="let user of users | search:term:'firstname'">
-                    <ion-item *ngIf="user.$key!==appservice.uid">
+                    <ion-item *ngIf="user.$key!==appservice.uid" class="flex-change">
                         <ion-avatar item-left>
                             <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
                             <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
                         </ion-avatar>
                         <ion-label color="dark">{{user.firstname}} {{user.lastname}}</ion-label>
-                        <ion-label></ion-label>
+                        <ion-label>{{user.councilsString}}</ion-label>
                         <ion-radio [value]="user" color="secondary"></ion-radio>
                     </ion-item>
                 </ng-container>
             </ion-list>
-            <ion-spinner *ngIf="isLoading" class="center"></ion-spinner>
+            <!--<ion-spinner *ngIf="isLoading" class="center"></ion-spinner>-->
         </ion-item-group>
     </form>
 </ion-content>

@@ -17,24 +17,41 @@ export class NewPrivateDiscussionPage {
   isLoading = true;
   constructor(fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
     appservice.getUser().subscribe(user => {
-      // user.councils.forEach(council => {
-      //   this.users = [];
-      //   this.firebaseservice.getUsersByCouncil(council).subscribe(usercouncils => {
-      //     usercouncils.forEach(usercouncil => {
-      //       this.users.push(this.firebaseservice.getUserObjByKey(usercouncil.userid));
-      //     });
-      //   });
-      // });
-      this.firebaseservice.getUsers().subscribe(u => {
-        this.users = u.filter(e => {
-          return e.councils.some(c => {
-            return user.councils.indexOf(c) !== -1;
+
+
+      user.councils.forEach(councilid => {
+        this.firebaseservice.getUsersByCouncil(councilid).subscribe(uc => {
+          uc.forEach(e => {
+            this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
+               let v = this.users.some(i=>{
+                return i.$key === u[0].$key;
+              });
+              u[0].councilsString = '';
+              u[0].councils.forEach(c=>{
+                this.firebaseservice.getCouncilByCouncilKey(c).subscribe(council=>{
+                  u[0].councilsString = `${u[0].councilsString}${u[0].councilsString?',':''} ${council.council}`;
+                });
+              });           
+              if(!v){
+                 this.users.push(u[0]);
+                 this.isLoading = false;
+              }
+           });
           });
         });
-         this.isLoading = false;
-      });
+      })
+
+      // this.firebaseservice.getUsers().subscribe(users => {
+      //   this.users = users.filter(e => {
+      //     return e.councils.some(c => {
+      //       return user.councils.indexOf(c) !== -1;
+      //     });
+      //   });
+      //   this.isLoading = false;
+      // });
+
       this.NewPrivateDiscussionForm = fb.group({
-        otherUser: ['',Validators.required],
+        otherUser: ['', Validators.required],
         createdDate: '',
         createdUserId: appservice.uid,
         createdUserName: user.firstname + ' ' + user.lastname,

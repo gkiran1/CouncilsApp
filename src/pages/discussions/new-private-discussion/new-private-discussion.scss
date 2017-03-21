@@ -10,4 +10,21 @@ new-private-discussion-page{
         top:40%;
         width:100%;
     }
+    ion-content ion-item ion-label{
+        white-space: normal !important;
+    }
+    .flex-change{
+        padding-top:10pt;
+        // padding-bottom: 10pt;
+    }
+    .flex-change .input-wrapper{
+        flex-direction: column;
+        align-items: flex-start
+    }
+    .flex-change .label-md,
+    .flex-change .label-ios,
+    .flex-change .label-wp{
+        margin:0;
+        overflow: visible;
+    }
 }
