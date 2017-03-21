@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginPage } from '../login/login';
+import { NavController } from 'ionic-angular';
 
 @Component({
     selector: 'noaccess-page',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
 })
 
 export class NoAccessPage {
+
+    constructor(public navCtrl: NavController) { }
+
+    backToLogin() {
+        this.navCtrl.setRoot(LoginPage);
+    }
 
 }
