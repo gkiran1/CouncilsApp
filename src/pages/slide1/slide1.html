@@ -1,11 +1,12 @@
 <ion-list no-lines>
-        <button *ngIf=isAdmin clear menuToggle ion-button class="listbtn2" name="AdminPage" block (click)="adminPage()" text-capitalize>
-                    <ion-icon name="star" item-left></ion-icon>Admin
+        <button *ngIf=isAdmin clear ion-button class="listbtn2" name="AdminPage" block (click)="adminPage()" text-capitalize>
+                    <ion-icon class="ion-ios-star-outline" item-left></ion-icon>Admin
             </button>
-        <button clear menuToggle ion-button class="listbtn2" name="settingsPage" block (click)="settingsPage()" text-capitalize>
-                    <ion-icon name="settings" item-left></ion-icon>Settings
+        <button clear ion-button class="listbtn2" name="settingsPage" block (click)="settingsPage()" text-capitalize>
+                    <ion-icon class="ion-ios-settings-outline" item-left></ion-icon>Settings
             </button>
-        <button clear menuToggle ion-button class="listbtn2" name="DonationsPage" block (click)="donationsPage()" text-capitalize>
-                    <ion-icon name="dollar" item-left></ion-icon>Donations
+            
+        <button clear ion-button class="listbtn2" name="DonationsPage" block (click)="donationsPage()" text-capitalize>
+                    <ion-icon class="ion-logo-usd" item-left></ion-icon>Donations
             </button>
 </ion-list>
