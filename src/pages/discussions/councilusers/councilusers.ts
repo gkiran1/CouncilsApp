@@ -25,8 +25,8 @@ export class CouncilUsersModalPage {
         });
 
     }
-    dismiss(){
-        this.viewCtrl.dismiss();
+    dismiss(user){
+        this.viewCtrl.dismiss(user);
     }
 
 }

@@ -20,5 +20,12 @@ private-discussions-list-page{
     ion-header ion-navbar .toolbar-background-wp{
         background-color: #fff;
     }
+    .text-content{
+        position: absolute;
+        top: 40%;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
     
 }

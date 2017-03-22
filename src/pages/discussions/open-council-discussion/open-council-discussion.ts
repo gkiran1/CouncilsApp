@@ -73,9 +73,11 @@ export class OpenCouncilDiscussionPage {
 
             if (this.isModalDismissed) {
                 this.councilusersModal = this.modalCtrl.create(CouncilUsersModalPage, { councilid: this.discussion.councilid });
-                this.councilusersModal.onDidDismiss(data => {
+                this.councilusersModal.onDidDismiss(user => {
+                    if(!user) return;
+                    this.msg = `${this.msg}${user.firstname} ${user.lastname}`
                     this.isModalDismissed = true;
-                    console.log('modal dismissed::', data);
+                    console.log('modal dismissed::', user);
                 });
                 this.councilusersModal.present();
                 this.isModalDismissed = false;
