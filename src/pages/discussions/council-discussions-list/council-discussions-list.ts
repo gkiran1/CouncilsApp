@@ -20,7 +20,7 @@ export class CouncilDiscussionsListPage {
              this.discussions = [];
           fs.getDiscussions().subscribe(discussions => {
             this.discussions = discussions.filter(discussion => {
-              console.log('user.councils, discussion.councilid',councilsIds, discussion.councilid);
+              //console.log('user.councils, discussion.councilid',councilsIds, discussion.councilid);
               return councilsIds.indexOf(discussion.councilid) !== -1;
             });
             this.isListEmpty = this.discussions.length ? false : true;
