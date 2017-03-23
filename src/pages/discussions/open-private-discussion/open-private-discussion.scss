@@ -22,4 +22,9 @@ open-private-discussion-page {
     .chat-content {
         bottom: 0;
     }
+    .typings-label{
+        position: fixed;
+        z-index: 99;
+        bottom: 11%;
+    }
 }

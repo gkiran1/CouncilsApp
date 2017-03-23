@@ -14,11 +14,13 @@ export class OpenPrivateDiscussionPage {
     @ViewChild(Content) content: Content;
     discussion = {
         $key: '',
-        messages: []
+        messages: [],
+        typings: ''
     }
     msg = '';
     user;
     chatWith;
+    isTyping = true;
     constructor(public af: AngularFire, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService) {
         this.af.auth.subscribe(auth => {
             if (auth !== null) {
@@ -31,6 +33,7 @@ export class OpenPrivateDiscussionPage {
             this.discussion = discussion;
             this.chatWith = discussion.createdUserId === this.user.$key ? discussion.otherUserName : discussion.createdUserName;
             this.discussion.messages = this.discussion.messages || [];
+            this.discussion.typings = this.discussion.typings || '';
             this.discussion.messages = Object.keys(this.discussion.messages).map(e => this.discussion.messages[e]);
         });
     }
@@ -65,5 +68,27 @@ export class OpenPrivateDiscussionPage {
             this.msg = '';
         }
     }
-
+    focusIn() {
+        //check whether username is already added to typings string. if so, dont add it again.
+        if (this.discussion.typings.includes(this.user.firstname)) return;
+        this.discussion.typings = `${this.discussion.typings}${this.discussion.typings ? ', ' : ''}${this.user.firstname} is typing..`;
+        this.fs.updatePrivateDiscussion(this.discussion.$key, this.discussion.typings)
+            .then(res => {
+                //
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+    focusOut() {
+        //username must have been added already in onfoucs event.So, removing it from the typings string
+        this.discussion.typings = this.discussion.typings.replace(', ' + this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '');
+        this.fs.updatePrivateDiscussion(this.discussion.$key, this.discussion.typings)
+            .then(res => {
+                //
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 }

@@ -626,7 +626,8 @@ export class FirebaseService {
                 otherUserAvatar: discussion.otherUserAvatar,
                 isActive: discussion.isActive,
                 messages: discussion.messages,
-                lastMsg: discussion.lastMsg
+                lastMsg: discussion.lastMsg,
+                typings: discussion.typings
             })
             .then((res) => {
                 //to get a reference of newly added object -res.path.o[1]
@@ -651,6 +652,9 @@ export class FirebaseService {
     }
     updateDiscussion(discussionId, typings) {
         return this.af.database.object(`discussions/${discussionId}`).update({ typings: typings });
+    }
+    updatePrivateDiscussion(discussionId, typings){
+         return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings });
     }
 
 }

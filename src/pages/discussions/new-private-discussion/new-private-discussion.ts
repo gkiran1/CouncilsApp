@@ -73,6 +73,7 @@ export class NewPrivateDiscussionPage {
     value.otherUserName = value.otherUser.firstname + ' ' + value.otherUser.lastname;
     value.otherUserAvatar = value.otherUser.avatar;
     value.createdDate = moment().toISOString();
+    value.typings = '';
     console.log('NewPrivateDiscussionForm------------>', value);
 
     this.firebaseservice.createPrivateDiscussion(value)
