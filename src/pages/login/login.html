@@ -1,33 +1,33 @@
 <ion-content has-footer="true">
-  <div class="login-header">
-    
-      <span class="login-title">Log In</span>
-      <div class="login-subheader">
-      <h3>Log in to your Councils account</h3>
-      </div>
-      <!--<p class="subtext2">to create your Councils account</p>-->
-    
-  </div>
+    <div class="login-header">
 
-  <form class="formcontent" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
-    <ion-item>
-      <ion-label class="inputtype" floating> Email</ion-label>
-      <ion-input type="email" name="email" id="email" [(ngModel)]="loginCredentials.email" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label class="inputtype" floating> Password</ion-label>
-      <ion-input type="password" id="password" name="password" [(ngModel)]="loginCredentials.password" required></ion-input>
-    </ion-item>
+        <span class="login-title">Log In</span>
+        <div class="login-subheader">
+            Log in to your Councils account
+        </div>
+        <!--<p class="subtext2">to create your Councils account</p>-->
 
-    <div class="login-button-container">
-      <button name="loginbtn" id="loginbtn" ion-button block clear color="secondary" class="login-button" type="submit" [disabled]="!loginForm.form.valid" text-capitalize>Log In</button>
     </div>
-  </form>
+
+    <form class="formcontent" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+        <ion-item>
+            <ion-label class="inputtype" floating> Email</ion-label>
+            <ion-input type="email" name="email" id="email" [(ngModel)]="loginCredentials.email" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label class="inputtype" floating> Password</ion-label>
+            <ion-input type="password" id="password" name="password" [(ngModel)]="loginCredentials.password" required></ion-input>
+        </ion-item>
+
+        <div class="login-button-container">
+            <button name="loginbtn" id="loginbtn" ion-button block clear color="secondary" class="login-button" type="submit" [disabled]="!loginForm.form.valid" text-capitalize>Log In</button>
+        </div>
+    </form>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <button ion-button clear color="secondary" name="forgotPassword" block text-capitalize (click)="forgotPassword()">Forgot password?</button>
-    <button ion-button clear color="secondary" name="noAccount" block text-capitalize (click)="noAccount()">Don't have an account?</button>
-  </ion-toolbar>
+    <ion-toolbar>
+        <button ion-button clear color="secondary" name="forgotPassword" block text-capitalize (click)="forgotPassword()">Forgot password?</button>
+        <button ion-button clear color="secondary" name="noAccount" block text-capitalize (click)="noAccount()">Don't have an account?</button>
+    </ion-toolbar>
 </ion-footer>
