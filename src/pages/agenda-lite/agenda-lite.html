@@ -87,7 +87,7 @@
                     formControlName="discussionitem" (keyup)="keypressed($event)" maxlength="500"></ion-input>
             </ng-container>-->
 
-            <ion-textarea name="notes" (focus)="discussionfocus()" elastic id="discussionitems" name="discussionitems" [(ngModel)]="discussionitems" formControlName="discussionitems"
+            <ion-textarea type="text" (focus)="discussionfocus()" elastic id="discussionitems" name="discussionitems" [(ngModel)]="discussionitems" formControlName="discussionitems"
                 maxlength="500" (keyup)="keypressed($event)">
                 </ion-textarea>
 

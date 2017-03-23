@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, ActionSheetController, NavController, MenuController, NavParams } from 'ionic-angular';
 import { WelcomePage } from '../menu/menu';
 import { AgendasPage } from '../agendas/agendas';
+import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
+import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -12,21 +14,29 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
   selector: 'agenda-lite-edit'
 })
 export class AgendaLiteEditPage {
-   minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
+  minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
   users = [];
   councils = [];
   assignmentslist = [];
   completedassignmentslist = [];
   agendaliteeditForm: FormGroup;
   agendaKey = '';
+  discussionitemsObj = [];
 
   constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
-    public nav: NavController) {
+    public nav: NavController, public actionSheetCtrl: ActionSheetController,
+    public menuctrl: MenuController
+  ) {
 
     this.councils = [];
     let agenda = navParams.get('agendaselected');
     this.agendaKey = agenda.$key;
+
+
+
+    this.discussionitemsObj = agenda.discussionitems.split('\n');
+    // (<FormControl>this.agendaliteeditForm.controls['discussionitems']).setValue(this.discussionitemsObj);
 
     var councilsIds = localStorage.getItem('userCouncils').split(',');
     councilsIds.forEach(councilId => {
@@ -88,7 +98,7 @@ export class AgendaLiteEditPage {
       spiritualthought: ['', Validators.required],
       assignments: ['', Validators.required],
       completedassignments: ['', Validators.required],
-      discussionitems: [agenda.discussionitems, Validators.required],
+      discussionitems: ['', Validators.required],
       closingprayer: ['', Validators.required],
       createdby: agenda.createdby,
       createddate: agenda.createddate,
@@ -169,6 +179,38 @@ export class AgendaLiteEditPage {
       .catch(err => { this.showAlert('Unable to delete the Agenda Lite, please try after some time.') })
   }
 
+  plusBtn(item) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: item,
+      buttons: [
+        {
+          text: 'Start Discussion',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewCouncilDiscussionPage,{item:item});
+
+          }
+        },
+        {
+          text: 'Make Assignment',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewAssignmentPage,{item:item});
+          }
+        },
+        {
+          text: 'Cancel',
+          cssClass: "actionsheet-cancel",
+          handler: () => {
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
+  }
   showAlert(errText) {
     let alert = this.alertCtrl.create({
       title: '',

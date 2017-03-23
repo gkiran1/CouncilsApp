@@ -73,27 +73,37 @@
 
         <ion-item>
             <ion-label floating>Spiritual Welfare</ion-label>
-            <ion-textarea elastic name="spiritualwelfare" formControlName="spiritualwelfare" maxlength="500"></ion-textarea>
+            <ion-textarea type="text" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare" [(ngModel)]="spiritualwelfare" formControlName="spiritualwelfare"
+                maxlength="500" (keyup)="spiritualkey($event)">
+                </ion-textarea>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Temporal Welfare</ion-label>
-            <ion-textarea elastic name="temporalwelfare" formControlName="temporalwelfare" maxlength="500"></ion-textarea>
+             <ion-textarea type="text" (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare" [(ngModel)]="temporalwelfare" formControlName="temporalwelfare"
+                maxlength="500" (keyup)="temporalkey($event)">
+                </ion-textarea>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Fellowship Items</ion-label>
-            <ion-textarea elastic name="fellowshipitems" formControlName="fellowshipitems" maxlength="500"></ion-textarea>
+            <ion-textarea type="text" (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems" [(ngModel)]="fellowshipitems" formControlName="fellowshipitems"
+                maxlength="500" (keyup)="fellowshipkey($event)">
+                </ion-textarea>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Missionary Items</ion-label>
-            <ion-textarea elastic name="missionaryitems" formControlName="missionaryitems" maxlength="500"></ion-textarea>
+             <ion-textarea type="text" (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems" [(ngModel)]="missionaryitems" formControlName="missionaryitems"
+                maxlength="500" (keyup)="missionarykey($event)">
+                </ion-textarea>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Events</ion-label>
-            <ion-textarea elastic name="events" formControlName="events" maxlength="500"></ion-textarea>
+             <ion-textarea type="text" (focus)="eventfocus()" elastic id="event" name="event" [(ngModel)]="event" formControlName="event"
+                maxlength="500" (keyup)="eventkey($event)">
+                </ion-textarea>
         </ion-item>
 
         <ion-item>

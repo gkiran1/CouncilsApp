@@ -19,6 +19,11 @@ export class AgendaPage {
     newagendaForm: FormGroup;
     usercouncils = [];
     term: string = '';
+    spiritualwelfare;
+    temporalwelfare;
+    fellowshipitems;
+    missionaryitems;
+    event;
 
 
     constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService,
@@ -46,7 +51,7 @@ export class AgendaPage {
             temporalwelfare: ['', Validators.required],
             fellowshipitems: ['', Validators.required],
             missionaryitems: ['', Validators.required],
-            events: ['', Validators.required],            
+            event: ['', Validators.required],
             closingprayer: ['', Validators.required],
             createdby: localStorage.getItem('securityToken'),
             createddate: new Date().toDateString(),
@@ -93,6 +98,11 @@ export class AgendaPage {
 
     agendasArray = [];
     createagenda(agenda) {
+     agenda.spiritualwelfare = agenda.spiritualwelfare.replace(/-/gi, '').trim();
+     agenda.temporalwelfare = agenda.temporalwelfare.replace(/-/gi, '').trim();
+     agenda.fellowshipitems = agenda.fellowshipitems.replace(/-/gi, '').trim();
+     agenda.missionaryitems = agenda.missionaryitems.replace(/-/gi, '').trim();
+     agenda.event = agenda.event.replace(/-/gi, '').trim();
 
         this.firebaseservice.createAgenda(agenda)
             .then(res => {
@@ -118,4 +128,69 @@ export class AgendaPage {
     searchFn(event) {
         this.term = event.target.value;
     }
+    spiritualkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        if (keycode == '13') {
+            if (this.spiritualwelfare) {
+                this.spiritualwelfare = this.spiritualwelfare + "- ";
+            }
+        }
+    }
+
+    spiritualfocus($event) {
+        this.spiritualwelfare = "- "
+    }
+
+    temporalkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        if (keycode == '13') {
+            if (this.temporalwelfare) {
+                this.temporalwelfare = this.temporalwelfare + "- ";
+            }
+        }
+    }
+
+    temporalfocus($event) {
+        this.temporalwelfare = "- "
+    }
+
+    fellowshipkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        if (keycode == '13') {
+            if (this.fellowshipitems) {
+                this.fellowshipitems = this.fellowshipitems + "- ";
+            }
+        }
+    }
+
+    fellowshipfocus($event) {
+        this.fellowshipitems = "- "
+    }
+
+    missionarykey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        if (keycode == '13') {
+            if (this.missionaryitems) {
+                this.missionaryitems = this.missionaryitems + "- ";
+            }
+        }
+    }
+
+    missionaryfocus($event) {
+        this.missionaryitems = "- "
+    }
+
+    eventkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        if (keycode == '13') {
+            if (this.event) {
+                this.event = this.event + "- ";
+            }
+        }
+    }
+
+    eventfocus($event) {
+        this.event = "- "
+    }
+
 }

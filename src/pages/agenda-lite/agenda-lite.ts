@@ -91,7 +91,7 @@ export class AgendaLitePage {
 
   agendasArray = [];
   createagenda(agenda) {
-    // agenda.discussionitems = agenda.discussionitems.replace(/-/gi, '').trim();
+     agenda.discussionitems = agenda.discussionitems.replace(/-/gi, '').trim();
     console.log("agenda.discussionitems", agenda.discussionitems)
     this.firebaseservice.createAgendaLite(agenda)
       .then(res => {
@@ -119,7 +119,7 @@ export class AgendaLitePage {
   }
   keypressed($event) {
 
-var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+// var keycode = ($event.keyCode ? $event.keyCode : $event.which);
     // if (keycode == '13') {
     //   if (this.discussionitems) {
     //     this.discussionitems.push({});

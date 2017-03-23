@@ -23,6 +23,9 @@ export class NewAssignmentPage {
 
   constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
     let assignment = navParams.get('assignment');
+    let description = navParams.get('item');
+    // let agendaitem = navParams.get('item');
+
     if (assignment) {
       this.isNewAssignment = false;
       this.assignmentKey = assignment.$key;
@@ -41,7 +44,7 @@ export class NewAssignmentPage {
       });
     } else {
       this.assignmentForm = fb.group({
-        description: ['', Validators.required],
+        description: [description ? description : '', Validators.required],
         assigneduser: ['', Validators.required],
         assignedcouncil: ['', Validators.required],
         assigneddate: [moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD'), Validators.required],

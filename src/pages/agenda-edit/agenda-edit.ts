@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, ActionSheetController, MenuController, NavParams } from 'ionic-angular';
 import { WelcomePage } from '../menu/menu';
 import { AgendasPage } from '../agendas/agendas';
+import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
+import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -19,14 +21,26 @@ export class AgendaEditPage {
     completedassignmentslist = [];
     agendaeditForm: FormGroup;
     agendaKey = '';
+    spiritualwelfareObj = [];
+    temporalwelfareObj = [];
+    fellowshipitemsObj = [];
+    missionaryitemsObj = [];
+    eventObj = [];
 
     constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService,
-        public firebaseservice: FirebaseService, public alertCtrl: AlertController,
-        public nav: NavController) {
+        public firebaseservice: FirebaseService,public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
+        public nav: NavController, public menuctrl: MenuController) {
 
         this.councils = [];
         let agenda = navParams.get('agendaselected');
         this.agendaKey = agenda.$key;
+
+        this.spiritualwelfareObj = agenda.spiritualwelfare.split('\n');
+        this.temporalwelfareObj = agenda.temporalwelfare.split('\n');
+        this.fellowshipitemsObj = agenda.fellowshipitems.split('\n');
+        this.missionaryitemsObj = agenda.missionaryitems.split('\n');
+        this.eventObj = agenda.event.split('\n');
+
 
         var councilsIds = localStorage.getItem('userCouncils').split(',');
         councilsIds.forEach(councilId => {
@@ -88,12 +102,11 @@ export class AgendaEditPage {
             spiritualthought: ['', Validators.required],
             assignments: ['', Validators.required],
             completedassignments: ['', Validators.required],
-            discussionitems: [agenda.discussionitems, Validators.required],
             spiritualwelfare: [agenda.spiritualwelfare, Validators.required],
             temporalwelfare: [agenda.temporalwelfare, Validators.required],
             fellowshipitems: [agenda.fellowshipitems, Validators.required],
             missionaryitems: [agenda.missionaryitems, Validators.required],
-            events: [agenda.events, Validators.required],
+            event: [agenda.event, Validators.required],
             closingprayer: ['', Validators.required],
             createdby: agenda.createdby,
             createddate: agenda.createddate,
@@ -144,7 +157,7 @@ export class AgendaEditPage {
     }
 
     formatAgendaObj(value) {
-        console.log("value",value)
+        console.log("value", value)
         return {
             assignedcouncil: value.assignedcouncil,
             assigneddate: moment(value.assigneddate, "YYYY-MM-DD").toISOString(),
@@ -157,7 +170,7 @@ export class AgendaEditPage {
             temporalwelfare: value.temporalwelfare,
             fellowshipitems: value.fellowshipitems,
             missionaryitems: value.missionaryitems,
-            events: value.events,
+            event: value.event,
             closingprayer: value.closingprayer,
             createdby: value.createdby,
             createddate: new Date().toISOString(),
@@ -168,7 +181,7 @@ export class AgendaEditPage {
 
     edit(value) {
         let formattedAgendaObj = this.formatAgendaObj(value);
-        console.log("formattedAgendaObj",formattedAgendaObj);
+        console.log("formattedAgendaObj", formattedAgendaObj);
         this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
             .then(res => { this.showAlert('Agenda has been updated.'); this.nav.push(AgendasPage); })
             .catch(err => { this.showAlert('Unable to updated the Agenda, please try after some time.') })
@@ -188,4 +201,37 @@ export class AgendaEditPage {
         });
         alert.present();
     }
+
+     plusBtn(item) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: item,
+      buttons: [
+        {
+          text: 'Start Discussion',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewCouncilDiscussionPage,{item:item});
+
+          }
+        },
+        {
+          text: 'Make Assignment',
+          cssClass: "actionsheet-items",
+          handler: () => {
+            this.menuctrl.close();
+            this.nav.push(NewAssignmentPage,{item:item});
+          }
+        },
+        {
+          text: 'Cancel',
+          cssClass: "actionsheet-cancel",
+          handler: () => {
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
+  }
 }

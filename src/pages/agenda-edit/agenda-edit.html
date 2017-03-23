@@ -71,30 +71,70 @@
             </ion-select>
         </ion-item>
 
-        <ion-item>
-            <ion-label floating>Spiritual Welfare</ion-label>
-            <ion-textarea elastic name="spiritualwelfare" formControlName="spiritualwelfare" maxlength="500"></ion-textarea>
-        </ion-item>
+        <ion-list>
+            <ion-label>Spiritual Welfare</ion-label>
+            <ng-container *ngFor="let item of spiritualwelfareObj">
+                <ion-item>{{item}}
+                    <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
+                 <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+                </button>
+                </ion-item>
+            </ng-container>
+        </ion-list>
 
-        <ion-item>
+        <ion-list>
+            <ion-label>Temporal Welfare</ion-label>
+            <ng-container *ngFor="let item of temporalwelfareObj">
+                <ion-item>{{item}}
+                    <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
+                 <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+                </button>
+                </ion-item>
+            </ng-container>
+        </ion-list>
+
+        <!--<ion-item>
             <ion-label floating>Temporal Welfare</ion-label>
             <ion-textarea elastic name="temporalwelfare" formControlName="temporalwelfare" maxlength="500"></ion-textarea>
-        </ion-item>
+        </ion-item>-->
 
-        <ion-item>
-            <ion-label floating>Fellowship Items</ion-label>
-            <ion-textarea elastic name="fellowshipitems" formControlName="fellowshipitems" maxlength="500"></ion-textarea>
-        </ion-item>
+        <ion-list>
+            <ion-label>Fellowship Items</ion-label>
+            <ng-container *ngFor="let item of fellowshipitemsObj">
+                <ion-item>{{item}}
+                    <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
+                 <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+                </button>
+                </ion-item>
+            </ng-container>
+        </ion-list>
 
-        <ion-item>
-            <ion-label floating>Missionary Items</ion-label>
-            <ion-textarea elastic name="missionaryitems" formControlName="missionaryitems" maxlength="500"></ion-textarea>
-        </ion-item>
-
-        <ion-item>
+        <ion-list>
+            <ion-label>Missionary Items</ion-label>
+            <ng-container *ngFor="let item of missionaryitemsObj">
+                <ion-item>{{item}}
+                    <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
+                 <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+                </button>
+                </ion-item>
+            </ng-container>
+        </ion-list>
+     
+     <ion-list>
+            <ion-label>Events</ion-label>
+            <ng-container *ngFor="let item of eventObj">
+                <ion-item>{{item}}
+                    <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
+                 <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+                </button>
+                </ion-item>
+            </ng-container>
+        </ion-list>
+        
+        <!--<ion-item>
             <ion-label floating>Events</ion-label>
-            <ion-textarea elastic name="events" formControlName="events" maxlength="500"></ion-textarea>
-        </ion-item>
+            <ion-textarea elastic name="event" formControlName="event" maxlength="500"></ion-textarea>
+        </ion-item>-->
 
         <ion-item>
             <ion-label floating>Closing Prayer</ion-label>

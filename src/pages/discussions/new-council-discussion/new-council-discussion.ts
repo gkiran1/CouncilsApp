@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
@@ -14,7 +14,9 @@ import { AngularFire } from 'angularfire2';
 export class NewCouncilDiscussionPage {
   newCouncilDiscussionForm: FormGroup;
   councils;
-  constructor(public af: AngularFire, fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
+  constructor(navParams: NavParams, public af: AngularFire, fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
+    let topicitem = navParams.get('item');
+
     this.af.auth.subscribe(auth => {
       if (auth !== null) {
         this.af.database.object('/users/' + auth.uid).subscribe(user => {
@@ -24,7 +26,7 @@ export class NewCouncilDiscussionPage {
           });
 
           this.newCouncilDiscussionForm = fb.group({
-            topic: ['', Validators.compose([Validators.required, Validators.maxLength(25)])],
+            topic: [topicitem ? topicitem : '', Validators.compose([Validators.required, Validators.maxLength(25)])],
             council: ['', Validators.required],
             createdDate: '',
             createdBy: appservice.uid,
