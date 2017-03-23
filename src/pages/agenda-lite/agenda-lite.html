@@ -26,8 +26,9 @@
 
         <ion-item>
             <ion-label floating>Date & Time</ion-label>
-            <ion-datetime displayFormat="DDDD, MMM D, YYYY, hh:mma" pickerFormat="DDDD, MMM D, YYYY, hh:mma" [min]="minDate" [max]="2120" name="assigneddate"
-                formControlName="assigneddate" monthNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec" dayNames="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"></ion-datetime>
+            <ion-datetime displayFormat="DDDD, MMM D, YYYY, hh:mma" pickerFormat="DDDD, MMM D, YYYY, hh:mma" [min]="minDate" [max]="2120"
+                name="assigneddate" formControlName="assigneddate" monthNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+                dayNames="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"></ion-datetime>
         </ion-item>
 
         <!--<ion-row>
@@ -80,8 +81,16 @@
 
         <ion-item>
             <ion-label floating>Discussion Items</ion-label>
-            <ion-textarea name="discussionitems" elastic formControlName="discussionitems" maxlength="500"></ion-textarea>
-            <!--<ion-input type="text" name="discussionitems" formControlName="discussionitems" maxlength="500"></ion-input>-->
+            <!--<ng-container *ngFor="let discussionitem of discussionitems">
+                <span>-</span>
+                <ion-input name="notes" (focus)="discussionfocus()" name="discussionitem" [(ngModel)]="discussionitem"
+                    formControlName="discussionitem" (keyup)="keypressed($event)" maxlength="500"></ion-input>
+            </ng-container>-->
+
+            <ion-textarea name="notes" (focus)="discussionfocus()" elastic id="discussionitems" name="discussionitems" [(ngModel)]="discussionitems" formControlName="discussionitems"
+                maxlength="500" (keyup)="keypressed($event)">
+                </ion-textarea>
+
         </ion-item>
 
         <ion-item>

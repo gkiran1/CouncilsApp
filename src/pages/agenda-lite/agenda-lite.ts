@@ -14,18 +14,20 @@ export class AgendaLitePage {
   minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
   users = [];
   assignmentslist = [];
-  completedassignmentslist=[];
+  completedassignmentslist = [];
   councils = [];
   newagendaliteForm: FormGroup;
   usercouncils = [];
   term: string = '';
-
+  discussionitems;
+//discussionitems=[];
 
   constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
     public nav: NavController) {
 
     // let council = navParams.get('councilObj');
+// this.discussionitems.push({});
 
     var councilsIds = localStorage.getItem('userCouncils').split(',');
     councilsIds.forEach(councilId => {
@@ -55,7 +57,7 @@ export class AgendaLitePage {
     this.users = [];
     this.assignmentslist = [];
     this.completedassignmentslist = [];
-    
+
     this.getUsersByCouncilId(value.assignedcouncil.$key).subscribe(usersObj => {
       usersObj.forEach(usrObj => {
         this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
@@ -65,14 +67,14 @@ export class AgendaLitePage {
         });
       });
     });
-    this.getAssignmentsByCouncilId(value.assignedcouncil.$key).subscribe(assignments=>{
-      assignments.forEach(assignObj=>{
-        if(assignObj.isCompleted){
+    this.getAssignmentsByCouncilId(value.assignedcouncil.$key).subscribe(assignments => {
+      assignments.forEach(assignObj => {
+        if (assignObj.isCompleted) {
           this.completedassignmentslist.push(assignObj);
         }
-        else{
+        else {
           this.assignmentslist.push(assignObj);
-          
+
         }
       });
 
@@ -86,10 +88,11 @@ export class AgendaLitePage {
   getAssignmentsByCouncilId(councilId: string) {
     return this.firebaseservice.getAssignmentsByCouncil(councilId);
   }
-  
+
   agendasArray = [];
   createagenda(agenda) {
-       
+    // agenda.discussionitems = agenda.discussionitems.replace(/-/gi, '').trim();
+    console.log("agenda.discussionitems", agenda.discussionitems)
     this.firebaseservice.createAgendaLite(agenda)
       .then(res => {
         this.showAlert('Agenda created successfully.');
@@ -114,4 +117,26 @@ export class AgendaLitePage {
   searchFn(event) {
     this.term = event.target.value;
   }
+  keypressed($event) {
+
+var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+    // if (keycode == '13') {
+    //   if (this.discussionitems) {
+    //     this.discussionitems.push({});
+    //   }
+    // }
+  
+    var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+    if (keycode == '13') {
+      if (this.discussionitems) {
+        this.discussionitems = this.discussionitems + "- ";
+      }
+    }
+
+  }
+  
+  discussionfocus($event) {
+    this.discussionitems = "- "
+  }
+
 }
