@@ -31,17 +31,17 @@ export class OpenCouncilDiscussionPage {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(usr => {
                     this.user = usr;
+                    fs.getDiscussionByKey(navparams.get('discussion')).subscribe(discussion => {
+                        this.discussion = discussion;
+                        this.discussion.messages = this.discussion.messages || [];
+                        this.discussion.messages = Object.keys(this.discussion.messages).map(e => this.discussion.messages[e]);
+                        this.discussion.typings = this.discussion.typings || '';
+                        fs.getActiveUsersFromCouncil(discussion.councilid).subscribe(users => {
+                            this.activeusersCount = users.length;
+                        });
+                    });
                 });
             }
-        });
-        fs.getDiscussionByKey(navparams.get('discussion')).subscribe(discussion => {
-            this.discussion = discussion;
-            this.discussion.messages = this.discussion.messages || [];
-            this.discussion.messages = Object.keys(this.discussion.messages).map(e => this.discussion.messages[e]);
-            this.discussion.typings = this.discussion.typings || '';
-            fs.getActiveUsersFromCouncil(discussion.councilid).subscribe(users => {
-                this.activeusersCount = users.length;
-            });
         });
     }
     back() {
@@ -103,7 +103,7 @@ export class OpenCouncilDiscussionPage {
     focusIn() {
         //check whether username is already added to typings string. if so, dont add it again.
         if (this.discussion.typings.includes(this.user.firstname)) return;
-        this.discussion.typings =  `${this.discussion.typings}${this.discussion.typings?', ':''}${this.user.firstname} is typing..`;
+        this.discussion.typings = `${this.discussion.typings}${this.discussion.typings ? ', ' : ''}${this.user.firstname} is typing..`;
         this.fs.updateDiscussion(this.discussion.$key, this.discussion.typings)
             .then(res => {
                 //
@@ -114,7 +114,7 @@ export class OpenCouncilDiscussionPage {
     }
     focusOut() {
         //username must have been added already in onfoucs event.So, removing it from the typings string
-        this.discussion.typings = this.discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '');
+        this.discussion.typings = this.discussion.typings.replace(', ' + this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '');
         this.fs.updateDiscussion(this.discussion.$key, this.discussion.typings)
             .then(res => {
                 //
