@@ -475,7 +475,8 @@ export class FirebaseService {
                 createdBy: discussion.createdBy,
                 isActive: discussion.isActive,
                 messages: discussion.messages,
-                lastMsg: discussion.lastMsg
+                lastMsg: discussion.lastMsg,
+                typings: discussion.typings
             })
             .then((res) => {
                 //to get a reference of newly added object -res.path.o[1]
@@ -483,7 +484,7 @@ export class FirebaseService {
             })
             .catch(err => { throw err });
     }
-    saveFile(file: any,image:any) {
+    saveFile(file: any, image: any) {
         return this.rootRef.child('files').push(
             {
                 // name: file.name,
@@ -647,6 +648,9 @@ export class FirebaseService {
     }
     getFilesByKey(key) {
         return this.af.database.object(`files/${key}`);
+    }
+    updateDiscussion(discussionId, typings) {
+        return this.af.database.object(`discussions/${discussionId}`).update({ typings: typings });
     }
 
 }

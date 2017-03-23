@@ -14,6 +14,7 @@
 </ion-header>
 <ion-content id="content1">
     <!--<ion-scroll scrollY="true" class="messages">-->
+        <ion-label class="typings-label" color="secondary" *ngIf="isTyping">{{discussion.typings.replace(this.user.firstname + ' is typing..', '')}}</ion-label>
     <div class="chat-content">
         <ion-item text-wrap>
             <ion-label>
@@ -38,7 +39,7 @@
 <ion-footer>
     <ion-row>
         <ion-col width-80>
-            <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (keyup)="keypresssed($event)"></ion-input>
+            <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)"></ion-input>
         </ion-col>
         <ion-col width-20>
             <button ion-button color="secondary" clear (click)="send()">Send</button>

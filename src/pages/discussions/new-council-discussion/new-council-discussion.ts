@@ -42,6 +42,7 @@ export class NewCouncilDiscussionPage {
     value.councilid = value.council.$key;
     value.councilname = value.council.council;
     value.lastMsg = '';
+    value.typings = '';
     this.firebaseservice.createDiscussion(value)
       .then(discussionId => {
         console.log("discussion created successfully...", discussionId);
