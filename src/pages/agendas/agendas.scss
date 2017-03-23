@@ -1,24 +1,24 @@
-agendas-page{
-    .agendadate-styles{
+agendas-page {
+    .agendadate-styles {
         font-family: Bernina-Regular !important;
-        font-size: 1.42em !important;
-        color:#3cb18a !important
+        font-size: 145% !important;
+        color: #3cb18a !important
     }
-    .agendacouncil-styles{
-         font-family: Bernina-Regular !important;
-        font-size: 1.08em !important;
-        color:#a9aaac !important
+    .agendacouncil-styles {
+        font-family: Bernina-Regular !important;
+        font-size: 105% !important;
+        color: #a9aaac !important
     }
-    .icon-style{
-    color:#A9AAAC;
-    width: 0.66em;
-    height: 1.08em;
+    .icon-style {
+        color: #A9AAAC;
+        width: 0.66em;
+        height: 1.08em;
     }
-     .text-content{
-       position:absolute;
-       top:50%;
-       width: 100%;
-       margin:auto;
-       color:map-get($colors, light-gray);
+    .text-content {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        margin: auto;
+        color: map-get($colors, light-gray);
     }
 }
