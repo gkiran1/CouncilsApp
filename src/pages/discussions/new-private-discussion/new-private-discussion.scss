@@ -1,33 +1,33 @@
-new-private-discussion-page{
+new-private-discussion-page {
     .ion-ios-close {
-        font-size: 36pt !important;
+        font-size: 300% !important;
     }
-    .text-input-md{
+    .text-input-md {
         margin: 13px 8px 13px 0 !important;
     }
-    .center{
+    .center {
         position: absolute;
-        top:40%;
-        width:100%;
+        top: 40%;
+        width: 100%;
     }
-    ion-content ion-item ion-label{
+    ion-content ion-item ion-label {
         white-space: normal !important;
     }
-    .flex-change{
-        padding-top:10pt;
+    .flex-change {
+        padding-top: 10pt;
         // padding-bottom: 10pt;
     }
-    .flex-change .input-wrapper{
+    .flex-change .input-wrapper {
         flex-direction: column;
         align-items: flex-start
     }
     .flex-change .label-md,
     .flex-change .label-ios,
-    .flex-change .label-wp{
-        margin:0;
+    .flex-change .label-wp {
+        margin: 0;
         overflow: visible;
     }
-    .flex-change .item-inner{
+    .flex-change .item-inner {
         padding-bottom: 6pt;
     }
 }
