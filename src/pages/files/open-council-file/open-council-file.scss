@@ -1,28 +1,29 @@
-open-council-file-page{
+open-council-file-page {
     .ion-ios-arrow-round-back {
-        font-size: 36pt !important;
+        font-size: 300% !important;
     }
-    .ion-md-arrow-back{
+    .ion-md-arrow-back {
         position: absolute;
         top: 15px;
     }
-    ion-header .button-ios{
+    ion-header .button-ios {
         margin: 0;
         padding: 0;
         height: inherit;
     }
-    ion-header .button-md{
+    ion-header .button-md {
         margin: 0;
         height: inherit;
     }
-    ion-footer .button-md,ion-footer .button-ios{
+    ion-footer .button-md,
+    ion-footer .button-ios {
         padding: 0;
     }
-    .image-content{
+    .image-content {
         position: absolute;
         bottom: 0;
     }
-    .empty{    
-    height: 25pt;    
-}
+    .empty {
+        height: 25pt;
+    }
 }

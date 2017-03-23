@@ -19,25 +19,28 @@
 .changepassword {
     color: #35373A;
     font-family: 'Bernina-Regular', 'sans-serif';
-    font-size: 12pt;
+    font-size: 100%;
 }
 
-.forwardBtn{
-background-color: white;
-color: #e8e9eb;
-font-size: 20pt;
-margin-right: 2%;
+.forwardBtn {
+    background-color: white;
+    color: #e8e9eb;
+    font-size: 160%;
+    margin-right: 2%;
 }
-.actionsheet-items{
+
+.actionsheet-items {
     color: #3cb18a !important;
-    font-family:Bernina-Regular !important;
-    font-size: 1.42em !important;
+    font-family: Bernina-Regular !important;
+    font-size: 145% !important;
 }
-.actionsheet-cancel{
-    color:#35373A !important;
-    font-family:Bernina-Regular !important;
-    font-size: 1.42em !important;    
+
+.actionsheet-cancel {
+    color: #35373A !important;
+    font-family: Bernina-Regular !important;
+    font-size: 145% !important;
 }
-.empty{    
-    height: 28pt;    
+
+.empty {
+    height: 28pt;
 }

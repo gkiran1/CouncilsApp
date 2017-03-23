@@ -1,30 +1,31 @@
-open-council-discussion-page{
+open-council-discussion-page {
     .ion-ios-arrow-round-back {
-        font-size: 36pt !important;
+        font-size: 300% !important;
     }
-    .ion-md-arrow-back{
+    .ion-md-arrow-back {
         position: absolute;
         top: 15px;
     }
-    ion-header .button-ios{
+    ion-header .button-ios {
         margin: 0;
         padding: 0;
         height: inherit;
     }
-    ion-header .button-md{
+    ion-header .button-md {
         margin: 0;
         height: inherit;
     }
-    ion-footer .button-md,ion-footer .button-ios{
+    ion-footer .button-md,
+    ion-footer .button-ios {
         padding: 0;
     }
-    .chat-content{
-         bottom: 0;
+    .chat-content {
+        bottom: 0;
     }
-    ion-modal{
-      position: absolute;
-      top: 60%;
-      bottom: 11%;
-      height: auto;
+    ion-modal {
+        position: absolute;
+        top: 60%;
+        bottom: 11%;
+        height: auto;
     }
 }

@@ -1,46 +1,40 @@
-page-display{
-.menuicon{
-    color: #32b38a;
-    font-size: 200%;
-}
-.notificationsicon{
-    color: #32b38a;
-    margin-left: 10px;
-    font-size: 200%;
-}
-.moreicon{
-    color:#32b38a;
-}
-.welcometext{
-    text-align: center;
-}
-.image {
+page-display {
+    .menuicon {
+        color: #32b38a;
+        font-size: 200%;
+    }
+    .notificationsicon {
+        color: #32b38a;
+        margin-left: 10px;
+        font-size: 200%;
+    }
+    .moreicon {
+        color: #32b38a;
+    }
+    .welcometext {
+        text-align: center;
+    }
+    .image {
         margin-top: 21%;
-}
-.content{
-    text-align: center;
-
-}
-.welcometext{
-     text-align: center;
-}
-.henry {
-    
-    font-size:10 pt; 
-    color: #a9aaac;
-     font-family:Bernina-Regular; 
-}
-
-.least{
-        font-size:14pt;
-        color:#35373a; 
-        font-family:Bernina-Regular;    
-}
-.matt{
-    font-size:13pt;
-     color: #a9aaac;
-
-}
-
-
+    }
+    .content {
+        text-align: center;
+    }
+    .welcometext {
+        text-align: center;
+    }
+    .henry {
+        font-size: 80%;
+        color: #a9aaac;
+        font-family: Bernina-Regular;
+    }
+    .least {
+        font-size: 145%;
+        color: #35373a;
+        font-family: Bernina-Regular;
+    }
+    .matt {
+        font-size: 105%;
+        color: #a9aaac;
+    }
 }
