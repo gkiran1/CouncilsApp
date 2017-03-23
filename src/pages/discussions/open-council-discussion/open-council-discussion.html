@@ -14,7 +14,7 @@
 </ion-header>
 <ion-content id="content1">
     <!--<ion-scroll scrollY="true" class="messages">-->
-        <ion-label class="typings-label" color="secondary" *ngIf="isTyping">{{discussion.typings.replace(this.user.firstname + ' is typing..', '')}}</ion-label>
+        <ion-label class="typings-label" color="secondary" *ngIf="isTyping">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '')}}</ion-label>
     <div class="chat-content">
         <ion-item text-wrap>
             <ion-label>
