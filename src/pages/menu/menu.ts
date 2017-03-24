@@ -1,4 +1,4 @@
-import { Component ,ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { DisplayPage } from '../display/display';
@@ -26,7 +26,7 @@ import { slide1Page } from '../slide1/slide1';
 import { slide2Page } from '../slide2/slide2';
 import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/new-private-discussion';
 import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
-import {  OnInit } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { Slides } from 'ionic-angular';
 
 
@@ -36,7 +36,7 @@ import { Slides } from 'ionic-angular';
   providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage, NewPrivateDiscussionPage]
 })
 
-export class WelcomePage implements OnInit{
+export class WelcomePage implements OnInit {
   @ViewChild('switcher') switcher: Slides;
   activeCouncilsCount;
   assignmentsCount;
@@ -59,7 +59,7 @@ export class WelcomePage implements OnInit{
     public agendaPage: AgendasPage) {
 
     this.userObj = null;
-    
+
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
         this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
@@ -68,6 +68,29 @@ export class WelcomePage implements OnInit{
           localStorage.setItem('unitNumber', usrs[0].unitnumber.toString());
           localStorage.setItem('userCouncils', usrs[0].councils.toString());
           localStorage.setItem('isAdmin', usrs[0].isadmin.toString());
+        });
+        this.firebaseService.getPrivateDiscussions().subscribe(discussions => {
+          let privatediscussions = discussions.filter(discussion => {
+            if (auth.uid === discussion.createdUserId || auth.uid === discussion.otherUserId) {
+              return true;
+            }
+            return false;
+          });
+          privatediscussions.forEach(discussionEle => {
+            this.firebaseService.getPrivateDiscussionByKey(discussionEle.$key).subscribe(discussion => {
+              console.log('discussion.messages',discussion,discussion.messages);
+              discussion.messages = discussion.messages || [];
+              Object.keys(discussion.messages).forEach(e => {
+                let message = discussion.messages[e];
+                if (message.userId !== auth.uid && message.status === 'sent') {
+                  this.firebaseService.updatePrivateDiscussionMessageStatus(discussion.$key, e, 'delivered')
+                    .catch(err => {
+                      console.log('Err:: open-council-discussion::', err);
+                    });
+                }
+              });
+            });
+          });
         });
       };
     });
@@ -81,11 +104,11 @@ export class WelcomePage implements OnInit{
   ngOnInit() {
   }
   menuOpened() {
+    this.switcher.update();
+    setTimeout(() => {
       this.switcher.update();
-      setTimeout(() => { 
-      this.switcher.update();
-      this.switcher.slideTo(1,0);
-    },300);
+      this.switcher.slideTo(1, 0);
+    }, 300);
   }
 
   councilsPage() {
@@ -272,7 +295,7 @@ export class WelcomePage implements OnInit{
   viewEditProfilePage() {
     this.nav.push(EditProfilePage);
   }
-  viewNewCouncilFilePage(){
+  viewNewCouncilFilePage() {
     this.nav.push(NewCouncilFilePage);
   }
 

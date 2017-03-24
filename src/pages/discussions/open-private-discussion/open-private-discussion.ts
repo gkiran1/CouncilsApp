@@ -21,6 +21,7 @@ export class OpenPrivateDiscussionPage {
     user;
     chatWith;
     isTyping = true;
+    statusSubscription;
     constructor(public af: AngularFire, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService) {
         this.af.auth.subscribe(auth => {
             if (auth !== null) {
@@ -31,7 +32,7 @@ export class OpenPrivateDiscussionPage {
                         this.chatWith = discussion.createdUserId === this.user.$key ? discussion.otherUserName : discussion.createdUserName;
                         this.discussion.messages = this.discussion.messages || [];
                         this.discussion.typings = this.discussion.typings || '';
-                        this.discussion.messages = Object.keys(this.discussion.messages).map(e => this.discussion.messages[e]);
+                        this.discussion.messages = Object.keys(this.discussion.messages).map(e =>this.discussion.messages[e]);
                     });
                 });
             }
@@ -44,6 +45,20 @@ export class OpenPrivateDiscussionPage {
 
     ionViewDidEnter() {
         this.content.scrollToBottom();
+        this.statusSubscription = this.fs.getPrivateDiscussionByKey(this.navparams.get('discussion')).subscribe(discussion => {
+            Object.keys(discussion.messages).forEach(e => {
+                let message = discussion.messages[e];
+                if (message.userId !== this.user.$key && message.status !== 'red') {
+                    this.fs.updatePrivateDiscussionMessageStatus(discussion.$key, e, 'red')
+                        .catch(err => {
+                            console.log('Err:: open-council-discussion::', err);
+                        });
+                }
+            });
+        });
+    }
+    ionViewDidLeave(){
+        this.statusSubscription.unsubscribe();
     }
     send() {
         if (this.msg) {
@@ -53,7 +68,8 @@ export class OpenPrivateDiscussionPage {
                 userId: this.as.uid,
                 user_firstname: this.user.firstname,
                 user_lastname: this.user.lastname,
-                user_avatar: this.user.avatar
+                user_avatar: this.user.avatar,
+                status: 'sent'
             }
             this.fs.updatePrivateDiscussionChat(this.discussion.$key, chatObj)
                 .then(res => {

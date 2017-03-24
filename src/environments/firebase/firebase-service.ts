@@ -656,7 +656,9 @@ export class FirebaseService {
     updatePrivateDiscussion(discussionId, typings) {
         return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings });
     }
-
+    updatePrivateDiscussionMessageStatus(discussionId, messageId, status) {
+        return this.af.database.object(`privatediscussions/${discussionId}/messages/${messageId}`).update({ status: status });
+    }
     getNotifications(userId) {
         return this.af.database.list('notifications', {
             query: {

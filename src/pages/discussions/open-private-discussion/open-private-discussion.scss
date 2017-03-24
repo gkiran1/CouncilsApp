@@ -27,4 +27,13 @@ open-private-discussion-page {
         z-index: 99;
        /// bottom: 11%;
     }
+    .msg-sendername{
+        display: inline-block;
+    }
+    .msg-status-icon{
+        position: absolute;
+        right: 0;
+        padding-right: 10pt;
+        font-size: 200%;
+    }
 }
