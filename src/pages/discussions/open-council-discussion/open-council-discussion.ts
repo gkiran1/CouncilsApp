@@ -77,7 +77,6 @@ export class OpenCouncilDiscussionPage {
     }
 
     keypresssed($event) {
-        console.log('---------------> $event.target.value', $event.target.value);
         $event.target.value = $event.target.value + ''; //should always be a string
         if ($event.target.value.includes('@')) {
 
