@@ -8,6 +8,7 @@ import { LoginPage } from '../login/login';
 import { FirebaseService } from '../../environments/firebase/firebase-service'
 import { AppService } from '../../providers/app-service';
 import { Subject, Subscription } from 'rxjs';
+import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 
 @Component({
   selector: 'page-display',
@@ -23,7 +24,10 @@ export class DisplayPage {
   notificationsCount;
   count$ = new Subject();
 
-  constructor(private navParams: NavParams, public appService: AppService, public firebaseService: FirebaseService) {
+  constructor(private navParams: NavParams,
+    public appService: AppService,
+    public firebaseService: FirebaseService,
+    private nav: NavController) {
     this.registerCredentials.email = navParams.data.email;
     this.registerCredentials.ldsorgusername = navParams.data.ldsorgusername;
 
@@ -53,7 +57,7 @@ export class DisplayPage {
   }
 
   notificationsPage() {
-
+    this.nav.push(NotificationsPage, { myNotifications: this.notifications });
   }
 
 }
