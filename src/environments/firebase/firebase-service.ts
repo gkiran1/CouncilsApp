@@ -653,8 +653,16 @@ export class FirebaseService {
     updateDiscussion(discussionId, typings) {
         return this.af.database.object(`discussions/${discussionId}`).update({ typings: typings });
     }
-    updatePrivateDiscussion(discussionId, typings){
-         return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings });
+    updatePrivateDiscussion(discussionId, typings) {
+        return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings });
     }
 
+    getNotifications(userId) {
+        return this.af.database.list('notifications', {
+            query: {
+                orderByChild: 'userid',
+                equalTo: userId
+            }
+        });
+    }
 }

@@ -8,22 +8,24 @@
 
     <ion-title class="welcometext">Welcome</ion-title>
     <ion-buttons end>
-      <button ion-button>
-      <ion-icon class="ion-ios-notifications-outline notificationsicon"  ></ion-icon>
-    </button>
+      <button ion-button (click)="notificationsPage()">
+      <ion-icon class="ion-ios-notifications-outline notificationsicon"  >
+         <ion-badge item-right style="position:absolute">{{notificationsCount | async}}</ion-badge>
+      </ion-icon>    
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-row class='image'>
-     <ion-col width-100 center>
-       <ion-img width="239" height="203" src="assets/icon/jesusimg.png"></ion-img>
+    <ion-col width-100 center>
+      <ion-img width="239" height="203" src="assets/icon/jesusimg.png"></ion-img>
     </ion-col>
   </ion-row>
   <ion-row class='henry'>
     <ion-col width-100 center>
-      <ion-label center > ~ Henry B Eyring</ion-label>
+      <ion-label center> ~ Henry B Eyring</ion-label>
     </ion-col>
   </ion-row>
   <ion-row class="least">
