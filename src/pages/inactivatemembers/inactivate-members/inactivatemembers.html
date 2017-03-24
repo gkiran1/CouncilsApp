@@ -1,0 +1,29 @@
+<ion-header>
+	<ion-navbar hideBackButton="true">
+		<ion-row>
+			<ion-col class="header-col" width-10>
+				<ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+					(click)="back()"></ion-icon>
+			</ion-col>
+			<ion-col width-80>
+				<ion-title text-center>Inactivate Members</ion-title>
+			</ion-col>
+		</ion-row>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<ion-item *ngFor="let user of users">
+			<ion-avatar item-left>
+				<img [src]="user.avatar" *ngIf="user.avatar">
+				<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+			</ion-avatar>
+			<h3>{{user.firstname}} {{user.lastname}}</h3>
+			<p><span>{{user.councilnames}}</span></p>
+			<button ion-button item-right clear (click)="inactivatemember(user)">   
+                   <ion-icon color='secondary' ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon> 
+                </button>
+		</ion-item>
+	</ion-list>
+</ion-content>

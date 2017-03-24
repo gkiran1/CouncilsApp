@@ -5,11 +5,12 @@ import * as firebase from 'firebase';
 import { Headers, Http, Response } from "@angular/http";
 import { AuthService } from '../../providers/auth-service';
 import { DisplayPage } from '../display/display';
-import { WelcomePage } from '../welcome/welcome';
+import { WelcomePage } from '../menu/menu';
 import { CreateAccountPage } from '../create-account/create-account';
-import { NewAgenda } from '../new-agenda/new-agenda';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../../user/user';
+import { NgZone } from '@angular/core';
+import { NoAccessPage } from '../noaccess/noaccess.component';
 
 @Component({
     selector: 'page-login',
@@ -27,7 +28,8 @@ export class LoginPage {
         public firebaseService: FirebaseService,
         public alertCtrl: AlertController,
         public http: Http,
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private zone: NgZone) {
     }
 
     public forgotPassword() {
@@ -44,17 +46,32 @@ export class LoginPage {
     private validateUser(loginCredentials) {
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
-            .then(uid => { flag = true })
+            .then(uid => {
+                this.firebaseService.getUsersByKey(uid).subscribe(usrs => {
+                    if (usrs[0].isactive) {
+                        flag = true;
+                        localStorage.setItem('securityToken', uid);
+                        localStorage.setItem('isUserLoggedIn', 'true');
+                        localStorage.setItem('isMenuCentered', '0');                             
+                    }
+                    else {
+                        this.zone.run(() => {
+                            this.nav.setRoot(NoAccessPage);
+                        });
+                    }
+                })
+            })
             .catch(err => this.showAlert('failure', 'Your Emailid or Password is incorrect.'));
+
         let v = setInterval(() => {
             if (flag) {
-                this.nav.push(WelcomePage);
+                this.zone.run(() => {
+                    this.nav.setRoot(WelcomePage);
+                });
                 clearInterval(v);
             }
         }, 50);
     }
-
-
 
     showAlert(reason, text) {
         let alert = this.alertCtrl.create({

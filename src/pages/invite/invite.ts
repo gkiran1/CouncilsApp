@@ -5,11 +5,11 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AlertController, NavController } from 'ionic-angular';
 import { AppService } from '../../providers/app-service';
 import { InvitationSuccessPage } from './success';
-import { WelcomePage } from '../welcome/welcome';
+import { WelcomePage } from '../menu/menu';
 
 @Component({
     templateUrl: 'invite.html',
-    selector:'invite-page'
+    selector: 'invite-page'
 })
 export class InviteMemberPage {
     invite: Invitee;
@@ -33,7 +33,6 @@ export class InviteMemberPage {
 
         });
     }
-
 
     inviteMember() {
         this.council.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');

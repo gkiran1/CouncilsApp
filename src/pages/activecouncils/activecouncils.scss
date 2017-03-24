@@ -1,9 +1,19 @@
-page-activecouncils{
-     .text-content{
-       position:absolute;
-       top:50%;
-       width: 100%;
-       margin:auto;
-       color:map-get($colors, light-gray);
+page-activecouncils {
+    .text-content {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        margin: auto;
+        color: map-get($colors, light-gray);
+    }
+    .council-styles {
+        font-family: Bernina-Regular !important;
+        font-size: 120% !important;
+        color: #35373a !important;
+    }
+    .icon-style {
+        color: #A9AAAC;
+        width: 0.66em;
+        height: 1.08em;
     }
 }

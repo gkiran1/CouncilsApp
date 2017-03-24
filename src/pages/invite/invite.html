@@ -6,7 +6,7 @@
         </ion-item>-->
         <ion-row>
             <ion-col class="header-col" width-10>
-                <ion-icon class="cancel-font" color="secondary" ios="ios-close" md="md-close" (click)="close()"></ion-icon>
+                <ion-icon class="cancel-font" name="close" color="secondary" ios="ios-close" md="md-close" (click)="close()"></ion-icon>
             </ion-col>
             <ion-col width-80>
                 <h3>
@@ -36,7 +36,7 @@
                 <ion-label floating>Calling</ion-label>
                 <ion-input type="text" name="calling" [(ngModel)]="invite.calling" required></ion-input>
             </ion-item>
-            <ion-item-divider color="light">Which council can they access</ion-item-divider>
+            <ion-item-divider class='color' color="light">Which councils can they access</ion-item-divider>
             <!--<ion-list radio-group [(ngModel)]="invite.council" name="council">
                 <ion-item *ngFor="let c of council">
                     <ion-label>{{c.council}}</ion-label>
@@ -46,13 +46,13 @@
             <ion-list no-lines>
                 <ion-item *ngFor="let c of council">
                     <ion-label item-left>{{c.council}}</ion-label>
-                    <ion-checkbox [(ngModel)]="c.selected" color="secondary" item-right [name]="c.council"></ion-checkbox>
+                    <ion-checkbox [(ngModel)]="c.selected" color="secondary" name="checkbox" item-right [name]="c.council"></ion-checkbox>
                 </ion-item>
             </ion-list>
         </ion-item-group>
     </form>
 </ion-content>
 <ion-footer>
-    <button ion-button type="submit" (click)="inviteMember()" clear block color="secondary" text-capitalize [disabled]="!InviteMemberForm.form.valid"
+    <button ion-button type="submit" (click)="inviteMember()" name="Invitebtn" clear block color="secondary" text-capitalize [disabled]="!InviteMemberForm.form.valid"
         text-capitalize>Invite</button>
 </ion-footer>

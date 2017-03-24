@@ -1,0 +1,69 @@
+<ion-header text-center>
+    <ion-navbar hideBackButton="true">
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+                    (click)="cancel()"></ion-icon>
+            </ion-col>
+        </ion-row>
+        <ion-title text-center>
+            <b>Edit Profile</b>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content  has-footer='true' overflow-scroll='true'>
+    <ion-item-divider class="empty"></ion-item-divider>
+    <ion-row>
+        <ion-col width-30>
+            <ng-container *ngIf="!imageflag">
+                <img src='{{imagePath}}' class="cameraBtn" (click)="cameraActionsPage()" />
+            </ng-container>
+            <ng-container *ngIf="imageflag && profile.avatar">
+                <img src='{{profile.avatar}}' class="cameraBtn" (click)="cameraActionsPage()" />
+            </ng-container>
+            <ng-container *ngIf="!profile.avatar">
+                <button class="cameraBtn" (click)="cameraActionsPage()">
+            <ion-icon name="camera"></ion-icon>
+        </button>
+            </ng-container>
+        </ion-col>
+        <ion-col width-70>
+            <ion-item>
+                <ion-label floating>First Name</ion-label>
+                <ion-input type="text" name="firstname" [(ngModel)]="profile.firstname"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Last Name</ion-label>
+                <ion-input type="text" name="lastname" [(ngModel)]="profile.lastname"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-item-divider class="empty"></ion-item-divider>
+    <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text" name="email" [(ngModel)]="profile.email"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Phone</ion-label>
+        <ion-input type="text" name="phone" [(ngModel)]="profile.phone"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>LDS.org username</ion-label>
+        <ion-input type="text" name="ldsusername" [(ngModel)]="profile.ldsusername"></ion-input>
+    </ion-item>
+    <ion-item-divider class="empty"></ion-item-divider>
+    <ion-row>
+        <ion-item>
+            <ion-label class="changepassword">
+                Change Password</ion-label>
+        </ion-item>
+        <button class="forwardBtn" (click)="viewChangePasswordPage()"> 
+                <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" end></ion-icon>
+            </button>
+    </ion-row>
+</ion-content>
+<ion-footer text-center>
+    <button ion-button class="saveBtn" clear text-capitalize name="savebtn" (click)="editProfile()">
+         Save
+        </button>
+</ion-footer>

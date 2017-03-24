@@ -16,4 +16,5 @@ export class User {
     lastupdateddate: string;
     isactive: boolean;
     councilnames: string;
+    phone:string;
 }

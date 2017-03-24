@@ -1,0 +1,31 @@
+private-discussions-list-page{
+    .right-align{
+        position: absolute;
+        right: 0;
+        margin-right:10px;
+    }
+    .item-md,.item-ios,.item-wp{
+        padding-right:16px;
+        position: relative;
+    }
+    .topic{
+        display: inline;
+    }
+    ion-content{
+        background-color:#f8f9fb !important;
+        margin-top:20pt;
+    }
+    ion-header ion-navbar .toolbar-background-md,
+    ion-header ion-navbar .toolbar-background-ios,
+    ion-header ion-navbar .toolbar-background-wp{
+        background-color: #fff;
+    }
+    .text-content{
+        position: absolute;
+        top: 40%;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
+    
+}

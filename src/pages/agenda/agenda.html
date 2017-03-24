@@ -1,0 +1,125 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+                    (click)="cancel()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <h3>
+                    New Agenda
+                </h3>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+
+    <form [formGroup]="newagendaForm" (ngSubmit)="newagendaForm.value">
+        <ion-item>
+            <ion-label floating>Council</ion-label>
+            <ion-select name="assignedcouncil" (ionChange)="assignedMemberChange(newagendaForm.value)" [(ngModel)]='assignedcouncil'
+                formControlName="assignedcouncil">
+                <ion-option *ngFor="let c of councils" [value]="c">{{c.council}}</ion-option>
+                </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Date & Time</ion-label>
+            <ion-datetime displayFormat="DDDD, MMM D, YYYY, hh:mma" pickerFormat="DDDD, MMM D, YYYY, hh:mma" [max]="2120" name="assigneddate"
+                formControlName="assigneddate" monthNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec" dayNames="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Opening Hymn</ion-label>
+            <ion-input type="text" name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Opening Prayer</ion-label>
+            <ion-select name="openingprayer" [(ngModel)]='openingprayer' formControlName="openingprayer">
+                <ng-container *ngFor="let user of users">
+                    <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Spiritual Thought</ion-label>
+            <ion-select name="spiritualthought" [(ngModel)]='spiritualthought' formControlName="spiritualthought">
+                <ng-container *ngFor="let user of users">
+                    <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Assignments</ion-label>
+            <ion-select name="assignments" [(ngModel)]='assignments' formControlName="assignments">
+                <ng-container *ngFor="let assignment of assignmentslist">
+                    <ion-option [value]="assignment">{{assignment.description}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Completed Assignments</ion-label>
+            <ion-select name="completedassignments" [(ngModel)]='completedassignments' formControlName="completedassignments">
+                <ng-container *ngFor="let completedassignment of completedassignmentslist">
+                    <ion-option [value]="completedassignment">{{completedassignment.description}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Spiritual Welfare</ion-label>
+            <ion-textarea type="text" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare" [(ngModel)]="spiritualwelfare" formControlName="spiritualwelfare"
+                maxlength="500" (keyup)="spiritualkey($event)">
+                </ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Temporal Welfare</ion-label>
+             <ion-textarea type="text" (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare" [(ngModel)]="temporalwelfare" formControlName="temporalwelfare"
+                maxlength="500" (keyup)="temporalkey($event)">
+                </ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Fellowship Items</ion-label>
+            <ion-textarea type="text" (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems" [(ngModel)]="fellowshipitems" formControlName="fellowshipitems"
+                maxlength="500" (keyup)="fellowshipkey($event)">
+                </ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Missionary Items</ion-label>
+             <ion-textarea type="text" (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems" [(ngModel)]="missionaryitems" formControlName="missionaryitems"
+                maxlength="500" (keyup)="missionarykey($event)">
+                </ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Events</ion-label>
+             <ion-textarea type="text" (focus)="eventfocus()" elastic id="event" name="event" [(ngModel)]="event" formControlName="event"
+                maxlength="500" (keyup)="eventkey($event)">
+                </ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Closing Prayer</ion-label>
+            <ion-select name="closingprayer" [(ngModel)]='closingprayer' formControlName="closingprayer">
+                <ng-container *ngFor="let user of users">
+                    <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
+    </form>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button clear block color="secondary" (click)="createagenda(newagendaForm.value)" text-capitalize [disabled]="!newagendaForm.valid">Create</button>
+    </ion-toolbar>
+</ion-footer>

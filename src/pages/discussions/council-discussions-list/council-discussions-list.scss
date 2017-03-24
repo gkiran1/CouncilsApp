@@ -1,0 +1,21 @@
+council-discussions-list-page{
+    .right-align{
+        position: absolute;
+        right: 0;
+        margin-right:10px;
+    }
+    .item-md,.item-ios,.item-wp{
+        padding-right:16px;
+        position: relative;
+    }
+    .topic{
+        display: inline;
+    }
+   .text-content{
+        position: absolute;
+        top: 40%;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }    
+}

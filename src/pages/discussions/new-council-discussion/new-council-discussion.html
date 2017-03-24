@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <h3>New Council Discussion</h3>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="newCouncilDiscussionForm" (ngSubmit)="newCouncilDiscussionForm.value" >
+        <ion-item-group>
+            <ion-item-divider>
+                <ion-label>What would you like to discuss?</ion-label>
+            </ion-item-divider>
+
+            <ion-item>
+                <ion-input type="text" id="topic" name="topic" formControlName="topic" placeholder="Discussion Topic" clearInput></ion-input>
+            </ion-item>
+            <ion-item-divider>
+                <h6>Must be 25 characters or less</h6>
+            </ion-item-divider>
+            <ion-item-divider item-wrap>
+                Which council will be discussing this topic?
+            </ion-item-divider>
+            <ion-list radio-group id="council" name="council" formControlName="council">
+                <ion-item *ngFor="let c of councils">
+                    <ion-label color="dark">{{(c | async)?.council}}</ion-label>
+                    <ion-radio [value]="c | async" color="secondary" ></ion-radio>
+                </ion-item>
+            </ion-list>
+        </ion-item-group>
+    </form>
+</ion-content>
+
+<ion-footer>
+    <button ion-button color="secondary" clear block [disabled]="!newCouncilDiscussionForm.valid" (click)="create(newCouncilDiscussionForm.value)">Create</button>
+</ion-footer>

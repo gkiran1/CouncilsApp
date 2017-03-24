@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/v2/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -15,77 +13,63 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @font-face {
-   font-family: "Gotham-Medium";
-src:url('../assets/fonts/GOTHMMED.eot');
-    src:url('../assets/fonts/GOTHMMED.eot') format('embedded-opentype'),
-        url('../assets/fonts/GOTHMMED.woff') format('woff'),
-        url('../assets/fonts/GOTHMMED.ttf') format('truetype'),
-        url('../assets/fonts/GOTHMMED.svg') format('svg');
+    font-family: "Gotham-Medium";
+    src: url('../assets/fonts/GOTHMMED.eot');
+    src: url('../assets/fonts/GOTHMMED.eot') format('embedded-opentype'), url('../assets/fonts/GOTHMMED.woff') format('woff'), url('../assets/fonts/GOTHMMED.ttf') format('truetype'), url('../assets/fonts/GOTHMMED.svg') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
-
 
 @font-face {
     font-family: "Bernina-Regular";
-    src:url('../assets/fonts/BerninaSans-Regular.eot');
-    src:url('../assets/fonts/BerninaSans-Regular.eot') format('embedded-opentype'),
-        url('../assets/fonts/BerninaSans-Regular.woff') format('woff'),
-        url('../assets/fonts/BerninaSans-Regular.ttf') format('truetype'),
-        url('../assets/fonts/BerninaSans-Regular.svg') format('svg');
+    src: url('../assets/fonts/BerninaSans-Regular.eot');
+    src: url('../assets/fonts/BerninaSans-Regular.eot') format('embedded-opentype'), url('../assets/fonts/BerninaSans-Regular.woff') format('woff'), url('../assets/fonts/BerninaSans-Regular.ttf') format('truetype'), url('../assets/fonts/BerninaSans-Regular.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Bernina-SemiBold";
-    src:url('../assets/fonts/BerninaSans-SemiBold.eot');
-    src:url('../assets/fonts/BerninaSans-SemiBold.eot') format('embedded-opentype'),
-        url('../assets/fonts/BerninaSans-SemiBold.woff') format('woff'),
-        url('../assets/fonts/BerninaSans-SemiBold.ttf') format('truetype'),
-        url('../assets/fonts/BerninaSans-SemiBold.svg') format('svg');
+    src: url('../assets/fonts/BerninaSans-SemiBold.eot');
+    src: url('../assets/fonts/BerninaSans-SemiBold.eot') format('embedded-opentype'), url('../assets/fonts/BerninaSans-SemiBold.woff') format('woff'), url('../assets/fonts/BerninaSans-SemiBold.ttf') format('truetype'), url('../assets/fonts/BerninaSans-SemiBold.svg') format('svg');
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Bernina-Bold";
-    src:url('../assets/fonts/BerninaSans-SemiBold.eot');
-    src:url('../assets/fonts/BerninaSans-SemiBold.eot') format('embedded-opentype'),
-        url('../assets/fonts/BerninaSans-SemiBold.woff') format('woff'),
-        url('../assets/fonts/BerninaSans-SemiBold.ttf') format('truetype'),
-        url('../assets/fonts/BerninaSans-SemiBold.svg') format('svg');
+    src: url('../assets/fonts/BerninaSans-SemiBold.eot');
+    src: url('../assets/fonts/BerninaSans-SemiBold.eot') format('embedded-opentype'), url('../assets/fonts/BerninaSans-SemiBold.woff') format('woff'), url('../assets/fonts/BerninaSans-SemiBold.ttf') format('truetype'), url('../assets/fonts/BerninaSans-SemiBold.svg') format('svg');
     font-weight: 700;
     font-style: normal;
 }
 
-
 body {
     padding: 0.5em !important;
     font-family: 'Bernina-Regular', sans-serif;
+    font-size: 12pt !important;
 }
 
-input[type=text] {
-     font-family: 'Bernina-Regular', sans-serif;
+input {
+    font-family: 'Bernina-Regular', sans-serif;
 }
 
- .toolbar-title-md, .toolbar-title-ios {
+.toolbar-title-md,
+.toolbar-title-ios {
     font-family: "Bernina-Bold", sans-serif;
-    font-size: 1.35em !important;
-    color : #35373A !important;
+    font-size: 145% !important;
+    color: #35373A !important;
 }
 
 .nocontent-message {
     font-family: "Benina-Regular", sans-serif;
     font-size: 1.35em;
     color: #a9aaac;
-
 }
 
-.header-md, .header-ios {
+.header-md,
+.header-ios {
     display: block;
-    
     text-align: center;
     background: #FFFFFF;
     border-bottom: 1px solid #dcd9d8;
@@ -94,6 +78,18 @@ input[type=text] {
 h1 {
     font-family: Gotham-Medium, sans-serif;
     font-size: 2.4em !important;
+    color: #35373a !important;
+}
+
+.row2 {
+    font-family: Gotham-Medium;
+    font-size: 28pt;
+    color: #35373a !important;
+}
+
+.row4 {
+    font-family: Bernina-Regular;
+    font-size: 17pt;
     color: #35373a !important;
 }
 
@@ -109,27 +105,27 @@ h3 {
     color: #35373a !important;
 }
 
-
-.footer-md, .footer-ios {
+.footer-md,
+.footer-ios {
     background: #FFFFFF;
 }
 
-button, .button-md, .button-ios {
-  
-  font-family: "Bernina-Regular", sans-serif;
-  font-size: 1.35em;
-  text-transform: capitalize !important;
-  color: #3CB18A;
+button,
+.button-md,
+.button-ios {
+    font-family: "Bernina-Regular", sans-serif;
+    font-size: 1.35em;
+    text-transform: capitalize !important;
+    color: #3CB18A;
 }
 
 .content-center {
-    height: 100%; /* Or 100vh */
-  
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    height: 100%;
+    /* Or 100vh */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
 
 .status-button-container {
     display: block;
@@ -139,50 +135,50 @@ button, .button-md, .button-ios {
 }
 
 .action-sheet-md .action-sheet-group .button-inner {
-    -webkit-justify-content: center !important; 
+    -webkit-justify-content: center !important;
     -ms-flex-pack: center !important;
-    justify-content: center !important; 
+    justify-content: center !important;
 }
+
 .action-sheet-md .action-sheet-title {
-        text-align: center !important;
+    text-align: center !important;
 }
 
-p{
-    font-family:  Bernina-Regular, sans-serif;
+p {
+    font-family: Bernina-Regular, sans-serif;
 }
 
-    .cancel-font{
-        font-size: 35pt;
-    }
+.cancel-font {
+    font-size: 24pt;
+}
 
-    .ion-md-close {
-        font-size: 24pt;
-        position: absolute;
-        top:15px;
-    }
-    ion-header ion-col{
-        padding: 0;
-    }
-    
+.ion-md-close {
+    font-size: 24pt;
+    position: absolute;
+    top: 15px;
+}
 
-.header-col{
-  display: flex;
+ion-header ion-col {
+    padding: 0;
+}
+
+.header-col {
+    display: flex;
     /* align-items: center; */
     justify-content: center;
-  
 }
-ion-header ion-col h3{
+
+ion-header ion-col h3 {
     font-weight: bold;
-     font-family: "Bernina-Bold", sans-serif;
+    font-family: "Bernina-Bold", sans-serif;
     font-size: 1.35em !important;
-    color : #35373A !important;
+    color: #35373A !important;
 }
 
-
-.action-sheet-ios .action-sheet-title{
-     font-family:Bernina-SemiBold !important;
+.action-sheet-ios .action-sheet-title {
+    font-family: Bernina-SemiBold !important;
     font-size: 1.08em !important;
-    color:#35373A !important;    
+    color: #35373A !important;
 }
 
 .picker-opt {
@@ -190,25 +186,66 @@ ion-header ion-col h3{
 }
 
 .picker-md .picker-toolbar-cancel {
-        flex: 1 !important;
+    flex: 1 !important;
 }
-.picker-md .picker-button, .picker-md .picker-button.activated{
 
-    color:#3CB18A!important;
+.picker-md .picker-button,
+.picker-md .picker-button.activated {
+    color: #3CB18A!important;
 }
-.picker-ios .picker-button, .picker-ios .picker-button.activated{
 
-    color:#3CB18A!important;
+.picker-ios .picker-button,
+.picker-ios .picker-button.activated {
+    color: #3CB18A!important;
 }
-.picker-md .picker-prefix, .picker-md .picker-suffix, .picker-md .picker-opt.picker-opt-selected{
-    color:#3CB18A!important;
+
+.picker-md .picker-prefix,
+.picker-md .picker-suffix,
+.picker-md .picker-opt.picker-opt-selected {
+    color: #3CB18A!important;
 }
 
 .input-has-focus .label-md[floating],
-    .input-has-value .label-md[floating] {
-        color: #3CB18A;
-    }
-    .input-has-focus .label-ios[floating],
-    .input-has-value .label-ios[floating] {
-        color: #3CB18A;
-    }
+.input-has-value .label-md[floating] {
+    color: #3CB18A;
+}
+
+.input-has-focus .label-ios[floating],
+.input-has-value .label-ios[floating] {
+    color: #3CB18A;
+}
+
+.scroll-content {
+    overflow-y: auto !important
+}
+
+button:disabled {
+    color: #222;
+}
+
+.item-divider-ios,
+.item-divider-md,
+.item-divider-wp {
+    color: #35373A;
+    background-color: #f7f7f7
+}
+
+.header-md,
+.header-ios {
+    border-bottom: none;
+}
+
+.header-md::after,
+.tabs-md[tabsPlacement="top"]>.tabbar::after,
+.footer-md::before,
+.tabs-md[tabsPlacement="bottom"]>.tabbar::before {
+    background-image: none;
+}
+
+.footer-md::before,
+.tabs-md[tabsPlacement="bottom"]>.tabbar::before {
+    top: 0px;
+    bottom: 0px;
+    height: 0px;
+    background-position: 0 0;
+}

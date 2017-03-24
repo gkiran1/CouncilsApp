@@ -3,3 +3,7 @@ platforms/*
 plugins/*
 www/*
 www/build/*
+/www
+/www/*
+www
+npm-debug.log

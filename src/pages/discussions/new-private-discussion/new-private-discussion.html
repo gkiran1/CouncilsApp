@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <h3>New Private Discussion</h3>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar (ionInput)="searchFn($event)" placeholder="Who do you want to chat with?"></ion-searchbar>
+    <form [formGroup]="NewPrivateDiscussionForm" (ngSubmit)="NewPrivateDiscussionForm.value">
+        <ion-item-group>
+            <ion-list radio-group id="otheruser" name="otheruser" formControlName="otherUser">
+                <ng-container *ngFor="let user of users | search:term:'firstname'">
+                    <ion-item *ngIf="user.$key!==uid" class="flex-change">
+                        <ion-avatar item-left>
+                            <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
+                            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+                        </ion-avatar>
+                        <ion-label color="dark">{{user.firstname}} {{user.lastname}}</ion-label>
+                        <ion-label>{{user.councilsString}}</ion-label>
+                        <ion-radio [value]="user" color="secondary"></ion-radio>
+                    </ion-item>
+                </ng-container>
+            </ion-list>
+            <!--<ion-spinner *ngIf="isLoading" class="center"></ion-spinner>-->
+        </ion-item-group>
+    </form>
+</ion-content>
+
+<ion-footer>
+    <button ion-button color="secondary" clear block [disabled]="!NewPrivateDiscussionForm.valid" (click)="create(NewPrivateDiscussionForm.value)">Create</button>
+</ion-footer>

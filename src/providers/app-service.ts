@@ -20,6 +20,7 @@ export class User {
     lastupdateddate: string;
     isactive: boolean;
     calling: string;
+    phone:string;
 
     constructor(user) {
         this.$key = user.$key;
@@ -39,6 +40,7 @@ export class User {
         this.lastupdateddate = user.lastupdateddate;
         this.isactive = user.isactive;
         this.calling = user.calling;
+        this.phone=user.phone;
     }
 }
 

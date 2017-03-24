@@ -1,0 +1,9 @@
+<ion-content>
+    <ion-item *ngFor="let user of usersArray" (click)="dismiss(user)">
+        <ion-avatar item-left>
+            <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
+            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+        </ion-avatar>
+        <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
+    </ion-item>
+</ion-content>

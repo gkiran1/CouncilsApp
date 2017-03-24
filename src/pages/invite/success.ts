@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { NavController } from 'ionic-angular';
 import { InviteMemberPage } from './invite';
-import { WelcomePage } from '../welcome/welcome';
+import { WelcomePage } from '../menu/menu';
 
 @Component({
     selector:'page-success',

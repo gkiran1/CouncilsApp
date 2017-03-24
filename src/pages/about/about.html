@@ -1,6 +1,13 @@
 <ion-header>
-	<ion-navbar>
+	<ion-navbar hideBackButton="true">
+<ion-row>
+			<ion-col class="header-col" width-10>
+				<ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back" (click)="cancel()"></ion-icon>
+			</ion-col>
+			<ion-col width-80>
 		<ion-title text-center>About</ion-title>
+		</ion-col>
+	</ion-row>
 	</ion-navbar>
 </ion-header>
 
@@ -15,10 +22,10 @@
 	</table>
 
 	<h5>Terms of use</h5>
-	<h6 elastic>{{TermsOfUse}}</h6>
+	<h3 elastic>{{TermsOfUse}}</h3>
 
 	<h5>Privacy policy</h5>
-	<h6 elastic>{{PrivacyPolicy}}</h6>
+	<h3 elastic>{{PrivacyPolicy}}</h3>
 
 	<h5>Contact</h5>
 	<table>

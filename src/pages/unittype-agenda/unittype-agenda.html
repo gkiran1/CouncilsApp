@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+                    (click)="cancel()"></ion-icon>
+
+            </ion-col>
+            <ion-col width-80>
+                <h3>
+                    Select Council
+                </h3>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar (ionInput)="searchFn($event)" placeholder="Which council will see this agenda?"></ion-searchbar>
+    <form [formGroup]="unitypeagendaForm" (ngSubmit)="unitypeagendaForm.value">
+        <ion-item-group>
+            <ion-list radio-group id="council" name="council" formControlName="council">
+                <ion-item *ngFor="let council of councils | search:term:'council'">
+                    <ion-label color="dark">{{council.council}}</ion-label>
+                    <ion-radio [value]="council" color="secondary"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </ion-item-group>
+    </form>
+</ion-content>
+
+<ion-footer>
+    <button ion-button color="secondary" clear block [disabled]="!unitypeagendaForm.valid" (click)="done(unitypeagendaForm.value)">Done</button>
+</ion-footer>

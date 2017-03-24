@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button ion-button menuToggle>
+      <ion-icon class="menuicon" name="menu" color="secondary"></ion-icon>
+    </button>
+        </ion-buttons>
+        <h4 text-center><b>Council Discussions</b></h4>
+        <ion-buttons end>
+            <button ion-button>
+      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
+    </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+<ion-content>
+    <ion-item-group>
+        <ng-container *ngIf="discussions.length">
+            <ion-item-divider></ion-item-divider>
+            <ion-item (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
+                <h3 class="topic">{{item.topic}}</h3><span class="right-align"><ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></span>
+                <p>{{item.lastMsg}}</p>
+                <span> {{item.councilname}}</span><span class="right-align">{{item.createdDate | customdateformat}}</span>
+            </ion-item>
+        </ng-container>
+        <ng-container *ngIf="isListEmpty">
+            <p class="text-content">There are no discussions</p>
+        </ng-container>
+    </ion-item-group>
+</ion-content>

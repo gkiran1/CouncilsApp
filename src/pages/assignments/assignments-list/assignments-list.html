@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button menuToggle>
+      <ion-icon class="menuicon" name="menu" color="secondary"></ion-icon>
+    </button>
+    </ion-buttons>
+    <h4 text-center><b>Assignments</b></h4>
+    <ion-buttons end>
+      <button ion-button>
+      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <ion-item-group>
+    <ng-container *ngIf="(councilAssignmentsArray.length || completedAssignmentsArray.length)">
+      <ion-item-divider>COUNCIL</ion-item-divider>
+      <ion-item (click)="assignmentSelected(item, i)" *ngFor="let item of councilAssignmentsArray; let i = index" [attr.data-index]="i">
+        <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': selectedIdx == i}"></ion-icon>
+        <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>
+        <h3>{{item.description}}</h3>
+        <ion-icon class="icon-style" item-right name="arrow-forward"></ion-icon>      
+        <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | customdateformat}}</span></p>
+     
+      </ion-item>
+      <ion-item-divider>COMPLETED</ion-item-divider>
+      <ion-item (click)="assignmentSelected(item, i)" *ngFor="let item of completedAssignmentsArray; let i = index" [attr.data-index]="i">
+        <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': selectedIdx == i}"></ion-icon>
+        <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>
+        <h3>{{item.description}}</h3>
+        <ion-icon class="icon-style" item-right name="arrow-forward"></ion-icon>        
+        <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | customdateformat}}</span></p>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="!(councilAssignmentsArray.length || completedAssignmentsArray.length)">
+      <p class="text-content">There are no assignments</p>
+    </ng-container>
+  </ion-item-group>
+</ion-content>

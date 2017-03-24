@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { WelcomePage } from '../../welcome/welcome';
+import { WelcomePage } from '../../menu/menu';
 
 @Component({
     selector: 'thanks-feedback',
