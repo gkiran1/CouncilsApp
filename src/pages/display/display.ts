@@ -12,7 +12,8 @@ import { NotificationsPage } from '../notifications/notifications-page/notificat
 
 @Component({
   selector: 'page-display',
-  templateUrl: 'display.html'
+  templateUrl: 'display.html',
+  providers: [NotificationsPage]
 })
 export class DisplayPage {
   // @ViewChild(Nav) nav: Nav;
@@ -27,37 +28,14 @@ export class DisplayPage {
   constructor(private navParams: NavParams,
     public appService: AppService,
     public firebaseService: FirebaseService,
-    private nav: NavController) {
+    private nav: NavController, notificationsPage: NotificationsPage) {
     this.registerCredentials.email = navParams.data.email;
     this.registerCredentials.ldsorgusername = navParams.data.ldsorgusername;
-
-    var userId = localStorage.getItem('securityToken');
-
-    if (userId !== null) {
-      this.notifications = [];
-      this.firebaseService.getNotifications(userId).subscribe(notifications => {
-        this.notifications = notifications.filter(notification => {
-          return notification.isread === false;
-        });
-        console.log('this.notifications', this.notifications);
-        this.count$.next(this.notifications.length);
-        this.notificationsCount = this.count$;
-      });
-    }
-
-  }
-
-
-  click() {
-    // setTimeout(() => {
-    //     this.userName = this.firebaseService.usr.firstname;
-    //   },50000);
-    // this.userName = this.appService.user.firstname;
-    // console.log('click', this.userName);
+    this.notificationsCount = notificationsPage.getCount();
   }
 
   notificationsPage() {
-    this.nav.push(NotificationsPage, { myNotifications: this.notifications });
+    this.nav.push(NotificationsPage);
   }
 
 }
