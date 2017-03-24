@@ -11,6 +11,14 @@
         </ion-row>
     </ion-navbar>
 </ion-header>
-<ion-content> 
-
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let notification of notifications" text-wrap>
+            <h2>{{notification.text}}</h2>
+            <p><span>{{notification.createddate| customdateformat}}</span></p>
+            <button ion-button item-right clear>
+              <ion-icon class="icon-style" name="arrow-forward"></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
 </ion-content>

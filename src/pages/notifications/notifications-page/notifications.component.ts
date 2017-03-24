@@ -17,16 +17,13 @@ export class NotificationsPage {
     constructor(private nav: NavController,
         public navParams: NavParams,
         public firebaseService: FirebaseService) {
-
         var userId = localStorage.getItem('securityToken');
-
         if (userId !== null) {
             this.notifications = [];
             this.firebaseService.getNotifications(userId).subscribe(notifications => {
                 this.notifications = notifications.filter(notification => {
                     return notification.isread === false;
                 });
-                console.log('this.notifications', this.notifications);
                 this.count$.next(this.notifications.length);
                 this.notificationsCount = this.count$;
             });

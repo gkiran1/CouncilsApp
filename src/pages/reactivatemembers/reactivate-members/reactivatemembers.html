@@ -15,9 +15,9 @@
     <ion-list>
         <ion-item *ngFor="let user of users">
             <ion-avatar item-left>
-                <img [src]="user.avatar" *ngIf="user.avatar">
-                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
-            </ion-avatar>
+				<img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar">
+				<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar" />
+			</ion-avatar>
             <h3>{{user.firstname}} {{user.lastname}}</h3>
             <p><span>{{user.councilnames}}</span></p>
             <button ion-button item-right clear (click)="reactivatemember(user)">   
