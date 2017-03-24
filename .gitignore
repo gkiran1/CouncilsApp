@@ -7,3 +7,4 @@ www/build/*
 /www/*
 www
 npm-debug.log
+.io-config.json
