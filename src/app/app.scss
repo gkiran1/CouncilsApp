@@ -63,7 +63,7 @@ input {
 
 .nocontent-message {
     font-family: "Benina-Regular", sans-serif;
-    font-size: 1.35em;
+    font-size: 145%;
     color: #a9aaac;
 }
 
@@ -77,31 +77,31 @@ input {
 
 h1 {
     font-family: Gotham-Medium, sans-serif;
-    font-size: 2.4em !important;
+    font-size: 230% !important;
     color: #35373a !important;
 }
 
 .row2 {
     font-family: Gotham-Medium;
-    font-size: 28pt;
+    font-size: 230%;
     color: #35373a !important;
 }
 
 .row4 {
     font-family: Bernina-Regular;
-    font-size: 17pt;
+    font-size: 145%;
     color: #35373a !important;
 }
 
 h3 {
     font-family: Bernina-Regular, sans-serif;
-    font-size: 1.35em !important;
+    font-size: 145% !important;
     color: #35373a !important;
 }
 
 .subtitle {
     font-family: Bernina-Regular, sans-serif;
-    font-size: 1.35em !important;
+    font-size: 145% !important;
     color: #35373a !important;
 }
 
@@ -114,7 +114,7 @@ button,
 .button-md,
 .button-ios {
     font-family: "Bernina-Regular", sans-serif;
-    font-size: 1.35em;
+    font-size: 145%;
     text-transform: capitalize !important;
     color: #3CB18A;
 }
@@ -149,11 +149,11 @@ p {
 }
 
 .cancel-font {
-    font-size: 24pt;
+    font-size: 200%;
 }
 
 .ion-md-close {
-    font-size: 24pt;
+    font-size: 200%;
     position: absolute;
     top: 15px;
 }
@@ -171,7 +171,7 @@ ion-header ion-col {
 ion-header ion-col h3 {
     font-weight: bold;
     font-family: "Bernina-Bold", sans-serif;
-    font-size: 1.35em !important;
+    font-size: 145% !important;
     color: #35373A !important;
 }
 
@@ -248,4 +248,8 @@ button:disabled {
     bottom: 0px;
     height: 0px;
     background-position: 0 0;
+}
+
+.toolbar-background {
+    background: #FFFFFF !important;
 }
