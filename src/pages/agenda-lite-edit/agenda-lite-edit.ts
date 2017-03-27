@@ -33,10 +33,7 @@ export class AgendaLiteEditPage {
     let agenda = navParams.get('agendaselected');
     this.agendaKey = agenda.$key;
 
-
-
     this.discussionitemsObj = agenda.discussionitems.split('\n');
-    // (<FormControl>this.agendaliteeditForm.controls['discussionitems']).setValue(this.discussionitemsObj);
 
     var councilsIds = localStorage.getItem('userCouncils').split(',');
     councilsIds.forEach(councilId => {
@@ -98,7 +95,7 @@ export class AgendaLiteEditPage {
       spiritualthought: ['', Validators.required],
       assignments: ['', Validators.required],
       completedassignments: ['', Validators.required],
-      discussionitems: ['', Validators.required],
+      discussionitems: [''],
       closingprayer: ['', Validators.required],
       createdby: agenda.createdby,
       createddate: agenda.createddate,
@@ -188,7 +185,7 @@ export class AgendaLiteEditPage {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewCouncilDiscussionPage,{item:item});
+            this.nav.push(NewCouncilDiscussionPage, { item: item });
 
           }
         },
@@ -197,7 +194,7 @@ export class AgendaLiteEditPage {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewAssignmentPage,{item:item});
+            this.nav.push(NewAssignmentPage, { item: item });
           }
         },
         {
