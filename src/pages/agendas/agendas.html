@@ -23,8 +23,9 @@
   <ng-container *ngIf="agendasArray.length">
     <ion-list inset>
       <ion-item (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
-        <ion-icon name="list" color="secondary" item-left></ion-icon>
-        <!--<ion-icon name="list" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>-->
+        <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
+       <ion-img  class="img-styles" src="assets/icon/agendaicon.png"></ion-img>
+
         <p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
         <button ion-button item-right clear>
       <ion-icon class="icon-style" name="arrow-forward"></ion-icon>
