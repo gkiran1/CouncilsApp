@@ -6,6 +6,7 @@ import { NewAssignmentPage } from '../../assignments/new-assignment/new-assignme
 import { AgendaLiteEditPage } from '../../agenda-lite-edit/agenda-lite-edit';
 import { AgendaEditPage } from '../../agenda-edit/agenda-edit';
 import { OpenCouncilDiscussionPage } from '../../discussions/open-council-discussion/open-council-discussion';
+import { OpenPrivateDiscussionPage } from '../../discussions/open-private-discussion/open-private-discussion';
 
 @Component({
     templateUrl: 'notifications.html',
@@ -56,6 +57,9 @@ export class NotificationsPage {
         }
         else if (notification.nodename === 'discussions') {
             this.nav.push(OpenCouncilDiscussionPage, { discussion: notification.nodeid })
+        }
+        else if (notification.nodename === 'privatediscussions') {
+            this.nav.push(OpenPrivateDiscussionPage, { discussion: notification.nodeid })
         }
     }
 
