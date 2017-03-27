@@ -105,13 +105,16 @@ export class WelcomePage implements OnInit {
   }
   menuOpened() {
     
-      setTimeout(() => { 
-      this.switcher.update();
+      
       if(localStorage.getItem('isMenuCentered') === '0') {
         localStorage.setItem('isMenuCentered','1');
+         this.switcher.update();
+        setTimeout(() => { 
+     
         this.switcher.slideTo(1,0);
+        },300);
       }
-    },300);
+    
 
   }
 
