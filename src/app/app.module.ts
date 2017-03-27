@@ -30,6 +30,7 @@ import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-fee
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { NewCouncilFilePage } from '../pages/files/new-council-file/new-council-file';
 import { OpenCouncilFilePage } from '../pages/files/open-council-file/open-council-file';
+import { FilesListPage } from '../pages/files/files-page/files-page';
 import { ChangePasswordPage } from '../pages/edit-profile/change-password';
 import { GoodbyePage } from '../pages/goodbye/goodbye';
 import { FormsModule } from '@angular/forms';
@@ -115,6 +116,7 @@ const cloudSettings: CloudSettings = {
     ChangePasswordPage,
     NewCouncilFilePage,
     OpenCouncilFilePage,
+    FilesListPage,
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
@@ -182,6 +184,7 @@ const cloudSettings: CloudSettings = {
     ChangePasswordPage,
     NewCouncilFilePage,
     OpenCouncilFilePage,
+    FilesListPage,
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
