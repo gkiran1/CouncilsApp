@@ -38,15 +38,7 @@ export class MyApp {
       }
 
       //Push Register to App
-<<<<<<< HEAD
-       this.push.register().then((t: PushToken) => {
-         
-      return this.push.saveToken(t);
-    }).then((t: PushToken) => {
-      
-      console.log('Token saved:', t.token);
-    });
-=======
+
       this.push.register().then((t: PushToken) => {
         return this.push.saveToken(t);
       }).then((t: PushToken) => {
@@ -62,7 +54,7 @@ export class MyApp {
             this.showAlert(msg.title + ': ' + msg.text);
           }
         });
->>>>>>> 3c967acf9bcacec401dcded1890ad0a84eddad7f
+
 
       platform.pause.subscribe(() => {
         isPause = true;
