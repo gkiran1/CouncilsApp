@@ -397,7 +397,8 @@ export class FirebaseService {
                     if (userUid === discussion.otherUserId) {
                         this.af.database.object(`privatediscussions/${discussion.$key}`).update({
                             otherUserAvatar: avatar,
-                            otherUserName: firstname + ' ' + lastname
+                            otherUserName: firstname + ' ' + lastname,
+                            otherUserEmail: email
                         });
                     }
                     if (userUid === discussion.lastMsg.userId) {
@@ -463,7 +464,14 @@ export class FirebaseService {
             }
         })
     }
-
+    getFilesByCouncilId(councilId: string) {
+        return this.af.database.list('files', {
+            query: {
+                orderByChild: 'councilid',
+                equalTo: councilId
+            }
+        })
+    }
     createDiscussion(discussion: any) {
         return this.rootRef.child('discussions').push(
             {
@@ -501,8 +509,8 @@ export class FirebaseService {
                 return res.path.o[1];
             })
             .catch(err => {
-                console.log(err);
-                alert(err);
+                // console.log(err);
+                throw err
             });
     }
 
@@ -611,6 +619,9 @@ export class FirebaseService {
     getDiscussions() {
         return this.af.database.list('discussions');
     }
+    getFiles() {
+        return this.af.database.list('files');
+    }
     getUsers() {
         return this.af.database.list('users');
     }
@@ -624,6 +635,7 @@ export class FirebaseService {
                 otherUserId: discussion.otherUserId,
                 otherUserName: discussion.otherUserName,
                 otherUserAvatar: discussion.otherUserAvatar,
+                otherUserEmail: discussion.otherUser.email,
                 isActive: discussion.isActive,
                 messages: discussion.messages,
                 lastMsg: discussion.lastMsg,
@@ -653,8 +665,30 @@ export class FirebaseService {
     updateDiscussion(discussionId, typings) {
         return this.af.database.object(`discussions/${discussionId}`).update({ typings: typings });
     }
-    updatePrivateDiscussion(discussionId, typings){
-         return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings });
+    updatePrivateDiscussion(discussionId, typings) {
+        return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings });
     }
-
+    updatePrivateDiscussionMessageStatus(discussionId, messageId, status) {
+        return this.af.database.object(`privatediscussions/${discussionId}/messages/${messageId}`).update({ status: status });
+    }
+    getNotifications(userId) {
+        return this.af.database.list('notifications', {
+            query: {
+                orderByChild: 'userid',
+                equalTo: userId
+            }
+        });
+    }
+    updateIsReadInNotifications(key) {
+        return this.af.database.object('notifications/' + key).update({ isread: true });
+    }
+    getAgendaByKey(key) {
+        return this.af.database.object('agendas/' + key);
+    }
+    getAssignmentByKey(key) {
+        return this.af.database.object('assignments/' + key);
+    }
+    deleteFilesByKey(key) {
+        return this.af.database.object(`files/${key}`).remove();
+    }
 }

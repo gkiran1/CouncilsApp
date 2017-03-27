@@ -23,7 +23,32 @@ open-council-file-page {
         position: absolute;
         bottom: 0;
     }
-    .empty {
-        height: 25pt;
+    .empty{    
+    height: 20pt;
+    border-top: 1px solid #dedede;    
+}
+.editbtn{
+    background-color: #FFFFFF !important;
+}
+.deletebtn{
+    color:#F13822 !important;
+}
+.header-col{
+    font-size: 1.42em !important;
+}
+.bgcolor{
+    background-color: #FFFFFF !important;
+}
+.document{
+    font-size: 24pt;
+}
+.toolbar-background-md,.toolbar-background-ios{
+    background: none !important;
+}
+.agendadate-styles{
+        font-family: Bernina-Regular !important;
+        font-size: 1.08em !important;
+        color:#a9aaac !important;
+        text-align: right;        
     }
 }

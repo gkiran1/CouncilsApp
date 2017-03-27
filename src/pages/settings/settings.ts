@@ -53,6 +53,7 @@ export class SettingsPage {
         this.activeCouncilsPage.userSubscription.unsubscribe();
         localStorage.setItem('securityToken', null);
         localStorage.setItem('isUserLoggedIn', 'false');
+        localStorage.setItem('isMenuCentered','0');
         this.firebaseService.signOut().then(() => {
             console.log('Sign Out successfully..');
             this.navCtrl.setRoot(GoodbyePage);

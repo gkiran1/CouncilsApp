@@ -16,8 +16,8 @@
     <button clear secondary class="listbtn2" id="assignmentsPage" name="assignmentsPage" ion-button block menuToggle (click)="assignmentsPage()" text-capitalize>
                     Assignments <span class="count">{{assignmentsCount | async}}</span>
                 </button>
-    <button clear secondary class="listbtn2" id="filePage" name="filePage" ion-button block menuToggle text-capitalize>
-                    Files
+    <button clear secondary class="listbtn2" id="filePage" name="filesPage" ion-button block menuToggle (click)="filesPage()" text-capitalize>
+                    Files <span class="count">{{filesCount | async}}</span>
                 </button>
     <ion-row>
         <ion-label class="menu-title">Private</ion-label>

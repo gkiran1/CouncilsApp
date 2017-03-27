@@ -59,7 +59,8 @@ export class OpenCouncilDiscussionPage {
                 userId: this.as.uid,
                 user_firstname: this.user.firstname,
                 user_lastname: this.user.lastname,
-                user_avatar: this.user.avatar
+                user_avatar: this.user.avatar,
+                status: 'sent'
             }
             this.fs.updateDiscussionChat(this.discussion.$key, chatObj)
                 .then(res => {
@@ -77,7 +78,6 @@ export class OpenCouncilDiscussionPage {
     }
 
     keypresssed($event) {
-        console.log('---------------> $event.target.value', $event.target.value);
         $event.target.value = $event.target.value + ''; //should always be a string
         if ($event.target.value.includes('@')) {
 

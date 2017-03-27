@@ -14,7 +14,6 @@
 </ion-header>
 <ion-content id="content1">
     <!--<ion-scroll scrollY="true" class="messages">-->
-        <ion-label class="typings-label" color="secondary" *ngIf="isTyping">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '')}}</ion-label>
     <div class="chat-content">
         <ion-item text-wrap>
             <ion-label>
@@ -29,6 +28,7 @@
                     <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!msg.user_avatar" />
                 </ion-avatar>
                 <h2>{{msg.user_firstname}} {{msg.user_lastname}}</h2>
+                <ion-icon class="msg-status-icon" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark" md="ios-checkmark"></ion-icon>
                 <p>{{msg.timestamp | amCalendar}}</p>
                 <p>{{msg.text}}</p>
             </ion-item>
@@ -37,6 +37,7 @@
     <!--</ion-scroll>-->
 </ion-content>
 <ion-footer>
+    <ion-label class="typings-label" color="secondary" *ngIf="discussion.typings">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '')}}</ion-label>
     <ion-row>
         <ion-col width-80>
             <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)"></ion-input>

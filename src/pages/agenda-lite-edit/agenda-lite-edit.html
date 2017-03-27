@@ -76,12 +76,14 @@
         </ion-item>
 
         <ion-list>
-            <ion-label>Discussion Items</ion-label>
+            <ion-label class="label-styles">Discussion Items</ion-label>
             <ng-container *ngFor="let item of discussionitemsObj">
-                <ion-item>{{item}}
+                <ion-item class="item-styles">
+                    <ion-input type="text" [value]="item" formControlName="discussionitems"></ion-input>
                     <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
+
                 </ion-item>
             </ng-container>
         </ion-list>
@@ -97,7 +99,6 @@
                     <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
         </ion-item>-->
-
 
         <ion-item>
             <ion-label floating>Closing Prayer</ion-label>
@@ -117,7 +118,7 @@
             <button ion-button color="danger" (click)="delete(agendaliteeditForm.value)">Delete</button>
         </ion-buttons>
         <ion-buttons end>
-            <button ion-button color="secondary" (click)="edit(agendaliteeditForm.value)">Edit</button>
+            <button ion-button color="secondary" (click)="edit(agendaliteeditForm.value)" [disabled]="!agendaliteeditForm.valid">Edit</button>
         </ion-buttons>
     </ion-toolbar>
 </ion-footer>

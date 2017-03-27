@@ -22,7 +22,7 @@ import {
 export class MyApp {
   rootPage: any;
 
-  constructor(platform: Platform, public push:Push, public alertCtrl: AlertController) {
+  constructor(platform: Platform, public push: Push, public alertCtrl: AlertController) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
 
@@ -37,8 +37,8 @@ export class MyApp {
         this.rootPage = WelcomePage;
       }
 
-
       //Push Register to App
+<<<<<<< HEAD
        this.push.register().then((t: PushToken) => {
          
       return this.push.saveToken(t);
@@ -46,13 +46,32 @@ export class MyApp {
       
       console.log('Token saved:', t.token);
     });
-
-    //Handler to Push Messages
-    this.push.rx.notification()
-      .subscribe((msg) => {
-        this.showAlert(msg.title + ': ' + msg.text);
+=======
+      this.push.register().then((t: PushToken) => {
+        return this.push.saveToken(t);
+      }).then((t: PushToken) => {
+        console.log('Token saved:', t.token);
       });
-   
+
+      var isPause = false;
+
+      //Handler to Push Messages
+      this.push.rx.notification()
+        .subscribe((msg) => {
+          if (isPause) {
+            this.showAlert(msg.title + ': ' + msg.text);
+          }
+        });
+>>>>>>> 3c967acf9bcacec401dcded1890ad0a84eddad7f
+
+      platform.pause.subscribe(() => {
+        isPause = true;
+      });
+
+      platform.resume.subscribe(() => {
+        isPause = false;
+      });
+
     });
   }
 
@@ -61,7 +80,6 @@ export class MyApp {
       title: '',
       subTitle: errText,
       buttons: ['OK']
-
     });
     alert.present();
   }

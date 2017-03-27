@@ -63,8 +63,8 @@ export class EditProfilePage {
                     // this.showAlert('picture',savedPicture.downloadURL);
                     let avatar = this.guestPicture ? savedPicture.downloadURL : this.profile.avatar;
                     this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, avatar).then(res => {
-                        this.showAlert('success', 'User profile updated successfully.')
-                        this.isChangeflag = false;
+                        this.showAlert1('success', 'User profile updated successfully.')
+                        this.isChangeflag = false;                        
                     }).catch(err => {
                         this.showAlert('failure', err.message);
                     })
@@ -88,6 +88,16 @@ export class EditProfilePage {
             title: '',
             subTitle: text,
             buttons: ['OK']
+        });
+        alert.present();
+    }
+    showAlert1(reason, text) {
+        let alert = this.alertCtrl.create({
+            title: '',
+            subTitle: text,
+            buttons: [
+                { text: 'OK', handler: () => this.nav.push(SettingsPage) }                
+            ]
         });
         alert.present();
     }

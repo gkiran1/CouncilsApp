@@ -30,6 +30,7 @@ import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-fee
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { NewCouncilFilePage } from '../pages/files/new-council-file/new-council-file';
 import { OpenCouncilFilePage } from '../pages/files/open-council-file/open-council-file';
+import { FilesListPage } from '../pages/files/files-page/files-page';
 import { ChangePasswordPage } from '../pages/edit-profile/change-password';
 import { GoodbyePage } from '../pages/goodbye/goodbye';
 import { FormsModule } from '@angular/forms';
@@ -65,6 +66,8 @@ import { TransferCompletePage } from '../pages/transferadminrights/transfer-comp
 import { UnitTypeAgendaPage } from '../pages/unittype-agenda/unittype-agenda';
 import { CustomDateFormat } from '../pipes/custom-date-format';
 import { CouncilUsersModalPage } from '../pages/discussions/councilusers/councilusers';
+import { NotificationsPage } from '../pages/notifications/notifications-page/notifications.component';
+
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -113,6 +116,7 @@ const cloudSettings: CloudSettings = {
     ChangePasswordPage,
     NewCouncilFilePage,
     OpenCouncilFilePage,
+    FilesListPage,
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
@@ -140,7 +144,8 @@ const cloudSettings: CloudSettings = {
     CustomDateFormat,
     UnitTypeAgendaPage,
     slide3Page,
-    CouncilUsersModalPage
+    CouncilUsersModalPage,
+    NotificationsPage
   ],
 
   imports: [
@@ -179,6 +184,7 @@ const cloudSettings: CloudSettings = {
     ChangePasswordPage,
     NewCouncilFilePage,
     OpenCouncilFilePage,
+    FilesListPage,
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
@@ -201,7 +207,8 @@ const cloudSettings: CloudSettings = {
     PrivateDiscussionsListPage,
     TransferCompletePage,
     UnitTypeAgendaPage,
-    CouncilUsersModalPage
+    CouncilUsersModalPage,
+    NotificationsPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]
