@@ -463,7 +463,14 @@ export class FirebaseService {
             }
         })
     }
-
+    getFilesByCouncilId(councilId: string) {
+        return this.af.database.list('files', {
+            query: {
+                orderByChild: 'councilid',
+                equalTo: councilId
+            }
+        })
+    }
     createDiscussion(discussion: any) {
         return this.rootRef.child('discussions').push(
             {
@@ -501,8 +508,8 @@ export class FirebaseService {
                 return res.path.o[1];
             })
             .catch(err => {
-                console.log(err);
-                alert(err);
+                // console.log(err);
+                throw err
             });
     }
 
@@ -611,6 +618,9 @@ export class FirebaseService {
     getDiscussions() {
         return this.af.database.list('discussions');
     }
+    getFiles() {
+        return this.af.database.list('files');
+    }
     getUsers() {
         return this.af.database.list('users');
     }
@@ -675,5 +685,8 @@ export class FirebaseService {
     }
     getAssignmentByKey(key) {
         return this.af.database.object('assignments/' + key);
+    }
+    deleteFilesByKey(key) {
+        return this.af.database.object(`files/${key}`).remove();
     }
 }
