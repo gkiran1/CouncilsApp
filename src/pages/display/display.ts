@@ -31,7 +31,7 @@ export class DisplayPage {
     private nav: NavController, notificationsPage: NotificationsPage) {
     this.registerCredentials.email = navParams.data.email;
     this.registerCredentials.ldsorgusername = navParams.data.ldsorgusername;
-    this.notificationsCount = notificationsPage.getCount();
+    this.notificationsCount = notificationsPage.getCount();    
   }
 
   notificationsPage() {

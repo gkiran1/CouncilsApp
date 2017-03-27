@@ -667,4 +667,7 @@ export class FirebaseService {
             }
         });
     }
+    updateIsReadInNotifications(key) {
+        return this.af.database.object('notifications/' + key).update({ isread: true });
+    }
 }
