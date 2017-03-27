@@ -691,4 +691,10 @@ export class FirebaseService {
     deleteFilesByKey(key) {
         return this.af.database.object(`files/${key}`).remove();
     }
+    checkNetworkStatus(uid, callback) {
+        let userRef = this.rootRef.child('/presence/' + uid);
+        userRef.on('value', function (snapshot) {
+            callback(snapshot.val());
+        });
+    }
 }
