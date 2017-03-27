@@ -107,7 +107,8 @@ export class WelcomePage implements OnInit {
     
       setTimeout(() => { 
       this.switcher.update();
-      if(localStorage.getItem('isMenuCentered') === '0') {
+      if(localStorage.getItem('isMenuCentered') !== undefined && 
+      localStorage.getItem('isMenuCentered') === '0') {
         localStorage.setItem('isMenuCentered','1');
         this.switcher.slideTo(1,0);
       }
