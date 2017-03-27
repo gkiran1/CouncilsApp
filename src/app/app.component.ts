@@ -40,8 +40,10 @@ export class MyApp {
 
       //Push Register to App
        this.push.register().then((t: PushToken) => {
+         
       return this.push.saveToken(t);
     }).then((t: PushToken) => {
+      
       console.log('Token saved:', t.token);
     });
 
