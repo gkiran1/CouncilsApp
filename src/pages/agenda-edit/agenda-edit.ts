@@ -153,7 +153,7 @@ export class AgendaEditPage {
     }
 
     cancel() {
-        this.nav.setRoot(WelcomePage);
+        this.nav.pop();
     }
 
     formatAgendaObj(value) {

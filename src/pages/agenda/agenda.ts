@@ -123,7 +123,7 @@ export class AgendaPage {
     }
 
     cancel() {
-        this.nav.setRoot(WelcomePage);
+        this.nav.pop();
     }
     searchFn(event) {
         this.term = event.target.value;
