@@ -670,4 +670,10 @@ export class FirebaseService {
     updateIsReadInNotifications(key) {
         return this.af.database.object('notifications/' + key).update({ isread: true });
     }
+    getAgendaByKey(key) {
+        return this.af.database.object('agendas/' + key);
+    }
+    getAssignmentByKey(key) {
+        return this.af.database.object('assignments/' + key);
+    }
 }

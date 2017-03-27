@@ -3,7 +3,7 @@
 		<ion-row>
 			<ion-col class="header-col" width-10>
 				<ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
-					(click)="back()"></ion-icon>
+				    (click)="back()"></ion-icon>
 			</ion-col>
 			<ion-col width-80>
 				<ion-title text-center>Notifications</ion-title>
@@ -17,10 +17,10 @@
 			<ion-item *ngFor="let notification of notifications" text-wrap>
 				<h2>{{notification.text}}</h2>
 				<p><span>{{notification.createddate| customdateformat}}</span></p>
-				<button ion-button item-right clear (click)="ActivityPage()">
+				<button ion-button item-right clear (click)="ActivityPage(notification)">
                  <ion-icon class="icon-style" name="arrow-forward"></ion-icon>
                 </button>
 			</ion-item>
 		</ion-list>
-	</ng-container>	
+	</ng-container>
 </ion-content>
