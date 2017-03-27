@@ -52,7 +52,8 @@ export class LoginPage {
                         flag = true;
                         localStorage.setItem('securityToken', uid);
                         localStorage.setItem('isUserLoggedIn', 'true');
-                        localStorage.setItem('isMenuCentered', '0');                             
+                        localStorage.setItem('isMenuCentered', '0');   
+                        localStorage.setItem('isAdmin', usrs[0].isadmin.toString());                          
                     }
                     else {
                         this.zone.run(() => {

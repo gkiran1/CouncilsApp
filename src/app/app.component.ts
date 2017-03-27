@@ -38,6 +38,7 @@ export class MyApp {
       }
 
       //Push Register to App
+
       this.push.register().then((t: PushToken) => {
         return this.push.saveToken(t);
       }).then((t: PushToken) => {
@@ -53,6 +54,7 @@ export class MyApp {
             this.showAlert(msg.title + ': ' + msg.text);
           }
         });
+
 
       platform.pause.subscribe(() => {
         isPause = true;

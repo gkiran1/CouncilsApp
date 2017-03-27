@@ -397,7 +397,8 @@ export class FirebaseService {
                     if (userUid === discussion.otherUserId) {
                         this.af.database.object(`privatediscussions/${discussion.$key}`).update({
                             otherUserAvatar: avatar,
-                            otherUserName: firstname + ' ' + lastname
+                            otherUserName: firstname + ' ' + lastname,
+                            otherUserEmail: email
                         });
                     }
                     if (userUid === discussion.lastMsg.userId) {
@@ -634,6 +635,7 @@ export class FirebaseService {
                 otherUserId: discussion.otherUserId,
                 otherUserName: discussion.otherUserName,
                 otherUserAvatar: discussion.otherUserAvatar,
+                otherUserEmail: discussion.otherUser.email,
                 isActive: discussion.isActive,
                 messages: discussion.messages,
                 lastMsg: discussion.lastMsg,
