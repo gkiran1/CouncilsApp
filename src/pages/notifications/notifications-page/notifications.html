@@ -12,7 +12,7 @@
 	</ion-navbar>
 </ion-header>
 <ion-content>
-	<ng-container>
+	<ng-container *ngIf="(notifications.length)">
 		<ion-list>
 			<ion-item *ngFor="let notification of notifications" text-wrap>
 				<h2>{{notification.text}}</h2>
@@ -22,5 +22,8 @@
                 </button>
 			</ion-item>
 		</ion-list>
+	</ng-container>
+	<ng-container *ngIf="!(notifications.length)">
+		<p class="text-content">There are no notifications</p>
 	</ng-container>
 </ion-content>
