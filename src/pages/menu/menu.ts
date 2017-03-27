@@ -28,7 +28,7 @@ import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/
 import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
 import { OnInit } from '@angular/core';
 import { Slides } from 'ionic-angular';
-
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'page-welcome',
@@ -46,6 +46,7 @@ export class WelcomePage implements OnInit {
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
   userSubscription: Subscription;
+  rootRef;
 
   constructor(public nav: NavController,
     public af: AngularFire,
@@ -62,6 +63,18 @@ export class WelcomePage implements OnInit {
 
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
+
+        //setting network status
+        this.rootRef = firebase.database().ref();
+        let amOnline = this.rootRef.child('.info/connected');
+        let userRef = this.rootRef.child('/presence/' + auth.uid);
+        amOnline.on('value', function (snapshot) {
+          if (snapshot.val()) {
+            userRef.onDisconnect().remove();
+            userRef.set(true);
+          }
+        });
+
         this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
           this.userObj = usrs[0];
           localStorage.setItem('unitType', usrs[0].unittype);
@@ -78,7 +91,7 @@ export class WelcomePage implements OnInit {
           });
           privatediscussions.forEach(discussionEle => {
             this.firebaseService.getPrivateDiscussionByKey(discussionEle.$key).subscribe(discussion => {
-              console.log('discussion.messages',discussion,discussion.messages);
+              console.log('discussion.messages', discussion, discussion.messages);
               discussion.messages = discussion.messages || [];
               Object.keys(discussion.messages).forEach(e => {
                 let message = discussion.messages[e];
@@ -104,6 +117,7 @@ export class WelcomePage implements OnInit {
   ngOnInit() {
   }
   menuOpened() {
+
     
       setTimeout(() => { 
       this.switcher.update();

@@ -1,9 +1,14 @@
 <ion-content>
-    <ion-item *ngFor="let user of usersArray" (click)="dismiss(user)">
-        <ion-avatar item-left>
-            <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
-            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
-        </ion-avatar>
-        <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
-    </ion-item>
+    <ng-container *ngFor="let user of usersArray">
+        <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="dismiss(user)">
+            <ion-avatar item-left>
+                <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
+                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+            </ion-avatar>
+            <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
+            <svg height="8" width="8">
+                <circle cx="4" cy="4" r="4" [attr.fill]='user.status' />
+            </svg>
+        </ion-item>
+    </ng-container>
 </ion-content>
