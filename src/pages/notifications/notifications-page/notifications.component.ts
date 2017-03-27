@@ -25,7 +25,7 @@ export class NotificationsPage {
                     return notification.isread === false;
                 });
                 this.count$.next(this.notifications.length);
-                this.notificationsCount = this.count$;
+                console.log(this.notifications);
             });
         }
     }
@@ -34,7 +34,15 @@ export class NotificationsPage {
         return this.count$;
     }
 
+    ActivityPage() {
+
+    }
+
     back() {
-        this.nav.pop();
+        this.nav.pop().then(() => {
+            this.notifications.forEach(notification => {
+                this.firebaseService.updateIsReadInNotifications(notification.$key);
+            });
+        })
     }
 }

@@ -5,18 +5,16 @@
       <ion-icon class="menuicon" name="menu" ></ion-icon>
     </button>
     </ion-buttons>
-
     <ion-title class="welcometext">Welcome</ion-title>
     <ion-buttons end>
       <button ion-button (click)="notificationsPage()">
-      <ion-icon class="ion-ios-notifications-outline notificationsicon"  >
-         <ion-badge item-right style="position:absolute">{{notificationsCount | async}}</ion-badge>
-      </ion-icon>    
+     <ion-icon class="ion-ios-notifications-outline notificationsicon">
+         <ion-badge item-right style="position:absolute; font-weight: bold; top:-5px; left:9px; font-size:9px" color='danger'>{{notificationsCount | async}}</ion-badge>
+      </ion-icon> 
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
 <ion-content>
   <ion-row class='image'>
     <ion-col width-100 center>
