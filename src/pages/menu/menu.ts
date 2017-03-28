@@ -89,7 +89,6 @@ export class WelcomePage implements OnInit {
           });
           privatediscussions.forEach(discussionEle => {
             this.firebaseService.getPrivateDiscussionByKey(discussionEle.$key).subscribe(discussion => {
-              console.log('discussion.messages', discussion, discussion.messages);
               discussion.messages = discussion.messages || [];
               Object.keys(discussion.messages).forEach(e => {
                 let message = discussion.messages[e];
