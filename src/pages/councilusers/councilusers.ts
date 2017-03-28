@@ -36,7 +36,7 @@ export class CouncilUsersPage {
 
     }
     cancel() {
-        this.nav.setRoot(WelcomePage);
+        this.nav.pop();
     }
 
 }

@@ -43,7 +43,7 @@ export class NewCouncilPage {
     });
   }
   cancel() {
-    this.nav.setRoot(WelcomePage);
+    this.nav.pop();
   }
 
   createCouncil() {
