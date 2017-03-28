@@ -1,29 +1,29 @@
 page-login {
     .login-title {
         font-family: Gotham-Medium, sans-serif;
-        font-size: 230%;
+        font-size: 28px;
         color: #35373A;
     }
     .login-header {
         display: block;
-        margin-top: 30pt;
+        margin-top: 30px;
         text-align: center;
     }
     .login-subheader {
         display: block;
         position: relative;
-        margin-top: 14pt;
+        margin-top: 14px;
         text-align: center;
         font-size: 145%;
     }
     .login-button-container {
-        padding-top: 12pt;
+        padding-top: 12px;
         text-align: center;
         margin: auto;
     }
     .login-button {
-        width: 160pt;
-        height: 72pt;
+        width: 160px;
+        height: 72px;
         margin: auto;
     }
     .login-button:disabled,
@@ -32,7 +32,7 @@ page-login {
     }
     .item-md,
     .item-ios {
-        padding: 0 1em !important;
+        padding: 0 16px !important;
     }
     ion-content ion-item ion-label {
         color: #a9aaad;
@@ -42,7 +42,7 @@ page-login {
     }
     .inputtype {
         font-family: "Bernina-Regular", sans-serif;
-        font-size: 0.75em;
+        font-size: 17px;
     }
     span.button-inner {
         text-transform: none;

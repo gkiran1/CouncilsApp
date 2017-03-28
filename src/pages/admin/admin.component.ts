@@ -42,7 +42,7 @@ export class AdminPage {
     }
 
     back() {
-        this.navCtrl.setRoot(WelcomePage);
+        this.navCtrl.pop();
     }
 
 }
