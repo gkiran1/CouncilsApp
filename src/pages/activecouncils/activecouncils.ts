@@ -44,7 +44,7 @@ export class ActiveCouncilsPage {
     }
 
     cancel() {
-        this.nav.setRoot(WelcomePage);
+        this.nav.pop();
     }
 
     getCount() {

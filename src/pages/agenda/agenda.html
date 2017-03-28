@@ -17,7 +17,8 @@
 
     <form [formGroup]="newagendaForm" (ngSubmit)="newagendaForm.value">
         <ion-item>
-            <ion-label floating>Council</ion-label>
+            <ion-label *ngIf="!assignedcouncil">Council</ion-label>
+            <ion-label floating color="secondary" *ngIf="assignedcouncil">Council</ion-label>
             <ion-select name="assignedcouncil" (ionChange)="assignedMemberChange(newagendaForm.value)" [(ngModel)]='assignedcouncil'
                 formControlName="assignedcouncil">
                 <ion-option *ngFor="let c of councils" [value]="c">{{c.council}}</ion-option>
@@ -36,7 +37,8 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Opening Prayer</ion-label>
+            <ion-label *ngIf="!openingprayer">Opening Prayer</ion-label>
+            <ion-label floating color="secondary" *ngIf="openingprayer">Opening Prayer</ion-label>
             <ion-select name="openingprayer" [(ngModel)]='openingprayer' formControlName="openingprayer">
                 <ng-container *ngFor="let user of users">
                     <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
@@ -45,7 +47,8 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Spiritual Thought</ion-label>
+            <ion-label *ngIf="!spiritualthought">Spiritual Thought</ion-label>
+            <ion-label floating color="secondary" *ngIf="spiritualthought">Spiritual Thought</ion-label>
             <ion-select name="spiritualthought" [(ngModel)]='spiritualthought' formControlName="spiritualthought">
                 <ng-container *ngFor="let user of users">
                     <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
@@ -54,7 +57,8 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Assignments</ion-label>
+             <ion-label *ngIf="!assignments">Assignments</ion-label>
+            <ion-label floating color="secondary" *ngIf="assignments">Assignments</ion-label>
             <ion-select name="assignments" [(ngModel)]='assignments' formControlName="assignments">
                 <ng-container *ngFor="let assignment of assignmentslist">
                     <ion-option [value]="assignment">{{assignment.description}}</ion-option>
@@ -63,7 +67,8 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Completed Assignments</ion-label>
+            <ion-label *ngIf="!completedassignments">Completed Assignments</ion-label>
+            <ion-label floating color="secondary" *ngIf="completedassignments">Completed Assignments</ion-label>
             <ion-select name="completedassignments" [(ngModel)]='completedassignments' formControlName="completedassignments">
                 <ng-container *ngFor="let completedassignment of completedassignmentslist">
                     <ion-option [value]="completedassignment">{{completedassignment.description}}</ion-option>
@@ -72,7 +77,9 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Spiritual Welfare</ion-label>
+            <!--<ion-label floating>Spiritual Welfare</ion-label>-->
+             <ion-label *ngIf="!spiritualwelfare">Spiritual Welfare</ion-label>
+            <ion-label floating color="secondary" *ngIf="spiritualwelfare">Spiritual Welfare</ion-label>
             <ion-textarea type="text" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare" [(ngModel)]="spiritualwelfare" formControlName="spiritualwelfare"
                 maxlength="500" (keyup)="spiritualkey($event)">
                 </ion-textarea>
@@ -107,7 +114,8 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Closing Prayer</ion-label>
+           <ion-label *ngIf="!closingprayer">Closing Prayer</ion-label>
+            <ion-label floating color="secondary" *ngIf="closingprayer">Closing Prayer</ion-label>
             <ion-select name="closingprayer" [(ngModel)]='closingprayer' formControlName="closingprayer">
                 <ng-container *ngFor="let user of users">
                     <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
