@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { WelcomePage } from '../../menu/menu';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AngularFire } from 'angularfire2';
 
 @Component({
   templateUrl: 'new-assignment.html',
@@ -20,10 +20,11 @@ export class NewAssignmentPage {
   arrayWithUserKeys = [];
   isNewAssignment = true;
   assignmentKey = '';
-
-  constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
+  uid;
+  constructor(public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
     let assignment = navParams.get('assignment');
     let description = navParams.get('item');
+    this.uid = localStorage.getItem('securityToken');
 
     if (assignment) {
       this.isNewAssignment = false;
@@ -56,59 +57,48 @@ export class NewAssignmentPage {
         isCompleted: false
       });
     }
-    appservice.getUser().subscribe(user => {
-      (<FormControl>this.assignmentForm.controls['createdby']).setValue(user.$key);
+    this.af.auth.subscribe(auth => {
+      if (!auth) return;
+      this.af.database.object('/users/' + auth.uid).subscribe(user => {
 
-      let subscribe = this.firebaseservice.getUsersByUnitNumber(user.unitnumber).subscribe(users => {
-        this.users = users;
+        user.councils.forEach(c => {
+          this.firebaseservice.getCouncilByCouncilKey(c).subscribe(council => {
+            this.councils.push(council);
+          });
+        });
+
         if (assignment) {
-          firebaseservice.findUserByKey(assignment.assignedto).subscribe(u => {
-            this.users.forEach(e => {
-              if (e.$key == u.$key) {
-                (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(e);
-                this.updateCouncils(e);
-                firebaseservice.getCouncilByKey(assignment.councilid).subscribe(council => {
-                  this.councils.forEach(c => {
-                    //use council[0] to get council since its return type is FirebaseListObservable and just contains one council object. 
-                    if (c.$key == council[0].$key) {
-                      (<FormControl>this.assignmentForm.controls['assignedcouncil']).setValue(c);
-                    }
-                  });
-                });
-              }
+          firebaseservice.getCouncilByCouncilKey(assignment.councilid).subscribe(council => {
+            this.updateUsers(council.$key);
+            setTimeout(() => {
+              (<FormControl>this.assignmentForm.controls['assignedcouncil']).setValue(council.$key);
             });
           });
+          firebaseservice.getUsersByKey(assignment.assignedto).subscribe(u => {
+            (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(u[0].$key);
+          });
         }
-        subscribe.unsubscribe();
+
+        (<FormControl>this.assignmentForm.controls['createdby']).setValue(user.$key);
+
       });
-      // if (user.isadmin) {
-      //   let subscribe = this.firebaseservice.getUsersByUnitNumber(user.unitnumber).subscribe(users => {
-      //     this.users = users;
-      //     subscribe.unsubscribe();
-      //   });
-      // } else {
-      //   user.councils.forEach(council => {
-      //     let subscribe = this.firebaseservice.getUsersByCouncil(council).subscribe(users => {
-      //       this.usercouncils.push(...users);
-      //       console.log(this.usercouncils);
-      //       this.usercouncils.forEach(e => this.arrayWithUserKeys.push(e.userid));
-      //       this.arrayWithUserKeys = this.arrayWithUserKeys.filter((e, i, self) => self.indexOf(e) === i);
-      //       // this.arrayWithUserKeys.forEach(userkey=>);
-      //       subscribe.unsubscribe();
-      //     });
-      //   });
-      // }
     });
   }
-  assignedMemberChange(value) {
-    this.councils = [];
-    (<FormControl>this.assignmentForm.controls['assignedcouncil']).setValue('');
-    this.updateCouncils(value.assigneduser);
-    console.log('member changed::', value);
+
+  assignedCouncilChanged(value) {
+    debugger;
+    this.users = [];
+    (<FormControl>this.assignmentForm.controls['assigneduser']).setValue('');
+    this.updateUsers(value.assignedcouncil);
   }
-  updateCouncils(userObj) {
-    userObj.councils.forEach(key => {
-      this.firebaseservice.getCouncilByKey(key).subscribe(council => this.councils.push(...council));
+  updateUsers(councilid) {
+    this.firebaseservice.getUsersByCouncil(councilid).subscribe(uc => {
+      uc.forEach(e => {
+        this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
+          this.users.push(u[0]);
+        });
+
+      });
     });
   }
 
@@ -122,15 +112,19 @@ export class NewAssignmentPage {
   }
 
   formatAssignmentObj(value) {
+    let assignedcouncilname;
+    this.firebaseservice.getCouncilByCouncilKey(value.assignedcouncil).take(1).subscribe(council => {
+      assignedcouncilname = council.council;
+    });
     return {
       assigneddate: moment(value.assigneddate + ' ' + value.assignedtime, "YYYY-MM-DD hh:mmA").toISOString(),
       createddate: new Date().toISOString(),
       lastupdateddate: new Date().toISOString(),
       createdby: value.createdby,
       description: value.description,
-      assigneduser: value.assigneduser.$key,
-      councilid: value.assignedcouncil.$key,
-      councilname: value.assignedcouncil.council,
+      assigneduser: value.assigneduser,
+      councilid: value.assignedcouncil,
+      councilname: assignedcouncilname,
       isactive: value.isactive,
       notes: value.notes,
       isCompleted: value.isCompleted
