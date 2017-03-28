@@ -31,14 +31,12 @@ import { PrivateDiscussionsListPage } from '../discussions/private-discussions-l
 @Component({
   templateUrl: 'slide3.html',
   selector: 'slide3',
-  providers: [AssignmentsListPage, ActiveCouncilsPage, CouncilDiscussionsListPage, AgendasPage, PrivateDiscussionsListPage]
+  providers: [AssignmentsListPage, ActiveCouncilsPage,  AgendasPage]
 })
 export class slide3Page {
 
   activeCouncilsCount;
   assignmentsCount;
-  councilDiscussionsCount;
-  privateDiscussionsCount
   agendasCount;
   //@ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
@@ -47,15 +45,12 @@ export class slide3Page {
 
   constructor(public nav: NavController,
     public af: AngularFire,
-    public appService: AppService,
     public actionSheetCtrl: ActionSheetController,
     public menuctrl: MenuController,
     public assignmentsListPage: AssignmentsListPage,
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService,
-    public councilDiscussionsListPage: CouncilDiscussionsListPage,
-    public agendaPage: AgendasPage,
-    public privateDiscussionsListPage: PrivateDiscussionsListPage) {
+    public agendaPage: AgendasPage) {
 
     this.userObj = null;
 
@@ -72,8 +67,6 @@ export class slide3Page {
 
     this.activeCouncilsCount = activeCouncilsPage.getCount();
     this.assignmentsCount = assignmentsListPage.getCount();
-    this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
-    this.privateDiscussionsCount = privateDiscussionsListPage.getCount();
     this.agendasCount = agendaPage.getCount();
 
   }
