@@ -47,7 +47,7 @@
 body {
     padding: 0.5em !important;
     font-family: 'Bernina-Regular', sans-serif;
-    font-size: 12pt !important;
+    font-size: 16px !important;
 }
 
 input {
@@ -57,15 +57,32 @@ input {
 .toolbar-title-md,
 .toolbar-title-ios {
     font-family: "Bernina-Bold", sans-serif;
-    font-size: 145% !important;
+    font-size: 17px !important;
     color: #35373A !important;
 }
 
 .nocontent-message {
-    font-family: "Benina-Regular", sans-serif;
-    font-size: 145%;
-    color: #a9aaac;
-}
+    
+        display: table;
+        height: 100%;
+        width: 100%;
+        background: #fafafa;
+        padding: -16px;
+    }
+    .nocontent-message p {
+       position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+        text-align: center;
+        vertical-align: center;
+        
+        font-family: Bernina-Regular !important;
+        font-size:17px;
+        
+        color: #a9aaac;
+        width:100%;
+    }
 
 .header-md,
 .header-ios {
@@ -77,31 +94,31 @@ input {
 
 h1 {
     font-family: Gotham-Medium, sans-serif;
-    font-size: 230% !important;
+    font-size: 28px !important;
     color: #35373a !important;
 }
 
 .row2 {
     font-family: Gotham-Medium;
-    font-size: 230%;
+    font-size: 28px;
     color: #35373a !important;
 }
 
 .row4 {
     font-family: Bernina-Regular;
-    font-size: 145%;
+    font-size: 17px;
     color: #35373a !important;
 }
 
 h3 {
     font-family: Bernina-Regular, sans-serif;
-    font-size: 145% !important;
+    font-size: 17px !important;
     color: #35373a !important;
 }
 
 .subtitle {
     font-family: Bernina-Regular, sans-serif;
-    font-size: 145% !important;
+    font-size: 17px !important;
     color: #35373a !important;
 }
 
@@ -114,7 +131,7 @@ button,
 .button-md,
 .button-ios {
     font-family: "Bernina-Regular", sans-serif;
-    font-size: 145%;
+    font-size: 17px;
     text-transform: capitalize !important;
     color: #3CB18A;
 }
@@ -130,19 +147,11 @@ button,
 .status-button-container {
     display: block;
     position: relative;
-    padding-top: 128pt;
+    padding-top: 128px;
     margin: auto;
 }
 
-.action-sheet-md .action-sheet-group .button-inner {
-    -webkit-justify-content: center !important;
-    -ms-flex-pack: center !important;
-    justify-content: center !important;
-}
 
-.action-sheet-md .action-sheet-title {
-    text-align: center !important;
-}
 
 p {
     font-family: Bernina-Regular, sans-serif;
@@ -171,15 +180,11 @@ ion-header ion-col {
 ion-header ion-col h3 {
     font-weight: bold;
     font-family: "Bernina-Bold", sans-serif;
-    font-size: 145% !important;
+    font-size: 17px !important;
     color: #35373A !important;
 }
 
-.action-sheet-ios .action-sheet-title {
-    font-family: Bernina-SemiBold !important;
-    font-size: 1.08em !important;
-    color: #35373A !important;
-}
+
 
 .picker-opt {
     text-overflow: initial !important;
@@ -252,4 +257,71 @@ button:disabled {
 
 .toolbar-background {
     background: #FFFFFF !important;
+}
+
+.actionsheet-items {
+    color: #3cb18a !important;
+    font-family: Bernina-Regular !important;
+    font-size: 17px !important;
+}
+
+.actionsheet-cancel {
+    color: #35373A !important;
+    font-family: Bernina-Regular !important;
+    font-size: 17px !important;
+}
+
+.slide-zoom {
+    height: 100% !important;
+}
+
+/****************************** Action Sheet Styles **********************************/
+
+.action-sheet-ios .action-sheet-button {
+    height: 41px !important;
+    min-height: 41px !important;
+    font-size: 17px !important;
+}
+
+.action-sheet-ios .action-sheet-title {
+    font-family: Bernina-SemiBold !important;
+    font-size: 13px !important;
+    color: #35373A !important;
+    height: 32px !important;
+    display: flex;
+    text-align: center !important;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.action-sheet-container {
+    padding: 0 !important;
+    border-radius: 0;
+}
+
+.action-sheet-group {
+   opacity: .95;
+}
+
+.action-sheet-ios .action-sheet-group {
+    border-radius: 0;
+}
+
+.action-sheet-ios .action-sheet-group:last-child {
+    margin-bottom: 0;
+}
+
+.action-sheet-md .action-sheet-group .button-inner {
+    -webkit-justify-content: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.action-sheet-md .action-sheet-title {
+    text-align: center !important;
+    font-size: 13px !important;
+
 }

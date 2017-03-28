@@ -6,20 +6,20 @@ page-welcome {
         border-bottom: none !important;
     }
     .listbtn1 {
-        font-size: 105% !important;
+        font-size: 13px !important;
         color: #35373A !important;
         font-family: Bernina-SemiBold !important;
-        padding-left: 16pt;
+        padding-left: 16px;
         text-align: left;
         // margin: auto;
-        // padding-right: 16pt;
+        // padding-right: 16px;
     }
     .menu-toolbar {
         padding: 0 !important;
-        margin-top: 10pt !important;
+        margin-top: 10px !important;
     }
     .listbtn2 {
-        font-size: 145% !important;
+        font-size: 17px !important;
         font-family: Bernina-Regular !important;
     }
     b {
@@ -50,42 +50,42 @@ page-welcome {
     }
     .item-md ion-avatar ion-img,
     .item-md ion-avatar img {
-        width: 46pt;
-        height: 46pt;
+        width: 46px;
+        height: 46px;
     }
     .item-ios ion-avatar ion-img,
     .item-ios ion-avatar img {
-        width: 46pt;
-        height: 46pt;
+        width: 46px;
+        height: 46px;
     }
     .user1 {
         font-family: Bernina-Regular;
-        font-size: 140%;
-        color: #3cb18a !important;
-        margin-bottom: 3pt;
+        font-size: 17px;
+        color: #35373a !important;
+        margin-bottom: 3px;
     }
     .user2 {
         font-family: Bernina-Regular;
-        font-size: 100%;
+        font-size: 15px;
         color: #a9aaac !important;
     }
     ion-icon {
         color: #3cb18a
     }
     .list {
-        margin-top: 16pt;
+        margin-top: 16px;
     }
     .button-md {
-        height: 44pt;
-        padding-left: 16pt !important;
-        padding-right: 16pt !important;
-        margin: 0pt;
+        height: 44px;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        margin: 0px;
     }
     .button-ios {
-        height: 44pt;
-        padding-left: 16pt !important;
-        padding-right: 16pt !important;
-        margin: 0pt;
+        height: 44px;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        margin: 0px;
     }
     .toolbar-md {
         padding: 0px !important;
@@ -111,14 +111,14 @@ page-welcome {
         content: "$"
     }
     ion-icon {
-        padding-right: 16pt;
+        padding-right: 16px;
     }
     .active {
         opacity: 1;
         background: #3cb18a;
     }
     .swiper-pagination-bullet {
-        margin-right: 10pt;
+        margin-right: 10px;
     }
     .swiper-pagination-bullet-active {
         background: #3cb18a;
@@ -129,18 +129,3 @@ page-welcome {
     }
 }
 
-.actionsheet-items {
-    color: #3cb18a !important;
-    font-family: Bernina-Regular !important;
-    font-size: 145% !important;
-}
-
-.actionsheet-cancel {
-    color: #35373A !important;
-    font-family: Bernina-Regular !important;
-    font-size: 145% !important;
-}
-
-.slide-zoom {
-    height: 100% !important;
-}

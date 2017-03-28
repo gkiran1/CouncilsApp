@@ -24,9 +24,9 @@ export class slide1Page {
     }
 
     adminPage() {
-        this.nav.setRoot(AdminPage);
+        this.nav.push(AdminPage);
     }
     settingsPage() {
-        this.nav.setRoot(SettingsPage);
+        this.nav.push(SettingsPage);
     }
 }
