@@ -2,8 +2,7 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col" width-10>
-                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
-                    (click)="cancel()"></ion-icon>
+                <ion-icon class="cancel-font" name="close" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
             </ion-col>
             <ion-col width-80>
                 <h3>
@@ -79,8 +78,8 @@
         <ion-list>
             <ion-label class="label-styles">Temporal Welfare</ion-label>
             <ng-container *ngFor="let item of spiritualwelfareObj">
-               <ion-item class="item-styles">
-                    <ion-input type="text" [value]="item"></ion-input>            
+                <ion-item class="item-styles">
+                    <ion-input type="text" [value]="item"></ion-input>
                     <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
@@ -128,11 +127,11 @@
                 </ion-item>
             </ng-container>
         </ion-list>
-     
-     <ion-list>
+
+        <ion-list>
             <ion-label class="label-styles">Events</ion-label>
             <ng-container *ngFor="let item of eventObj">
-              <ion-item class="item-styles">
+                <ion-item class="item-styles">
                     <ion-input type="text" [value]="item"></ion-input>
                     <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
@@ -140,14 +139,14 @@
                 </ion-item>
             </ng-container>
         </ion-list>
-        
+
         <!--<ion-item>
             <ion-label floating>Events</ion-label>
             <ion-textarea elastic name="event" formControlName="event" maxlength="500"></ion-textarea>
         </ion-item>-->
 
         <ion-item>
-             <ion-label *ngIf="!closingprayer">Closing Prayer</ion-label>
+            <ion-label *ngIf="!closingprayer">Closing Prayer</ion-label>
             <ion-label floating color="secondary" *ngIf="closingprayer">Closing Prayer</ion-label>
             <ion-select name="closingprayer" [(ngModel)]='closingprayer' formControlName="closingprayer">
                 <ng-container *ngFor="let user of users">
