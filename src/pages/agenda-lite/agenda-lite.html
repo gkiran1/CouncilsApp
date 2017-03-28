@@ -7,7 +7,7 @@
             </ion-col>
             <ion-col width-80>
                 <h3>
-                    New Agenda Lite
+                   Lite
                 </h3>
             </ion-col>
         </ion-row>
@@ -78,13 +78,7 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Discussion Items</ion-label>            
-            <!--<ng-container *ngFor="let discussionitem of discussionitems">
-                <span>-</span>
-                <ion-input name="notes" (focus)="discussionfocus()" name="discussionitem" [(ngModel)]="discussionitem"
-                    formControlName="discussionitem" (keyup)="keypressed($event)" maxlength="500"></ion-input>
-            </ng-container>-->
-
+            <ion-label floating>Discussion Items</ion-label>                   
             <ion-textarea type="text" (focus)="discussionfocus()" elastic id="discussionitems" name="discussionitems" [(ngModel)]="discussionitems"
                 formControlName="discussionitems" maxlength="500" (keyup)="keypressed($event)">
                 </ion-textarea>
