@@ -19,7 +19,7 @@
             </ion-item-divider>
 
             <ion-item>
-                <ion-input type="text" id="topic" name="topic" formControlName="topic" placeholder="Discussion Topic" clearInput></ion-input>
+                <ion-input type="text" id="topic" name="topic" maxLength="25" formControlName="topic" placeholder="Discussion Topic" clearInput></ion-input>
             </ion-item>
             <ion-item-divider>
                 <h6>Must be 25 characters or less</h6>
@@ -29,8 +29,8 @@
             </ion-item-divider>
             <ion-list radio-group id="council" name="council" formControlName="council">
                 <ion-item *ngFor="let c of councils">
-                    <ion-label color="dark">{{(c | async)?.council}}</ion-label>
-                    <ion-radio [value]="c | async" color="secondary" ></ion-radio>
+                    <ion-label color="dark">{{c.council}}</ion-label>
+                    <ion-radio [value]="c" color="secondary" ></ion-radio>
                 </ion-item>
             </ion-list>
         </ion-item-group>

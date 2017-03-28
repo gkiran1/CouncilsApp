@@ -72,9 +72,11 @@
         </ion-item>
 
         <ion-list>
-            <ion-label>Spiritual Welfare</ion-label>
+            <ion-label class="label-styles">Spiritual Welfare</ion-label>
             <ng-container *ngFor="let item of spiritualwelfareObj">
-                <ion-item>{{item}}
+               <ion-item class="item-styles">
+                    <ion-input type="text" [value]="item"></ion-input>
+                <!--<ion-item>{{item}}-->
                     <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
@@ -83,9 +85,10 @@
         </ion-list>
 
         <ion-list>
-            <ion-label>Temporal Welfare</ion-label>
+            <ion-label class="label-styles">Temporal Welfare</ion-label>
             <ng-container *ngFor="let item of temporalwelfareObj">
-                <ion-item>{{item}}
+                <ion-item class="item-styles">
+                    <ion-input type="text" [value]="item"></ion-input>
                     <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
@@ -99,9 +102,10 @@
         </ion-item>-->
 
         <ion-list>
-            <ion-label>Fellowship Items</ion-label>
+            <ion-label class="label-styles">Fellowship Items</ion-label>
             <ng-container *ngFor="let item of fellowshipitemsObj">
-                <ion-item>{{item}}
+                <ion-item class="item-styles">
+                    <ion-input type="text" [value]="item"></ion-input>
                     <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
@@ -110,9 +114,10 @@
         </ion-list>
 
         <ion-list>
-            <ion-label>Missionary Items</ion-label>
+            <ion-label class="label-styles">Missionary Items</ion-label>
             <ng-container *ngFor="let item of missionaryitemsObj">
-                <ion-item>{{item}}
+                <ion-item class="item-styles">
+                    <ion-input type="text" [value]="item"></ion-input>
                     <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
@@ -121,9 +126,10 @@
         </ion-list>
      
      <ion-list>
-            <ion-label>Events</ion-label>
+            <ion-label class="label-styles">Events</ion-label>
             <ng-container *ngFor="let item of eventObj">
-                <ion-item>{{item}}
+              <ion-item class="item-styles">
+                    <ion-input type="text" [value]="item"></ion-input>
                     <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
@@ -154,7 +160,7 @@
             <button ion-button color="danger" (click)="delete(agendaeditForm.value)">Delete</button>
         </ion-buttons>
         <ion-buttons end>
-            <button ion-button color="secondary" (click)="edit(agendaeditForm.value)">Edit</button>
+            <button ion-button color="secondary" (click)="edit(agendaeditForm.value)" [disabled]="!agendaeditForm.valid">Edit</button>
         </ion-buttons>
     </ion-toolbar>
 </ion-footer>

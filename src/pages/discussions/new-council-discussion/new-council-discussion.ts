@@ -22,7 +22,9 @@ export class NewCouncilDiscussionPage {
         this.af.database.object('/users/' + auth.uid).subscribe(user => {
           this.councils = [];
           user.councils.forEach(c => {
-            this.councils.push(this.firebaseservice.getCouncilByCouncilKey(c));
+            this.firebaseservice.getCouncilByCouncilKey(c).subscribe(council=>{
+              this.councils.push(council);
+            });
           });
 
           this.newCouncilDiscussionForm = fb.group({

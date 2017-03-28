@@ -142,7 +142,7 @@ export class AgendaLiteEditPage {
   }
 
   cancel() {
-    this.nav.setRoot(WelcomePage);
+    this.nav.pop();
   }
 
   formatAgendaObj(value) {
@@ -216,4 +216,8 @@ export class AgendaLiteEditPage {
     });
     alert.present();
   }
+
+  // trackByIndex(index: number, obj: any): any {
+  //   return index;
+  // }
 }

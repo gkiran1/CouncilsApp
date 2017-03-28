@@ -33,14 +33,13 @@ import * as firebase from 'firebase';
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage, NewPrivateDiscussionPage]
+  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage,  AgendasPage]
 })
 
 export class WelcomePage implements OnInit {
   @ViewChild('switcher') switcher: Slides;
   activeCouncilsCount;
   assignmentsCount;
-  councilDiscussionsCount;
   agendasCount;
   //@ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
@@ -56,7 +55,6 @@ export class WelcomePage implements OnInit {
     public assignmentsListPage: AssignmentsListPage,
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService,
-    public councilDiscussionsListPage: CouncilDiscussionsListPage,
     public agendaPage: AgendasPage) {
 
     this.userObj = null;
@@ -91,7 +89,6 @@ export class WelcomePage implements OnInit {
           });
           privatediscussions.forEach(discussionEle => {
             this.firebaseService.getPrivateDiscussionByKey(discussionEle.$key).subscribe(discussion => {
-              console.log('discussion.messages', discussion, discussion.messages);
               discussion.messages = discussion.messages || [];
               Object.keys(discussion.messages).forEach(e => {
                 let message = discussion.messages[e];
@@ -110,7 +107,6 @@ export class WelcomePage implements OnInit {
 
     this.activeCouncilsCount = activeCouncilsPage.getCount();
     this.assignmentsCount = assignmentsListPage.getCount();
-    this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
     this.agendasCount = agendaPage.getCount();
 
   }

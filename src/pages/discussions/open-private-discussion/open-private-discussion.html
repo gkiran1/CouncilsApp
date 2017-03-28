@@ -17,8 +17,8 @@
     <div class="chat-content">
         <ion-item text-wrap>
             <ion-label>
-                This is private discussion with {{chatWith}} created by <span ion-text color="secondary">You</span> on {{discussion.createdDate |
-                amCalendar}}.No one else can view this discussion.
+                This is a private discussion with {{chatWith}} created by <span ion-text color="secondary">You</span> on {{discussion.createdDate |
+                amCalendar}}. No one else can view this discussion.
             </ion-label>
         </ion-item>
         <ion-list>
@@ -45,7 +45,7 @@
             <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"></ion-input>
         </ion-col>
         <ion-col width-20>
-            <button ion-button color="secondary" clear (click)="send()">Send</button>
+            <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
         </ion-col>
     </ion-row>
 </ion-footer>
