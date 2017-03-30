@@ -12,14 +12,19 @@ assignments-list{
     }
     .text-content{
        position:absolute;
-       top:50%;
+       top:45%;
        width: 100%;
        margin:auto;
-       color:map-get($colors, light-gray);
     }
-     .icon-style{
-    color:#A9AAAC;
-    width: 8px;
-    height: 13px;
+    .icon-style{
+        color:#A9AAAC;
+        width: 8px;
+        height: 13px;
     }
+    .font1{
+        font-family: Bernina-Regular, sans-serif;
+        font-size: 17px !important;
+        color: #a9aaac !important;
+    }
+
 }

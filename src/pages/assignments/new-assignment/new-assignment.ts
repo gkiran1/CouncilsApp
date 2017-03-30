@@ -174,4 +174,27 @@ export class NewAssignmentPage {
       .catch(err => { console.error(err); this.showAlert('Unable to delete the Assignment, please try after some time') })
   }
 
+
+  showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Are you sure you want to delete?',
+      // message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+           this.delete();
+          }
+        },
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
 }

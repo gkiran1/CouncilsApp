@@ -30,9 +30,10 @@
     <ion-item>
       <ion-label *ngIf="!assignedcouncil">Council</ion-label>
       <ion-label floating color="secondary" *ngIf="assignedcouncil">Council</ion-label>
-      <ion-select name="assignedcouncil" (ionChange)="assignedCouncilChanged(assignmentForm.value)" [(ngModel)]='assignedcouncil' formControlName="assignedcouncil">
+      <ion-select name="assignedcouncil" (ionChange)="assignedCouncilChanged(assignmentForm.value)" [(ngModel)]='assignedcouncil'
+        formControlName="assignedcouncil">
         <ion-option *ngFor="let c of councils" [value]="c.$key">{{c.council}}</ion-option>
-      </ion-select>
+        </ion-select>
     </ion-item>
     <ion-item>
       <ion-label *ngIf="!assigneduser">Assign to</ion-label>
@@ -71,14 +72,17 @@
     </ion-toolbar>
   </ng-container>
   <ng-container *ngIf="!isNewAssignment">
-    <ion-toolbar>
+    <ion-toolbar *ngIf="!assignmentForm.value.isCompleted">
       <ion-buttons start>
-        <button ion-button color="danger" (click)="delete(assignmentForm.value)">Delete</button>
+        <button ion-button color="danger" (click)="showConfirm()">Delete</button>
       </ion-buttons>
       <button ion-button clear block color="secondary" [disabled]="!assignmentForm.valid" (click)="complete(assignmentForm.value)">Complete</button>
       <ion-buttons end>
         <button ion-button color="secondary" [disabled]="!assignmentForm.valid" (click)="edit(assignmentForm.value)">Save</button>
       </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="assignmentForm.value.isCompleted">
+      <button ion-button class="danger-color" clear block (click)="showConfirm()">Delete</button>
     </ion-toolbar>
   </ng-container>
 
