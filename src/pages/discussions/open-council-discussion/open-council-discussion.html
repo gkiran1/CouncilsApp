@@ -16,9 +16,9 @@
     <!--<ion-scroll scrollY="true" class="messages">-->
     <div class="chat-content">
         <ion-item text-wrap>
-            <ion-label>
+            <ion-label class="font1 line-height">
                 This discussion was created by <span ion-text color="secondary">{{user.$key===discussion.createdBy?'You':discussion.createdUser}}</span> on {{discussion.createdDate |
-                amCalendar}}.There are {{activeusersCount}} active participants from the <span ion-text color="secondary">{{discussion.councilname}}</span>.
+                customdateformat}}. There are {{activeusersCount}} active participants from the <span ion-text color="secondary">{{discussion.councilname}}</span>.
             </ion-label>
         </ion-item>
         <ion-list>
@@ -27,10 +27,10 @@
                     <img [src]="msg.user_avatar" *ngIf="msg.user_avatar">
                     <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!msg.user_avatar" />
                 </ion-avatar>
-                <h2>{{msg.user_firstname}} {{msg.user_lastname}}</h2>
+                <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
                 <ion-icon class="msg-status-icon" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark" md="ios-checkmark"></ion-icon>
-                <p>{{msg.timestamp | amCalendar}}</p>
-                <p>{{msg.text}}</p>
+                <p class="font2">{{msg.timestamp | customdateformat}}</p>
+                <p class="font5 line-height">{{msg.text}}</p>
             </ion-item>
         </ion-list>
     </div>

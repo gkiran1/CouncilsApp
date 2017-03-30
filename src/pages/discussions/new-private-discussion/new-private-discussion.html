@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-searchbar (ionInput)="searchFn($event)" placeholder="Who do you want to chat with?"></ion-searchbar>
+    <ion-searchbar (ionInput)="searchFn($event)" class="font1" placeholder="Who do you want to chat with?"></ion-searchbar>
     <form [formGroup]="NewPrivateDiscussionForm" (ngSubmit)="NewPrivateDiscussionForm.value">
         <ion-item-group>
             <ion-list radio-group id="otheruser" name="otheruser" formControlName="otherUser">
@@ -22,8 +22,8 @@
                             <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
                             <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
                         </ion-avatar>
-                        <ion-label color="dark">{{user.firstname}} {{user.lastname}}</ion-label>
-                        <ion-label>{{user.councilsString}}</ion-label>
+                        <ion-label class="font5">{{user.firstname}} {{user.lastname}}</ion-label>
+                        <ion-label class="font1">{{user.councilsString}}</ion-label>
                         <ion-radio [value]="user" color="secondary"></ion-radio>
                     </ion-item>
                 </ng-container>

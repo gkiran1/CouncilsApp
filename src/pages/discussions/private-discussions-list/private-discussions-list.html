@@ -30,7 +30,7 @@
             <h3 class="topic" *ngIf="uid !== item.createdUserId">{{item.createdUserName}}</h3>
             <span class="right-align"><ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></span>
             <p>{{item.lastMsg.text}}</p>
-            <p>{{item.lastMsg.timestamp | customdateformat}}</p>
+            <p class="font2">{{item.lastMsg.timestamp | customdateformat}}</p>
         </ion-item>
     </ng-container>
     <ng-container *ngIf="isListEmpty">
