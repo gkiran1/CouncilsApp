@@ -15,21 +15,21 @@
     <form [formGroup]="newCouncilDiscussionForm" (ngSubmit)="newCouncilDiscussionForm.value" >
         <ion-item-group>
             <ion-item-divider>
-                <ion-label>What would you like to discuss?</ion-label>
+                <ion-label class="font1">What would you like to discuss?</ion-label>
             </ion-item-divider>
 
             <ion-item>
                 <ion-input type="text" id="topic" name="topic" maxLength="25" formControlName="topic" placeholder="Discussion Topic" clearInput></ion-input>
             </ion-item>
             <ion-item-divider>
-                <h6>Must be 25 characters or less</h6>
+                <ion-label class="font2">Must be 25 characters or less</ion-label>
             </ion-item-divider>
             <ion-item-divider item-wrap>
-                Which council will be discussing this topic?
+                <ion-label class="font1 line-height">Which council will be discussing this topic?</ion-label>
             </ion-item-divider>
             <ion-list radio-group id="council" name="council" formControlName="council">
                 <ion-item *ngFor="let c of councils">
-                    <ion-label color="dark">{{c.council}}</ion-label>
+                    <ion-label class="font3">{{c.council}}</ion-label>
                     <ion-radio [value]="c" color="secondary" ></ion-radio>
                 </ion-item>
             </ion-list>
