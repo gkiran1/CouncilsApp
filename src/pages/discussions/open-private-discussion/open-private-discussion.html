@@ -30,7 +30,7 @@
                 <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
                 <ion-icon class="msg-status-icon" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark" md="ios-checkmark"></ion-icon>
                 <ion-icon class="msg-status-icon" *ngIf="msg.userId === user.$key && msg.status === 'delivered'" ios="ios-done-all" md="ios-done-all"></ion-icon>
-                <ion-icon class="msg-status-icon" *ngIf="msg.userId === user.$key && msg.status === 'red'" color="secondary" ios="ios-done-all" md="ios-done-all"></ion-icon>
+                <ion-icon class="msg-status-icon red-status" *ngIf="msg.userId === user.$key && msg.status === 'red'" ios="ios-done-all" md="ios-done-all"></ion-icon>
                 <p  class="font2">{{msg.timestamp | customdateformat}}</p>
                 <p class="font5 line-height">{{msg.text}}</p>
             </ion-item>
