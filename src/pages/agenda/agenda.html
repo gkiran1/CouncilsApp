@@ -77,7 +77,7 @@
         <ion-item>
             <ion-label *ngIf="!spiritualwelfare">Spiritual Welfare</ion-label>
             <ion-label floating color="secondary" *ngIf="spiritualwelfare">Spiritual Welfare</ion-label>
-            <ion-textarea type="text" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare" [(ngModel)]="spiritualwelfare"
+            <ion-textarea type="text" wrap="off" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare" [(ngModel)]="spiritualwelfare"
                 formControlName="spiritualwelfare" maxlength="500" (keyup)="spiritualkey($event)">
                 </ion-textarea>
         </ion-item>
@@ -85,7 +85,7 @@
         <ion-item>
             <ion-label *ngIf="!temporalwelfare">Temporal Welfare</ion-label>
             <ion-label floating color="secondary" *ngIf="temporalwelfare">Temporal Welfare</ion-label>
-            <ion-textarea type="text" (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare" [(ngModel)]="temporalwelfare"
+            <ion-textarea type="text" wrap="off" (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare" [(ngModel)]="temporalwelfare"
                 formControlName="temporalwelfare" maxlength="500" (keyup)="temporalkey($event)">
                 </ion-textarea>
         </ion-item>
@@ -93,7 +93,7 @@
         <ion-item>
             <ion-label *ngIf="!fellowshipitems">Fellowship Items</ion-label>
             <ion-label floating color="secondary" *ngIf="fellowshipitems">Fellowship Items</ion-label>
-            <ion-textarea type="text" (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems" [(ngModel)]="fellowshipitems"
+            <ion-textarea type="text" wrap="off" (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems" [(ngModel)]="fellowshipitems"
                 formControlName="fellowshipitems" maxlength="500" (keyup)="fellowshipkey($event)">
                 </ion-textarea>
         </ion-item>
@@ -101,7 +101,7 @@
         <ion-item>
             <ion-label *ngIf="!missionaryitems">Missionary Items</ion-label>
             <ion-label floating color="secondary" *ngIf="missionaryitems">Missionary Items</ion-label>
-            <ion-textarea type="text" (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems" [(ngModel)]="missionaryitems"
+            <ion-textarea type="text" wrap="off" (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems" [(ngModel)]="missionaryitems"
                 formControlName="missionaryitems" maxlength="500" (keyup)="missionarykey($event)">
                 </ion-textarea>
         </ion-item>
@@ -109,7 +109,7 @@
         <ion-item>
             <ion-label *ngIf="!event">Events</ion-label>
             <ion-label floating color="secondary" *ngIf="event">Events</ion-label>
-            <ion-textarea type="text" (focus)="eventfocus()" elastic id="event" name="event" [(ngModel)]="event" formControlName="event"
+            <ion-textarea type="text" wrap="off" (focus)="eventfocus()" elastic id="event" name="event" [(ngModel)]="event" formControlName="event"
                 maxlength="500" (keyup)="eventkey($event)">
                 </ion-textarea>
         </ion-item>
