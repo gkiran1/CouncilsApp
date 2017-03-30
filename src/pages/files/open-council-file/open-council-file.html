@@ -10,46 +10,41 @@
                 <h3>{{value.councilname}}</h3>
             </ion-col>
             <ion-col width-10>
-                <ng-container *ngIf="!deleteflag">
-                    <button color="secondary" class="editbtn" clear block (click)="edit()">Edit</button>
+                <ng-container *ngIf="!deleteflag && filesArray.length">
+                    <button color="secondary" class="editbtn" clear block>Edit</button>
                 </ng-container>
                 <ng-container *ngIf="deleteflag">
-                    <button color="secondary" class="editbtn" clear block (click)="done()">Done</button>
+                    <button color="secondary" class="editbtn" clear block>Done</button>
                 </ng-container>
             </ion-col>
         </ion-row>
     </ion-navbar>
+    <ion-item-divider class="empty"></ion-item-divider>
 </ion-header>
 <ion-content id="content1">
-    <ion-list inset>
+    <ion-item>
         <ng-container *ngIf="!listdisplayflag">
-            <ion-item>
-                <ion-row>
-                    <ion-col width-10>
-                        <ion-icon class="document" name="document" color="secondary"></ion-icon>
-                    </ion-col>
-                    <!--<i class="icon ion-document"></i>-->
-                    <ion-col width-80>
-                        <p>by <span ion-text color="secondary">{{file1.createdUser}}</span></p>
-                        <p>
-                            {{file.size}}b {{file.contentType}} file
-                        </p>
-                        <p class="agendadate-styles">{{file.createdDate | customdateformat}}</p>
-                    </ion-col>
-                    <ion-col width-10>
-                        <!--<button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="councilsPage()">
-                    <ion-icon name="councilscircle" class="ion-ios-add-circle-outline" item-right></ion-icon>
-                </button>-->
-                        <ng-container *ngIf="deleteflag">
-                            <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="delete()">
+            <ion-row class="row" *ngFor="let file of filesArray">
+                <ion-col width-10>
+                    <ion-icon class="document" name="document" color="secondary"></ion-icon>
+                </ion-col>
+                <ion-col width-80>
+                    <p>by <span ion-text color="secondary">{{file1.createdUser}}</span></p>
+                    <p>
+                        {{file.size}}b {{file.contentType}} file
+                    </p>
+                    <p class="agendadate-styles">{{file.createdDate | customdateformat}}</p>
+                </ion-col>
+                <ion-col width-10>
+                    <ng-container *ngIf="deleteflag">
+                        <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right>
                             <ion-icon class="document" name="close-circle" color="secondary" item-right></ion-icon>
                             </button>
-                        </ng-container>
-                    </ion-col>
-                </ion-row>
-            </ion-item>
+                    </ng-container>
+                </ion-col>
+            </ion-row>
         </ng-container>
-    </ion-list>
+    </ion-item>
 </ion-content>
 <ion-footer>
     <ng-container *ngIf="!deleteflag">

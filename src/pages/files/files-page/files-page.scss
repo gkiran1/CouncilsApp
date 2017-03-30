@@ -1,14 +1,19 @@
 files-page{
-    .agendadate-styles{
+    .date-styles{
         font-family: Bernina-Regular !important;
         font-size: 1.08em !important;
         color:#a9aaac !important;
         text-align: right;        
     }
-    .agendacouncil-styles{
+    .council-styles{
         font-family:Bernina-SemiBold !important;
-        font-size: 1.42em !important;
-        color:#35373A !important
+        font-size: 17px !important;
+        color:#35373A !important;
+    }
+    .name-styles{
+        font-family:Bernina-SemiBold !important;
+        font-size: 15px !important;
+        color:#a9aaac !important;
     }
     .icon-style{
     color:#A9AAAC;
@@ -26,7 +31,7 @@ files-page{
     background: none !important;
 }
     .empty{    
-    height: 20pt;
+    height: 20px;
     border-top: 1px solid #dedede;    
 }
 .h3{

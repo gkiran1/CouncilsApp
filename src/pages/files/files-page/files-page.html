@@ -3,8 +3,7 @@
         <ion-buttons left>
             <button ion-button menuToggle>
               <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
-                    (click)="cancel()"></ion-icon>
-      <!--<ion-icon name="menu" color="secondary"></ion-icon>-->
+                    (click)="cancel()"></ion-icon>      
     </button>
         </ion-buttons>
         <h3 text-center><b>Files</b></h3>
@@ -19,17 +18,14 @@
 <ion-content padding center text-center>    
     <ng-container *ngIf="filesArray.length">
         <ion-list inset>
-            <ion-item (click)="openFile(item)" *ngFor="let item of filesArray">
-                <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
-                <!--<ion-icon name="list" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>-->
-                <!--<p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>-->
+            <ion-item (click)="openFile(item)" *ngFor="let item of filesArray">                
                 <button class="forwardBtn" ion-button item-right clear>
       <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" end></ion-icon>
       </button>
-                <p><span class="agendacouncil-styles">{{item.councilname}}</span>
-                </p>
+                <p><span class="council-styles">{{item.councilname}}</span></p>
+                <p><span class="name-styles">{{item.councilname}} {{item.name}}</span></p>
                 <p>by <span ion-text color="secondary">{{item.createdUser}}</span></p>
-                <p class="agendadate-styles">{{item.createdDate | customdateformat}}</p>
+                <p class="date-styles">{{item.createdDate | customdateformat}}</p>
             </ion-item>
         </ion-list>
     </ng-container>

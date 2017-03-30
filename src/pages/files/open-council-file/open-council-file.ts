@@ -18,20 +18,20 @@ export class OpenCouncilFilePage {
     //metadata
     file = {
         $key: '',
-        councilid: '',        
+        councilid: '',
         name: ''
     }
     //files
     file1 = {
         $key: '',
-        councilid: '',
-        images: []
+        councilid: ''
     }
+    filesArray = [];
     deleteflag = false;
     listdisplayflag = false;
+    addfileflag = false;
     user;
     value: any;
-    councilName: any;
     activeusersCount = 0;
     guestPicture: any;
     imagePath: any;
@@ -51,22 +51,17 @@ export class OpenCouncilFilePage {
         appservice.getUser().subscribe(user => this.user = user);
         this.file = navparams.get('file');
         this.value = navparams.get('value');
-        this.councilName = this.value.councilname;
+        this.filesArray.push(this.file);
         firebaseservice.getFilesByKey(navparams.get('file1')).subscribe(res => {
             this.file1 = res;
         });
+
     }
-    delete() {
-        console.log('fileId:', this.file1.councilid);
-    }
-    edit() {
-        this.deleteflag = true;
-    }
-    done() {
-        this.listdisplayflag = true;
-        this.deleteflag = false;
+    delete() {   
+        //to delete files form the database using key
         this.firebaseservice.deleteFilesByKey(this.file1.$key).then((res) => {
-            this.profilePictureRef.child(this.file.name).delete().then(function () {
+            //to delete files from the storage using file name
+            this.profilePictureRef.child(this.value.councilid + '//' + this.file.name).delete().then(function () {
                 console.log('File deleted successfully');
             }).catch(function (error) {
                 console.log(error);
@@ -75,9 +70,13 @@ export class OpenCouncilFilePage {
             console.log(err);
         });
     }
-    // AddFile() {
-    //     this.newCouncilFilePage.chooseFileActionsPage(this.value);
-    // }
+    edit() {
+        this.deleteflag = true;
+    }
+    done() {
+        this.deleteflag = false;
+        this.listdisplayflag = true;
+    }
     back() {
         this.nav.pop();
     }
@@ -89,6 +88,7 @@ export class OpenCouncilFilePage {
                     text: 'Take Photo',
                     cssClass: "actionsheet-items",
                     handler: () => {
+                        this.addfileflag = true;
                         this.takePicture(this.value);
                         this.menuctrl.close();
                     }
@@ -104,6 +104,7 @@ export class OpenCouncilFilePage {
                     text: 'Choose From Library',
                     cssClass: "actionsheet-items",
                     handler: () => {
+                        this.addfileflag = true;
                         this.uploadPicture(this.value);
                         this.menuctrl.close();
                     }
@@ -112,6 +113,7 @@ export class OpenCouncilFilePage {
                     text: 'Import File From...',
                     cssClass: "actionsheet-items",
                     handler: () => {
+                        this.addfileflag = true;
                         this.importFile(this.value);
                         this.menuctrl.close();
                     }
@@ -145,16 +147,17 @@ export class OpenCouncilFilePage {
             this.value.createdDate = moment().toISOString();
             this.value.councilid = value.council.$key;
             this.value.councilname = value.council.council;
-            this.profilePictureRef.child(value.councilid + '/ /')
+            let x = Math.floor(Math.random() * 5000);
+            this.profilePictureRef.child(value.councilid + '//' + x)
                 .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
                 .then((savedPicture) => {
                     this.firebaseservice.saveFile(value, savedPicture.downloadURL).then(fileId => {
-                        this.pictureRef = this.profilePictureRef.child(value.councilid + '/ /').getMetadata();
+                        this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + x).getMetadata();
                         this.pictureRef.then((metadata) => {
                             // Metadata now contains the metadata like filesize and type for 'images/...'
                             this.file = metadata;
-                            this.file1 = fileId,
-                                this.value = value.councilname;
+                            this.filesArray.push(this.file);
+                            this.value.councilname = value.councilname;
                         }).catch((error) => {
                             console.log(error);
                         });
@@ -186,16 +189,18 @@ export class OpenCouncilFilePage {
             this.value.createdDate = moment().toISOString();
             this.value.councilid = value.council.$key;
             this.value.councilname = value.council.council;
-            this.profilePictureRef.child(value.councilid + '/ /')
+            let x = Math.floor(Math.random() * 5000);
+            this.profilePictureRef.child(value.councilid + '//' + x)
                 .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
                 .then((savedPicture) => {
                     this.firebaseservice.saveFile(value, savedPicture.downloadURL).then(fileId => {
-                        this.pictureRef = this.profilePictureRef.child(value.councilid + '/ /').getMetadata();
+                        this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + x).getMetadata();
                         this.pictureRef.then((metadata) => {
                             // Metadata now contains the metadata like filesize and type for 'images/...'                                                       
                             this.file = metadata;
-                            this.file1 = fileId,
-                                this.value = value.councilname;
+                            this.filesArray.push(this.file);
+                            console.log(this.filesArray);
+                            this.value.councilname = value.councilname;
                         }).catch((error) => {
                             console.log(error);
                         });
@@ -218,16 +223,17 @@ export class OpenCouncilFilePage {
                         this.value.createdDate = moment().toISOString();
                         this.value.councilid = value.council.$key;
                         this.value.councilname = value.council.council;
-                        this.profilePictureRef.child(value.councilid + '/ /')
+                        let x = Math.floor(Math.random() * 5000);
+                        this.profilePictureRef.child(value.councilid + '//' + x)
                             .putString(filePath)
                             .then((savedPicture) => {
                                 this.firebaseservice.saveFile(value, filePath).then(fileId => {
-                                    this.pictureRef = this.profilePictureRef.child(value.councilid + '/ /').getMetadata();
+                                    this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + x).getMetadata();
                                     this.pictureRef.then((metadata) => {
                                         // Metadata now contains the metadata like filesize and type for 'images/...'
                                         this.file = metadata;
-                                        this.file1 = fileId,
-                                            this.value = value.councilname;
+                                        this.filesArray.push(this.file);
+                                        this.value.councilname = value.councilname;
                                     }).catch((error) => {
                                         alert(error);
                                     });

@@ -6,6 +6,9 @@ open-council-file-page {
         position: absolute;
         top: 15px;
     }
+    .row{
+    border-bottom:1px solid #DEDEDE !important;
+    }
     ion-header .button-ios {
         margin: 0;
         padding: 0;
@@ -19,13 +22,16 @@ open-council-file-page {
     ion-footer .button-ios {
         padding: 0;
     }
-    .image-content {
-        position: absolute;
-        bottom: 0;
-    }
+//     .image-content {
+//         position: absolute;
+//         bottom: 0;
+//     }
     .empty{    
-    height: 20pt;
+    height: 20px;
     border-top: 1px solid #dedede;    
+}
+.item-md.item-block .item-inner{
+        border-bottom: none !important;
 }
 .editbtn{
     background-color: #FFFFFF !important;
@@ -40,7 +46,7 @@ open-council-file-page {
     background-color: #FFFFFF !important;
 }
 .document{
-    font-size: 24pt;
+    font-size: 24px;
 }
 .toolbar-background-md,.toolbar-background-ios{
     background: none !important;

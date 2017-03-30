@@ -20,6 +20,7 @@ export class NewCouncilFilePage {
   imagePath: any;
   profilePictureRef: any;
   pictureRef: any;
+  randomImage: any;
   filename: any;
   image = '';
   file: string;
@@ -118,11 +119,12 @@ export class NewCouncilFilePage {
       value.createdDate = moment().toISOString();
       value.councilid = value.council.$key;
       value.councilname = value.council.council;
-      this.profilePictureRef.child(value.councilid + '/ /')
+      let x = Math.floor(Math.random() * 5000);
+      this.profilePictureRef.child(value.councilid + '//' + x)
         .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
         .then((savedPicture) => {
           this.firebaseservice.saveFile(value, savedPicture.downloadURL).then(fileId => {
-            this.pictureRef = this.profilePictureRef.child(value.councilid + '/ /').getMetadata();
+            this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + x).getMetadata();
             this.pictureRef.then((metadata) => {
               // Metadata now contains the metadata like filesize and type for 'images/...'
               this.nav.push(OpenCouncilFilePage, {
@@ -154,17 +156,17 @@ export class NewCouncilFilePage {
       mediaType: Camera.MediaType.PICTURE,
       saveToPhotoAlbum: false
     }).then(imageData => {
-      console.log('===================imageData',imageData);
       this.guestPicture = imageData;
       this.imagePath = "data:image/jpeg;base64," + imageData;
       value.createdDate = moment().toISOString();
       value.councilid = value.council.$key;
       value.councilname = value.council.council;
-      this.profilePictureRef.child(value.councilid + '/ /')
+      let x = Math.floor(Math.random() * 5000);      
+      this.profilePictureRef.child(value.councilid + '//' + x)
         .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
         .then((savedPicture) => {
           this.firebaseservice.saveFile(value, savedPicture.downloadURL).then(fileId => {
-            this.pictureRef = this.profilePictureRef.child(value.councilid + '/ /').getMetadata();
+            this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + x).getMetadata();
             this.pictureRef.then((metadata) => {
               // Metadata now contains the metadata like filesize and type for 'images/...'
               this.nav.push(OpenCouncilFilePage, {
@@ -192,11 +194,12 @@ export class NewCouncilFilePage {
             value.createdDate = moment().toISOString();
             value.councilid = value.council.$key;
             value.councilname = value.council.council;
-            this.profilePictureRef.child(value.councilid + '/ /')
+            let x = Math.floor(Math.random() * 5000);
+            this.profilePictureRef.child(value.councilid + '//'+x)
               .putString(filePath)
               .then((savedPicture) => {
                 this.firebaseservice.saveFile(value, filePath).then(fileId => {
-                  this.pictureRef = this.profilePictureRef.child(value.councilid + '/ /').getMetadata();
+                  this.pictureRef = this.profilePictureRef.child(value.councilid + '//'+x).getMetadata();
                   this.pictureRef.then((metadata) => {
                     // Metadata now contains the metadata like filesize and type for 'images/...'
                     this.nav.push(OpenCouncilFilePage, {
