@@ -6,9 +6,7 @@
           (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
-        <h3>
-          Agendas
-        </h3>
+        <ion-title text-center>Agendas</ion-title>
       </ion-col>
     </ion-row>
     <ion-buttons end>
@@ -24,7 +22,7 @@
     <ion-list inset>
       <ion-item (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
         <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
-       <ion-img  class="img-styles" src="../assets/icon/agendaicon.png"></ion-img>
+        <ion-img class="img-styles" src="../assets/icon/agendaicon.png"></ion-img>
 
         <p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
         <button ion-button item-right clear>
@@ -36,6 +34,8 @@
     </ion-list>
   </ng-container>
   <ng-container *ngIf="!agendasArray.length">
-    <div class="nocontent-message"><p>There are no agendas</p></div>
+    <div class="nocontent-message">
+      <p>There are no agendas</p>
+    </div>
   </ng-container>
 </ion-content>
