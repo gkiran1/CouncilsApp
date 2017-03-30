@@ -64,7 +64,12 @@ export class AgendaPage {
         this.users = [];
         this.assignmentslist = [];
         this.completedassignmentslist = [];
-
+        (<FormControl>this.newagendaForm.controls['openingprayer']).setValue('');
+        (<FormControl>this.newagendaForm.controls['spiritualthought']).setValue('');
+        (<FormControl>this.newagendaForm.controls['assignments']).setValue('');
+        (<FormControl>this.newagendaForm.controls['completedassignments']).setValue('');
+        (<FormControl>this.newagendaForm.controls['closingprayer']).setValue('');
+        
         this.getUsersByCouncilId(value.assignedcouncil.$key).subscribe(usersObj => {
             usersObj.forEach(usrObj => {
                 this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
@@ -98,11 +103,11 @@ export class AgendaPage {
 
     agendasArray = [];
     createagenda(agenda) {
-     agenda.spiritualwelfare = agenda.spiritualwelfare.replace(/-/gi, '').trim();
-     agenda.temporalwelfare = agenda.temporalwelfare.replace(/-/gi, '').trim();
-     agenda.fellowshipitems = agenda.fellowshipitems.replace(/-/gi, '').trim();
-     agenda.missionaryitems = agenda.missionaryitems.replace(/-/gi, '').trim();
-     agenda.event = agenda.event.replace(/-/gi, '').trim();
+        agenda.spiritualwelfare = agenda.spiritualwelfare.replace(/-/gi, '').trim();
+        agenda.temporalwelfare = agenda.temporalwelfare.replace(/-/gi, '').trim();
+        agenda.fellowshipitems = agenda.fellowshipitems.replace(/-/gi, '').trim();
+        agenda.missionaryitems = agenda.missionaryitems.replace(/-/gi, '').trim();
+        agenda.event = agenda.event.replace(/-/gi, '').trim();
 
         this.firebaseservice.createAgenda(agenda)
             .then(res => {

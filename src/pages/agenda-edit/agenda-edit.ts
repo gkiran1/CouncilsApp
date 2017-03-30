@@ -28,7 +28,7 @@ export class AgendaEditPage {
     eventObj = [];
 
     constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService,
-        public firebaseservice: FirebaseService,public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
+        public firebaseservice: FirebaseService, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
         public nav: NavController, public menuctrl: MenuController) {
 
         this.councils = [];
@@ -118,6 +118,12 @@ export class AgendaEditPage {
 
     assignedMemberChange(value) {
         this.users = [];
+        (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue('');
+        (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue('');
+        (<FormControl>this.agendaeditForm.controls['assignments']).setValue('');
+        (<FormControl>this.agendaeditForm.controls['completedassignments']).setValue('');
+        (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue('');
+
         this.getUsersByCouncilId(value.assignedcouncil.$key).subscribe(usersObj => {
             usersObj.forEach(usrObj => {
                 this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
@@ -128,7 +134,6 @@ export class AgendaEditPage {
             });
         });
 
-        //  this.allassignments = [];
         this.completedassignmentslist = [];
         this.assignmentslist = [];
 
@@ -202,36 +207,36 @@ export class AgendaEditPage {
         alert.present();
     }
 
-     plusBtn(item) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: item,
-      buttons: [
-        {
-          text: 'Start Discussion',
-          cssClass: "actionsheet-items",
-          handler: () => {
-            this.menuctrl.close();
-            this.nav.push(NewCouncilDiscussionPage,{item:item});
+    plusBtn(item) {
+        let actionSheet = this.actionSheetCtrl.create({
+            title: item,
+            buttons: [
+                {
+                    text: 'Start Discussion',
+                    cssClass: "actionsheet-items",
+                    handler: () => {
+                        this.menuctrl.close();
+                        this.nav.push(NewCouncilDiscussionPage, { item: item });
 
-          }
-        },
-        {
-          text: 'Make Assignment',
-          cssClass: "actionsheet-items",
-          handler: () => {
-            this.menuctrl.close();
-            this.nav.push(NewAssignmentPage,{item:item});
-          }
-        },
-        {
-          text: 'Cancel',
-          cssClass: "actionsheet-cancel",
-          handler: () => {
-          }
-        }
-      ]
-    });
+                    }
+                },
+                {
+                    text: 'Make Assignment',
+                    cssClass: "actionsheet-items",
+                    handler: () => {
+                        this.menuctrl.close();
+                        this.nav.push(NewAssignmentPage, { item: item });
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    cssClass: "actionsheet-cancel",
+                    handler: () => {
+                    }
+                }
+            ]
+        });
 
-    actionSheet.present();
-  }
+        actionSheet.present();
+    }
 }

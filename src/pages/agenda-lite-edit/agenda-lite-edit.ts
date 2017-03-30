@@ -107,6 +107,11 @@ export class AgendaLiteEditPage {
 
   assignedMemberChange(value) {
     this.users = [];
+    (<FormControl>this.agendaliteeditForm.controls['openingprayer']).setValue('');
+    (<FormControl>this.agendaliteeditForm.controls['spiritualthought']).setValue('');
+    (<FormControl>this.agendaliteeditForm.controls['assignments']).setValue('');
+    (<FormControl>this.agendaliteeditForm.controls['completedassignments']).setValue('');
+    (<FormControl>this.agendaliteeditForm.controls['closingprayer']).setValue('');
     this.getUsersByCouncilId(value.assignedcouncil.$key).subscribe(usersObj => {
       usersObj.forEach(usrObj => {
         this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
@@ -217,7 +222,8 @@ export class AgendaLiteEditPage {
     alert.present();
   }
 
-  // trackByIndex(index: number, obj: any): any {
-  //   return index;
-  // }
+  trackByIndex(index: number, obj: any): any {
+    return index;
+    
+  }
 }

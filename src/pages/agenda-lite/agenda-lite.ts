@@ -57,7 +57,12 @@ export class AgendaLitePage {
     this.users = [];
     this.assignmentslist = [];
     this.completedassignmentslist = [];
-
+    (<FormControl>this.newagendaliteForm.controls['openingprayer']).setValue('');
+    (<FormControl>this.newagendaliteForm.controls['spiritualthought']).setValue('');
+    (<FormControl>this.newagendaliteForm.controls['assignments']).setValue('');
+    (<FormControl>this.newagendaliteForm.controls['completedassignments']).setValue('');
+    (<FormControl>this.newagendaliteForm.controls['closingprayer']).setValue('');
+    
     this.getUsersByCouncilId(value.assignedcouncil.$key).subscribe(usersObj => {
       usersObj.forEach(usrObj => {
         this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
@@ -126,7 +131,7 @@ export class AgendaLitePage {
     }
 
   }
-  
+
   discussionfocus($event) {
     this.discussionitems = "- "
   }

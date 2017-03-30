@@ -83,7 +83,7 @@ export class slide2Page {
   }
   councilsPage() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Councils',
+      title: 'Council',
       buttons: [
         {
           text: 'Add Agenda',
