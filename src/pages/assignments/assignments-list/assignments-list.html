@@ -1,11 +1,19 @@
 <ion-header>
-  <ion-navbar>
-    <ion-buttons left>
+  <ion-navbar hideBackButton>
+    <!--<ion-buttons left>
       <button ion-button menuToggle>
       <ion-icon class="menuicon" name="menu" color="secondary"></ion-icon>
     </button>
-    </ion-buttons>
-    <h4 text-center><b>Assignments</b></h4>
+    </ion-buttons>-->
+    <ion-row>
+      <ion-col class="header-col" width-10>
+        <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+          (click)="cancel()"></ion-icon>
+      </ion-col>
+      <ion-col width-80>
+        <ion-title text-center>Assignments</ion-title>
+      </ion-col>
+    </ion-row>
     <ion-buttons end>
       <button ion-button>
       <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
@@ -21,18 +29,18 @@
       <ion-item (click)="assignmentSelected(item, i)" *ngFor="let item of councilAssignmentsArray; let i = index" [attr.data-index]="i">
         <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': selectedIdx == i}"></ion-icon>
         <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>
-        <h3>{{item.description}}</h3>
-        <ion-icon class="icon-style" item-right name="arrow-forward"></ion-icon>      
-        <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | customdateformat}}</span></p>
-     
+        <h3 class="inline-block">{{item.description}}</h3>
+        <ion-icon class="icon-style right-align" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+        <p class="font2"><span>{{item.councilname}}</span><span style="position: absolute;right: 10px">{{item.assigneddate | customdateformat}}</span></p>
+
       </ion-item>
       <ion-item-divider>COMPLETED</ion-item-divider>
       <ion-item (click)="assignmentSelected(item, i)" *ngFor="let item of completedAssignmentsArray; let i = index" [attr.data-index]="i">
         <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': selectedIdx == i}"></ion-icon>
         <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>
-        <h3>{{item.description}}</h3>
-        <ion-icon class="icon-style" item-right name="arrow-forward"></ion-icon>        
-        <p><span>{{item.councilname}}</span><span style="position: absolute;right: 0">{{item.assigneddate | customdateformat}}</span></p>
+        <h3 class="inline-block">{{item.description}}</h3>
+        <ion-icon class="icon-style right-align" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+        <p class="font2"><span>{{item.councilname}}</span><span class="right-align">{{item.assigneddate | customdateformat}}</span></p>
       </ion-item>
     </ng-container>
     <ng-container *ngIf="!(councilAssignmentsArray.length || completedAssignmentsArray.length)">

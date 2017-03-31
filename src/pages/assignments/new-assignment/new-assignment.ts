@@ -86,7 +86,6 @@ export class NewAssignmentPage {
   }
 
   assignedCouncilChanged(value) {
-    debugger;
     this.users = [];
     (<FormControl>this.assignmentForm.controls['assigneduser']).setValue('');
     this.updateUsers(value.assignedcouncil);

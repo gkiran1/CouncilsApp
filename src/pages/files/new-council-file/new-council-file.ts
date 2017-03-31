@@ -119,12 +119,11 @@ export class NewCouncilFilePage {
       value.createdDate = moment().toISOString();
       value.councilid = value.council.$key;
       value.councilname = value.council.council;
-      let x = Math.floor(Math.random() * 5000);
-      this.profilePictureRef.child(value.councilid + '//' + x)
-        .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
-        .then((savedPicture) => {
-          this.firebaseservice.saveFile(value, savedPicture.downloadURL).then(fileId => {
-            this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + x).getMetadata();
+      this.firebaseservice.saveFile(value).then(fileId => {
+        this.profilePictureRef.child(value.councilid + '//' + fileId)
+          .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
+          .then((savedPicture) => {
+            this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId).getMetadata();
             this.pictureRef.then((metadata) => {
               // Metadata now contains the metadata like filesize and type for 'images/...'
               this.nav.push(OpenCouncilFilePage, {
@@ -136,9 +135,9 @@ export class NewCouncilFilePage {
           }).catch(err => {
             console.log(err);
           })
-        }).catch(err => {
-          alert(err);
-        })
+      }).catch(err => {
+        alert(err);
+      })
     }, error => {
       console.log("ERROR -> " + JSON.stringify(error));
     });
@@ -161,12 +160,11 @@ export class NewCouncilFilePage {
       value.createdDate = moment().toISOString();
       value.councilid = value.council.$key;
       value.councilname = value.council.council;
-      let x = Math.floor(Math.random() * 5000);      
-      this.profilePictureRef.child(value.councilid + '//' + x)
-        .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
-        .then((savedPicture) => {
-          this.firebaseservice.saveFile(value, savedPicture.downloadURL).then(fileId => {
-            this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + x).getMetadata();
+      this.firebaseservice.saveFile(value).then(fileId => {
+        this.profilePictureRef.child(value.councilid + '//' + fileId)
+          .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
+          .then((savedPicture) => {
+            this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId).getMetadata();
             this.pictureRef.then((metadata) => {
               // Metadata now contains the metadata like filesize and type for 'images/...'
               this.nav.push(OpenCouncilFilePage, {
@@ -178,9 +176,9 @@ export class NewCouncilFilePage {
           }).catch(err => {
             console.log(err);
           })
-        }).catch(err => {
-          alert(err);
-        })
+      }).catch(err => {
+        alert(err);
+      })
     }, error => {
       console.log("ERROR -> " + JSON.stringify(error));
     });
@@ -194,12 +192,11 @@ export class NewCouncilFilePage {
             value.createdDate = moment().toISOString();
             value.councilid = value.council.$key;
             value.councilname = value.council.council;
-            let x = Math.floor(Math.random() * 5000);
-            this.profilePictureRef.child(value.councilid + '//'+x)
-              .putString(filePath)
-              .then((savedPicture) => {
-                this.firebaseservice.saveFile(value, filePath).then(fileId => {
-                  this.pictureRef = this.profilePictureRef.child(value.councilid + '//'+x).getMetadata();
+            this.firebaseservice.saveFile(value).then(fileId => {
+              this.profilePictureRef.child(value.councilid + '//' + fileId)
+                .putString(filePath)
+                .then((savedPicture) => {
+                  this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId).getMetadata();
                   this.pictureRef.then((metadata) => {
                     // Metadata now contains the metadata like filesize and type for 'images/...'
                     this.nav.push(OpenCouncilFilePage, {
@@ -211,9 +208,9 @@ export class NewCouncilFilePage {
                 }).catch(err => {
                   alert(err);
                 })
-              }).catch(err => {
-                alert(err);
-              })
+            }).catch(err => {
+              alert(err);
+            })
           }).catch(e => alert(e));
       }).catch(e => alert(e));
   }

@@ -433,6 +433,7 @@ button:disabled {
 
 }
 
+
 ion-avatar img, ion-thumbnail img {
     display: block;
     width: 48px !important;
@@ -446,3 +447,7 @@ ion-avatar {
     height: 48px  !important;
     border-radius:50%  !important;
     }
+
+.header-md,.header-ios{
+    border-bottom: 1px solid #dcd9d8
+}

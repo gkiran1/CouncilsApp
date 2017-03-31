@@ -1,11 +1,18 @@
 <ion-header>
-    <ion-navbar>
-        <ion-buttons left>
+    <ion-navbar hideBackButton>
+        <!--<ion-buttons left>
             <button ion-button menuToggle>
       <ion-icon class="menuicon" name="menu" color="secondary"></ion-icon>
     </button>
-        </ion-buttons>
-        <h4 text-center><b>Private Discussions</b></h4>
+        </ion-buttons>-->
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <h4 text-center>Private Discussions</h4>
+            </ion-col>
+        </ion-row>
         <ion-buttons end>
             <button ion-button>
       <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
