@@ -492,7 +492,7 @@ export class FirebaseService {
             })
             .catch(err => { throw err });
     }
-    saveFile(file: any, image: any) {
+    saveFile(file: any) {
         return this.rootRef.child('files').push(
             {
                 // name: file.name,
@@ -502,7 +502,7 @@ export class FirebaseService {
                 createdUser: file.createdUser,
                 createdBy: file.createdBy,
                 isActive: file.isActive,
-                images: image
+                // images: image
             })
             .then((res) => {
                 //to get a reference of newly added object -res.path.o[1]

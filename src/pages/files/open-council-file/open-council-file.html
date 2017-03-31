@@ -11,10 +11,10 @@
             </ion-col>
             <ion-col width-10>
                 <ng-container *ngIf="!deleteflag && filesArray.length">
-                    <button color="secondary" class="editbtn" clear block>Edit</button>
+                    <button color="secondary" class="editbtn" clear block (click)="edit()">Edit</button>
                 </ng-container>
                 <ng-container *ngIf="deleteflag">
-                    <button color="secondary" class="editbtn" clear block>Done</button>
+                    <button color="secondary" class="editbtn" clear block (click)="done()">Done</button>
                 </ng-container>
             </ion-col>
         </ion-row>
@@ -29,7 +29,7 @@
                     <ion-icon class="document" name="document" color="secondary"></ion-icon>
                 </ion-col>
                 <ion-col width-80>
-                    <p>by <span ion-text color="secondary">{{file1.createdUser}}</span></p>
+                    <p>by <span ion-text color="secondary">{{value.createdUser}}</span></p>
                     <p>
                         {{file.size}}b {{file.contentType}} file
                     </p>
@@ -37,7 +37,7 @@
                 </ion-col>
                 <ion-col width-10>
                     <ng-container *ngIf="deleteflag">
-                        <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right>
+                        <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="delete(file)">
                             <ion-icon class="document" name="close-circle" color="secondary" item-right></ion-icon>
                             </button>
                     </ng-container>
@@ -51,6 +51,6 @@
         <button ion-button color="secondary" clear block (click)="addFileActionsPage(value)">Add File</button>
     </ng-container>
     <ng-container *ngIf="deleteflag">
-        <button ion-button class="deletebtn" clear block>Delete All</button>
+        <button ion-button class="deletebtn" clear block (click)="deleteFiles(filesArray)">Delete All</button>
     </ng-container>
 </ion-footer>
