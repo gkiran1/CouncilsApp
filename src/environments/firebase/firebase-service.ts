@@ -484,7 +484,8 @@ export class FirebaseService {
                 isActive: discussion.isActive,
                 messages: discussion.messages,
                 lastMsg: discussion.lastMsg,
-                typings: discussion.typings
+                typings: discussion.typings,
+                isNotificationReq: discussion.isNotificationReq
             })
             .then((res) => {
                 //to get a reference of newly added object -res.path.o[1]
@@ -602,7 +603,7 @@ export class FirebaseService {
     updateDiscussionChat(discussionId, msg) {
         return this.af.database.list(`discussions/${discussionId}/messages`).push(msg)
             .then(() => {
-                return this.af.database.object(`discussions/${discussionId}`).update({ lastMsg: msg.text });
+                return this.af.database.object(`discussions/${discussionId}`).update({ lastMsg: msg.text, isNotificationReq: true });
             })
     }
     getDiscussionByKey(key) {
@@ -665,7 +666,7 @@ export class FirebaseService {
         return this.af.database.object(`files/${key}`);
     }
     updateDiscussion(discussionId, typings) {
-        return this.af.database.object(`discussions/${discussionId}`).update({ typings: typings });
+        return this.af.database.object(`discussions/${discussionId}`).update({ typings: typings, isNotificationReq: false });
     }
     updatePrivateDiscussion(discussionId, typings) {
         return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings, isNotificationReq: false });
