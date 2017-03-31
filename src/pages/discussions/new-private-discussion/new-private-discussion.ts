@@ -61,7 +61,8 @@ export class NewPrivateDiscussionPage {
             createdUserAvatar: user.avatar,
             isActive: true,
             messages: [],
-            lastMsg: ''
+            lastMsg: '',
+            isNotificationReq: false
           });
         });
       }
