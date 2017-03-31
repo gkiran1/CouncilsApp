@@ -48,8 +48,8 @@ export class OpenPrivateDiscussionPage {
         this.statusSubscription = this.fs.getPrivateDiscussionByKey(this.navparams.get('discussion')).subscribe(discussion => {
             Object.keys(discussion.messages).forEach(e => {
                 let message = discussion.messages[e];
-                if (message.userId !== this.user.$key && message.status !== 'red') {
-                    this.fs.updatePrivateDiscussionMessageStatus(discussion.$key, e, 'red')
+                if (message.userId !== this.user.$key && message.status !== 'read') {
+                    this.fs.updatePrivateDiscussionMessageStatus(discussion.$key, e, 'read')
                         .catch(err => {
                             console.log('Err:: open-council-discussion::', err);
                         });

@@ -632,6 +632,7 @@ export class FirebaseService {
                 createdUserId: discussion.createdUserId,
                 createdUserName: discussion.createdUserName,
                 createdUserAvatar: discussion.createdUserAvatar,
+                createdUserEmail: discussion.createdUserEmail,
                 otherUserId: discussion.otherUserId,
                 otherUserName: discussion.otherUserName,
                 otherUserAvatar: discussion.otherUserAvatar,
@@ -639,7 +640,8 @@ export class FirebaseService {
                 isActive: discussion.isActive,
                 messages: discussion.messages,
                 lastMsg: discussion.lastMsg,
-                typings: discussion.typings
+                typings: discussion.typings,
+                isNotificationReq: discussion.isNotificationReq
             })
             .then((res) => {
                 //to get a reference of newly added object -res.path.o[1]
@@ -653,7 +655,7 @@ export class FirebaseService {
     updatePrivateDiscussionChat(discussionId, msg) {
         return this.af.database.list(`privatediscussions/${discussionId}/messages`).push(msg)
             .then(() => {
-                return this.af.database.object(`privatediscussions/${discussionId}`).update({ lastMsg: msg });
+                return this.af.database.object(`privatediscussions/${discussionId}`).update({ lastMsg: msg, isNotificationReq: true });
             })
     }
     getPrivateDiscussions() {
@@ -666,10 +668,10 @@ export class FirebaseService {
         return this.af.database.object(`discussions/${discussionId}`).update({ typings: typings });
     }
     updatePrivateDiscussion(discussionId, typings) {
-        return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings });
+        return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings, isNotificationReq: false });
     }
     updatePrivateDiscussionMessageStatus(discussionId, messageId, status) {
-        return this.af.database.object(`privatediscussions/${discussionId}/messages/${messageId}`).update({ status: status });
+        return this.af.database.object(`privatediscussions/${discussionId}/messages/${messageId}`).update({ status: status, isNotificationReq: false });
     }
     getNotifications(userId) {
         return this.af.database.list('notifications', {
