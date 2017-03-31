@@ -484,6 +484,7 @@ export class FirebaseService {
                 isActive: discussion.isActive,
                 messages: discussion.messages,
                 lastMsg: discussion.lastMsg,
+                lastMsgSentUser: discussion.lastMsgSentUser,
                 typings: discussion.typings,
                 isNotificationReq: discussion.isNotificationReq
             })
@@ -603,7 +604,8 @@ export class FirebaseService {
     updateDiscussionChat(discussionId, msg) {
         return this.af.database.list(`discussions/${discussionId}/messages`).push(msg)
             .then(() => {
-                return this.af.database.object(`discussions/${discussionId}`).update({ lastMsg: msg.text, isNotificationReq: true });
+                return this.af.database.object(`discussions/${discussionId}`)
+                    .update({ lastMsg: msg.text, lastMsgSentUser: msg.user_firstname + ' ' + msg.user_lastname, isNotificationReq: true });
             })
     }
     getDiscussionByKey(key) {

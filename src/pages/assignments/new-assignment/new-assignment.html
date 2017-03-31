@@ -5,8 +5,10 @@
     </button>-->
     <ion-row>
       <ion-col class="header-col" width-10>
-        <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+        <ion-icon *ngIf="isNewAssignment" class="cancel-font" name="close" item-left color="secondary" ios="ios-close" md="md-close"
           (click)="cancel()"></ion-icon>
+          <ion-icon *ngIf="!isNewAssignment" class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back"
+            md="md-arrow-round-back" (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
         <ion-title *ngIf="isNewAssignment" text-center>New Assignment</ion-title>

@@ -6,10 +6,9 @@
           (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
-
-        <h3>
+        <ion-title text-area>
           Active Councils
-        </h3>
+        </ion-title>
       </ion-col>
     </ion-row>
   </ion-navbar>
@@ -18,8 +17,7 @@
 <ion-content>
   <ion-list inset>
     <ng-container *ngIf="myCouncils.length">
-
-        <ion-item (click)="usersincouncils(item.$key,item.council)" class="council-styles" *ngFor="let item of myCouncils">
+      <ion-item (click)="usersincouncils(item.$key,item.council)" class="council-styles" *ngFor="let item of myCouncils">
         <ion-label class="council-styles">{{item.council}}</ion-label>
         <button ion-button item-right clear>
       <ion-icon class="icon-style" name="arrow-forward"></ion-icon>

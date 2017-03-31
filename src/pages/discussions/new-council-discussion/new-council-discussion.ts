@@ -36,7 +36,8 @@ export class NewCouncilDiscussionPage {
             isActive: true,
             messages: [],
             councilname: '',
-            isNotificationReq: false
+            isNotificationReq: false,
+            lastMsgSentUser: ''
           });
         });
       }

@@ -1,6 +1,15 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>Feedback</ion-title>
+    <ion-navbar hideBackButton>
+        <ion-row>
+			<ion-col class="header-col" width-10>
+				<ion-icon class="cancel-font" name="close" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
+			</ion-col>
+			<ion-col width-80>
+				<ion-title text-center>
+					Feedback
+				</ion-title>
+			</ion-col>
+		</ion-row>
     </ion-navbar>
 </ion-header>
 <ion-content text-center>
