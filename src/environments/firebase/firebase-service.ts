@@ -63,7 +63,8 @@ export class FirebaseService {
                 createddate: user.createddate,
                 lastupdateddate: user.lastupdateddate,
                 isactive: user.isactive,
-                guestpicture: user.avatar
+                guestpicture: user.avatar,
+                isnotificationreq: false
             }).then(() => user.councils.forEach(counc => {
                 this.createUserCouncils(uid, counc);
             }));
@@ -307,23 +308,27 @@ export class FirebaseService {
             return "councils in user updated successfully..."
         }).catch(err => {
             throw err;
-        })
+        });
     }
 
     inactivateUser(userUid: string, isactive: boolean) {
-        return this.rootRef.child('users/' + userUid).update({ isactive: isactive }).then(() => {
+        return this.rootRef.child('users/' + userUid).update({ isactive: isactive, isnotificationreq: true }).then(() => {
             return "User inactivated successfully..."
+        }).then(() => {
+            this.rootRef.child('users/' + userUid).update({ isnotificationreq: false })
         }).catch(err => {
             throw err;
-        })
+        });
     }
 
     reactivateUser(userUid: string, isactive: boolean) {
-        return this.rootRef.child('users/' + userUid).update({ isactive: isactive }).then(() => {
+        return this.rootRef.child('users/' + userUid).update({ isactive: isactive, isnotificationreq: true }).then(() => {
             return "User reactivated successfully..."
+        }).then(() => {
+            this.rootRef.child('users/' + userUid).update({ isnotificationreq: false })
         }).catch(err => {
             throw err;
-        })
+        });
     }
 
     transferAdminRights(currentAdminId, futureAdminId) {
