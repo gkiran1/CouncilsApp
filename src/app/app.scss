@@ -128,7 +128,7 @@ input {
     display: block;
     text-align: center;
     background: #FFFFFF;
-    border-bottom: 1px solid #dcd9d8;
+    border-bottom: 1px solid #dcd9d8 !important;
 }
 
 h1 {
@@ -432,3 +432,17 @@ button:disabled {
     top: 50%;
 
 }
+
+ion-avatar img, ion-thumbnail img {
+    display: block;
+    width: 48px !important;
+    height: 48px  !important;
+    border-radius:50%  !important;
+}
+
+ion-avatar {
+        background: #F4F6FA;
+        width: 48px !important;
+    height: 48px  !important;
+    border-radius:50%  !important;
+    }
