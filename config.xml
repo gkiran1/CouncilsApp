@@ -5,6 +5,7 @@
   <content src="index.html"/>
   <access origin="*"/>
   <allow-navigation href="http://ionic.local/*"/>
+  <allow-navigation href="http://172.16.202.7:8100"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
@@ -25,6 +26,7 @@
     <splash density="port-ldpi" src="resources\android\splash\drawable-port-ldpi-screen.png"/>
     <splash density="port-mdpi" src="resources\android\splash\drawable-port-mdpi-screen.png"/>
     <splash density="port-hdpi" src="resources\android\splash\drawable-port-hdpi-screen.png"/>
+    <preference name="loadUrlTimeoutValue" value="700000"/>
   </platform>
   <platform name="ios">
     <allow-intent href="itms:*"/>
