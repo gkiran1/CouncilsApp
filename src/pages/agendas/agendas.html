@@ -20,7 +20,8 @@
 <ion-content padding center text-center>
   <ng-container *ngIf="agendasArray.length">
     <ion-list inset>
-      <ion-item (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
+     <ion-item-divider></ion-item-divider>
+      <ion-item class="background-color" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
         <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
         <ion-img class="img-styles" src="../assets/icon/agendaicon.png"></ion-img>
 
@@ -35,7 +36,7 @@
   </ng-container>
   <ng-container *ngIf="!agendasArray.length">
     <div class="nocontent-message">
-      <p>There are no agendas</p>
+      <p class="background-color">There are no agendas</p>
     </div>
   </ng-container>
 </ion-content>

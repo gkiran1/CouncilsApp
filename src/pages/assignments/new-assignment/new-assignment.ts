@@ -136,7 +136,7 @@ export class NewAssignmentPage {
       this.showAlert('Assignment Date/Time cannot be in past');
     } else {
       this.firebaseservice.createAssigment(formattedAssignmentObj)
-        .then(res => { this.showAlert('Assignment created successfully..'); this.nav.setRoot(WelcomePage) })
+        .then(res => { this.showAlert('Assignment created successfully.'); this.nav.setRoot(WelcomePage) })
         .catch(err => this.showAlert(err))
     }
   }
@@ -169,7 +169,7 @@ export class NewAssignmentPage {
   }
   delete() {
     this.firebaseservice.removeAssignment(this.assignmentKey)
-      .then(res => { console.log(res); this.showAlert('Assignment has been deleted'); this.nav.pop(); })
+      .then(res => { console.log(res); this.showAlert('Assignment has been deleted.'); this.nav.pop(); })
       .catch(err => { console.error(err); this.showAlert('Unable to delete the Assignment, please try after some time') })
   }
 
