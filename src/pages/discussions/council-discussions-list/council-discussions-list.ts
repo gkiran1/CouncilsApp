@@ -34,4 +34,7 @@ export class CouncilDiscussionsListPage {
   getCount() {
     return this.count$;
   }
+    cancel() {
+    this.nav.pop();
+  }
 }

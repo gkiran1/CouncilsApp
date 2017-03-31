@@ -34,7 +34,7 @@ export class AssignmentsListPage {
 
               this.councilAssignmentsArray = [];
               this.completedAssignmentsArray = [];
-     
+
               councilAssignments.forEach(e => {
                 if (e.isCompleted) {
                   this.completedAssignmentsArray.push(e);
@@ -61,5 +61,7 @@ export class AssignmentsListPage {
     this.selectedIdx = index;
     console.log('assignmentSelected', assignment);
   }
-
+  cancel() {
+    this.navCtrl.pop();
+  }
 }
