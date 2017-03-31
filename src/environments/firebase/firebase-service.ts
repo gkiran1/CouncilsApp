@@ -632,6 +632,7 @@ export class FirebaseService {
                 createdUserId: discussion.createdUserId,
                 createdUserName: discussion.createdUserName,
                 createdUserAvatar: discussion.createdUserAvatar,
+                createdUserEmail: discussion.createdUserEmail,
                 otherUserId: discussion.otherUserId,
                 otherUserName: discussion.otherUserName,
                 otherUserAvatar: discussion.otherUserAvatar,

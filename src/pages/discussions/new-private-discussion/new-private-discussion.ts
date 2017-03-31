@@ -59,6 +59,7 @@ export class NewPrivateDiscussionPage {
             createdUserId: appservice.uid,
             createdUserName: user.firstname + ' ' + user.lastname,
             createdUserAvatar: user.avatar,
+            createdUserEmail: user.email,
             isActive: true,
             messages: [],
             lastMsg: '',
