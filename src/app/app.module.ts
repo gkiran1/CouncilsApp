@@ -67,6 +67,7 @@ import { UnitTypeAgendaPage } from '../pages/unittype-agenda/unittype-agenda';
 import { CustomDateFormat } from '../pipes/custom-date-format';
 import { CouncilUsersModalPage } from '../pages/discussions/councilusers/councilusers';
 import { NotificationsPage } from '../pages/notifications/notifications-page/notifications.component';
+import { NotificationSettingsPage } from '../pages/notifications/notifications-settings/notificationsettings.component';
 
 
 //Cloud Settings - Push Messaging
@@ -145,7 +146,8 @@ const cloudSettings: CloudSettings = {
     UnitTypeAgendaPage,
     slide3Page,
     CouncilUsersModalPage,
-    NotificationsPage
+    NotificationsPage,
+    NotificationSettingsPage
   ],
 
   imports: [
@@ -208,7 +210,8 @@ const cloudSettings: CloudSettings = {
     TransferCompletePage,
     UnitTypeAgendaPage,
     CouncilUsersModalPage,
-    NotificationsPage
+    NotificationsPage,
+    NotificationSettingsPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]

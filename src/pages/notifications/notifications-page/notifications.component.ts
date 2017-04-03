@@ -61,6 +61,9 @@ export class NotificationsPage {
         else if (notification.nodename === 'privatediscussions') {
             this.nav.push(OpenPrivateDiscussionPage, { discussion: notification.nodeid })
         }
+        else if (notification.nodename === 'files') {
+            // Need to implement.
+        }
     }
 
     back() {
