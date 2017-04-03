@@ -332,6 +332,10 @@ button:disabled {
 border-bottom: 1px solid #e8e9eb !important;
 }
 
+.item-noborder.div {
+        border: none !important;
+    }
+
 /****************************** Action Sheet Styles **********************************/
 
 .action-sheet-ios .action-sheet-button {
