@@ -19,14 +19,14 @@
 
 <ion-content padding center text-center>
   <ng-container *ngIf="agendasArray.length">
-    <ion-list inset>
+    <ion-list>
       <ion-item class="background-color" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
         <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
         <ion-img class="img-styles" src="../assets/icon/agendaicon.png"></ion-img>
 
         <p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
         <button ion-button item-right clear>
-      <ion-icon class="icon-style" name="arrow-forward"></ion-icon>
+      <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey"></ion-icon>
       </button>
         <p><span class="agendacouncil-styles">{{item.agendacouncil}}</span>
         </p>
@@ -35,7 +35,7 @@
   </ng-container>
   <ng-container *ngIf="!agendasArray.length">
     <div class="nocontent-message">
-      <p class="background-color">There are no agendas</p>
+      <p>There are no agendas</p>
     </div>
   </ng-container>
 </ion-content>
