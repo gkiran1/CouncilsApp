@@ -49,7 +49,7 @@ export class OpenCouncilFilePage {
 
         this.profilePictureRef = firebase.storage().ref('/files/');
         appservice.getUser().subscribe(user => this.user = user);
-        this.file = navparams.get('file');
+        // this.file = navparams.get('file');
         this.value = navparams.get('value');
         console.log('value:', this.value);
         this.filesArray.push(this.file);

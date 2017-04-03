@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { OpenCouncilFilePage } from '../open-council-file/open-council-file';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import { WelcomePage } from '../../menu/menu';
+import { Transfer } from 'ionic-native';
+import * as firebase from 'firebase';
 
 @Component({
     templateUrl: 'files-page.html',
@@ -17,8 +19,11 @@ export class FilesListPage {
     userSubscription: Subscription;
     isListEmpty = false;
     filesArray = [];
-    constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController) {
+    profilePictureRef: any;
+    storageDirectory: string = '';
+    constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController, public platform: Platform) {
         this.filesArray = [];
+        this.profilePictureRef = firebase.storage().ref('/files/');
         if (localStorage.getItem('userCouncils') !== null) {
             var councilsIds = localStorage.getItem('userCouncils').split(',');
             councilsIds.forEach(councilId => {
@@ -47,6 +52,24 @@ export class FilesListPage {
         //         });
         //     }
         // });
+    }
+    downloadFile(item) {
+        // this.platform.ready().then(() => {
+        //     let fileTransfer = new Transfer();
+        //     let imageLocation = this.profilePictureRef.child(item.councilid + '//' + 'Profilepicture')
+        //     fileTransfer.download(this.storageDirectory,'files/-Ke7ZCbP6Kw0SofmBlIx/Profilepicture').then((entry) => {
+        //         alert('file downloaded successfully.' + entry.toURL());
+        //     }).catch(err => {
+        //         alert('err:' + err);
+        //     })
+        // })
+        let ProfileRef = this.profilePictureRef.child(item.councilid + '//' + 'Profilepicture')
+        ProfileRef.getDownloadURL().then(function (url) {
+            console.log("la url ", url);
+            // $scope.url = url;
+        }).catch(function (error) {
+            alert(error);
+        });
     }
     openFile(file) {
         this.nav.push(OpenCouncilFilePage, { file: file })
