@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform, AlertController } from 'ionic-angular';
-import { StatusBar } from 'ionic-native';
+import { StatusBar, Splashscreen } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
 import { DisplayPage } from '../pages/display/display';
 import { CreateAccountPage } from '../pages/create-account/create-account';
@@ -19,13 +19,19 @@ import {
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 
+
+
 export class MyApp {
   rootPage: any;
 
   constructor(platform: Platform, public push: Push, public alertCtrl: AlertController) {
     platform.ready().then(() => {
-      StatusBar.styleDefault();
 
+      setTimeout(function() {
+        Splashscreen.hide();
+    }, 300);
+      StatusBar.styleDefault();
+      
       var securityToken = localStorage.getItem('securityToken');
       var isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
 
