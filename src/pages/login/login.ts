@@ -44,6 +44,11 @@ export class LoginPage {
     }
 
     private validateUser(loginCredentials) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: "Please wait...",
+        });
+        loader.present();
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
             .then(uid => {
@@ -52,17 +57,24 @@ export class LoginPage {
                         flag = true;
                         localStorage.setItem('securityToken', uid);
                         localStorage.setItem('isUserLoggedIn', 'true');
-                        localStorage.setItem('isMenuCentered', '0');   
-                        localStorage.setItem('isAdmin', usrs[0].isadmin.toString());                          
+                        localStorage.setItem('isMenuCentered', '0');
+                        localStorage.setItem('isAdmin', usrs[0].isadmin.toString());
                     }
                     else {
                         this.zone.run(() => {
                             this.nav.setRoot(NoAccessPage);
                         });
                     }
+                    loader.dismiss();
                 })
+
             })
-            .catch(err => this.showAlert('failure', 'Your Emailid or Password is incorrect.'));
+            .catch(err => {
+                loader.dismiss();
+                this.showAlert('failure', 'Your Emailid or Password is incorrect.')
+            });
+
+
 
         let v = setInterval(() => {
             if (flag) {

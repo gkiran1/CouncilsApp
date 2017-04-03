@@ -20,7 +20,6 @@
 <ion-content padding center text-center>
   <ng-container *ngIf="agendasArray.length">
     <ion-list inset>
-     <ion-item-divider></ion-item-divider>
       <ion-item class="background-color" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
         <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
         <ion-img class="img-styles" src="../assets/icon/agendaicon.png"></ion-img>
