@@ -2,8 +2,8 @@
 	<ion-navbar hideBackButton="true">
 		<ion-row>
 			<ion-col class="header-col" width-10>
-				<ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
-				    (click)="back()"></ion-icon>
+				<ion-icon name="cancel" item-left color="secondary" class="ion-md-arrow-back cancel-button"
+                    (click)="back()"></ion-icon>
 			</ion-col>
 			<ion-col width-80>
 				<ion-title text-center>Admin</ion-title>
@@ -13,51 +13,55 @@
 </ion-header>
 
 <ion-content>
-	<ion-list inset>
-		<ng-container>
-			<ion-item (click)="activeCouncils()">
+	
+	
+	
+		
+			<ion-item-divider class="empty"></ion-item-divider>
+			<ion-item class="bordered-item" (click)="activeCouncils()">
 				<ion-label class="label-styles">Active Councils</ion-label>
 				<button ion-button item-right clear>   
-           <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+           <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey" ></ion-icon>
         </button>
 			</ion-item>
-			<ion-item (click)="createCouncils()">
+			<ion-item class="bordered-item" (click)="createCouncils()">
 				<ion-label class="label-styles">Create Council</ion-label>
 				<button ion-button item-right clear>   
-           <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+           <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey" ></ion-icon>
         </button>
 			</ion-item>
 
-			<ion-item (click)="inviteMembers()">
+			<ion-item class="bordered-item" (click)="inviteMembers()">
 				<ion-label class="label-styles"> Invite Member</ion-label>
 				<button ion-button item-right clear>   
-           <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+           <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey" ></ion-icon>
         </button>
 			</ion-item>
-			<ion-item (click)="getActiveUsers()">
+			<ion-item class="bordered-item" (click)="getActiveUsers()">
 				<ion-label class="label-styles">Inactivate Member</ion-label>
 				<button ion-button item-right clear>   
-           <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+           <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey" ></ion-icon>
         </button>
 			</ion-item>
-			<ion-item>
+			<ion-item class="bordered-item">
 				<ion-label class="label-styles">Edit Member</ion-label>
 				<button ion-button item-right clear>   
-           <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+           <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey" ></ion-icon>
         </button>
 			</ion-item>
-			<ion-item (click)="getInactiveUsers()">
+			<ion-item class="bordered-item" (click)="getInactiveUsers()">
 				<ion-label class="label-styles">Reactivate Member</ion-label>
 				<button ion-button item-right clear>   
-           <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+           <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey" ></ion-icon>
         </button>
 			</ion-item>
 			<ion-item (click)="transferAdminRights()">
 				<ion-label class="label-styles">Transfer Admin Rights</ion-label>
 				<button ion-button item-right clear>   
-           <ion-icon class="icon-style" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+           <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey" ></ion-icon>
         </button>
 			</ion-item>
-		</ng-container>
-	</ion-list>
+	
+	
+	
 </ion-content>

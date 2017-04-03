@@ -28,12 +28,7 @@ settings-page {
         color: #F13822 !important;
         text-align: center;
     }
-    .empty {
-        height: 28px;
-        background-color: #f7f7f7;
-        border-top: 1px solid #e8e9eb !important;
-        border-bottom: 1px solid #e8e9eb !important;
-    }
+    
 
     .item-noborder.div {
         border: none !important;
@@ -44,8 +39,5 @@ settings-page {
     border: none !important;
 }
 
-.bordered-item.item-ios.item-block .item-inner,
-.bordered-item.item-md.item-block .item-inner {
-border-bottom: 1px solid #e8e9eb !important;
-}
+
 }

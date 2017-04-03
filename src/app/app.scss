@@ -89,8 +89,9 @@ body {
   
 }
 
-input {
-    font-family: 'Bernina-Regular', sans-serif;
+input, textarea {
+    font-family: 'Bernina-Regular', sans-serif !important;
+    font-size: 1.7rem !important;
 }
 
 .toolbar-title-md,
@@ -164,6 +165,7 @@ h3 {
 .footer-md,
 .footer-ios {
     background: #FFFFFF;
+    border-top: 1px solid #dcd9d8;
 }
 
 button,
@@ -274,10 +276,7 @@ button:disabled {
     background-color: #f7f7f7
 }
 
-.header-md,
-.header-ios {
-    border-bottom: none;
-}
+
 
 .header-md::after,
 .tabs-md[tabsPlacement="top"]>.tabbar::after,
@@ -302,6 +301,35 @@ button:disabled {
 
 .slide-zoom {
     height: 100% !important;
+}
+
+.empty {
+        height: 28px;
+        background-color: #fafafa !important;
+        border-top: 1px solid #e8e9eb !important;
+        border-bottom: 1px solid #e8e9eb !important;
+    }
+
+    ion-content {
+        display: flex;
+  flex-direction: column;
+  height: 100%;
+    }
+
+    ion-content .page-blank-area {
+        align-items: stretch;
+    }
+
+    .page-blank-area {
+        flex: 1;
+        background-color: #fafafa !important;
+        height: 100%;
+        
+    }
+
+    .bordered-item.item-ios.item-block .item-inner,
+.bordered-item.item-md.item-block .item-inner {
+border-bottom: 1px solid #e8e9eb !important;
 }
 
 /****************************** Action Sheet Styles **********************************/
@@ -416,6 +444,8 @@ button:disabled {
     background: #f4f6fa;
 }
 
+/*************************** End - AcionSheet Styles ******************************/
+
 // uncomment below media query if you need to grayout the modal backdrop.
 
 @media not all and (min-height: 600px) and (min-width: 768px) {
@@ -448,9 +478,7 @@ ion-avatar {
     border-radius:50%  !important;
     }
 
-.header-md,.header-ios{
-    border-bottom: 1px solid #dcd9d8
-}
+
 
 
 
