@@ -689,6 +689,47 @@ export class FirebaseService {
             }
         });
     }
+    setDefaultNotificationSettings(userId) {
+        var notSettingsRef = this.rootRef.child('notificationsettings').orderByChild('userid').equalTo(userId);
+        return notSettingsRef.once("value", function (snap) {
+            if (!snap.exists()) {
+                return firebase.database().ref().child('notificationsettings').push({
+                    userid: userId,
+                    allactivity: false,
+                    agendas: false,
+                    discussions: false,
+                    pvtdiscussions: false,
+                    assignments: false,
+                    closingassignment: false,
+                    files: false,
+                    actinactaccount: false
+                });
+            }
+        });
+    }
+    getNotificationSettings(userId) {
+        return this.af.database.list('notificationsettings', {
+            query: {
+                orderByChild: 'userid',
+                equalTo: userId,
+                limitToFirst: 1
+            }
+        });
+    }
+    updateNotificationSettings(key, notSettings) {
+        return this.af.database.list('notificationsettings').update(key, {
+            allactivity: notSettings.allactivity,
+            agendas: notSettings.agendas,
+            discussions: notSettings.discussions,
+            pvtdiscussions: notSettings.pvtdiscussions,
+            assignments: notSettings.assignments,
+            closingassignment: notSettings.closingassignment,
+            files: notSettings.files,
+            actinactaccount: notSettings.actinactaccount
+        }).then(() => {
+            return "User notification settings has been updated."
+        }).catch(err => { throw err });
+    }
     updateIsReadInNotifications(key) {
         return this.af.database.object('notifications/' + key).update({ isread: true });
     }

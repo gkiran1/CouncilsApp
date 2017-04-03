@@ -2,8 +2,7 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col" width-10>
-                <ion-icon name="cancel" item-left color="secondary" class="ion-md-arrow-back cancel-button"
-                    (click)="back()"></ion-icon>
+                <ion-icon name="cancel" item-left color="secondary" class="ion-md-arrow-back cancel-button" (click)="back()"></ion-icon>
             </ion-col>
             <ion-col width-80>
                 <ion-title text-center>Settings</ion-title>
@@ -20,7 +19,7 @@
         </button>
     </ion-item>
     <ion-item-divider class="empty"></ion-item-divider>
-    <ion-item>
+    <ion-item (click)="viewNotificationSettingsPage()">
         <ion-label class="label-styles">Push Notifications</ion-label>
         <button ion-button item-right clear>   
            <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey" ></ion-icon>
@@ -55,7 +54,7 @@
     <ion-item-divider class="empty"></ion-item-divider>
     <ion-item (click)="signOut()">
         <ion-label class="signout">Sign Out</ion-label>
-        
+
     </ion-item>
     <ion-item-divider class="empty"></ion-item-divider>
     <div class="page-blank-area"></div>
