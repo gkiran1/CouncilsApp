@@ -65,10 +65,10 @@ import { PrivateDiscussionsListPage } from '../pages/discussions/private-discuss
 import { TransferCompletePage } from '../pages/transferadminrights/transfer-complete/transfercomplete.component';
 import { UnitTypeAgendaPage } from '../pages/unittype-agenda/unittype-agenda';
 import { CustomDateFormat } from '../pipes/custom-date-format';
-import { CouncilUsersModalPage } from '../pages/discussions/councilusers/councilusers';
+import { CouncilUsersModalPage } from '../modals/council-users/council-users';
 import { NotificationsPage } from '../pages/notifications/notifications-page/notifications.component';
 import { NotificationSettingsPage } from '../pages/notifications/notifications-settings/notificationsettings.component';
-
+import {UserCouncilsModalPage} from '../modals/user-councils/user-councils';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -147,7 +147,8 @@ const cloudSettings: CloudSettings = {
     slide3Page,
     CouncilUsersModalPage,
     NotificationsPage,
-    NotificationSettingsPage
+    NotificationSettingsPage,
+    UserCouncilsModalPage
   ],
 
   imports: [
@@ -211,7 +212,8 @@ const cloudSettings: CloudSettings = {
     UnitTypeAgendaPage,
     CouncilUsersModalPage,
     NotificationsPage,
-    NotificationSettingsPage
+    NotificationSettingsPage,
+    UserCouncilsModalPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]

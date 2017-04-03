@@ -16,7 +16,7 @@
     <form [formGroup]="NewPrivateDiscussionForm" (ngSubmit)="NewPrivateDiscussionForm.value">
         <ion-item-group>
             <ion-list radio-group id="otheruser" name="otheruser" formControlName="otherUser">
-                <ng-container *ngFor="let user of users | search:term:'firstname'">
+                <ng-container *ngFor="let user of users | search:term:'username'">
                     <ion-item *ngIf="user.$key!==uid" class="flex-change">
                         <ion-avatar item-left>
                             <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams, ModalController } from 'ionic-angular';
 import { WelcomePage } from '../../menu/menu';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFire } from 'angularfire2';
+import { CouncilUsersModalPage } from '../../../modals/council-users/council-users';
+import { UserCouncilsModalPage } from '../../../modals/user-councils/user-councils';
 
 @Component({
   templateUrl: 'new-assignment.html',
@@ -15,16 +17,22 @@ export class NewAssignmentPage {
   users = [];
   councils = [];
   assignmentForm: FormGroup;
-  //This is required to store assingeduser object in UI inorder to fetch related councils.
   usercouncils = [];
-  arrayWithUserKeys = [];
   isNewAssignment = true;
   assignmentKey = '';
   uid;
-  constructor(public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
+  assignedcouncil;
+  assigneduser;
+  councilusersModal;
+  isModalDismissed = true;
+  showlist = false;
+  term;
+
+  constructor(public modalCtrl: ModalController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
     let assignment = navParams.get('assignment');
     let description = navParams.get('item');
     this.uid = localStorage.getItem('securityToken');
+    this.usercouncils = localStorage.getItem('userCouncils').split(',');
 
     if (assignment) {
       this.isNewAssignment = false;
@@ -71,11 +79,13 @@ export class NewAssignmentPage {
           firebaseservice.getCouncilByCouncilKey(assignment.councilid).subscribe(council => {
             this.updateUsers(council.$key);
             setTimeout(() => {
-              (<FormControl>this.assignmentForm.controls['assignedcouncil']).setValue(council.$key);
+              (<FormControl>this.assignmentForm.controls['assignedcouncil']).setValue(council.council);
+              this.assignedcouncil = council;
             });
           });
           firebaseservice.getUsersByKey(assignment.assignedto).subscribe(u => {
-            (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(u[0].$key);
+            (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(u[0].firstname + ' ' + u[0].lastname);
+            this.assigneduser = u[0];
           });
         }
 
@@ -85,22 +95,31 @@ export class NewAssignmentPage {
     });
   }
 
-  assignedCouncilChanged(value) {
-    this.users = [];
-    (<FormControl>this.assignmentForm.controls['assigneduser']).setValue('');
-    this.updateUsers(value.assignedcouncil);
+
+  showCouncilsModal(value) {
+    let usercouncilsmodal = this.modalCtrl.create(UserCouncilsModalPage, { usercouncils: this.usercouncils });
+    usercouncilsmodal.present();
+    usercouncilsmodal.onDidDismiss(council => {
+      if (!council) return;
+      (<FormControl>this.assignmentForm.controls['assigneduser']).setValue('');
+      this.updateUsers(council.$key);
+      (<FormControl>this.assignmentForm.controls['assignedcouncil']).setValue(council.council);
+      this.assignedcouncil = council;
+    });
   }
   updateUsers(councilid) {
     this.firebaseservice.getUsersByCouncil(councilid).subscribe(uc => {
       uc.forEach(e => {
         this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
+          this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
+            console.log('status', status);
+            u[0].status = status ? 'green' : 'gray';
+          });
           this.users.push(u[0]);
         });
-
       });
     });
   }
-
   cancel() {
     if (this.isNewAssignment) {
       this.nav.setRoot(WelcomePage);
@@ -111,19 +130,15 @@ export class NewAssignmentPage {
   }
 
   formatAssignmentObj(value) {
-    let assignedcouncilname;
-    this.firebaseservice.getCouncilByCouncilKey(value.assignedcouncil).take(1).subscribe(council => {
-      assignedcouncilname = council.council;
-    });
     return {
       assigneddate: moment(value.assigneddate + ' ' + value.assignedtime, "YYYY-MM-DD hh:mmA").toISOString(),
       createddate: new Date().toISOString(),
       lastupdateddate: new Date().toISOString(),
       createdby: value.createdby,
       description: value.description,
-      assigneduser: value.assigneduser,
-      councilid: value.assignedcouncil,
-      councilname: assignedcouncilname,
+      assigneduser: this.assigneduser.$key,
+      councilid: this.assignedcouncil.$key,
+      councilname: this.assignedcouncil.council,
       isactive: value.isactive,
       notes: value.notes,
       isCompleted: value.isCompleted
@@ -182,7 +197,7 @@ export class NewAssignmentPage {
         {
           text: 'Yes',
           handler: () => {
-           this.delete();
+            this.delete();
           }
         },
         {
@@ -194,6 +209,18 @@ export class NewAssignmentPage {
       ]
     });
     confirm.present();
+  }
+
+  showList(event) {
+    let v = event.target.value;
+
+    this.term = (v.indexOf('@') === 0) ? v.substr(1) : v;
+    this.showlist = true;
+  }
+  bindAssignto(user) {
+    this.showlist = false;
+    (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(user.firstname + ' ' + user.lastname);
+    this.assigneduser = user;
   }
 
 }

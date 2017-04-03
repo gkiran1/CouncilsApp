@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { FirebaseService } from '../../environments/firebase/firebase-service';
+import { AngularFire} from 'angularfire2';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 
 @Component({
     selector: 'page-councilusersmodal',
-    templateUrl: 'councilusers.html'
+    templateUrl: 'council-users.html'
 })
 
 export class CouncilUsersModalPage {

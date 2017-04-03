@@ -4,7 +4,7 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { Content } from 'ionic-angular';
-import { CouncilUsersModalPage } from '../councilusers/councilusers';
+import { CouncilUsersModalPage } from '../../../modals/council-users/council-users';
 import { AngularFire } from 'angularfire2';
 
 @Component({
