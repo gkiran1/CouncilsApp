@@ -39,9 +39,10 @@ export class AgendaPage {
             })
         })
 
+        let date = this.localISOformat(new Date());
         this.newagendaForm = fb.group({
             assignedcouncil: ['', Validators.required],
-            assigneddate: [moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD'), Validators.required],
+            assigneddate: [date, Validators.required],
             openinghymn: ['', Validators.required],
             openingprayer: ['', Validators.required],
             spiritualthought: ['', Validators.required],
@@ -103,6 +104,9 @@ export class AgendaPage {
 
     agendasArray = [];
     createagenda(agenda) {
+        let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
+        agenda.assigneddate = moment(assigneddate).toISOString(),
+
         agenda.spiritualwelfare = agenda.spiritualwelfare.replace(/-/gi, '').trim();
         agenda.temporalwelfare = agenda.temporalwelfare.replace(/-/gi, '').trim();
         agenda.fellowshipitems = agenda.fellowshipitems.replace(/-/gi, '').trim();
@@ -206,5 +210,25 @@ export class AgendaPage {
             this.event = "- "
         }
     }
+
+    pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+    return number;
+  }
+
+  localISOformat(date) {
+    date = new Date(date);
+    return date.getFullYear() +
+      '-' + this.pad(date.getMonth() + 1) +
+      '-' + this.pad(date.getDate()) +
+      'T' + this.pad(date.getHours()) +
+      ':' + this.pad(date.getMinutes()) +
+      ':' + this.pad(date.getSeconds()) +
+      '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+      'Z';
+  };
+
 
 }

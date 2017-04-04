@@ -35,6 +35,11 @@ export class AgendaEditPage {
         let agenda = navParams.get('agendaselected');
         this.agendaKey = agenda.$key;
 
+        // agenda.spiritualwelfare = agenda.spiritualwelfare || '';
+        // agenda.temporalwelfare = agenda.temporalwelfare || '';
+        // agenda.fellowshipitems = agenda.fellowshipitems || '';
+        // agenda.missionaryitems = agenda.missionaryitems || '';
+
         this.spiritualwelfareObj = agenda.spiritualwelfare.split('\n');
         this.temporalwelfareObj = agenda.temporalwelfare.split('\n');
         this.fellowshipitemsObj = agenda.fellowshipitems.split('\n');
@@ -94,9 +99,11 @@ export class AgendaEditPage {
 
         });
 
+        let localdate = new Date(agenda.agendadate).toLocaleString();
+        let localISOformat = this.localISOformat(localdate);
         this.agendaeditForm = fb.group({
             assignedcouncil: ['', Validators.required],
-            assigneddate: [moment(agenda.assigneddate, 'DDDD, MMM D, YYYY, hh:mma').format(), Validators.required],
+            assigneddate: [localISOformat, Validators.required],
             openinghymn: [agenda.openinghymn, Validators.required],
             openingprayer: ['', Validators.required],
             spiritualthought: ['', Validators.required],
@@ -207,6 +214,25 @@ export class AgendaEditPage {
         alert.present();
     }
 
+pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+    return number;
+  }
+
+  localISOformat(date) {
+    date = new Date(date);
+    return date.getFullYear() +
+      '-' + this.pad(date.getMonth() + 1) +
+      '-' + this.pad(date.getDate()) +
+      'T' + this.pad(date.getHours()) +
+      ':' + this.pad(date.getMinutes()) +
+      ':' + this.pad(date.getSeconds()) +
+      '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+      'Z';
+  };
+  
     plusBtn(item) {
         let actionSheet = this.actionSheetCtrl.create({
             title: item,
