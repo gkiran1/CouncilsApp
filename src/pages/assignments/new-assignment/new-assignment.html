@@ -5,9 +5,8 @@
     </button>-->
     <ion-row>
       <ion-col class="header-col" width-10>
-        <ion-icon *ngIf="isNewAssignment" class="cancel-font" name="close" item-left color="secondary" ios="ios-close" md="md-close"
-          (click)="cancel()"></ion-icon>
-          <ion-icon *ngIf="!isNewAssignment" class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
+        <ion-icon *ngIf="isNewAssignment" class="ion-md-arrow-back cancel-button" name="close" item-left color="secondary" (click)="cancel()"></ion-icon>
+        <ion-icon *ngIf="!isNewAssignment" class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
         <ion-title *ngIf="isNewAssignment" text-center>New Assignment</ion-title>
@@ -62,7 +61,7 @@
     </ion-toolbar>
   </ng-container>
   <ng-container *ngIf="!isNewAssignment">
-    <ion-toolbar *ngIf="!assignmentForm.value.isCompleted">
+    <ion-toolbar *ngIf="!assignmentForm.value.isCompleted && isPersonalAssignment">
       <ion-buttons start>
         <button ion-button color="danger" (click)="showConfirm()">Delete</button>
       </ion-buttons>
@@ -70,6 +69,9 @@
       <ion-buttons end>
         <button ion-button color="secondary" [disabled]="!assignmentForm.valid" (click)="edit(assignmentForm.value)">Save</button>
       </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="!assignmentForm.value.isCompleted && !isPersonalAssignment">
+      <button ion-button clear block color="secondary" [disabled]="!assignmentForm.valid" (click)="complete(assignmentForm.value)">Complete</button>
     </ion-toolbar>
     <ion-toolbar *ngIf="assignmentForm.value.isCompleted">
       <button ion-button class="danger-color" clear block (click)="showConfirm()">Delete</button>

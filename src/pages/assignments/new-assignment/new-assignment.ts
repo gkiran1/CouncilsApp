@@ -27,6 +27,7 @@ export class NewAssignmentPage {
   isModalDismissed = true;
   showlist = false;
   term;
+  isPersonalAssignment;
 
   constructor(public modalCtrl: ModalController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
     let assignment = navParams.get('assignment');
@@ -36,6 +37,7 @@ export class NewAssignmentPage {
 
     if (assignment) {
       this.isNewAssignment = false;
+      this.isPersonalAssignment = assignment.assignedto === this.uid;
       this.assignmentKey = assignment.$key;
       let localdate = new Date(assignment.assigneddate).toLocaleString();
       let localISOformat = this.localISOformat(localdate);

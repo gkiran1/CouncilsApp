@@ -16,6 +16,7 @@ import { Subscription } from "rxjs";
 export class AssignmentsListPage {
   user;
   councilAssignmentsArray = [];
+  personalAssignmentsArray = [];
   completedAssignmentsArray = [];
   count$ = new Subject();
   userSubscription: Subscription;
@@ -28,24 +29,29 @@ export class AssignmentsListPage {
           this.user = usr;
           af.database.list('/assignments')
             .subscribe(assignments => {
-              const councilAssignments = assignments.filter(assignment => {
-                return this.user.councils.includes(assignment.councilid);
-              });
-
               this.councilAssignmentsArray = [];
+              this.personalAssignmentsArray = [];
               this.completedAssignmentsArray = [];
+              assignments.forEach(assignment => {
+                if (assignment.assignedto === this.user.$key) {
+                  if (assignment.isCompleted) {
+                    this.completedAssignmentsArray.push(assignment);
+                  } else {
+                    this.personalAssignmentsArray.push(assignment);
+                  }
 
-              councilAssignments.forEach(e => {
-                if (e.isCompleted) {
-                  this.completedAssignmentsArray.push(e);
-                } else {
-                  this.councilAssignmentsArray.push(e);
+                } else if (this.user.councils.includes(assignment.councilid)) {
+                  if (assignment.isCompleted) {
+                    this.completedAssignmentsArray.push(assignment);
+                  } else {
+                    this.councilAssignmentsArray.push(assignment);
+                  }
                 }
               });
 
               // this.councilAssignmentsArray = assignments;
-              let count = this.councilAssignmentsArray.length + this.completedAssignmentsArray.length;
-              this.count$.next(this.councilAssignmentsArray.length + this.completedAssignmentsArray.length);
+              let count = this.personalAssignmentsArray.length + this.councilAssignmentsArray.length + this.completedAssignmentsArray.length;
+              this.count$.next(count);
             });
         })
       }
