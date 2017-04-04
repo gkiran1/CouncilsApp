@@ -20,7 +20,9 @@ export class AssignmentsListPage {
   completedAssignmentsArray = [];
   count$ = new Subject();
   userSubscription: Subscription;
-  selectedIdx;
+  personalselectedIdx;
+  councilselectedIdx;
+  completedselectedIdx;
 
   constructor(public navCtrl: NavController, public fs: FirebaseService, public af: AngularFire) {
     this.userSubscription = this.af.auth.subscribe(auth => {
@@ -62,9 +64,23 @@ export class AssignmentsListPage {
     return this.count$;
   }
 
-  assignmentSelected(assignment, index) {
+  assignmentSelected(assignment, index, type) {
     this.navCtrl.push(NewAssignmentPage, { assignment: assignment });
-    this.selectedIdx = index;
+    if (type === 'council') {
+      this.councilselectedIdx = index;
+      this.personalselectedIdx = '';
+      this.completedselectedIdx = '';
+    } else if (type === 'completed') {
+      this.completedselectedIdx = index;
+      this.personalselectedIdx = '';
+      this.councilselectedIdx = '';
+
+    } else if (type === 'personal') {
+      this.personalselectedIdx = index;
+      this.councilselectedIdx = '';
+      this.completedselectedIdx = '';
+    }
+
     console.log('assignmentSelected', assignment);
   }
   cancel() {
