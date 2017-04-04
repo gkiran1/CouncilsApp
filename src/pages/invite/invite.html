@@ -45,7 +45,7 @@
             </ion-list>-->
             <ion-list no-lines>
                 <ion-item *ngFor="let c of council">
-                    <ion-label item-left>{{c.council}}</ion-label>
+                    <ion-label class="council-styles" item-left>{{c.council}}</ion-label>
                     <ion-checkbox [(ngModel)]="c.selected" color="secondary" name="checkbox" item-right [name]="c.council"></ion-checkbox>
                 </ion-item>
             </ion-list>
