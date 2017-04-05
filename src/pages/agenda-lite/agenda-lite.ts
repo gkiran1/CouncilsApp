@@ -20,14 +20,10 @@ export class AgendaLitePage {
   usercouncils = [];
   term: string = '';
   discussionitems;
-//discussionitems=[];
 
   constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
     public nav: NavController) {
-
-    // let council = navParams.get('councilObj');
-// this.discussionitems.push({});
 
     var councilsIds = localStorage.getItem('userCouncils').split(',');
     councilsIds.forEach(councilId => {
@@ -36,9 +32,10 @@ export class AgendaLitePage {
       })
     })
 
+    let date = this.localISOformat(new Date());
     this.newagendaliteForm = fb.group({
       assignedcouncil: ['', Validators.required],
-      assigneddate: [moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD'), Validators.required],
+      assigneddate: [date, Validators.required],
       openinghymn: ['', Validators.required],
       openingprayer: ['', Validators.required],
       spiritualthought: ['', Validators.required],
@@ -96,8 +93,10 @@ export class AgendaLitePage {
 
   agendasArray = [];
   createagenda(agenda) {
-    agenda.discussionitems = agenda.discussionitems.replace(/-/gi, '').trim();
-    console.log("agenda.discussionitems", agenda.discussionitems)
+    let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
+    agenda.assigneddate = moment(assigneddate).toISOString(),
+
+      agenda.discussionitems = agenda.discussionitems.replace(/-/gi, '').trim();
     this.firebaseservice.createAgendaLite(agenda)
       .then(res => {
         this.showAlert('Agenda created successfully.');
@@ -138,5 +137,24 @@ export class AgendaLitePage {
     }
 
   }
+
+  pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+    return number;
+  }
+
+  localISOformat(date) {
+    date = new Date(date);
+    return date.getFullYear() +
+      '-' + this.pad(date.getMonth() + 1) +
+      '-' + this.pad(date.getDate()) +
+      'T' + this.pad(date.getHours()) +
+      ':' + this.pad(date.getMinutes()) +
+      ':' + this.pad(date.getSeconds()) +
+      '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+      'Z';
+  };
 
 }

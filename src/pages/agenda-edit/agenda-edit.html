@@ -2,8 +2,7 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col" width-10>
-                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
-                    (click)="cancel()"></ion-icon>
+                <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
             </ion-col>
             <ion-col width-80>
                 <ion-title text-center>Standard</ion-title>
@@ -25,8 +24,7 @@
 
         <ion-item>
             <ion-label floating>Date & Time</ion-label>
-            <ion-datetime displayFormat="DDDD, MMM D, YYYY, hh:mma" pickerFormat="DDDD, MMM D, YYYY, hh:mma" [max]="2120" name="assigneddate"
-                formControlName="assigneddate" monthNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec" dayNames="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"></ion-datetime>
+            <ion-datetime displayFormat="DDDD, MMM D,YYYY, h:mm a" pickerFormat="DDD MMM D, h, mm, A" name="assigneddate" formControlName="assigneddate"></ion-datetime>
         </ion-item>
 
         <ion-item>

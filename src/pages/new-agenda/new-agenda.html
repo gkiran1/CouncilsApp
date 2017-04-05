@@ -12,8 +12,9 @@
 </ion-header>
 
 <ion-content>
-    <ion-list >
-        <ion-item class="list-styles" (click)="agendalite()">
+        <ion-item-divider class="empty"></ion-item-divider>
+    <!--<ion-list >-->
+        <ion-item class="item-noborder" (click)="agendalite()">
             <ion-label class="council-styles">
                 Lite
             </ion-label>
@@ -22,7 +23,7 @@
             </button>
         </ion-item>
 
-        <ion-item class="list-styles" (click)="agenda()">
+        <ion-item class="item-noborder" (click)="agenda()">
             <ion-label class="council-styles">
                 Standard
             </ion-label>
@@ -30,5 +31,5 @@
       <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey"></ion-icon>
       </button>
         </ion-item>
-    </ion-list>
+    <!--</ion-list>-->
 </ion-content>

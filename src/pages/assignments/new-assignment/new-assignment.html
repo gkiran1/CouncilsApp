@@ -5,10 +5,8 @@
     </button>-->
     <ion-row>
       <ion-col class="header-col" width-10>
-        <ion-icon *ngIf="isNewAssignment" class="cancel-font" name="close" item-left color="secondary" ios="ios-close" md="md-close"
-          (click)="cancel()"></ion-icon>
-          <ion-icon *ngIf="!isNewAssignment" class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back"
-            md="md-arrow-round-back" (click)="cancel()"></ion-icon>
+        <ion-icon *ngIf="isNewAssignment" class="ion-md-arrow-back cancel-button" name="close" item-left color="secondary" (click)="cancel()"></ion-icon>
+        <ion-icon *ngIf="!isNewAssignment" class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
         <ion-title *ngIf="isNewAssignment" text-center>New Assignment</ion-title>
@@ -32,33 +30,23 @@
       <ion-input type="text" (keyup)="showList($event)" formControlName="assigneduser"></ion-input>
     </ion-item>
     <div *ngIf="showlist" class="assignto-list">
-    <ng-container *ngFor="let user of users | search:term:'username'">
-       <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto(user)">
-            <ion-avatar item-left>
-                <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
-                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
-            </ion-avatar>
-            <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
-            <svg height="8" width="8">
-                <circle cx="4" cy="4" r="4" [attr.fill]='user.status' />
-            </svg>
+      <ng-container *ngFor="let user of users | search:term:'username'">
+        <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto(user)">
+          <ion-avatar item-left>
+            <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
+            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+          </ion-avatar>
+          <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
+          <svg height="8" width="8">
+            <circle cx="4" cy="4" r="4" [attr.fill]='user.status' />
+          </svg>
         </ion-item>
-    </ng-container>
+      </ng-container>
     </div>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label floating>Date</ion-label>
-          <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" [max]="2120" name="assigneddate" formControlName="assigneddate"></ion-datetime>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label floating>Time</ion-label>
-          <ion-datetime displayFormat="hh:mma" name="assignedtime" formControlName="assignedtime"></ion-datetime>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+    <ion-item>
+      <ion-label floating>Date & Time</ion-label>
+      <ion-datetime displayFormat="DDDD, MMM D,YYYY, h:mm a" pickerFormat="DDD MMM D, h, mm, A" name="assigneddate" formControlName="assigneddate"></ion-datetime>
+    </ion-item>
     <ion-item>
       <ion-label floating>Notes</ion-label>
       <ion-textarea name="notes" elastic formControlName="notes"></ion-textarea>
@@ -73,7 +61,7 @@
     </ion-toolbar>
   </ng-container>
   <ng-container *ngIf="!isNewAssignment">
-    <ion-toolbar *ngIf="!assignmentForm.value.isCompleted">
+    <ion-toolbar *ngIf="!assignmentForm.value.isCompleted && isPersonalAssignment">
       <ion-buttons start>
         <button ion-button color="danger" (click)="showConfirm()">Delete</button>
       </ion-buttons>
@@ -81,6 +69,9 @@
       <ion-buttons end>
         <button ion-button color="secondary" [disabled]="!assignmentForm.valid" (click)="edit(assignmentForm.value)">Save</button>
       </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="!assignmentForm.value.isCompleted && !isPersonalAssignment">
+      <button ion-button clear block color="secondary" [disabled]="!assignmentForm.valid" (click)="complete(assignmentForm.value)">Complete</button>
     </ion-toolbar>
     <ion-toolbar *ngIf="assignmentForm.value.isCompleted">
       <button ion-button class="danger-color" clear block (click)="showConfirm()">Delete</button>

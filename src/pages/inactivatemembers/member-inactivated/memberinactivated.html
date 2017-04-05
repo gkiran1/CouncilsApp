@@ -4,17 +4,17 @@
     </ion-navbar>
 </ion-header>
 <ion-content text-center>
-    <ion-row class='row2 Thank'>
+    <ion-row class="message" text-center text-wrap>
         <ion-col width-100 center>
-            Member Inactivated
+            <ion-label center class="title-styles"> Member Inactivated</ion-label>
         </ion-col>
     </ion-row>
-    <ion-row class='row4 goal'>
+    <ion-row text-center text-wrap>
         <ion-col width-100 center>
-            Members access to your unit has been blocked.
+            <ion-label center class="content-styles">Members access to your unit <br> has been blocked.</ion-label>            
         </ion-col>
     </ion-row>
     <ion-footer text-center>
-        <button ion-button clear color="secondary" (click)="goToInactivateMembersPage()" text-capitalize>Inactivate Another</button>
+        <button ion-button clear color="secondary" (click)="goToInactivateMembersPage()" text-capitalize>Members</button>
     </ion-footer>
 </ion-content>

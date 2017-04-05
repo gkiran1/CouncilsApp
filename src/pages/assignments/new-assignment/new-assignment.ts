@@ -27,6 +27,7 @@ export class NewAssignmentPage {
   isModalDismissed = true;
   showlist = false;
   term;
+  isPersonalAssignment;
 
   constructor(public modalCtrl: ModalController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
     let assignment = navParams.get('assignment');
@@ -36,13 +37,15 @@ export class NewAssignmentPage {
 
     if (assignment) {
       this.isNewAssignment = false;
+      this.isPersonalAssignment = assignment.assignedto === this.uid;
       this.assignmentKey = assignment.$key;
+      let localdate = new Date(assignment.assigneddate).toLocaleString();
+      let localISOformat = this.localISOformat(localdate);
       this.assignmentForm = fb.group({
         description: [assignment.description, Validators.required],
         assigneduser: ['', Validators.required],
         assignedcouncil: ['', Validators.required],
-        assigneddate: [assignment.assigneddate, Validators.required],
-        assignedtime: [assignment.assigneddate, Validators.required],
+        assigneddate: [localISOformat, Validators.required],
         createdby: assignment.createdby,
         createddate: assignment.createddate,
         isactive: assignment.isactive, //default false
@@ -51,12 +54,14 @@ export class NewAssignmentPage {
         isCompleted: assignment.isCompleted
       });
     } else {
+      // var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+      // var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+      let date = this.localISOformat(new Date());
       this.assignmentForm = fb.group({
         description: [description ? description : '', Validators.required],
         assigneduser: ['', Validators.required],
         assignedcouncil: ['', Validators.required],
-        assigneddate: [moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD'), Validators.required],
-        assignedtime: ['', Validators.required],
+        assigneddate: [date, Validators.required],
         createdby: '',
         createddate: '',
         isactive: false, //default false
@@ -130,8 +135,11 @@ export class NewAssignmentPage {
   }
 
   formatAssignmentObj(value) {
+
+    //giving input is a local time but ionic treats it as GMT. hence manually converting it ISO format. 
+    let assigneddate = value.assigneddate.replace(/T/, ' ').replace(/Z/, '');
     return {
-      assigneddate: moment(value.assigneddate + ' ' + value.assignedtime, "YYYY-MM-DD hh:mmA").toISOString(),
+      assigneddate: moment(assigneddate).toISOString(),
       createddate: new Date().toISOString(),
       lastupdateddate: new Date().toISOString(),
       createdby: value.createdby,
@@ -147,7 +155,7 @@ export class NewAssignmentPage {
 
   createAssignment(value) {
     let formattedAssignmentObj = this.formatAssignmentObj(value);
-    if (moment(formattedAssignmentObj.assigneddate).isBefore(moment())) {
+    if (moment(formattedAssignmentObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
       this.showAlert('Assignment Date/Time cannot be in past');
     } else {
       this.firebaseservice.createAssigment(formattedAssignmentObj)
@@ -222,5 +230,24 @@ export class NewAssignmentPage {
     (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(user.firstname + ' ' + user.lastname);
     this.assigneduser = user;
   }
+
+  pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+    return number;
+  }
+
+  localISOformat(date) {
+    date = new Date(date);
+    return date.getFullYear() +
+      '-' + this.pad(date.getMonth() + 1) +
+      '-' + this.pad(date.getDate()) +
+      'T' + this.pad(date.getHours()) +
+      ':' + this.pad(date.getMinutes()) +
+      ':' + this.pad(date.getSeconds()) +
+      '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+      'Z';
+  };
 
 }
