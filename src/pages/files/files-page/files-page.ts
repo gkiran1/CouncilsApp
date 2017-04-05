@@ -40,13 +40,13 @@ export class FilesListPage {
         let fileTransfer = new Transfer();
         ProfileRef.getDownloadURL().then(function (url) {
             fileTransfer.download(url, this.file.dataDirectory).then(res => {
-                alert('file downloaded ...' + res.toURL());
+                // alert('file downloaded ...' + res.toURL());
 
             }).catch(err => {
-                alert(err);
+                console.log(err);
             })
         }).catch(function (error) {
-            alert(error);
+            console.log(error);
         });
     }
     getCount() {
