@@ -134,11 +134,11 @@ export class FirebaseService {
         }).catch(err => { throw err });
     }
 
-    getCouncilsByType(councilType: string): Observable<Council[]> {
+    getCouncilsByType(unitNumber: string): Observable<Council[]> {
         return this.af.database.list('councils', {
             query: {
-                orderByChild: 'counciltype',
-                equalTo: councilType
+                orderByChild: 'unitnumber',
+                equalTo: unitNumber
             }
         }).map(results => results);
     }
@@ -169,17 +169,17 @@ export class FirebaseService {
         });
     }
 
-    createCouncil(council: Council) {
-        firebase.database().ref().child('councils').push(
-            {
-                council: council.council,
-                firstname: council.counciltype
-            })
-            .then(() => {
-                return "User is successfully invited..."
-            })
-            .catch(err => { throw err });
-    }
+    // createCouncil(council: Council) {
+    //     firebase.database().ref().child('councils').push(
+    //         {
+    //             council: council.council,
+    //             firstname: council.counciltype
+    //         })
+    //         .then(() => {
+    //             return "User is successfully invited..."
+    //         })
+    //         .catch(err => { throw err });
+    // }
 
     createUserCouncils(userUid: string, council: string) {
         this.rootRef.child('usercouncils').push({
@@ -190,7 +190,7 @@ export class FirebaseService {
     }
 
     createCouncils(council: Council) {
-        var counRef = this.rootRef.child('councils').orderByChild('council_counciltype').equalTo(council.council + '_' + council.counciltype).limitToFirst(1);
+        var counRef = this.rootRef.child('councils').orderByChild('council_unitnumber').equalTo(council.council + '_' + council.unitnumber).limitToFirst(1);
         return counRef.once('value').then(function (snapshot) {
             if (snapshot.val()) {
                 // invalid council: Council already exists..
@@ -200,8 +200,9 @@ export class FirebaseService {
                 return firebase.database().ref().child('councils').push(
                     {
                         council: council.council,
-                        counciltype: council.counciltype,
-                        council_counciltype: council.council + '_' + council.counciltype
+                        unittype: council.counciltype,
+                        unitnumber: Number(council.unitnumber),
+                        council_unitnumber: council + '_' + council.unitnumber
                     }).then(res => {
                         return res.key;
                     }).catch(err => {
@@ -432,14 +433,14 @@ export class FirebaseService {
         })
     }
 
-    getAllCouncils(counciltype: string): FirebaseListObservable<any[]> {
-        return this.af.database.list('councils', {
-            query: {
-                orderByChild: 'counciltype',
-                equalTo: counciltype
-            }
-        });
-    }
+    // getAllCouncils(counciltype: string): FirebaseListObservable<any[]> {
+    //     return this.af.database.list('councils', {
+    //         query: {
+    //             orderByChild: 'counciltype',
+    //             equalTo: counciltype
+    //         }
+    //     });
+    // }
 
     createAgendaLite(agenda: any) {
         return this.rootRef.child('agendas').push({
