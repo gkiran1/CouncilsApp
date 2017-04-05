@@ -29,10 +29,10 @@
                     <ion-icon class="document" name="document" color="secondary"></ion-icon>
                 </ion-col>
                 <ion-col width-80>
-                    <p><span class="council-styles">{{value.filename}}</span></p>
+                    <p><span class="council-styles">{{file.name}}</span></p>
                     <p>by <span ion-text color="secondary">{{value.createdUser}}</span></p>
                     <p>
-                        {{value.filesize}}b {{value.filetype}} file
+                        {{file.size}}b {{file.mimetype}} file
                     </p>
                     <p class="agendadate-styles">{{file.createdDate | customdateformat}}</p>
                 </ion-col>

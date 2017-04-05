@@ -506,8 +506,8 @@ export class FirebaseService {
         return this.rootRef.child('files').push(
             {
                 filename: file.filename,
-                filesize: file.filesize,
-                filetype: file.filetype,
+                // filesize: file.filesize,
+                // filetype: file.filetype,
                 councilid: file.councilid,
                 councilname: file.councilname,
                 createdDate: file.createdDate,
@@ -744,7 +744,9 @@ export class FirebaseService {
         return this.af.database.object('assignments/' + key);
     }
     deleteFilesByKey(key) {
-        return this.af.database.object(`files/${key}`).remove();
+        return this.af.database.object(`files/${key}`).remove().then(() => {
+            return "file deleted from database."
+        }).catch(err => { alert(err) });
     }
     checkNetworkStatus(uid, callback) {
         let userRef = this.rootRef.child('/presence/' + uid);
