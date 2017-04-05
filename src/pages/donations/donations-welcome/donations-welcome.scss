@@ -1,0 +1,29 @@
+page-donations-welcome {
+   ion-content{
+        background-color:#FAFAFA !important;
+    }
+    ion-label{
+        white-space: pre-wrap;
+        text-align: center;
+        overflow: visible;
+    }
+    .donations-container{
+        position: absolute;
+        top:25%;
+        margin:0 23px;
+    }
+    .main-text{
+        font-family: Bernina-semibold, sans-serif;
+        font-size: 24px !important;
+        color: #35373a !important;
+    }
+    .sub-text{
+        font-family: Bernina-Regular, sans-serif;
+        font-size: 17px !important;
+        color: #35373a !important;
+        line-height: 24px;
+    }
+    .donation-btn{
+        margin-top: 50px;
+    }
+}

@@ -26,6 +26,7 @@ export class CouncilUsersPage {
         let councilid = navParams.get('myCouncils');
 
         this.firebaseservice.getUsersByCouncil(councilid).subscribe(uc => {
+            this.usersArray = [];
             uc.forEach(e => {
                 this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
                     this.usersArray.push(u[0]);
