@@ -48,6 +48,7 @@ export class NewCouncilPage {
 
   createCouncil() {
     this.newCouncil.counciltype = this.currentUser.unittype;
+    this.newCouncil.unitnumber = this.currentUser.unitnumber;
     this.firebaseservice.createCouncils(this.newCouncil).then(res => {
       if (res != false) {
         this.currentUser.councils.push(res);
@@ -62,7 +63,7 @@ export class NewCouncilPage {
             this.firebaseservice.updateCouncilsInUser(user.$key, user.councils);
           }
         });
-        
+
         this.showAlert('Council created successfully..');
         this.nav.setRoot(WelcomePage);
       }
