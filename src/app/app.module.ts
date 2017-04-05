@@ -68,7 +68,10 @@ import { CustomDateFormat } from '../pipes/custom-date-format';
 import { CouncilUsersModalPage } from '../modals/council-users/council-users';
 import { NotificationsPage } from '../pages/notifications/notifications-page/notifications.component';
 import { NotificationSettingsPage } from '../pages/notifications/notifications-settings/notificationsettings.component';
-import {UserCouncilsModalPage} from '../modals/user-councils/user-councils';
+import { UserCouncilsModalPage } from '../modals/user-councils/user-councils';
+import { DonationsWelcomePage } from '../pages/donations/donations-welcome/donations-welcome';
+import { DonationsSendPage } from '../pages/donations/donations-send/donations-send';
+import { DonationsThankyouPage } from '../pages/donations/donations-thankyou/donations-thankyou';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -148,7 +151,10 @@ const cloudSettings: CloudSettings = {
     CouncilUsersModalPage,
     NotificationsPage,
     NotificationSettingsPage,
-    UserCouncilsModalPage
+    UserCouncilsModalPage,
+    DonationsWelcomePage,
+    DonationsSendPage,
+    DonationsThankyouPage
   ],
 
   imports: [
@@ -213,7 +219,10 @@ const cloudSettings: CloudSettings = {
     CouncilUsersModalPage,
     NotificationsPage,
     NotificationSettingsPage,
-    UserCouncilsModalPage
+    UserCouncilsModalPage,
+    DonationsWelcomePage,
+    DonationsSendPage,
+    DonationsThankyouPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]
