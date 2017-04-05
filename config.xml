@@ -81,7 +81,7 @@
   <plugin name="cordova-plugin-device" spec="1.1.4"/>
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/>
   <plugin name="phonegap-plugin-push" spec="~1.9.4">
-    <variable name="SENDER_ID" value="619253720821"/>
+    <variable name="SENDER_ID" value="310008879834"/>
   </plugin>
   <icon src="resources\android\icon\drawable-xhdpi-icon.png"/>
 </widget>
