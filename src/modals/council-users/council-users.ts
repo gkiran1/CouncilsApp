@@ -18,6 +18,7 @@ export class CouncilUsersModalPage {
         this.uid = localStorage.getItem('securityToken');
 
         this.firebaseservice.getUsersByCouncil(councilid).subscribe(uc => {
+            this.usersArray = [];
             uc.forEach(e => {
                 this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
                     this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {

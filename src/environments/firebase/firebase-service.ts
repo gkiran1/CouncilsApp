@@ -134,11 +134,11 @@ export class FirebaseService {
         }).catch(err => { throw err });
     }
 
-    getCouncilsByType(councilType: string): Observable<Council[]> {
+    getCouncilsByType(unitNumber: string): Observable<Council[]> {
         return this.af.database.list('councils', {
             query: {
-                orderByChild: 'counciltype',
-                equalTo: councilType
+                orderByChild: 'unitnumber',
+                equalTo: unitNumber
             }
         }).map(results => results);
     }
@@ -169,17 +169,17 @@ export class FirebaseService {
         });
     }
 
-    createCouncil(council: Council) {
-        firebase.database().ref().child('councils').push(
-            {
-                council: council.council,
-                firstname: council.counciltype
-            })
-            .then(() => {
-                return "User is successfully invited..."
-            })
-            .catch(err => { throw err });
-    }
+    // createCouncil(council: Council) {
+    //     firebase.database().ref().child('councils').push(
+    //         {
+    //             council: council.council,
+    //             firstname: council.counciltype
+    //         })
+    //         .then(() => {
+    //             return "User is successfully invited..."
+    //         })
+    //         .catch(err => { throw err });
+    // }
 
     createUserCouncils(userUid: string, council: string) {
         this.rootRef.child('usercouncils').push({
@@ -190,7 +190,7 @@ export class FirebaseService {
     }
 
     createCouncils(council: Council) {
-        var counRef = this.rootRef.child('councils').orderByChild('council_counciltype').equalTo(council.council + '_' + council.counciltype).limitToFirst(1);
+        var counRef = this.rootRef.child('councils').orderByChild('council_unitnumber').equalTo(council.council + '_' + council.unitnumber).limitToFirst(1);
         return counRef.once('value').then(function (snapshot) {
             if (snapshot.val()) {
                 // invalid council: Council already exists..
@@ -200,8 +200,9 @@ export class FirebaseService {
                 return firebase.database().ref().child('councils').push(
                     {
                         council: council.council,
-                        counciltype: council.counciltype,
-                        council_counciltype: council.council + '_' + council.counciltype
+                        unittype: council.counciltype,
+                        unitnumber: Number(council.unitnumber),
+                        council_unitnumber: council + '_' + council.unitnumber
                     }).then(res => {
                         return res.key;
                     }).catch(err => {
@@ -280,9 +281,11 @@ export class FirebaseService {
     }
 
     getAboutus() {
-        var aboutusRef = this.rootRef.child('aboutus/-Kd9xpkjKGqdLVdNB_Gj');
-        return aboutusRef.once('value').then(function (snapshot) {
-            return snapshot.val();
+        let about:any;
+        var aboutusRef = this.rootRef.child('aboutus');
+     return aboutusRef.orderByChild('createddate').limitToLast(1).once('value').then(function (snapshot) {
+         if(snapshot.val())
+            return snapshot;
         });
     }
 
@@ -432,14 +435,14 @@ export class FirebaseService {
         })
     }
 
-    getAllCouncils(counciltype: string): FirebaseListObservable<any[]> {
-        return this.af.database.list('councils', {
-            query: {
-                orderByChild: 'counciltype',
-                equalTo: counciltype
-            }
-        });
-    }
+    // getAllCouncils(counciltype: string): FirebaseListObservable<any[]> {
+    //     return this.af.database.list('councils', {
+    //         query: {
+    //             orderByChild: 'counciltype',
+    //             equalTo: counciltype
+    //         }
+    //     });
+    // }
 
     createAgendaLite(agenda: any) {
         return this.rootRef.child('agendas').push({
@@ -503,8 +506,8 @@ export class FirebaseService {
         return this.rootRef.child('files').push(
             {
                 filename: file.filename,
-                filesize: file.filesize,
-                filetype: file.filetype,
+                // filesize: file.filesize,
+                // filetype: file.filetype,
                 councilid: file.councilid,
                 councilname: file.councilname,
                 createdDate: file.createdDate,
@@ -741,7 +744,9 @@ export class FirebaseService {
         return this.af.database.object('assignments/' + key);
     }
     deleteFilesByKey(key) {
-        return this.af.database.object(`files/${key}`).remove();
+        return this.af.database.object(`files/${key}`).remove().then(() => {
+            return "file deleted from database."
+        }).catch(err => { alert(err) });
     }
     checkNetworkStatus(uid, callback) {
         let userRef = this.rootRef.child('/presence/' + uid);

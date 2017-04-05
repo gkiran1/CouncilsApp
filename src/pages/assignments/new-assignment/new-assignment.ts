@@ -114,6 +114,7 @@ export class NewAssignmentPage {
   }
   updateUsers(councilid) {
     this.firebaseservice.getUsersByCouncil(councilid).subscribe(uc => {
+      this.users = [];
       uc.forEach(e => {
         this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
           this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {

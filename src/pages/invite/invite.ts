@@ -28,7 +28,7 @@ export class InviteMemberPage {
                     this.invite.createddate = new Date().toDateString();
                     this.invite.lastupdateddate = new Date().toDateString();
                     this.invite.isactive = true;
-                    this.fs.getCouncilsByType(res.unittype).subscribe(councils => {
+                    this.fs.getCouncilsByType(res.unitnumber).subscribe(councils => {
                         this.council = councils;
                         console.log(councils, this.invite.councils);
                     });
