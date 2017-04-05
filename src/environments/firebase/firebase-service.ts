@@ -280,9 +280,11 @@ export class FirebaseService {
     }
 
     getAboutus() {
-        var aboutusRef = this.rootRef.child('aboutus/-Kd9xpkjKGqdLVdNB_Gj');
-        return aboutusRef.once('value').then(function (snapshot) {
-            return snapshot.val();
+        let about:any;
+        var aboutusRef = this.rootRef.child('aboutus');
+     return aboutusRef.orderByChild('createddate').limitToLast(1).once('value').then(function (snapshot) {
+         if(snapshot.val())
+            return snapshot;
         });
     }
 
