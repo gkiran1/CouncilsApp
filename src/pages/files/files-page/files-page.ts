@@ -7,7 +7,7 @@ import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import { WelcomePage } from '../../menu/menu';
 import { Transfer, File } from 'ionic-native';
-import { FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { TransferObject } from '@ionic-native/transfer';
 import * as firebase from 'firebase';
 
 @Component({
@@ -21,7 +21,7 @@ export class FilesListPage {
     filesArray = [];
     profilePictureRef: any;
     storageDirectory: string = '';
-    constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController, public platform: Platform, public file: File, public transfer: Transfer) {
+    constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController, public platform: Platform) {
         this.filesArray = [];
         this.profilePictureRef = firebase.storage().ref('/files/');
         if (localStorage.getItem('userCouncils') !== null) {
