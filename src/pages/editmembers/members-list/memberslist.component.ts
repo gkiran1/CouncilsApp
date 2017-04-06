@@ -3,6 +3,7 @@ import { FirebaseService } from '../../../environments/firebase/firebase-service
 import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { EditMemberPage } from '../edit-member/editmember.component';
 
 @Component({
     templateUrl: 'memberslist.html',
@@ -37,6 +38,10 @@ export class MembersListPage {
                 }
             });
         });
+    }
+
+    editMember(user) {
+        this.nav.push(EditMemberPage, { selectedUser: user });
     }
 
     back() {

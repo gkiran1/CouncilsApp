@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="back()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <ion-title text-center>{{selectedUser.firstname}} {{selectedUser.lastname}}</ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list no-lines>
+        <ion-item *ngFor="let councilObj of councilsObj" text-wrap>
+            <ion-label item-left>{{councilObj.councilName}}</ion-label>
+            <ion-checkbox [(ngModel)]="councilObj.isMemberCouncil" color="secondary" item-right></ion-checkbox>
+        </ion-item>
+    </ion-list>
+</ion-content>

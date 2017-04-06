@@ -20,7 +20,7 @@
             </ion-avatar>
             <h3>{{user.firstname}} {{user.lastname}}</h3>
             <p><span>{{user.councilnames}}</span></p>
-            <button ion-button item-right clear>   
+            <button ion-button item-right clear (click)="editMember(user)">   
              <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey" ></ion-icon>
             </button>
         </ion-item>
