@@ -20,7 +20,7 @@
   <form [formGroup]="donationForm">
     <ion-item>
       <ion-label floating>Amount</ion-label>
-      <ion-input type="text" name="amount" formControlName="amount" (keyup)="addCurrencySysmbol($event)"></ion-input>
+      <ion-input type="text" name="amount" maxLength='8' formControlName="amount" (input)="addCurrencySysmbol($event)"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Full Name</ion-label>
@@ -36,7 +36,7 @@
         <ion-radio value="onetime" checked></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>Monthly</ion-label>
+        <ion-label>Monthly donation</ion-label>
         <ion-radio value="monthly"></ion-radio>
       </ion-item>
     </ion-list>
@@ -45,11 +45,11 @@
     </ion-label>
      <ion-item>
       <ion-label floating>Number</ion-label>
-      <ion-input type="text" name="creditcardNo" (keyup)="formatToCreditNumber($event)" maxLength='19' formControlName="creditcardNo"></ion-input>
+      <ion-input type="text" name="creditcardNo" (input)="formatToCreditNumber($event)" maxLength='18' formControlName="creditcardNo"></ion-input>
     </ion-item>
      <ion-item>
       <ion-label floating>Valid Thru</ion-label>
-      <ion-input type="text" name="creditValidthru" (keyup)="formatToValidThru($event)" maxLength="5" formControlName="creditValidthru"></ion-input>
+      <ion-input type="text" name="creditValidthru" (input)="formatToValidThru($event)" maxLength="5" formControlName="creditValidthru"></ion-input>
     </ion-item>
   </form>
 </ion-content>
