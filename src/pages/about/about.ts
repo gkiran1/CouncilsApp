@@ -6,7 +6,7 @@ import { WelcomePage } from '../menu/menu';
 
 
 @Component({
-    selector: 'about',
+    selector: 'page-about',
     templateUrl: 'about.html',
     providers: [FirebaseService]
 })
