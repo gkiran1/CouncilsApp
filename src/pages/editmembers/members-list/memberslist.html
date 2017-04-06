@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="back()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <ion-title text-center>Edit Members</ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let user of users">
+            <ion-avatar item-left>
+                <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar">
+                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar" />
+            </ion-avatar>
+            <h3>{{user.firstname}} {{user.lastname}}</h3>
+            <p><span>{{user.councilnames}}</span></p>
+            <button ion-button item-right clear>   
+             <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey" ></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
+</ion-content>
