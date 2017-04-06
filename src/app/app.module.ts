@@ -72,6 +72,7 @@ import { UserCouncilsModalPage } from '../modals/user-councils/user-councils';
 import { DonationsWelcomePage } from '../pages/donations/donations-welcome/donations-welcome';
 import { DonationsSendPage } from '../pages/donations/donations-send/donations-send';
 import { DonationsThankyouPage } from '../pages/donations/donations-thankyou/donations-thankyou';
+import { MembersListPage } from '../pages/editmembers/members-list/memberslist.component';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -154,7 +155,8 @@ const cloudSettings: CloudSettings = {
     UserCouncilsModalPage,
     DonationsWelcomePage,
     DonationsSendPage,
-    DonationsThankyouPage
+    DonationsThankyouPage,
+    MembersListPage
   ],
 
   imports: [
@@ -222,7 +224,8 @@ const cloudSettings: CloudSettings = {
     UserCouncilsModalPage,
     DonationsWelcomePage,
     DonationsSendPage,
-    DonationsThankyouPage
+    DonationsThankyouPage,
+    MembersListPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]
