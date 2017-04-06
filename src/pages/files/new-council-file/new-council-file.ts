@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Nav, NavController, AlertController, ActionSheetController, MenuController } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
@@ -14,7 +14,7 @@ import * as moment from 'moment';
   selector: 'new-council-file-page'
 })
 export class NewCouncilFilePage {
-  @ViewChild('fileSelector') fileSelector;
+  // @ViewChild('fileSelector') fileSelector;
   newCouncilFileForm: FormGroup;
   councils;
   guestPicture: any;
@@ -150,9 +150,12 @@ export class NewCouncilFilePage {
     FileChooser.open()
       .then(uri => {
         this.file = uri.toString();
+        // alert(this.file)
         FilePath.resolveNativePath(this.file)
           .then(filePath => {
+            alert(filePath);
             var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
+            // alert(filename);
             value.createdDate = moment().toISOString();
             value.councilid = value.council.$key;
             value.councilname = value.council.council;
@@ -168,19 +171,27 @@ export class NewCouncilFilePage {
                       file: metadata, file1: fileId, value: value
                     });
                   }).catch((error) => {
+                    // alert(error);
                     console.log(error);
                   });
-                }).catch(err => {
-                  console.log(err);
+                }).catch(error => {
+                  // alert(error);
+                  console.log(error);
                 })
-            }).catch(err => {
-              console.log(err);
+            }).catch(error => {
+              // alert(error);
+              console.log(error);
             })
-          }).catch(e => console.log(e));
-      }).catch(e => console.log(e));
-
+          }).catch(error => {
+            // alert(error)
+            console.log(error);
+          });
+      }).catch(error => {
+        // alert(error)
+        console.log(error);
+      });
   }
-  
+
   importFile(value) {
 
   }
