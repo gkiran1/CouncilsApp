@@ -11,11 +11,33 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 export class MembersListPage {
 
+    users: User[] = [];
+
     constructor(private firebaseService: FirebaseService,
         private nav: NavController,
         private alertCtrl: AlertController,
         public actionSheetCtrl: ActionSheetController,
-        public menuctrl: MenuController, public af: AngularFire) { }
+        public menuctrl: MenuController, public af: AngularFire) {
+
+        const userUid = localStorage.getItem('securityToken');
+        const unitNumber = Number(localStorage.getItem('unitNumber'));
+        this.users = [];
+
+        this.firebaseService.getUsersByUnitNumber(unitNumber).subscribe(usersObj => {
+            this.users = usersObj.filter(userObj => {
+                if (userObj.$key !== userUid && userObj.isactive === true) {
+                    var userCouncilNames: string[] = [];
+                    userObj.councils.forEach(councilId => {
+                        this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
+                            userCouncilNames.push(councilObj[0].council);
+                            userObj.councilnames = userCouncilNames.join(', ');
+                        });
+                    });
+                    return userObj;
+                }
+            });
+        });
+    }
 
     back() {
         this.nav.pop();
