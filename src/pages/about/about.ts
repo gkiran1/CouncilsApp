@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { WelcomePage } from '../menu/menu';
@@ -19,7 +19,12 @@ export class AboutPage {
     public Phone: string;
     objAbout: any;
 
-    constructor(public navCtrl: NavController, private service: FirebaseService) {
+    constructor(public navCtrl: NavController, private service: FirebaseService, private loadingCtrl: LoadingController) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: "Please wait...",
+        });
+        loader.present();
         service.getAboutus()
         .then(about => {
             about.forEach(result=>{
@@ -30,8 +35,12 @@ export class AboutPage {
                 this.WebAddress = result.val().web;
                 this.Phone = result.phone;
             });
-           
-         });
+           loader.dismiss();
+         }).catch(err => {
+                loader.dismiss();
+                
+            });
+
     }
 
       cancel() {
