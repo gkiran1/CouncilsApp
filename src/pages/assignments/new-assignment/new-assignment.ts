@@ -92,9 +92,9 @@ export class NewAssignmentPage {
             (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(u[0].firstname + ' ' + u[0].lastname);
             this.assigneduser = u[0];
           });
+        } else {
+          (<FormControl>this.assignmentForm.controls['createdby']).setValue(user.$key);
         }
-
-        (<FormControl>this.assignmentForm.controls['createdby']).setValue(user.$key);
 
       });
     });
@@ -137,7 +137,7 @@ export class NewAssignmentPage {
 
   formatAssignmentObj(value) {
 
-    //giving input is a local time but ionic treats it as GMT. hence manually converting it ISO format. 
+    //input time is in local ISO format. hence manually converting it GMT ISO format. 
     let assigneddate = value.assigneddate.replace(/T/, ' ').replace(/Z/, '');
     return {
       assigneddate: moment(assigneddate).toISOString(),
