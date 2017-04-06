@@ -2,37 +2,34 @@
     <ion-navbar hideBackButton>
         <ion-row>
             <ion-col class="header-col" width-10>
-                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
-                    (click)="cancel()"></ion-icon>
-
+                <ion-icon class="cancel-font" name="close" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
             </ion-col>
             <ion-col width-80>
-                <h3>
-                    New Agenda
-                </h3>
+                <ion-title text-center>New Agenda</ion-title>
             </ion-col>
         </ion-row>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <ion-list>
-        <ion-item (click)="agendalite()">
+        <ion-item-divider class="empty"></ion-item-divider>
+    <!--<ion-list >-->
+        <ion-item class="item-noborder" (click)="agendalite()">
             <ion-label class="council-styles">
-               Agenda Lite
+                Lite
             </ion-label>
             <button ion-button item-right clear>
-              <ion-icon class="icon-style" name="arrow-forward"></ion-icon>            
+              <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey"></ion-icon>            
             </button>
-            </ion-item>
+        </ion-item>
 
-            <ion-item (click)="agenda()">
+        <ion-item class="item-noborder" (click)="agenda()">
             <ion-label class="council-styles">
-                Agenda
+                Standard
             </ion-label>
-            <button ion-button item-right clear >
-      <ion-icon class="icon-style" name="arrow-forward"></ion-icon>
+            <button ion-button item-right clear>
+      <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey"></ion-icon>
       </button>
         </ion-item>
-    </ion-list>
+    <!--</ion-list>-->
 </ion-content>

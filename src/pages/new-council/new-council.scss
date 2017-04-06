@@ -2,8 +2,23 @@ new-council{
 .createbtn button:disabled{
   color:#222;    
 }
-.username{
-  font-family:Bernina-SemiBold ;
+.username-styles{
+    font-family: Bernina-Regular !important;
+    font-size: 120% !important;
+    color: #35373a !important;
 }
-
+.font1{
+        font-family: Bernina-Regular, sans-serif;
+        font-size: 17px !important;
+        color: #a9aaac !important;
+    }
+    .font2{
+        font-family: 'Bernina-Regular', sans-serif;
+        font-size: 13px;
+        color: #a9aaac;
+    }
+    .line-height{
+        line-height: 24px;
+        white-space: normal;
+    }
 }

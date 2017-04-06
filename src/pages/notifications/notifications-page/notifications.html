@@ -1,0 +1,29 @@
+<ion-header>
+	<ion-navbar hideBackButton="true">
+		<ion-row>
+			<ion-col class="header-col" width-10>
+				<ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary"
+				    (click)="back()"></ion-icon>
+			</ion-col>
+			<ion-col width-80>
+				<ion-title text-center>Notifications</ion-title>
+			</ion-col>
+		</ion-row>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<ng-container *ngIf="(notifications.length)">
+		<ion-list>
+			<ion-item *ngFor="let notification of notifications" text-wrap>
+				<h2>{{notification.text}}</h2>
+				<p><span>{{notification.createddate| customdateformat}}</span></p>
+				<button ion-button item-right clear (click)="ActivityPage(notification)">
+                 <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey"></ion-icon>
+                </button>
+			</ion-item>
+		</ion-list>
+	</ng-container>
+	<ng-container *ngIf="!(notifications.length)">
+		<div class="nocontent-message"><p>There are no notifications</p></div>
+	</ng-container>
+</ion-content>

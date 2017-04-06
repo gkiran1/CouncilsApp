@@ -7,6 +7,7 @@ import { InviteMemberPage } from '../invite/invite';
 import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { NewCouncilPage } from '../new-council/new-council';
 import { WelcomePage } from '../menu/menu';
+import { MembersListPage } from '../editmembers/members-list/memberslist.component';
 
 @Component({
     selector: 'admin-page',
@@ -33,6 +34,10 @@ export class AdminPage {
         this.navCtrl.push(InactivateMembersPage);
     }
 
+    editMembers() {
+        this.navCtrl.push(MembersListPage);
+    }
+
     getInactiveUsers() {
         this.navCtrl.push(ReactivateMembersPage);
     }
@@ -42,7 +47,7 @@ export class AdminPage {
     }
 
     back() {
-        this.navCtrl.setRoot(WelcomePage);
+        this.navCtrl.pop();
     }
 
 }

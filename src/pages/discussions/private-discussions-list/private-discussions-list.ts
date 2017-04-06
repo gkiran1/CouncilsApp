@@ -38,4 +38,7 @@ export class PrivateDiscussionsListPage {
   getCount() {
     return this.count$;
   }
+   cancel() {
+    this.nav.pop();
+  }
 }

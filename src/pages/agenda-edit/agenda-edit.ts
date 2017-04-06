@@ -28,12 +28,17 @@ export class AgendaEditPage {
     eventObj = [];
 
     constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService,
-        public firebaseservice: FirebaseService,public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
+        public firebaseservice: FirebaseService, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
         public nav: NavController, public menuctrl: MenuController) {
 
         this.councils = [];
         let agenda = navParams.get('agendaselected');
         this.agendaKey = agenda.$key;
+
+        // agenda.spiritualwelfare = agenda.spiritualwelfare || '';
+        // agenda.temporalwelfare = agenda.temporalwelfare || '';
+        // agenda.fellowshipitems = agenda.fellowshipitems || '';
+        // agenda.missionaryitems = agenda.missionaryitems || '';
 
         this.spiritualwelfareObj = agenda.spiritualwelfare.split('\n');
         this.temporalwelfareObj = agenda.temporalwelfare.split('\n');
@@ -94,9 +99,11 @@ export class AgendaEditPage {
 
         });
 
+        let localdate = new Date(agenda.agendadate).toLocaleString();
+        let localISOformat = this.localISOformat(localdate);
         this.agendaeditForm = fb.group({
             assignedcouncil: ['', Validators.required],
-            assigneddate: [moment(agenda.assigneddate, 'DDDD, MMM D, YYYY, hh:mma').format(), Validators.required],
+            assigneddate: [localISOformat, Validators.required],
             openinghymn: [agenda.openinghymn, Validators.required],
             openingprayer: ['', Validators.required],
             spiritualthought: ['', Validators.required],
@@ -118,6 +125,12 @@ export class AgendaEditPage {
 
     assignedMemberChange(value) {
         this.users = [];
+        (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue('');
+        (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue('');
+        (<FormControl>this.agendaeditForm.controls['assignments']).setValue('');
+        (<FormControl>this.agendaeditForm.controls['completedassignments']).setValue('');
+        (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue('');
+
         this.getUsersByCouncilId(value.assignedcouncil.$key).subscribe(usersObj => {
             usersObj.forEach(usrObj => {
                 this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
@@ -128,7 +141,6 @@ export class AgendaEditPage {
             });
         });
 
-        //  this.allassignments = [];
         this.completedassignmentslist = [];
         this.assignmentslist = [];
 
@@ -153,7 +165,7 @@ export class AgendaEditPage {
     }
 
     cancel() {
-        this.nav.setRoot(WelcomePage);
+        this.nav.pop();
     }
 
     formatAgendaObj(value) {
@@ -202,36 +214,55 @@ export class AgendaEditPage {
         alert.present();
     }
 
-     plusBtn(item) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: item,
-      buttons: [
-        {
-          text: 'Start Discussion',
-          cssClass: "actionsheet-items",
-          handler: () => {
-            this.menuctrl.close();
-            this.nav.push(NewCouncilDiscussionPage,{item:item});
-
-          }
-        },
-        {
-          text: 'Make Assignment',
-          cssClass: "actionsheet-items",
-          handler: () => {
-            this.menuctrl.close();
-            this.nav.push(NewAssignmentPage,{item:item});
-          }
-        },
-        {
-          text: 'Cancel',
-          cssClass: "actionsheet-cancel",
-          handler: () => {
-          }
-        }
-      ]
-    });
-
-    actionSheet.present();
+pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+    return number;
   }
+
+  localISOformat(date) {
+    date = new Date(date);
+    return date.getFullYear() +
+      '-' + this.pad(date.getMonth() + 1) +
+      '-' + this.pad(date.getDate()) +
+      'T' + this.pad(date.getHours()) +
+      ':' + this.pad(date.getMinutes()) +
+      ':' + this.pad(date.getSeconds()) +
+      '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+      'Z';
+  };
+  
+    plusBtn(item) {
+        let actionSheet = this.actionSheetCtrl.create({
+            title: item,
+            buttons: [
+                {
+                    text: 'Start Discussion',
+                    cssClass: "actionsheet-items",
+                    handler: () => {
+                        this.menuctrl.close();
+                        this.nav.push(NewCouncilDiscussionPage, { item: item });
+
+                    }
+                },
+                {
+                    text: 'Make Assignment',
+                    cssClass: "actionsheet-items",
+                    handler: () => {
+                        this.menuctrl.close();
+                        this.nav.push(NewAssignmentPage, { item: item });
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    cssClass: "actionsheet-cancel",
+                    handler: () => {
+                    }
+                }
+            ]
+        });
+
+        actionSheet.present();
+    }
 }

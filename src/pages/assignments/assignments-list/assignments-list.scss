@@ -12,14 +12,30 @@ assignments-list{
     }
     .text-content{
        position:absolute;
-       top:50%;
+       top:45%;
        width: 100%;
        margin:auto;
-       color:map-get($colors, light-gray);
     }
-     .icon-style{
-    color:#A9AAAC;
-    width: 0.66em;
-    height: 1.08em;
+    .icon-style{
+        color:#A9AAAC;
+        width: 8px;
+        height: 13px;
+    }
+    .font1{
+        font-family: Bernina-Regular, sans-serif;
+        font-size: 17px !important;
+        color: #a9aaac !important;
+    }
+    .font2{
+        font-family: 'Bernina-Regular', sans-serif;
+        font-size: 13px;
+        color: #a9aaac;
+    }
+    .inline-block{
+        display: inline-block;
+    }
+    .right-align{
+        position: absolute;
+        right: 10px;
     }
 }

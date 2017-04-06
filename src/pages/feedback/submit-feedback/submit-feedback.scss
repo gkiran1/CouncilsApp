@@ -1,11 +1,21 @@
+submit-feedback {
 .row1 {
-    margin-top: 20pt;
-    margin-bottom: 14pt;
+    padding-top: 20px;
+    
+    background: #fafafa;
 }
 
 .row5 {
     border-bottom: 1px solid #e8e9eb;
-    margin-bottom: 20pt;
+    
+}
+
+.row4 {
+    display: table;
+    width: 100%;
+    text-align: center;
+    background: #fafafa;
+    padding-bottom: 20px;
 }
 
 .row6 {
@@ -13,6 +23,32 @@
     position: relative;
 }
 
+.item-md.item-block .item-inner,
+.item-ios.item-block .item-inner {
+    border: none !important;
+}
+
 textarea {
     resize: both;
+    line-height: 2.4rem;
+    min-height: 15rem;
+}
+
+.border-top {
+    border-top:1px solid #e8e9eb;
+    border-bottom:1px solid #e8e9eb;
+}
+
+.text-area-bottom {
+    height: 2.8rem;
+    background: #fafafa !important;
+    border: none !important;
+}
+
+form {
+        display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
 }

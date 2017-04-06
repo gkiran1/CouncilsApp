@@ -1,4 +1,4 @@
-import { Component ,ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { DisplayPage } from '../display/display';
@@ -26,26 +26,26 @@ import { slide1Page } from '../slide1/slide1';
 import { slide2Page } from '../slide2/slide2';
 import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/new-private-discussion';
 import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
-import {  OnInit } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { Slides } from 'ionic-angular';
-
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage, CouncilDiscussionsListPage, AgendasPage, NewPrivateDiscussionPage]
+  providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, SubmitFeedbackPage,  AgendasPage]
 })
 
-export class WelcomePage implements OnInit{
+export class WelcomePage implements OnInit {
   @ViewChild('switcher') switcher: Slides;
   activeCouncilsCount;
   assignmentsCount;
-  councilDiscussionsCount;
   agendasCount;
   //@ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
   userSubscription: Subscription;
+  rootRef;
 
   constructor(public nav: NavController,
     public af: AngularFire,
@@ -55,13 +55,24 @@ export class WelcomePage implements OnInit{
     public assignmentsListPage: AssignmentsListPage,
     public activeCouncilsPage: ActiveCouncilsPage,
     private firebaseService: FirebaseService,
-    public councilDiscussionsListPage: CouncilDiscussionsListPage,
     public agendaPage: AgendasPage) {
 
     this.userObj = null;
-    
+
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
+
+        //setting network status
+        this.rootRef = firebase.database().ref();
+        let amOnline = this.rootRef.child('.info/connected');
+        let userRef = this.rootRef.child('/presence/' + auth.uid);
+        amOnline.on('value', function (snapshot) {
+          if (snapshot.val()) {
+            userRef.onDisconnect().remove();
+            userRef.set(true);
+          }
+        });
+
         this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
           this.userObj = usrs[0];
           localStorage.setItem('unitType', usrs[0].unittype);
@@ -69,23 +80,51 @@ export class WelcomePage implements OnInit{
           localStorage.setItem('userCouncils', usrs[0].councils.toString());
           localStorage.setItem('isAdmin', usrs[0].isadmin.toString());
         });
+        this.firebaseService.getPrivateDiscussions().subscribe(discussions => {
+          let privatediscussions = discussions.filter(discussion => {
+            if (auth.uid === discussion.createdUserId || auth.uid === discussion.otherUserId) {
+              return true;
+            }
+            return false;
+          });
+          privatediscussions.forEach(discussionEle => {
+            this.firebaseService.getPrivateDiscussionByKey(discussionEle.$key).subscribe(discussion => {
+              discussion.messages = discussion.messages || [];
+              Object.keys(discussion.messages).forEach(e => {
+                let message = discussion.messages[e];
+                if (message.userId !== auth.uid && message.status === 'sent') {
+                  this.firebaseService.updatePrivateDiscussionMessageStatus(discussion.$key, e, 'delivered')
+                    .catch(err => {
+                      console.log('Err:: open-council-discussion::', err);
+                    });
+                }
+              });
+            });
+          });
+        });
       };
     });
 
     this.activeCouncilsCount = activeCouncilsPage.getCount();
     this.assignmentsCount = assignmentsListPage.getCount();
-    this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
     this.agendasCount = agendaPage.getCount();
 
   }
   ngOnInit() {
   }
   menuOpened() {
-      this.switcher.update();
+    
+    this.switcher.update();
+      if(localStorage.getItem('isMenuCentered') === '0') {
+        localStorage.setItem('isMenuCentered','1');
       setTimeout(() => { 
-      this.switcher.update();
-      this.switcher.slideTo(1,0);
+        this.switcher.update();
+      
+        this.switcher.slideTo(1,0);
+      
     },300);
+      }
+
   }
 
   councilsPage() {
@@ -272,7 +311,7 @@ export class WelcomePage implements OnInit{
   viewEditProfilePage() {
     this.nav.push(EditProfilePage);
   }
-  viewNewCouncilFilePage(){
+  viewNewCouncilFilePage() {
     this.nav.push(NewCouncilFilePage);
   }
 

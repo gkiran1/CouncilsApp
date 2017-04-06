@@ -4,7 +4,7 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { Content } from 'ionic-angular';
-import { CouncilUsersModalPage } from '../councilusers/councilusers';
+import { CouncilUsersModalPage } from '../../../modals/council-users/council-users';
 import { AngularFire } from 'angularfire2';
 
 @Component({
@@ -59,7 +59,8 @@ export class OpenCouncilDiscussionPage {
                 userId: this.as.uid,
                 user_firstname: this.user.firstname,
                 user_lastname: this.user.lastname,
-                user_avatar: this.user.avatar
+                user_avatar: this.user.avatar,
+                status: 'sent'
             }
             this.fs.updateDiscussionChat(this.discussion.$key, chatObj)
                 .then(res => {

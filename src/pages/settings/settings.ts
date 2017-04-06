@@ -17,6 +17,7 @@ import { CouncilDiscussionsListPage } from '../discussions/council-discussions-l
 import { Subscription } from "rxjs";
 import { GoodbyePage } from '../goodbye/goodbye';
 import { WelcomePage } from '../menu/menu';
+import { NotificationSettingsPage } from '../notifications/notifications-settings/notificationsettings.component';
 
 @Component({
     selector: 'settings-page',
@@ -40,6 +41,9 @@ export class SettingsPage {
     viewEditProfilePage() {
         this.navCtrl.push(EditProfilePage);
     }
+    viewNotificationSettingsPage() {
+        this.navCtrl.push(NotificationSettingsPage);
+    }
     viewFeedbackPage() {
         this.navCtrl.push(SubmitFeedbackPage);
     }
@@ -53,6 +57,7 @@ export class SettingsPage {
         this.activeCouncilsPage.userSubscription.unsubscribe();
         localStorage.setItem('securityToken', null);
         localStorage.setItem('isUserLoggedIn', 'false');
+        localStorage.setItem('isMenuCentered', '0');
         this.firebaseService.signOut().then(() => {
             console.log('Sign Out successfully..');
             this.navCtrl.setRoot(GoodbyePage);

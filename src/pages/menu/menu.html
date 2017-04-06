@@ -1,26 +1,12 @@
-<ion-menu name="menu" id="menu" [content]="content" type="overlay" swipeEnabled="false" (ionOpen)="menuOpened()">
+<ion-menu name="menu" id="menu" [content]="content" type="overlay" swipeEnabled="false" (ionOpen)="menuOpened()" width="80%">
     <ion-header>
     </ion-header>
     <ion-content>
-        <ion-navbar class="menu-toolbar" hideBackButton="true">
+        <!--<ion-navbar class="menu-toolbar" hideBackButton="true">
             <ion-item style="border: none !important">
-                <ion-row>
-                    <ion-avatar item-left>
-                        <img [src]="(userObj)?.avatar" class="avatarImage" *ngIf="(userObj)?.avatar" />
-                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj)?.avatar" />
-                    </ion-avatar>
-
-                    <ion-col style="margin-left: 16pt">
-                        <ion-row class='user1'>
-                            {{(userObj)?.firstname}}
-                        </ion-row>
-                        <ion-row class='user2'>
-                            <p class='user2'>{{(userObj)?.calling}} - {{(userObj)?.unitnumber}}</p>
-                        </ion-row>
-                    </ion-col>
-                </ion-row>
+                
             </ion-item>
-        </ion-navbar>
+        </ion-navbar>-->
         <ion-slides #switcher pager initialSlide='1'>
             <ion-slide>
                 <slide1></slide1>

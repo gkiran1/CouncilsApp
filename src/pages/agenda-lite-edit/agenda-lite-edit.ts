@@ -33,10 +33,7 @@ export class AgendaLiteEditPage {
     let agenda = navParams.get('agendaselected');
     this.agendaKey = agenda.$key;
 
-
-
     this.discussionitemsObj = agenda.discussionitems.split('\n');
-    // (<FormControl>this.agendaliteeditForm.controls['discussionitems']).setValue(this.discussionitemsObj);
 
     var councilsIds = localStorage.getItem('userCouncils').split(',');
     councilsIds.forEach(councilId => {
@@ -90,15 +87,17 @@ export class AgendaLiteEditPage {
 
     });
 
+    let localdate = new Date(agenda.agendadate).toLocaleString();   
+    let localISOformat = this.localISOformat(localdate);
     this.agendaliteeditForm = fb.group({
+      assigneddate: [localISOformat, Validators.required],
       assignedcouncil: ['', Validators.required],
-      assigneddate: [moment(agenda.assigneddate, 'DDDD, MMM D, YYYY, hh:mma').format(), Validators.required],
       openinghymn: [agenda.openinghymn, Validators.required],
       openingprayer: ['', Validators.required],
       spiritualthought: ['', Validators.required],
       assignments: ['', Validators.required],
       completedassignments: ['', Validators.required],
-      discussionitems: ['', Validators.required],
+      discussionitems: [''],
       closingprayer: ['', Validators.required],
       createdby: agenda.createdby,
       createddate: agenda.createddate,
@@ -110,6 +109,11 @@ export class AgendaLiteEditPage {
 
   assignedMemberChange(value) {
     this.users = [];
+    (<FormControl>this.agendaliteeditForm.controls['openingprayer']).setValue('');
+    (<FormControl>this.agendaliteeditForm.controls['spiritualthought']).setValue('');
+    (<FormControl>this.agendaliteeditForm.controls['assignments']).setValue('');
+    (<FormControl>this.agendaliteeditForm.controls['completedassignments']).setValue('');
+    (<FormControl>this.agendaliteeditForm.controls['closingprayer']).setValue('');
     this.getUsersByCouncilId(value.assignedcouncil.$key).subscribe(usersObj => {
       usersObj.forEach(usrObj => {
         this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
@@ -145,13 +149,14 @@ export class AgendaLiteEditPage {
   }
 
   cancel() {
-    this.nav.setRoot(WelcomePage);
+    this.nav.pop();
   }
 
   formatAgendaObj(value) {
+    let assigneddate = value.assigneddate.replace(/T/, ' ').replace(/Z/, '');
     return {
       assignedcouncil: value.assignedcouncil,
-      assigneddate: moment(value.assigneddate, "YYYY-MM-DD").toISOString(),
+      assigneddate: moment(assigneddate).toISOString(),
       openinghymn: value.openinghymn,
       openingprayer: value.openingprayer,
       spiritualthought: value.spiritualthought,
@@ -188,7 +193,7 @@ export class AgendaLiteEditPage {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewCouncilDiscussionPage,{item:item});
+            this.nav.push(NewCouncilDiscussionPage, { item: item });
 
           }
         },
@@ -197,7 +202,7 @@ export class AgendaLiteEditPage {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewAssignmentPage,{item:item});
+            this.nav.push(NewAssignmentPage, { item: item });
           }
         },
         {
@@ -219,4 +224,27 @@ export class AgendaLiteEditPage {
     });
     alert.present();
   }
+
+  trackByIndex(index: number, obj: any): any {
+    return index;
+
+  }
+  pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+    return number;
+  }
+
+  localISOformat(date) {
+    date = new Date(date);
+    return date.getFullYear() +
+      '-' + this.pad(date.getMonth() + 1) +
+      '-' + this.pad(date.getDate()) +
+      'T' + this.pad(date.getHours()) +
+      ':' + this.pad(date.getMinutes()) +
+      ':' + this.pad(date.getSeconds()) +
+      '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+      'Z';
+  };
 }

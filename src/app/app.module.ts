@@ -30,6 +30,7 @@ import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-fee
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { NewCouncilFilePage } from '../pages/files/new-council-file/new-council-file';
 import { OpenCouncilFilePage } from '../pages/files/open-council-file/open-council-file';
+import { FilesListPage } from '../pages/files/files-page/files-page';
 import { ChangePasswordPage } from '../pages/edit-profile/change-password';
 import { GoodbyePage } from '../pages/goodbye/goodbye';
 import { FormsModule } from '@angular/forms';
@@ -64,7 +65,15 @@ import { PrivateDiscussionsListPage } from '../pages/discussions/private-discuss
 import { TransferCompletePage } from '../pages/transferadminrights/transfer-complete/transfercomplete.component';
 import { UnitTypeAgendaPage } from '../pages/unittype-agenda/unittype-agenda';
 import { CustomDateFormat } from '../pipes/custom-date-format';
-import { CouncilUsersModalPage } from '../pages/discussions/councilusers/councilusers';
+import { CouncilUsersModalPage } from '../modals/council-users/council-users';
+import { NotificationsPage } from '../pages/notifications/notifications-page/notifications.component';
+import { NotificationSettingsPage } from '../pages/notifications/notifications-settings/notificationsettings.component';
+import { UserCouncilsModalPage } from '../modals/user-councils/user-councils';
+import { DonationsWelcomePage } from '../pages/donations/donations-welcome/donations-welcome';
+import { DonationsSendPage } from '../pages/donations/donations-send/donations-send';
+import { DonationsThankyouPage } from '../pages/donations/donations-thankyou/donations-thankyou';
+import { MembersListPage } from '../pages/editmembers/members-list/memberslist.component';
+import { EditMemberPage } from '../pages/editmembers/edit-member/editmember.component';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -113,6 +122,7 @@ const cloudSettings: CloudSettings = {
     ChangePasswordPage,
     NewCouncilFilePage,
     OpenCouncilFilePage,
+    FilesListPage,
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
@@ -140,7 +150,15 @@ const cloudSettings: CloudSettings = {
     CustomDateFormat,
     UnitTypeAgendaPage,
     slide3Page,
-    CouncilUsersModalPage
+    CouncilUsersModalPage,
+    NotificationsPage,
+    NotificationSettingsPage,
+    UserCouncilsModalPage,
+    DonationsWelcomePage,
+    DonationsSendPage,
+    DonationsThankyouPage,
+    MembersListPage,
+    EditMemberPage
   ],
 
   imports: [
@@ -179,6 +197,7 @@ const cloudSettings: CloudSettings = {
     ChangePasswordPage,
     NewCouncilFilePage,
     OpenCouncilFilePage,
+    FilesListPage,
     GoodbyePage,
     CouncilUsersPage,
     AgendasPage,
@@ -201,7 +220,15 @@ const cloudSettings: CloudSettings = {
     PrivateDiscussionsListPage,
     TransferCompletePage,
     UnitTypeAgendaPage,
-    CouncilUsersModalPage
+    CouncilUsersModalPage,
+    NotificationsPage,
+    NotificationSettingsPage,
+    UserCouncilsModalPage,
+    DonationsWelcomePage,
+    DonationsSendPage,
+    DonationsThankyouPage,
+    MembersListPage,
+    EditMemberPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]

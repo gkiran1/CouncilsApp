@@ -1,37 +1,57 @@
 <ion-header>
     <ion-navbar hideBackButton>
-        <ion-row>
+        <ion-row class="bgcolor">
             <ion-col class="header-col" width-10>
                 <button ion-button clear>
-                 <ion-icon class="cancel-font" name="cancel" color="secondary" ios="ios-arrow-round-back" md="md-arrow-back" (click)="back()"></ion-icon>
+                 <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" color="secondary" (click)="back()"></ion-icon>
                 </button>
             </ion-col>
-            <ion-col width-80>
-                <h3>{{file.councilname}}</h3>
+            <ion-col class="header-col" width-80>
+                <h3>{{value.councilname}}</h3>
             </ion-col>
             <ion-col width-10>
-            <button color="secondary" clear block>Edit</button>
+                <ng-container *ngIf="!deleteflag && filesArray.length">
+                    <button color="secondary" class="editbtn" clear block (click)="edit()">Edit</button>
+                </ng-container>
+                <ng-container *ngIf="deleteflag">
+                    <button color="secondary" class="editbtn" clear block (click)="done()">Done</button>
+                </ng-container>
             </ion-col>
         </ion-row>
     </ion-navbar>
+    <ion-item-divider class="empty"></ion-item-divider>
 </ion-header>
 <ion-content id="content1">
-    <ion-item-divider class="empty"></ion-item-divider>
-    <ion-row>
-        <ion-col width-10>
-            <img src='{{file.images}}' />
-        </ion-col>
-        <ion-col width-70>            
-        </ion-col>
-    </ion-row>
-    <!--<ion-list>
-            <ion-item *ngFor="let img of file.images">
-                <ion-avatar item-left>
-                    <img [src]="img" *ngIf="file.images">                    
-                </ion-avatar>                
-            </ion-item>
-        </ion-list>-->    
+    <ion-item>
+        <ng-container *ngIf="!listdisplayflag">
+            <ion-row class="row" *ngFor="let file of filesArray">
+                <ion-col width-10>
+                    <ion-icon class="document" name="document" color="secondary"></ion-icon>
+                </ion-col>
+                <ion-col width-80>
+                    <p><span class="council-styles">{{file.name}}</span></p>
+                    <p>by <span ion-text color="secondary">{{value.createdUser}}</span></p>
+                    <p>
+                        {{file.size}}b {{file.mimetype}} file
+                    </p>
+                    <p class="agendadate-styles">{{file.createdDate | customdateformat}}</p>
+                </ion-col>
+                <ion-col width-10>
+                    <ng-container *ngIf="deleteflag">
+                        <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="delete(file)">
+                            <ion-icon class="document" name="close-circle" color="secondary" item-right></ion-icon>
+                            </button>
+                    </ng-container>
+                </ion-col>
+            </ion-row>
+        </ng-container>
+    </ion-item>
 </ion-content>
 <ion-footer>
-    <button ion-button color="secondary" clear block>Add File</button>
+    <ng-container *ngIf="!deleteflag">
+        <button ion-button color="secondary" clear block (click)="addFileActionsPage(value)">Add File</button>
+    </ng-container>
+    <ng-container *ngIf="deleteflag">
+        <button ion-button class="deletebtn" clear block (click)="deleteFiles(filesArray)">Delete All</button>
+    </ng-container>
 </ion-footer>

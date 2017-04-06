@@ -2,7 +2,7 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col" width-10>
-                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+                <ion-icon name="cancel" item-left color="secondary" class="ion-md-arrow-back cancel-button"
                     (click)="back()"></ion-icon>
             </ion-col>
             <ion-col width-80>
@@ -15,26 +15,20 @@
 <ion-content text-center has-header="true" has-footer="true">
     <form (ngSubmit)="submitFeedback()" #newFeedbackForm="ngForm">
         <ion-row class='row2 row1'>
-            <ion-col>
-                What can we improve?
-            </ion-col>
+        What can we improve?
+           
         </ion-row>
         <ion-row class='row4'>
-            <ion-col>
+           
                 Please give us your feedback.
-            </ion-col>
+            
         </ion-row>
-        <ion-row class='row5'>
-            <ion-col>
-            </ion-col>
-        </ion-row>
-        <ion-item>
+        
+        <ion-item class="border-top">
             <ion-textarea name="feedback" [(ngModel)]="feedback" elastic required placeholder="Type your feedback here"></ion-textarea>
         </ion-item>
-        <ion-row class="row6">
-            <ion-col>
-            </ion-col>
-        </ion-row>
+        <ion-item-divider class="text-area-bottom"></ion-item-divider>
+        <div class="page-blank-area"></div>
     </form>
 </ion-content>
 

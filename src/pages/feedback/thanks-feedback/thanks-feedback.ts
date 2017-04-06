@@ -14,5 +14,8 @@ export class ThanksFeedbackPage {
     goToHome() {
         this.navCtrl.push(WelcomePage);
     }
+     cancel() {
+      this.navCtrl.pop();
+    }
 
 }

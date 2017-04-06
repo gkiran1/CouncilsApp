@@ -1,0 +1,9 @@
+<ion-header>
+  <ion-title>Select Council</ion-title>
+</ion-header>
+<ion-content>
+  <ion-searchbar (ionInput)="searchFn($event)" class="font1" placeholder="For which councils is this assignment?"></ion-searchbar>
+    <ion-item *ngFor="let council of councils | search:term:'council'">
+      <ion-label (click)="dismiss(council)">{{council.council}}</ion-label>
+    </ion-item>
+</ion-content>

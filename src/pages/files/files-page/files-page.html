@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button ion-button menuToggle>
+              <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary"
+                    (click)="cancel()"></ion-icon>      
+    </button>
+        </ion-buttons>
+        <h3 text-center><b>Files</b></h3>
+        <ion-buttons end>
+            <button ion-button>
+      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
+    </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<!--<ion-item-divider class="empty"></ion-item-divider>-->
+<ion-content padding center text-center>    
+    <ng-container *ngIf="filesArray.length">
+        <ion-list inset>
+            <ion-item *ngFor="let item of filesArray">                
+                <button class="forwardBtn" ion-button item-right clear (click)="downloadFile(item)">
+      <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" end></ion-icon>
+      </button>
+                <p><span class="council-styles">{{item.councilname}}</span></p>
+                <p><span class="name-styles">{{item.filename}}</span></p>
+                <p>by <span ion-text color="secondary">{{item.createdUser}}</span></p>
+                <p class="date-styles">{{item.createdDate | customdateformat}}</p>
+            </ion-item>
+        </ion-list>
+    </ng-container>
+    <ng-container *ngIf="!filesArray.length">
+        <p class="text-content">There are no files</p>
+    </ng-container>
+</ion-content>

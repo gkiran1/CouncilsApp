@@ -7,11 +7,11 @@
 }
 
 .cameraBtn {
-    margin-top: 10pt;
-    margin-left: 5pt;
-    width: 70%;
-    height: 75%;
-    border-radius: 112pt;
+    margin-top: 10px;
+    margin-left: 5px;
+    width: 112px;
+    height: 112px;
+    border-radius: 112px;
     background-color: #fafafa;
     border: 1px solid #e8e9eb;
 }
@@ -19,7 +19,7 @@
 .changepassword {
     color: #35373A;
     font-family: 'Bernina-Regular', 'sans-serif';
-    font-size: 100%;
+    font-size: 17px;
 }
 
 .forwardBtn {
@@ -32,15 +32,18 @@
 .actionsheet-items {
     color: #3cb18a !important;
     font-family: Bernina-Regular !important;
-    font-size: 145% !important;
+    font-size: 17px !important;
 }
 
 .actionsheet-cancel {
     color: #35373A !important;
     font-family: Bernina-Regular !important;
-    font-size: 145% !important;
+    font-size: 17px !important;
 }
 
 .empty {
-    height: 28pt;
-}
+        height: 28px;
+        background-color: #f7f7f7;
+        border-top: 1px solid #e8e9eb !important;
+        border-bottom: 1px solid #e8e9eb !important;
+    }

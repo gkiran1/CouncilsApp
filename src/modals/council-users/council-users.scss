@@ -1,13 +1,19 @@
 page-councilusersmodal {
     ion-content {
         position: fixed;
-        top: 50%;
-        bottom: 11%;
+        bottom: 0%;
         height: auto;
     }
     .council-styles {
         font-family: Bernina-Regular !important;
         font-size: 120% !important;
         color: #35373a !important;
+    }
+    ion-label{
+        display: flex;
+        align-items: center;
+    }
+    ion-label h4{
+        flex: 1;
     }
 }

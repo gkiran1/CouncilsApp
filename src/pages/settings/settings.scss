@@ -1,8 +1,4 @@
 settings-page {
-    .item-md.item-block .item-inner,
-    .item-ios.item-block .item-inner {
-        border: none !important;
-    }
     .menuicon {
         color: #32b38a;
     }
@@ -15,22 +11,25 @@ settings-page {
     }
     .icon-style {
         color: #A9AAAC !important;
-        width: 0.66em;
-        height: 1.08em;
+        width: 8px;
+        height: 13px;
     }
     .label-styles {
         font-family: Bernina-Regular !important;
-        font-size: 120% !important;
+        font-size: 17px !important;
         color: #35373a !important;
     }
     .signout {
         font-family: Bernina-Regular !important;
-        font-size: 120% !important;
+        font-size: 17px !important;
         color: #F13822 !important;
+        text-align: center;
     }
-    .empty {
-        height: 25pt;
-        background-color: #f7f7f7;
-        border: none !important;
-    }
+    
+    .item-md.item-block .item-inner,
+.item-ios.item-block .item-inner {
+    border: none !important;
+}
+
+
 }

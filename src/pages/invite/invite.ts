@@ -18,20 +18,40 @@ export class InviteMemberPage {
     result: FirebaseObjectObservable<any>;
     constructor(public navctrl: NavController, public fs: FirebaseService, public af: AngularFire, public alertCtrl: AlertController, public appService: AppService) {
         this.invite = new Invitee;
-        appService.getUser().subscribe(res => {
-            this.invite.unittype = res.unittype;
-            this.invite.unitnumber = res.unitnumber;
-            this.invite.createdby = appService.uid;
-            this.invite.createddate = new Date().toDateString();
-            this.invite.lastupdateddate = new Date().toDateString();
-            this.invite.isactive = true;
-            this.fs.getCouncilsByType(res.unittype).subscribe(councils => {
-                this.council = councils;
-                console.log(councils, this.invite.councils);
-            });
-            this.invite.councils = [];
 
+        this.af.auth.subscribe(auth => {
+            if (auth !== null) {
+                this.af.database.object('/users/' + auth.uid).subscribe(res => {
+                    this.invite.unittype = res.unittype;
+                    this.invite.unitnumber = res.unitnumber;
+                    this.invite.createdby = appService.uid;
+                    this.invite.createddate = new Date().toDateString();
+                    this.invite.lastupdateddate = new Date().toDateString();
+                    this.invite.isactive = true;
+                    this.fs.getCouncilsByType(res.unitnumber).subscribe(councils => {
+                        this.council = councils;
+                        console.log(councils, this.invite.councils);
+                    });
+                    this.invite.councils = [];
+                });
+            }
         });
+
+
+        // appService.getUser().subscribe(res => {
+        //     this.invite.unittype = res.unittype;
+        //     this.invite.unitnumber = res.unitnumber;
+        //     this.invite.createdby = appService.uid;
+        //     this.invite.createddate = new Date().toDateString();
+        //     this.invite.lastupdateddate = new Date().toDateString();
+        //     this.invite.isactive = true;
+        //     this.fs.getCouncilsByType(res.unittype).subscribe(councils => {
+        //         this.council = councils;
+        //         console.log(councils, this.invite.councils);
+        //     });
+        //     this.invite.councils = [];
+
+        // });
     }
 
     inviteMember() {

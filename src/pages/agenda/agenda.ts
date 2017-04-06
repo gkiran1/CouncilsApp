@@ -39,9 +39,10 @@ export class AgendaPage {
             })
         })
 
+        let date = this.localISOformat(new Date());
         this.newagendaForm = fb.group({
             assignedcouncil: ['', Validators.required],
-            assigneddate: [moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD'), Validators.required],
+            assigneddate: [date, Validators.required],
             openinghymn: ['', Validators.required],
             openingprayer: ['', Validators.required],
             spiritualthought: ['', Validators.required],
@@ -64,6 +65,11 @@ export class AgendaPage {
         this.users = [];
         this.assignmentslist = [];
         this.completedassignmentslist = [];
+        (<FormControl>this.newagendaForm.controls['openingprayer']).setValue('');
+        (<FormControl>this.newagendaForm.controls['spiritualthought']).setValue('');
+        (<FormControl>this.newagendaForm.controls['assignments']).setValue('');
+        (<FormControl>this.newagendaForm.controls['completedassignments']).setValue('');
+        (<FormControl>this.newagendaForm.controls['closingprayer']).setValue('');
 
         this.getUsersByCouncilId(value.assignedcouncil.$key).subscribe(usersObj => {
             usersObj.forEach(usrObj => {
@@ -98,11 +104,14 @@ export class AgendaPage {
 
     agendasArray = [];
     createagenda(agenda) {
-     agenda.spiritualwelfare = agenda.spiritualwelfare.replace(/-/gi, '').trim();
-     agenda.temporalwelfare = agenda.temporalwelfare.replace(/-/gi, '').trim();
-     agenda.fellowshipitems = agenda.fellowshipitems.replace(/-/gi, '').trim();
-     agenda.missionaryitems = agenda.missionaryitems.replace(/-/gi, '').trim();
-     agenda.event = agenda.event.replace(/-/gi, '').trim();
+        let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
+        agenda.assigneddate = moment(assigneddate).toISOString(),
+
+        agenda.spiritualwelfare = agenda.spiritualwelfare.replace(/-/gi, '').trim();
+        agenda.temporalwelfare = agenda.temporalwelfare.replace(/-/gi, '').trim();
+        agenda.fellowshipitems = agenda.fellowshipitems.replace(/-/gi, '').trim();
+        agenda.missionaryitems = agenda.missionaryitems.replace(/-/gi, '').trim();
+        agenda.event = agenda.event.replace(/-/gi, '').trim();
 
         this.firebaseservice.createAgenda(agenda)
             .then(res => {
@@ -123,7 +132,7 @@ export class AgendaPage {
     }
 
     cancel() {
-        this.nav.setRoot(WelcomePage);
+        this.nav.pop();
     }
     searchFn(event) {
         this.term = event.target.value;
@@ -138,7 +147,9 @@ export class AgendaPage {
     }
 
     spiritualfocus($event) {
-        this.spiritualwelfare = "- "
+        if (this.spiritualwelfare == undefined || this.spiritualwelfare.length == 0) {
+            this.spiritualwelfare = "- "
+        }
     }
 
     temporalkey($event) {
@@ -151,9 +162,10 @@ export class AgendaPage {
     }
 
     temporalfocus($event) {
-        this.temporalwelfare = "- "
+        if (this.temporalwelfare == undefined || this.temporalwelfare.length == 0) {
+            this.temporalwelfare = "- "
+        }
     }
-
     fellowshipkey($event) {
         var keycode = ($event.keyCode ? $event.keyCode : $event.which);
         if (keycode == '13') {
@@ -164,7 +176,9 @@ export class AgendaPage {
     }
 
     fellowshipfocus($event) {
-        this.fellowshipitems = "- "
+        if (this.fellowshipitems == undefined || this.fellowshipitems.length == 0) {
+            this.fellowshipitems = "- "
+        }
     }
 
     missionarykey($event) {
@@ -177,7 +191,9 @@ export class AgendaPage {
     }
 
     missionaryfocus($event) {
-        this.missionaryitems = "- "
+        if (this.missionaryitems == undefined || this.missionaryitems.length == 0) {
+            this.missionaryitems = "- "
+        }
     }
 
     eventkey($event) {
@@ -190,7 +206,29 @@ export class AgendaPage {
     }
 
     eventfocus($event) {
-        this.event = "- "
+        if (this.event == undefined || this.event.length == 0) {
+            this.event = "- "
+        }
     }
+
+    pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+    return number;
+  }
+
+  localISOformat(date) {
+    date = new Date(date);
+    return date.getFullYear() +
+      '-' + this.pad(date.getMonth() + 1) +
+      '-' + this.pad(date.getDate()) +
+      'T' + this.pad(date.getHours()) +
+      ':' + this.pad(date.getMinutes()) +
+      ':' + this.pad(date.getSeconds()) +
+      '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+      'Z';
+  };
+
 
 }

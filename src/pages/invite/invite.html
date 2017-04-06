@@ -6,12 +6,12 @@
         </ion-item>-->
         <ion-row>
             <ion-col class="header-col" width-10>
-                <ion-icon class="cancel-font" name="close" color="secondary" ios="ios-close" md="md-close" (click)="close()"></ion-icon>
+                <ion-icon name="cancel" item-left color="secondary" class="ion-md-arrow-back cancel-button" (click)="close()"></ion-icon>
             </ion-col>
             <ion-col width-80>
-                <h3>
+                <ion-title text-center>
                     Invite Members
-                </h3>
+                </ion-title>
             </ion-col>
         </ion-row>
     </ion-navbar>
@@ -45,7 +45,7 @@
             </ion-list>-->
             <ion-list no-lines>
                 <ion-item *ngFor="let c of council">
-                    <ion-label item-left>{{c.council}}</ion-label>
+                    <ion-label class="council-styles" item-left>{{c.council}}</ion-label>
                     <ion-checkbox [(ngModel)]="c.selected" color="secondary" name="checkbox" item-right [name]="c.council"></ion-checkbox>
                 </ion-item>
             </ion-list>
@@ -53,6 +53,6 @@
     </form>
 </ion-content>
 <ion-footer>
-    <button ion-button type="submit" (click)="inviteMember()" name="Invitebtn" clear block color="secondary" text-capitalize [disabled]="!InviteMemberForm.form.valid"
-        text-capitalize>Invite</button>
+    <button ion-button type="submit" (click)="inviteMember()" name="Invitebtn" clear block color="secondary" text-capitalize
+        [disabled]="!InviteMemberForm.form.valid" text-capitalize>Invite</button>
 </ion-footer>

@@ -2,7 +2,7 @@
 	<ion-navbar hideBackButton="true">
 		<ion-row>
 			<ion-col class="header-col" width-10>
-				<ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+				<ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary"
 				    (click)="back()"></ion-icon>
 			</ion-col>
 			<ion-col width-80>
@@ -15,8 +15,8 @@
 	<ion-list>
 		<ion-item *ngFor="let user of users" (click)="transferAdminRights(user)">
 			<ion-avatar item-left>
-				<img [src]="user.avatar" *ngIf="user.avatar">
-				<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+				<img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar">
+				<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar" />
 			</ion-avatar>
 			<h3>{{user.firstname}} {{user.lastname}}</h3>
 			<p><span>{{user.councilnames}}</span></p>

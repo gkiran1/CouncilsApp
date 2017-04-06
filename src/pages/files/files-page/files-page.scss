@@ -1,0 +1,46 @@
+files-page{
+    .date-styles{
+        font-family: Bernina-Regular !important;
+        font-size: 1.08em !important;
+        color:#a9aaac !important;
+        text-align: right;        
+    }
+    .council-styles{
+        font-family:Bernina-SemiBold !important;
+        font-size: 17px !important;
+        color:#35373A !important;
+    }
+    .name-styles{
+        font-family:Bernina-SemiBold !important;
+        font-size: 15px !important;
+        color:#a9aaac !important;
+    }
+    .icon-style{
+    color:#A9AAAC;
+    width: 0.66em;
+    height: 1.08em;
+    }
+     .text-content{
+       position:absolute;
+       top:50%;
+       width: 100%;
+       margin:auto;
+       color:map-get($colors, light-gray);
+    }    
+    .toolbar-background-md,.toolbar-background-ios{
+    background: none !important;
+}
+    .empty{    
+    height: 20px;
+    border-top: 1px solid #dedede;    
+}
+.h3{
+    font-size: 1.42em !important;
+}    
+    .forwardBtn{
+// background-color: white;
+color: #e8e9eb;
+font-size: 1.42em !important;
+margin-right: 2%;
+}
+}

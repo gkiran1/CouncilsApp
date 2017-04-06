@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-row>
+      <ion-col class="header-col" width-10>
+        <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
+      </ion-col>
+      <ion-col width-80>
+        <ion-title text-center>Send Donation</ion-title>
+      </ion-col>
+    </ion-row>
+    <ion-buttons end>
+      <button ion-button>
+      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="donations-container">
+    <ion-label class="main-text">Thank You!</ion-label>
+    <ion-label class="sub-text">Your donation was successfully sent.</ion-label>
+
+    <ion-label class="margintop sub-text">Council Foundation is a 501(1)(3)</ion-label>
+    <ion-label class="marginnone sub-text">Tax ID 81-2814823</ion-label>
+    <ion-label class="marginnone" color="secondary">donate@councils.io</ion-label>
+  </div>
+</ion-content>

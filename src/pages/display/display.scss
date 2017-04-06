@@ -1,12 +1,14 @@
 page-display {
     .menuicon {
         color: #32b38a;
-        font-size: 200%;
+        font-size: 24px;
     }
     .notificationsicon {
         color: #32b38a;
         margin-left: 10px;
-        font-size: 200%;
+        font-size: 24px;
+        position: relative;
+        font-weight: bold;
     }
     .moreicon {
         color: #32b38a;
@@ -24,17 +26,19 @@ page-display {
         text-align: center;
     }
     .henry {
-        font-size: 80%;
+        font-size: 10px;
         color: #a9aaac;
         font-family: Bernina-Regular;
     }
     .least {
-        font-size: 145%;
+        font-size: 17px;
         color: #35373a;
         font-family: Bernina-Regular;
     }
     .matt {
-        font-size: 105%;
+        font-size: 13px;
         color: #a9aaac;
-    }
+        font-family: Bernina-Regular;
+       margin-top: -22px;
+    }   
 }

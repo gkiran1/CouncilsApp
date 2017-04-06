@@ -50,6 +50,26 @@ new-assignment-page {
         order: 3;
     }
     .bar-button-md{
-        font-size: 1.7rem;
+        font-size: 17px;
+    }
+
+    .danger-color{
+        color: #F13822;
+    }
+    .assignto-list{
+        position: absolute;
+        z-index: 99;
+        height: 200px;
+        width: 100%;
+        overflow-y: scroll;
+    }
+    .assignto-list{
+        ion-label{
+            display: flex;
+            align-items: center;
+        }
+        ion-label h4{
+            flex: 1;
+        }
     }
 }

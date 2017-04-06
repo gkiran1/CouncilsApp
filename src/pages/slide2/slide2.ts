@@ -25,13 +25,14 @@ import { CouncilDiscussionsListPage } from '../discussions/council-discussions-l
 import { NewAgendaPage } from '../new-agenda/new-agenda';
 import { slide1Page } from '../slide1/slide1';
 import { NewCouncilFilePage } from '../files/new-council-file/new-council-file';
+import { FilesListPage } from '../files/files-page/files-page';
 import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/new-private-discussion';
 import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
 
 @Component({
   templateUrl: 'slide2.html',
   selector: 'slide2',
-  providers: [AssignmentsListPage, ActiveCouncilsPage, CouncilDiscussionsListPage, AgendasPage, PrivateDiscussionsListPage]
+  providers: [AssignmentsListPage, ActiveCouncilsPage, CouncilDiscussionsListPage, AgendasPage, PrivateDiscussionsListPage, FilesListPage]
 })
 export class slide2Page {
 
@@ -40,6 +41,7 @@ export class slide2Page {
   councilDiscussionsCount;
   privateDiscussionsCount
   agendasCount;
+  filesCount;
   //@ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
@@ -55,7 +57,8 @@ export class slide2Page {
     private firebaseService: FirebaseService,
     public councilDiscussionsListPage: CouncilDiscussionsListPage,
     public agendaPage: AgendasPage,
-    public privateDiscussionsListPage: PrivateDiscussionsListPage) {
+    public privateDiscussionsListPage: PrivateDiscussionsListPage,
+    public filesListPage: FilesListPage) {
 
     this.userObj = null;
 
@@ -75,11 +78,12 @@ export class slide2Page {
     this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
     this.privateDiscussionsCount = privateDiscussionsListPage.getCount();
     this.agendasCount = agendaPage.getCount();
+    this.filesCount = filesListPage.getCount();
 
   }
   councilsPage() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Councils',
+      title: 'Council',
       buttons: [
         {
           text: 'Add Agenda',
@@ -173,6 +177,9 @@ export class slide2Page {
   }
   privateDiscussionPage() {
     this.nav.push(PrivateDiscussionsListPage);
+  }
+  filesPage() {
+    this.nav.push(FilesListPage);
   }
 
 }

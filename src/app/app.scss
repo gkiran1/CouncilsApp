@@ -44,77 +44,135 @@
     font-style: normal;
 }
 
-body {
-    padding: 0.5em !important;
-    font-family: 'Bernina-Regular', sans-serif;
-    font-size: 12pt !important;
+html {
+	font-size: 62.5%; /* [1] */
 }
 
-input {
-    font-family: 'Bernina-Regular', sans-serif;
+@function parseInt($n) { /* [2] */
+  @return $n / ($n * 0 + 1);
+}
+
+@mixin rem($property, $values) {
+  $px : (); /* [3] */
+  $rem: (); /* [3] */
+  
+  @each $value in $values { /* [4] */
+   
+    @if $value == 0 or $value == auto { /* [5] */
+      $px : append($px , $value);
+      $rem: append($rem, $value);
+    }
+    
+    @else { 
+      $unit: unit($value); /* [6] */
+      $val: parseInt($value); /* [6] */
+      
+      @if $unit == "px" { /* [7] */
+        $px : append($px,  $value);
+        $rem: append($rem, ($val / 10 * 1rem));
+      }
+      
+      @if $unit == "rem" { /* [7] */
+        $px : append($px,  ($val * 10 * 1px));
+        $rem: append($rem, $value);
+      }
+    }
+  }
+  
+  #{$property}: $px;  /* [8] */
+  #{$property}: $rem; /* [8] */
+}
+
+body {
+  @include rem(font-size, 1.6rem);
+  font-family: Bernina-Regular, sans-serif;
+  
+}
+
+input, textarea {
+    font-family: 'Bernina-Regular', sans-serif !important;
+    font-size: 1.7rem !important;
 }
 
 .toolbar-title-md,
 .toolbar-title-ios {
     font-family: "Bernina-Bold", sans-serif;
-    font-size: 145% !important;
+    font-size: 1.7rem !important;
     color: #35373A !important;
 }
 
 .nocontent-message {
-    font-family: "Benina-Regular", sans-serif;
-    font-size: 1.35em;
-    color: #a9aaac;
-}
+    
+        display: table;
+        height: 100%;
+        width: 100%;
+        background: #fafafa;
+        padding: -16px;
+    }
+    .nocontent-message p {
+       position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+        text-align: center;
+        vertical-align: center;
+        
+        font-family: Bernina-Regular !important;
+        font-size:1.7rem !important;
+        
+        color: #a9aaac;
+        width:100%;
+    }
 
 .header-md,
 .header-ios {
     display: block;
     text-align: center;
     background: #FFFFFF;
-    border-bottom: 1px solid #dcd9d8;
+    border-bottom: 1px solid #dcd9d8 !important;
 }
 
 h1 {
     font-family: Gotham-Medium, sans-serif;
-    font-size: 2.4em !important;
+    font-size: 2.8rem !important;
     color: #35373a !important;
 }
 
 .row2 {
     font-family: Gotham-Medium;
-    font-size: 28pt;
+    font-size: 2.8rem;
     color: #35373a !important;
 }
 
 .row4 {
     font-family: Bernina-Regular;
-    font-size: 17pt;
+    font-size: 1.7rem;
     color: #35373a !important;
 }
 
 h3 {
     font-family: Bernina-Regular, sans-serif;
-    font-size: 1.35em !important;
+    font-size: 1.7rem !important;
     color: #35373a !important;
 }
 
 .subtitle {
     font-family: Bernina-Regular, sans-serif;
-    font-size: 1.35em !important;
+    font-size: 1.7rem !important;
     color: #35373a !important;
 }
 
 .footer-md,
 .footer-ios {
     background: #FFFFFF;
+    border-top: 1px solid #dcd9d8;
 }
 
 button,
 .button-md,
 .button-ios {
     font-family: "Bernina-Regular", sans-serif;
-    font-size: 1.35em;
+    font-size: 1.7rem;
     text-transform: capitalize !important;
     color: #3CB18A;
 }
@@ -130,32 +188,24 @@ button,
 .status-button-container {
     display: block;
     position: relative;
-    padding-top: 128pt;
+    padding-top: 12.8rem;
     margin: auto;
 }
 
-.action-sheet-md .action-sheet-group .button-inner {
-    -webkit-justify-content: center !important;
-    -ms-flex-pack: center !important;
-    justify-content: center !important;
-}
 
-.action-sheet-md .action-sheet-title {
-    text-align: center !important;
-}
 
 p {
     font-family: Bernina-Regular, sans-serif;
 }
 
 .cancel-font {
-    font-size: 24pt;
+    font-size: 2.4rem;
 }
 
 .ion-md-close {
-    font-size: 24pt;
+    font-size: 2.4rem;
     position: absolute;
-    top: 15px;
+    top: 1.5rem;
 }
 
 ion-header ion-col {
@@ -171,15 +221,11 @@ ion-header ion-col {
 ion-header ion-col h3 {
     font-weight: bold;
     font-family: "Bernina-Bold", sans-serif;
-    font-size: 1.35em !important;
+    font-size: 1.7rem !important;
     color: #35373A !important;
 }
 
-.action-sheet-ios .action-sheet-title {
-    font-family: Bernina-SemiBold !important;
-    font-size: 1.08em !important;
-    color: #35373A !important;
-}
+
 
 .picker-opt {
     text-overflow: initial !important;
@@ -230,10 +276,7 @@ button:disabled {
     background-color: #f7f7f7
 }
 
-.header-md,
-.header-ios {
-    border-bottom: none;
-}
+
 
 .header-md::after,
 .tabs-md[tabsPlacement="top"]>.tabbar::after,
@@ -249,3 +292,204 @@ button:disabled {
     height: 0px;
     background-position: 0 0;
 }
+
+.toolbar-background {
+    background: #FFFFFF !important;
+}
+
+
+
+.slide-zoom {
+    height: 100% !important;
+}
+
+.empty {
+        height: 28px;
+        background-color: #fafafa !important;
+        border-top: 1px solid #e8e9eb !important;
+        border-bottom: 1px solid #e8e9eb !important;
+    }
+
+    ion-content {
+        display: flex;
+  flex-direction: column;
+  height: 100%;
+    }
+
+    ion-content .page-blank-area {
+        align-items: stretch;
+    }
+
+    .page-blank-area {
+        flex: 1;
+        background-color: #fafafa !important;
+        height: 100%;
+        
+    }
+
+    .bordered-item.item-ios.item-block .item-inner,
+.bordered-item.item-md.item-block .item-inner {
+border-bottom: 1px solid #e8e9eb !important;
+}
+
+.item-noborder.div {
+        border: none !important;
+    }
+
+/****************************** Action Sheet Styles **********************************/
+
+.action-sheet-ios .action-sheet-button {
+    height: 4.1rem !important;
+    min-height: 4.1rem !important;
+    font-size: 1.7rem !important;
+    border-radius: 0;
+    
+}
+
+.action-sheet-md .action-sheet-button {
+    height: 4.1rem !important;
+    min-height: 4.1rem !important;
+    font-family: Bernina-Regular;
+    font-size: 1.7rem !important;
+    border-radius: 0;
+    text-align: center;
+    border-bottom: 1px solid #d6d6da;
+}
+
+.action-sheet-ios .action-sheet-title {
+    font-family: Bernina-SemiBold !important;
+    font-size: 1.3rem !important;
+    color: #35373A !important;
+    height: 3.2rem !important;
+    display: flex;
+    text-align: center !important;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 0;
+}
+
+.action-sheet-md .action-sheet-title {
+    font-family: Bernina-SemiBold !important;
+    font-size: 1.3rem !important;
+    color: #35373A !important;
+    height: 3.2rem !important;
+    display: flex;
+    text-align: center !important;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 0;
+    border-bottom: 1px solid #d6d6da;
+}
+
+.action-sheet-container {
+    padding: 0 !important;
+    border-radius: 0;
+    background:rgba(256,256,256,.9) !important;
+   opacity: .9;
+   margin-bottom: 0;
+}
+
+.action-sheet-group {
+   background:rgba(256,256,256,.9) !important;
+   opacity: .9;
+   border-radius: 0;
+   margin-bottom: 0;
+}
+
+.action-sheet-ios .action-sheet-group {
+    border-radius: 0;
+}
+
+.action-sheet-ios .action-sheet-group:last-child {
+    margin-bottom: 0;
+}
+
+.action-sheet-ios .action-sheet-group .button-inner {
+    -webkit-justify-content: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+    border-radius: 0 !important;
+    margin-bottom: 0;
+    background:rgba(256,256,256,.9);
+}
+
+.action-sheet-md .action-sheet-group .button-inner {
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: center;
+}
+
+.action-sheet-md .action-sheet-title {
+    text-align: center !important;
+    font-size: 1.3rem !important;
+    border-radius: 0;
+
+}
+
+.actionsheet-items {
+    color: #3cb18a !important;
+    font-family: Bernina-Regular !important;
+    font-size: 1.7rem !important;
+    background:rgba(256,256,256,.9);
+    border-radius: 0;
+}
+
+.actionsheet-cancel {
+    color: #35373A !important;
+    font-family: Bernina-Regular !important;
+
+    font-size: 17px !important;
+}
+.item-radio-checked {
+    background: #f4f6fa;
+}
+
+/*************************** End - AcionSheet Styles ******************************/
+
+// uncomment below media query if you need to grayout the modal backdrop.
+
+@media not all and (min-height: 600px) and (min-width: 768px) {
+  ion-modal ion-backdrop {
+    visibility: visible;
+    opacity: 0 !important;
+  }
+}
+
+.modal-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 40%; 
+    top: 50%;
+
+}
+
+
+ion-avatar img, ion-thumbnail img {
+    display: block;
+    width: 48px !important;
+    height: 48px  !important;
+    border-radius:50%  !important;
+}
+
+ion-avatar {
+        background: #F4F6FA;
+        width: 48px !important;
+    height: 48px  !important;
+    border-radius:50%  !important;
+    }
+
+
+
+
+
+.fwd-arrow-grey {
+    color: #a9aaac !important;
+}
+
+.cancel-button {
+        font-size:24px !important;
+    }

@@ -6,4 +6,9 @@ www/build/*
 /www
 /www/*
 www
+resources
+resources/*
+/resources
+/resources/*
 npm-debug.log
+.io-config.json

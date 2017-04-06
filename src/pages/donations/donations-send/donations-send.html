@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-row>
+      <ion-col class="header-col" width-10>
+        <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
+      </ion-col>
+      <ion-col width-80>
+        <ion-title text-center>Send Donation</ion-title>
+      </ion-col>
+    </ion-row>
+    <ion-buttons end>
+      <button ion-button>
+      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="donationForm">
+    <ion-item>
+      <ion-label floating>Amount</ion-label>
+      <ion-input type="text" name="amount" formControlName="amount" (keyup)="addCurrencySysmbol($event)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Full Name</ion-label>
+      <ion-input type="text" name="fullname" formControlName="fullname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email" name="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-list class="period-list" radio-group name="donationtype" formControlName="donationtype">
+      <ion-item>
+        <ion-label>One time donation</ion-label>
+        <ion-radio value="onetime" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Monthly</ion-label>
+        <ion-radio value="monthly"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-label class="sub-heading">
+      CREDIT CARD INFO
+    </ion-label>
+     <ion-item>
+      <ion-label floating>Number</ion-label>
+      <ion-input type="text" name="creditcardNo" (keyup)="formatToCreditNumber($event)" maxLength='19' formControlName="creditcardNo"></ion-input>
+    </ion-item>
+     <ion-item>
+      <ion-label floating>Valid Thru</ion-label>
+      <ion-input type="text" name="creditValidthru" (keyup)="formatToValidThru($event)" maxLength="5" formControlName="creditValidthru"></ion-input>
+    </ion-item>
+  </form>
+</ion-content>
+<ion-footer>
+  <button ion-button clear block color="secondary" [disabled]="!donationForm.valid" (click)="send(donationForm.value)">Send</button>
+</ion-footer>

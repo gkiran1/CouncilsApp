@@ -63,7 +63,8 @@ export class FirebaseService {
                 createddate: user.createddate,
                 lastupdateddate: user.lastupdateddate,
                 isactive: user.isactive,
-                guestpicture: user.avatar
+                guestpicture: user.avatar,
+                isnotificationreq: false
             }).then(() => user.councils.forEach(counc => {
                 this.createUserCouncils(uid, counc);
             }));
@@ -133,11 +134,11 @@ export class FirebaseService {
         }).catch(err => { throw err });
     }
 
-    getCouncilsByType(councilType: string): Observable<Council[]> {
+    getCouncilsByType(unitNumber: string): Observable<Council[]> {
         return this.af.database.list('councils', {
             query: {
-                orderByChild: 'counciltype',
-                equalTo: councilType
+                orderByChild: 'unitnumber',
+                equalTo: unitNumber
             }
         }).map(results => results);
     }
@@ -168,17 +169,17 @@ export class FirebaseService {
         });
     }
 
-    createCouncil(council: Council) {
-        firebase.database().ref().child('councils').push(
-            {
-                council: council.council,
-                firstname: council.counciltype
-            })
-            .then(() => {
-                return "User is successfully invited..."
-            })
-            .catch(err => { throw err });
-    }
+    // createCouncil(council: Council) {
+    //     firebase.database().ref().child('councils').push(
+    //         {
+    //             council: council.council,
+    //             firstname: council.counciltype
+    //         })
+    //         .then(() => {
+    //             return "User is successfully invited..."
+    //         })
+    //         .catch(err => { throw err });
+    // }
 
     createUserCouncils(userUid: string, council: string) {
         this.rootRef.child('usercouncils').push({
@@ -189,7 +190,7 @@ export class FirebaseService {
     }
 
     createCouncils(council: Council) {
-        var counRef = this.rootRef.child('councils').orderByChild('council_counciltype').equalTo(council.council + '_' + council.counciltype).limitToFirst(1);
+        var counRef = this.rootRef.child('councils').orderByChild('council_unitnumber').equalTo(council.council + '_' + council.unitnumber).limitToFirst(1);
         return counRef.once('value').then(function (snapshot) {
             if (snapshot.val()) {
                 // invalid council: Council already exists..
@@ -199,8 +200,9 @@ export class FirebaseService {
                 return firebase.database().ref().child('councils').push(
                     {
                         council: council.council,
-                        counciltype: council.counciltype,
-                        council_counciltype: council.council + '_' + council.counciltype
+                        unittype: council.counciltype,
+                        unitnumber: Number(council.unitnumber),
+                        council_unitnumber: council + '_' + council.unitnumber
                     }).then(res => {
                         return res.key;
                     }).catch(err => {
@@ -279,9 +281,11 @@ export class FirebaseService {
     }
 
     getAboutus() {
-        var aboutusRef = this.rootRef.child('aboutus/-Kd9xpkjKGqdLVdNB_Gj');
-        return aboutusRef.once('value').then(function (snapshot) {
-            return snapshot.val();
+        let about:any;
+        var aboutusRef = this.rootRef.child('aboutus');
+     return aboutusRef.orderByChild('createddate').limitToLast(1).once('value').then(function (snapshot) {
+         if(snapshot.val())
+            return snapshot;
         });
     }
 
@@ -307,23 +311,27 @@ export class FirebaseService {
             return "councils in user updated successfully..."
         }).catch(err => {
             throw err;
-        })
+        });
     }
 
     inactivateUser(userUid: string, isactive: boolean) {
-        return this.rootRef.child('users/' + userUid).update({ isactive: isactive }).then(() => {
+        return this.rootRef.child('users/' + userUid).update({ isactive: isactive, isnotificationreq: true }).then(() => {
             return "User inactivated successfully..."
+        }).then(() => {
+            this.rootRef.child('users/' + userUid).update({ isnotificationreq: false })
         }).catch(err => {
             throw err;
-        })
+        });
     }
 
     reactivateUser(userUid: string, isactive: boolean) {
-        return this.rootRef.child('users/' + userUid).update({ isactive: isactive }).then(() => {
+        return this.rootRef.child('users/' + userUid).update({ isactive: isactive, isnotificationreq: true }).then(() => {
             return "User reactivated successfully..."
+        }).then(() => {
+            this.rootRef.child('users/' + userUid).update({ isnotificationreq: false })
         }).catch(err => {
             throw err;
-        })
+        });
     }
 
     transferAdminRights(currentAdminId, futureAdminId) {
@@ -397,7 +405,8 @@ export class FirebaseService {
                     if (userUid === discussion.otherUserId) {
                         this.af.database.object(`privatediscussions/${discussion.$key}`).update({
                             otherUserAvatar: avatar,
-                            otherUserName: firstname + ' ' + lastname
+                            otherUserName: firstname + ' ' + lastname,
+                            otherUserEmail: email
                         });
                     }
                     if (userUid === discussion.lastMsg.userId) {
@@ -426,14 +435,14 @@ export class FirebaseService {
         })
     }
 
-    getAllCouncils(counciltype: string): FirebaseListObservable<any[]> {
-        return this.af.database.list('councils', {
-            query: {
-                orderByChild: 'counciltype',
-                equalTo: counciltype
-            }
-        });
-    }
+    // getAllCouncils(counciltype: string): FirebaseListObservable<any[]> {
+    //     return this.af.database.list('councils', {
+    //         query: {
+    //             orderByChild: 'counciltype',
+    //             equalTo: counciltype
+    //         }
+    //     });
+    // }
 
     createAgendaLite(agenda: any) {
         return this.rootRef.child('agendas').push({
@@ -463,7 +472,14 @@ export class FirebaseService {
             }
         })
     }
-
+    getFilesByCouncilId(councilId: string) {
+        return this.af.database.list('files', {
+            query: {
+                orderByChild: 'councilid',
+                equalTo: councilId
+            }
+        })
+    }
     createDiscussion(discussion: any) {
         return this.rootRef.child('discussions').push(
             {
@@ -476,7 +492,9 @@ export class FirebaseService {
                 isActive: discussion.isActive,
                 messages: discussion.messages,
                 lastMsg: discussion.lastMsg,
-                typings: discussion.typings
+                lastMsgSentUser: discussion.lastMsgSentUser,
+                typings: discussion.typings,
+                isNotificationReq: discussion.isNotificationReq
             })
             .then((res) => {
                 //to get a reference of newly added object -res.path.o[1]
@@ -484,25 +502,26 @@ export class FirebaseService {
             })
             .catch(err => { throw err });
     }
-    saveFile(file: any, image: any) {
+    saveFile(file: any) {
         return this.rootRef.child('files').push(
             {
-                // name: file.name,
+                filename: file.filename,
+                // filesize: file.filesize,
+                // filetype: file.filetype,
                 councilid: file.councilid,
                 councilname: file.councilname,
                 createdDate: file.createdDate,
                 createdUser: file.createdUser,
                 createdBy: file.createdBy,
                 isActive: file.isActive,
-                images: image
             })
             .then((res) => {
                 //to get a reference of newly added object -res.path.o[1]
                 return res.path.o[1];
             })
             .catch(err => {
-                console.log(err);
-                alert(err);
+                // console.log(err);
+                throw err
             });
     }
 
@@ -594,7 +613,8 @@ export class FirebaseService {
     updateDiscussionChat(discussionId, msg) {
         return this.af.database.list(`discussions/${discussionId}/messages`).push(msg)
             .then(() => {
-                return this.af.database.object(`discussions/${discussionId}`).update({ lastMsg: msg.text });
+                return this.af.database.object(`discussions/${discussionId}`)
+                    .update({ lastMsg: msg.text, lastMsgSentUser: msg.user_firstname + ' ' + msg.user_lastname, isNotificationReq: true });
             })
     }
     getDiscussionByKey(key) {
@@ -611,6 +631,9 @@ export class FirebaseService {
     getDiscussions() {
         return this.af.database.list('discussions');
     }
+    getFiles() {
+        return this.af.database.list('files');
+    }
     getUsers() {
         return this.af.database.list('users');
     }
@@ -621,13 +644,16 @@ export class FirebaseService {
                 createdUserId: discussion.createdUserId,
                 createdUserName: discussion.createdUserName,
                 createdUserAvatar: discussion.createdUserAvatar,
+                createdUserEmail: discussion.createdUserEmail,
                 otherUserId: discussion.otherUserId,
                 otherUserName: discussion.otherUserName,
                 otherUserAvatar: discussion.otherUserAvatar,
+                otherUserEmail: discussion.otherUser.email,
                 isActive: discussion.isActive,
                 messages: discussion.messages,
                 lastMsg: discussion.lastMsg,
-                typings: discussion.typings
+                typings: discussion.typings,
+                isNotificationReq: discussion.isNotificationReq
             })
             .then((res) => {
                 //to get a reference of newly added object -res.path.o[1]
@@ -641,7 +667,7 @@ export class FirebaseService {
     updatePrivateDiscussionChat(discussionId, msg) {
         return this.af.database.list(`privatediscussions/${discussionId}/messages`).push(msg)
             .then(() => {
-                return this.af.database.object(`privatediscussions/${discussionId}`).update({ lastMsg: msg });
+                return this.af.database.object(`privatediscussions/${discussionId}`).update({ lastMsg: msg, isNotificationReq: true });
             })
     }
     getPrivateDiscussions() {
@@ -651,10 +677,81 @@ export class FirebaseService {
         return this.af.database.object(`files/${key}`);
     }
     updateDiscussion(discussionId, typings) {
-        return this.af.database.object(`discussions/${discussionId}`).update({ typings: typings });
+        return this.af.database.object(`discussions/${discussionId}`).update({ typings: typings, isNotificationReq: false });
     }
-    updatePrivateDiscussion(discussionId, typings){
-         return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings });
+    updatePrivateDiscussion(discussionId, typings) {
+        return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings, isNotificationReq: false });
     }
-
+    updatePrivateDiscussionMessageStatus(discussionId, messageId, status) {
+        return this.af.database.object(`privatediscussions/${discussionId}/messages/${messageId}`).update({ status: status, isNotificationReq: false });
+    }
+    getNotifications(userId) {
+        return this.af.database.list('notifications', {
+            query: {
+                orderByChild: 'userid',
+                equalTo: userId
+            }
+        });
+    }
+    setDefaultNotificationSettings(userId) {
+        var notSettingsRef = this.rootRef.child('notificationsettings').orderByChild('userid').equalTo(userId);
+        return notSettingsRef.once("value", function (snap) {
+            if (!snap.exists()) {
+                return firebase.database().ref().child('notificationsettings').push({
+                    userid: userId,
+                    allactivity: false,
+                    agendas: false,
+                    discussions: false,
+                    pvtdiscussions: false,
+                    assignments: false,
+                    closingassignment: false,
+                    files: false,
+                    actinactaccount: false
+                });
+            }
+        });
+    }
+    getNotificationSettings(userId) {
+        return this.af.database.list('notificationsettings', {
+            query: {
+                orderByChild: 'userid',
+                equalTo: userId,
+                limitToFirst: 1
+            }
+        });
+    }
+    updateNotificationSettings(key, notSettings) {
+        return this.af.database.list('notificationsettings').update(key, {
+            allactivity: notSettings.allactivity,
+            agendas: notSettings.agendas,
+            discussions: notSettings.discussions,
+            pvtdiscussions: notSettings.pvtdiscussions,
+            assignments: notSettings.assignments,
+            closingassignment: notSettings.closingassignment,
+            files: notSettings.files,
+            actinactaccount: notSettings.actinactaccount
+        }).then(() => {
+            return "User notification settings has been updated."
+        }).catch(err => { throw err });
+    }
+    updateIsReadInNotifications(key) {
+        return this.af.database.object('notifications/' + key).update({ isread: true });
+    }
+    getAgendaByKey(key) {
+        return this.af.database.object('agendas/' + key);
+    }
+    getAssignmentByKey(key) {
+        return this.af.database.object('assignments/' + key);
+    }
+    deleteFilesByKey(key) {
+        return this.af.database.object(`files/${key}`).remove().then(() => {
+            return "file deleted from database."
+        }).catch(err => { alert(err) });
+    }
+    checkNetworkStatus(uid, callback) {
+        let userRef = this.rootRef.child('/presence/' + uid);
+        userRef.on('value', function (snapshot) {
+            callback(snapshot.val());
+        });
+    }
 }

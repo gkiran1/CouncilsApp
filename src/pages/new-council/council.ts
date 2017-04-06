@@ -1,5 +1,6 @@
 export class Council {
-    $key:string;
+    $key: string;
     council: string;
     counciltype: string;
+    unitnumber: number;
 } 

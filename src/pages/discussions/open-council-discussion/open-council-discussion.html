@@ -3,11 +3,11 @@
         <ion-row>
             <ion-col class="header-col" width-10>
                 <button ion-button clear>
-                 <ion-icon class="cancel-font" name="cancel" color="secondary" ios="ios-arrow-round-back" md="md-arrow-back" (click)="back()"></ion-icon>
+                 <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" color="secondary" (click)="back()"></ion-icon>
                 </button>
             </ion-col>
             <ion-col width-80>
-                <h3>{{discussion.topic}}</h3>
+                <h3 text-center>{{discussion.topic}}</h3>
             </ion-col>
         </ion-row>
     </ion-navbar>
@@ -16,9 +16,9 @@
     <!--<ion-scroll scrollY="true" class="messages">-->
     <div class="chat-content">
         <ion-item text-wrap>
-            <ion-label>
+            <ion-label class="font1 line-height">
                 This discussion was created by <span ion-text color="secondary">{{user.$key===discussion.createdBy?'You':discussion.createdUser}}</span> on {{discussion.createdDate |
-                amCalendar}}.There are {{activeusersCount}} active participants from the <span ion-text color="secondary">{{discussion.councilname}}</span>.
+                customdateformat}}. There are {{activeusersCount}} active participants from the <span ion-text color="secondary">{{discussion.councilname}}</span>.
             </ion-label>
         </ion-item>
         <ion-list>
@@ -27,9 +27,10 @@
                     <img [src]="msg.user_avatar" *ngIf="msg.user_avatar">
                     <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!msg.user_avatar" />
                 </ion-avatar>
-                <h2>{{msg.user_firstname}} {{msg.user_lastname}}</h2>
-                <p>{{msg.timestamp | amCalendar}}</p>
-                <p>{{msg.text}}</p>
+                <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
+                <ion-icon class="msg-status-icon" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark" md="ios-checkmark"></ion-icon>
+                <p class="font2">{{msg.timestamp | customdateformat}}</p>
+                <p class="font5 line-height">{{msg.text}}</p>
             </ion-item>
         </ion-list>
     </div>
@@ -42,7 +43,7 @@
             <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)"></ion-input>
         </ion-col>
         <ion-col width-20>
-            <button ion-button color="secondary" clear (click)="send()">Send</button>
+            <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
         </ion-col>
     </ion-row>
 </ion-footer>

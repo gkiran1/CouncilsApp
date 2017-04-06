@@ -2,13 +2,11 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col" width-10>
-                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+                <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary"
                     (click)="cancel()"></ion-icon>
             </ion-col>
             <ion-col width-80>
-                <h3>
-                    New Agenda Lite
-                </h3>
+              <ion-title text-center>Lite</ion-title>
             </ion-col>
         </ion-row>
     </ion-navbar>
@@ -17,7 +15,8 @@
 
     <form [formGroup]="newagendaliteForm" (ngSubmit)="newagendaliteForm.value">
         <ion-item>
-            <ion-label floating>Council</ion-label>
+            <ion-label *ngIf="!assignedcouncil">Council</ion-label>
+            <ion-label floating color="secondary" *ngIf="assignedcouncil">Council</ion-label>
             <ion-select name="assignedcouncil" (ionChange)="assignedMemberChange(newagendaliteForm.value)" [(ngModel)]='assignedcouncil'
                 formControlName="assignedcouncil">
                 <ion-option *ngFor="let c of councils" [value]="c">{{c.council}}</ion-option>
@@ -26,17 +25,8 @@
 
         <ion-item>
             <ion-label floating>Date & Time</ion-label>
-            <ion-datetime displayFormat="DDDD, MMM D, YYYY, hh:mma" pickerFormat="DDDD, MMM D, YYYY, hh:mma" [min]="minDate" [max]="2120"
-                name="assigneddate" formControlName="assigneddate" monthNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
-                dayNames="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"></ion-datetime>
+             <ion-datetime displayFormat="DDDD, MMM D,YYYY, h:mm a" pickerFormat="DDD MMM D, h, mm, A" name="assigneddate" formControlName="assigneddate"></ion-datetime>
         </ion-item>
-
-        <!--<ion-row>
-            <ion-col>
-                <ion-item>
-                    <ion-label floating>Date</ion-label>
-
-                    <ion-datetime displayFormat="DD.MM.YYYY" [min]="minDate" [max]="2120" name="assigneddate" formControlName="assigneddate"></ion-datetime>-->
 
         <ion-item>
             <ion-label floating>Opening Hymn</ion-label>
@@ -44,7 +34,8 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Opening Prayer</ion-label>
+            <ion-label *ngIf="!openingprayer">Opening Prayer</ion-label>
+            <ion-label floating color="secondary" *ngIf="openingprayer">Opening Prayer</ion-label>
             <ion-select name="openingprayer" [(ngModel)]='openingprayer' formControlName="openingprayer">
                 <ng-container *ngFor="let user of users">
                     <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
@@ -53,7 +44,8 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Spiritual Thought</ion-label>
+            <ion-label *ngIf="!spiritualthought">Spiritual Thought</ion-label>
+            <ion-label floating color="secondary" *ngIf="spiritualthought">Spiritual Thought</ion-label>
             <ion-select name="spiritualthought" [(ngModel)]='spiritualthought' formControlName="spiritualthought">
                 <ng-container *ngFor="let user of users">
                     <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
@@ -62,7 +54,8 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Assignments</ion-label>
+            <ion-label *ngIf="!assignments">Assignments</ion-label>
+            <ion-label floating color="secondary" *ngIf="assignments">Assignments</ion-label>
             <ion-select name="assignments" [(ngModel)]='assignments' formControlName="assignments">
                 <ng-container *ngFor="let assignment of assignmentslist">
                     <ion-option [value]="assignment">{{assignment.description}}</ion-option>
@@ -71,7 +64,8 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Completed Assignments</ion-label>
+            <ion-label *ngIf="!completedassignments">Completed Assignments</ion-label>
+            <ion-label floating color="secondary" *ngIf="completedassignments">Completed Assignments</ion-label>
             <ion-select name="completedassignments" [(ngModel)]='completedassignments' formControlName="completedassignments">
                 <ng-container *ngFor="let completedassignment of completedassignmentslist">
                     <ion-option [value]="completedassignment">{{completedassignment.description}}</ion-option>
@@ -80,21 +74,17 @@
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Discussion Items</ion-label>
-            <!--<ng-container *ngFor="let discussionitem of discussionitems">
-                <span>-</span>
-                <ion-input name="notes" (focus)="discussionfocus()" name="discussionitem" [(ngModel)]="discussionitem"
-                    formControlName="discussionitem" (keyup)="keypressed($event)" maxlength="500"></ion-input>
-            </ng-container>-->
-
-            <ion-textarea type="text" (focus)="discussionfocus()" elastic id="discussionitems" name="discussionitems" [(ngModel)]="discussionitems" formControlName="discussionitems"
-                maxlength="500" (keyup)="keypressed($event)">
+            <ion-label *ngIf="!discussionitems">Discussion Items</ion-label>
+            <ion-label floating color="secondary" *ngIf="discussionitems">Discussion Items</ion-label>
+            <ion-textarea type="text" wrap="off" (focus)="discussionfocus()" elastic id="discussionitems" name="discussionitems" [(ngModel)]="discussionitems"
+                formControlName="discussionitems" maxlength="500" (keyup)="keypressed($event)">
                 </ion-textarea>
 
         </ion-item>
 
         <ion-item>
-            <ion-label floating>Closing Prayer</ion-label>
+            <ion-label *ngIf="!closingprayer">Closing Prayer</ion-label>
+            <ion-label floating color="secondary" *ngIf="closingprayer">Closing Prayer</ion-label>
             <ion-select name="closingprayer" [(ngModel)]='closingprayer' formControlName="closingprayer">
                 <ng-container *ngFor="let user of users">
                     <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>

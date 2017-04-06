@@ -2,13 +2,11 @@
   <ion-navbar hideBackButton="true">
     <ion-row>
       <ion-col class="header-col" width-10>
-        <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-arrow-round-back" md="md-arrow-round-back"
+        <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary"
           (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
-        <h3>
-          Agendas
-        </h3>
+        <ion-title text-center>Agendas</ion-title>
       </ion-col>
     </ion-row>
     <ion-buttons end>
@@ -21,13 +19,14 @@
 
 <ion-content padding center text-center>
   <ng-container *ngIf="agendasArray.length">
-    <ion-list inset>
-      <ion-item (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
-        <ion-icon name="list" color="secondary" item-left></ion-icon>
-        <!--<ion-icon name="list" color="secondary" item-left [ngClass]="{'active': selectedIdx != i}"></ion-icon>-->
+    <ion-list>
+      <ion-item class="background-color" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
+        <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
+        <ion-img class="img-styles" src="../assets/icon/agendaicon.png"></ion-img>
+
         <p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
         <button ion-button item-right clear>
-      <ion-icon class="icon-style" name="arrow-forward"></ion-icon>
+      <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey"></ion-icon>
       </button>
         <p><span class="agendacouncil-styles">{{item.agendacouncil}}</span>
         </p>
@@ -35,6 +34,8 @@
     </ion-list>
   </ng-container>
   <ng-container *ngIf="!agendasArray.length">
-    <p class="text-content">There are no agendas</p>
+    <div class="nocontent-message">
+      <p>There are no agendas</p>
+    </div>
   </ng-container>
 </ion-content>

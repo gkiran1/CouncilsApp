@@ -16,10 +16,13 @@ import { Subscription } from "rxjs";
 export class AssignmentsListPage {
   user;
   councilAssignmentsArray = [];
+  personalAssignmentsArray = [];
   completedAssignmentsArray = [];
   count$ = new Subject();
   userSubscription: Subscription;
-  selectedIdx;
+  personalselectedIdx;
+  councilselectedIdx;
+  completedselectedIdx;
 
   constructor(public navCtrl: NavController, public fs: FirebaseService, public af: AngularFire) {
     this.userSubscription = this.af.auth.subscribe(auth => {
@@ -28,24 +31,29 @@ export class AssignmentsListPage {
           this.user = usr;
           af.database.list('/assignments')
             .subscribe(assignments => {
-              const councilAssignments = assignments.filter(assignment => {
-                return this.user.councils.includes(assignment.councilid);
-              });
-
               this.councilAssignmentsArray = [];
+              this.personalAssignmentsArray = [];
               this.completedAssignmentsArray = [];
-     
-              councilAssignments.forEach(e => {
-                if (e.isCompleted) {
-                  this.completedAssignmentsArray.push(e);
-                } else {
-                  this.councilAssignmentsArray.push(e);
+              assignments.forEach(assignment => {
+                if (assignment.assignedto === this.user.$key) {
+                  if (assignment.isCompleted) {
+                    this.completedAssignmentsArray.push(assignment);
+                  } else {
+                    this.personalAssignmentsArray.push(assignment);
+                  }
+
+                } else if (this.user.councils.includes(assignment.councilid)) {
+                  if (assignment.isCompleted) {
+                    this.completedAssignmentsArray.push(assignment);
+                  } else {
+                    this.councilAssignmentsArray.push(assignment);
+                  }
                 }
               });
 
               // this.councilAssignmentsArray = assignments;
-              let count = this.councilAssignmentsArray.length + this.completedAssignmentsArray.length;
-              this.count$.next(this.councilAssignmentsArray.length + this.completedAssignmentsArray.length);
+              let count = this.personalAssignmentsArray.length + this.councilAssignmentsArray.length + this.completedAssignmentsArray.length;
+              this.count$.next(count);
             });
         })
       }
@@ -56,10 +64,26 @@ export class AssignmentsListPage {
     return this.count$;
   }
 
-  assignmentSelected(assignment, index) {
+  assignmentSelected(assignment, index, type) {
     this.navCtrl.push(NewAssignmentPage, { assignment: assignment });
-    this.selectedIdx = index;
+    if (type === 'council') {
+      this.councilselectedIdx = index;
+      this.personalselectedIdx = '';
+      this.completedselectedIdx = '';
+    } else if (type === 'completed') {
+      this.completedselectedIdx = index;
+      this.personalselectedIdx = '';
+      this.councilselectedIdx = '';
+
+    } else if (type === 'personal') {
+      this.personalselectedIdx = index;
+      this.councilselectedIdx = '';
+      this.completedselectedIdx = '';
+    }
+
     console.log('assignmentSelected', assignment);
   }
-
+  cancel() {
+    this.navCtrl.pop();
+  }
 }
