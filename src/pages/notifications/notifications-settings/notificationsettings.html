@@ -2,8 +2,7 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col" width-10>
-                <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary"
-                    (click)="back()"></ion-icon>
+                <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="back()"></ion-icon>
             </ion-col>
             <ion-col width-80>
                 <ion-title text-center>Push Notifications</ion-title>
@@ -15,35 +14,35 @@
     <ion-item-divider class='color' color="light">Send me push notifications for:</ion-item-divider>
     <ion-list *ngIf="notSettings" no-lines>
         <ion-item text-wrap>
-            <ion-label item-left>All Activity</ion-label>
+            <ion-label class="label-styles" item-left>All Activity</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.allactivity" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
         <ion-item text-wrap>
-            <ion-label item-left>Agendas</ion-label>
+            <ion-label class="label-styles" item-left>Agendas</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.agendas" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
         <ion-item text-wrap>
-            <ion-label item-left>Discussions</ion-label>
+            <ion-label class="label-styles" item-left>Discussions</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.discussions" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
         <ion-item text-wrap>
-            <ion-label item-left>Private discussions</ion-label>
+            <ion-label class="label-styles" item-left>Private discussions</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.pvtdiscussions" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
         <ion-item text-wrap>
-            <ion-label item-left>My assignments</ion-label>
+            <ion-label class="label-styles" item-left>My assignments</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.assignments" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
         <ion-item text-wrap>
-            <ion-label item-left>Admin closes my assignment</ion-label>
+            <ion-label class="label-styles" item-left>Admin closes my assignment</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.closingassignment" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
         <ion-item text-wrap>
-            <ion-label item-left>Files</ion-label>
+            <ion-label class="label-styles" item-left>Files</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.files" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
         <ion-item text-wrap>
-            <ion-label item-left>Admin activate or inactivate my account</ion-label>
+            <ion-label class="label-styles" item-left>Admin activate or inactivate my account</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.actinactaccount" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
     </ion-list>
