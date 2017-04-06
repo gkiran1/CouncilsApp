@@ -281,11 +281,11 @@ export class FirebaseService {
     }
 
     getAboutus() {
-        let about:any;
+        let about: any;
         var aboutusRef = this.rootRef.child('aboutus');
-     return aboutusRef.orderByChild('createddate').limitToLast(1).once('value').then(function (snapshot) {
-         if(snapshot.val())
-            return snapshot;
+        return aboutusRef.orderByChild('createddate').limitToLast(1).once('value').then(function (snapshot) {
+            if (snapshot.val())
+                return snapshot;
         });
     }
 
@@ -311,6 +311,16 @@ export class FirebaseService {
             return "councils in user updated successfully..."
         }).catch(err => {
             throw err;
+        });
+    }
+
+    deleteCouncilsInUserCouncils(usrId) {
+        var userCouncilsRef = this.rootRef.child('usercouncils').orderByChild('userid').equalTo(usrId);
+        return userCouncilsRef.once('value').then(function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                firebase.database().ref().child('usercouncils/' + childSnapshot.key).remove();
+            });
+            return true;
         });
     }
 

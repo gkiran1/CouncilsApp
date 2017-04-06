@@ -15,10 +15,10 @@ export class EditMemberPage {
     selectedUserCouncils = [];
     adminCouncils = [];
     councilsObj = [];
+    isCouncilsChanged = false;
 
     constructor(public navParams: NavParams,
         public navCtrl: NavController,
-        public af: AngularFire,
         private firebaseService: FirebaseService) {
         this.adminCouncils = localStorage.getItem('userCouncils').split(',');
         this.selectedUser = navParams.get('selectedUser');
@@ -35,6 +35,28 @@ export class EditMemberPage {
                     isMemberCouncil: isMemberCncl,
                     councilId: counId
                 });
+            });
+        });
+    }
+
+    enableSaveBtn() {
+        this.isCouncilsChanged = true;
+    }
+
+    updateCouncils() {
+        var updatedCouncils = [];
+        this.councilsObj.forEach(obj => {
+            if (obj.isMemberCouncil) {
+                updatedCouncils.push(obj.councilId);
+            }
+        });
+        this.firebaseService.updateCouncilsInUser(this.selectedUser.$key, updatedCouncils).then((res) => {
+            this.firebaseService.deleteCouncilsInUserCouncils(this.selectedUser.$key).then((res) => {
+                if (res) {
+                    updatedCouncils.forEach(id => {
+                        this.firebaseService.createUserCouncils(this.selectedUser.$key, id);
+                    });
+                }
             });
         });
     }
