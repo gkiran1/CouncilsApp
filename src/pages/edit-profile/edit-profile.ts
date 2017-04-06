@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Nav, NavController, AlertController, ActionSheetController, MenuController } from 'ionic-angular';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ChangePasswordPage } from '../edit-profile/change-password';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
@@ -18,6 +19,7 @@ import { SettingsPage } from '../settings/settings';
     providers: [FirebaseService]
 })
 export class EditProfilePage {
+    editProfileForm: FormGroup;
     profilePictureRef: any;
     guestPicture: any;
     imagePath: any;
@@ -34,7 +36,7 @@ export class EditProfilePage {
     isChangeflag = false;
     userSubscription: Subscription
 
-    constructor(public af: AngularFire, public nav: NavController,
+    constructor(fb: FormBuilder, public af: AngularFire, public nav: NavController,
         public appService: AppService,
         private firebaseService: FirebaseService,
         public actionSheetCtrl: ActionSheetController,
@@ -52,9 +54,17 @@ export class EditProfilePage {
                 });
             }
         });
+        this.editProfileForm = fb.group({
+            firstname: ['', Validators.required],
+            lastname: ['', Validators.required],
+            email: ['', Validators.required],
+            phone: ['', Validators.required],
+            ldsusername: ['', Validators.required],
+
+        });
     }
 
-    editProfile() {
+    editProfile(value) {
         if ((new RegExp(/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/).test(this.profile.phone))) {
             this.guestPicture = this.guestPicture || '';
             this.profilePictureRef.child(this.profile.$key)
@@ -64,13 +74,13 @@ export class EditProfilePage {
                     let avatar = this.guestPicture ? savedPicture.downloadURL : this.profile.avatar;
                     this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, avatar).then(res => {
                         this.showAlert1('success', 'User profile updated successfully.')
-                        this.isChangeflag = false;                        
+                        this.isChangeflag = false;
                     }).catch(err => {
                         this.showAlert('failure', err.message);
                     })
                 });
         } else {
-            this.showAlert('failure', 'please enter valid phone number.');
+            this.showAlert('failure', 'Please Enter Valid Phone Number.');
         }
     }
     viewChangePasswordPage() {
@@ -96,7 +106,7 @@ export class EditProfilePage {
             title: '',
             subTitle: text,
             buttons: [
-                { text: 'OK', handler: () => this.nav.push(SettingsPage) }                
+                { text: 'OK', handler: () => this.nav.push(SettingsPage) }
             ]
         });
         alert.present();

@@ -153,7 +153,7 @@ export class NewCouncilFilePage {
         // alert(this.file)
         FilePath.resolveNativePath(this.file)
           .then(filePath => {
-            alert(filePath);
+            // alert(filePath);
             var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
             // alert(filename);
             value.createdDate = moment().toISOString();
