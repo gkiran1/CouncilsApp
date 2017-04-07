@@ -3,6 +3,7 @@ import { FirebaseService } from '../../../environments/firebase/firebase-service
 import { User } from '../../../user/user';
 import { AlertController, NavController, NavParams, ActionSheetController, MenuController } from 'ionic-angular';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { EditCompletePage } from '../edit-complete/editcomplete.component';
 
 @Component({
     templateUrl: 'editmember.html',
@@ -15,7 +16,7 @@ export class EditMemberPage {
     selectedUserCouncils = [];
     adminCouncils = [];
     councilsObj = [];
-    isCouncilsChanged = false;
+    enableBtn = false;
 
     constructor(public navParams: NavParams,
         public navCtrl: NavController,
@@ -23,6 +24,7 @@ export class EditMemberPage {
         this.adminCouncils = localStorage.getItem('userCouncils').split(',');
         this.selectedUser = navParams.get('selectedUser');
         this.selectedUserCouncils = this.selectedUser.councils;
+        this.enableBtn = false;
 
         this.adminCouncils.forEach(counId => {
             var isMemberCncl = false;
@@ -40,7 +42,13 @@ export class EditMemberPage {
     }
 
     enableSaveBtn() {
-        this.isCouncilsChanged = true;
+        this.enableBtn = false;
+        this.councilsObj.forEach(obj => {
+            if (obj.isMemberCouncil) {
+                this.enableBtn = true;
+                return;
+            }
+        });
     }
 
     updateCouncils() {
@@ -57,6 +65,9 @@ export class EditMemberPage {
                         this.firebaseService.createUserCouncils(this.selectedUser.$key, id);
                     });
                 }
+            }).then(() => {
+                this.enableBtn = false;
+                this.navCtrl.push(EditCompletePage, { name: this.selectedUser.firstname + ' ' + this.selectedUser.lastname });
             });
         });
     }

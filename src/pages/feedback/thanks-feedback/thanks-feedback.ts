@@ -12,7 +12,7 @@ export class ThanksFeedbackPage {
     constructor(public navCtrl: NavController, public navParams: NavParams) { }
 
     goToHome() {
-        this.navCtrl.push(WelcomePage);
+        this.navCtrl.setRoot(WelcomePage);
     }
      cancel() {
       this.navCtrl.pop();

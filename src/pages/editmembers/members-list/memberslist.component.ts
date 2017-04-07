@@ -4,6 +4,7 @@ import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { EditMemberPage } from '../edit-member/editmember.component';
+import { AdminPage } from '../../admin/admin.component';
 
 @Component({
     templateUrl: 'memberslist.html',
@@ -45,6 +46,6 @@ export class MembersListPage {
     }
 
     back() {
-        this.nav.pop();
+        this.nav.popTo(AdminPage);
     }
 }
