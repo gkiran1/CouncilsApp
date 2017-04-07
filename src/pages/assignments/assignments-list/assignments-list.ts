@@ -25,6 +25,18 @@ export class AssignmentsListPage {
   completedselectedIdx;
 
   constructor(public navCtrl: NavController, public fs: FirebaseService, public af: AngularFire) {
+    // ***TODO*** 
+    let uid = localStorage.getItem('securityToken');
+     this.af.database.object('/users/' + uid).subscribe(u => {
+      let assignmentsArray = [];
+      u.councils.forEach(councilId => {
+        this.fs.getAssignmentsByCouncil(councilId).subscribe(assignments => {
+          assignmentsArray.push(...assignments);
+          this.count$.next(assignmentsArray.length);
+        });
+      });
+    });
+    // ***TODO ***
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
         this.af.database.object('/users/' + auth.uid).subscribe(usr => {
@@ -53,7 +65,7 @@ export class AssignmentsListPage {
 
               // this.councilAssignmentsArray = assignments;
               let count = this.personalAssignmentsArray.length + this.councilAssignmentsArray.length + this.completedAssignmentsArray.length;
-              this.count$.next(count);
+              // this.count$.next(count);
             });
         })
       }
