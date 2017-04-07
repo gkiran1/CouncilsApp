@@ -26,6 +26,7 @@ export class NewCouncilFilePage {
   image = '';
   file: string;
   filedata: string;
+  i = 1;
   files = {
     $key: '',
     images: []
@@ -121,12 +122,13 @@ export class NewCouncilFilePage {
       value.createdDate = moment().toISOString();
       value.councilid = value.council.$key;
       value.councilname = value.council.council;
-      value.filename = 'Image123.png';
+      value.filename = value.councilname + '_file' + this.i++ + '.png';
+      value.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
       this.firebaseservice.saveFile(value).then(fileId => {
-        this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + 'Image123.png')
+        this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
           .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
           .then((savedPicture) => {
-            this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + 'Image123.png').getMetadata();
+            this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
             this.pictureRef.then((metadata) => {
               // Metadata now contains the metadata like filesize and type for 'images/...'
               this.nav.push(OpenCouncilFilePage, {
@@ -155,11 +157,13 @@ export class NewCouncilFilePage {
           .then(filePath => {
             // alert(filePath);
             var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
+            var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
             // alert(filename);
             value.createdDate = moment().toISOString();
             value.councilid = value.council.$key;
             value.councilname = value.council.council;
             value.filename = filename;
+            value.filetype = filetype;
             this.firebaseservice.saveFile(value).then(fileId => {
               this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
                 .putString(filePath)

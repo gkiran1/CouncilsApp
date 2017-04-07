@@ -19,7 +19,8 @@ export class OpenCouncilFilePage {
     file = {
         $key: '',
         councilid: '',
-        name: ''
+        name: '',
+        type: ''
     }
     //files
     file1 = {
@@ -39,6 +40,7 @@ export class OpenCouncilFilePage {
     pictureRef: any;
     openCouncilFileForm: FormGroup;
     filepath1: string;
+    i = 2;
     constructor(public navparams: NavParams,
         public nav: NavController,
         public appservice: AppService,
@@ -53,6 +55,7 @@ export class OpenCouncilFilePage {
         this.value = navparams.get('value');
         this.file.$key = navparams.get('file1');
         this.file.name = this.value.filename;
+        this.file.type = this.value.filetype;
         this.filesArray.push(this.file);
         firebaseservice.getFilesByKey(navparams.get('file1')).subscribe(res => {
             this.file1 = res;
@@ -168,20 +171,23 @@ export class OpenCouncilFilePage {
             this.value.createdDate = moment().toISOString();
             this.value.councilid = value.council.$key;
             this.value.councilname = value.council.council;
-            value.filename = 'Image123.png';
+            value.filename = value.councilname + '_file' + this.i++ + '.png';
+            value.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
             this.firebaseservice.saveFile(value).then(fileId => {
-                this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + 'Image123.png')
+                this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
                     .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
                     .then((savedPicture) => {
-                        this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + 'Image123.png').getMetadata();
+                        this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
                         this.pictureRef.then((metadata) => {
                             // Metadata now contains the metadata like filesize and type for 'images/...'
                             this.file = metadata;
                             this.file.$key = fileId;
-                            this.file.name = 'Image123.png';
+                            this.file.name = value.filename;
+                            this.file.type = value.filetype;
                             this.filesArray.push(this.file);
                             this.value.councilname = value.councilname;
                             this.value.filename = value.filename;
+                            this.value.filetype = value.filetype;
                         }).catch((error) => {
                             console.log(error);
                         });
@@ -203,10 +209,12 @@ export class OpenCouncilFilePage {
                 FilePath.resolveNativePath(this.filepath1)
                     .then(filePath => {
                         var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
+                        var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
                         this.value.createdDate = moment().toISOString();
                         this.value.councilid = value.council.$key;
                         this.value.councilname = value.council.council;
                         this.value.filename = filename;
+                        this.value.filetype = filetype;
                         this.firebaseservice.saveFile(value).then(fileId => {
                             this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
                                 .putString(filePath)
@@ -217,9 +225,11 @@ export class OpenCouncilFilePage {
                                         this.file = metadata;
                                         this.file.$key = fileId;
                                         this.file.name = filename;
+                                        this.file.type = filetype;
                                         this.filesArray.push(this.file);
                                         this.value.councilname = value.councilname;
                                         this.value.filename = value.filename;
+                                        this.value.filetype = filetype;
                                     }).catch((error) => {
                                         console.log(error);
                                     });

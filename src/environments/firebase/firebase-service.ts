@@ -525,7 +525,7 @@ export class FirebaseService {
             {
                 filename: file.filename,
                 // filesize: file.filesize,
-                // filetype: file.filetype,
+                filetype: file.filetype,
                 councilid: file.councilid,
                 councilname: file.councilname,
                 createdDate: file.createdDate,
