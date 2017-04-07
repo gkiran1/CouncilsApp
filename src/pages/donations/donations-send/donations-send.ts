@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { DonationsThankyouPage } from '../donations-thankyou/donations-thankyou';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { validateEmail } from '../../../custom-validators/custom-validator';
+declare var Stripe: any;
 
 @Component({
   selector: 'page-donations-send',
@@ -10,6 +11,7 @@ import { validateEmail } from '../../../custom-validators/custom-validator';
 })
 export class DonationsSendPage {
   donationForm: FormGroup;
+  private token: string = '';
   constructor(fb: FormBuilder, public nav: NavController, public navParams: NavParams) {
     this.donationForm = fb.group({
       amount: ['', Validators.required],
@@ -19,14 +21,11 @@ export class DonationsSendPage {
       creditcardNo: ['', Validators.compose([Validators.required, Validators.minLength(18), Validators.maxLength(18)])],
       creditValidthru: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5)])],
     });
+    Stripe.setPublishableKey('pk_test_s1UhNXOG0r73kmqPi3fQV2BE');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DonationsSendPage');
-  }
-
-  send() {
-    this.nav.push(DonationsThankyouPage);
   }
 
   cancel() {
@@ -67,4 +66,31 @@ export class DonationsSendPage {
     }
     event.target.setSelectionRange(start, start);
   }
+
+  send(value) {
+    console.log(value);
+    Stripe.card.createToken({
+      number: value.creditcardNo.split('-').join(''),//'4242424242424242',378282246310005
+      exp_month: value.creditValidthru.split('/')[0],
+      exp_year: value.creditValidthru.split('/')[1]
+    }, (status, response) => this.stripeResponseHandler(status, response));
+    // this.nav.push(DonationsThankyouPage);
+  }
+  stripeResponseHandler(status, response) {
+
+    if (response.error) {
+      // Show the errors on the form
+      console.log('error');
+      console.log(response.error.message);
+    } else {
+      // response contains id and card, which contains additional card details
+      this.token = response.id;
+      // Insert the token into the form so it gets submitted to the server
+      console.log('success');
+      console.log('Sending token param:');
+      console.log(this.token);
+      this.nav.push(DonationsThankyouPage, { token: this.token });
+    }
+  }
+
 }
