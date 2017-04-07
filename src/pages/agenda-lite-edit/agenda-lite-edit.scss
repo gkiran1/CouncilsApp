@@ -17,4 +17,13 @@ agenda-lite-edit{
         width: 100%;
         overflow-y: scroll;
     }
+    .assignto-list{
+        ion-label{
+            display: flex;
+            align-items: center;
+        }
+        ion-label h4{
+            flex: 1;
+        }
+    }
 }

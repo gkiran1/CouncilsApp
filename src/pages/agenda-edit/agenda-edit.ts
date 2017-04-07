@@ -47,11 +47,11 @@ export class AgendaEditPage {
         let agenda = navParams.get('agendaselected');
         this.agendaKey = agenda.$key;
 
-        this.spiritualwelfareObj = (agenda.spiritualwelfareObj != undefined && agenda.spiritualwelfareObj.length > 0) ? agenda.spiritualwelfareObj.split('\n') : '';
-        this.temporalwelfareObj = (agenda.temporalwelfareObj != undefined && agenda.temporalwelfareObj.length > 0) ? agenda.temporalwelfareObj.split('\n') : '';
-        this.fellowshipitemsObj = (agenda.fellowshipitemsObj != undefined && agenda.fellowshipitemsObj.length > 0) ? agenda.fellowshipitemsObj.split('\n') : '';
-        this.missionaryitemsObj = (agenda.missionaryitemsObj != undefined && agenda.missionaryitemsObj.length > 0) ? agenda.missionaryitemsObj.split('\n') : '';
-        this.eventObj = (agenda.eventObj != undefined && agenda.eventObj.length > 0) ? agenda.eventObj.split('\n') : '';
+        this.spiritualwelfareObj = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.split('\n') : '';
+        this.temporalwelfareObj = (agenda.temporalwelfare != undefined && agenda.temporalwelfare.length > 0) ? agenda.temporalwelfare.split('\n') : '';
+        this.fellowshipitemsObj = (agenda.fellowshipitems != undefined && agenda.fellowshipitems.length > 0) ? agenda.fellowshipitems.split('\n') : '';
+        this.missionaryitemsObj = (agenda.missionaryitems != undefined && agenda.missionaryitems.length > 0) ? agenda.missionaryitems.split('\n') : '';
+        this.eventObj = (agenda.event != undefined && agenda.event.length > 0) ? agenda.event.split('\n') : '';
 
         this.usercouncils = localStorage.getItem('userCouncils').split(',');
         var councilsIds = localStorage.getItem('userCouncils').split(',');
@@ -162,7 +162,7 @@ export class AgendaEditPage {
             this.updateUsers(council.$key);
             (<FormControl>this.agendaeditForm.controls['assignedcouncil']).setValue(council.council);
             this.assignedcouncil = council;
-
+            console.log("this.assignedcouncil", this.assignedcouncil);
             this.getAssignmentsByCouncilId(council.$key).subscribe(assignments => {
                 assignments.forEach(assignObj => {
                     if (assignObj.isCompleted) {
@@ -247,44 +247,44 @@ export class AgendaEditPage {
     }
 
     showList(event) {
-    let v = event.target.value;
+        let v = event.target.value;
 
-    this.term = (v.indexOf('@') === 0) ? v.substr(1) : v;
-    this.showlist = true;
-  }
+        this.term = (v.indexOf('@') === 0) ? v.substr(1) : v;
+        this.showlist = true;
+    }
 
-  showList1(event) {
-    let v1 = event.target.value;
+    showList1(event) {
+        let v1 = event.target.value;
 
-    this.term = (v1.indexOf('@') === 0) ? v1.substr(1) : v1;
-    this.showlist1 = true;
-  }
+        this.term = (v1.indexOf('@') === 0) ? v1.substr(1) : v1;
+        this.showlist1 = true;
+    }
 
-  showList2(event) {
-    let v2 = event.target.value;
+    showList2(event) {
+        let v2 = event.target.value;
 
-    this.term = (v2.indexOf('@') === 0) ? v2.substr(1) : v2;
-    this.showlist2 = true;
-  }
+        this.term = (v2.indexOf('@') === 0) ? v2.substr(1) : v2;
+        this.showlist2 = true;
+    }
 
-  bindAssignto(user) {
-    this.showlist = false;
-    (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue(user.firstname + ' ' + user.lastname);
+    bindAssignto(user) {
+        this.showlist = false;
+        (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue(user.firstname + ' ' + user.lastname);
 
-    this.openingprayer = user;
-  }
-  bindAssignto1(user) {
-    this.showlist1 = false;
-    (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue(user.firstname + ' ' + user.lastname);
+        this.openingprayer = user;
+    }
+    bindAssignto1(user) {
+        this.showlist1 = false;
+        (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue(user.firstname + ' ' + user.lastname);
 
-    this.spiritualthought = user;
-  }
-  bindAssignto2(user) {
-    this.showlist2 = false;
-    (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue(user.firstname + ' ' + user.lastname);
+        this.spiritualthought = user;
+    }
+    bindAssignto2(user) {
+        this.showlist2 = false;
+        (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue(user.firstname + ' ' + user.lastname);
 
-    this.closingprayer = user;
-  }
+        this.closingprayer = user;
+    }
 
     pad(number) {
         if (number < 10) {
