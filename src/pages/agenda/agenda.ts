@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams, ModalController } from 'ionic-angular';
 import { WelcomePage } from '../menu/menu';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { CouncilUsersModalPage } from '../../modals/council-users/council-users';
+import { UserCouncilsModalPage } from '../../modals/user-councils/user-councils';
+
 
 @Component({
     templateUrl: 'agenda.html',
@@ -19,19 +22,27 @@ export class AgendaPage {
     newagendaForm: FormGroup;
     usercouncils = [];
     term: string = '';
+    assignedcouncil;
+    openingprayer;
+    spiritualthought;
+    closingprayer;
     spiritualwelfare;
     temporalwelfare;
     fellowshipitems;
     missionaryitems;
     event;
+    isModalDismissed = true;
+    showlist = false;
+    showlist1 = false;
+    showlist2 = false;
 
-
-    constructor(navParams: NavParams, fb: FormBuilder, public appservice: AppService,
+    constructor(public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
         public firebaseservice: FirebaseService, public alertCtrl: AlertController,
         public nav: NavController) {
 
         // let council = navParams.get('councilObj');
 
+        this.usercouncils = localStorage.getItem('userCouncils').split(',');
         var councilsIds = localStorage.getItem('userCouncils').split(',');
         councilsIds.forEach(councilId => {
             this.firebaseservice.getCouncilByKey(councilId).subscribe(councilObj => {
@@ -43,54 +54,21 @@ export class AgendaPage {
         this.newagendaForm = fb.group({
             assignedcouncil: ['', Validators.required],
             assigneddate: [date, Validators.required],
-            openinghymn: ['', Validators.required],
-            openingprayer: ['', Validators.required],
-            spiritualthought: ['', Validators.required],
-            assignments: ['', Validators.required],
-            completedassignments: ['', Validators.required],
-            spiritualwelfare: ['', Validators.required],
-            temporalwelfare: ['', Validators.required],
-            fellowshipitems: ['', Validators.required],
-            missionaryitems: ['', Validators.required],
-            event: ['', Validators.required],
-            closingprayer: ['', Validators.required],
+            openinghymn: [''],
+            openingprayer: [''],
+            spiritualthought: [''],
+            assignments: [''],
+            completedassignments: [''],
+            spiritualwelfare: [''],
+            temporalwelfare: [''],
+            fellowshipitems: [''],
+            missionaryitems: [''],
+            event: [''],
+            closingprayer: [''],
             createdby: localStorage.getItem('securityToken'),
             createddate: new Date().toDateString(),
             isactive: true,
             // lastupdateddate: ''
-        });
-    }
-
-    assignedMemberChange(value) {
-        this.users = [];
-        this.assignmentslist = [];
-        this.completedassignmentslist = [];
-        (<FormControl>this.newagendaForm.controls['openingprayer']).setValue('');
-        (<FormControl>this.newagendaForm.controls['spiritualthought']).setValue('');
-        (<FormControl>this.newagendaForm.controls['assignments']).setValue('');
-        (<FormControl>this.newagendaForm.controls['completedassignments']).setValue('');
-        (<FormControl>this.newagendaForm.controls['closingprayer']).setValue('');
-
-        this.getUsersByCouncilId(value.assignedcouncil.$key).subscribe(usersObj => {
-            usersObj.forEach(usrObj => {
-                this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
-                    usrs.forEach(usr => {
-                        this.users.push(usr);
-                    });
-                });
-            });
-        });
-        this.getAssignmentsByCouncilId(value.assignedcouncil.$key).subscribe(assignments => {
-            assignments.forEach(assignObj => {
-                if (assignObj.isCompleted) {
-                    this.completedassignmentslist.push(assignObj);
-                }
-                else {
-                    this.assignmentslist.push(assignObj);
-
-                }
-            });
-
         });
     }
 
@@ -106,12 +84,12 @@ export class AgendaPage {
     createagenda(agenda) {
         let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
         agenda.assigneddate = moment(assigneddate).toISOString(),
-
-        agenda.spiritualwelfare = agenda.spiritualwelfare.replace(/-/gi, '').trim();
-        agenda.temporalwelfare = agenda.temporalwelfare.replace(/-/gi, '').trim();
-        agenda.fellowshipitems = agenda.fellowshipitems.replace(/-/gi, '').trim();
-        agenda.missionaryitems = agenda.missionaryitems.replace(/-/gi, '').trim();
-        agenda.event = agenda.event.replace(/-/gi, '').trim();
+        agenda.spiritualwelfare = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.replace(/-/gi, '').trim() : '';
+        agenda.temporalwelfare = (agenda.temporalwelfare != undefined && agenda.temporalwelfare.length > 0) ? agenda.temporalwelfare.replace(/-/gi, '').trim() : '';
+        agenda.fellowshipitems = (agenda.fellowshipitems != undefined && agenda.fellowshipitems.length > 0) ? agenda.fellowshipitems.replace(/-/gi, '').trim() : '';
+        agenda.missionaryitems = (agenda.missionaryitems != undefined && agenda.missionaryitems.length > 0) ? agenda.missionaryitems.replace(/-/gi, '').trim() : '';
+        agenda.event = (agenda.event != undefined && agenda.event.length > 0) ? agenda.event.replace(/-/gi, '').trim() : '';
+        agenda.councilid = this.assignedcouncil.$key;
 
         this.firebaseservice.createAgenda(agenda)
             .then(res => {
@@ -131,6 +109,52 @@ export class AgendaPage {
         alert.present();
     }
 
+    showCouncilsModal(value) {
+        this.users = [];
+        this.assignmentslist = [];
+        this.completedassignmentslist = [];
+        let usercouncilsmodal = this.modalCtrl.create(UserCouncilsModalPage, { usercouncils: this.usercouncils });
+        usercouncilsmodal.present();
+        usercouncilsmodal.onDidDismiss(council => {
+            if (!council) return;
+            (<FormControl>this.newagendaForm.controls['openingprayer']).setValue('');
+            (<FormControl>this.newagendaForm.controls['spiritualthought']).setValue('');
+            (<FormControl>this.newagendaForm.controls['assignments']).setValue('');
+            (<FormControl>this.newagendaForm.controls['completedassignments']).setValue('');
+            (<FormControl>this.newagendaForm.controls['closingprayer']).setValue('');
+            this.updateUsers(council.$key);
+            (<FormControl>this.newagendaForm.controls['assignedcouncil']).setValue(council.council);
+            this.assignedcouncil = council;
+
+            this.getAssignmentsByCouncilId(council.$key).subscribe(assignments => {
+                assignments.forEach(assignObj => {
+                    if (assignObj.isCompleted) {
+                        this.completedassignmentslist.push(assignObj);
+                    }
+                    else {
+                        this.assignmentslist.push(assignObj);
+
+                    }
+                });
+
+            });
+        });
+
+    }
+
+    updateUsers(councilid) {
+        this.firebaseservice.getUsersByCouncil(councilid).subscribe(uc => {
+            this.users = [];
+            uc.forEach(e => {
+                this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
+                    this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
+                        u[0].status = status ? 'green' : 'gray';
+                    });
+                    this.users.push(u[0]);
+                });
+            });
+        });
+    }
     cancel() {
         this.nav.pop();
     }
@@ -212,23 +236,62 @@ export class AgendaPage {
     }
 
     pad(number) {
-    if (number < 10) {
-      return '0' + number;
+        if (number < 10) {
+            return '0' + number;
+        }
+        return number;
     }
-    return number;
-  }
 
-  localISOformat(date) {
-    date = new Date(date);
-    return date.getFullYear() +
-      '-' + this.pad(date.getMonth() + 1) +
-      '-' + this.pad(date.getDate()) +
-      'T' + this.pad(date.getHours()) +
-      ':' + this.pad(date.getMinutes()) +
-      ':' + this.pad(date.getSeconds()) +
-      '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
-      'Z';
-  };
+    showList(event) {
+        let v = event.target.value;
+
+        this.term = (v.indexOf('@') === 0) ? v.substr(1) : v;
+        this.showlist = true;
+    }
+
+    showList1(event) {
+        let v1 = event.target.value;
+
+        this.term = (v1.indexOf('@') === 0) ? v1.substr(1) : v1;
+        this.showlist1 = true;
+    }
+
+    showList2(event) {
+        let v2 = event.target.value;
+
+        this.term = (v2.indexOf('@') === 0) ? v2.substr(1) : v2;
+        this.showlist2 = true;
+    }
+
+    bindAssignto(user) {
+        this.showlist = false;
+        (<FormControl>this.newagendaForm.controls['openingprayer']).setValue(user.firstname + ' ' + user.lastname);
+
+        this.openingprayer = user;
+    }
+    bindAssignto1(user) {
+        this.showlist1 = false;
+        (<FormControl>this.newagendaForm.controls['spiritualthought']).setValue(user.firstname + ' ' + user.lastname);
+
+        this.spiritualthought = user;
+    }
+    bindAssignto2(user) {
+        this.showlist2 = false;
+        (<FormControl>this.newagendaForm.controls['closingprayer']).setValue(user.firstname + ' ' + user.lastname);
+
+        this.closingprayer = user;
+    }
+    localISOformat(date) {
+        date = new Date(date);
+        return date.getFullYear() +
+            '-' + this.pad(date.getMonth() + 1) +
+            '-' + this.pad(date.getDate()) +
+            'T' + this.pad(date.getHours()) +
+            ':' + this.pad(date.getMinutes()) +
+            ':' + this.pad(date.getSeconds()) +
+            '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+            'Z';
+    };
 
 
 }

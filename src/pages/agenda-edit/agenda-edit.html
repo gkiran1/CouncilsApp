@@ -14,12 +14,8 @@
 
     <form [formGroup]="agendaeditForm" (ngSubmit)="agendaeditForm.value">
         <ion-item>
-            <ion-label *ngIf="!assignedcouncil">Council</ion-label>
-            <ion-label floating color="secondary" *ngIf="assignedcouncil">Council</ion-label>
-            <ion-select name="assignedcouncil" (ionChange)="assignedMemberChange(agendaeditForm.value)" [(ngModel)]='assignedcouncil'
-                formControlName="assignedcouncil">
-                <ion-option *ngFor="let c of councils" [value]="c">{{c.council}}</ion-option>
-                </ion-select>
+            <ion-label floating>Council</ion-label>
+            <ion-input type="text" readonly (click)="showCouncilsModal(newagendaForm.value)" formControlName="assignedcouncil"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -33,24 +29,42 @@
         </ion-item>
 
         <ion-item>
-            <ion-label *ngIf="!openingprayer">Opening Prayer</ion-label>
-            <ion-label floating color="secondary" *ngIf="openingprayer">Opening Prayer</ion-label>
-            <ion-select name="openingprayer" [(ngModel)]='openingprayer' formControlName="openingprayer">
-                <ng-container *ngFor="let user of users">
-                    <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
-                </ng-container>
-            </ion-select>
+            <ion-label floating>Opening Prayer</ion-label>
+            <ion-input type="text" (keyup)="showList($event)" formControlName="openingprayer"></ion-input>
         </ion-item>
+        <div *ngIf="showlist" class="assignto-list">
+            <ng-container *ngFor="let user of users | search:term:'username'">
+                <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto(user)">
+                    <ion-avatar item-left>
+                        <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
+                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+                    </ion-avatar>
+                    <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
+                    <svg height="8" width="8">
+                        <circle cx="4" cy="4" r="4" [attr.fill]='user.status' />
+                    </svg>
+                </ion-item>
+            </ng-container>
+        </div>
 
         <ion-item>
-            <ion-label *ngIf="!spiritualthought">Spiritual Thought</ion-label>
-            <ion-label floating color="secondary" *ngIf="spiritualthought">Spiritual Thought</ion-label>
-            <ion-select name="spiritualthought" [(ngModel)]='spiritualthought' formControlName="spiritualthought">
-                <ng-container *ngFor="let user of users">
-                    <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
-                </ng-container>
-            </ion-select>
+            <ion-label floating>Spiritual Thought</ion-label>
+            <ion-input type="text" (keyup)="showList1($event)" formControlName="spiritualthought"></ion-input>
         </ion-item>
+        <div *ngIf="showlist1" class="assignto-list">
+            <ng-container *ngFor="let user of users | search:term:'username'">
+                <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto1(user)">
+                    <ion-avatar item-left>
+                        <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
+                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+                    </ion-avatar>
+                    <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
+                    <svg height="8" width="8">
+                        <circle cx="4" cy="4" r="4" [attr.fill]='user.status' />
+                    </svg>
+                </ion-item>
+            </ng-container>
+        </div>
 
         <ion-item>
             <ion-label *ngIf="!assignments">Assignments</ion-label>
@@ -74,78 +88,72 @@
 
         <ion-list>
             <ion-label class="label-styles">Spiritual Welfare</ion-label>
-            <ng-container *ngFor="let item of spiritualwelfareObj">
-                <ion-item class="item-styles">
-                    <ion-input type="text" [value]="item"></ion-input>
-                    <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
+            <ion-item *ngFor="let item of spiritualwelfareObj" class="item-styles">
+                <ion-input type="text" [value]="item" formControlName='spiritualwelfare' maxlength="500"></ion-input>
+                <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
-                </ion-item>
-            </ng-container>
+            </ion-item>
         </ion-list>
 
         <ion-list>
             <ion-label class="label-styles">Temporal Welfare</ion-label>
-            <ng-container *ngFor="let item of temporalwelfareObj">
-                <ion-item class="item-styles">
-                    <ion-input type="text" [value]="item"></ion-input>
-                    <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
+            <ion-item *ngFor="let item of temporalwelfareObj" class="item-styles">
+                <ion-input type="text" [value]="item" formControlName='temporalwelfare' maxlength="500"></ion-input>
+                <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
-                </ion-item>
-            </ng-container>
+            </ion-item>
         </ion-list>
 
         <ion-list>
             <ion-label class="label-styles">Fellowship Items</ion-label>
-            <ng-container *ngFor="let item of fellowshipitemsObj">
-                <ion-item class="item-styles">
-                    <ion-input type="text" [value]="item"></ion-input>
-                    <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
+            <ion-item *ngFor="let item of fellowshipitemsObj" class="item-styles">
+                <ion-input type="text" [value]="item" formControlName='fellowshipitems' maxlength="500"></ion-input>
+                <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
-                </ion-item>
-            </ng-container>
+            </ion-item>
         </ion-list>
 
         <ion-list>
             <ion-label class="label-styles">Missionary Items</ion-label>
-            <ng-container *ngFor="let item of missionaryitemsObj">
-                <ion-item class="item-styles">
-                    <ion-input type="text" [value]="item"></ion-input>
-                    <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
+            <ion-item *ngFor="let item of missionaryitemsObj" class="item-styles">
+                <ion-input type="text" [value]="item" formControlName='missionaryitems' maxlength="500"></ion-input>
+                <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
-                </ion-item>
-            </ng-container>
+            </ion-item>
         </ion-list>
 
         <ion-list>
             <ion-label class="label-styles">Events</ion-label>
-            <ng-container *ngFor="let item of eventObj">
-                <ion-item class="item-styles">
-                    <ion-input type="text" [value]="item"></ion-input>
-                    <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
+            <ion-item *ngFor="let item of eventObj" class="item-styles">
+                <ion-input type="text" [value]="item" formControlName='event' maxlength="500"></ion-input>
+                <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
-                </ion-item>
-            </ng-container>
+            </ion-item>
         </ion-list>
 
-        <!--<ion-item>
-            <ion-label floating>Events</ion-label>
-            <ion-textarea elastic name="event" formControlName="event" maxlength="500"></ion-textarea>
-        </ion-item>-->
-
         <ion-item>
-            <ion-label *ngIf="!closingprayer">Closing Prayer</ion-label>
-            <ion-label floating color="secondary" *ngIf="closingprayer">Closing Prayer</ion-label>
-            <ion-select name="closingprayer" [(ngModel)]='closingprayer' formControlName="closingprayer">
-                <ng-container *ngFor="let user of users">
-                    <ion-option [value]="user">{{user.firstname}} {{user.lastname}}</ion-option>
-                </ng-container>
-            </ion-select>
+            <ion-label floating>Closing Prayer</ion-label>
+            <ion-input type="text" (keyup)="showList2($event)" formControlName="closingprayer"></ion-input>
         </ion-item>
+        <div *ngIf="showlist2" class="assignto-list">
+            <ng-container *ngFor="let user of users | search:term:'username'">
+                <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto2(user)">
+                    <ion-avatar item-left>
+                        <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
+                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+                    </ion-avatar>
+                    <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
+                    <svg height="8" width="8">
+                        <circle cx="4" cy="4" r="4" [attr.fill]='user.status' />
+                    </svg>
+                </ion-item>
+            </ng-container>
+        </div>
 
     </form>
 </ion-content>
