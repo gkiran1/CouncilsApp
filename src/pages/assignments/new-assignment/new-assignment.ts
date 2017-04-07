@@ -101,7 +101,8 @@ export class NewAssignmentPage {
   }
 
 
-  showCouncilsModal(value) {
+  showCouncilsModal(event, value) {
+    event.preventDefault();
     let usercouncilsmodal = this.modalCtrl.create(UserCouncilsModalPage, { usercouncils: this.usercouncils });
     usercouncilsmodal.present();
     usercouncilsmodal.onDidDismiss(council => {

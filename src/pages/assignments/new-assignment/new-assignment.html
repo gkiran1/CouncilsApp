@@ -23,13 +23,13 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Council</ion-label>
-      <ion-input type="text" readonly (click)="showCouncilsModal(assignmentForm.value)" formControlName="assignedcouncil"></ion-input>
+      <ion-input type="text" readonly (mousedown)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Assign to</ion-label>
-      <ion-input type="text" (keyup)="showList($event)" [(ngModel)]="au" formControlName="assigneduser"></ion-input>
+      <ion-input type="text" (keyup)="showList($event)"  formControlName="assigneduser"></ion-input>
     </ion-item>
-    <div *ngIf="showlist && au" class="assignto-list">
+    <div *ngIf="showlist && assignmentForm.controls.assigneduser.value" class="assignto-list">
       <ng-container *ngFor="let user of users | search:term:'username'">
         <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto(user)">
           <ion-avatar item-left>
