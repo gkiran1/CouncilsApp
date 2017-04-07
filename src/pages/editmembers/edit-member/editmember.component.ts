@@ -24,6 +24,7 @@ export class EditMemberPage {
         this.adminCouncils = localStorage.getItem('userCouncils').split(',');
         this.selectedUser = navParams.get('selectedUser');
         this.selectedUserCouncils = this.selectedUser.councils;
+        this.enableBtn = false;
 
         this.adminCouncils.forEach(counId => {
             var isMemberCncl = false;
@@ -65,6 +66,7 @@ export class EditMemberPage {
                     });
                 }
             }).then(() => {
+                this.enableBtn = false;
                 this.navCtrl.push(EditCompletePage, { name: this.selectedUser.firstname + ' ' + this.selectedUser.lastname });
             });
         });
