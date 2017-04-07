@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="back()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <ion-title text-center>{{name}}</ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+<ion-content text-center>
+    <ion-row class="message" text-center text-wrap>
+        <ion-col width-100 center>
+            <ion-label center class="title-styles">Edit Complete</ion-label>
+        </ion-col>
+    </ion-row>
+    <ion-row text-center text-wrap>
+        <ion-col width-100 center>
+            <ion-label center class="content-styles">Members access to councils <br> has been updated.</ion-label>
+        </ion-col>
+    </ion-row>
+    <ion-footer text-center>
+        <button ion-button clear color="secondary" (click)="goToMembersListPage()" text-capitalize>Members</button>
+    </ion-footer>
+</ion-content>
