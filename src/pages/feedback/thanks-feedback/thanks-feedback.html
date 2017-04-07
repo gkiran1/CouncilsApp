@@ -1,26 +1,27 @@
 <ion-header>
     <ion-navbar hideBackButton>
         <ion-row>
-			<ion-col class="header-col" width-10>
-				<ion-icon class="cancel-font" name="close" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
-			</ion-col>
-			<ion-col width-80>
-				<ion-title text-center>
-					Feedback
-				</ion-title>
-			</ion-col>
-		</ion-row>
+            <ion-col class="header-col" width-10>
+                <ion-icon name="cancel" item-left color="secondary" class="ion-md-arrow-back cancel-button" (click)="cancel()"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+                <ion-title text-center>
+                    Feedback
+                </ion-title>
+            </ion-col>
+        </ion-row>
     </ion-navbar>
 </ion-header>
 <ion-content text-center>
-    <ion-row class='row2 Thank'>
+    <ion-row class="message" text-center text-wrap>
         <ion-col width-100 center>
-            Thank you for your feedback!
+            <ion-label center class="title-styles"> Thank you <br> for your feedback!</ion-label>
+
         </ion-col>
     </ion-row>
-    <ion-row class='row4 goal'>
+    <ion-row text-center text-wrap>
         <ion-col width-100 center>
-            Our goal is to help you be more effective at magnifying your calling.
+            <ion-label center class="content-styles">Our goal is to help you be more <br> effective at magnifying your calling.</ion-label>
         </ion-col>
     </ion-row>
     <button ion-button clear color="secondary" (click)="goToHome()" text-capitalize>Home</button>

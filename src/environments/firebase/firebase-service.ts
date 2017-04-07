@@ -464,19 +464,19 @@ export class FirebaseService {
 
     createAgendaLite(agenda: any) {
         return this.rootRef.child('agendas').push({
-            agendacouncil: agenda.assignedcouncil.council,
-            councilid: agenda.assignedcouncil.$key,
+            agendacouncil: agenda.assignedcouncil,
+            councilid: agenda.councilid,
             agendadate: agenda.assigneddate,
             openinghymn: agenda.openinghymn,
-            openingprayer: agenda.openingprayer.$key,
-            spiritualthought: agenda.spiritualthought.$key,
-            assignments: agenda.assignments.$key,
-            completedassignments: agenda.completedassignments.$key,
+            openingprayer: agenda.openingprayer,
+            spiritualthought: agenda.spiritualthought,
+            assignments: agenda.assignments.$key ? agenda.assignments.$key : [],
+            completedassignments: agenda.completedassignments.$key ? agenda.completedassignments.$key : [],
             discussionitems: agenda.discussionitems,
-            closingprayer: agenda.closingprayer.$key,
+            closingprayer: agenda.closingprayer,
             createdby: agenda.createdby,
             createddate: agenda.createddate,
-            lastupdateddate: agenda.lastupdateddate,
+            // lastupdateddate: agenda.lastupdateddate,
             isactive: agenda.isactive,
             islite: true
         })
@@ -545,18 +545,16 @@ export class FirebaseService {
 
     updateAgendaLite(agenda, agendaKey) {
         return this.af.database.list('agendas').update(agendaKey, {
-
-            agendacouncil: agenda.assignedcouncil.council,
-            councilid: agenda.assignedcouncil.$key,
+            agendacouncil: agenda.assignedcouncil,
+            councilid: agenda.councilid,
             agendadate: agenda.assigneddate,
-            // agendatime: agenda.assignedtime,
             openinghymn: agenda.openinghymn,
-            openingprayer: agenda.openingprayer.$key,
-            spiritualthought: agenda.spiritualthought.$key,
+            openingprayer: agenda.openingprayer.firstname + ' ' + agenda.openingprayer.lastname,
+            spiritualthought: agenda.spiritualthought.firstname + ' ' + agenda.spiritualthought.lastname,
             assignments: agenda.assignments.$key,
             completedassignments: agenda.completedassignments.$key,
             discussionitems: agenda.discussionitems,
-            closingprayer: agenda.closingprayer.$key,
+            closingprayer: agenda.closingprayer.firstname + ' ' + agenda.closingprayer.lastname,
             createdby: agenda.createdby,
             createddate: agenda.createddate,
             lastupdateddate: agenda.lastupdateddate,
@@ -574,20 +572,20 @@ export class FirebaseService {
 
     createAgenda(agenda: any) {
         return this.rootRef.child('agendas').push({
-            agendacouncil: agenda.assignedcouncil.council,
-            councilid: agenda.assignedcouncil.$key,
+            agendacouncil: agenda.assignedcouncil,
+            councilid: agenda.councilid,
             agendadate: agenda.assigneddate,
             openinghymn: agenda.openinghymn,
-            openingprayer: agenda.openingprayer.$key,
-            spiritualthought: agenda.spiritualthought.$key,
-            assignments: agenda.assignments.$key,
-            completedassignments: agenda.completedassignments.$key,
+            openingprayer: agenda.openingprayer,
+            spiritualthought: agenda.spiritualthought,
+            assignments: agenda.assignments.$key ? agenda.assignments.$key : [],
+            completedassignments: agenda.completedassignments.$key ? agenda.completedassignments.$key : [],
             spiritualwelfare: agenda.spiritualwelfare,
             temporalwelfare: agenda.temporalwelfare,
             fellowshipitems: agenda.fellowshipitems,
             missionaryitems: agenda.missionaryitems,
             event: agenda.event,
-            closingprayer: agenda.closingprayer.$key,
+            closingprayer: agenda.closingprayer,
             createdby: agenda.createdby,
             createddate: agenda.createddate,
             // lastupdateddate: agenda.lastupdateddate,
@@ -598,13 +596,12 @@ export class FirebaseService {
 
     updateAgenda(agenda, agendaKey) {
         return this.af.database.list('agendas').update(agendaKey, {
-
-            agendacouncil: agenda.assignedcouncil.council,
-            councilid: agenda.assignedcouncil.$key,
+            agendacouncil: agenda.assignedcouncil,
+            councilid: agenda.councilid,
             agendadate: agenda.assigneddate,
             openinghymn: agenda.openinghymn,
-            openingprayer: agenda.openingprayer.$key,
-            spiritualthought: agenda.spiritualthought.$key,
+            openingprayer: agenda.openingprayer.firstname + ' ' + agenda.openingprayer.lastname,
+            spiritualthought: agenda.spiritualthought.firstname + ' ' + agenda.spiritualthought.lastname,
             assignments: agenda.assignments.$key,
             completedassignments: agenda.completedassignments.$key,
             spiritualwelfare: agenda.spiritualwelfare,
@@ -612,12 +609,12 @@ export class FirebaseService {
             fellowshipitems: agenda.fellowshipitems,
             missionaryitems: agenda.missionaryitems,
             event: agenda.event,
-            closingprayer: agenda.closingprayer.$key,
+            closingprayer: agenda.closingprayer.firstname + ' ' + agenda.closingprayer.lastname,
             createdby: agenda.createdby,
             createddate: agenda.createddate,
             lastupdateddate: agenda.lastupdateddate,
             isactive: agenda.isactive,
-            islite: true
+            islite: false
         }).then(() => {
             return "Agenda Lite has been updated."
         }).catch(err => { throw err });
