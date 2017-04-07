@@ -156,6 +156,10 @@ export class NewAssignmentPage {
   }
 
   createAssignment(value) {
+    if ((this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
+      this.showAlert('Please assign to a valid user');
+      return;
+    }
     let formattedAssignmentObj = this.formatAssignmentObj(value);
     if (moment(formattedAssignmentObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
       this.showAlert('Assignment Date/Time cannot be in past');
@@ -178,6 +182,8 @@ export class NewAssignmentPage {
   complete(value) {
     if (value.isCompleted) {
       this.showAlert('This assignment is already completed');
+    } else if ((this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
+      this.showAlert('Please assign to a valid user');
     } else {
       value.isCompleted = true;
       let formattedAssignmentObj = this.formatAssignmentObj(value);
@@ -187,6 +193,10 @@ export class NewAssignmentPage {
     }
   }
   edit(value) {
+    if ((this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
+      this.showAlert('Please assign to a valid user');
+      return;
+    }
     let formattedAssignmentObj = this.formatAssignmentObj(value);
     this.firebaseservice.updateAssignment(formattedAssignmentObj, this.assignmentKey)
       .then(res => { console.log(res); this.showAlert('Assignment has been updated') })
@@ -222,9 +232,13 @@ export class NewAssignmentPage {
   }
 
   showList(event) {
-    let v = event.target.value;
 
-    this.term = (v.indexOf('@') === 0) ? v.substr(1) : v;
+    let v = event.target.value;
+    if (v.charAt('0') !== '@') {
+      event.target.value = '';
+      this.showlist = false; return;
+    }
+    this.term = v.substr(1);
     this.showlist = true;
   }
   bindAssignto(user) {
