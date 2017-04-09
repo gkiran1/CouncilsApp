@@ -551,8 +551,8 @@ export class FirebaseService {
             openinghymn: agenda.openinghymn,
             openingprayer: agenda.openingprayer.firstname + ' ' + agenda.openingprayer.lastname,
             spiritualthought: agenda.spiritualthought.firstname + ' ' + agenda.spiritualthought.lastname,
-            assignments: agenda.assignments.$key,
-            completedassignments: agenda.completedassignments.$key,
+            assignments: agenda.assignments.$key ? agenda.assignments.$key : [],
+            completedassignments: agenda.completedassignments.$key ? agenda.completedassignments.$key : [],
             discussionitems: agenda.discussionitems,
             closingprayer: agenda.closingprayer.firstname + ' ' + agenda.closingprayer.lastname,
             createdby: agenda.createdby,
@@ -602,8 +602,8 @@ export class FirebaseService {
             openinghymn: agenda.openinghymn,
             openingprayer: agenda.openingprayer.firstname + ' ' + agenda.openingprayer.lastname,
             spiritualthought: agenda.spiritualthought.firstname + ' ' + agenda.spiritualthought.lastname,
-            assignments: agenda.assignments.$key,
-            completedassignments: agenda.completedassignments.$key,
+            assignments: agenda.assignments.$key ? agenda.assignments.$key : [],
+            completedassignments: agenda.completedassignments.$key ? agenda.completedassignments.$key : [],
             spiritualwelfare: agenda.spiritualwelfare,
             temporalwelfare: agenda.temporalwelfare,
             fellowshipitems: agenda.fellowshipitems,
@@ -768,5 +768,15 @@ export class FirebaseService {
         userRef.on('value', function (snapshot) {
             callback(snapshot.val());
         });
+    }
+    createNote(note: any) {
+        return this.rootRef.child('notes').push(
+            {
+                createdby: note.createdby,
+                createddate: note.createddate,
+                title: note.title,
+                note: note.note,
+            })
+
     }
 }

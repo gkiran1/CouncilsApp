@@ -11,7 +11,7 @@ import { UserCouncilsModalPage } from '../../modals/user-councils/user-councils'
 
 @Component({
     templateUrl: 'agenda.html',
-    selector: 'agenda'
+    selector: 'agenda-page'
 })
 export class AgendaPage {
     minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');

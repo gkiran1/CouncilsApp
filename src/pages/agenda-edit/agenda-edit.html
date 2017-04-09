@@ -15,7 +15,7 @@
     <form [formGroup]="agendaeditForm" (ngSubmit)="agendaeditForm.value">
         <ion-item>
             <ion-label floating>Council</ion-label>
-            <ion-input type="text" readonly (click)="showCouncilsModal(newagendaForm.value)" formControlName="assignedcouncil"></ion-input>
+            <ion-input type="text" readonly (click)="showCouncilsModal(agendaeditForm.value)" formControlName="assignedcouncil"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -86,7 +86,7 @@
             </ion-select>
         </ion-item>
 
-        <ion-list>
+      
             <ion-label class="label-styles">Spiritual Welfare</ion-label>
             <ion-item *ngFor="let item of spiritualwelfareObj" class="item-styles">
                 <ion-input type="text" [value]="item" formControlName='spiritualwelfare' maxlength="500"></ion-input>
@@ -94,7 +94,7 @@
                  <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
                 </button>
             </ion-item>
-        </ion-list>
+       
 
         <ion-list>
             <ion-label class="label-styles">Temporal Welfare</ion-label>
