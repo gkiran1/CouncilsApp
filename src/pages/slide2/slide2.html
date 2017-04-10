@@ -3,7 +3,7 @@
         <ion-col class="menu-avatar-col">
             <ion-avatar>
                 <img [src]="(userObj)?.avatar" class="avatarImage" *ngIf="(userObj)?.avatar && (userObj)?.avatar !== 'avatar'" />
-                <img src="assets/icon/app-transparent.png" class="avatarImage" *ngIf="!(userObj)?.avatar || (userObj)?.avatar === 'avatar'"
+                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj)?.avatar || (userObj)?.avatar === 'avatar'"
                 />
             </ion-avatar>
         </ion-col>
