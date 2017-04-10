@@ -13,7 +13,10 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 export class NotePage {
 
     noteKey = '';
+    date = '';
+    // createddate='';
     noteForm: FormGroup;
+    createddate: '';
 
     constructor(navParams: NavParams, fb: FormBuilder,
         public firebaseservice: FirebaseService,
@@ -23,9 +26,9 @@ export class NotePage {
         public menuctrl: MenuController) {
 
         let note = navParams.get('notesSelected');
+        this.date = note.createddate;
         this.noteKey = note.$key;
 
-        console.log("note", note);
         let date = this.localISOformat(new Date());
         this.noteForm = fb.group({
             title: [note.title, Validators.required],

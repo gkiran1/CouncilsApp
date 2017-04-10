@@ -13,14 +13,13 @@
 
 <ion-content>
     <form [formGroup]="noteForm" (ngSubmit)="noteForm.value">
-        <ion-item>
-            <ion-label floating>Title</ion-label>
-            <ion-input type="text" name="title" formControlName="title" maxlength="30"></ion-input>
+        <ion-label class="date">{{date | customdateformat}}</ion-label>
+        <ion-item no-lines>
+            <ion-input class="title-style" type="text" name="title" formControlName="title" maxlength="30"></ion-input>
         </ion-item>
 
-        <ion-item>
-            <ion-label floating>Note</ion-label>
-            <ion-textarea type="text" elastic name="note" formControlName="note" maxlength="500"></ion-textarea>
+        <ion-item no-lines>
+            <ion-textarea class="note" type="text" elastic name="note" formControlName="note" maxlength="500"></ion-textarea>
         </ion-item>
 
     </form>
