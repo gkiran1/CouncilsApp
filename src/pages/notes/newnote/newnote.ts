@@ -20,20 +20,20 @@ export class NewNotePage {
         public nav: NavController,
         public menuctrl: MenuController) {
 
-        let date = this.localISOformat(new Date());
         this.newnoteForm = fb.group({
             title: ['', Validators.required],
             note: ['', Validators.required],
             createdby: localStorage.getItem('securityToken'),
-            createddate: new Date().toDateString(),
+            createddate: '',
         });
     }
 
     createNote(note) {
+        note.createddate = moment().toISOString();
         this.firebaseservice.createNote(note)
             .then(res => {
                 this.showAlert('Note created successfully.');
-                this.nav.push(WelcomePage)
+                this.nav.setRoot(WelcomePage)
             })
             .catch(err => this.showAlert(err))
     }
@@ -52,17 +52,7 @@ export class NewNotePage {
         }
         return number;
     }
-    localISOformat(date) {
-        date = new Date(date);
-        return date.getFullYear() +
-            '-' + this.pad(date.getMonth() + 1) +
-            '-' + this.pad(date.getDate()) +
-            'T' + this.pad(date.getHours()) +
-            ':' + this.pad(date.getMinutes()) +
-            ':' + this.pad(date.getSeconds()) +
-            '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
-            'Z';
-    };
+
     cancel() {
         this.nav.pop();
     }

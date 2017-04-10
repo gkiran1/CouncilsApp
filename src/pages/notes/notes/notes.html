@@ -2,8 +2,7 @@
   <ion-navbar hideBackButton="true">
     <ion-row>
       <ion-col class="header-col" width-10>
-        <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary"
-          (click)="cancel()"></ion-icon>
+        <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
         <ion-title text-center>Notes</ion-title>
@@ -17,25 +16,20 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding center text-center>
-  <ng-container *ngIf="notesArray.length">
-    <ion-list>
-      <ion-item class="background-color" (click)="noteSelected(item)" *ngFor="let item of agendasArray">
-        <ion-icon name="list" color="secondary" item-left></ion-icon>
-      <ion-img class="img-styles" src="../assets/icon/agendaicon.png"></ion-img>
-
-        <!--<p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
-        <button ion-button item-right clear>
-      <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey"></ion-icon>
-      </button>
-        <p><span class="agendacouncil-styles">{{item.agendacouncil}}</span>
-        </p>-->
+<ion-content>
+  <ion-item-group>
+    <ng-container *ngIf="notesArray.length">
+      <ion-item-divider></ion-item-divider>
+      <ion-item (click)="notesSelected(item)" *ngFor="let item of notesArray">
+        <h3 class="title">{{item.title}}</h3><span class="right-align"><ion-icon item-right ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></span>
+        <p>{{item.note}}</p>
+        <span>{{item.createddate | customdateformat}}</span>
       </ion-item>
-    </ion-list>
-  </ng-container>
-  <ng-container *ngIf="!notesArray.length">
-    <div class="nocontent-message">
-      <p>There are no notes</p>
-    </div>
-  </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!notesArray.length">
+      <div class="nocontent-message">
+        <p>There are no notes</p>
+      </div>
+    </ng-container>
+  </ion-item-group>
 </ion-content>

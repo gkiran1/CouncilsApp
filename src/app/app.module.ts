@@ -165,7 +165,8 @@ const cloudSettings: CloudSettings = {
     EditMemberPage,
     EditCompletePage,
     NewNotePage,
-    NotesPage
+    NotesPage,
+    NotePage
   ],
 
   imports: [
@@ -238,7 +239,8 @@ const cloudSettings: CloudSettings = {
     EditMemberPage,
     EditCompletePage,
     NewNotePage,
-    NotesPage
+    NotesPage,
+    NotePage
   ],
 
   providers: [AuthService, AppService, FirebaseService]

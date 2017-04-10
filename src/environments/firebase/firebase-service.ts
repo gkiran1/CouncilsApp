@@ -779,6 +779,20 @@ export class FirebaseService {
 
     }
     getNotes() {
-        return this.af.database.list('notes/' );
+        return this.af.database.list('notes/');
     }
+    updateNote(note, notekey) {
+        return this.af.database.list('notes').update(notekey, {
+            createdby: note.createdby,
+            createddate: note.createddate,
+            title: note.title,
+            note: note.note,
+        }).then(() => {
+            return "Note has been updated."
+        }).catch(err => { throw err });
+    }
+    removeNote(notekey) {
+        return this.af.database.object('notes/' + notekey).remove();
+    }
+
 }

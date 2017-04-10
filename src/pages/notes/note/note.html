@@ -2,30 +2,37 @@
     <ion-navbar hideBackButton>
         <ion-row>
             <ion-col class="header-col" width-10>
-                <ion-icon class="cancel-font" name="close" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
+                <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
             </ion-col>
             <ion-col width-80>
-                <ion-title text-center>New Note</ion-title>
+                <ion-title text-center>Note</ion-title>
             </ion-col>
         </ion-row>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="newnoteForm" (ngSubmit)="newnoteForm.value">
-    <ion-item>
-      <ion-label floating>Title</ion-label>
-      <ion-input type="text" name="title" formControlName="title" maxlength="30"></ion-input>
-    </ion-item>
+    <form [formGroup]="noteForm" (ngSubmit)="noteForm.value">
+        <ion-item>
+            <ion-label floating>Title</ion-label>
+            <ion-input type="text" name="title" formControlName="title" maxlength="30"></ion-input>
+        </ion-item>
 
-     <ion-item>
-      <ion-label floating>Note</ion-label>
-      <ion-textarea  type="text" elastic name="note" formControlName="note" maxlength="500"></ion-textarea>
-    </ion-item>
+        <ion-item>
+            <ion-label floating>Note</ion-label>
+            <ion-textarea type="text" elastic name="note" formControlName="note" maxlength="500"></ion-textarea>
+        </ion-item>
 
-  </form>
+    </form>
 </ion-content>
 
 <ion-footer>
-    <button ion-button clear block color="secondary" (click)="createNote(newnoteForm.value)" text-capitalize [disabled]="!newnoteForm.valid">Save</button>
+    <ion-toolbar>
+        <ion-buttons start>
+            <button ion-button color="danger" (click)="delete(noteForm.value)">Delete</button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button color="secondary" (click)="save(noteForm.value)" [disabled]="!noteForm.valid">Save</button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-footer>
