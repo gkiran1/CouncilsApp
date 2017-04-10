@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-row>
+      <ion-col class="header-col" width-10>
+        <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary"
+          (click)="cancel()"></ion-icon>
+      </ion-col>
+      <ion-col width-80>
+        <ion-title text-center>Notes</ion-title>
+      </ion-col>
+    </ion-row>
+    <ion-buttons end>
+      <button ion-button>
+      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding center text-center>
+  <ng-container *ngIf="notesArray.length">
+    <ion-list>
+      <ion-item class="background-color" (click)="noteSelected(item)" *ngFor="let item of agendasArray">
+        <ion-icon name="list" color="secondary" item-left></ion-icon>
+      <ion-img class="img-styles" src="../assets/icon/agendaicon.png"></ion-img>
+
+        <!--<p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
+        <button ion-button item-right clear>
+      <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey"></ion-icon>
+      </button>
+        <p><span class="agendacouncil-styles">{{item.agendacouncil}}</span>
+        </p>-->
+      </ion-item>
+    </ion-list>
+  </ng-container>
+  <ng-container *ngIf="!notesArray.length">
+    <div class="nocontent-message">
+      <p>There are no notes</p>
+    </div>
+  </ng-container>
+</ion-content>

@@ -28,11 +28,13 @@ import { NewCouncilFilePage } from '../files/new-council-file/new-council-file';
 import { FilesListPage } from '../files/files-page/files-page';
 import { NewPrivateDiscussionPage } from '../discussions/new-private-discussion/new-private-discussion';
 import { PrivateDiscussionsListPage } from '../discussions/private-discussions-list/private-discussions-list';
+import { NewNotePage } from '../notes/newnote/newnote';
+import { NotesPage } from '../notes/notes/notes';
 
 @Component({
   templateUrl: 'slide2.html',
   selector: 'slide2',
-  providers: [AssignmentsListPage, ActiveCouncilsPage, CouncilDiscussionsListPage, AgendasPage, PrivateDiscussionsListPage, FilesListPage]
+  providers: [AssignmentsListPage, ActiveCouncilsPage, CouncilDiscussionsListPage, AgendasPage, PrivateDiscussionsListPage, FilesListPage, NotesPage]
 })
 export class slide2Page {
 
@@ -42,6 +44,7 @@ export class slide2Page {
   privateDiscussionsCount
   agendasCount;
   filesCount;
+  notesCount;
   //@ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
@@ -58,7 +61,9 @@ export class slide2Page {
     public councilDiscussionsListPage: CouncilDiscussionsListPage,
     public agendaPage: AgendasPage,
     public privateDiscussionsListPage: PrivateDiscussionsListPage,
-    public filesListPage: FilesListPage) {
+    public filesListPage: FilesListPage,
+    public notesPage: NotesPage,
+  ) {
 
     this.userObj = null;
 
@@ -78,6 +83,7 @@ export class slide2Page {
     this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
     this.privateDiscussionsCount = privateDiscussionsListPage.getCount();
     this.agendasCount = agendaPage.getCount();
+    this.notesCount = notesPage.getCount();
     this.filesCount = filesListPage.getCount();
 
   }
@@ -148,8 +154,8 @@ export class slide2Page {
           text: 'Add Note',
           cssClass: "actionsheet-items",
           handler: () => {
-            // this.menuctrl.close();
-            // this.nav.push();
+            this.menuctrl.close();
+            this.nav.push(NewNotePage);
           }
         },
         {
@@ -180,6 +186,9 @@ export class slide2Page {
   }
   filesPage() {
     this.nav.push(FilesListPage);
+  }
+  notePage() {
+    this.nav.push(NotesPage)
   }
 
 }

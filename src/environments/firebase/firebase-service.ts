@@ -549,12 +549,12 @@ export class FirebaseService {
             councilid: agenda.councilid,
             agendadate: agenda.assigneddate,
             openinghymn: agenda.openinghymn,
-            openingprayer: agenda.openingprayer.firstname + ' ' + agenda.openingprayer.lastname,
-            spiritualthought: agenda.spiritualthought.firstname + ' ' + agenda.spiritualthought.lastname,
+            openingprayer: agenda.openingprayer,
+            spiritualthought: agenda.spiritualthought,
             assignments: agenda.assignments.$key ? agenda.assignments.$key : [],
             completedassignments: agenda.completedassignments.$key ? agenda.completedassignments.$key : [],
             discussionitems: agenda.discussionitems,
-            closingprayer: agenda.closingprayer.firstname + ' ' + agenda.closingprayer.lastname,
+            closingprayer: agenda.closingprayer,
             createdby: agenda.createdby,
             createddate: agenda.createddate,
             lastupdateddate: agenda.lastupdateddate,
@@ -600,8 +600,8 @@ export class FirebaseService {
             councilid: agenda.councilid,
             agendadate: agenda.assigneddate,
             openinghymn: agenda.openinghymn,
-            openingprayer: agenda.openingprayer.firstname + ' ' + agenda.openingprayer.lastname,
-            spiritualthought: agenda.spiritualthought.firstname + ' ' + agenda.spiritualthought.lastname,
+            openingprayer: agenda.openingprayer,
+            spiritualthought: agenda.spiritualthought,
             assignments: agenda.assignments.$key ? agenda.assignments.$key : [],
             completedassignments: agenda.completedassignments.$key ? agenda.completedassignments.$key : [],
             spiritualwelfare: agenda.spiritualwelfare,
@@ -609,7 +609,7 @@ export class FirebaseService {
             fellowshipitems: agenda.fellowshipitems,
             missionaryitems: agenda.missionaryitems,
             event: agenda.event,
-            closingprayer: agenda.closingprayer.firstname + ' ' + agenda.closingprayer.lastname,
+            closingprayer: agenda.closingprayer,
             createdby: agenda.createdby,
             createddate: agenda.createddate,
             lastupdateddate: agenda.lastupdateddate,
@@ -621,7 +621,6 @@ export class FirebaseService {
     }
 
     removeAgenda(agendaKey) {
-        console.log('agendas.$key', agendaKey);
         return this.af.database.object('agendas/' + agendaKey).remove();
     }
 
@@ -778,5 +777,8 @@ export class FirebaseService {
                 note: note.note,
             })
 
+    }
+    getNotes() {
+        return this.af.database.list('notes/' );
     }
 }

@@ -76,6 +76,8 @@ import { MembersListPage } from '../pages/editmembers/members-list/memberslist.c
 import { EditMemberPage } from '../pages/editmembers/edit-member/editmember.component';
 import { EditCompletePage } from '../pages/editmembers/edit-complete/editcomplete.component';
 import { NewNotePage } from '../pages/notes/newnote/newnote';
+import { NotesPage } from '../pages/notes/notes/notes';
+import { NotePage } from '../pages/notes/note/note';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -162,7 +164,8 @@ const cloudSettings: CloudSettings = {
     MembersListPage,
     EditMemberPage,
     EditCompletePage,
-    NewNotePage
+    NewNotePage,
+    NotesPage
   ],
 
   imports: [
@@ -234,7 +237,8 @@ const cloudSettings: CloudSettings = {
     MembersListPage,
     EditMemberPage,
     EditCompletePage,
-    NewNotePage
+    NewNotePage,
+    NotesPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]
