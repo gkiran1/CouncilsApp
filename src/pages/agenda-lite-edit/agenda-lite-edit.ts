@@ -136,7 +136,8 @@ export class AgendaLiteEditPage {
     return this.firebaseservice.getAssignmentsByCouncil(councilId);
   }
 
-  showCouncilsModal(value) {
+  showCouncilsModal(event, value) {
+    event.preventDefault();
     this.users = [];
     this.assignmentslist = [];
     this.completedassignmentslist = [];
@@ -193,12 +194,12 @@ export class AgendaLiteEditPage {
       councilid: this.assignedcouncil.$key,
       assigneddate: moment(assigneddate).toISOString(),
       openinghymn: value.openinghymn,
-      openingprayer: this.openingprayer.firstname + ' ' + this.openingprayer.lastname,
-      spiritualthought: this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname,
-      assignments: value.assignments,
-      completedassignments: value.completedassignments,
+      openingprayer: value.openingprayer === '' ? '' : this.openingprayer.firstname + ' ' + this.openingprayer.lastname,
+      spiritualthought: value.spiritualthought === '' ? '' : this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname,
+      assignments: (value.assignments != undefined && value.assignments.length > 0) ? value.assignments : '',
+      completedassignments: (value.completedassignments != undefined && value.completedassignments.length > 0) ? value.completedassignments : '',
       discussionitems: value.discussionitems,
-      closingprayer: this.closingprayer.firstname + ' ' + this.closingprayer.lastname,
+      closingprayer: value.closingprayer === '' ? '' : this.closingprayer.firstname + ' ' + this.closingprayer.lastname,
       createdby: value.createdby,
       createddate: new Date().toISOString(),
       isactive: value.isactive,
@@ -266,22 +267,31 @@ export class AgendaLiteEditPage {
 
   showList(event) {
     let v = event.target.value;
-
-    this.term = (v.indexOf('@') === 0) ? v.substr(1) : v;
+    if (v.charAt('0') !== '@') {
+      event.target.value = '';
+      this.showlist = false; return;
+    }
+    this.term = v.substr(1);
     this.showlist = true;
   }
 
   showList1(event) {
     let v1 = event.target.value;
-
-    this.term = (v1.indexOf('@') === 0) ? v1.substr(1) : v1;
+    if (v1.charAt('0') !== '@') {
+      event.target.value = '';
+      this.showlist1 = false; return;
+    }
+    this.term = v1.substr(1);
     this.showlist1 = true;
   }
 
   showList2(event) {
     let v2 = event.target.value;
-
-    this.term = (v2.indexOf('@') === 0) ? v2.substr(1) : v2;
+    if (v2.charAt('0') !== '@') {
+      event.target.value = '';
+      this.showlist2 = false; return;
+    }
+    this.term = v2.substr(1);
     this.showlist2 = true;
   }
 

@@ -73,7 +73,7 @@ export class AgendaLitePage {
   createagenda(agenda) {
     let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
     agenda.assigneddate = moment(assigneddate).toISOString(),
-    agenda.discussionitems = (agenda.discussionitems != undefined && agenda.discussionitems.length > 0) ? agenda.discussionitems.replace(/-/gi, '').trim() : '';
+      agenda.discussionitems = (agenda.discussionitems != undefined && agenda.discussionitems.length > 0) ? agenda.discussionitems.replace(/-/gi, '').trim() : '';
     agenda.councilid = this.assignedcouncil.$key;
     this.firebaseservice.createAgendaLite(agenda)
       .then(res => {
@@ -93,7 +93,8 @@ export class AgendaLitePage {
     alert.present();
   }
 
-  showCouncilsModal(value) {
+  showCouncilsModal(event, value) {
+    event.preventDefault();
     this.users = [];
     this.assignmentslist = [];
     this.completedassignmentslist = [];
@@ -162,25 +163,34 @@ export class AgendaLitePage {
 
   }
 
-  showList(event) {
+   showList(event) {
     let v = event.target.value;
-
-    this.term = (v.indexOf('@') === 0) ? v.substr(1) : v;
+    if (v.charAt('0') !== '@') {
+      event.target.value = '';
+      this.showlist = false; return;
+    }
+    this.term = v.substr(1);
     this.showlist = true;
   }
 
   showList1(event) {
     let v1 = event.target.value;
-
-    this.term = (v1.indexOf('@') === 0) ? v1.substr(1) : v1;
-    this.showlist1 = true;
+    if (v1.charAt('0') !== '@') {
+      event.target.value = '';
+      this.showlist = false; return;
+    }
+    this.term = v1.substr(1);
+    this.showlist = true;
   }
 
   showList2(event) {
     let v2 = event.target.value;
-
-    this.term = (v2.indexOf('@') === 0) ? v2.substr(1) : v2;
-    this.showlist2 = true;
+    if (v2.charAt('0') !== '@') {
+      event.target.value = '';
+      this.showlist = false; return;
+    }
+    this.term = v2.substr(1);
+    this.showlist = true;
   }
 
   bindAssignto(user) {

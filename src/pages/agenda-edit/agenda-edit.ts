@@ -146,7 +146,8 @@ export class AgendaEditPage {
         return this.firebaseservice.getAssignmentsByCouncil(councilId);
     }
 
-    showCouncilsModal(value) {
+    showCouncilsModal(event, value) {
+        event.preventDefault();
         this.users = [];
         this.assignmentslist = [];
         this.completedassignmentslist = [];
@@ -203,8 +204,8 @@ export class AgendaEditPage {
             councilid: this.assignedcouncil.$key,
             assigneddate: moment(assigneddate).toISOString(),
             openinghymn: value.openinghymn,
-            openingprayer: this.openingprayer.firstname + ' ' + this.openingprayer.lastname,
-            spiritualthought: this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname,
+            openingprayer: value.openingprayer === '' ? '' : this.openingprayer.firstname + ' ' + this.openingprayer.lastname,
+            spiritualthought: value.spiritualthought === '' ? '' : this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname,
             assignments: value.assignments,
             completedassignments: value.completedassignments,
             spiritualwelfare: value.spiritualwelfare,
@@ -212,7 +213,7 @@ export class AgendaEditPage {
             fellowshipitems: value.fellowshipitems,
             missionaryitems: value.missionaryitems,
             event: value.event,
-            closingprayer: this.closingprayer.firstname + ' ' + this.closingprayer.lastname,
+            closingprayer: value.closingprayer === '' ? '' : this.closingprayer.firstname + ' ' + this.closingprayer.lastname,
             createdby: value.createdby,
             createddate: new Date().toISOString(),
             isactive: value.isactive,
@@ -247,25 +248,34 @@ export class AgendaEditPage {
     }
 
     showList(event) {
-        let v = event.target.value;
-
-        this.term = (v.indexOf('@') === 0) ? v.substr(1) : v;
-        this.showlist = true;
+    let v = event.target.value;
+    if (v.charAt('0') !== '@') {
+      event.target.value = '';
+      this.showlist = false; return;
     }
+    this.term = v.substr(1);
+    this.showlist = true;
+  }
 
-    showList1(event) {
-        let v1 = event.target.value;
-
-        this.term = (v1.indexOf('@') === 0) ? v1.substr(1) : v1;
-        this.showlist1 = true;
+  showList1(event) {
+    let v1 = event.target.value;
+    if (v1.charAt('0') !== '@') {
+      event.target.value = '';
+      this.showlist = false; return;
     }
+    this.term = v1.substr(1);
+    this.showlist = true;
+  }
 
-    showList2(event) {
-        let v2 = event.target.value;
-
-        this.term = (v2.indexOf('@') === 0) ? v2.substr(1) : v2;
-        this.showlist2 = true;
+  showList2(event) {
+    let v2 = event.target.value;
+    if (v2.charAt('0') !== '@') {
+      event.target.value = '';
+      this.showlist = false; return;
     }
+    this.term = v2.substr(1);
+    this.showlist = true;
+  }
 
     bindAssignto(user) {
         this.showlist = false;
