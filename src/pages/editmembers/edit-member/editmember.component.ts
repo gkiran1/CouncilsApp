@@ -69,8 +69,8 @@ export class EditMemberPage {
                 this.firebaseService.getAssignmentsByUserKey(this.selectedUser.$key).subscribe(assignments => {
                     assignments.forEach(assignment => {
                         if (updatedCouncils.indexOf(assignment.councilid) === -1) {
-                            // Update assignedto as empty string in assignments since user is not in that council now..
-                            this.firebaseService.updateAssignedToInAssignment(assignment.$key, '')
+                            // Remove assignment in assignments since user is not in that council now..
+                            this.firebaseService.removeAssignment(assignment.$key)
                         }
                     });
                 });

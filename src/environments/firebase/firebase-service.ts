@@ -375,14 +375,6 @@ export class FirebaseService {
             .catch(err => { throw err });
     }
 
-    updateAssignedToInAssignment(assignmentKey, assignedTo) {
-        return this.af.database.list('assignments').update(assignmentKey, {
-            assignedto: assignedTo
-        }).then(() => {
-            return "Assignment has been updated!"
-        }).catch(err => { throw err });
-    }
-
     removeAssignment(assignmentKey) {
         console.log('assignment.$key', assignmentKey);
         return this.af.database.object('assignments/' + assignmentKey).remove();
