@@ -787,4 +787,29 @@ export class FirebaseService {
         return this.af.database.object('notes/' + notekey).remove();
     }
 
+    getAgendas() {
+        return this.af.database.list('agendas');
+    }
+
+    updateOpeningPrayerInAgendas(agendaKey) {
+        return this.af.database.object('agendas/' + agendaKey).update({
+            openingprayer: '',
+            openingprayeruserid: ''
+        });
+    }
+
+    updateSpiritualThoughtInAgendas(agendaKey) {
+        return this.af.database.object('agendas/' + agendaKey).update({
+            spiritualthought: '',
+            spiritualthoughtuserid: ''
+        });
+    }
+
+    updateClosingPrayerInAgendas(agendaKey) {
+        return this.af.database.object('agendas/' + agendaKey).update({
+            closingprayer: '',
+            closingprayeruserid: ''
+        });
+    }
+
 }
