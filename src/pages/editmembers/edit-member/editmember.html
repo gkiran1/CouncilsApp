@@ -11,10 +11,11 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <ion-list no-lines>
-        <ion-item *ngFor="let councilObj of councilsObj" text-wrap>
-            <h3 item-left>{{councilObj.councilName}}</h3>
-            <ion-checkbox [(ngModel)]="councilObj.isMemberCouncil" (click)="enableSaveBtn()" color="secondary" item-right></ion-checkbox>
+    <ion-item-divider class="empty"></ion-item-divider>
+    <ion-list>
+        <ion-item *ngFor="let councilObj of councilsObj">
+            <ion-label class="councilname">{{councilObj.councilName}}</ion-label>
+            <ion-checkbox [(ngModel)]="councilObj.isMemberCouncil" (click)="enableSaveBtn()" color="secondary" item-right clear></ion-checkbox>
         </ion-item>
     </ion-list>
 </ion-content>
