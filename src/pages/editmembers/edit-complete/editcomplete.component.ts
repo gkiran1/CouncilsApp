@@ -16,7 +16,7 @@ export class EditCompletePage {
     }
 
     goToMembersListPage() {
-        this.navCtrl.setRoot(MembersListPage);
+        this.navCtrl.popTo(this.navCtrl.getByIndex(2));
     }
 
     back() {
