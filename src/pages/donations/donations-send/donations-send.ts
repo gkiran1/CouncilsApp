@@ -97,7 +97,8 @@ export class DonationsSendPage {
           amount: Number.parseInt(value.amount.substr(2)) * 100, // adding decimals
           fullname: value.fullname,
           email: value.email,
-          donationtype: value.donationtype
+          donationtype: value.donationtype,
+          cardNo: value.creditcardNo.split('-').join('')
         }
         this.http.post('http://localhost:8080/donate', data)
           .subscribe(response => {
