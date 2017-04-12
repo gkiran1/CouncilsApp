@@ -6,8 +6,8 @@
     </button>
         </ion-buttons>-->
         <ion-row>
-            <ion-col class="header-col" width-10>
-                <ion-icon class="cancel-font" name="cancel" item-left color="secondary" ios="ios-close" md="md-close" (click)="cancel()"></ion-icon>
+            <ion-col class="header-col">
+                <ion-icon class="councils-icon__close menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
             </ion-col>
             <ion-col width-80>
                 <h4 text-center>Private Discussions</h4>
@@ -35,7 +35,7 @@
                 <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!item.createdUserAvatar" />
             </ion-avatar>
             <h3 class="topic" *ngIf="uid !== item.createdUserId">{{item.createdUserName}}</h3>
-            <span class="right-align"><ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></span>
+            <span class="right-align"><ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon></span>
             <p>{{item.lastMsg.text}}</p>
             <p class="font2">{{item.lastMsg.timestamp | customdateformat}}</p>
         </ion-item>

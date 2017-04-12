@@ -6,8 +6,8 @@
     </button>
     </ion-buttons>-->
     <ion-row>
-      <ion-col class="header-col" width-10>
-        <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
+      <ion-col class="header-col">
+        <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
         <ion-title text-center>Assignments</ion-title>
@@ -29,7 +29,7 @@
         <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': personalselectedIdx === i}"></ion-icon>
         <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': personalselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
-        <ion-icon class="icon-style right-align" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+        <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
         <p class="font2"><span>{{item.councilname}}</span><span style="position: absolute;right: 10px">{{item.assigneddate | customdateformat}}</span></p>
       </ion-item>
 
@@ -38,7 +38,7 @@
         <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': councilselectedIdx === i}"></ion-icon>
         <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': councilselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
-        <ion-icon class="icon-style right-align" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+        <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
         <p class="font2"><span>{{item.councilname}}</span><span style="position: absolute;right: 10px">{{item.assigneddate | customdateformat}}</span></p>
 
       </ion-item>
@@ -48,7 +48,7 @@
         <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': completedselectedIdx === i}"></ion-icon>
         <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': completedselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
-        <ion-icon class="icon-style right-align" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+        <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
         <p class="font2"><span>{{item.councilname}}</span><span class="right-align">{{item.assigneddate | customdateformat}}</span></p>
         </ion-item>
     </ng-container>

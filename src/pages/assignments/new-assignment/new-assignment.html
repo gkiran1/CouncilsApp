@@ -4,9 +4,9 @@
       <ion-icon name="menu"></ion-icon>
     </button>-->
     <ion-row>
-      <ion-col class="header-col" width-10>
-        <ion-icon *ngIf="isNewAssignment" class="ion-md-arrow-back cancel-button" name="close" item-left color="secondary" (click)="cancel()"></ion-icon>
-        <ion-icon *ngIf="!isNewAssignment" class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
+      <ion-col class="header-col">
+        <ion-icon *ngIf="isNewAssignment" class="councils-icon__close menu-icon" name="close" item-left color="secondary" (click)="cancel()"></ion-icon>
+        <ion-icon *ngIf="!isNewAssignment" class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
         <ion-title *ngIf="isNewAssignment" text-center>New Assignment</ion-title>

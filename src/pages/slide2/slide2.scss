@@ -40,6 +40,7 @@ slide2 {
         font-size: 17px;
         color: #35373a !important;
         margin-bottom: 3px;
+        white-space: pre;
     }
     .user2 {
         margin:0;
@@ -57,7 +58,14 @@ slide2 {
 
     .menu-user-col {
         padding:0 !important;
-        margin-left: 16px !important;
+        margin: 16px 0 0 16px !important;
+    }
+    .user-admin-icon {
+        font-size: 17px !important;
+    }
+
+    .user-admin-col {
+        margin-right:6px;
     }
 
     

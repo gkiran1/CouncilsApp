@@ -44,6 +44,90 @@
     font-style: normal;
 }
 
+/************************************ Icons **************************************/
+
+@font-face {
+  font-family: 'councils-icons';
+  src:  url('../assets/fonts/councils-icons.eot?1p3suo');
+  src:  url('../assets/fonts/councils-icons.eot?1p3suo#iefix') format('embedded-opentype'),
+    url('../assets/fonts/councils-icons.ttf?1p3suo') format('truetype'),
+    url('../assets/fonts/councils-icons.woff?1p3suo') format('woff'),
+    url('../assets/fonts/councils-icons.svg?1p3suo#councils-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'councils-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.councils-icon__add:before {
+  content: "\e900";
+}
+.councils-icon__admin:before {
+  content: "\e901";
+}
+.councils-icon__agenda:before {
+  content: "\e902";
+}
+.councils-icon__back:before {
+  content: "\e903";
+}
+.councils-icon__chevron_right:before {
+  content: "\e904";
+}
+.councils-icon__close:before {
+  content: "\e905";
+}
+.councils-icon__donations:before {
+  content: "\e906";
+}
+.councils-icon__file:before {
+  content: "\e907";
+}
+.councils-icon__inactivate:before {
+  content: "\e908";
+}
+.councils-icon__left_menu:before {
+  content: "\e909";
+}
+.councils-icon__notifications:before {
+  content: "\e90a";
+}
+.councils-icon__photo:before {
+  content: "\e90b";
+}
+.councils-icon__radio_1:before {
+  content: "\e90c";
+}
+.councils-icon__radio_2:before {
+  content: "\e90d";
+}
+.councils-icon__reactivate:before {
+  content: "\e90e";
+}
+.councils-icon__search:before {
+  content: "\e90f";
+}
+.councils-icon__settings:before {
+  content: "\e910";
+}
+.councils-icon__share:before {
+  content: "\e911";
+}
+/*************************************************************************************/
+
 html {
     font-size: 62.5%;
     /* [1] */
@@ -220,6 +304,15 @@ ion-header ion-col {
     display: flex;
     /* align-items: center; */
     justify-content: center;
+    align-items: center;
+    min-width: 44px;
+    max-width: 44px;
+    min-height: 44px;
+    max-height: 44px;
+}
+
+.header-left-icon {
+    font-size: 24px;
 }
 
 ion-header ion-col h3 {
@@ -332,6 +425,21 @@ ion-content .page-blank-area {
 .item-noborder.div {
     border: none !important;
 }
+
+
+    .menu-icon {
+        
+        font-size: 24px !important;
+    }
+
+    .bar-button-menutoggle-md {
+        margin:0 !important;
+        padding: 0 !important;
+    }
+
+    .bar-button-menutoggle-md ion-icon {
+        padding-left: 10px !important;
+    }
 
 
 /****************************** Action Sheet Styles **********************************/
@@ -479,6 +587,7 @@ ion-avatar {
 
 .fwd-arrow-grey {
     color: #a9aaac !important;
+    font-size: 13px !important;
 }
 
 .cancel-button {
@@ -489,6 +598,7 @@ ion-avatar {
     background: #f4f6fa;
         font-size:24px !important;
     }
+
 
 .item-md{
         border-bottom: 1px solid #E8E9EB;
@@ -520,3 +630,12 @@ ion-avatar {
     padding-right: 8px;
     border-bottom: none !important;
 }
+
+    .notification-badge {
+        position:absolute; 
+        font-weight: bold; 
+        top:-5px; 
+        left:9px; 
+        font-size:9px
+    }
+

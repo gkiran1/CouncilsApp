@@ -6,8 +6,8 @@
     </button>
         </ion-buttons>-->
     <ion-row>
-        <ion-col class="header-col" width-10>
-            <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary"
+        <ion-col class="header-col">
+            <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary"
                 (click)="cancel()"></ion-icon>
         </ion-col>
         <ion-col width-80>
@@ -28,7 +28,7 @@
         <ng-container *ngIf="discussions.length">
             <ion-item-divider></ion-item-divider>
             <ion-item (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
-                <h3 class="topic">{{item.topic}}</h3><span class="right-align"><ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></span>
+                <h3 class="topic">{{item.topic}}</h3><span class="right-align"><ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon></span>
                 <p>{{item.lastMsg}}</p>
                 <span> {{item.councilname}}</span><span class="right-align">{{item.createdDate | customdateformat}}</span>
             </ion-item>

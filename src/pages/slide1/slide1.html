@@ -1,12 +1,13 @@
 <ion-list no-lines>
         <button *ngIf=isAdmin clear ion-button class="settings-button" name="AdminPage" block (click)="adminPage()" text-capitalize>
-                    <ion-icon class="ion-ios-star-outline" item-left></ion-icon><span>Admin</span>
+                    <ion-icon class="icon councils-icon__admin menu-icon" item-left></ion-icon><span>Admin</span>
             </button>
         <button clear ion-button class="settings-button" name="settingsPage" block (click)="settingsPage()" text-capitalize>
-                    <ion-icon class="ion-ios-settings-outline" item-left></ion-icon>Settings
+                    
+                    <ion-icon class="icon councils-icon__settings menu-icon" item-left></ion-icon>Settings
             </button>
             
         <button clear ion-button class="settings-button" name="DonationsPage" block (click)="donationsPage()" text-capitalize>
-                    <ion-icon class="ion-logo-usd" item-left></ion-icon>Donations
+                    <ion-icon class="icon councils-icon__donations menu-icon" item-left></ion-icon>Donations
             </button>
 </ion-list>

@@ -1,17 +1,19 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
     <ion-row>
-      <ion-col class="header-col" width-10>
-        <ion-icon class="ion-md-arrow-back cancel-button" name="cancel" item-left color="secondary"
+      <ion-col class="header-col">
+        <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary"
           (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
         <ion-title text-center>Agendas</ion-title>
       </ion-col>
     </ion-row>
-    <ion-buttons end>
+    <ion-buttons class="menu-button" end>
       <button ion-button>
-      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
+      <ion-icon class="councils-icon__notifications menu-icon" color="secondary">
+        <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
+      </ion-icon>
     </button>
     </ion-buttons>
   </ion-navbar>
@@ -22,14 +24,21 @@
     <ion-list>
       <ion-item class="background-color" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
         <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
-        <ion-img class="img-styles" src="../assets/icon/agendaicon.png"></ion-img>
-
+        <ion-row>
+          <ion-col>
+        <ion-icon class="councils-icon__agenda menu-icon" color="primary"></ion-icon>
+          </ion-col>
+          <ion-col>
         <p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
-        <button ion-button item-right clear>
-      <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey"></ion-icon>
-      </button>
         <p><span class="agendacouncil-styles">{{item.agendacouncil}}</span>
         </p>
+          </ion-col>
+          <ion-col>
+        <button ion-button item-right clear>
+      <ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon>
+      </button>
+          </ion-col>
+        </ion-row>
       </ion-item>
     </ion-list>
   </ng-container>

@@ -49,7 +49,7 @@ export class slide2Page {
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
   userSubscription: Subscription;
-
+  isAdmin: boolean = false;
   constructor(public nav: NavController,
     public af: AngularFire,
     public appService: AppService,
@@ -64,7 +64,9 @@ export class slide2Page {
     public filesListPage: FilesListPage,
     public notesPage: NotesPage,
   ) {
-
+     if (localStorage.getItem('isAdmin') === 'true') {
+            this.isAdmin = true;
+        }
     this.userObj = null;
 
     this.userSubscription = this.af.auth.subscribe(auth => {
