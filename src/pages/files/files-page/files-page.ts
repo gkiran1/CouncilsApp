@@ -6,7 +6,7 @@ import { NavController, Platform } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import { WelcomePage } from '../../menu/menu';
-import { Transfer, File, FilePath } from 'ionic-native';
+import { Transfer, FilePath, File, FileOpener } from 'ionic-native';
 import { TransferObject } from '@ionic-native/transfer';
 import * as firebase from 'firebase';
 
@@ -16,33 +16,9 @@ import * as firebase from 'firebase';
 })
 export class FilesListPage {
     count$ = new Subject();
-    userSubscription: Subscription;
-    isListEmpty = false;
     filesArray = [];
     profilePictureRef: any;
-    rootRef: any;
-    storageDirectory: string = '';
     constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController, public platform: Platform) {
-        this.rootRef = firebase.database().ref();
-
-        this.platform.ready().then(() => {
-            // make sure this is on a device, not an emulation (e.g. chrome tools device mode)
-            if (!this.platform.is('cordova')) {
-                return false;
-            }
-
-            if (this.platform.is('ios')) {
-                var cordova: any;
-                this.storageDirectory = cordova.file.documentsDirectory;
-            }
-            else if (this.platform.is('android')) {
-                this.storageDirectory = cordova.file.dataDirectory;
-            }
-            else {
-                // exit otherwise, but you could add further types here e.g. Windows
-                return false;
-            }
-        });
         this.filesArray = [];
         this.profilePictureRef = firebase.storage().ref('/files/');
         if (localStorage.getItem('userCouncils') !== null) {
@@ -58,16 +34,15 @@ export class FilesListPage {
     }
     downloadFile(item) {
         let ProfileRef = this.profilePictureRef.child(item.councilid + '//' + item.$key + '//' + item.filename)
-        // alert(ProfileRef);
         let fileTransfer = new Transfer();
         ProfileRef.getDownloadURL().then(function (url) {
-            var Path = firebase.database().ref().child('files/' + item.$key);
-            // alert(Path)
-            // alert(url.toString());           
-             var targetPath = "cdvfile://localhost/persistent/android/";
-            fileTransfer.download(url, targetPath).then(res => {
-                alert('file downloaded ...' + res.toNativeURL());
-
+            console.log(url);
+            var targetPath = cordova.file.dataDirectory + '/CouncilDownloads/' + item.filename;
+            // alert(targetPath);
+            var trustHosts = true;
+            var options = {};
+            fileTransfer.download(url, targetPath, trustHosts, options).then(res => {  
+                 alert('file downloaded.' + res.toNativeURL());
             }).catch(err => {
                 alert('could not download file.' + JSON.stringify(err));
                 console.log(err);
