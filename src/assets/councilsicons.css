@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'councils-icons';
+  src:  url('../fonts/councils-icons.eot?vu15ft');
+  src:  url('../fonts/councils-icons.eot?vu15ft#iefix') format('embedded-opentype'),
+    url('../fonts/councils-icons.ttf?vu15ft') format('truetype'),
+    url('../fonts/councils-icons.woff?vu15ft') format('woff'),
+    url('../fonts/councils-icons.svg?vu15ft#councils-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'councils-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.councils-icon__add:before {
+  content: "\e900";
+}
+.councils-icon__admin:before {
+  content: "\e901";
+}
+.councils-icon__agenda:before {
+  content: "\e902";
+}
+.councils-icon__back:before {
+  content: "\e903";
+}
+.councils-icon__close:before {
+  content: "\e904";
+}
+.councils-icon__donations:before {
+  content: "\e905";
+}
+.councils-icon__file:before {
+  content: "\e906";
+}
+.councils-icon__inactivate:before {
+  content: "\e907";
+}
+.councils-icon__left_menu:before {
+  content: "\e908";
+}
+.councils-icon__notifications:before {
+  content: "\e909";
+}
+.councils-icon__photo:before {
+  content: "\e90a";
+}
+.councils-icon__radio_1:before {
+  content: "\e90b";
+}
+.councils-icon__radio_2:before {
+  content: "\e90c";
+}
+.councils-icon__reactivate:before {
+  content: "\e90d";
+}
+.councils-icon__search:before {
+  content: "\e90e";
+}
+.councils-icon__settings:before {
+  content: "\e90f";
+}
+.councils-icon__share:before {
+  content: "\e910";
+}
+
