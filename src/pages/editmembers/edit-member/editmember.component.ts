@@ -52,6 +52,7 @@ export class EditMemberPage {
     }
 
     updateCouncils() {
+        this.enableBtn = false;
         var updatedCouncils = [];
         this.councilsObj.forEach(obj => {
             if (obj.isMemberCouncil) {
@@ -69,13 +70,30 @@ export class EditMemberPage {
                 this.firebaseService.getAssignmentsByUserKey(this.selectedUser.$key).subscribe(assignments => {
                     assignments.forEach(assignment => {
                         if (updatedCouncils.indexOf(assignment.councilid) === -1) {
-                            // Update assignedto as empty string in assignments since user is not in that council now..
-                            this.firebaseService.updateAssignedToInAssignment(assignment.$key, '')
+                            // Remove assignment in assignments since user is not in that council now..
+                            this.firebaseService.removeAssignment(assignment.$key)
                         }
                     });
                 });
             }).then(() => {
-                this.enableBtn = false;
+                this.firebaseService.getAgendas().subscribe(agendas => {
+                    agendas.forEach(agenda => {
+                        if (updatedCouncils.indexOf(agenda.councilid) === -1) {
+                            // Update agendas since user is not in that council now..
+                            if (agenda.openingprayeruserid === this.selectedUser.$key) {
+                                this.firebaseService.updateOpeningPrayerInAgendas(agenda.$key);
+                            }
+                            if (agenda.spiritualthoughtuserid === this.selectedUser.$key) {
+                                this.firebaseService.updateSpiritualThoughtInAgendas(agenda.$key);
+                            }
+                            if (agenda.closingprayeruserid === this.selectedUser.$key) {
+                                this.firebaseService.updateClosingPrayerInAgendas(agenda.$key);
+                            }
+                        }
+                    });
+                });
+
+            }).then(() => {
                 this.navCtrl.push(EditCompletePage, { name: this.selectedUser.firstname + ' ' + this.selectedUser.lastname });
             });
         });

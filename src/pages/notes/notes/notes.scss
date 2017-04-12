@@ -1,0 +1,24 @@
+notes-page{
+    .title{
+        display: inline;
+         font-family: Bernina-Regular, sans-serif !important;
+        font-size: 17px !important;
+        color: #35373a !important;
+
+    }
+     p{
+        font-family: Bernina-Regular, sans-serif !important;
+        font-size: 15px !important;
+        color: #a9aaac !important;
+    }
+    span{
+        font-family: 'Bernina-Regular', sans-serif !important;
+        font-size: 13px;
+        color: #a9aaac;
+    }    
+     .right-align{
+        position: absolute;
+        right: 0;
+        margin-right:10px;
+    }
+}

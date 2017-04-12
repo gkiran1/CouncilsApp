@@ -12,14 +12,14 @@
 </ion-header>
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let user of users">
+        <ion-item *ngFor="let user of users" (click)="editMember(user)">
             <ion-avatar item-left>
                 <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar">
                 <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar" />
             </ion-avatar>
             <h3>{{user.firstname}} {{user.lastname}}</h3>
             <p><span>{{user.councilnames}}</span></p>
-            <button ion-button item-right clear (click)="editMember(user)">   
+            <button ion-button item-right clear>   
              <ion-icon class="ion-ios-arrow-forward fwd-arrow-grey" ></ion-icon>
             </button>
         </ion-item>

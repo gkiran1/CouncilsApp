@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { DonationsThankyouPage } from '../donations-thankyou/donations-thankyou';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { validateEmail } from '../../../custom-validators/custom-validator';
+import { Http } from '@angular/http';
+import { NgZone } from '@angular/core';
+
 declare var Stripe: any;
 
 @Component({
@@ -12,7 +15,7 @@ declare var Stripe: any;
 export class DonationsSendPage {
   donationForm: FormGroup;
   private token: string = '';
-  constructor(fb: FormBuilder, public nav: NavController, public navParams: NavParams) {
+  constructor(public zone: NgZone, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public http: Http, fb: FormBuilder, public nav: NavController, public navParams: NavParams) {
     this.donationForm = fb.group({
       amount: ['', Validators.required],
       fullname: ['', Validators.required],
@@ -69,28 +72,57 @@ export class DonationsSendPage {
 
   send(value) {
     console.log(value);
+    let loader = this.loadingCtrl.create({
+      spinner: 'crescent',
+      content: "Please wait, while your request being processed..",
+    });
+    loader.present();
     Stripe.card.createToken({
       number: value.creditcardNo.split('-').join(''),//'4242424242424242',378282246310005
       exp_month: value.creditValidthru.split('/')[0],
       exp_year: value.creditValidthru.split('/')[1]
-    }, (status, response) => this.stripeResponseHandler(status, response));
-    // this.nav.push(DonationsThankyouPage);
-  }
-  stripeResponseHandler(status, response) {
+    }, (status, response) => {
+      if (response.error) {
+        // Show the errors on the form
+        loader.dismiss();
+        console.log('error', response.error.message);
+        this.showAlert(response.error.message);
+      } else {
+        // response contains id and card, which contains additional card details
+        this.token = response.id;
+        console.log('token - ', this.token);
+        // Insert the token into the form so it gets submitted to the server
+        let data = {
+          stripeToken: this.token,
+          amount: Number.parseInt(value.amount.substr(2)) * 100, // adding decimals
+          fullname: value.fullname,
+          email: value.email,
+          donationtype: value.donationtype,
+          cardNo: value.creditcardNo.split('-').join('')
+        }
+        this.http.post('http://localhost:8080/donate', data)
+          .subscribe(response => {
+            loader.dismiss();
+            console.log('payment success', response);
+            this.zone.run(() => {
+              this.nav.push(DonationsThankyouPage);
+            });
+          }, err => {
+            loader.dismiss();
+            console.log('Error:', err);
+            this.showAlert('There has been an error processing your request, please try again');
+          })
 
-    if (response.error) {
-      // Show the errors on the form
-      console.log('error');
-      console.log(response.error.message);
-    } else {
-      // response contains id and card, which contains additional card details
-      this.token = response.id;
-      // Insert the token into the form so it gets submitted to the server
-      console.log('success');
-      console.log('Sending token param:');
-      console.log(this.token);
-      this.nav.push(DonationsThankyouPage, { token: this.token });
-    }
+      }
+    });
   }
 
+  showAlert(errText) {
+    let alert = this.alertCtrl.create({
+      title: '',
+      subTitle: errText,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 }

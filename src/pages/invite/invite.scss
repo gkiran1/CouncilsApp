@@ -10,4 +10,35 @@ invite-page{
         font-size: 17px !important;
         color: #35373a !important;
     }
+    .item-md{
+        border-bottom: 1px solid #E8E9EB;
+    }
+     .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+    border-bottom-color: #E8E9EB !important;
+    box-shadow: none !important;
+}
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+    border-bottom-color: none !important;
+    box-shadow: none !important;
+}
+.item-md.item-block .item-inner {
+    padding-right: 8px;
+    border-bottom: none !important;
+}
+    .item-ios{
+        border-bottom: 1px solid #E8E9EB;
+    }
+    .item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+    border-bottom-color: #E8E9EB !important;
+    box-shadow: none !important;
+}
+.item-ios.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+    border-bottom-color: none !important;
+    box-shadow: none !important;
+}
+.item-ios.item-block .item-inner {
+    padding-right: 8px;
+    border-bottom: none !important;
+}
+   
 }

@@ -21,7 +21,7 @@ export class AgendaPage {
     councils = [];
     newagendaForm: FormGroup;
     usercouncils = [];
-    term: string = '';
+    term;
     assignedcouncil;
     openingprayer;
     spiritualthought;
@@ -39,8 +39,6 @@ export class AgendaPage {
     constructor(public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
         public firebaseservice: FirebaseService, public alertCtrl: AlertController,
         public nav: NavController) {
-
-        // let council = navParams.get('councilObj');
 
         this.usercouncils = localStorage.getItem('userCouncils').split(',');
         var councilsIds = localStorage.getItem('userCouncils').split(',');
@@ -84,13 +82,16 @@ export class AgendaPage {
     createagenda(agenda) {
         let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
         agenda.assigneddate = moment(assigneddate).toISOString(),
-        agenda.spiritualwelfare = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.replace(/-/gi, '').trim() : '';
+            agenda.spiritualwelfare = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.replace(/-/gi, '').trim() : '';
         agenda.temporalwelfare = (agenda.temporalwelfare != undefined && agenda.temporalwelfare.length > 0) ? agenda.temporalwelfare.replace(/-/gi, '').trim() : '';
         agenda.fellowshipitems = (agenda.fellowshipitems != undefined && agenda.fellowshipitems.length > 0) ? agenda.fellowshipitems.replace(/-/gi, '').trim() : '';
         agenda.missionaryitems = (agenda.missionaryitems != undefined && agenda.missionaryitems.length > 0) ? agenda.missionaryitems.replace(/-/gi, '').trim() : '';
         agenda.event = (agenda.event != undefined && agenda.event.length > 0) ? agenda.event.replace(/-/gi, '').trim() : '';
         agenda.councilid = this.assignedcouncil.$key;
-
+        agenda.openingprayeruserid = (this.openingprayer !== undefined) ? this.openingprayer.$key : '';
+        agenda.spiritualthoughtuserid = (this.spiritualthought !== undefined) ? this.spiritualthought.$key : '';
+        agenda.closingprayeruserid = (this.closingprayer !== undefined) ? this.closingprayer.$key : '';
+        
         this.firebaseservice.createAgenda(agenda)
             .then(res => {
                 this.showAlert('Agenda created successfully.');
@@ -109,7 +110,8 @@ export class AgendaPage {
         alert.present();
     }
 
-    showCouncilsModal(value) {
+    showCouncilsModal(event, value) {
+        event.preventDefault();
         this.users = [];
         this.assignmentslist = [];
         this.completedassignmentslist = [];
@@ -244,24 +246,34 @@ export class AgendaPage {
 
     showList(event) {
         let v = event.target.value;
-
-        this.term = (v.indexOf('@') === 0) ? v.substr(1) : v;
+        if (v.charAt('0') !== '@') {
+            event.target.value = '';
+            this.showlist = false; return;
+        }
+        this.term = v.substr(1);
         this.showlist = true;
     }
 
     showList1(event) {
         let v1 = event.target.value;
-
-        this.term = (v1.indexOf('@') === 0) ? v1.substr(1) : v1;
+        if (v1.charAt('0') !== '@') {
+            event.target.value = '';
+            this.showlist1 = false; return;
+        }
+        this.term = v1.substr(1);
         this.showlist1 = true;
     }
 
     showList2(event) {
         let v2 = event.target.value;
-
-        this.term = (v2.indexOf('@') === 0) ? v2.substr(1) : v2;
+        if (v2.charAt('0') !== '@') {
+            event.target.value = '';
+            this.showlist2 = false; return;
+        }
+        this.term = v2.substr(1);
         this.showlist2 = true;
     }
+
 
     bindAssignto(user) {
         this.showlist = false;

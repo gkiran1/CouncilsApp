@@ -15,7 +15,7 @@
     <form [formGroup]="agendaeditForm" (ngSubmit)="agendaeditForm.value">
         <ion-item>
             <ion-label floating>Council</ion-label>
-            <ion-input type="text" readonly (click)="showCouncilsModal(agendaeditForm.value)" formControlName="assignedcouncil"></ion-input>
+            <ion-input type="text" readonly (touchstart)="showCouncilsModal($event, newagendaliteForm.value)" formControlName="assignedcouncil"></ion-input>
         </ion-item>
 
         <ion-item>

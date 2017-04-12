@@ -149,42 +149,74 @@ export class NewCouncilFilePage {
   }
   // to upload a picture from gallery to the firebase.
   uploadPicture(value) {
+
+  }
+  // to upload files from the device.
+  importFile(value) {
     FileChooser.open()
       .then(uri => {
         this.file = uri.toString();
-        // alert(this.file)
         FilePath.resolveNativePath(this.file)
           .then(filePath => {
-            // alert(filePath);
-            var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
-            var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
-            // alert(filename);
-            value.createdDate = moment().toISOString();
-            value.councilid = value.council.$key;
-            value.councilname = value.council.council;
-            value.filename = filename;
-            value.filetype = filetype;
-            this.firebaseservice.saveFile(value).then(fileId => {
-              this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
-                .putString(filePath)
-                .then((savedPicture) => {
-                  this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
-                  this.pictureRef.then((metadata) => {
-                    // Metadata now contains the metadata like filesize and type for 'images/...'
-                    this.nav.push(OpenCouncilFilePage, {
-                      file: metadata, file1: fileId, value: value
-                    });
-                  }).catch((error) => {
+            (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
+              res.file((resFile) => {
+                var reader = new FileReader();
+                reader.readAsArrayBuffer(resFile);
+                reader.onloadend = (evt: any) => {
+                  var imgBlob = new Blob([evt.target.result]);
+
+                  var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
+                  var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
+                  var mimeType;
+                  switch (filetype) {
+                    case value: 'PNG'
+                      mimeType = 'image/png';
+                      break;
+                    case value: 'JPG'
+                      mimeType = 'image/jpeg';
+                      break;
+                    case value: 'DOC/DOCX'
+                      mimeType = 'application/msword';
+                      break;
+                    case value: 'PDF'
+                      mimeType = 'application/pdf';
+                      break;
+                    case value: 'XLS'
+                      mimeType = 'application/excel';
+                      break;
+                    default:
+                      break;
+                  }
+                  value.createdDate = moment().toISOString();
+                  value.councilid = value.council.$key;
+                  value.councilname = value.council.council;
+                  value.filename = filename;
+                  value.filetype = filetype;
+
+                  this.firebaseservice.saveFile(value).then(fileId => {
+                    this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
+                      .put(imgBlob, { contentType: mimeType })
+                      .then((savedPicture) => {
+                        this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
+                        this.pictureRef.then((metadata) => {
+                          // Metadata now contains the metadata like filesize and type for 'images/...'
+                          this.nav.push(OpenCouncilFilePage, {
+                            file: metadata, file1: fileId, value: value
+                          });
+                        }).catch((error) => {
+                          // alert(error);
+                          console.log(error);
+                        });
+                      }).catch(error => {
+                        // alert(error);
+                        console.log(error);
+                      })
+                  }).catch(error => {
                     // alert(error);
                     console.log(error);
-                  });
-                }).catch(error => {
-                  // alert(error);
-                  console.log(error);
-                })
-            }).catch(error => {
-              // alert(error);
-              console.log(error);
+                  })
+                }
+              })
             })
           }).catch(error => {
             // alert(error)
@@ -194,10 +226,6 @@ export class NewCouncilFilePage {
         // alert(error)
         console.log(error);
       });
-  }
-
-  importFile(value) {
-
   }
 
   cancel() {

@@ -1,0 +1,26 @@
+note-page{
+    .date{
+        font-family: 'Bernina-Regular', sans-serif !important;
+        font-size: 13px;
+        color: #a9aaac;
+        padding-left: 15px;
+        padding-top: 10px;
+    }    
+   input[type="text"] {
+      font-size:17px !important;
+      display: inline;
+      font-family: Bernina-SemiBold, sans-serif !important;
+     color: #35373a !important;
+}
+ textarea[type="text"]{
+     font-size:17px !important;
+     font-family: Bernina-Regular, sans-serif !important;
+     color: #35373a !important;
+     line-height:24px !important;
+     
+}
+.text-input-ios {
+  margin: -3px 0px 0px 0;
+}
+
+}

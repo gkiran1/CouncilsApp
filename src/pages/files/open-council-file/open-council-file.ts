@@ -203,46 +203,79 @@ export class OpenCouncilFilePage {
     }
     // to upload a picture from gallery to the firebase.
     uploadPicture(value) {
+
+    }
+    // to upload files from the device.
+    importFile(value) {
         FileChooser.open()
             .then(uri => {
                 this.filepath1 = uri.toString();
                 FilePath.resolveNativePath(this.filepath1)
                     .then(filePath => {
-                        var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
-                        var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
-                        this.value.createdDate = moment().toISOString();
-                        this.value.councilid = value.council.$key;
-                        this.value.councilname = value.council.council;
-                        this.value.filename = filename;
-                        this.value.filetype = filetype;
-                        this.firebaseservice.saveFile(value).then(fileId => {
-                            this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
-                                .putString(filePath)
-                                .then((savedPicture) => {
-                                    this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
-                                    this.pictureRef.then((metadata) => {
-                                        // Metadata now contains the metadata like filesize and type for 'images/...'
-                                        this.file = metadata;
-                                        this.file.$key = fileId;
-                                        this.file.name = filename;
-                                        this.file.type = filetype;
-                                        this.filesArray.push(this.file);
-                                        this.value.councilname = value.councilname;
-                                        this.value.filename = value.filename;
-                                        this.value.filetype = filetype;
-                                    }).catch((error) => {
-                                        console.log(error);
-                                    });
-                                }).catch(err => {
-                                    console.log(err);
-                                })
-                        }).catch(err => {
-                            console.log(err);
+                        (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
+                            // alert('res' + res);
+                            res.file((resFile) => {
+                                var reader = new FileReader();
+                                // alert('resFile' + resFile);
+                                reader.readAsArrayBuffer(resFile);
+                                reader.onloadend = (evt: any) => {
+                                    var imgBlob = new Blob([evt.target.result]);
+                                    // alert('imgBlob' + imgBlob);
+                                    var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
+                                    var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
+                                    var mimeType;
+                                    switch (filetype) {
+                                        case value: 'PNG'
+                                            mimeType = 'image/png';
+                                            break;
+                                        case value: 'JPG'
+                                            mimeType = 'image/jpeg';
+                                            break;
+                                        case value: 'DOC'
+                                            mimeType = 'application/msword';
+                                            break;
+                                        case value: 'PDF'
+                                            mimeType = 'application/pdf';
+                                            break;
+                                        case value: 'XLS'
+                                            mimeType = 'application/excel';
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    this.value.createdDate = moment().toISOString();
+                                    this.value.councilid = value.council.$key;
+                                    this.value.councilname = value.council.council;
+                                    this.value.filename = filename;
+                                    this.value.filetype = filetype;
+                                    this.firebaseservice.saveFile(value).then(fileId => {
+                                        this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
+                                            .putString(filePath)
+                                            .then((savedPicture) => {
+                                                this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
+                                                this.pictureRef.then((metadata) => {
+                                                    // Metadata now contains the metadata like filesize and type for 'images/...'
+                                                    this.file = metadata;
+                                                    this.file.$key = fileId;
+                                                    this.file.name = filename;
+                                                    this.file.type = filetype;
+                                                    this.filesArray.push(this.file);
+                                                    this.value.councilname = value.councilname;
+                                                    this.value.filename = value.filename;
+                                                    this.value.filetype = filetype;
+                                                }).catch((error) => {
+                                                    console.log(error);
+                                                });
+                                            }).catch(err => {
+                                                console.log(err);
+                                            })
+                                    }).catch(err => {
+                                        console.log(err);
+                                    })
+                                }
+                            })
                         })
                     }).catch(e => console.log(e));
             }).catch(e => console.log(e));
-    }
-    importFile(value) {
-
     }
 }

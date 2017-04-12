@@ -13,7 +13,6 @@ import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AgendasPage } from '../agendas/agendas';
 import { AssignmentsListPage } from '../assignments/assignments-list/assignments-list';
-import { CouncilDiscussionsListPage } from '../discussions/council-discussions-list/council-discussions-list'
 import { Subscription } from "rxjs";
 import { GoodbyePage } from '../goodbye/goodbye';
 import { WelcomePage } from '../menu/menu';
@@ -22,7 +21,7 @@ import { NotificationSettingsPage } from '../notifications/notifications-setting
 @Component({
     selector: 'settings-page',
     templateUrl: 'settings.html',
-    providers: [FirebaseService, AssignmentsListPage, ActiveCouncilsPage, AboutPage, CouncilDiscussionsListPage, AgendasPage]
+    providers: [ AssignmentsListPage, ActiveCouncilsPage]
 
 })
 
@@ -30,13 +29,9 @@ export class SettingsPage {
     // userSubscription: Subscription;
     constructor(private navCtrl: NavController,
         public appService: AppService,
-        public actionSheetCtrl: ActionSheetController,
-        public menuctrl: MenuController,
         public assignmentsListPage: AssignmentsListPage,
         public activeCouncilsPage: ActiveCouncilsPage,
-        private firebaseService: FirebaseService,
-        public councilDiscussionsListPage: CouncilDiscussionsListPage,
-        public agendaPage: AgendasPage) { }
+        private firebaseService: FirebaseService) { }
 
     viewEditProfilePage() {
         this.navCtrl.push(EditProfilePage);

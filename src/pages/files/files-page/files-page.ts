@@ -6,7 +6,7 @@ import { NavController, Platform } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import { WelcomePage } from '../../menu/menu';
-import { Transfer, File } from 'ionic-native';
+import { Transfer, FilePath, File, FileOpener } from 'ionic-native';
 import { TransferObject } from '@ionic-native/transfer';
 import * as firebase from 'firebase';
 
@@ -16,11 +16,8 @@ import * as firebase from 'firebase';
 })
 export class FilesListPage {
     count$ = new Subject();
-    userSubscription: Subscription;
-    isListEmpty = false;
     filesArray = [];
     profilePictureRef: any;
-    storageDirectory: string = '';
     constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController, public platform: Platform) {
         this.filesArray = [];
         this.profilePictureRef = firebase.storage().ref('/files/');
@@ -39,13 +36,19 @@ export class FilesListPage {
         let ProfileRef = this.profilePictureRef.child(item.councilid + '//' + item.$key + '//' + item.filename)
         let fileTransfer = new Transfer();
         ProfileRef.getDownloadURL().then(function (url) {
-            fileTransfer.download(url, this.file.dataDirectory).then(res => {
-                // alert('file downloaded ...' + res.toURL());
-
+            console.log(url);
+            var targetPath = cordova.file.dataDirectory + '/CouncilDownloads/' + item.filename;
+            // alert(targetPath);
+            var trustHosts = true;
+            var options = {};
+            fileTransfer.download(url, targetPath, trustHosts, options).then(res => {  
+                 alert('file downloaded.' + res.toNativeURL());
             }).catch(err => {
+                alert('could not download file.' + JSON.stringify(err));
                 console.log(err);
             })
         }).catch(function (error) {
+            alert(error);
             console.log(error);
         });
     }

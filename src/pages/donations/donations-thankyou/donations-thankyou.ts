@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { DonationsWelcomePage } from '../donations-welcome/donations-welcome'
+import { WelcomePage } from '../../menu/menu';
 
 @Component({
   selector: 'page-donations-thankyou',
@@ -14,7 +14,7 @@ export class DonationsThankyouPage {
     console.log('ionViewDidLoad DonationsThankyouPage');
   }
   cancel() {
-    this.nav.push(DonationsWelcomePage);
+    this.nav.setRoot(WelcomePage);
   }
 
 }
