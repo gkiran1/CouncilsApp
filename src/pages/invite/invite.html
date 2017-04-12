@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar hideBackButton>
-        
+
         <ion-row>
             <ion-col class="header-col">
                 <ion-icon name="cancel" class="councils-icon__back menu-icon" item-left color="secondary" (click)="close()"></ion-icon>
@@ -40,7 +40,7 @@
                     <ion-radio [value]="c.$key"></ion-radio>
                 </ion-item>
             </ion-list>-->
-            <ion-list no-lines>
+            <ion-list>
                 <ion-item *ngFor="let c of council">
                     <ion-label class="council-styles" item-left>{{c.council}}</ion-label>
                     <ion-checkbox [(ngModel)]="c.selected" color="secondary" name="checkbox" item-right [name]="c.council"></ion-checkbox>

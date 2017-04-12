@@ -150,15 +150,25 @@ export class AgendaLitePage {
   searchFn(event) {
     this.term = event.target.value;
   }
+ 
   keypressed($event) {
     var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+    let v = $event.target.value.split('\n');
+    let newValue = v.map(e => {
+      if (e.length > 27) {
+        e = e.substr(0, 27);
+      }
+      return e;
+    });
+    $event.target.value = newValue.join('\n');
+
     if (keycode == '13') {
       if (this.discussionitems) {
         this.discussionitems = this.discussionitems + "- ";
       }
     }
 
-  }
+  } 
 
   discussionfocus($event) {
     if (this.discussionitems == undefined || this.discussionitems.length == 0) {

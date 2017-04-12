@@ -5,9 +5,9 @@
                 <ion-icon class="councils-icon__back menu-icon" item-left color="secondary" (click)="cancel()"></ion-icon>
             </ion-col>
             <ion-col width-80>
-               <ion-title text-center>
-                   {{council}}
-               </ion-title>
+                <ion-title text-center>
+                    {{council}}
+                </ion-title>
             </ion-col>
         </ion-row>
     </ion-navbar>
@@ -15,8 +15,12 @@
 
 <ion-content>
     <ion-item *ngFor="let user of usersArray">
+        <ion-avatar item-left>
+            <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar">
+            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar" />
+        </ion-avatar>
         <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
-       <p> <span>{{user.calling}}</span></p>
+        <p> <span>{{user.calling}}</span></p>
     </ion-item>
-   
+
 </ion-content>

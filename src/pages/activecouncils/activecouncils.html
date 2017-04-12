@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list inset>
+  <ion-list>
     <ng-container *ngIf="myCouncils.length">
       <ion-item (click)="usersincouncils(item.$key,item.council)" class="council-styles" *ngFor="let item of myCouncils">
         <ion-label class="council-styles">{{item.council}}</ion-label>
