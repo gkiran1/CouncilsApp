@@ -596,7 +596,7 @@ export class FirebaseService {
     }
 
     updateAgenda(agenda, agendaKey) {
-        return this.af.database.list('agendas').update(agendaKey, {          
+        return this.af.database.list('agendas').update(agendaKey, {
             agendacouncil: agenda.assignedcouncil,
             councilid: agenda.councilid,
             agendadate: agenda.assigneddate,
@@ -613,7 +613,7 @@ export class FirebaseService {
             missionaryitems: agenda.missionaryitems,
             event: agenda.event,
             closingprayer: agenda.closingprayer,
-            closingprayeruserid: agenda.closingprayeruserid,            
+            closingprayeruserid: agenda.closingprayeruserid,
             createdby: agenda.createdby,
             createddate: agenda.createddate,
             lastupdateddate: agenda.lastupdateddate,
@@ -782,9 +782,15 @@ export class FirebaseService {
             })
 
     }
-    getNotes() {
-        return this.af.database.list('notes/');
+    getNotes(userId) {
+        return this.af.database.list('notes', {
+            query: {
+                orderByChild: 'createdby',
+                equalTo: userId
+            }
+        });
     }
+    
     updateNote(note, notekey) {
         return this.af.database.list('notes').update(notekey, {
             createdby: note.createdby,

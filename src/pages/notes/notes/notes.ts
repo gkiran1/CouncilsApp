@@ -17,14 +17,15 @@ export class NotesPage {
     notesArray = [];
     count$ = new Subject();
     constructor(public nav: NavController, public as: AppService, public firebaseservice: FirebaseService) {
-        this.notesArray = [];
-
-        this.firebaseservice.getNotes().subscribe(notes => {
-            this.notesArray = notes;
-            this.count$.next(this.notesArray.length);
-        });
+        var userId = localStorage.getItem('securityToken');
+        if (userId !== null) {
+            this.notesArray = [];
+            this.firebaseservice.getNotes(userId).subscribe(notes => {
+                this.notesArray = notes;
+                this.count$.next(this.notesArray.length);
+            });
+        }
     }
-
     notesSelected(notesSelected) {
         this.nav.push(NotePage, { notesSelected: notesSelected });
     }
