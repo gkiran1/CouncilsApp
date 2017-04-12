@@ -21,7 +21,7 @@ export class AgendaPage {
     councils = [];
     newagendaForm: FormGroup;
     usercouncils = [];
-    term: string = '';
+    term;
     assignedcouncil;
     openingprayer;
     spiritualthought;
@@ -39,8 +39,6 @@ export class AgendaPage {
     constructor(public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
         public firebaseservice: FirebaseService, public alertCtrl: AlertController,
         public nav: NavController) {
-
-        // let council = navParams.get('councilObj');
 
         this.usercouncils = localStorage.getItem('userCouncils').split(',');
         var councilsIds = localStorage.getItem('userCouncils').split(',');
@@ -90,7 +88,10 @@ export class AgendaPage {
         agenda.missionaryitems = (agenda.missionaryitems != undefined && agenda.missionaryitems.length > 0) ? agenda.missionaryitems.replace(/-/gi, '').trim() : '';
         agenda.event = (agenda.event != undefined && agenda.event.length > 0) ? agenda.event.replace(/-/gi, '').trim() : '';
         agenda.councilid = this.assignedcouncil.$key;
-
+        agenda.openingprayeruserid = (this.openingprayer !== undefined) ? this.openingprayer.$key : '';
+        agenda.spiritualthoughtuserid = (this.spiritualthought !== undefined) ? this.spiritualthought.$key : '';
+        agenda.closingprayeruserid = (this.closingprayer !== undefined) ? this.closingprayer.$key : '';
+        
         this.firebaseservice.createAgenda(agenda)
             .then(res => {
                 this.showAlert('Agenda created successfully.');
@@ -257,20 +258,20 @@ export class AgendaPage {
         let v1 = event.target.value;
         if (v1.charAt('0') !== '@') {
             event.target.value = '';
-            this.showlist = false; return;
+            this.showlist1 = false; return;
         }
         this.term = v1.substr(1);
-        this.showlist = true;
+        this.showlist1 = true;
     }
 
     showList2(event) {
         let v2 = event.target.value;
         if (v2.charAt('0') !== '@') {
             event.target.value = '';
-            this.showlist = false; return;
+            this.showlist2 = false; return;
         }
         this.term = v2.substr(1);
-        this.showlist = true;
+        this.showlist2 = true;
     }
 
 

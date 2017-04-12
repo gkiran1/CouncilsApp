@@ -52,6 +52,7 @@ export class EditMemberPage {
     }
 
     updateCouncils() {
+        this.enableBtn = false;
         var updatedCouncils = [];
         this.councilsObj.forEach(obj => {
             if (obj.isMemberCouncil) {
@@ -75,7 +76,24 @@ export class EditMemberPage {
                     });
                 });
             }).then(() => {
-                this.enableBtn = false;
+                this.firebaseService.getAgendas().subscribe(agendas => {
+                    agendas.forEach(agenda => {
+                        if (updatedCouncils.indexOf(agenda.councilid) === -1) {
+                            // Update agendas since user is not in that council now..
+                            if (agenda.openingprayeruserid === this.selectedUser.$key) {
+                                this.firebaseService.updateOpeningPrayerInAgendas(agenda.$key);
+                            }
+                            if (agenda.spiritualthoughtuserid === this.selectedUser.$key) {
+                                this.firebaseService.updateSpiritualThoughtInAgendas(agenda.$key);
+                            }
+                            if (agenda.closingprayeruserid === this.selectedUser.$key) {
+                                this.firebaseService.updateClosingPrayerInAgendas(agenda.$key);
+                            }
+                        }
+                    });
+                });
+
+            }).then(() => {
                 this.navCtrl.push(EditCompletePage, { name: this.selectedUser.firstname + ' ' + this.selectedUser.lastname });
             });
         });

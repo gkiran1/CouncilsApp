@@ -20,7 +20,7 @@ export class AgendaLitePage {
   councils = [];
   newagendaliteForm: FormGroup;
   usercouncils = [];
-  term: string = '';
+  term;
   discussionitems;
   assignedcouncil;
   openingprayer;
@@ -72,9 +72,13 @@ export class AgendaLitePage {
   agendasArray = [];
   createagenda(agenda) {
     let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
-    agenda.assigneddate = moment(assigneddate).toISOString(),
-      agenda.discussionitems = (agenda.discussionitems != undefined && agenda.discussionitems.length > 0) ? agenda.discussionitems.replace(/-/gi, '').trim() : '';
+    agenda.assigneddate = moment(assigneddate).toISOString();
+    agenda.discussionitems = (agenda.discussionitems != undefined && agenda.discussionitems.length > 0) ? agenda.discussionitems.replace(/-/gi, '').trim() : '';
     agenda.councilid = this.assignedcouncil.$key;
+    agenda.openingprayeruserid = (this.openingprayer !== undefined) ? this.openingprayer.$key : '';
+    agenda.spiritualthoughtuserid = (this.spiritualthought !== undefined) ? this.spiritualthought.$key : '';
+    agenda.closingprayeruserid = (this.closingprayer !== undefined) ? this.closingprayer.$key : '';
+
     this.firebaseservice.createAgendaLite(agenda)
       .then(res => {
         this.showAlert('Agenda created successfully.');
@@ -163,7 +167,7 @@ export class AgendaLitePage {
 
   }
 
-   showList(event) {
+  showList(event) {
     let v = event.target.value;
     if (v.charAt('0') !== '@') {
       event.target.value = '';
@@ -177,20 +181,20 @@ export class AgendaLitePage {
     let v1 = event.target.value;
     if (v1.charAt('0') !== '@') {
       event.target.value = '';
-      this.showlist = false; return;
+      this.showlist1 = false; return;
     }
     this.term = v1.substr(1);
-    this.showlist = true;
+    this.showlist1 = true;
   }
 
   showList2(event) {
     let v2 = event.target.value;
     if (v2.charAt('0') !== '@') {
       event.target.value = '';
-      this.showlist = false; return;
+      this.showlist2 = false; return;
     }
     this.term = v2.substr(1);
-    this.showlist = true;
+    this.showlist2 = true;
   }
 
   bindAssignto(user) {

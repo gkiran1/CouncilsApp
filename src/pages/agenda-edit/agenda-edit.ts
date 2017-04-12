@@ -73,18 +73,18 @@ export class AgendaEditPage {
             this.users = [];
             usersObj.forEach(usrObj => {
                 this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
-                    if (usrs[0].firstname + ' ' + usrs[0].lastname === agenda.openingprayer) {
+                    if (usrs[0].$key === agenda.openingprayeruserid) {
                         (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue(usrs[0].firstname + ' ' + usrs[0].lastname);
                         this.openingprayer = usrs[0];
 
                     }
-                    if (usrs[0].firstname + ' ' + usrs[0].lastname === agenda.spiritualthought) {
+                    if (usrs[0].$key === agenda.spiritualthoughtuserid) {
                         (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue(usrs[0].firstname + ' ' + usrs[0].lastname);
                         this.spiritualthought = usrs[0];
 
                     }
 
-                    if (usrs[0].firstname + ' ' + usrs[0].lastname === agenda.closingprayer) {
+                    if (usrs[0].$key === agenda.closingprayeruserid) {
                         (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue(usrs[0].firstname + ' ' + usrs[0].lastname);
                         this.closingprayer = usrs[0];
 
@@ -122,8 +122,8 @@ export class AgendaEditPage {
             openinghymn: [agenda.openinghymn],
             openingprayer: [agenda.openingprayer],
             spiritualthought: [agenda.spiritualthought],
-            assignments: [''],
-            completedassignments: [''],
+            assignments: [agenda.assignments],
+            completedassignments: [agenda.completedassignments],
             spiritualwelfare: [agenda.spiritualwelfare],
             temporalwelfare: [agenda.temporalwelfare],
             fellowshipitems: [agenda.fellowshipitems],
@@ -205,15 +205,18 @@ export class AgendaEditPage {
             assigneddate: moment(assigneddate).toISOString(),
             openinghymn: value.openinghymn,
             openingprayer: value.openingprayer === '' ? '' : this.openingprayer.firstname + ' ' + this.openingprayer.lastname,
+            openingprayeruserid: value.openingprayer === '' ? '' : this.openingprayer.$key,
             spiritualthought: value.spiritualthought === '' ? '' : this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname,
-            assignments: value.assignments,
-            completedassignments: value.completedassignments,
+            spiritualthoughtuserid: value.spiritualthought === '' ? '' : this.spiritualthought.$key,
+            assignments: (value.assignments === undefined || value.assignments === '') ? '' : value.assignments.$key,
+            completedassignments: (value.completedassignments === undefined || value.completedassignments === '') ? '' : value.completedassignments.$key,
             spiritualwelfare: value.spiritualwelfare,
             temporalwelfare: value.temporalwelfare,
             fellowshipitems: value.fellowshipitems,
             missionaryitems: value.missionaryitems,
             event: value.event,
             closingprayer: value.closingprayer === '' ? '' : this.closingprayer.firstname + ' ' + this.closingprayer.lastname,
+            closingprayeruserid: value.closingprayer === '' ? '' : this.closingprayer.$key,
             createdby: value.createdby,
             createddate: new Date().toISOString(),
             isactive: value.isactive,
@@ -248,34 +251,34 @@ export class AgendaEditPage {
     }
 
     showList(event) {
-    let v = event.target.value;
-    if (v.charAt('0') !== '@') {
-      event.target.value = '';
-      this.showlist = false; return;
+        let v = event.target.value;
+        if (v.charAt('0') !== '@') {
+            event.target.value = '';
+            this.showlist = false; return;
+        }
+        this.term = v.substr(1);
+        this.showlist = true;
     }
-    this.term = v.substr(1);
-    this.showlist = true;
-  }
 
-  showList1(event) {
-    let v1 = event.target.value;
-    if (v1.charAt('0') !== '@') {
-      event.target.value = '';
-      this.showlist = false; return;
+    showList1(event) {
+        let v1 = event.target.value;
+        if (v1.charAt('0') !== '@') {
+            event.target.value = '';
+            this.showlist1 = false; return;
+        }
+        this.term = v1.substr(1);
+        this.showlist1 = true;
     }
-    this.term = v1.substr(1);
-    this.showlist = true;
-  }
 
-  showList2(event) {
-    let v2 = event.target.value;
-    if (v2.charAt('0') !== '@') {
-      event.target.value = '';
-      this.showlist = false; return;
+    showList2(event) {
+        let v2 = event.target.value;
+        if (v2.charAt('0') !== '@') {
+            event.target.value = '';
+            this.showlist2 = false; return;
+        }
+        this.term = v2.substr(1);
+        this.showlist2 = true;
     }
-    this.term = v2.substr(1);
-    this.showlist = true;
-  }
 
     bindAssignto(user) {
         this.showlist = false;

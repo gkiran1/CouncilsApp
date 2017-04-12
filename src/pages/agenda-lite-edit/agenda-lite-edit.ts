@@ -67,18 +67,18 @@ export class AgendaLiteEditPage {
       this.users = [];
       usersObj.forEach(usrObj => {
         this.firebaseservice.getUsersByKey(usrObj.userid).subscribe(usrs => {
-          if (usrs[0].firstname + ' ' + usrs[0].lastname === agenda.openingprayer) {
+          if (usrs[0].$key === agenda.openingprayeruserid) {
             (<FormControl>this.agendaliteeditForm.controls['openingprayer']).setValue(usrs[0].firstname + ' ' + usrs[0].lastname);
             this.openingprayer = usrs[0];
 
           }
-          if (usrs[0].firstname + ' ' + usrs[0].lastname === agenda.spiritualthought) {
+          if (usrs[0].$key === agenda.spiritualthoughtuserid) {
             (<FormControl>this.agendaliteeditForm.controls['spiritualthought']).setValue(usrs[0].firstname + ' ' + usrs[0].lastname);
             this.spiritualthought = usrs[0];
 
           }
 
-          if (usrs[0].firstname + ' ' + usrs[0].lastname === agenda.closingprayer) {
+          if (usrs[0].$key === agenda.closingprayeruserid) {
             (<FormControl>this.agendaliteeditForm.controls['closingprayer']).setValue(usrs[0].firstname + ' ' + usrs[0].lastname);
             this.closingprayer = usrs[0];
 
@@ -94,12 +94,14 @@ export class AgendaLiteEditPage {
     this.getAssignmentsByCouncilId(agenda.councilid).subscribe(assignments => {
 
       assignments.forEach(assignment => {
+
         if (!assignment.isCompleted) this.assignmentslist.push(assignment);
         if (assignment.isCompleted) this.completedassignmentslist.push(assignment);
 
         if (assignment.$key === agenda.assignments) {
           (<FormControl>this.agendaliteeditForm.controls['assignments']).setValue(assignment);
         }
+
         if (assignment.$key === agenda.completedassignments) {
           (<FormControl>this.agendaliteeditForm.controls['completedassignments']).setValue(assignment);
         }
@@ -116,8 +118,8 @@ export class AgendaLiteEditPage {
       openinghymn: [agenda.openinghymn],
       openingprayer: [agenda.openingprayer],
       spiritualthought: [agenda.spiritualthought],
-      assignments: [''],
-      completedassignments: [''],
+      assignments: [agenda.assignments],
+      completedassignments: [agenda.completedassignments],
       discussionitems: [agenda.discussionitems],
       closingprayer: [agenda.closingprayer],
       createdby: agenda.createdby,
@@ -195,11 +197,14 @@ export class AgendaLiteEditPage {
       assigneddate: moment(assigneddate).toISOString(),
       openinghymn: value.openinghymn,
       openingprayer: value.openingprayer === '' ? '' : this.openingprayer.firstname + ' ' + this.openingprayer.lastname,
+      openingprayeruserid: value.openingprayer === '' ? '' : this.openingprayer.$key,
       spiritualthought: value.spiritualthought === '' ? '' : this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname,
-      assignments: (value.assignments != undefined && value.assignments.length > 0) ? value.assignments : '',
-      completedassignments: (value.completedassignments != undefined && value.completedassignments.length > 0) ? value.completedassignments : '',
+      spiritualthoughtuserid: value.spiritualthought === '' ? '' : this.spiritualthought.$key,
+      assignments: (value.assignments === undefined || value.assignments === '') ? '' : value.assignments.$key,
+      completedassignments: (value.completedassignments === undefined || value.completedassignments === '') ? '' : value.completedassignments.$key,
       discussionitems: value.discussionitems,
       closingprayer: value.closingprayer === '' ? '' : this.closingprayer.firstname + ' ' + this.closingprayer.lastname,
+      closingprayeruserid: value.closingprayer === '' ? '' : this.closingprayer.$key,
       createdby: value.createdby,
       createddate: new Date().toISOString(),
       isactive: value.isactive,
