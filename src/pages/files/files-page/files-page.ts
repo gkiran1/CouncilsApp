@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { OpenCouncilFilePage } from '../open-council-file/open-council-file';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, LoadingController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import { WelcomePage } from '../../menu/menu';
@@ -18,7 +18,10 @@ export class FilesListPage {
     count$ = new Subject();
     filesArray = [];
     profilePictureRef: any;
-    constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController, public platform: Platform) {
+    constructor(
+        fs: FirebaseService,
+        public nav: NavController,
+        public loadingCtrl: LoadingController) {
         this.filesArray = [];
         this.profilePictureRef = firebase.storage().ref('/files/');
         if (localStorage.getItem('userCouncils') !== null) {
@@ -33,6 +36,10 @@ export class FilesListPage {
         }
     }
     downloadFile(item) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: "Please wait while downloading...",
+        });
         let ProfileRef = this.profilePictureRef.child(item.councilid + '//' + item.$key + '//' + item.filename)
         let fileTransfer = new Transfer();
         ProfileRef.getDownloadURL().then(function (url) {
@@ -41,13 +48,17 @@ export class FilesListPage {
             // alert(targetPath);
             var trustHosts = true;
             var options = {};
-            fileTransfer.download(url, targetPath, trustHosts, options).then(res => {  
-                 alert('file downloaded.' + res.toNativeURL());
+            loader.present();
+            fileTransfer.download(url, targetPath, trustHosts, options).then(res => {
+                alert('file downloaded.' + res.toNativeURL());
+                 loader.dismiss();
             }).catch(err => {
+                loader.dismiss();
                 alert('could not download file.' + JSON.stringify(err));
                 console.log(err);
             })
         }).catch(function (error) {
+            loader.dismiss();
             alert(error);
             console.log(error);
         });

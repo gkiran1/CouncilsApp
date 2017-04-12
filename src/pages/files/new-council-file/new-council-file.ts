@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Nav, NavController, AlertController, ActionSheetController, MenuController } from 'ionic-angular';
+import { Nav, NavController, AlertController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
@@ -38,7 +38,8 @@ export class NewCouncilFilePage {
     public nav: NavController,
     public actionSheetCtrl: ActionSheetController,
     public menuctrl: MenuController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController) {
     appservice.getUser().subscribe(user => {
       //console.log(user);
       this.profilePictureRef = firebase.storage().ref('/files/');
@@ -153,6 +154,10 @@ export class NewCouncilFilePage {
   }
   // to upload files from the device.
   importFile(value) {
+    let loader = this.loadingCtrl.create({
+      spinner: 'crescent',
+      content: "Please wait while uploading...",
+    });
     FileChooser.open()
       .then(uri => {
         this.file = uri.toString();
@@ -164,7 +169,7 @@ export class NewCouncilFilePage {
                 reader.readAsArrayBuffer(resFile);
                 reader.onloadend = (evt: any) => {
                   var imgBlob = new Blob([evt.target.result]);
-
+                  loader.present();
                   var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
                   var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
                   var mimeType;
@@ -199,19 +204,23 @@ export class NewCouncilFilePage {
                       .then((savedPicture) => {
                         this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
                         this.pictureRef.then((metadata) => {
+                          loader.dismiss();
                           // Metadata now contains the metadata like filesize and type for 'images/...'
                           this.nav.push(OpenCouncilFilePage, {
                             file: metadata, file1: fileId, value: value
                           });
                         }).catch((error) => {
+                          loader.dismiss();
                           // alert(error);
                           console.log(error);
                         });
                       }).catch(error => {
+                        loader.dismiss();
                         // alert(error);
                         console.log(error);
                       })
                   }).catch(error => {
+                    loader.dismiss();
                     // alert(error);
                     console.log(error);
                   })
@@ -219,10 +228,12 @@ export class NewCouncilFilePage {
               })
             })
           }).catch(error => {
+            loader.dismiss();
             // alert(error)
             console.log(error);
           });
       }).catch(error => {
+        loader.dismiss();
         // alert(error)
         console.log(error);
       });

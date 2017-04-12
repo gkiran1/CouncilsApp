@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, AlertController, ActionSheetController, MenuController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
 // import { FormBuilder,  Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -47,7 +47,8 @@ export class OpenCouncilFilePage {
         public firebaseservice: FirebaseService,
         public actionSheetCtrl: ActionSheetController,
         public menuctrl: MenuController,
-        public alertCtrl: AlertController) {
+        public alertCtrl: AlertController,
+        public loadingCtrl: LoadingController) {
 
         this.profilePictureRef = firebase.storage().ref('/files/');
         appservice.getUser().subscribe(user => this.user = user);
@@ -63,12 +64,18 @@ export class OpenCouncilFilePage {
 
     }
     delete(file) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: "Deleting file...",
+        });
+        loader.present();
         //to delete files form the database using key
         this.firebaseservice.deleteFilesByKey(file.$key).then((res) => {
             //to delete files from the storage using file name
             this.profilePictureRef.child(this.value.councilid + '//' + file.$key + '//' + file.name).delete().then(res => {
                 this.filesArray.forEach((f, i) => {
                     if (f.$key == file.$key) {
+                        loader.dismiss();
                         this.filesArray.splice(i, 1);
                         console.log(this.filesArray);
                     }
@@ -81,10 +88,16 @@ export class OpenCouncilFilePage {
         });
     }
     deleteFiles(filesArray) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: "Deleting files...",
+        });
+        loader.present();
         this.filesArray.forEach((f, i) => {
             //to delete all the files in the array
             this.firebaseservice.deleteFilesByKey(filesArray[i].$key).then(res => {
                 this.profilePictureRef.child(this.value.councilid + '//' + filesArray[i].$key + '//' + this.filesArray[i].name).delete().then(res => {
+                    loader.dismiss();
                     this.filesArray.splice(0, this.filesArray.length);
                 }).catch(err => {
                     console.log(err);
@@ -207,20 +220,22 @@ export class OpenCouncilFilePage {
     }
     // to upload files from the device.
     importFile(value) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: "Please wait while uploading...",
+        });
         FileChooser.open()
             .then(uri => {
                 this.filepath1 = uri.toString();
                 FilePath.resolveNativePath(this.filepath1)
                     .then(filePath => {
                         (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
-                            // alert('res' + res);
                             res.file((resFile) => {
                                 var reader = new FileReader();
-                                // alert('resFile' + resFile);
                                 reader.readAsArrayBuffer(resFile);
                                 reader.onloadend = (evt: any) => {
                                     var imgBlob = new Blob([evt.target.result]);
-                                    // alert('imgBlob' + imgBlob);
+                                    loader.present();
                                     var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
                                     var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
                                     var mimeType;
@@ -254,6 +269,7 @@ export class OpenCouncilFilePage {
                                             .then((savedPicture) => {
                                                 this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
                                                 this.pictureRef.then((metadata) => {
+                                                    loader.dismiss();
                                                     // Metadata now contains the metadata like filesize and type for 'images/...'
                                                     this.file = metadata;
                                                     this.file.$key = fileId;
@@ -264,18 +280,27 @@ export class OpenCouncilFilePage {
                                                     this.value.filename = value.filename;
                                                     this.value.filetype = filetype;
                                                 }).catch((error) => {
+                                                    loader.dismiss();
                                                     console.log(error);
                                                 });
                                             }).catch(err => {
+                                                loader.dismiss();
                                                 console.log(err);
                                             })
                                     }).catch(err => {
+                                        loader.dismiss();
                                         console.log(err);
                                     })
                                 }
                             })
                         })
-                    }).catch(e => console.log(e));
-            }).catch(e => console.log(e));
+                    }).catch(e => {
+                        loader.dismiss();
+                        console.log(e);
+                    });
+            }).catch(e => {
+                loader.dismiss();
+                console.log(e);
+            });
     }
 }
