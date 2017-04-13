@@ -41,6 +41,7 @@ slide2 {
         color: #35373a !important;
         margin-bottom: 3px;
         white-space: pre;
+        line-height: 17px;
     }
     .user2 {
         margin:0;
@@ -60,13 +61,21 @@ slide2 {
         padding:0 !important;
         margin: 16px 0 0 16px !important;
     }
+    .menu-user-col ion-row, .menu-user-col ion-row ion-col, .menu-user-col ion-row ion-col {
+        padding: 0 !important;
+    } 
     .user-admin-icon {
         font-size: 17px !important;
     }
 
     .user-admin-col {
+        padding:0;
         margin-right:6px;
     }
 
+    .user-admin-col ion-row span {
+        padding:0;
+        margin:0;
+    }
     
 }
