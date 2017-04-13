@@ -13,5 +13,7 @@ export class MemberReactivatedPage {
     goToReactivateMembersPage() {
         this.navCtrl.pop();
     }
-
+    back() {
+        this.navCtrl.pop();
+    }
 }

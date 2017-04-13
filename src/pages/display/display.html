@@ -2,13 +2,13 @@
   <ion-navbar>
     <ion-buttons class="menu-button" left>
       <button ion-button menuToggle >
-      <ion-icon class="icon councils-icon__left_menu menuicon" name="menu" ></ion-icon>
+      <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" ></ion-icon>
     </button>
     </ion-buttons>
-    <ion-title class="welcometext">Welcome</ion-title>
+    <ion-title>Welcome</ion-title>
     <ion-buttons class="menu-button" end>
       <button ion-button (click)="notificationsPage()"  >
-     <ion-icon class="icon councils-icon__notifications menuicon">
+     <ion-icon class="icon councils-icon__notifications menu-icon">
          <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
       </ion-icon> 
       </button>

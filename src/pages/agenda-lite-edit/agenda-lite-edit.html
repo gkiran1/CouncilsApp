@@ -39,8 +39,8 @@
             <ng-container *ngFor="let user of users | search:term:'username'">
                 <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto(user)">
                     <ion-avatar item-left>
-                        <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
-                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+                        <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
+                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
                     </ion-avatar>
                     <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
                     <svg height="8" width="8">
@@ -51,15 +51,15 @@
         </div>
 
         <ion-item>
-            <ion-label floating>Spiritual Thought</ion-label>          
+            <ion-label floating>Spiritual Thought</ion-label>
             <ion-input type="text" (keyup)="showList1($event)" formControlName="spiritualthought"></ion-input>
         </ion-item>
         <div *ngIf="showlist1" class="assignto-list">
             <ng-container *ngFor="let user of users | search:term:'username'">
                 <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto1(user)">
                     <ion-avatar item-left>
-                        <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
-                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+                        <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
+                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
                     </ion-avatar>
                     <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
                     <svg height="8" width="8">
@@ -101,14 +101,14 @@
 
         <ion-item>
             <ion-label floating>Closing Prayer</ion-label>
-            <ion-input type="text" (keyup)="showList2($event)" formControlName="closingprayer"></ion-input>            
+            <ion-input type="text" (keyup)="showList2($event)" formControlName="closingprayer"></ion-input>
         </ion-item>
-         <div *ngIf="showlist2" class="assignto-list">
+        <div *ngIf="showlist2" class="assignto-list">
             <ng-container *ngFor="let user of users | search:term:'username'">
                 <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto2(user)">
                     <ion-avatar item-left>
-                        <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
-                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+                        <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
+                        <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
                     </ion-avatar>
                     <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
                     <svg height="8" width="8">

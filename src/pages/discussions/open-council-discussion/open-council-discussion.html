@@ -17,15 +17,19 @@
     <div class="chat-content">
         <ion-item text-wrap>
             <ion-label class="font1 line-height">
-                This discussion was created by <span ion-text color="secondary">{{user.$key===discussion.createdBy?'You':discussion.createdUser}}</span> on {{discussion.createdDate |
-                customdateformat}}. There are {{activeusersCount}} active participants from the <span ion-text color="secondary">{{discussion.councilname}}</span>.
+                This discussion was created by <span ion-text color="secondary">{{user.$key===discussion.createdBy?'You':discussion.createdUser}}</span>                on {{discussion.createdDate | customdateformat}}. There are {{activeusersCount}} active participants from
+                the <span ion-text color="secondary">{{discussion.councilname}}</span>.
             </ion-label>
         </ion-item>
         <ion-list>
             <ion-item *ngFor="let msg of discussion.messages" text-wrap>
-                <ion-avatar item-left>
+                <!--<ion-avatar item-left>
                     <img [src]="msg.user_avatar" *ngIf="msg.user_avatar">
                     <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!msg.user_avatar" />
+                </ion-avatar>-->
+                <ion-avatar item-left>
+                    <img [src]="(msg)?.user_avatar" class="avatarImage" *ngIf="(msg)?.user_avatar && (msg)?.user_avatar !== 'avatar'" />
+                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(msg)?.user_avatar || (msg)?.user_avatar === 'avatar'" />
                 </ion-avatar>
                 <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
                 <ion-icon class="msg-status-icon" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark" md="ios-checkmark"></ion-icon>
@@ -37,10 +41,13 @@
     <!--</ion-scroll>-->
 </ion-content>
 <ion-footer>
-    <ion-label class="typings-label" color="secondary" *ngIf="discussion.typings">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '')}}</ion-label>
+    <ion-label class="typings-label" color="secondary" *ngIf="discussion.typings">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
+        '')}}
+    </ion-label>
     <ion-row>
         <ion-col width-80>
-            <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)"></ion-input>
+            <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"
+                (keyup)="keypresssed($event)"></ion-input>
         </ion-col>
         <ion-col width-20>
             <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>

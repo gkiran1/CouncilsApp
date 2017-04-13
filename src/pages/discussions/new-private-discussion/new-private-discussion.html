@@ -19,8 +19,8 @@
                 <ng-container *ngFor="let user of users | search:term:'username'">
                     <ion-item *ngIf="user.$key!==uid" class="flex-change">
                         <ion-avatar item-left>
-                            <img [src]="user.avatar" class="avatarImage" *ngIf="user.avatar">
-                            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!user.avatar" />
+                            <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
+                            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
                         </ion-avatar>
                         <ion-label class="font5">{{user.firstname}} {{user.lastname}}</ion-label>
                         <ion-label class="font1">{{user.councilsString}}</ion-label>
