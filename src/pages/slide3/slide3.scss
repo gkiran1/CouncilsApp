@@ -1,0 +1,56 @@
+slide3{
+    .heading{
+        height: 64px;
+        background: #f4f4f4;
+     }
+     .toolbar-title {
+        text-align: left;
+        padding:16px;
+    }
+    .name{
+        font-family: Bernina-semibold, sans-serif;
+        font-size: 17px !important;
+        color: #35373a !important;
+    }
+    .item{
+        margin-top:10px;
+    }
+    .input-wrapper{
+        padding-left: 12px;
+        margin-bottom: 10px;
+    }
+    .item-block{
+        align-items: flex-start;
+    }
+    .input-wrapper ion-label{
+        margin:0
+    }
+    img{
+        width: 46px !important;
+        height: 46px !important;
+    }
+    ion-content{
+        margin-bottom:40px;
+    }
+    .text-content{
+        font-family: Bernina-Regular, sans-serif;
+        font-size: 15px !important;
+        color: #35373a !important;
+        line-height: 20px;
+        margin-bottom: 8px;
+    }
+    .timestamp{
+        font-family: Bernina-Regular, sans-serif;
+        font-size: 13px !important;
+        color: #a9aaac !important;
+        line-height: 17px
+    }
+    ion-item:first-child{
+        margin-top: 24px;
+    }
+    ion-item:last-child{
+        margin-bottom: 100px;
+    }
+  
+
+}

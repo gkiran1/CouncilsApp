@@ -248,8 +248,8 @@ export class FirebaseService {
                 notes: assignment.notes,
                 isCompleted: assignment.isCompleted
             })
-            .then(() => {
-                return "assignment created successfully..."
+            .then((res) => {
+                return res.path.o[1];
             })
             .catch(err => { throw err });
     }
@@ -377,7 +377,7 @@ export class FirebaseService {
 
     removeAssignment(assignmentKey) {
         console.log('assignment.$key', assignmentKey);
-        return this.af.database.object('assignments/' + assignmentKey).remove();
+        return this.af.database.object('assignments/' + assignmentKey).update({ isactive: false });
     }
 
     updateProfile(userUid: string, firstname, lastname, email, phone, ldsusername, avatar) {
@@ -790,7 +790,7 @@ export class FirebaseService {
             }
         });
     }
-    
+
     updateNote(note, notekey) {
         return this.af.database.list('notes').update(notekey, {
             createdby: note.createdby,
@@ -827,6 +827,26 @@ export class FirebaseService {
         return this.af.database.object('agendas/' + agendaKey).update({
             closingprayer: '',
             closingprayeruserid: ''
+        });
+    }
+    createActivity(activity) {
+        return this.rootRef.child('activities').push({
+            userid: activity.userid,
+            entity: activity.entity,
+            entityid: activity.entityid,
+            action: activity.action,
+            timestamp: activity.timestamp,
+            createdUserId: activity.createdUserId,
+            createdUserName: activity.createdUserName,
+            createdUserAvatar: activity.createdUserAvatar
+        });
+    }
+    getActivities(userId) {
+        return this.af.database.list('activities', {
+            query: {
+                orderByChild: 'userid',
+                equalTo: userId
+            }
         });
     }
 
