@@ -2,8 +2,7 @@
   <ion-navbar hideBackButton="true">
     <ion-row>
       <ion-col class="header-col">
-        <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary"
-          (click)="cancel()"></ion-icon>
+        <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
         <ion-title text-center>
@@ -26,7 +25,10 @@
 
     </ng-container>
     <ng-container *ngIf="!myCouncils.length">
-      <p class="text-content">There are no active councils</p>
+      <div class="nocontent-message">
+        <p>There are no active councils</p>
+      </div>
     </ng-container>
+
   </ion-list>
 </ion-content>

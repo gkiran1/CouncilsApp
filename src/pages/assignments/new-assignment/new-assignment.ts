@@ -28,6 +28,7 @@ export class NewAssignmentPage {
   showlist = false;
   term;
   isPersonalAssignment;
+  user;
 
   constructor(public modalCtrl: ModalController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
     let assignment = navParams.get('assignment');
@@ -64,7 +65,7 @@ export class NewAssignmentPage {
         assigneddate: [date, Validators.required],
         createdby: '',
         createddate: '',
-        isactive: false, //default false
+        isactive: true, //default true
         lastupdateddate: '',
         notes: '',
         isCompleted: false
@@ -73,7 +74,7 @@ export class NewAssignmentPage {
     this.af.auth.subscribe(auth => {
       if (!auth) return;
       this.af.database.object('/users/' + auth.uid).subscribe(user => {
-
+        this.user = user;
         user.councils.forEach(c => {
           this.firebaseservice.getCouncilByCouncilKey(c).subscribe(council => {
             this.councils.push(council);
@@ -142,7 +143,7 @@ export class NewAssignmentPage {
     let assigneddate = value.assigneddate.replace(/T/, ' ').replace(/Z/, '');
     return {
       assigneddate: moment(assigneddate).toISOString(),
-      createddate: new Date().toISOString(),
+      createddate: value.createddate,
       lastupdateddate: new Date().toISOString(),
       createdby: value.createdby,
       description: value.description,
@@ -164,8 +165,13 @@ export class NewAssignmentPage {
     if (moment(formattedAssignmentObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
       this.showAlert('Assignment Date/Time cannot be in past');
     } else {
+
       this.firebaseservice.createAssigment(formattedAssignmentObj)
-        .then(res => { this.showAlert('Assignment created successfully.'); this.nav.setRoot(WelcomePage) })
+        .then(key => {
+          this.showAlert('Assignment created successfully.');
+          this.createActivity(key, 'created');
+          this.nav.setRoot(WelcomePage)
+        })
         .catch(err => this.showAlert(err))
     }
   }
@@ -188,7 +194,12 @@ export class NewAssignmentPage {
       value.isCompleted = true;
       let formattedAssignmentObj = this.formatAssignmentObj(value);
       this.firebaseservice.updateAssignment(formattedAssignmentObj, this.assignmentKey)
-        .then(res => { console.log(res); this.showAlert('Assignment marked as completed!'); this.nav.pop(); })
+        .then(res => {
+          console.log(res);
+          this.createActivity(this.assignmentKey, 'completed');
+          this.showAlert('Assignment marked as completed!');
+          this.nav.pop();
+        })
         .catch(err => { console.error(err); this.showAlert('Unable to updated the Assignment, please try after some time') })
     }
   }
@@ -199,12 +210,21 @@ export class NewAssignmentPage {
     }
     let formattedAssignmentObj = this.formatAssignmentObj(value);
     this.firebaseservice.updateAssignment(formattedAssignmentObj, this.assignmentKey)
-      .then(res => { console.log(res); this.showAlert('Assignment has been updated') })
+      .then(res => {
+        console.log(res);
+        this.createActivity(this.assignmentKey, 'updated');
+        this.showAlert('Assignment has been updated')
+      })
       .catch(err => { console.error(err); this.showAlert('Unable to updated the Assignment, please try after some time') })
   }
   delete() {
     this.firebaseservice.removeAssignment(this.assignmentKey)
-      .then(res => { console.log(res); this.showAlert('Assignment has been deleted.'); this.nav.pop(); })
+      .then(res => {
+        console.log(res);
+        this.createActivity(this.assignmentKey, 'deleted');
+        this.showAlert('Assignment has been deleted.');
+        this.nav.pop();
+      })
       .catch(err => { console.error(err); this.showAlert('Unable to delete the Assignment, please try after some time') })
   }
 
@@ -265,5 +285,19 @@ export class NewAssignmentPage {
       '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
       'Z';
   };
+
+  createActivity(assignmentKey, action) {
+    let activity = {
+      userid: this.assigneduser.$key,
+      entity: 'Assignment',
+      entityid: assignmentKey,
+      action: action,
+      timestamp: new Date().toISOString(),
+      createdUserId: this.user.$key,
+      createdUserName: this.user.firstname + ' ' + this.user.lastname,
+      createdUserAvatar: this.user.avatar
+    }
+    this.firebaseservice.createActivity(activity);
+  }
 
 }

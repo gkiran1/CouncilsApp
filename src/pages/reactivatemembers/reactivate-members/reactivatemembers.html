@@ -2,8 +2,7 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col">
-                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary"
-                    (click)="back()"></ion-icon>
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="back()"></ion-icon>
             </ion-col>
             <ion-col width-80>
                 <ion-title text-center>Reactivate Members</ion-title>
@@ -15,14 +14,14 @@
     <ion-list>
         <ion-item *ngFor="let user of users">
             <ion-avatar item-left>
-				<img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar">
-				<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar" />
-			</ion-avatar>
+                <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
+                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
+            </ion-avatar>
             <h3>{{user.firstname}} {{user.lastname}}</h3>
-            <p><span>{{user.councilnames}}</span></p>
+            <p><span>{{user.councilnames}}</span></p>          
             <button ion-button item-right clear (click)="reactivatemember(user)">   
-                    <ion-icon color='secondary' ios="ios-arrow-dropleft" md="md-arrow-dropleft"></ion-icon>                 
-            </button>
+           <ion-icon class="councils-icon__reactivate" ></ion-icon>
+        </button>
         </ion-item>
     </ion-list>
     <ion-footer text-center>

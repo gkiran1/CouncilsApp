@@ -14,5 +14,7 @@ export class MemberInactivatedPage {
     goToInactivateMembersPage() {
         this.navCtrl.pop();
     }
-
+    back() {
+        this.navCtrl.pop();
+    }
 }

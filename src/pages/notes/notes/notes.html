@@ -2,8 +2,7 @@
   <ion-navbar hideBackButton="true">
     <ion-row>
       <ion-col class="header-col">
-        <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary"
-          (click)="cancel()"></ion-icon>
+        <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
         <ion-title text-center>Notes</ion-title>
@@ -22,7 +21,10 @@
     <ng-container *ngIf="notesArray.length">
       <ion-item-divider></ion-item-divider>
       <ion-item (click)="notesSelected(item)" *ngFor="let item of notesArray">
-        <h3 class="title">{{item.title}}</h3><span class="right-align"><ion-icon item-right ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></span>
+        <h3 class="title">{{item.title}}</h3><span class="right-align"></span>
+        <button ion-button item-right clear>   
+           <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
+        </button>
         <p>{{item.note}}</p>
         <span>{{item.createddate | customdateformat}}</span>
       </ion-item>

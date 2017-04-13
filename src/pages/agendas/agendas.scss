@@ -3,13 +3,13 @@ agendas-page {
         font-family: Bernina-Regular !important;
         font-size: 17px !important;
         color: #3cb18a !important;
-        padding-left: 20pt !important;
+         margin-left: -30px !important;
     }
     .agendacouncil-styles {
         font-family: Bernina-Regular !important;
         font-size: 13px !important;
         color: #a9aaac !important;
-         padding-left: 20pt !important;
+         margin-left: -30px !important;
     }
     .icon-style {
         color: #A9AAAC;
@@ -32,5 +32,8 @@ agendas-page {
     }
     .background-color{
         background: #fff;
+    }
+    .councils-icon__chevron_right,.fwd-arrow-grey,.arrow-allign{
+      padding-right: 10px !important;
     }
 }

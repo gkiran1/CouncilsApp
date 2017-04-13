@@ -432,7 +432,7 @@ ion-content .page-blank-area {
 
 
     .menu-icon {
-        
+        color: #32b38a;
         font-size: 24px !important;
     }
 
@@ -600,7 +600,7 @@ ion-avatar {
 
 .item-checkbox-checked {
     background: #f4f6fa;
-        font-size:24px !important;
+        
     }
 
 
@@ -643,6 +643,7 @@ ion-avatar {
         font-size:9px
     }
     ion-title{
-        height:100%
+        height:100%;
+        text-align: center;
     }
 

@@ -11,13 +11,15 @@
                 (click)="cancel()"></ion-icon>
         </ion-col>
         <ion-col width-80>
-            <h4 text-center>Council Discussions</h4>
+            <ion-title>Council Discussions</ion-title>
         </ion-col>
     </ion-row>
    
     <ion-buttons end>
         <button ion-button>
-      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
+      <ion-icon class="icon councils-icon__notifications menuicon">
+         <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
+      </ion-icon> 
     </button>
     </ion-buttons>
     </ion-navbar>

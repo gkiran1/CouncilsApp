@@ -25,6 +25,7 @@ export class AssignmentsListPage {
   completedselectedIdx;
 
   constructor(public navCtrl: NavController, public fs: FirebaseService, public af: AngularFire) {
+    console.log('assignments constructor================>');
     // // ***TODO*** 
     // let uid = localStorage.getItem('securityToken');
     //  this.af.database.object('/users/' + uid).subscribe(u => {
@@ -47,6 +48,7 @@ export class AssignmentsListPage {
               this.personalAssignmentsArray = [];
               this.completedAssignmentsArray = [];
               assignments.forEach(assignment => {
+                if (!assignment.isactive) return;
                 if (assignment.assignedto === this.user.$key) {
                   if (assignment.isCompleted) {
                     this.completedAssignmentsArray.push(assignment);

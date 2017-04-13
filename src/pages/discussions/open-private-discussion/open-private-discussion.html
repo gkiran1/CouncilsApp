@@ -2,9 +2,9 @@
     <ion-navbar hideBackButton>
         <ion-row>
             <ion-col class="header-col">
-                
-                 <ion-icon class="councils-icon__back menu-icon" name="cancel" color="secondary" (click)="back()"></ion-icon>
-                
+
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" color="secondary" (click)="back()"></ion-icon>
+
             </ion-col>
             <ion-col width-80>
                 <h3>{{chatWith}}</h3>
@@ -17,29 +17,31 @@
     <div class="chat-content">
         <ion-item text-wrap>
             <ion-label class="font1 line-height">
-                This is a private discussion with {{chatWith}} created by <span ion-text color="secondary">You</span> on {{discussion.createdDate |
-                customdateformat}}. No one else can view this discussion.
+                This is a private discussion with {{chatWith}} created by <span ion-text color="secondary">You</span> on
+                {{discussion.createdDate | customdateformat}}. No one else can view this discussion.
             </ion-label>
         </ion-item>
         <ion-list>
             <ion-item *ngFor="let msg of discussion.messages" text-wrap>
                 <ion-avatar item-left>
-                    <img [src]="msg.user_avatar" *ngIf="msg.user_avatar">
-                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!msg.user_avatar" />
+                    <img [src]="(msg)?.user_avatar" class="avatarImage" *ngIf="(msg)?.user_avatar && (msg)?.user_avatar !== 'avatar'" />
+                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(msg)?.user_avatar || (msg)?.user_avatar === 'avatar'" />
                 </ion-avatar>
                 <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
                 <ion-icon class="msg-status-icon" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark" md="ios-checkmark"></ion-icon>
                 <ion-icon class="msg-status-icon" *ngIf="msg.userId === user.$key && msg.status === 'delivered'" ios="ios-done-all" md="ios-done-all"></ion-icon>
-                <ion-icon class="msg-status-icon red-status" *ngIf="msg.userId === user.$key && msg.status === 'read'" ios="ios-done-all" md="ios-done-all"></ion-icon>
-                <p  class="font2">{{msg.timestamp | customdateformat}}</p>
-                <p class="font5 line-height">{{msg.text}}</p>
+                <ion-icon class="msg-status-icon red-status" *ngIf="msg.userId === user.$key && msg.status === 'read'" ios="ios-done-all"
+                    md="ios-done-all"></ion-icon>
+                    <p class="font2">{{msg.timestamp | customdateformat}}</p>
+                    <p class="font5 line-height">{{msg.text}}</p>
             </ion-item>
         </ion-list>
     </div>
     <!--</ion-scroll>-->
 </ion-content>
 <ion-footer>
-     <ion-label class="typings-label" color="secondary" *ngIf="discussion.typings">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '')}}</ion-label>
+    <ion-label class="typings-label" color="secondary" *ngIf="discussion.typings">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
+        '')}}</ion-label>
     <ion-row>
         <ion-col width-80>
             <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"></ion-input>

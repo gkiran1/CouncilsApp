@@ -40,7 +40,7 @@
                     <ion-radio [value]="c.$key"></ion-radio>
                 </ion-item>
             </ion-list>-->
-            <ion-list>
+            <ion-list inset>
                 <ion-item *ngFor="let c of council">
                     <ion-label class="council-styles" item-left>{{c.council}}</ion-label>
                     <ion-checkbox [(ngModel)]="c.selected" color="secondary" name="checkbox" item-right [name]="c.council"></ion-checkbox>
