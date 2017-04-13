@@ -17,11 +17,12 @@ import { Subscription } from "rxjs";
 import { GoodbyePage } from '../goodbye/goodbye';
 import { WelcomePage } from '../menu/menu';
 import { NotificationSettingsPage } from '../notifications/notifications-settings/notificationsettings.component';
+import { GoogleCalenderPage } from '../googlecalender/googlecalender.component';
 
 @Component({
     selector: 'settings-page',
     templateUrl: 'settings.html',
-    providers: [ AssignmentsListPage, ActiveCouncilsPage]
+    providers: [AssignmentsListPage, ActiveCouncilsPage]
 
 })
 
@@ -44,6 +45,9 @@ export class SettingsPage {
     }
     viewAboutUSPage() {
         this.navCtrl.push(AboutPage);
+    }
+    viewGoogleCalenderPage() {
+        this.navCtrl.push(GoogleCalenderPage);
     }
     signOut() {
         this.appService.userSubscription.unsubscribe();

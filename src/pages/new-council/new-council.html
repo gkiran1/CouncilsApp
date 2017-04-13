@@ -21,8 +21,8 @@
 			</ion-item-divider>
 
 			<ion-item>
-				<ion-input type="text" id="council" name="council" maxlength="25" [(ngModel)]="newCouncil.council" placeholder="Council Name" clearInput
-					required></ion-input>
+				<ion-input type="text" id="council" name="council" maxlength="25" [(ngModel)]="newCouncil.council" placeholder="Council Name"
+					clearInput required></ion-input>
 			</ion-item>
 			<ion-item-divider>
 				<ion-label class="font2">
@@ -38,11 +38,15 @@
 				<ng-container *ngFor="let user of users">
 
 					<ion-item *ngIf="!(user.isadmin)">
+						<ion-avatar item-left>
+							<img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar">
+							<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar" />
+						</ion-avatar>
 						<ion-label>
 							<h4 class="username-styles">{{user.firstname}} {{user.lastname}}</h4>
 							<p>{{user.councilnames}}</p>
 						</ion-label>
-						<ion-checkbox [(ngModel)]="user.selected" color="secondary" name="checkbox" item-right name="selectedUser"></ion-checkbox>
+						<ion-checkbox required [(ngModel)]="user.selected" color="secondary" name="checkbox" item-right name="selectedUser"></ion-checkbox>
 					</ion-item>
 				</ng-container>
 			</ion-list>

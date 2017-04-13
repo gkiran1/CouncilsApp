@@ -91,7 +91,7 @@ export class AgendaPage {
         agenda.openingprayeruserid = (this.openingprayer !== undefined) ? this.openingprayer.$key : '';
         agenda.spiritualthoughtuserid = (this.spiritualthought !== undefined) ? this.spiritualthought.$key : '';
         agenda.closingprayeruserid = (this.closingprayer !== undefined) ? this.closingprayer.$key : '';
-        
+
         this.firebaseservice.createAgenda(agenda)
             .then(res => {
                 this.showAlert('Agenda created successfully.');
@@ -165,6 +165,15 @@ export class AgendaPage {
     }
     spiritualkey($event) {
         var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
         if (keycode == '13') {
             if (this.spiritualwelfare) {
                 this.spiritualwelfare = this.spiritualwelfare + "- ";
@@ -180,6 +189,15 @@ export class AgendaPage {
 
     temporalkey($event) {
         var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
         if (keycode == '13') {
             if (this.temporalwelfare) {
                 this.temporalwelfare = this.temporalwelfare + "- ";
@@ -194,6 +212,15 @@ export class AgendaPage {
     }
     fellowshipkey($event) {
         var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
         if (keycode == '13') {
             if (this.fellowshipitems) {
                 this.fellowshipitems = this.fellowshipitems + "- ";
@@ -209,6 +236,15 @@ export class AgendaPage {
 
     missionarykey($event) {
         var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
         if (keycode == '13') {
             if (this.missionaryitems) {
                 this.missionaryitems = this.missionaryitems + "- ";
@@ -224,6 +260,15 @@ export class AgendaPage {
 
     eventkey($event) {
         var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
         if (keycode == '13') {
             if (this.event) {
                 this.event = this.event + "- ";

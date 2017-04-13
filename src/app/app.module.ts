@@ -78,6 +78,7 @@ import { EditCompletePage } from '../pages/editmembers/edit-complete/editcomplet
 import { NewNotePage } from '../pages/notes/newnote/newnote';
 import { NotesPage } from '../pages/notes/notes/notes';
 import { NotePage } from '../pages/notes/note/note';
+import { GoogleCalenderPage } from '../pages/googlecalender/googlecalender.component';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -166,7 +167,8 @@ const cloudSettings: CloudSettings = {
     EditCompletePage,
     NewNotePage,
     NotesPage,
-    NotePage
+    NotePage,
+    GoogleCalenderPage
   ],
 
   imports: [
@@ -240,7 +242,8 @@ const cloudSettings: CloudSettings = {
     EditCompletePage,
     NewNotePage,
     NotesPage,
-    NotePage
+    NotePage,
+    GoogleCalenderPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]
