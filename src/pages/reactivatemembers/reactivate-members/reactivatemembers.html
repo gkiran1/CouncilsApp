@@ -18,10 +18,10 @@
                 <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
             </ion-avatar>
             <h3>{{user.firstname}} {{user.lastname}}</h3>
-            <p><span>{{user.councilnames}}</span></p>
+            <p><span>{{user.councilnames}}</span></p>          
             <button ion-button item-right clear (click)="reactivatemember(user)">   
-                    <ion-icon color='secondary' ios="ios-arrow-dropleft" md="md-arrow-dropleft"></ion-icon>                 
-            </button>
+           <ion-icon class="councils-icon__reactivate" ></ion-icon>
+        </button>
         </ion-item>
     </ion-list>
     <ion-footer text-center>

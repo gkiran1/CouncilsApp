@@ -22,7 +22,7 @@
 <ion-content padding center text-center>
   <ng-container *ngIf="agendasArray.length">
     <ion-list>
-      <ion-item class="background-color" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
+      <ion-item inset class="background-color" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
         <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
         <ion-row>
           <ion-col>

@@ -92,9 +92,9 @@
         <ion-list>
             <ion-label class="label-styles">Discussion Items</ion-label>
             <ion-item *ngFor="let item of discussionitemsObj" class="item-styles">
-                <ion-input type="text" readonly [value]="item" formControlName='discussionitems' maxlength="500"></ion-input>
-                <button color="secondary" name="plusBtn" ion-button icon-only clear item-right (click)="plusBtn(item)">
-                 <ion-icon name="councilscircle" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+                <ion-input type="text" readonly [value]="item" formControlName='discussionitems' maxlength="500"></ion-input>         
+                <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
+                    <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
                 </button>
             </ion-item>
         </ion-list>
