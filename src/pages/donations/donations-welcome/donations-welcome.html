@@ -8,10 +8,12 @@
         <ion-title text-center>Donations</ion-title>
       </ion-col>
     </ion-row>
-    <ion-buttons end>
-      <button ion-button>
-      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
-    </button>
+    <ion-buttons class="menu-button" end>
+      <button ion-button (click)="notificationsPage()" >
+     <ion-icon class="councils-icon__notifications menu-icon" color="primary" >
+         <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
+      </ion-icon> 
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
