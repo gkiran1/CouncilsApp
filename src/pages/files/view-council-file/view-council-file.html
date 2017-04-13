@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-row>
+            <ion-col class="header-col">
+
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" color="secondary" (click)="back()"></ion-icon>
+
+            </ion-col>
+            <ion-col width-80>
+                <h3>{{councilName}}</h3>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+<ion-content id="content1">
+    <ion-item-divider class="empty"></ion-item-divider>
+    <ion-list inset>
+        <ion-item *ngFor="let item of filesArray">
+            <button class="forwardBtn" ion-button item-right clear (click)="downloadFile(item)">
+      <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" end></ion-icon>
+      </button>
+            <p><span class="council-styles">{{item.councilname}}</span></p>
+            <p><span class="name-styles">{{item.filename}}</span></p>
+            <p>by <span ion-text color="secondary">{{item.createdUser}}</span></p>
+            <p class="date-styles">{{item.createdDate | customdateformat}}</p>
+        </ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer>
+
+</ion-footer>

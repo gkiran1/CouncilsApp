@@ -2,11 +2,11 @@
     <ion-navbar hideBackButton>
         <ion-row>
             <ion-col class="header-col">
-                
-                 <ion-icon class="councils-icon__back menu-icon" name="cancel" color="secondary" (click)="back()"></ion-icon>
-                
+
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" color="secondary" (click)="back()"></ion-icon>
+
             </ion-col>
-            <ion-col width-80>
+            <ion-col width-70>
                 <h3>{{value.councilname}}</h3>
             </ion-col>
             <ion-col class="header-col">
@@ -19,16 +19,16 @@
             </ion-col>
         </ion-row>
     </ion-navbar>
-    <ion-item-divider class="empty"></ion-item-divider>
 </ion-header>
 <ion-content id="content1">
+    <ion-item-divider class="empty"></ion-item-divider>
     <ion-item>
         <ng-container *ngIf="!listdisplayflag">
             <ion-row class="row" *ngFor="let file of filesArray">
                 <ion-col width-10>
-                    <ion-icon class="document" name="document" color="secondary"></ion-icon>
+                    <ion-icon class="councils-icon__file menu-icon" name="document" color="secondary"></ion-icon>
                 </ion-col>
-                <ion-col width-80>
+                <ion-col width-70>
                     <p><span class="council-styles">{{file.name}}</span></p>
                     <p>by <span ion-text color="secondary">{{value.createdUser}}</span></p>
                     <p>
@@ -39,7 +39,7 @@
                 <ion-col width-10>
                     <ng-container *ngIf="deleteflag">
                         <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="delete(file)">
-                            <ion-icon class="document" name="close-circle" color="secondary" item-right></ion-icon>
+                            <ion-icon class="councils-icon__inactivate menu-icon" name="close-circle" color="secondary" item-right></ion-icon>
                             </button>
                     </ng-container>
                 </ion-col>

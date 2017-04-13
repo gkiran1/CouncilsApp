@@ -30,6 +30,7 @@ import { ThanksFeedbackPage } from '../pages/feedback/thanks-feedback/thanks-fee
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { NewCouncilFilePage } from '../pages/files/new-council-file/new-council-file';
 import { OpenCouncilFilePage } from '../pages/files/open-council-file/open-council-file';
+import { ViewCouncilFilePage } from '../pages/files/view-council-file/view-council-file';
 import { FilesListPage } from '../pages/files/files-page/files-page';
 import { ChangePasswordPage } from '../pages/edit-profile/change-password';
 import { GoodbyePage } from '../pages/goodbye/goodbye';
@@ -127,6 +128,7 @@ const cloudSettings: CloudSettings = {
     ChangePasswordPage,
     NewCouncilFilePage,
     OpenCouncilFilePage,
+    ViewCouncilFilePage,
     FilesListPage,
     GoodbyePage,
     CouncilUsersPage,
@@ -207,6 +209,7 @@ const cloudSettings: CloudSettings = {
     ChangePasswordPage,
     NewCouncilFilePage,
     OpenCouncilFilePage,
+    ViewCouncilFilePage,
     FilesListPage,
     GoodbyePage,
     CouncilUsersPage,

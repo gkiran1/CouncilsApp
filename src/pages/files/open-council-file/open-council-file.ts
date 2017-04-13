@@ -12,7 +12,7 @@ import * as moment from 'moment';
 @Component({
     templateUrl: 'open-council-file.html',
     selector: 'open-council-file-page'
-    // providers: [FirebaseService]
+    // providers: [Firebase
 })
 export class OpenCouncilFilePage {
     //metadata
@@ -131,13 +131,6 @@ export class OpenCouncilFilePage {
                     }
                 },
                 {
-                    text: 'Use Last Photo Taken',
-                    cssClass: "actionsheet-items",
-                    handler: () => {
-                        this.menuctrl.close();
-                    }
-                },
-                {
                     text: 'Choose From Library',
                     cssClass: "actionsheet-items",
                     handler: () => {
@@ -168,6 +161,10 @@ export class OpenCouncilFilePage {
     }
     // to upload a picture to the firebase.
     takePicture(value) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: "Please wait while uploading...",
+        });
         Camera.getPicture({
             quality: 95,
             destinationType: Camera.DestinationType.DATA_URL,
@@ -179,6 +176,7 @@ export class OpenCouncilFilePage {
             mediaType: Camera.MediaType.PICTURE,
             saveToPhotoAlbum: true
         }).then(imageData => {
+            loader.present();
             this.guestPicture = imageData;
             this.imagePath = "data:image/jpeg;base64," + imageData;
             this.value.createdDate = moment().toISOString();
@@ -192,6 +190,7 @@ export class OpenCouncilFilePage {
                     .then((savedPicture) => {
                         this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
                         this.pictureRef.then((metadata) => {
+                            loader.dismiss();
                             // Metadata now contains the metadata like filesize and type for 'images/...'
                             this.file = metadata;
                             this.file.$key = fileId;
@@ -202,15 +201,19 @@ export class OpenCouncilFilePage {
                             this.value.filename = value.filename;
                             this.value.filetype = value.filetype;
                         }).catch((error) => {
+                            loader.dismiss();
                             console.log(error);
                         });
                     }).catch(err => {
+                        loader.dismiss();
                         console.log(err);
                     })
             }).catch(err => {
+                loader.dismiss();
                 console.log(err);
             })
         }, error => {
+            loader.dismiss();
             console.log("ERROR -> " + JSON.stringify(error));
         });
     }
@@ -226,6 +229,7 @@ export class OpenCouncilFilePage {
         });
         FileChooser.open()
             .then(uri => {
+                loader.present();
                 this.filepath1 = uri.toString();
                 FilePath.resolveNativePath(this.filepath1)
                     .then(filePath => {
@@ -235,7 +239,6 @@ export class OpenCouncilFilePage {
                                 reader.readAsArrayBuffer(resFile);
                                 reader.onloadend = (evt: any) => {
                                     var imgBlob = new Blob([evt.target.result]);
-                                    loader.present();
                                     var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
                                     var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
                                     var mimeType;

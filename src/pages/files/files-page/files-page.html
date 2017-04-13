@@ -12,7 +12,7 @@
             </ion-col>
         <ion-col class="header-col" end>
             
-      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
+      <ion-icon class="councils-icon__notifications menu-icon" name="notifications-outline" color="secondary"></ion-icon>
     
         </ion-col>
         </ion-row>
@@ -23,7 +23,7 @@
     <ng-container *ngIf="filesArray.length">
         <ion-list inset>
             <ion-item *ngFor="let item of filesArray">                
-                <button class="forwardBtn" ion-button item-right clear (click)="downloadFile(item)">
+                <button class="forwardBtn" ion-button item-right clear (click)="viewCouncilFile(item)">
       <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" end></ion-icon>
       </button>
                 <p><span class="council-styles">{{item.councilname}}</span></p>

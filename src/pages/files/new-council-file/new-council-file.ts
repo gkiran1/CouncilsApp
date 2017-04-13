@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Nav, NavController, AlertController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
@@ -72,13 +72,6 @@ export class NewCouncilFilePage {
           }
         },
         {
-          text: 'Use Last Photo Taken',
-          cssClass: "actionsheet-items",
-          handler: () => {
-            this.menuctrl.close();
-          }
-        },
-        {
           text: 'Choose From Library',
           cssClass: "actionsheet-items",
           handler: () => {
@@ -107,6 +100,10 @@ export class NewCouncilFilePage {
   }
   // to upload a picture to the firebase.
   takePicture(value) {
+    let loader = this.loadingCtrl.create({
+      spinner: 'crescent',
+      content: "Please wait while uploading...",
+    });
     Camera.getPicture({
       quality: 95,
       destinationType: Camera.DestinationType.DATA_URL,
@@ -118,6 +115,7 @@ export class NewCouncilFilePage {
       mediaType: Camera.MediaType.PICTURE,
       saveToPhotoAlbum: true
     }).then(imageData => {
+      loader.present();
       this.guestPicture = imageData;
       this.imagePath = "data:image/jpeg;base64," + imageData;
       value.createdDate = moment().toISOString();
@@ -131,20 +129,25 @@ export class NewCouncilFilePage {
           .then((savedPicture) => {
             this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
             this.pictureRef.then((metadata) => {
+              loader.dismiss();
               // Metadata now contains the metadata like filesize and type for 'images/...'
               this.nav.push(OpenCouncilFilePage, {
                 file: metadata, file1: fileId, value: value
               });
             }).catch((error) => {
+              loader.dismiss();
               console.log(error);
             });
           }).catch(err => {
+            loader.dismiss();
             console.log(err);
           })
       }).catch(err => {
+        loader.dismiss();
         console.log(err);
       })
     }, error => {
+      loader.dismiss();
       console.log("ERROR -> " + JSON.stringify(error));
     });
   }
@@ -160,6 +163,7 @@ export class NewCouncilFilePage {
     });
     FileChooser.open()
       .then(uri => {
+        loader.present();
         this.file = uri.toString();
         FilePath.resolveNativePath(this.file)
           .then(filePath => {
@@ -169,7 +173,6 @@ export class NewCouncilFilePage {
                 reader.readAsArrayBuffer(resFile);
                 reader.onloadend = (evt: any) => {
                   var imgBlob = new Blob([evt.target.result]);
-                  loader.present();
                   var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
                   var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
                   var mimeType;

@@ -489,9 +489,18 @@ export class FirebaseService {
         return this.af.database.list('files', {
             query: {
                 orderByChild: 'councilid',
+                equalTo: councilId,
+                limitToLast: 1
+            }
+        }).map(results => results);
+    }
+    getFilesByCouncil(councilId: any) {
+        return this.af.database.list('files', {
+            query: {
+                orderByChild: 'councilid',
                 equalTo: councilId
             }
-        })
+        }).map(results => results);
     }
     createDiscussion(discussion: any) {
         return this.rootRef.child('discussions').push(
@@ -648,9 +657,6 @@ export class FirebaseService {
     }
     getDiscussions() {
         return this.af.database.list('discussions');
-    }
-    getFiles() {
-        return this.af.database.list('files');
     }
     getUsers() {
         return this.af.database.list('users');

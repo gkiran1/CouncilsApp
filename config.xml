@@ -75,7 +75,7 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name="AutoHideSplashScreen" value="false"/>
-
+    <preference name="AndroidPersistentFileLocation" value="Internal" />
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
