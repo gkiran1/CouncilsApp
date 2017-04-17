@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, ActionSheetController, MenuController, LoadingController, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
@@ -8,6 +8,7 @@ import { User } from '../../user/user';
 import { Camera, Toast, File, FileChooser, FilePath } from 'ionic-native';
 import * as firebase from 'firebase';
 import * as moment from 'moment';
+declare var FilePicker;
 
 @Component({
   templateUrl: 'new-council-file.html',
@@ -39,7 +40,8 @@ export class NewCouncilFilePage {
     public actionSheetCtrl: ActionSheetController,
     public menuctrl: MenuController,
     public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public platform: Platform) {
     appservice.getUser().subscribe(user => {
       //console.log(user);
       this.profilePictureRef = firebase.storage().ref('/files/');
@@ -161,6 +163,21 @@ export class NewCouncilFilePage {
       spinner: 'crescent',
       content: "Please wait while uploading...",
     });
+    if(this.platform.is('ios'))
+    {
+      var options = ["public.data","public.audio"];
+      FilePicker.pickFile(
+        function (uri) {
+          alert(uri);
+        },
+        function (error) {
+          alert(error);
+        },options
+      );
+    }
+    else {
+
+    
     FileChooser.open()
       .then(uri => {
         loader.present();
@@ -240,6 +257,7 @@ export class NewCouncilFilePage {
         // alert(error)
         console.log(error);
       });
+    }
   }
 
   cancel() {
