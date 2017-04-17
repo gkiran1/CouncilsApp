@@ -1,14 +1,15 @@
 // .item-md.item-block .item-inner{
 //     border-bottom:none !important;
 // }
+
+edit-profile {
 .item-md.item-input.input-has-focus .item-inner {
     border-bottom-color: #DEDEDE !important;
     box-shadow: none !important;
 }
 
 .cameraBtn {
-    margin-top: 10px;
-    margin-left: 5px;
+    
     width: 112px;
     height: 112px;
     border-radius: 112px;
@@ -47,3 +48,30 @@
         border-top: 1px solid #e8e9eb !important;
         border-bottom: 1px solid #e8e9eb !important;
     }
+
+    .photo-col {
+        margin-left:16px;
+        padding: 0;
+        max-width: 114px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        
+    }
+
+    .username-col {
+        margin-left:20px;
+        padding:0;
+    }
+
+    .username-col ion-item {
+        padding:0;
+        margin: 0;
+        border:none;
+    }
+
+    ion-input {
+        padding:0 !important;
+    }
+}

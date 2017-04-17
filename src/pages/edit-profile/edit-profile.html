@@ -4,17 +4,19 @@
             <ion-col class="header-col">
                 <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
             </ion-col>
-        </ion-row>
-        <ion-title text-center>
-            <b>Edit Profile</b>
+        <ion-col width-80>
+        <ion-title text-center >
+            Edit Profile
         </ion-title>
+        </ion-col>
+        </ion-row>
     </ion-navbar>
 </ion-header>
 <ion-content  has-footer='true' overflow-scroll='true'>
     <form [formGroup]="editProfileForm" (ngSubmit)="editProfileForm.value">
             <ion-item-divider class="empty"></ion-item-divider>
             <ion-row>
-                <ion-col width-30>
+                <ion-col class='photo-col'>
                     <ng-container *ngIf="!imageflag">
                         <img src='{{imagePath}}' class="cameraBtn" (click)="cameraActionsPage()" />
                     </ng-container>
@@ -27,8 +29,8 @@
         </button>
                     </ng-container>
                 </ion-col>
-                <ion-col width-70>
-                    <ion-item>
+                <ion-col class="username-col">
+                    <ion-item class="bordered-item">
                         <ion-label floating>First Name</ion-label>
                         <ion-input type="text" name="firstname" [(ngModel)]="profile.firstname" formControlName="firstname"></ion-input>
                     </ion-item>
