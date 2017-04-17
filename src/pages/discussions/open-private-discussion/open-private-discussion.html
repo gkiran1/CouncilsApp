@@ -28,10 +28,10 @@
                     <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(msg)?.user_avatar || (msg)?.user_avatar === 'avatar'" />
                 </ion-avatar>
                 <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
-                <ion-icon class="msg-status-icon" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark" md="ios-checkmark"></ion-icon>
-                <ion-icon class="msg-status-icon" *ngIf="msg.userId === user.$key && msg.status === 'delivered'" ios="ios-done-all" md="ios-done-all"></ion-icon>
-                <ion-icon class="msg-status-icon red-status" *ngIf="msg.userId === user.$key && msg.status === 'read'" ios="ios-done-all"
-                    md="ios-done-all"></ion-icon>
+                <ion-icon class="councils-icon__checkmark" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ></ion-icon>
+                <ion-icon class="councils-icon__double_checkmark" *ngIf="msg.userId === user.$key && msg.status === 'delivered'" ></ion-icon>
+                <ion-icon class="councils-icon__double_checkmark red-status" *ngIf="msg.userId === user.$key && msg.status === 'read'" 
+                    ></ion-icon>
                     <p class="font2">{{msg.timestamp | customdateformat}}</p>
                     <p class="font5 line-height">{{msg.text}}</p>
             </ion-item>
