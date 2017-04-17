@@ -163,103 +163,105 @@ export class NewCouncilFilePage {
       spinner: 'crescent',
       content: "Please wait while uploading...",
     });
-    if(this.platform.is('ios'))
-    {
-      var options = ["public.data","public.audio"];
+    if (this.platform.is('ios')) {
+      var options = ["public.data", "public.audio"];
       FilePicker.pickFile(
         function (uri) {
-          alert(uri);
+          // alert(uri);
+          loader.present();
+          this.uploadFile(uri, value, loader);
         },
         function (error) {
-          alert(error);
-        },options
+          loader.dismiss();
+          // alert(error);
+        }, options
       );
     }
     else {
+      FileChooser.open()
+        .then(uri => {
+          loader.present();
+          this.uploadFile(uri, value, loader);
+        }).catch(error => {
+          loader.dismiss();
+          // alert(error)
+          console.log(error);
+        });
+    }
+  }
+  uploadFile(uri, value, loader) {
+    this.file = uri.toString();
+    FilePath.resolveNativePath(this.file)
+      .then(filePath => {
+        (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
+          res.file((resFile) => {
+            var reader = new FileReader();
+            reader.readAsArrayBuffer(resFile);
+            reader.onloadend = (evt: any) => {
+              var imgBlob = new Blob([evt.target.result]);
+              var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
+              var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
+              var mimeType;
+              switch (filetype) {
+                case value: 'PNG'
+                  mimeType = 'image/png';
+                  break;
+                case value: 'JPG'
+                  mimeType = 'image/jpeg';
+                  break;
+                case value: 'DOC/DOCX'
+                  mimeType = 'application/msword';
+                  break;
+                case value: 'PDF'
+                  mimeType = 'application/pdf';
+                  break;
+                case value: 'XLS'
+                  mimeType = 'application/excel';
+                  break;
+                default:
+                  break;
+              }
+              value.createdDate = moment().toISOString();
+              value.councilid = value.council.$key;
+              value.councilname = value.council.council;
+              value.filename = filename;
+              value.filetype = filetype;
 
-    
-    FileChooser.open()
-      .then(uri => {
-        loader.present();
-        this.file = uri.toString();
-        FilePath.resolveNativePath(this.file)
-          .then(filePath => {
-            (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
-              res.file((resFile) => {
-                var reader = new FileReader();
-                reader.readAsArrayBuffer(resFile);
-                reader.onloadend = (evt: any) => {
-                  var imgBlob = new Blob([evt.target.result]);
-                  var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
-                  var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
-                  var mimeType;
-                  switch (filetype) {
-                    case value: 'PNG'
-                      mimeType = 'image/png';
-                      break;
-                    case value: 'JPG'
-                      mimeType = 'image/jpeg';
-                      break;
-                    case value: 'DOC/DOCX'
-                      mimeType = 'application/msword';
-                      break;
-                    case value: 'PDF'
-                      mimeType = 'application/pdf';
-                      break;
-                    case value: 'XLS'
-                      mimeType = 'application/excel';
-                      break;
-                    default:
-                      break;
-                  }
-                  value.createdDate = moment().toISOString();
-                  value.councilid = value.council.$key;
-                  value.councilname = value.council.council;
-                  value.filename = filename;
-                  value.filetype = filetype;
-
-                  this.firebaseservice.saveFile(value).then(fileId => {
-                    this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
-                      .put(imgBlob, { contentType: mimeType })
-                      .then((savedPicture) => {
-                        this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
-                        this.pictureRef.then((metadata) => {
-                          loader.dismiss();
-                          // Metadata now contains the metadata like filesize and type for 'images/...'
-                          this.nav.push(OpenCouncilFilePage, {
-                            file: metadata, file1: fileId, value: value
-                          });
-                        }).catch((error) => {
-                          loader.dismiss();
-                          // alert(error);
-                          console.log(error);
-                        });
-                      }).catch(error => {
-                        loader.dismiss();
-                        // alert(error);
-                        console.log(error);
-                      })
+              this.firebaseservice.saveFile(value).then(fileId => {
+                this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
+                  .put(imgBlob, { contentType: mimeType })
+                  .then((savedPicture) => {
+                    this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
+                    this.pictureRef.then((metadata) => {
+                      loader.dismiss();
+                      // Metadata now contains the metadata like filesize and type for 'images/...'
+                      this.nav.push(OpenCouncilFilePage, {
+                        file: metadata, file1: fileId, value: value
+                      });
+                    }).catch((error) => {
+                      loader.dismiss();
+                      // alert(error);
+                      console.log(error);
+                    });
                   }).catch(error => {
                     loader.dismiss();
                     // alert(error);
                     console.log(error);
                   })
-                }
+              }).catch(error => {
+                loader.dismiss();
+                // alert(error);
+                console.log(error);
               })
-            })
-          }).catch(error => {
-            loader.dismiss();
-            // alert(error)
-            console.log(error);
-          });
+            }
+          })
+        })
       }).catch(error => {
         loader.dismiss();
         // alert(error)
         console.log(error);
       });
-    }
   }
-
   cancel() {
     this.nav.pop();
   }
