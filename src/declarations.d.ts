@@ -13,3 +13,4 @@
 */
 declare module '*';
 declare var cordova: any;
+declare const gapi: any;

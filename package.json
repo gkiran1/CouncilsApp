@@ -53,7 +53,8 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-camera",
     "cordova-plugin-filepath",
-    "phonegap-plugin-push"
+    "phonegap-plugin-push",
+    "cordova-plugin-inappbrowser"
   ],
   "cordovaPlatforms": [
     "andriod",
