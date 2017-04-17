@@ -243,20 +243,20 @@ export class OpenCouncilFilePage {
                                     var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
                                     var mimeType;
                                     switch (filetype) {
-                                        case value: 'PNG'
+                                        case 'PNG':
                                             mimeType = 'image/png';
                                             break;
-                                        case value: 'JPG'
+                                        case 'JPG':
                                             mimeType = 'image/jpeg';
                                             break;
-                                        case value: 'DOC'
+                                        case 'DOC':
                                             mimeType = 'application/msword';
                                             break;
-                                        case value: 'PDF'
+                                        case 'PDF':
                                             mimeType = 'application/pdf';
                                             break;
-                                        case value: 'XLS'
-                                            mimeType = 'application/excel';
+                                        case 'XLS':
+                                            mimeType = 'application/vnd.ms-excel';
                                             break;
                                         default:
                                             break;
@@ -268,7 +268,7 @@ export class OpenCouncilFilePage {
                                     this.value.filetype = filetype;
                                     this.firebaseservice.saveFile(value).then(fileId => {
                                         this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
-                                            .putString(filePath)
+                                            .put(imgBlob, { contentType: mimeType })
                                             .then((savedPicture) => {
                                                 this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
                                                 this.pictureRef.then((metadata) => {

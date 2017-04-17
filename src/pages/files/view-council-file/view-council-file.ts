@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { NavController, AlertController, NavParams, Platform, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { WelcomePage } from '../../menu/menu';
 import { Transfer, File } from 'ionic-native';
@@ -21,7 +21,6 @@ export class ViewCouncilFilePage {
         public nav: NavController,
         public navparams: NavParams,
         public loadingCtrl: LoadingController,
-        public alertCtrl: AlertController,
         public platform: Platform) {
 
         this.filesArray = [];
@@ -37,24 +36,57 @@ export class ViewCouncilFilePage {
     downloadFile(item) {
         let loader = this.loadingCtrl.create({
             spinner: 'crescent',
-            content: "Please wait while downloading...",
+            content: "Please wait while opening file...",
         });
+        if (this.platform.is('ios')) {
+            var targetPath = cordova.file.documentsDirectory + '/CouncilDownloads/' + item.filename;
+        } else {
+            var targetPath = cordova.file.externalDataDirectory + '/CouncilDownloads/' + item.filename;
+        }
         let ProfileRef = this.profilePictureRef.child(item.councilid + '//' + item.$key + '//' + item.filename)
+        var filetype = (item.filename.substr(item.filename.lastIndexOf('.') + 1)).toUpperCase();
+        var mimeType;
+        switch (filetype) {
+            case 'PNG':
+                mimeType = 'image/png';
+                break;
+            case 'JPG':
+                mimeType = 'image/jpeg';
+                break;
+            case 'DOC':
+                mimeType = 'application/msword';
+                break;
+            case 'PDF':
+                mimeType = 'application/pdf';
+                break;
+            case 'XLS':
+                mimeType = 'application/vnd.ms-excel';
+                break;
+            default:
+                break;
+        }
         let fileTransfer = new Transfer();
         ProfileRef.getDownloadURL().then(function (url) {
             console.log(url);
-            if (this.platform.is('ios')) {
-                var targetPath = cordova.file.documentsDirectory + '/CouncilDownloads/' + item.filename;
-            } else {
-                var targetPath = cordova.file.dataDirectory + '/CouncilDownloads/' + item.filename;
-            }
-            // alert(targetPath);
             var trustHosts = true;
             var options = {};
             loader.present();
             fileTransfer.download(url, targetPath, trustHosts, options).then(res => {
                 loader.dismiss();
-                this.showAlert('success', 'File downloaded.'); 
+                cordova.plugins.fileOpener2.open(
+                    targetPath,
+                    mimeType,
+                    {
+                        error: function (e) {
+                            console.log(e);
+                            // alert('Error status: ' + e.status + ' - Error message: ' + e.message);
+                        },
+                        success: function () {
+                            console.log('file openrd successfully.');
+                            // alert('file opened successfully');
+                        }
+                    }
+                );
             }).catch(err => {
                 loader.dismiss();
                 // alert('could not download file.' + JSON.stringify(err));
@@ -71,13 +103,5 @@ export class ViewCouncilFilePage {
 
     back() {
         this.nav.pop();
-    }
-    showAlert(reason, text) {
-        let alert = this.alertCtrl.create({
-            title: '',
-            subTitle: text,
-            buttons: ['OK']
-        });
-        alert.present();
     }
 }

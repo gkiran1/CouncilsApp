@@ -201,22 +201,23 @@ export class NewCouncilFilePage {
               var imgBlob = new Blob([evt.target.result]);
               var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
               var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
+              // alert(filetype)
               var mimeType;
               switch (filetype) {
-                case value: 'PNG'
+                case 'PNG':
                   mimeType = 'image/png';
                   break;
-                case value: 'JPG'
+                case 'JPG':
                   mimeType = 'image/jpeg';
                   break;
-                case value: 'DOC/DOCX'
+                case 'DOC':
                   mimeType = 'application/msword';
                   break;
-                case value: 'PDF'
+                case 'PDF':
                   mimeType = 'application/pdf';
                   break;
-                case value: 'XLS'
-                  mimeType = 'application/excel';
+                case 'XLS':
+                  mimeType = 'application/vnd.ms-excel';
                   break;
                 default:
                   break;
@@ -226,7 +227,7 @@ export class NewCouncilFilePage {
               value.councilname = value.council.council;
               value.filename = filename;
               value.filetype = filetype;
-
+              // alert(mimeType);
               this.firebaseservice.saveFile(value).then(fileId => {
                 this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
                   .put(imgBlob, { contentType: mimeType })

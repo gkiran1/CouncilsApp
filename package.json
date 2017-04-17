@@ -54,7 +54,8 @@
     "cordova-plugin-camera",
     "cordova-plugin-filepath",
     "phonegap-plugin-push",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-file-opener2"
   ],
   "cordovaPlatforms": [
     "andriod",
