@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CouncilUsersModalPage } from '../../modals/council-users/council-users';
 import { UserCouncilsModalPage } from '../../modals/user-councils/user-councils';
+import { AngularFire } from 'angularfire2';
 
 @Component({
   templateUrl: 'agenda-lite-edit.html',
@@ -34,15 +35,25 @@ export class AgendaLiteEditPage {
   showlist = false;
   showlist1 = false;
   showlist2 = false;
+  user;
+  agenda;
 
-  constructor(public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
+  constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
     public nav: NavController, public actionSheetCtrl: ActionSheetController,
     public menuctrl: MenuController
   ) {
 
+    this.af.auth.subscribe(auth => {
+      if (!auth) return;
+      this.af.database.object('/users/' + auth.uid).subscribe(user => {
+        this.user = user;
+      });
+    });
+
     this.councils = [];
     let agenda = navParams.get('agendaselected');
+    this.agenda = agenda;
     this.agendaKey = agenda.$key;
 
     this.discussionitemsObj = (agenda.discussionitems != undefined && agenda.discussionitems.length > 0) ? agenda.discussionitems.split('\n') : '';
@@ -215,13 +226,23 @@ export class AgendaLiteEditPage {
   edit(value) {
     let formattedAgendaObj = this.formatAgendaObj(value);
     this.firebaseservice.updateAgendaLite(formattedAgendaObj, this.agendaKey)
-      .then(res => { this.showAlert('Agenda Lite has been updated.'); this.nav.push(AgendasPage); })
+      .then(res => {
+        this.createActivity('updated', formattedAgendaObj.openingprayeruserid);
+        this.createActivity('updated', formattedAgendaObj.spiritualthoughtuserid);
+        this.createActivity('updated', formattedAgendaObj.closingprayeruserid);
+        this.showAlert('Agenda Lite has been updated.'); this.nav.push(AgendasPage);
+      })
       .catch(err => { this.showAlert('Unable to updated the Agenda Lite, please try after some time.') })
   }
 
   delete() {
     this.firebaseservice.removeAgendaLite(this.agendaKey)
-      .then(res => { this.showAlert('Agenda Lite has been deleted.'); this.nav.push(AgendasPage); })
+      .then(res => {
+        this.createActivity('deleted', this.agenda.openingprayeruserid);
+        this.createActivity('deleted', this.agenda.spiritualthoughtuserid);
+        this.createActivity('deleted', this.agenda.closingprayeruserid);
+        this.showAlert('Agenda Lite has been deleted.'); this.nav.push(AgendasPage);
+      })
       .catch(err => { this.showAlert('Unable to delete the Agenda Lite, please try after some time.') })
   }
 
@@ -337,4 +358,17 @@ export class AgendaLiteEditPage {
       '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
       'Z';
   };
+  createActivity(action, userid) {
+    let activity = {
+      userid: userid,
+      entity: 'Agenda Lite',
+      entityid: this.agendaKey,
+      action: action,
+      timestamp: new Date().toISOString(),
+      createdUserId: this.user.$key,
+      createdUserName: this.user.firstname + ' ' + this.user.lastname,
+      createdUserAvatar: this.user.avatar
+    }
+    this.firebaseservice.createActivity(activity);
+  }
 }

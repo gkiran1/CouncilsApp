@@ -475,6 +475,10 @@ export class FirebaseService {
             isactive: agenda.isactive,
             islite: true
         })
+            .then((res) => {
+                return res.path.o[1];
+            })
+            .catch(err => { throw err });
     }
 
     getAgendasByCouncilId(councilId: string) {
@@ -602,6 +606,10 @@ export class FirebaseService {
             isactive: agenda.isactive,
             islite: false
         })
+            .then((res) => {
+                return res.path.o[1];
+            })
+            .catch(err => { throw err });
     }
 
     updateAgenda(agenda, agendaKey) {

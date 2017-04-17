@@ -4,6 +4,8 @@ import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
 import { NgZone } from '@angular/core';
 import { AngularFire } from 'angularfire2';
+import { AgendaEditPage } from '../agenda-edit/agenda-edit';
+import { AgendaLiteEditPage } from '../agenda-lite-edit/agenda-lite-edit';
 
 @Component({
   templateUrl: 'slide3.html',
@@ -26,6 +28,18 @@ export class slide3Page {
       this.af.database.object('assignments/' + activity.entityid).take(1).subscribe(assignment => {
         this.zone.run(() => {
           this.nav.push(NewAssignmentPage, { assignment: assignment });
+        });
+      });
+    } else if (activity.entity === 'Agenda Standard') {
+      this.af.database.object('agendas/' + activity.entityid).take(1).subscribe(agenda => {
+        this.zone.run(() => {
+          this.nav.push(AgendaEditPage, { agendaselected: agenda });
+        });
+      });
+    } else if (activity.entity === 'Agenda Lite') {
+      this.af.database.object('agendas/' + activity.entityid).take(1).subscribe(agenda => {
+        this.zone.run(() => {
+          this.nav.push(AgendaLiteEditPage, { agendaselected: agenda });
         });
       });
     }

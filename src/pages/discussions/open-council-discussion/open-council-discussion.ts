@@ -78,8 +78,9 @@ export class OpenCouncilDiscussionPage {
     }
 
     keypresssed($event) {
-        $event.target.value = $event.target.value + ''; //should always be a string
-        if ($event.target.value.includes('@')) {
+        // $event.target.value = $event.target.value + ''; //should always be a string
+        let start = $event.target.selectionStart;
+        if ($event.target.value.includes('@') && $event.target.value.charAt(start - 1) === '@') {
 
             if (this.isModalDismissed) {
                 this.councilusersModal = this.modalCtrl.create(CouncilUsersModalPage, { councilid: this.discussion.councilid });

@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CouncilUsersModalPage } from '../../modals/council-users/council-users';
 import { UserCouncilsModalPage } from '../../modals/user-councils/user-councils';
+import { AngularFire } from 'angularfire2';
 
 @Component({
   templateUrl: 'agenda-lite.html',
@@ -30,10 +31,18 @@ export class AgendaLitePage {
   showlist = false;
   showlist1 = false;
   showlist2 = false;
+  user;
 
-  constructor(public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
+  constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
     public nav: NavController) {
+
+    this.af.auth.subscribe(auth => {
+      if (!auth) return;
+      this.af.database.object('/users/' + auth.uid).subscribe(user => {
+        this.user = user;
+      });
+    });
 
     this.usercouncils = localStorage.getItem('userCouncils').split(',');
     var councilsIds = localStorage.getItem('userCouncils').split(',');
@@ -80,8 +89,11 @@ export class AgendaLitePage {
     agenda.closingprayeruserid = (this.closingprayer !== undefined) ? this.closingprayer.$key : '';
 
     this.firebaseservice.createAgendaLite(agenda)
-      .then(res => {
+      .then(key => {
         this.showAlert('Agenda created successfully.');
+        this.createActivity(key, agenda.openingprayeruserid);
+        this.createActivity(key, agenda.spiritualthoughtuserid);
+        this.createActivity(key, agenda.closingprayeruserid);
         this.nav.push(WelcomePage)
       })
       .catch(err => this.showAlert(err))
@@ -150,7 +162,7 @@ export class AgendaLitePage {
   searchFn(event) {
     this.term = event.target.value;
   }
- 
+
   keypressed($event) {
     var keycode = ($event.keyCode ? $event.keyCode : $event.which);
     let v = $event.target.value.split('\n');
@@ -168,7 +180,7 @@ export class AgendaLitePage {
       }
     }
 
-  } 
+  }
 
   discussionfocus($event) {
     if (this.discussionitems == undefined || this.discussionitems.length == 0) {
@@ -244,5 +256,19 @@ export class AgendaLitePage {
       '.' + (date.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
       'Z';
   };
+
+  createActivity(agendaKey, userid) {
+    let activity = {
+      userid: userid,
+      entity: 'Agenda Lite',
+      entityid: agendaKey,
+      action: 'created',
+      timestamp: new Date().toISOString(),
+      createdUserId: this.user.$key,
+      createdUserName: this.user.firstname + ' ' + this.user.lastname,
+      createdUserAvatar: this.user.avatar
+    }
+    this.firebaseservice.createActivity(activity);
+  }
 
 }
