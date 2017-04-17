@@ -18,10 +18,10 @@
                     <ng-container *ngIf="!imageflag">
                         <img src='{{imagePath}}' class="cameraBtn" (click)="cameraActionsPage()" />
                     </ng-container>
-                    <ng-container *ngIf="imageflag && profile.avatar">
+                    <ng-container *ngIf="imageflag && profile.avatar && profile.avatar !== 'avatar'">
                         <img src='{{profile.avatar}}' class="cameraBtn" (click)="cameraActionsPage()" />
                     </ng-container>
-                    <ng-container *ngIf="!profile.avatar">
+                    <ng-container *ngIf="!profile.avatar || profile.avatar === 'avatar'">
                         <button class="cameraBtn" (click)="cameraActionsPage()">
             <ion-icon class="councils-icon__photo"></ion-icon>
         </button>
