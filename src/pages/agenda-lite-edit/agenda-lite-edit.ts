@@ -227,9 +227,13 @@ export class AgendaLiteEditPage {
     let formattedAgendaObj = this.formatAgendaObj(value);
     this.firebaseservice.updateAgendaLite(formattedAgendaObj, this.agendaKey)
       .then(res => {
-        this.createActivity('updated', formattedAgendaObj.openingprayeruserid);
-        this.createActivity('updated', formattedAgendaObj.spiritualthoughtuserid);
-        this.createActivity('updated', formattedAgendaObj.closingprayeruserid);
+        let userids = new Set();
+        userids.add(formattedAgendaObj.openingprayeruserid);
+        userids.add(formattedAgendaObj.spiritualthoughtuserid);
+        userids.add(formattedAgendaObj.closingprayeruserid);
+        Array.from(userids).forEach(id => {
+          this.createActivity('updated', id);
+        });
         this.showAlert('Agenda Lite has been updated.'); this.nav.push(AgendasPage);
       })
       .catch(err => { this.showAlert('Unable to updated the Agenda Lite, please try after some time.') })
@@ -238,9 +242,13 @@ export class AgendaLiteEditPage {
   delete() {
     this.firebaseservice.removeAgendaLite(this.agendaKey)
       .then(res => {
-        this.createActivity('deleted', this.agenda.openingprayeruserid);
-        this.createActivity('deleted', this.agenda.spiritualthoughtuserid);
-        this.createActivity('deleted', this.agenda.closingprayeruserid);
+        let userids = new Set();
+        userids.add(this.agenda.openingprayeruserid);
+        userids.add(this.agenda.spiritualthoughtuserid);
+        userids.add(this.agenda.closingprayeruserid);
+        Array.from(userids).forEach(id => {
+          this.createActivity('deleted', id);
+        });
         this.showAlert('Agenda Lite has been deleted.'); this.nav.push(AgendasPage);
       })
       .catch(err => { this.showAlert('Unable to delete the Agenda Lite, please try after some time.') })
