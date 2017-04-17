@@ -64,10 +64,12 @@ export class MyApp {
 
       platform.pause.subscribe(() => {
         isPause = true;
+        localStorage.setItem('isMenuCentered', '0');
       });
 
       platform.resume.subscribe(() => {
         isPause = false;
+        //localStorage.setItem('isMenuCentered', '0');
       });
 
     });
