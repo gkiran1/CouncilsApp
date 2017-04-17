@@ -101,7 +101,11 @@ export class NewAssignmentPage {
     });
   }
 
-
+  ngOnInit() {
+    if (!this.assignmentForm.value.isactive) {
+      this.showAlert('This is a deleted assignment!');
+    }
+  }
   showCouncilsModal(event, value) {
     event.preventDefault();
     let usercouncilsmodal = this.modalCtrl.create(UserCouncilsModalPage, { usercouncils: this.usercouncils });

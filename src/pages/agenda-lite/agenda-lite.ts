@@ -90,10 +90,14 @@ export class AgendaLitePage {
 
     this.firebaseservice.createAgendaLite(agenda)
       .then(key => {
+        let userids = new Set();
+        userids.add(agenda.openingprayeruserid);
+        userids.add(agenda.spiritualthoughtuserid);
+        userids.add(agenda.closingprayeruserid);
+        Array.from(userids).forEach(id => {
+          this.createActivity(key, id);
+        });
         this.showAlert('Agenda created successfully.');
-        this.createActivity(key, agenda.openingprayeruserid);
-        this.createActivity(key, agenda.spiritualthoughtuserid);
-        this.createActivity(key, agenda.closingprayeruserid);
         this.nav.push(WelcomePage)
       })
       .catch(err => this.showAlert(err))

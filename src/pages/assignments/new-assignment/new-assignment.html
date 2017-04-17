@@ -60,7 +60,7 @@
       <button ion-button clear block color="secondary" (click)="createAssignment(assignmentForm.value)" text-capitalize [disabled]="!assignmentForm.valid">Create</button>
     </ion-toolbar>
   </ng-container>
-  <ng-container *ngIf="!isNewAssignment">
+  <ng-container *ngIf="!isNewAssignment && assignmentForm.value.isactive">
     <ion-toolbar *ngIf="!assignmentForm.value.isCompleted && isPersonalAssignment">
       <ion-buttons start>
         <button ion-button color="danger" (click)="showConfirm()">Delete</button>
