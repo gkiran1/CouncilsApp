@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { InAppBrowser } from 'ionic-native';
 import * as firebase from 'firebase';
+import { FirebaseService } from '../../environments/firebase/firebase-service'
 
 @Component({
     selector: 'googlecalender-page',
@@ -18,7 +19,7 @@ export class GoogleCalenderPage {
     APIKEY = "AIzaSyACyvOLh2dcuJv1am2fmlnnQfhGKXkuROI";
     REDIRECTURL = "http://localhost/callback";
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private firebaseService: FirebaseService) {
         this.rootRef = firebase.database().ref();
         var apiKey = this.APIKEY;
         var tkn;
@@ -58,8 +59,8 @@ export class GoogleCalenderPage {
                     },
                     'body': JSON.stringify({
                         "summary": 'Agendas',
-                        "location": 'Test',
-                        "description": 'New Agenda',
+                        "location": 'New Agenda',
+                        "description": 'New Agenda has been created',
                         "start": {
                             "dateTime": createdDate,
                             "timeZone": "Asia/Kolkata"
@@ -115,8 +116,8 @@ export class GoogleCalenderPage {
                     },
                     'body': JSON.stringify({
                         "summary": 'Assignments',
-                        "location": 'Test',
-                        "description": 'New Assignment',
+                        "location": 'New Assignment',
+                        "description": 'New Assignment has been created',
                         "start": {
                             "dateTime": createdDate,
                             "timeZone": "Asia/Kolkata"
