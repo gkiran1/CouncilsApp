@@ -98,9 +98,19 @@ export class DonationsSendPage {
           fullname: value.fullname,
           email: value.email,
           donationtype: value.donationtype,
-          cardNo: value.creditcardNo.split('-').join('')
+          cardNo: value.creditcardNo.split('-').join(''),
+          userid:localStorage.getItem('securityToken')
         }
-        this.http.post('http://localhost:8080/donate', data)
+
+        let baseURL = 'https://councilsapi-165009.appspot.com/';
+        let url = '';
+        if (data.donationtype === 'monthly') {
+          url = baseURL + 'donate-monthly';
+        } else {
+          url = baseURL + 'donate';
+        }
+
+        this.http.post(url, data)
           .subscribe(response => {
             loader.dismiss();
             console.log('payment success', response);
