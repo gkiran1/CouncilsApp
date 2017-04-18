@@ -5,7 +5,7 @@ import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { OpenCouncilFilePage } from '../open-council-file/open-council-file';
 import { User } from '../../user/user';
-import { Camera, Toast, File, FileChooser, FilePath } from 'ionic-native';
+import { Camera, Toast, File, FileChooser, FilePath, ImagePicker } from 'ionic-native';
 import * as firebase from 'firebase';
 import * as moment from 'moment';
 declare var FilePicker;
@@ -27,11 +27,13 @@ export class NewCouncilFilePage {
   image = '';
   file: string;
   filedata: string;
-  i = 1;
   files = {
     $key: '',
     images: []
   }
+
+  now = moment().valueOf();
+
   constructor(
     fb: FormBuilder,
     public appservice: AppService,
@@ -123,7 +125,7 @@ export class NewCouncilFilePage {
       value.createdDate = moment().toISOString();
       value.councilid = value.council.$key;
       value.councilname = value.council.council;
-      value.filename = value.councilname + '_file' + this.i++ + '.png';
+      value.filename = 'Image' + '_' + this.now + '.png';
       value.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
       this.firebaseservice.saveFile(value).then(fileId => {
         this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
@@ -155,7 +157,56 @@ export class NewCouncilFilePage {
   }
   // to upload a picture from gallery to the firebase.
   uploadPicture(value) {
-
+    let loader = this.loadingCtrl.create({
+      spinner: 'crescent',
+      content: "Please wait while uploading...",
+    });
+    Camera.getPicture({
+      quality: 95,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.PNG,
+      targetWidth: 500,
+      targetHeight: 500,
+      mediaType: Camera.MediaType.PICTURE,
+      saveToPhotoAlbum: true
+    }).then(imageData => {
+      loader.present();
+      this.guestPicture = imageData;
+      this.imagePath = "data:image/jpeg;base64," + imageData;
+      value.createdDate = moment().toISOString();
+      value.councilid = value.council.$key;
+      value.councilname = value.council.council;
+      value.filename = 'Image' + '_' + this.now + '.png';
+      value.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
+      this.firebaseservice.saveFile(value).then(fileId => {
+        this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
+          .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
+          .then((savedPicture) => {
+            this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
+            this.pictureRef.then((metadata) => {
+              loader.dismiss();
+              // Metadata now contains the metadata like filesize and type for 'images/...'
+              this.nav.push(OpenCouncilFilePage, {
+                file: metadata, file1: fileId, value: value
+              });
+            }).catch((error) => {
+              loader.dismiss();
+              console.log(error);
+            });
+          }).catch(err => {
+            loader.dismiss();
+            console.log(err);
+          })
+      }).catch(err => {
+        loader.dismiss();
+        console.log(err);
+      })
+    }, error => {
+      loader.dismiss();
+      console.log("ERROR -> " + JSON.stringify(error));
+    });
   }
   // to upload files from the device.
   importFile(value) {
