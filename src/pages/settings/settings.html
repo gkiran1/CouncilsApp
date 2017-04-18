@@ -8,6 +8,13 @@
                 <ion-title text-center>Settings</ion-title>
             </ion-col>
         </ion-row>
+        <ion-buttons class="menu-button" end>
+            <button ion-button>
+      <ion-icon class="councils-icon__notifications menu-icon" color="secondary">
+        <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
+      </ion-icon>
+    </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 <ion-content>
