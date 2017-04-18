@@ -9,7 +9,8 @@
             <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!activity.createdUserAvatar" />
         </ion-avatar>
         <h3 class="name">{{activity.createdUserName}}</h3>
-        <p class="text-content">{{activity.entity}} has been {{activity.action}}</p>
+        <p class="text-content" *ngIf="activity.entity !== 'Discussion'">{{activity.entity}} has been {{activity.action}}</p>
+        <p class="text-content" *ngIf="activity.entity === 'Discussion'">Your name has been mentioned in a discussion</p>
         <p class="timestamp">{{activity.timestamp | customdateformat}}</p>
         <p class="timestamp">{{activity.entity}}</p>
     </ion-item>

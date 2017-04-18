@@ -6,6 +6,7 @@ import { NgZone } from '@angular/core';
 import { AngularFire } from 'angularfire2';
 import { AgendaEditPage } from '../agenda-edit/agenda-edit';
 import { AgendaLiteEditPage } from '../agenda-lite-edit/agenda-lite-edit';
+import { OpenCouncilDiscussionPage } from '../discussions/open-council-discussion/open-council-discussion';
 
 @Component({
   templateUrl: 'slide3.html',
@@ -30,6 +31,10 @@ export class slide3Page {
           this.nav.push(NewAssignmentPage, { assignment: assignment });
         });
       });
+    } else if (activity.entity === 'Discussion') {
+
+      this.nav.push(OpenCouncilDiscussionPage, { discussion: activity.entityid });
+
     } else if (activity.entity === 'Agenda Standard') {
       this.af.database.object('agendas/' + activity.entityid).take(1).subscribe(agenda => {
         this.zone.run(() => {

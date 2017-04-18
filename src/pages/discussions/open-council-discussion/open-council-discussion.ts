@@ -25,6 +25,7 @@ export class OpenCouncilDiscussionPage {
     councilusersModal;
     isModalDismissed = true;
     isTyping = true;
+    tagsSet = new Set();
     constructor(public af: AngularFire, public modalCtrl: ModalController, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService) {
         // as.getUser().subscribe(user => this.user = user);
         this.af.auth.subscribe(auth => {
@@ -64,7 +65,12 @@ export class OpenCouncilDiscussionPage {
             }
             this.fs.updateDiscussionChat(this.discussion.$key, chatObj)
                 .then(res => {
-                    //
+                    this.tagsSet.forEach(tag => {
+                        if (chatObj.text.includes('@' + tag.split('/')[1])) {
+                            this.createActivity(this.discussion.$key, tag.split('/')[0]);
+                        }
+                    });
+                    this.tagsSet.clear();
                 })
                 .catch(err => {
                     console.log(err);
@@ -86,6 +92,7 @@ export class OpenCouncilDiscussionPage {
                 this.councilusersModal = this.modalCtrl.create(CouncilUsersModalPage, { councilid: this.discussion.councilid });
                 this.councilusersModal.onDidDismiss(user => {
                     if (!user) return;
+                    this.tagsSet.add(`${user.$key}/${user.firstname} ${user.lastname}`);
                     this.msg = `${this.msg}${user.firstname} ${user.lastname}`
                     this.isModalDismissed = true;
                     console.log('modal dismissed::', user);
@@ -123,5 +130,19 @@ export class OpenCouncilDiscussionPage {
             .catch(err => {
                 console.log(err);
             });
+    }
+
+    createActivity(key, userid) {
+        let activity = {
+            userid: userid,
+            entity: 'Discussion',
+            entityid: key,
+            action: 'mentioned',
+            timestamp: new Date().toISOString(),
+            createdUserId: this.user.$key,
+            createdUserName: this.user.firstname + ' ' + this.user.lastname,
+            createdUserAvatar: this.user.avatar
+        }
+        this.fs.createActivity(activity);
     }
 }

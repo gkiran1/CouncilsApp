@@ -439,6 +439,20 @@ export class FirebaseService {
                     });
                 });
             });
+            this.af.database.list('activities', {
+                query: {
+                    orderByChild: 'createdUserId',
+                    equalTo: userUid
+                }
+            })
+                .take(1).subscribe(activities => {
+                    activities.forEach(activity => {
+                        this.af.database.object('activities/' + activity.$key).update({
+                            createdUserName: firstname + ' ' + lastname,
+                            createdUserAvatar: avatar
+                        });
+                    });
+                });
             return "user profile updated successfully..."
         }).catch(err => {
             throw err;
