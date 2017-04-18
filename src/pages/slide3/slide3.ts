@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
 import { NgZone } from '@angular/core';
@@ -14,7 +14,7 @@ import { OpenCouncilDiscussionPage } from '../discussions/open-council-discussio
 })
 export class slide3Page {
   activities;
-  constructor(public af: AngularFire, public zone: NgZone, public nav: NavController, public fs: FirebaseService) {
+  constructor(public alertCtrl: AlertController, public af: AngularFire, public zone: NgZone, public nav: NavController, public fs: FirebaseService) {
     let uid = localStorage.getItem('securityToken');
     if (!uid) return; //Do nothing
 
@@ -27,9 +27,13 @@ export class slide3Page {
   showActivity(activity) {
     if (activity.entity === 'Assignment') {
       this.af.database.object('assignments/' + activity.entityid).take(1).subscribe(assignment => {
-        this.zone.run(() => {
-          this.nav.push(NewAssignmentPage, { assignment: assignment });
-        });
+        if (assignment.isactive) {
+          this.zone.run(() => {
+            this.nav.push(NewAssignmentPage, { assignment: assignment });
+          });
+        } else {
+          this.showAlert('This assignment has been deleted!');
+        }
       });
     } else if (activity.entity === 'Discussion') {
 
@@ -37,17 +41,34 @@ export class slide3Page {
 
     } else if (activity.entity === 'Agenda Standard') {
       this.af.database.object('agendas/' + activity.entityid).take(1).subscribe(agenda => {
-        this.zone.run(() => {
-          this.nav.push(AgendaEditPage, { agendaselected: agenda });
-        });
+        if (agenda.isactive) {
+          this.zone.run(() => {
+            this.nav.push(AgendaEditPage, { agendaselected: agenda });
+          });
+        } else {
+          this.showAlert('This assignment has been deleted!');
+        }
       });
     } else if (activity.entity === 'Agenda Lite') {
       this.af.database.object('agendas/' + activity.entityid).take(1).subscribe(agenda => {
-        this.zone.run(() => {
-          this.nav.push(AgendaLiteEditPage, { agendaselected: agenda });
-        });
+        if (agenda.isactive) {
+          this.zone.run(() => {
+            this.nav.push(AgendaLiteEditPage, { agendaselected: agenda });
+          });
+        } else {
+          this.showAlert('This assignment has been deleted!');
+        }
       });
     }
+  }
+
+  showAlert(errText) {
+    let alert = this.alertCtrl.create({
+      title: '',
+      subTitle: errText,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }
