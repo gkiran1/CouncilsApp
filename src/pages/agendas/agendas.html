@@ -2,8 +2,7 @@
   <ion-navbar hideBackButton="true">
     <ion-row>
       <ion-col class="header-col">
-        <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary"
-          (click)="cancel()"></ion-icon>
+        <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
       </ion-col>
       <ion-col width-80>
         <ion-title text-center>Agendas</ion-title>
@@ -19,32 +18,37 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding center text-center>
-  <ng-container *ngIf="agendasArray.length">
-    <ion-list>
-      <ion-item inset class="background-color" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
-        <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
-        <ion-row>
-          <ion-col>
-        <ion-icon class="councils-icon__agenda menu-icon" color="primary"></ion-icon>
-          </ion-col>
-          <ion-col>
-        <p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
-        <p><span class="agendacouncil-styles">{{item.agendacouncil}}</span>
-        </p>
-          </ion-col>
-          <ion-col>
-        <button ion-button item-right clear>
-      <ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon>
+<ion-content>
+  <ion-item-group>
+    <ng-container *ngIf="agendasArray.length">
+      <ion-item-divider></ion-item-divider>
+      <ion-list inset>
+        <ion-item class="background-color" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
+          <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
+          <ion-row>
+            <ion-col>
+              <ion-icon class="councils-icon__agenda menu-icon menu-style" color="primary"></ion-icon>
+            </ion-col>
+            <ion-col>
+              <p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
+              <p><span class="agendacouncil-styles">{{item.agendacouncil}}</span>
+              </p>
+            </ion-col>
+            <ion-col>
+              <button ion-button item-right clear>
+      <!--<ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon>-->
+      <!--<span class="right-align">-->
+        <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
       </button>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-    </ion-list>
-  </ng-container>
-  <ng-container *ngIf="!agendasArray.length">
-    <div class="nocontent-message">
-      <p>There are no agendas</p>
-    </div>
-  </ng-container>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    <ng-container *ngIf="!agendasArray.length">
+      <div class="nocontent-message">
+        <p>There are no agendas</p>
+      </div>
+    </ng-container>
+  </ion-item-group>
 </ion-content>

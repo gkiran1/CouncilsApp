@@ -3,37 +3,26 @@ agendas-page {
         font-family: Bernina-Regular !important;
         font-size: 17px !important;
         color: #3cb18a !important;
-         margin-left: -30px !important;
+        margin-left: -30px !important;
     }
     .agendacouncil-styles {
         font-family: Bernina-Regular !important;
         font-size: 13px !important;
         color: #a9aaac !important;
-         margin-left: -30px !important;
+        margin-left: -30px !important;
     }
-    .icon-style {
-        color: #A9AAAC;
-        width: 8px;
-        height: 13px;
-    }
-    .text-content {
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        margin: auto;
-        color: map-get($colors, light-gray);
-    }
-    .img-styles{
-        float:left;
-        width:24px !important;
-        height:24px !important;
-        margin-top: 11px;
-        background: #fff;
-    }
+
     .background-color{
-        background: #fff;
+        background: #ffffff;
     }
-    .councils-icon__chevron_right,.fwd-arrow-grey,.arrow-allign{
-      padding-right: 10px !important;
+   
+    .menu-style{
+        padding-top: 10px;
     }
+    .item-ios [item-right] {
+    margin: -11px -10px -11px 40px;
+}
+.item-md [item-right]{
+    margin: -11px -10px -11px 40px;    
+}
 }
