@@ -102,7 +102,7 @@ export class DonationsSendPage {
           userid:localStorage.getItem('securityToken')
         }
 
-        let baseURL = 'http://localhost:8080/';
+        let baseURL = 'https://councilsapi-165009.appspot.com/';
         let url = '';
         if (data.donationtype === 'monthly') {
           url = baseURL + 'donate-monthly';

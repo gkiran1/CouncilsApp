@@ -46,7 +46,7 @@ export class slide3Page {
             this.nav.push(AgendaEditPage, { agendaselected: agenda });
           });
         } else {
-          this.showAlert('This assignment has been deleted!');
+          this.showAlert('This agenda has been deleted!');
         }
       });
     } else if (activity.entity === 'Agenda Lite') {
@@ -56,7 +56,7 @@ export class slide3Page {
             this.nav.push(AgendaLiteEditPage, { agendaselected: agenda });
           });
         } else {
-          this.showAlert('This assignment has been deleted!');
+          this.showAlert('This agenda has been deleted!');
         }
       });
     }
