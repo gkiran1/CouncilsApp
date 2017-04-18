@@ -20,7 +20,8 @@ export class OpenCouncilFilePage {
         $key: '',
         councilid: '',
         name: '',
-        type: ''
+        type: '',
+        size: ''
     }
     //files
     file1 = {
@@ -40,7 +41,7 @@ export class OpenCouncilFilePage {
     pictureRef: any;
     openCouncilFileForm: FormGroup;
     filepath1: string;
-    i = 2;
+    now = moment().valueOf();
     constructor(public navparams: NavParams,
         public nav: NavController,
         public appservice: AppService,
@@ -61,7 +62,7 @@ export class OpenCouncilFilePage {
         firebaseservice.getFilesByKey(navparams.get('file1')).subscribe(res => {
             this.file1 = res;
         });
-
+        this.file.size = this.formatBytes(this.file.size);
     }
     delete(file) {
         let loader = this.loadingCtrl.create({
@@ -182,7 +183,7 @@ export class OpenCouncilFilePage {
             this.value.createdDate = moment().toISOString();
             this.value.councilid = value.council.$key;
             this.value.councilname = value.council.council;
-            value.filename = value.councilname + '_file' + this.i++ + '.png';
+            value.filename = 'Image' + '_' + this.now + '.png';
             value.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
             this.firebaseservice.saveFile(value).then(fileId => {
                 this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
@@ -193,6 +194,7 @@ export class OpenCouncilFilePage {
                             loader.dismiss();
                             // Metadata now contains the metadata like filesize and type for 'images/...'
                             this.file = metadata;
+                            this.file.size = this.formatBytes(this.file.size);
                             this.file.$key = fileId;
                             this.file.name = value.filename;
                             this.file.type = value.filetype;
@@ -219,6 +221,62 @@ export class OpenCouncilFilePage {
     }
     // to upload a picture from gallery to the firebase.
     uploadPicture(value) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: "Please wait while uploading...",
+        });
+        Camera.getPicture({
+            quality: 95,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            allowEdit: true,
+            encodingType: Camera.EncodingType.PNG,
+            targetWidth: 500,
+            targetHeight: 500,
+            mediaType: Camera.MediaType.PICTURE,
+            saveToPhotoAlbum: true
+        }).then(imageData => {
+            loader.present();
+            this.guestPicture = imageData;
+            this.imagePath = "data:image/jpeg;base64," + imageData;
+            this.value.createdDate = moment().toISOString();
+            this.value.councilid = value.council.$key;
+            this.value.councilname = value.council.council;
+            value.filename = 'Image' + '_' + this.now + '.png';
+            value.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
+            this.firebaseservice.saveFile(value).then(fileId => {
+                this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
+                    .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
+                    .then((savedPicture) => {
+                        this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
+                        this.pictureRef.then((metadata) => {
+                            loader.dismiss();
+                            // Metadata now contains the metadata like filesize and type for 'images/...'
+                            this.file = metadata;
+                            this.file.size = this.formatBytes(this.file.size);
+                            this.file.$key = fileId;
+                            this.file.name = value.filename;
+                            this.file.type = value.filetype;
+                            this.filesArray.push(this.file);
+                            this.value.councilname = value.councilname;
+                            this.value.filename = value.filename;
+                            this.value.filetype = value.filetype;
+                        }).catch((error) => {
+                            loader.dismiss();
+                            console.log(error);
+                        });
+                    }).catch(err => {
+                        loader.dismiss();
+                        console.log(err);
+                    })
+            }).catch(err => {
+                loader.dismiss();
+                console.log(err);
+            })
+        }, error => {
+            loader.dismiss();
+            console.log("ERROR -> " + JSON.stringify(error));
+        });
 
     }
     // to upload files from the device.
@@ -275,6 +333,7 @@ export class OpenCouncilFilePage {
                                                     loader.dismiss();
                                                     // Metadata now contains the metadata like filesize and type for 'images/...'
                                                     this.file = metadata;
+                                                    this.file.size = this.formatBytes(this.file.size);
                                                     this.file.$key = fileId;
                                                     this.file.name = filename;
                                                     this.file.type = filetype;
@@ -306,4 +365,12 @@ export class OpenCouncilFilePage {
                 console.log(e);
             });
     }
+    // to convert bytes to KB/MB/GB/TB formats
+    formatBytes(bytes) {
+        if (bytes < 1024) return bytes + "b";
+        else if (bytes < 1048576) return Math.round(bytes / 1024) + "kb";
+        else if (bytes < 1073741824) return Math.round(bytes / 1048576) + "mb";
+        else if (bytes < 1099511627776) return Math.round(bytes / 1073741824) + "gb";
+        else return Math.round(bytes / 1099511627776) + "tb";
+    };
 }
