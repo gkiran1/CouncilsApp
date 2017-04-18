@@ -8,9 +8,11 @@
         <ion-title text-center>Notes</ion-title>
       </ion-col>
     </ion-row>
-    <ion-buttons end>
+    <ion-buttons class="menu-button" end>
       <button ion-button>
-      <ion-icon class="notificationsicon" name="notifications-outline" color="secondary"></ion-icon>
+      <ion-icon class="councils-icon__notifications menu-icon" color="secondary">
+        <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
+      </ion-icon>
     </button>
     </ion-buttons>
   </ion-navbar>
