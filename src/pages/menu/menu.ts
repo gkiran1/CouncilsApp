@@ -6,13 +6,15 @@ import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Subscription } from "rxjs";
 import { Slides } from 'ionic-angular';
 import * as firebase from 'firebase';
+import { GoogleCalenderPage } from '../googlecalender/googlecalender.component';
 
 @Component({
   selector: 'page-welcome',
-  templateUrl: 'menu.html'
+  templateUrl: 'menu.html',
+  providers: [GoogleCalenderPage]
 })
 
-export class WelcomePage{
+export class WelcomePage {
   @ViewChild('switcher') switcher: Slides;
   //@ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
@@ -22,7 +24,8 @@ export class WelcomePage{
 
   constructor(public nav: NavController,
     public af: AngularFire,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    public googlecalender: GoogleCalenderPage
   ) {
 
     this.userObj = null;
@@ -47,7 +50,16 @@ export class WelcomePage{
           localStorage.setItem('unitNumber', usrs[0].unitnumber.toString());
           localStorage.setItem('userCouncils', usrs[0].councils.toString());
           localStorage.setItem('isAdmin', usrs[0].isadmin.toString());
+          localStorage.setItem('googlecalendaradded', usrs[0].googlecalendaradded.toString());
         });
+
+        if (localStorage.getItem('googlecalendaradded') === 'true' &&
+          (localStorage.getItem('gcToken') !== 'null' &&
+            localStorage.getItem('gcToken') !== null &&
+            localStorage.getItem('gcToken') !== undefined)) {
+          googlecalender.sendInvite();
+        }
+
         this.firebaseService.getPrivateDiscussions().subscribe(discussions => {
           let privatediscussions = discussions.filter(discussion => {
             if (auth.uid === discussion.createdUserId || auth.uid === discussion.otherUserId) {

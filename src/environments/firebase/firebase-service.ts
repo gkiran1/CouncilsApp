@@ -64,7 +64,8 @@ export class FirebaseService {
                 lastupdateddate: user.lastupdateddate,
                 isactive: user.isactive,
                 guestpicture: user.avatar,
-                isnotificationreq: false
+                isnotificationreq: false,
+                googlecalendaradded: false
             }).then(() => user.councils.forEach(counc => {
                 this.createUserCouncils(uid, counc);
             }));

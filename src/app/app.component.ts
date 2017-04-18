@@ -27,16 +27,17 @@ export class MyApp {
   constructor(platform: Platform, public push: Push, public alertCtrl: AlertController) {
     platform.ready().then(() => {
 
-      setTimeout(function() {
+      setTimeout(function () {
         Splashscreen.hide();
-    }, 300);
+      }, 300);
       StatusBar.styleDefault();
-      
+
       var securityToken = localStorage.getItem('securityToken');
       var isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
 
       if ((securityToken == null || securityToken == 'null') &&
         (isUserLoggedIn == 'null' || isUserLoggedIn == null || isUserLoggedIn == 'false')) {
+        localStorage.setItem('isInstanceCreated', 'false');
         this.rootPage = LoginPage;
       }
       else {
@@ -61,10 +62,10 @@ export class MyApp {
           }
         });
 
-
       platform.pause.subscribe(() => {
         isPause = true;
         localStorage.setItem('isMenuCentered', '0');
+        localStorage.setItem('isInstanceCreated', 'false');
       });
 
       platform.resume.subscribe(() => {

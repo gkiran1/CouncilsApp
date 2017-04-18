@@ -47,6 +47,7 @@ export class SettingsPage {
         this.navCtrl.push(AboutPage);
     }
     viewGoogleCalenderPage() {
+        localStorage.setItem('isGCClicked', 'true');
         this.navCtrl.push(GoogleCalenderPage);
     }
     signOut() {
