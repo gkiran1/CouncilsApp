@@ -192,11 +192,19 @@ textarea {
     font-size: 1.7rem !important;
 }
 
+.toolbar-title {
+    overflow: visible !important;
+}
+
 .toolbar-title-md,
 .toolbar-title-ios {
     font-family: "Bernina-Bold", sans-serif;
     font-size: 1.7rem !important;
     color: #35373A !important;
+}
+
+.title-ios {
+    padding: 25px 40px 1px !important;
 }
 
 .nocontent-message {
