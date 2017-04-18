@@ -41,7 +41,7 @@ export class ViewCouncilFilePage {
         if (this.platform.is('ios')) {
             var targetPath = cordova.file.documentsDirectory + '/CouncilDownloads/' + item.filename;
         } else {
-            var targetPath = cordova.file.externalDataDirectory + '/CouncilDownloads/' + item.filename;
+            var targetPath = cordova.file.dataDirectory + '/CouncilDownloads/' + item.filename;
         }
         let ProfileRef = this.profilePictureRef.child(item.councilid + '//' + item.$key + '//' + item.filename)
         var filetype = (item.filename.substr(item.filename.lastIndexOf('.') + 1)).toUpperCase();
@@ -67,7 +67,7 @@ export class ViewCouncilFilePage {
         }
         let fileTransfer = new Transfer();
         ProfileRef.getDownloadURL().then(function (url) {
-            console.log(url);
+            // console.log(url);
             var trustHosts = true;
             var options = {};
             loader.present();
@@ -82,7 +82,7 @@ export class ViewCouncilFilePage {
                             // alert('Error status: ' + e.status + ' - Error message: ' + e.message);
                         },
                         success: function () {
-                            console.log('file openrd successfully.');
+                            console.log('file opened successfully.');
                             // alert('file opened successfully');
                         }
                     }
