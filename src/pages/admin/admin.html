@@ -1,14 +1,19 @@
 <ion-header>
-	<ion-navbar hideBackButton="true">
-		<ion-row>
-			<ion-col class="header-col">
-				<ion-icon name="cancel" item-left color="secondary" class="councils-icon__back menu-icon" (click)="back()"></ion-icon>
-			</ion-col>
-			<ion-col width-80>
-				<ion-title text-center>Admin</ion-title>
-			</ion-col>
-		</ion-row>
-	</ion-navbar>
+	 <ion-navbar>
+    <ion-buttons class="menu-button" left>
+      <button ion-button menuToggle >
+      <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" ></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title>Admin</ion-title>
+    <ion-buttons class="menu-button" end>
+      <button ion-button (click)="notificationsPage()"  >
+     <ion-icon class="icon councils-icon__notifications menu-icon">
+         <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
+      </ion-icon> 
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>

@@ -12,7 +12,7 @@
 </ion-header>
 <ion-content class="background-styles">
     <ion-list>
-        <ion-item *ngFor="let user of users">
+        <ion-item inset *ngFor="let user of users">
             <ion-avatar item-left>
                 <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
                 <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
