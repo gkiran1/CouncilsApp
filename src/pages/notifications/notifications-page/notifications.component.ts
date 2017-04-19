@@ -66,7 +66,7 @@ export class NotificationsPage {
         }
     }
 
-    back() {
+    cancel() {
         this.nav.pop().then(() => {
             this.notifications.forEach(notification => {
                 this.firebaseService.updateIsReadInNotifications(notification.$key);
