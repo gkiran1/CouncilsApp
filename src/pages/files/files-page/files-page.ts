@@ -9,6 +9,7 @@ import { AngularFire } from 'angularfire2';
 import { WelcomePage } from '../../menu/menu';
 import { TransferObject } from '@ionic-native/transfer';
 import * as firebase from 'firebase';
+import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 
 @Component({
     templateUrl: 'files-page.html',
@@ -18,6 +19,8 @@ export class FilesListPage {
     count$ = new Subject();
     filesArray = [];
     profilePictureRef: any;
+    notificationsCount;
+
     constructor(
         public fs: FirebaseService,
         public nav: NavController,
@@ -34,6 +37,10 @@ export class FilesListPage {
                 });
             });
         }
+
+        fs.getNotCnt().subscribe(count => {
+            this.notificationsCount = count;
+        });
     }
 
     viewCouncilFile(item) {
@@ -47,5 +54,8 @@ export class FilesListPage {
     }
     cancel() {
         this.nav.setRoot(WelcomePage);
+    }
+    notificationsPage() {
+        this.nav.push(NotificationsPage);
     }
 }
