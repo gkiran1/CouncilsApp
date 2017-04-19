@@ -7,6 +7,7 @@ import { WelcomePage } from '../../menu/menu';
 import { NewNotePage } from '../../notes/newnote/newnote';
 import { NotePage } from '../../notes/note/note';
 import { Subject } from 'rxjs/Subject';
+import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 
 @Component({
     templateUrl: 'notes.html',
@@ -16,6 +17,8 @@ export class NotesPage {
 
     notesArray = [];
     count$ = new Subject();
+    notificationsCount;
+
     constructor(public nav: NavController, public as: AppService, public firebaseservice: FirebaseService) {
         var userId = localStorage.getItem('securityToken');
         if (userId !== null) {
@@ -25,7 +28,12 @@ export class NotesPage {
                 this.count$.next(this.notesArray.length);
             });
         }
+
+        firebaseservice.getNotCnt().subscribe(count => {
+            this.notificationsCount = count;
+        });
     }
+
     notesSelected(notesSelected) {
         this.nav.push(NotePage, { notesSelected: notesSelected });
     }
@@ -38,5 +46,8 @@ export class NotesPage {
         this.nav.setRoot(WelcomePage);
     }
 
+    notificationsPage() {
+        this.nav.push(NotificationsPage);
+    }
 }
 
