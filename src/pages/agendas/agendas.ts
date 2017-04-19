@@ -9,6 +9,7 @@ import { AgendaLiteEditPage } from '../agenda-lite-edit/agenda-lite-edit';
 import { AgendaEditPage } from '../agenda-edit/agenda-edit';
 import { Subject, } from 'rxjs/Subject';
 import { Subscription } from "rxjs";
+import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 
 @Component({
     templateUrl: 'agendas.html',
@@ -20,9 +21,10 @@ export class AgendasPage {
     agendasArray = [];
     count$ = new Subject();
     userSubscription: Subscription;
+    notificationsCount;
 
     constructor(public nav: NavController, public af: AngularFire, public firebaseservice: FirebaseService) {
-        
+
         this.userSubscription = this.af.auth.subscribe(auth => {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(usr => {
@@ -45,7 +47,9 @@ export class AgendasPage {
             }
         });
 
-
+        firebaseservice.getNotCnt().subscribe(count => {
+            this.notificationsCount = count;
+        });
 
     }
 
@@ -64,6 +68,10 @@ export class AgendasPage {
 
     cancel() {
         this.nav.setRoot(WelcomePage);
+    }
+
+    notificationsPage() {
+        this.nav.push(NotificationsPage);
     }
 
 }
