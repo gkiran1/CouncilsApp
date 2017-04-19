@@ -6,7 +6,7 @@ import { User } from '../../user/user';
 import { Headers, Http, Response } from "@angular/http";
 //import { Observable } from 'rxjs/Observable';
 import { Invitee } from '../../pages/invite/invitee.model';
-import { Observable, Subject } from "rxjs/Rx";
+import { Observable, Subject, Subscription } from "rxjs/Rx";
 import { Council } from '../../pages/new-council/council';
 import {
     Auth, UserDetails, IDetailedError,
@@ -18,6 +18,7 @@ export class FirebaseService {
 
     fireAuth: any;
     rootRef: any;
+    count$ = new Subject();
 
     constructor(private af: AngularFire, public ionicAuth: Auth) {
         this.fireAuth = firebase.auth();
@@ -740,6 +741,29 @@ export class FirebaseService {
             }
         });
     }
+
+    notifications;
+    notificationsCount;
+
+
+    getNotCnt() {
+        var userId = localStorage.getItem('securityToken');
+        if (userId !== null) {
+            this.notifications = [];
+            this.getNotifications(userId).subscribe(notifications => {
+                this.notifications = notifications.filter(notification => {
+                    return notification.isread === false;
+                });
+                this.count$.next(this.notifications.length);
+                console.log(this.notifications);
+            });
+        }
+
+        return this.count$;
+    }
+
+
+
     setDefaultNotificationSettings(userId) {
         var notSettingsRef = this.rootRef.child('notificationsettings').orderByChild('userid').equalTo(userId);
         return notSettingsRef.once("value", function (snap) {

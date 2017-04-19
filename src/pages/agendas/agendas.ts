@@ -7,6 +7,7 @@ import { WelcomePage } from '../menu/menu';
 import { AgendaLiteEditPage } from '../agenda-lite-edit/agenda-lite-edit';
 import { AgendaEditPage } from '../agenda-edit/agenda-edit';
 import { Subject } from 'rxjs/Subject';
+import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 
 @Component({
     templateUrl: 'agendas.html',
@@ -16,6 +17,8 @@ export class AgendasPage {
 
     agendasArray = [];
     count$ = new Subject();
+    notificationsCount;
+
     constructor(public nav: NavController, public as: AppService, public firebaseservice: FirebaseService) {
         this.agendasArray = [];
         if (localStorage.getItem('userCouncils') !== null) {
@@ -27,6 +30,11 @@ export class AgendasPage {
                 });
             });
         }
+
+        this.firebaseservice.getNotCnt().subscribe(count => {
+            this.notificationsCount = count;
+        });
+
     }
 
     agendaSelected(agendaselected) {
@@ -44,6 +52,10 @@ export class AgendasPage {
 
     cancel() {
         this.nav.setRoot(WelcomePage);
+    }
+
+    notificationsPage() {
+        this.nav.push(NotificationsPage);
     }
 
 }
