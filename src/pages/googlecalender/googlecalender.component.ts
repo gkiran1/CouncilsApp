@@ -27,18 +27,23 @@ export class GoogleCalenderPage {
         if (localStorage.getItem('isGCClicked') === 'true') {
 
             localStorage.setItem('isGCClicked', 'false');
-            // localStorage.setItem('allowed', 'false');
 
             var browserRef = cordova.InAppBrowser.open('https://accounts.google.com/o/oauth2/auth?suppress_webview_warning=true&client_id='
                 + this.CLIENT_ID + '&redirect_uri=' + this.REDIRECTURL
                 + '&scope=https://www.googleapis.com/auth/calendar&approval_prompt=force&response_type=token', '_blank', 'location=no');
 
             browserRef.addEventListener('loadstart', function (event) {
-                if ((event.url).startsWith("http://localhost/callback")) {
+                console.log('eventurl', event.url);
+                if ((event["url"]).indexOf("http://localhost/callback") >= 0 && (event["url"]).indexOf("access_token=") >= 0) {
                     var url = event["url"];
                     var token = url.split('access_token=')[1].split('&token_type')[0];
                     localStorage.setItem('allowed', 'true');
                     localStorage.setItem('gcToken', token);
+                    browserRef.removeEventListener("exit", (event) => { });
+                    browserRef.close();
+                }
+                else if ((event["url"]).indexOf("http://localhost/callback#error=access_denied") >= 0) {
+                    localStorage.setItem('allowed', 'false');
                     browserRef.removeEventListener("exit", (event) => { });
                     browserRef.close();
                 }
@@ -121,7 +126,7 @@ export class GoogleCalenderPage {
                                     }),
                                     'callback': function (jsonR, rawR) {
                                         if (jsonR.id) {
-                                            alert("Invitation sent successfully for Agenda");
+                                          //  alert("Invitation sent successfully for Agendas");
                                         }
                                         console.log(jsonR);
                                     }
@@ -199,7 +204,7 @@ export class GoogleCalenderPage {
                                     }),
                                     'callback': function (jsonR, rawR) {
                                         if (jsonR.id) {
-                                            alert("Invitation sent successfully");
+                                          //  alert("Invitation sent successfully for Assignments");
                                         }
                                         console.log(jsonR);
                                     }
