@@ -5,6 +5,7 @@ import { OpenPrivateDiscussionPage } from '../open-private-discussion/open-priva
 import { NavController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
+import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 
 @Component({
   templateUrl: 'private-discussions-list.html',
@@ -16,6 +17,8 @@ export class PrivateDiscussionsListPage {
   userSubscription: Subscription;
   uid;
   isListEmpty = false;
+  notificationsCount;
+
   constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController) {
     if (localStorage.getItem('securityToken') !== null) {
       this.uid = localStorage.getItem('securityToken');
@@ -31,6 +34,11 @@ export class PrivateDiscussionsListPage {
         this.count$.next(this.discussions.length);
       });
     }
+
+    fs.getNotCnt().subscribe(count => {
+      this.notificationsCount = count;
+    });
+
   }
   openDiscussion(discussion) {
     this.nav.push(OpenPrivateDiscussionPage, { discussion: discussion })
@@ -38,7 +46,10 @@ export class PrivateDiscussionsListPage {
   getCount() {
     return this.count$;
   }
-   cancel() {
+  cancel() {
     this.nav.pop();
+  }
+  notificationsPage() {
+    this.nav.push(NotificationsPage);
   }
 }
