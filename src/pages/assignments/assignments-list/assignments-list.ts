@@ -7,6 +7,7 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { NewAssignmentPage } from '../new-assignment/new-assignment';
 import { User } from '../../../user/user';
 import { Subscription } from "rxjs";
+import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 
 @Component({
   templateUrl: 'assignments-list.html',
@@ -23,6 +24,7 @@ export class AssignmentsListPage {
   personalselectedIdx;
   councilselectedIdx;
   completedselectedIdx;
+  notificationsCount;
 
   constructor(public navCtrl: NavController, public fs: FirebaseService, public af: AngularFire) {
     console.log('assignments constructor================>');
@@ -72,6 +74,11 @@ export class AssignmentsListPage {
         })
       }
     });
+
+    fs.getNotCnt().subscribe(count => {
+      this.notificationsCount = count;
+    });
+
   }
 
   getCount() {
@@ -99,5 +106,8 @@ export class AssignmentsListPage {
   }
   cancel() {
     this.navCtrl.pop();
+  }
+  notificationsPage() {
+    this.navCtrl.push(NotificationsPage);
   }
 }
