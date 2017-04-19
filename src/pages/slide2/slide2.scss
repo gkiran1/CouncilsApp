@@ -6,6 +6,15 @@ slide2 {
         padding-left: 16px;
         text-align: left;
     }
+     .button-inner {
+        justify-content: flex-start;
+    }
+    .button-md.activated {
+        color: #FFFFFF;
+    }
+    .button-ios.activated {
+        color: #FFFFFF;
+    }
 
     .add-icon {
         font-size: 24px !important;
