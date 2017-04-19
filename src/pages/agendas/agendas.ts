@@ -4,11 +4,9 @@ import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
 import { WelcomePage } from '../menu/menu';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AgendaLiteEditPage } from '../agenda-lite-edit/agenda-lite-edit';
 import { AgendaEditPage } from '../agenda-edit/agenda-edit';
-import { Subject, } from 'rxjs/Subject';
-import { Subscription } from "rxjs";
+import { Subject } from 'rxjs/Subject';
 
 @Component({
     templateUrl: 'agendas.html',
@@ -16,37 +14,19 @@ import { Subscription } from "rxjs";
 })
 export class AgendasPage {
 
-    user;
     agendasArray = [];
     count$ = new Subject();
-    userSubscription: Subscription;
-
-    constructor(public nav: NavController, public af: AngularFire, public firebaseservice: FirebaseService) {
-        
-        this.userSubscription = this.af.auth.subscribe(auth => {
-            if (auth !== null) {
-                this.af.database.object('/users/' + auth.uid).subscribe(usr => {
-                    this.user = usr;
-                    af.database.list('/agendas')
-                        .subscribe(agendas => {
-                            this.agendasArray = [];
-                            agendas.forEach(agenda => {
-                                if (!agenda.isactive) return;
-                                if (this.user.councils.includes(agenda.councilid)) {
-                                    this.agendasArray.push(agenda);
-                                }
-
-                            });
-
-                            let count = this.agendasArray.length;
-                            this.count$.next(count);
-                        });
-                })
-            }
-        });
-
-
-
+    constructor(public nav: NavController, public as: AppService, public firebaseservice: FirebaseService) {
+        this.agendasArray = [];
+        if (localStorage.getItem('userCouncils') !== null) {
+            var councilsIds = localStorage.getItem('userCouncils').split(',');
+            councilsIds.forEach(councilId => {
+                this.firebaseservice.getAgendasByCouncilId(councilId).subscribe(agendas => {
+                    this.agendasArray.push(...agendas);
+                    this.count$.next(this.agendasArray.length);
+                });
+            });
+        }
     }
 
     agendaSelected(agendaselected) {

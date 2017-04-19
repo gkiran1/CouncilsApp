@@ -86,110 +86,54 @@
             </ion-select>
         </ion-item>
 
-        <ion-list>
-            <ng-container *ngIf="!spiritualwelfareObj.length">
-                <ion-item>
-                    <ion-label *ngIf="!spiritualwelfare">Spiritual Welfare</ion-label>
-                    <ion-label floating color="secondary" *ngIf="spiritualwelfare">Spiritual Welfare</ion-label>
-                    <ion-textarea type="text" wrap="off" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare" [(ngModel)]="spiritualwelfare"
-                        formControlName="spiritualwelfare" maxlength="500" (keyup)="spiritualkey($event)">
-                        </ion-textarea>
-                </ion-item>
-            </ng-container>
-            <ng-container *ngIf="spiritualwelfareObj.length">
-                <ion-label class="label-styles">Spiritual Welfare</ion-label>
-                <ion-item *ngFor="let item of spiritualwelfareObj" class="item-styles">
-                    <ion-input type="text" readonly [value]="item" formControlName='spiritualwelfare' maxlength="500"></ion-input>
-                    <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
+
+        <ion-label class="label-styles">Spiritual Welfare</ion-label>
+        <ion-item *ngFor="let item of spiritualwelfareObj" class="item-styles">
+            <ion-input type="text" readonly [value]="item" formControlName='spiritualwelfare' maxlength="500"></ion-input>
+            <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
                 </button>
-                </ion-item>
-            </ng-container>
-        </ion-list>
+        </ion-item>
 
 
         <ion-list>
-            <ng-container *ngIf="!temporalwelfareObj.length">
-                <ion-item>
-                    <ion-label *ngIf="!temporalwelfare">Temporal Welfare</ion-label>
-                    <ion-label floating color="secondary" *ngIf="temporalwelfare">Temporal Welfare</ion-label>
-                    <ion-textarea type="text" wrap="off" (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare" [(ngModel)]="temporalwelfare"
-                        formControlName="temporalwelfare" maxlength="500" (keyup)="temporalkey($event)">
-                        </ion-textarea>
-                </ion-item>
-            </ng-container>
-            <ng-container *ngIf="temporalwelfareObj.length">
-                <ion-label class="label-styles">Temporal Welfare</ion-label>
-                <ion-item *ngFor="let item of temporalwelfareObj" class="item-styles">
-                    <ion-input type="text" readonly [value]="item" formControlName='temporalwelfare' maxlength="500"></ion-input>
-                    <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
+            <ion-label class="label-styles">Temporal Welfare</ion-label>
+            <ion-item *ngFor="let item of temporalwelfareObj" class="item-styles">
+                <ion-input type="text" readonly [value]="item" formControlName='temporalwelfare' maxlength="500"></ion-input>
+                <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
                 </button>
-                </ion-item>
-            </ng-container>
+            </ion-item>
         </ion-list>
 
         <ion-list>
-            <ng-container *ngIf="!fellowshipitemsObj.length">
-                <ion-item>
-                    <ion-label *ngIf="!fellowshipitems">Fellowship Items</ion-label>
-                    <ion-label floating color="secondary" *ngIf="fellowshipitems">Fellowship Items</ion-label>
-                    <ion-textarea type="text" wrap="off" (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems" [(ngModel)]="fellowshipitems"
-                        formControlName="fellowshipitems" maxlength="500" (keyup)="fellowshipkey($event)">
-                        </ion-textarea>
-                </ion-item>
-            </ng-container>
-            <ng-container *ngIf="fellowshipitemsObj.length">
-                <ion-label class="label-styles">Fellowship Items</ion-label>
-                <ion-item *ngFor="let item of fellowshipitemsObj" class="item-styles">
-                    <ion-input type="text" readonly [value]="item" formControlName='fellowshipitems' maxlength="500"></ion-input>
-                    <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
+            <ion-label class="label-styles">Fellowship Items</ion-label>
+            <ion-item *ngFor="let item of fellowshipitemsObj" class="item-styles">
+                <ion-input type="text" readonly [value]="item" formControlName='fellowshipitems' maxlength="500"></ion-input>
+                <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
                 </button>
-                </ion-item>
-            </ng-container>
+            </ion-item>
         </ion-list>
 
         <ion-list>
-            <ng-container *ngIf="!missionaryitemsObj.length">
-                <ion-item>
-                    <ion-label *ngIf="!missionaryitems">Missionary Items</ion-label>
-                    <ion-label floating color="secondary" *ngIf="missionaryitems">Missionary Items</ion-label>
-                    <ion-textarea type="text" wrap="off" (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems" [(ngModel)]="missionaryitems"
-                        formControlName="missionaryitems" maxlength="500" (keyup)="missionarykey($event)">
-                        </ion-textarea>
-                </ion-item>
-            </ng-container>
-            <ng-container *ngIf="missionaryitemsObj.length">
-                <ion-label class="label-styles">Missionary Items</ion-label>
-                <ion-item *ngFor="let item of missionaryitemsObj" class="item-styles">
-                    <ion-input type="text" readonly [value]="item" formControlName='missionaryitems' maxlength="500"></ion-input>
-                    <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
+            <ion-label class="label-styles">Missionary Items</ion-label>
+            <ion-item *ngFor="let item of missionaryitemsObj" class="item-styles">
+                <ion-input type="text" readonly [value]="item" formControlName='missionaryitems' maxlength="500"></ion-input>
+                <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
                 </button>
-                </ion-item>
-            </ng-container>
+            </ion-item>
         </ion-list>
 
         <ion-list>
-            <ng-container *ngIf="!eventObj.length">
-                <ion-item>
-                    <ion-label *ngIf="!event">Events</ion-label>
-                    <ion-label floating color="secondary" *ngIf="event">Events</ion-label>
-                    <ion-textarea type="text" wrap="off" (focus)="eventfocus()" elastic id="event" name="event" [(ngModel)]="event" formControlName="event"
-                        maxlength="500" (keyup)="eventkey($event)">
-                        </ion-textarea>
-                </ion-item>
-            </ng-container>
-            <ng-container *ngIf="eventObj.length">
-                <ion-label class="label-styles">Events</ion-label>
-                <ion-item *ngFor="let item of eventObj" class="item-styles">
-                    <ion-input type="text" readonly [value]="item" formControlName='event' maxlength="500"></ion-input>
-                    <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
+            <ion-label class="label-styles">Events</ion-label>
+            <ion-item *ngFor="let item of eventObj" class="item-styles">
+                <ion-input type="text" readonly [value]="item" formControlName='event' maxlength="500"></ion-input>
+                <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
                 </button>
-                </ion-item>
-            </ng-container>
+            </ion-item>
         </ion-list>
 
         <ion-item>

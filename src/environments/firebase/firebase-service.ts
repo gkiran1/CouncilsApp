@@ -593,7 +593,7 @@ export class FirebaseService {
 
     removeAgendaLite(agendaKey) {
         console.log('agendas.$key', agendaKey);
-        return this.af.database.object('agendas/' + agendaKey).update({ isactive: false });
+        return this.af.database.object('agendas/' + agendaKey).remove();
     }
 
     createAgenda(agenda: any) {
@@ -657,7 +657,7 @@ export class FirebaseService {
     }
 
     removeAgenda(agendaKey) {
-        return this.af.database.object('agendas/' + agendaKey).update({ isactive: false });
+        return this.af.database.object('agendas/' + agendaKey).remove();
     }
 
     updateDiscussionChat(discussionId, msg) {

@@ -25,7 +25,6 @@ export class AgendaLiteEditPage {
   completedassignmentslist = [];
   agendaliteeditForm: FormGroup;
   agendaKey = '';
-  discussionitems;
   discussionitemsObj = [];
   term;
   assignedcouncil;
@@ -225,8 +224,7 @@ export class AgendaLiteEditPage {
   }
 
   edit(value) {
-    value.discussionitems = (value.discussionitems != undefined && value.discussionitems.length > 0) ? value.discussionitems.replace(/-/gi, '').trim() : '';
-    let formattedAgendaObj = this.formatAgendaObj(value);    
+    let formattedAgendaObj = this.formatAgendaObj(value);
     this.firebaseservice.updateAgendaLite(formattedAgendaObj, this.agendaKey)
       .then(res => {
         let userids = new Set();
@@ -236,7 +234,7 @@ export class AgendaLiteEditPage {
         Array.from(userids).forEach(id => {
           this.createActivity('updated', id);
         });
-        this.showAlert('Agenda Lite has been updated.');
+        this.showAlert('Agenda Lite has been updated.'); this.nav.push(AgendasPage);
       })
       .catch(err => { this.showAlert('Unable to updated the Agenda Lite, please try after some time.') })
   }
@@ -251,7 +249,7 @@ export class AgendaLiteEditPage {
         Array.from(userids).forEach(id => {
           this.createActivity('deleted', id);
         });
-        this.showAlert('Agenda Lite has been deleted.'); this.nav.pop();
+        this.showAlert('Agenda Lite has been deleted.'); this.nav.push(AgendasPage);
       })
       .catch(err => { this.showAlert('Unable to delete the Agenda Lite, please try after some time.') })
   }
@@ -297,31 +295,6 @@ export class AgendaLiteEditPage {
     alert.present();
   }
 
-  keypressed($event) {
-    var keycode = ($event.keyCode ? $event.keyCode : $event.which);
-    let v = $event.target.value.split('\n');
-    let newValue = v.map(e => {
-      if (e.length > 27) {
-        e = e.substr(0, 27);
-      }
-      return e;
-    });
-    $event.target.value = newValue.join('\n');
-
-    if (keycode == '13') {
-      if (this.discussionitems) {
-        this.discussionitems = this.discussionitems + "- ";
-      }
-    }
-
-  }
-
-  discussionfocus($event) {
-    if (this.discussionitems == undefined || this.discussionitems.length == 0) {
-      this.discussionitems = "- "
-    }
-
-  }
   trackByIndex(index: number, obj: any): any {
     return index;
   }

@@ -50,13 +50,13 @@ export class NotePage {
     save(value) {
         let formattedAgendaObj = this.formatnoteObj(value);
         this.firebaseservice.updateNote(formattedAgendaObj, this.noteKey)
-            .then(res => { this.showAlert('Note has been updated.');})
+            .then(res => { this.showAlert('Note has been updated.'); this.nav.push(NotesPage); })
             .catch(err => { this.showAlert('Unable to update the Note, please try after some time.') })
     }
 
     delete() {
         this.firebaseservice.removeNote(this.noteKey)
-            .then(res => { this.showAlert('Note has been deleted.'); this.nav.pop(); })
+            .then(res => { this.showAlert('Note has been deleted.'); this.nav.push(NotesPage); })
             .catch(err => { this.showAlert('Unable to delete the Note, please try after some time.') })
     }
 

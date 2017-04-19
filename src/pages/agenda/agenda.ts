@@ -91,7 +91,7 @@ export class AgendaPage {
     createagenda(agenda) {
         let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
         agenda.assigneddate = moment(assigneddate).toISOString(),
-        agenda.spiritualwelfare = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.replace(/-/gi, '').trim() : '';
+            agenda.spiritualwelfare = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.replace(/-/gi, '').trim() : '';
         agenda.temporalwelfare = (agenda.temporalwelfare != undefined && agenda.temporalwelfare.length > 0) ? agenda.temporalwelfare.replace(/-/gi, '').trim() : '';
         agenda.fellowshipitems = (agenda.fellowshipitems != undefined && agenda.fellowshipitems.length > 0) ? agenda.fellowshipitems.replace(/-/gi, '').trim() : '';
         agenda.missionaryitems = (agenda.missionaryitems != undefined && agenda.missionaryitems.length > 0) ? agenda.missionaryitems.replace(/-/gi, '').trim() : '';
