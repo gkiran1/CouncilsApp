@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Nav, NavController, AlertController, ActionSheetController, MenuController } from 'ionic-angular';
+import { Nav, NavController, AlertController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ChangePasswordPage } from '../edit-profile/change-password';
 import { AppService } from '../../providers/app-service';
@@ -41,6 +41,7 @@ export class EditProfilePage {
         private firebaseService: FirebaseService,
         public actionSheetCtrl: ActionSheetController,
         public menuctrl: MenuController,
+        public loadingCtrl: LoadingController,
         public alertCtrl: AlertController) {
 
         this.profile = new User;
@@ -65,6 +66,11 @@ export class EditProfilePage {
     }
 
     editProfile(value) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: "Please wait while updating profile...",
+        });
+        loader.present();
         if ((new RegExp(/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/).test(this.profile.phone))) {
             this.guestPicture = this.guestPicture || '';
             this.profilePictureRef.child(this.profile.$key)
@@ -73,13 +79,16 @@ export class EditProfilePage {
                     // this.showAlert('picture',savedPicture.downloadURL);
                     let avatar = this.guestPicture ? savedPicture.downloadURL : this.profile.avatar;
                     this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, avatar).then(res => {
+                        loader.dismiss();
                         this.showAlert1('success', 'User profile updated successfully.')
                         this.isChangeflag = false;
                     }).catch(err => {
+                        loader.dismiss();
                         this.showAlert('failure', err.message);
                     })
                 });
         } else {
+            loader.dismiss();
             this.showAlert('failure', 'Please Enter Valid Phone Number.');
         }
     }
