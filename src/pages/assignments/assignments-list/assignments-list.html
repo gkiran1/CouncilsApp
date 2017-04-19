@@ -1,13 +1,13 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <ion-buttons class="menu-button" left>
-      <button ion-button menuToggle >
+      <button ion-button menuToggle>
       <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" ></ion-icon>
     </button>
     </ion-buttons>
     <ion-title>Assignments</ion-title>
     <ion-buttons class="menu-button" end>
-      <button ion-button (click)="notificationsPage()"  >
+      <button ion-button (click)="notificationsPage()">
      <ion-icon class="icon councils-icon__notifications menu-icon">
          <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
       </ion-icon> 
@@ -21,8 +21,8 @@
     <ng-container *ngIf="(personalAssignmentsArray.length || councilAssignmentsArray.length || completedAssignmentsArray.length)">
       <ion-item-divider>PERSONAL</ion-item-divider>
       <ion-item (click)="assignmentSelected(item, i,'personal')" *ngFor="let item of personalAssignmentsArray; let i = index" [attr.data-index]="i">
-        <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': personalselectedIdx === i}"></ion-icon>
-        <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': personalselectedIdx !== i}"></ion-icon>
+        <ion-icon class="councils-icon__radio_1" item-left [ngClass]="{'active': personalselectedIdx === i}"></ion-icon>
+        <ion-icon class="councils-icon__radio_2" item-left [ngClass]="{'active': personalselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
         <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
         <p class="font2"><span>{{item.councilname}}</span><span style="position: absolute;right: 10px">{{item.assigneddate | customdateformat}}</span></p>
@@ -30,8 +30,8 @@
 
       <ion-item-divider>COUNCIL</ion-item-divider>
       <ion-item (click)="assignmentSelected(item, i,'council')" *ngFor="let item of councilAssignmentsArray; let i = index" [attr.data-index]="i">
-        <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': councilselectedIdx === i}"></ion-icon>
-        <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': councilselectedIdx !== i}"></ion-icon>
+        <ion-icon class="councils-icon__radio_1" item-left [ngClass]="{'active': councilselectedIdx === i}"></ion-icon>
+        <ion-icon class="councils-icon__radio_2" item-left [ngClass]="{'active': councilselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
         <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
         <p class="font2"><span>{{item.councilname}}</span><span style="position: absolute;right: 10px">{{item.assigneddate | customdateformat}}</span></p>
@@ -40,8 +40,8 @@
       <ion-item-divider>COMPLETED</ion-item-divider>
       <ion-item (click)="assignmentSelected(item, i,'completed')" *ngFor="let item of completedAssignmentsArray; let i = index"
         [attr.data-index]="i">
-        <ion-icon name="radio-button-off" color="secondary" item-left [ngClass]="{'active': completedselectedIdx === i}"></ion-icon>
-        <ion-icon name="radio-button-on" color="secondary" item-left [ngClass]="{'active': completedselectedIdx !== i}"></ion-icon>
+        <ion-icon class="councils-icon__radio_1" item-left [ngClass]="{'active': completedselectedIdx === i}"></ion-icon>
+        <ion-icon class="councils-icon__radio_2" item-left [ngClass]="{'active': completedselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
         <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
         <p class="font2"><span>{{item.councilname}}</span><span class="right-align">{{item.assigneddate | customdateformat}}</span></p>

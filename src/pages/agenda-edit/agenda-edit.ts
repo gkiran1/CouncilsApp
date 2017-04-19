@@ -35,6 +35,11 @@ export class AgendaEditPage {
     fellowshipitemsObj = [];
     missionaryitemsObj = [];
     eventObj = [];
+    spiritualwelfare;
+    temporalwelfare;
+    fellowshipitems;
+    missionaryitems;
+    event;
     isModalDismissed = true;
     showlist = false;
     showlist1 = false;
@@ -235,6 +240,11 @@ export class AgendaEditPage {
     }
 
     edit(value) {
+        value.spiritualwelfare = (value.spiritualwelfare != undefined && value.spiritualwelfare.length > 0) ? value.spiritualwelfare.replace(/-/gi, '').trim() : '';
+        value.temporalwelfare = (value.temporalwelfare != undefined && value.temporalwelfare.length > 0) ? value.temporalwelfare.replace(/-/gi, '').trim() : '';
+        value.fellowshipitems = (value.fellowshipitems != undefined && value.fellowshipitems.length > 0) ? value.fellowshipitems.replace(/-/gi, '').trim() : '';
+        value.missionaryitems = (value.missionaryitems != undefined && value.missionaryitems.length > 0) ? value.missionaryitems.replace(/-/gi, '').trim() : '';
+        value.event = (value.event != undefined && value.event.length > 0) ? value.event.replace(/-/gi, '').trim() : '';
         let formattedAgendaObj = this.formatAgendaObj(value);
         this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
             .then(res => {
@@ -245,7 +255,7 @@ export class AgendaEditPage {
                 Array.from(userids).forEach(id => {
                     this.createActivity('updated', id);
                 });
-                this.showAlert('Agenda has been updated.'); this.nav.push(AgendasPage);
+                this.showAlert('Agenda has been updated.');
             })
             .catch(err => { this.showAlert('Unable to updated the Agenda, please try after some time.') })
     }
@@ -260,7 +270,7 @@ export class AgendaEditPage {
                 Array.from(userids).forEach(id => {
                     this.createActivity('deleted', id);
                 });
-                this.showAlert('Agenda has been deleted.'); this.nav.push(AgendasPage);
+                this.showAlert('Agenda has been deleted.'); this.nav.pop();
             })
             .catch(err => { this.showAlert('Unable to delete the Agenda, please try after some time.') })
     }
@@ -276,6 +286,125 @@ export class AgendaEditPage {
 
     trackByIndex(index: number, obj: any): any {
         return index;
+    }
+
+    spiritualkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            if (this.spiritualwelfare) {
+                this.spiritualwelfare = this.spiritualwelfare + "- ";
+            }
+        }
+    }
+
+    spiritualfocus($event) {
+        if (this.spiritualwelfare == undefined || this.spiritualwelfare.length == 0) {
+            this.spiritualwelfare = "- "
+        }
+    }
+
+    temporalkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            if (this.temporalwelfare) {
+                this.temporalwelfare = this.temporalwelfare + "- ";
+            }
+        }
+    }
+
+    temporalfocus($event) {
+        if (this.temporalwelfare == undefined || this.temporalwelfare.length == 0) {
+            this.temporalwelfare = "- "
+        }
+    }
+    fellowshipkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            if (this.fellowshipitems) {
+                this.fellowshipitems = this.fellowshipitems + "- ";
+            }
+        }
+    }
+
+    fellowshipfocus($event) {
+        if (this.fellowshipitems == undefined || this.fellowshipitems.length == 0) {
+            this.fellowshipitems = "- "
+        }
+    }
+
+    missionarykey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            if (this.missionaryitems) {
+                this.missionaryitems = this.missionaryitems + "- ";
+            }
+        }
+    }
+
+    missionaryfocus($event) {
+        if (this.missionaryitems == undefined || this.missionaryitems.length == 0) {
+            this.missionaryitems = "- "
+        }
+    }
+
+    eventkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            if (this.event) {
+                this.event = this.event + "- ";
+            }
+        }
+    }
+
+    eventfocus($event) {
+        if (this.event == undefined || this.event.length == 0) {
+            this.event = "- "
+        }
     }
 
     showList(event) {
