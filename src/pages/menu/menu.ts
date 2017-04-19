@@ -16,13 +16,13 @@ import { GoogleCalenderPage } from '../googlecalender/googlecalender.component';
 
 export class WelcomePage {
   @ViewChild('switcher') switcher: Slides;
-  //@ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;
   userObj: FirebaseObjectObservable<any>;
   userSubscription: Subscription;
   rootRef;
 
-  constructor(public nav: NavController,
+  constructor(
     public af: AngularFire,
     private firebaseService: FirebaseService,
     public googlecalender: GoogleCalenderPage

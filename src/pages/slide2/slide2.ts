@@ -63,6 +63,7 @@ export class slide2Page {
     public privateDiscussionsListPage: PrivateDiscussionsListPage,
     public filesListPage: FilesListPage,
     public notesPage: NotesPage,
+    public welcomePage: WelcomePage
   ) {
      if (localStorage.getItem('isAdmin') === 'true') {
             this.isAdmin = true;
@@ -173,24 +174,24 @@ export class slide2Page {
   }
 
   agendasPage() {
-    this.nav.push(AgendasPage);
+    this.welcomePage.nav.setRoot(AgendasPage);
 
   }
   councilDiscussionsPage() {
-    this.nav.push(CouncilDiscussionsListPage);
+    this.welcomePage.nav.setRoot(CouncilDiscussionsListPage);
 
   }
   assignmentsPage() {
-    this.nav.push(AssignmentsListPage);
+    this.welcomePage.nav.setRoot(AssignmentsListPage);
   }
   privateDiscussionPage() {
-    this.nav.push(PrivateDiscussionsListPage);
+    this.welcomePage.nav.setRoot(PrivateDiscussionsListPage);
   }
   filesPage() {
-    this.nav.push(FilesListPage);
+    this.welcomePage.nav.setRoot(FilesListPage);
   }
   notePage() {
-    this.nav.push(NotesPage)
+    this.welcomePage.nav.setRoot(NotesPage)
   }
 
 }

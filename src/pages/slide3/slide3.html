@@ -5,8 +5,8 @@
     <ion-content>
     <ion-item *ngFor="let activity of activities" text-wrap (click)="showActivity(activity)">
         <ion-avatar item-left>
-            <img [src]="activity.createdUserAvatar" class="avatarImage" *ngIf="activity.createdUserAvatar" />
-            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!activity.createdUserAvatar" />
+            <img [src]="activity.createdUserAvatar" class="avatarImage" *ngIf="activity.createdUserAvatar && activity.createdUserAvatar !== 'avatar'" />
+            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!activity.createdUserAvatar || activity.createdUserAvatar === 'avatar'" />
         </ion-avatar>
         <h3 class="name">{{activity.createdUserName}}</h3>
         <p class="text-content" *ngIf="activity.entity !== 'Discussion'">{{activity.entity}} has been {{activity.action}}</p>
