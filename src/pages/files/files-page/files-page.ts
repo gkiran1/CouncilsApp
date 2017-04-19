@@ -47,7 +47,6 @@ export class FilesListPage {
         console.log(item);
         // alert(item.councilid)
         this.nav.push(ViewCouncilFilePage, { councilid: item.councilid, councilname: item.councilname });
-
     }
     getCount() {
         return this.count$;
