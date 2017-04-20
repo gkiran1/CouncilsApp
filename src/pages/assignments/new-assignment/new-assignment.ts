@@ -134,7 +134,7 @@ export class NewAssignmentPage {
   }
   cancel() {
     if (this.isNewAssignment) {
-      this.nav.setRoot(MenuPage);
+      this.nav.popToRoot();
     } else {
       this.nav.pop();
     }
