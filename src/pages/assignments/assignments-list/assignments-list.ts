@@ -69,6 +69,7 @@ export class AssignmentsListPage {
 
               // this.councilAssignmentsArray = assignments;
               let count = this.personalAssignmentsArray.length + this.councilAssignmentsArray.length + this.completedAssignmentsArray.length;
+              count = count ? count : null;
               this.count$.next(count);
             });
         })
