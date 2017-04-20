@@ -740,26 +740,23 @@ export class FirebaseService {
             }
         });
     }
-    
-    count$ = new Subject();
-    notifications;
-    notificationsCount;
 
+    count$ = new Subject();
+    
     getNotCnt() {
         var userId = localStorage.getItem('securityToken');
         if (userId !== null) {
-            this.notifications = [];
+            var notifications = [];
             this.getNotifications(userId).subscribe(notifications => {
-                this.notifications = notifications.filter(notification => {
+                notifications = notifications.filter(notification => {
                     return notification.isread === false;
                 });
-                this.count$.next(this.notifications.length);
-                console.log(this.notifications);
+                this.count$.next(notifications.length);
             });
         }
-
         return this.count$;
     }
+
     setDefaultNotificationSettings(userId) {
         var notSettingsRef = this.rootRef.child('notificationsettings').orderByChild('userid').equalTo(userId);
         return notSettingsRef.once("value", function (snap) {

@@ -12,13 +12,9 @@ import { NotificationsPage } from '../notifications/notifications-page/notificat
 
 @Component({
   selector: 'page-display',
-  templateUrl: 'display.html',
-  providers: [NotificationsPage]
+  templateUrl: 'display.html'
 })
 export class DisplayPage {
-  // @ViewChild(Nav) nav: Nav;
-  //rootPage = LoginPage;
-  //displaypage:DisplayPage;
   userName;
   registerCredentials = { email: '', ldsorgusername: '' };
   notifications;
@@ -28,10 +24,11 @@ export class DisplayPage {
   constructor(private navParams: NavParams,
     public appService: AppService,
     public firebaseService: FirebaseService,
-    private nav: NavController, notificationsPage: NotificationsPage) {
+    private nav: NavController) {
     this.registerCredentials.email = navParams.data.email;
     this.registerCredentials.ldsorgusername = navParams.data.ldsorgusername;
-    notificationsPage.getCount().subscribe(count => {
+
+    firebaseService.getNotCnt().subscribe(count => {
       this.notificationsCount = count;
     });
   }
