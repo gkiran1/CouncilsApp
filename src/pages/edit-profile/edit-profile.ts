@@ -138,7 +138,6 @@ export class EditProfilePage {
             buttons: [
                 {
                     text: 'Camera',
-                    icon: 'camera',
                     cssClass: "actionsheet-items",
                     handler: () => {
                         this.menuctrl.close();
@@ -147,7 +146,6 @@ export class EditProfilePage {
                 },
                 {
                     text: 'Gallery',
-                    icon: 'albums',
                     cssClass: "actionsheet-items",
                     handler: () => {
                         this.menuctrl.close();
