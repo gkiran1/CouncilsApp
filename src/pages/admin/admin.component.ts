@@ -8,6 +8,8 @@ import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { NewCouncilPage } from '../new-council/new-council';
 import { WelcomePage } from '../menu/menu';
 import { MembersListPage } from '../editmembers/members-list/memberslist.component';
+import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
+import { FirebaseService } from '../../environments/firebase/firebase-service';
 
 @Component({
     selector: 'admin-page',
@@ -16,7 +18,13 @@ import { MembersListPage } from '../editmembers/members-list/memberslist.compone
 
 export class AdminPage {
 
-    constructor(private navCtrl: NavController) { }
+    notificationsCount;
+    constructor(private navCtrl: NavController, public firebaseservice: FirebaseService) {
+        firebaseservice.getNotCnt().subscribe(count => {
+            this.notificationsCount = count;
+        });
+
+    }
 
     activeCouncils() {
         this.navCtrl.push(ActiveCouncilsPage);
@@ -48,6 +56,10 @@ export class AdminPage {
 
     back() {
         this.navCtrl.pop();
+    }
+
+    notificationsPage() {
+        this.navCtrl.push(NotificationsPage);
     }
 
 }

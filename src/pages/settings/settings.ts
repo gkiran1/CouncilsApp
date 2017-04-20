@@ -18,6 +18,7 @@ import { GoodbyePage } from '../goodbye/goodbye';
 import { WelcomePage } from '../menu/menu';
 import { NotificationSettingsPage } from '../notifications/notifications-settings/notificationsettings.component';
 import { GoogleCalenderPage } from '../googlecalender/googlecalender.component';
+import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 
 @Component({
     selector: 'settings-page',
@@ -28,11 +29,17 @@ import { GoogleCalenderPage } from '../googlecalender/googlecalender.component';
 
 export class SettingsPage {
     // userSubscription: Subscription;
+    notificationsCount;
+
     constructor(private navCtrl: NavController,
         public appService: AppService,
         public assignmentsListPage: AssignmentsListPage,
         public activeCouncilsPage: ActiveCouncilsPage,
-        private firebaseService: FirebaseService) { }
+        private firebaseService: FirebaseService) {
+        firebaseService.getNotCnt().subscribe(count => {
+            this.notificationsCount = count;
+        });
+    }
 
     viewEditProfilePage() {
         this.navCtrl.push(EditProfilePage);
@@ -69,4 +76,8 @@ export class SettingsPage {
     back() {
         this.navCtrl.setRoot(WelcomePage);
     }
+    notificationsPage() {
+        this.navCtrl.push(NotificationsPage);
+    }
+
 }
