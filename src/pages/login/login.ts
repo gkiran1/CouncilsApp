@@ -5,7 +5,7 @@ import * as firebase from 'firebase';
 import { Headers, Http, Response } from "@angular/http";
 import { AuthService } from '../../providers/auth-service';
 import { DisplayPage } from '../display/display';
-import { WelcomePage } from '../menu/menu';
+import { MenuPage } from '../menu/menu';
 import { CreateAccountPage } from '../create-account/create-account';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../../user/user';
@@ -79,7 +79,7 @@ export class LoginPage {
         let v = setInterval(() => {
             if (flag) {
                 this.zone.run(() => {
-                    this.nav.setRoot(WelcomePage);
+                    this.nav.setRoot(MenuPage);
                 });
                 clearInterval(v);
             }

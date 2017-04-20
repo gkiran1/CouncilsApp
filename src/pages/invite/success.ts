@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { NavController } from 'ionic-angular';
 import { InviteMemberPage } from './invite';
-import { WelcomePage } from '../menu/menu';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
@@ -25,6 +24,6 @@ export class InvitationSuccessPage {
         this.navctrl.setRoot(InviteMemberPage);
     }
     close() {
-        this.navctrl.setRoot(WelcomePage)
+        this.navctrl.popToRoot();
     }
 }

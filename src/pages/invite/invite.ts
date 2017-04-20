@@ -5,7 +5,6 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AlertController, NavController } from 'ionic-angular';
 import { AppService } from '../../providers/app-service';
 import { InvitationSuccessPage } from './success';
-import { WelcomePage } from '../menu/menu';
 
 @Component({
     templateUrl: 'invite.html',
@@ -83,7 +82,7 @@ export class InviteMemberPage {
     }
 
     close() {
-        this.navctrl.setRoot(WelcomePage)
+        this.navctrl.popToRoot();
     }
 
 }

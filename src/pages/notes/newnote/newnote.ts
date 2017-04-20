@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { AlertController, NavController, ActionSheetController, MenuController, ModalController, NavParams } from 'ionic-angular';
-import { WelcomePage } from '../../menu/menu';
+
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -33,7 +33,7 @@ export class NewNotePage {
         this.firebaseservice.createNote(note)
             .then(res => {
                 this.showAlert('Note created successfully.');
-                this.nav.setRoot(WelcomePage)
+                this.nav.popToRoot();
             })
             .catch(err => this.showAlert(err))
     }

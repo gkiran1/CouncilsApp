@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
-import { WelcomePage } from '../menu/menu';
+
 import { NewAgendaPage } from '../new-agenda/new-agenda';
 import { AgendaLitePage } from '../agenda-lite/agenda-lite';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';

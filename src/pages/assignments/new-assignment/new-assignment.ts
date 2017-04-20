@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { AlertController, NavController, NavParams, ModalController } from 'ionic-angular';
-import { WelcomePage } from '../../menu/menu';
+import { MenuPage } from '../../menu/menu';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFire } from 'angularfire2';
@@ -134,7 +134,7 @@ export class NewAssignmentPage {
   }
   cancel() {
     if (this.isNewAssignment) {
-      this.nav.setRoot(WelcomePage);
+      this.nav.setRoot(MenuPage);
     } else {
       this.nav.pop();
     }
@@ -174,7 +174,7 @@ export class NewAssignmentPage {
         .then(key => {
           this.showAlert('Assignment created successfully.');
           this.createActivity(key, 'created');
-          this.nav.setRoot(WelcomePage)
+          this.nav.popToRoot();
         })
         .catch(err => this.showAlert(err))
     }

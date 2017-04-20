@@ -6,7 +6,6 @@ import { ViewCouncilFilePage } from '../view-council-file/view-council-file';
 import { NavController, Platform, LoadingController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
-import { WelcomePage } from '../../menu/menu';
 import { TransferObject } from '@ionic-native/transfer';
 import * as firebase from 'firebase';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
@@ -52,7 +51,7 @@ export class FilesListPage {
         return this.count$;
     }
     cancel() {
-        this.nav.setRoot(WelcomePage);
+        this.nav.popToRoot();
     }
     notificationsPage() {
         this.nav.push(NotificationsPage);

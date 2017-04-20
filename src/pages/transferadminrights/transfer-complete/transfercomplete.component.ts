@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
-import { WelcomePage } from '../../menu/menu'
+
 
 @Component({
     selector: 'transfercomplete-page',
@@ -16,6 +16,6 @@ export class TransferCompletePage {
     }
 
     back() {
-        this.navCtrl.setRoot(WelcomePage);
+        this.navCtrl.popToRoot();
     }
 }

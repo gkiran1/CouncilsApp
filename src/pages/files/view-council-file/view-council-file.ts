@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
-import { WelcomePage } from '../../menu/menu';
 import { Transfer, File } from 'ionic-native';
 import * as firebase from 'firebase';
 

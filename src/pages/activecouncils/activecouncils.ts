@@ -8,8 +8,6 @@ import { Observable, Subject } from 'rxjs/Rx';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Council } from '../new-council/council';
 import { NavController } from 'ionic-angular';
-import { WelcomePage } from '../menu/menu';
-
 import { Subscription } from "rxjs";
 import { CouncilUsersPage } from '../councilusers/councilusers';
 

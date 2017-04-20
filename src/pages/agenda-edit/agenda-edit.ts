@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AlertController, NavController, ActionSheetController, MenuController, ModalController, NavParams } from 'ionic-angular';
-import { WelcomePage } from '../menu/menu';
 import { AgendasPage } from '../agendas/agendas';
 import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
 import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';

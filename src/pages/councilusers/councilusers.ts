@@ -8,7 +8,6 @@ import { Observable, Subject } from 'rxjs/Rx';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Council } from '../new-council/council';
 import { NavController, NavParams } from 'ionic-angular';
-import { WelcomePage } from '../menu/menu';
 
 @Component({
     selector: 'page-councilusers',
