@@ -23,7 +23,7 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Council</ion-label>
-      <ion-input type="text" readonly (click)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil"></ion-input>
+      <ion-input type="text" readonly (touchstart)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Assign to</ion-label>
