@@ -248,9 +248,16 @@ export class AgendaEditPage {
         this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
             .then(res => {
                 let userids = new Set();
-                userids.add(formattedAgendaObj.openingprayeruserid);
-                userids.add(formattedAgendaObj.spiritualthoughtuserid);
-                userids.add(formattedAgendaObj.closingprayeruserid);
+
+                if (formattedAgendaObj.openingprayeruserid) {
+                    userids.add(formattedAgendaObj.openingprayeruserid);
+                }
+                if (formattedAgendaObj.spiritualthoughtuserid) {
+                    userids.add(formattedAgendaObj.spiritualthoughtuserid);
+                }
+                if (formattedAgendaObj.closingprayeruserid) {
+                    userids.add(formattedAgendaObj.closingprayeruserid);
+                }
                 Array.from(userids).forEach(id => {
                     this.createActivity('updated', id);
                 });
@@ -263,9 +270,16 @@ export class AgendaEditPage {
         this.firebaseservice.removeAgenda(this.agendaKey)
             .then(res => {
                 let userids = new Set();
-                userids.add(this.agenda.openingprayeruserid);
-                userids.add(this.agenda.spiritualthoughtuserid);
-                userids.add(this.agenda.closingprayeruserid);
+
+                if (this.agenda.openingprayeruserid) {
+                    userids.add(this.agenda.openingprayeruserid);
+                }
+                if (this.agenda.spiritualthoughtuserid) {
+                    userids.add(this.agenda.spiritualthoughtuserid);
+                }
+                if (this.agenda.closingprayeruserid) {
+                    userids.add(this.agenda.closingprayeruserid);
+                }
                 Array.from(userids).forEach(id => {
                     this.createActivity('deleted', id);
                 });

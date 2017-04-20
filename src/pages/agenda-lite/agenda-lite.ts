@@ -91,9 +91,15 @@ export class AgendaLitePage {
     this.firebaseservice.createAgendaLite(agenda)
       .then(key => {
         let userids = new Set();
-        userids.add(agenda.openingprayeruserid);
-        userids.add(agenda.spiritualthoughtuserid);
-        userids.add(agenda.closingprayeruserid);
+        if (agenda.openingprayeruserid) {
+          userids.add(agenda.openingprayeruserid);
+        }
+        if (agenda.spiritualthoughtuserid) {
+          userids.add(agenda.spiritualthoughtuserid);
+        }
+        if (agenda.closingprayeruserid) {
+          userids.add(agenda.closingprayeruserid);
+        }
         Array.from(userids).forEach(id => {
           this.createActivity(key, id);
         });

@@ -90,7 +90,7 @@ export class AgendaPage {
     agendasArray = [];
     createagenda(agenda) {
         let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
-        agenda.assigneddate = moment(assigneddate).toISOString(),
+        agenda.assigneddate = moment(assigneddate).toISOString();
         agenda.spiritualwelfare = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.replace(/-/gi, '').trim() : '';
         agenda.temporalwelfare = (agenda.temporalwelfare != undefined && agenda.temporalwelfare.length > 0) ? agenda.temporalwelfare.replace(/-/gi, '').trim() : '';
         agenda.fellowshipitems = (agenda.fellowshipitems != undefined && agenda.fellowshipitems.length > 0) ? agenda.fellowshipitems.replace(/-/gi, '').trim() : '';
@@ -104,9 +104,15 @@ export class AgendaPage {
         this.firebaseservice.createAgenda(agenda)
             .then(key => {
                 let userids = new Set();
-                userids.add(agenda.openingprayeruserid);
-                userids.add(agenda.spiritualthoughtuserid);
-                userids.add(agenda.closingprayeruserid);
+                if (agenda.openingprayeruserid) {
+                    userids.add(agenda.openingprayeruserid);
+                }
+                if (agenda.spiritualthoughtuserid) {
+                    userids.add(agenda.spiritualthoughtuserid);
+                }
+                if (agenda.closingprayeruserid) {
+                    userids.add(agenda.closingprayeruserid);
+                }
                 Array.from(userids).forEach(id => {
                     this.createActivity(key, id);
                 });
