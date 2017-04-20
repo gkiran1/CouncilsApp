@@ -16,52 +16,51 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-	<ion-item-divider class="empty"></ion-item-divider>
-	<ion-item class="bordered-item" (click)="activeCouncils()">
+<ion-content class="list-page">
+	
+	<ion-item class="ion-item-first" (click)="activeCouncils()">
 		<ion-label class="label-styles">Active Councils</ion-label>
 		<button ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
 	</ion-item>
-	<ion-item class="bordered-item" (click)="createCouncils()">
+	<ion-item class="ion-item-middle" (click)="createCouncils()">
 		<ion-label class="label-styles">Create Council</ion-label>
 		<button ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
 	</ion-item>
 
-	<ion-item class="bordered-item" (click)="inviteMembers()">
+	<ion-item class="ion-item-middle" (click)="inviteMembers()">
 		<ion-label class="label-styles"> Invite Member</ion-label>
 		<button ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
 	</ion-item>
-	<ion-item class="bordered-item" (click)="getActiveUsers()">
+	<ion-item class="ion-item-middle" (click)="getActiveUsers()">
 		<ion-label class="label-styles">Inactivate Member</ion-label>
 		<button ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
 	</ion-item>
-	<ion-item class="bordered-item" (click)="editMembers()">
+	<ion-item class="ion-item-middle" (click)="editMembers()">
 		<ion-label class="label-styles">Edit Member</ion-label>
 		<button ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
 	</ion-item>
-	<ion-item class="bordered-item" (click)="getInactiveUsers()">
+	<ion-item class="ion-item-middle" (click)="getInactiveUsers()">
 		<ion-label class="label-styles">Reactivate Member</ion-label>
 		<button ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
 	</ion-item>
-	<ion-item class="item-noborder" (click)="transferAdminRights()">
+	<ion-item class="ion-item-last" (click)="transferAdminRights()">
 		<ion-label class="label-styles">Transfer Admin Rights</ion-label>
 		<button ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
 	</ion-item>
-	<div class="page-blank-area"></div>
 
 
 </ion-content>

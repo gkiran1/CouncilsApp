@@ -2,6 +2,11 @@ slide1 {
     .menu-icon {
         margin-right: 12px !important;
     }
+
+     .list {
+        margin-top: 16px;
+    }
+    
     
 
     .settings-button {
@@ -12,6 +17,19 @@ slide1 {
 
      .button-inner {
         justify-content: flex-start;
+    }
+
+    .button-md {
+        height: 44px;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        margin: 0px;
+    }
+    .button-ios {
+        height: 44px;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        margin: 0px;
     }
     .button-md.activated {
         color: #FFFFFF;

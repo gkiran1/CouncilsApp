@@ -606,6 +606,7 @@ ion-avatar {
 .fwd-arrow-grey {
     color: #a9aaac !important;
     font-size: 13px !important;
+     
 }
 
 .cancel-button {
@@ -661,3 +662,94 @@ ion-avatar {
         text-align: center;
     }
 
+    
+    
+
+    /***************************** List Page Styles **********************************************/
+
+     .list-page .scroll-content {
+        background: #fafafa;
+        padding-top: 28px !important;
+    }
+
+    
+
+
+    .list-page ion-item {
+        height: 48px;
+        
+    }
+
+    .list-page .ion-idv-item {
+         border-top: 1px solid #e8e9eb !important;
+        border-bottom: 1px solid #e8e9eb !important;
+    }
+
+    
+
+
+    .ion-item-first {
+        border-top:1px solid #e8e9eb !important;
+        border-bottom: none !important;
+    }
+    
+    .ion-item-middle {
+        border: none  !important;
+    }
+
+    .ion-item-last {
+        border-bottom: 1px solid #e8e9eb !important;
+        border-top: none !important;
+    }    
+
+    .ion-item-first.item-md.item-block .item-inner,
+    .ion-item-first.item-ios.item-block .item-inner {
+        border-bottom: 1px solid #e8e9eb  !important;
+    }
+
+    .ion-item-middle.item-md.item-block .item-inner,
+    .ion-item-middle.item-ios.item-block .item-inner {
+        border-bottom: 1px solid #e8e9eb  !important;
+    }
+
+    .ion-item-last .item-inner {
+        border: none !important;
+    }
+
+    .empty {
+        border:none !important;
+        height: 28px;
+    }
+
+    
+    
+
+    .label-styles {
+        font-family: Bernina-Regular !important;
+        font-size: 17px !important;
+        color: #35373a !important;
+    }
+
+    
+
+    
+
+
+/************************ Form-Page Styles ************************************************/
+
+.form-page ion-item {
+        border-top: none !important;
+        border-bottom: 1px solid #e8e9eb !important;
+    }
+
+    ion-item.form-item-first {
+        border-top: 1px solid #e8e9eb !important;
+        border-bottom: 1px solid #e8e9eb !important;
+    }
+
+    ion-item.form-item-first .item-inner {
+        border: none !important;
+    }
+
+
+ 

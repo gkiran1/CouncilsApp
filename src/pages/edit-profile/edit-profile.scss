@@ -3,10 +3,18 @@
 // }
 
 edit-profile {
-.item-md.item-input.input-has-focus .item-inner {
-    border-bottom-color: #DEDEDE !important;
-    box-shadow: none !important;
+.scroll-content {
+    background: #fafafa;
+    padding-top: 28px !important;
 }
+
+.form-page ion-row {
+        background: #FFF;
+        border-top: 1px solid #e8e9eb !important;
+        border-bottom: 1px solid #e8e9eb !important;
+    }
+
+
 
 .cameraBtn {
     
@@ -37,12 +45,6 @@ edit-profile {
     font-size: 17px !important;
 }
 
-.empty {
-        height: 28px;
-        background-color: #f7f7f7;
-        border-top: 1px solid #e8e9eb !important;
-        border-bottom: 1px solid #e8e9eb !important;
-    }
 
     .photo-col {
         margin-left:16px;

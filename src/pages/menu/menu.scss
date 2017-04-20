@@ -1,10 +1,5 @@
 page-welcome {
-    .noborder {
-        border: 0px !important;
-        border-bottom-color: transparent !important;
-        background-image: none !important;
-        border-bottom: none !important;
-    }
+    
     .listbtn1 {
         font-size: 13px !important;
         color: #35373A !important;
@@ -14,94 +9,11 @@ page-welcome {
         // margin: auto;
         // padding-right: 16px;
     }
-    .menu-toolbar {
-        padding: 0 !important;
-        margin-top: 10px !important;
-    }
+    
     .listbtn2 {
         font-size: 17px !important;
         font-family: Bernina-Regular !important;
-    }
-    b {
-        color: #35373a !important;
-        font-size: 17px !important;
-        font-family: Bernina-Semibold, sans-serif;
-    }
-    .signOutbtn {
-        color: #F13822;
-        font-size: 15px;
-    }
-    .count {
-        color: #a9aaac;
-        margin-left: 13px;
-    }
-    .item-ios.item-block .item-inner,
-    .item-md.item-block .item-inner {
-        border: none !important;
-    }
-   
-    .item-md ion-avatar ion-img,
-    .item-md ion-avatar img {
-        width: 46px;
-        height: 46px;
-    }
-    .item-ios ion-avatar ion-img,
-    .item-ios ion-avatar img {
-        width: 46px;
-        height: 46px;
-    }
-    .user1 {
-        font-family: Bernina-Regular;
-        font-size: 17px;
-        color: #35373a !important;
-        margin-bottom: 3px;
-    }
-    .user2 {
-        font-family: Bernina-Regular;
-        font-size: 15px;
-        color: #a9aaac !important;
-    }
-    ion-icon {
-        color: #3cb18a
-    }
-    .list {
-        margin-top: 16px;
-    }
-    .button-md {
-        height: 44px;
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-        margin: 0px;
-    }
-    .button-ios {
-        height: 44px;
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-        margin: 0px;
-    }
-    .toolbar-md {
-        padding: 0px !important;
-    }
-    .item-md ion-avatar[item-left],
-    .item-md ion-thumbnail[item-left] {
-        margin: 0;
-    }
-    .item-ios ion-avatar[item-left],
-    .item-ios ion-thumbnail[item-left] {
-        margin: 0;
-    }
-    .item-md {
-        padding-left: 16px;
-    }
-    .item-ios {
-        padding-left: 16px;
-    }
-    .ion-md-dollar:before {
-        content: "$"
-    }
-    .ion-ios-dollar:before {
-        content: "$"
-    }
+    } 
     
     .active {
         opacity: 1;

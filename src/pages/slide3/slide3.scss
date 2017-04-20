@@ -51,6 +51,15 @@ slide3{
     ion-item:last-child{
         margin-bottom: 100px;
     }
+
+    .item-md ion-avatar[item-left],
+    .item-md ion-thumbnail[item-left] {
+        margin: 0;
+    }
+    .item-ios ion-avatar[item-left],
+    .item-ios ion-thumbnail[item-left] {
+        margin: 0;
+    }
   
 
 }

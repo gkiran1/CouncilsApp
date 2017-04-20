@@ -12,9 +12,9 @@
         </ion-row>
     </ion-navbar>
 </ion-header>
-<ion-content  has-footer='true' overflow-scroll='true'>
+<ion-content class="form-page" has-footer='true' overflow-scroll='true'>
     <form [formGroup]="editProfileForm" (ngSubmit)="editProfileForm.value">
-            <ion-item-divider class="empty"></ion-item-divider>
+            
             <ion-row>
                 <ion-col class='photo-col'>
                     <ng-container *ngIf="!imageflag">
@@ -30,18 +30,18 @@
                     </ng-container>
                 </ion-col>
                 <ion-col class="username-col">
-                    <ion-item class="bordered-item">
+                    <ion-item >
                         <ion-label floating>First Name</ion-label>
                         <ion-input type="text" name="firstname" [(ngModel)]="profile.firstname" formControlName="firstname"></ion-input>
                     </ion-item>
-                    <ion-item>
+                    <ion-item style="border:none !important">
                         <ion-label floating>Last Name</ion-label>
                         <ion-input type="text" name="lastname" [(ngModel)]="profile.lastname" formControlName="lastname"></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>
             <ion-item-divider class="empty"></ion-item-divider>
-            <ion-item>
+            <ion-item class="form-item-first">
                 <ion-label floating>Email</ion-label>
                 <ion-input type="text" name="email" [(ngModel)]="profile.email" formControlName="email"></ion-input>
             </ion-item>
@@ -55,7 +55,7 @@
             </ion-item>
             <ion-item-divider class="empty"></ion-item-divider>
 
-            <ion-item (click)="viewChangePasswordPage()">
+            <ion-item class="form-item-first" (click)="viewChangePasswordPage()">
                 <ion-label class="changepassword">
                     Change Password</ion-label>
 
@@ -63,7 +63,7 @@
                 <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
             </button>
             </ion-item>
-            <ion-item-divider class="empty"></ion-item-divider>
+           <ion-item-divider class="empty"></ion-item-divider>
     </form>
 </ion-content>
 <ion-footer text-center>
