@@ -177,7 +177,7 @@ const cloudSettings: CloudSettings = {
     MaterialModule.forRoot(),
     MomentModule,
     FormsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, { platforms: { ios: { statusbarPadding: true } } }),
     AngularFireModule.initializeApp(FirebaseConfig),
     //Cloud Module Imports
     CloudModule.forRoot(cloudSettings),
