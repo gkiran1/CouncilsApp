@@ -67,7 +67,7 @@
     </form>
 </ion-content>
 <ion-footer text-center>
-    <button ion-button color="secondary" class="saveBtn" clear text-capitalize name="savebtn" [disabled]="!editProfileForm.valid" (click)="editProfile(editProfileForm.value)">
+    <button ion-button color="secondary" class="saveBtn" clear text-capitalize name="savebtn" [disabled]="!editProfileForm.valid || !editProfileForm.dirty" (click)="editProfile(editProfileForm.value)">
          Save
         </button>
 </ion-footer>
