@@ -1,6 +1,6 @@
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
-import { WelcomePage } from '../menu/menu';
+import { MenuPage } from '../menu/menu';
 import { Component } from '@angular/core';
 import { Nav, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
@@ -63,7 +63,7 @@ export class slide2Page {
     public privateDiscussionsListPage: PrivateDiscussionsListPage,
     public filesListPage: FilesListPage,
     public notesPage: NotesPage,
-    public welcomePage: WelcomePage
+    public welcomePage: MenuPage
   ) {
      if (localStorage.getItem('isAdmin') === 'true') {
             this.isAdmin = true;
@@ -99,7 +99,7 @@ export class slide2Page {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.setRoot(NewAgendaPage);
+            this.nav.push(NewAgendaPage);
 
           }
         },

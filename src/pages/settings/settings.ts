@@ -15,7 +15,6 @@ import { AgendasPage } from '../agendas/agendas';
 import { AssignmentsListPage } from '../assignments/assignments-list/assignments-list';
 import { Subscription } from "rxjs";
 import { GoodbyePage } from '../goodbye/goodbye';
-import { WelcomePage } from '../menu/menu';
 import { NotificationSettingsPage } from '../notifications/notifications-settings/notificationsettings.component';
 import { GoogleCalenderPage } from '../googlecalender/googlecalender.component';
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
@@ -74,7 +73,7 @@ export class SettingsPage {
         })
     }
     back() {
-        this.navCtrl.setRoot(WelcomePage);
+        //this.navCtrl.setRoot(WelcomePage);
     }
     notificationsPage() {
         this.navCtrl.push(NotificationsPage);

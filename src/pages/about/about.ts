@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { WelcomePage } from '../menu/menu';
+import { SettingsPage } from '../settings/settings';
 
 
 @Component({
@@ -44,7 +44,7 @@ export class AboutPage {
     }
 
       cancel() {
-    this.navCtrl.setRoot(WelcomePage);
+    this.navCtrl.setRoot(SettingsPage);
   }
 
 

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { WelcomePage } from '../../menu/menu';
 
 @Component({
     selector: 'thanks-feedback',
@@ -12,7 +11,7 @@ export class ThanksFeedbackPage {
     constructor(public navCtrl: NavController, public navParams: NavParams) { }
 
     goToHome() {
-        this.navCtrl.setRoot(WelcomePage);
+        this.navCtrl.popToRoot();
     }
      cancel() {
       this.navCtrl.pop();

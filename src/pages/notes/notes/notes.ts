@@ -3,7 +3,6 @@ import { NavController } from 'ionic-angular';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
-import { WelcomePage } from '../../menu/menu';
 import { NewNotePage } from '../../notes/newnote/newnote';
 import { NotePage } from '../../notes/note/note';
 import { Subject } from 'rxjs/Subject';
@@ -25,6 +24,7 @@ export class NotesPage {
             this.notesArray = [];
             this.firebaseservice.getNotes(userId).subscribe(notes => {
                 this.notesArray = notes;
+                this.notesArray.length = this.notesArray.length ? this.notesArray.length : null;
                 this.count$.next(this.notesArray.length);
             });
         }
@@ -43,7 +43,7 @@ export class NotesPage {
     }
 
     cancel() {
-        this.nav.setRoot(WelcomePage);
+        this.nav.popToRoot();
     }
 
     notificationsPage() {

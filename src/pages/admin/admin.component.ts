@@ -6,7 +6,6 @@ import { TransferAdminRightsPage } from '../transferadminrights/transfer-adminri
 import { InviteMemberPage } from '../invite/invite';
 import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { NewCouncilPage } from '../new-council/new-council';
-import { WelcomePage } from '../menu/menu';
 import { MembersListPage } from '../editmembers/members-list/memberslist.component';
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 import { FirebaseService } from '../../environments/firebase/firebase-service';

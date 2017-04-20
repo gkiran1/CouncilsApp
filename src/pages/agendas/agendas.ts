@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
-import { WelcomePage } from '../menu/menu';
+import { MenuPage } from '../menu/menu';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AgendaLiteEditPage } from '../agenda-lite-edit/agenda-lite-edit';
 import { AgendaEditPage } from '../agenda-edit/agenda-edit';
@@ -67,7 +67,7 @@ export class AgendasPage {
     }
 
     cancel() {
-        this.nav.setRoot(WelcomePage);
+        this.nav.setRoot(MenuPage);
     }
 
     notificationsPage() {

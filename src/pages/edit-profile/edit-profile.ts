@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ChangePasswordPage } from '../edit-profile/change-password';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-//import { WelcomePage } from '../menu/menu';
 import { User } from '../../user/user';
 import { Toast } from 'ionic-native';
 import { Camera } from 'ionic-native';

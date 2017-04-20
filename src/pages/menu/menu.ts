@@ -14,7 +14,7 @@ import { GoogleCalenderPage } from '../googlecalender/googlecalender.component';
   providers: [GoogleCalenderPage]
 })
 
-export class WelcomePage {
+export class MenuPage {
   @ViewChild('switcher') switcher: Slides;
   @ViewChild(Nav) nav: Nav;
   rootPage: any = DisplayPage;

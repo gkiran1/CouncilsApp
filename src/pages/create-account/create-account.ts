@@ -10,7 +10,6 @@ import * as firebase from 'firebase';
 import { User } from '../../user/user';
 import { Invitee } from '../invite/invitee.model';
 import { Observable, Subject } from "rxjs/Rx";
-import { WelcomePage } from '../menu/menu';
 import { AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
@@ -61,7 +60,7 @@ export class CreateAccountPage {
         let flag = false;
         this.firebaseService.signupNewUser(this.newUser)
           .then(res => {
-            //onSuccess redirect to welcome page
+            //onSuccess redirect to Menu page
             flag = true;
 
           })

@@ -736,13 +736,14 @@ export class FirebaseService {
         return this.af.database.list('notifications', {
             query: {
                 orderByChild: 'userid',
-                equalTo: userId
+                equalTo: userId,
+                limitToLast: 50
             }
         });
     }
 
     count$ = new Subject();
-    
+
     getNotCnt() {
         var userId = localStorage.getItem('securityToken');
         if (userId !== null) {

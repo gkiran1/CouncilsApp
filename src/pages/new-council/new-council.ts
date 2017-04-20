@@ -8,7 +8,6 @@ import { Observable } from 'rxjs/Rx';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Council } from './council'
 import { AlertController, NavController } from 'ionic-angular';
-import { WelcomePage } from '../menu/menu';
 
 @Component({
   selector: 'new-council',
@@ -65,7 +64,7 @@ export class NewCouncilPage {
         });
 
         this.showAlert('Council created successfully..');
-        this.nav.setRoot(WelcomePage);
+        this.nav.popToRoot();
       }
       else {
         this.showAlert('Council already exists.');

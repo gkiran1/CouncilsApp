@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AlertController, NavController, NavParams, ModalController } from 'ionic-angular';
-import { WelcomePage } from '../menu/menu';
+import { MenuPage } from '../menu/menu';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CouncilUsersModalPage } from '../../modals/council-users/council-users';
@@ -111,7 +111,7 @@ export class AgendaPage {
                     this.createActivity(key, id);
                 });
                 this.showAlert('Agenda created successfully.');
-                this.nav.push(WelcomePage)
+                this.nav.push(MenuPage)
             })
             .catch(err => this.showAlert(err))
     }

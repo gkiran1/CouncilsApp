@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { WelcomePage } from '../menu/menu';
+import { MenuPage } from '../menu/menu';
 import { AdminPage } from '../admin/admin.component';
 import { SettingsPage } from '../settings/settings';
 import { DonationsWelcomePage } from '../donations/donations-welcome/donations-welcome';
@@ -14,7 +14,7 @@ import { DonationsWelcomePage } from '../donations/donations-welcome/donations-w
 export class slide1Page {
     isAdmin: boolean = false;
     constructor(public nav: NavController,
-    public welcomePage: WelcomePage) {
+    public menuPage: MenuPage) {
         if (localStorage.getItem('isAdmin') === 'true') {
             this.isAdmin = true;
         }
@@ -22,12 +22,12 @@ export class slide1Page {
     }
 
     adminPage() {
-        this.welcomePage.nav.setRoot(AdminPage);
+        this.menuPage.nav.setRoot(AdminPage);
     }
     settingsPage() {
-        this.welcomePage.nav.setRoot(SettingsPage);
+        this.menuPage.nav.setRoot(SettingsPage);
     }
     donationsPage() {
-        this.welcomePage.nav.setRoot(DonationsWelcomePage);
+        this.menuPage.nav.setRoot(DonationsWelcomePage);
     }
 }

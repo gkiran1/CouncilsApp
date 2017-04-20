@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { AlertController, NavController, ActionSheetController, MenuController, ModalController, NavParams } from 'ionic-angular';
-import { WelcomePage } from '../../menu/menu';
 import { NotesPage } from '../../notes/notes/notes';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';

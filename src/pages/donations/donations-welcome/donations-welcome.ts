@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { WelcomePage } from '../../menu/menu';
+
 import { DonationsSendPage } from '../donations-send/donations-send';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
@@ -26,7 +26,7 @@ export class DonationsWelcomePage {
     this.nav.push(DonationsSendPage);
   }
   cancel() {
-    this.nav.setRoot(WelcomePage);
+    this.nav.popToRoot();
   }
   notificationsPage() {
     this.nav.push(NotificationsPage);

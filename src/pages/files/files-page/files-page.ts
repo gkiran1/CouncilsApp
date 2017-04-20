@@ -6,7 +6,6 @@ import { ViewCouncilFilePage } from '../view-council-file/view-council-file';
 import { NavController, Platform, LoadingController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
-import { WelcomePage } from '../../menu/menu';
 import { TransferObject } from '@ionic-native/transfer';
 import * as firebase from 'firebase';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
@@ -32,6 +31,7 @@ export class FilesListPage {
             councilsIds.forEach(councilId => {
                 fs.getFilesByCouncilId(councilId).subscribe(files => {
                     this.filesArray.push(...files);
+                    this.filesArray.length = this.filesArray.length ? this.filesArray.length : null;
                     this.count$.next(this.filesArray.length);
                     // this.subject.next(this.agendasArray.length);
                 });
@@ -52,7 +52,7 @@ export class FilesListPage {
         return this.count$;
     }
     cancel() {
-        this.nav.setRoot(WelcomePage);
+        this.nav.popToRoot();
     }
     notificationsPage() {
         this.nav.push(NotificationsPage);

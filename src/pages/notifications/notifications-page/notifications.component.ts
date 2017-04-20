@@ -16,7 +16,7 @@ import { ViewCouncilFilePage } from '../../files/view-council-file/view-council-
 
 export class NotificationsPage {
 
-    notifications;   
+    notifications;
 
     constructor(private nav: NavController,
         public navParams: NavParams,
@@ -26,12 +26,10 @@ export class NotificationsPage {
         if (userId !== null) {
             this.notifications = [];
             this.firebaseService.getNotifications(userId).subscribe(notifications => {
-                this.notifications = notifications.filter(notification => {
-                    return notification.isread === false;
-                });               
+                this.notifications = notifications.reverse();
             });
         }
-    }   
+    }
 
     ActivityPage(notification) {
         if (notification.nodename === 'agendas') {
