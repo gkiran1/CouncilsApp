@@ -126,10 +126,6 @@
                 </ion-textarea>
         </ion-item>
 
-        <ion-item>
-            <ion-label floating>Closing Prayer</ion-label>
-            <ion-input type="text" (input)="showList2($event)" formControlName="closingprayer"></ion-input>
-        </ion-item>
         <div *ngIf="showlist2" class="assignto-list">
             <ng-container *ngFor="let user of users | search:term:'username'">
                 <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto2(user)">
@@ -144,6 +140,10 @@
                 </ion-item>
             </ng-container>
         </div>
+        <ion-item>
+            <ion-label floating>Closing Prayer</ion-label>
+            <ion-input type="text" (input)="showList2($event)" formControlName="closingprayer"></ion-input>
+        </ion-item>
 
     </form>
 </ion-content>
