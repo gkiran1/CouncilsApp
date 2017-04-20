@@ -40,4 +40,14 @@ new-private-discussion-page {
         font-size: 17px !important;
         color: #a9aaac !important;
     }
+    .searchbar-input{
+        padding: 6px 20px !important;
+    }
+    .searchbar-search-icon {
+        left:0 !important;
+    }
+    .searchbar-clear-icon{
+        right:0 !important;
+        padding-right: 0 !important;
+    }
 }
