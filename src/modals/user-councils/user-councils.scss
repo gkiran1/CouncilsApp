@@ -1,9 +1,14 @@
 page-user-councils {
-
+ion-content{
+    // margin-top: 40px;
+}
+ion-title{
+    padding: 16px;
+}
 }
 .user-councils-modal{
     position: absolute;
-    top: 20px;
+    top: 0;
     width:100%;
     height: 100%;
 }
