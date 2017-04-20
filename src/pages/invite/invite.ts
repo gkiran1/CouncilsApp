@@ -15,6 +15,7 @@ export class InviteMemberPage {
     invite: Invitee;
     InviteMemberForm;
     council;
+    councilsLength = false;
     result: FirebaseObjectObservable<any>;
     constructor(public navctrl: NavController, public fs: FirebaseService, public af: AngularFire, public alertCtrl: AlertController, public appService: AppService) {
         this.invite = new Invitee;
@@ -61,6 +62,15 @@ export class InviteMemberPage {
         this.fs.createInvitee(this.invite)
             .then(res => this.navctrl.setRoot(InvitationSuccessPage))
             .catch(err => this.showAlert(err))
+    }
+
+    itemChanged() {
+        this.councilsLength = false;
+        this.council.forEach(e => {
+            if (e.selected) {
+                this.councilsLength = true;
+            }
+        });
     }
 
     showAlert(errText) {
