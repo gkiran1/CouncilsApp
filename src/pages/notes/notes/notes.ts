@@ -42,10 +42,6 @@ export class NotesPage {
         return this.count$;
     }
 
-    cancel() {
-        this.nav.popToRoot();
-    }
-
     notificationsPage() {
         this.nav.push(NotificationsPage);
     }

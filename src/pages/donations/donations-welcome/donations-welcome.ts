@@ -26,7 +26,7 @@ export class DonationsWelcomePage {
     this.nav.push(DonationsSendPage);
   }
   cancel() {
-    this.nav.popToRoot();
+    this.nav.pop();
   }
   notificationsPage() {
     this.nav.push(NotificationsPage);

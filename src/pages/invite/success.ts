@@ -24,6 +24,6 @@ export class InvitationSuccessPage {
         this.navctrl.setRoot(InviteMemberPage);
     }
     close() {
-        this.navctrl.popToRoot();
+        this.navctrl.pop();
     }
 }

@@ -67,10 +67,6 @@ export class AgendasPage {
         return this.count$;
     }
 
-    cancel() {
-        this.nav.setRoot(MenuPage);
-    }
-
     notificationsPage() {
         this.nav.push(NotificationsPage);
     }

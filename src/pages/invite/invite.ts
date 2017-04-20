@@ -82,7 +82,7 @@ export class InviteMemberPage {
     }
 
     close() {
-        this.navctrl.popToRoot();
+        this.navctrl.pop();
     }
 
 }
