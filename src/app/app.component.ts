@@ -26,12 +26,12 @@ export class MyApp {
 
   constructor(platform: Platform, public push: Push, public alertCtrl: AlertController) {
     platform.ready().then(() => {
-
+      
       setTimeout(function () {
         Splashscreen.hide();
       }, 300);
       StatusBar.styleDefault();
-
+      StatusBar.overlaysWebView(false);
       var securityToken = localStorage.getItem('securityToken');
       var isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
 

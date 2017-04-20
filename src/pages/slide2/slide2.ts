@@ -99,7 +99,7 @@ export class slide2Page {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.setRoot(NewAgendaPage);
+            this.nav.push(NewAgendaPage);
 
           }
         },

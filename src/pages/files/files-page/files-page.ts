@@ -31,6 +31,7 @@ export class FilesListPage {
             councilsIds.forEach(councilId => {
                 fs.getFilesByCouncilId(councilId).subscribe(files => {
                     this.filesArray.push(...files);
+                    this.filesArray.length = this.filesArray.length ? this.filesArray.length : null;
                     this.count$.next(this.filesArray.length);
                     // this.subject.next(this.agendasArray.length);
                 });

@@ -41,6 +41,7 @@ export class AgendasPage {
                             });
 
                             let count = this.agendasArray.length;
+                            count = count ? count : null;
                             this.count$.next(count);
                         });
                 })

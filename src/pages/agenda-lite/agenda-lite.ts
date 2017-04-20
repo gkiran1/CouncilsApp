@@ -98,7 +98,7 @@ export class AgendaLitePage {
           this.createActivity(key, id);
         });
         this.showAlert('Agenda created successfully.');
-        this.nav.push(MenuPage)
+        this.nav.popToRoot()
       })
       .catch(err => this.showAlert(err))
   }

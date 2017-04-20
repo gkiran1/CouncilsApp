@@ -23,6 +23,6 @@ export class NewAgendaPage {
     }
     
     cancel() {
-        this.nav.popToRoot();
+        this.nav.pop();
     }
 }
