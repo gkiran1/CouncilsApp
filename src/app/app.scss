@@ -192,6 +192,11 @@ textarea {
     font-size: 1.7rem !important;
 }
 
+.toolbar-ios, .toolbar-md {
+    padding: 0;
+    margin: 0;
+}
+
 .toolbar-title {
     overflow: visible !important;
 }
@@ -444,6 +449,15 @@ ion-content .page-blank-area {
     border: none !important;
 }
 
+.menu-button {
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+    }
 
     .menu-icon {
         color: #32b38a;

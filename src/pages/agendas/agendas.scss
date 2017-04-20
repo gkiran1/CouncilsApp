@@ -1,4 +1,21 @@
 agendas-page {
+
+    .list-page ion-item {
+        height: 64px !important;
+    }
+
+    ion-list:first-child {
+        border-top: 1px solid #e8e9eb;
+    }
+
+    ion-list:last-child {
+        border-bottom: 1px solid #e8e9eb;
+    }
+
+    ion-list:last-child.item-ios.item-block .item-inner {
+        border: none !important;
+    }
+
     .agendadate-styles {
         font-family: Bernina-Regular !important;
         font-size: 17px !important;
