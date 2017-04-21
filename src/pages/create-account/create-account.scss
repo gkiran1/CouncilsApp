@@ -1,4 +1,4 @@
-
+createaccount-page{
 ion-input{
     padding-bottom:10px;
 }
@@ -34,4 +34,21 @@ ion-list ion-item{
 .inputtype {
     font-size:12px;
 }
-
+   .create-title {
+        font-family: Gotham-Medium, sans-serif;
+        font-size: 28px;
+        color: #35373A;
+    }
+    .create-header {
+        display: block;
+        margin-top: 74px;
+        text-align: center;
+    }
+    .create-subheader {
+        display: block;
+        position: relative;
+        margin-top: 14px;
+        text-align: center;
+        font-size: 17px;
+    }
+}

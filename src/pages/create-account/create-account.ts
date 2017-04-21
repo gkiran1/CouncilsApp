@@ -14,7 +14,9 @@ import { AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
 @Component({
-  templateUrl: 'create-account.html'
+  templateUrl: 'create-account.html',
+  selector: 'createaccount-page'
+
 })
 
 export class CreateAccountPage {
