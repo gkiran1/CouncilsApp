@@ -34,7 +34,7 @@ export class EditProfilePage {
     imageflag = true;
     isChangeflag = false;
     userSubscription: Subscription
-
+    isPicNotChanged = true;
     constructor(fb: FormBuilder, public af: AngularFire, public nav: NavController,
         public appService: AppService,
         private firebaseService: FirebaseService,
@@ -81,6 +81,7 @@ export class EditProfilePage {
                         loader.dismiss();
                         this.showAlert1('success', 'User profile updated successfully.')
                         this.isChangeflag = false;
+                        this.isPicNotChanged = true;
                     }).catch(err => {
                         loader.dismiss();
                         this.showAlert('failure', err.message);
@@ -176,6 +177,7 @@ export class EditProfilePage {
         }).then(imageData => {
             this.guestPicture = imageData;
             this.imagePath = "data:image/jpeg;base64," + imageData;
+            this.isPicNotChanged = false;
             this.imageflag = false;
             this.isChangeflag = true;
         }, error => {
@@ -197,6 +199,7 @@ export class EditProfilePage {
             // alert('image data' + imageData);
             this.guestPicture = imageData;
             this.imagePath = "data:image/jpeg;base64," + imageData;
+            this.isPicNotChanged = false;
             this.imageflag = false;
             this.isChangeflag = true;
             // this.showAlert('success',this.imagePath);                       

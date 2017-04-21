@@ -4,70 +4,71 @@
             <ion-col class="header-col">
                 <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
             </ion-col>
-        <ion-col width-80>
-        <ion-title text-center >
-            Edit Profile
-        </ion-title>
-        </ion-col>
+            <ion-col width-80>
+                <ion-title text-center>
+                    Edit Profile
+                </ion-title>
+            </ion-col>
         </ion-row>
     </ion-navbar>
 </ion-header>
 <ion-content class="form-page" has-footer='true' overflow-scroll='true'>
     <form [formGroup]="editProfileForm" (ngSubmit)="editProfileForm.value">
-            
-            <ion-row>
-                <ion-col class='photo-col'>
-                    <ng-container *ngIf="!imageflag">
-                        <img src='{{imagePath}}' class="cameraBtn" (click)="cameraActionsPage()" />
-                    </ng-container>
-                    <ng-container *ngIf="imageflag && profile.avatar && profile.avatar !== 'avatar'">
-                        <img src='{{profile.avatar}}' class="cameraBtn" (click)="cameraActionsPage()" />
-                    </ng-container>
-                    <ng-container *ngIf="!profile.avatar || profile.avatar === 'avatar'">
-                        <button class="cameraBtn" (click)="cameraActionsPage()">
+
+        <ion-row>
+            <ion-col class='photo-col'>
+                <ng-container *ngIf="!imageflag">
+                    <img src='{{imagePath}}' class="cameraBtn" (click)="cameraActionsPage()" />
+                </ng-container>
+                <ng-container *ngIf="imageflag && profile.avatar && profile.avatar !== 'avatar'">
+                    <img src='{{profile.avatar}}' class="cameraBtn" (click)="cameraActionsPage()" />
+                </ng-container>
+                <ng-container *ngIf="!profile.avatar || profile.avatar === 'avatar'">
+                    <button class="cameraBtn" (click)="cameraActionsPage()">
             <ion-icon class="councils-icon__photo menu-icon"></ion-icon>
         </button>
-                    </ng-container>
-                </ion-col>
-                <ion-col class="username-col">
-                    <ion-item >
-                        <ion-label floating>First Name</ion-label>
-                        <ion-input type="text" name="firstname" [(ngModel)]="profile.firstname" formControlName="firstname"></ion-input>
-                    </ion-item>
-                    <ion-item style="border:none !important">
-                        <ion-label floating>Last Name</ion-label>
-                        <ion-input type="text" name="lastname" [(ngModel)]="profile.lastname" formControlName="lastname"></ion-input>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
-            <ion-item-divider class="empty"></ion-item-divider>
-            <ion-item class="form-item-first">
-                <ion-label floating>Email</ion-label>
-                <ion-input type="text" name="email" [(ngModel)]="profile.email" formControlName="email"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Phone</ion-label>
-                <ion-input type="text" name="phone" [(ngModel)]="profile.phone" formControlName="phone"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>LDS.org username</ion-label>
-                <ion-input type="text" name="ldsusername" [(ngModel)]="profile.ldsusername" formControlName="ldsusername"></ion-input>
-            </ion-item>
-            <ion-item-divider class="empty"></ion-item-divider>
+                </ng-container>
+            </ion-col>
+            <ion-col class="username-col">
+                <ion-item>
+                    <ion-label floating>First Name</ion-label>
+                    <ion-input type="text" name="firstname" [(ngModel)]="profile.firstname" formControlName="firstname"></ion-input>
+                </ion-item>
+                <ion-item style="border:none !important">
+                    <ion-label floating>Last Name</ion-label>
+                    <ion-input type="text" name="lastname" [(ngModel)]="profile.lastname" formControlName="lastname"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-item-divider class="empty"></ion-item-divider>
+        <ion-item class="form-item-first">
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" name="email" [(ngModel)]="profile.email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Phone</ion-label>
+            <ion-input type="text" name="phone" [(ngModel)]="profile.phone" formControlName="phone"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>LDS.org username</ion-label>
+            <ion-input type="text" name="ldsusername" [(ngModel)]="profile.ldsusername" formControlName="ldsusername"></ion-input>
+        </ion-item>
+        <ion-item-divider class="empty"></ion-item-divider>
 
-            <ion-item class="form-item-first" (click)="viewChangePasswordPage()">
-                <ion-label class="changepassword">
-                    Change Password</ion-label>
+        <ion-item class="form-item-first" (click)="viewChangePasswordPage()">
+            <ion-label class="changepassword">
+                Change Password</ion-label>
 
-                <button ion-button item-right clear > 
+            <button ion-button item-right clear> 
                 <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
             </button>
-            </ion-item>
-           <ion-item-divider class="empty"></ion-item-divider>
+        </ion-item>
+        <ion-item-divider class="empty"></ion-item-divider>
     </form>
 </ion-content>
 <ion-footer text-center>
-    <button ion-button color="secondary" class="saveBtn" clear text-capitalize name="savebtn" [disabled]="!editProfileForm.valid || !editProfileForm.dirty" (click)="editProfile(editProfileForm.value)">
-         Save
+    <button ion-button color="secondary" class="saveBtn" clear text-capitalize name="savebtn" [disabled]="(!editProfileForm.valid || !editProfileForm.dirty) && isPicNotChanged"
+        (click)="editProfile(editProfileForm.value)">
+        Save
         </button>
 </ion-footer>
