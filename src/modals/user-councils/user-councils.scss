@@ -1,10 +1,34 @@
 page-user-councils {
-ion-content{
-    // margin-top: 40px;
-}
-ion-title{
-    padding: 16px;
-}
+    ion-content{
+        // margin-top: 40px;
+    }
+    ion-title{
+        padding: 16px;
+    }
+
+   .searchbar-ios .searchbar-input{
+        padding: 6px 20px 6px 25px !important;
+        background: #F4F6FA !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+     .searchbar-md .searchbar-input{
+        padding: 6px 20px 6px 30px !important;
+        background: #F4F6FA !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    .searchbar-search-icon {
+        left:8px !important;
+    }
+    .searchbar-clear-icon{
+        right:0 !important;
+        padding-right: 0 !important;
+    }
+    ion-searchbar{
+        background: #F4F6F4 !important;
+    }
+
 }
 .user-councils-modal{
     position: absolute;

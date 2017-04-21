@@ -11,9 +11,10 @@ import { ElementRef } from "@angular/core";
 export class UserCouncilsModalPage {
   councils = [];
   term: string = '';
+  fromPage;
   constructor(private ele: ElementRef, public af: AngularFire, public navParams: NavParams, public fs: FirebaseService, public navCtrl: NavController, public viewCtrl: ViewController) {
     let usercouncils = navParams.get('usercouncils');
-    let fromPage = navParams.get('fromPage');
+    this.fromPage = navParams.get('fromPage');
     usercouncils.forEach(c => {
       fs.getCouncilByCouncilKey(c).subscribe(council => {
         this.councils.push(council);
