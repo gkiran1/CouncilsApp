@@ -22,6 +22,16 @@ view-council-file-page {
     ion-footer .button-ios {
         padding: 0;
     }
+    .date-styles{
+        font-family: Bernina-Regular !important;
+        font-size: 1.08em !important;
+        color:#a9aaac !important;        
+    }
+    .name-styles{
+        font-family:Bernina-SemiBold !important;
+        font-size: 15px !important;
+        color:#a9aaac !important;
+    }
     .council-styles{
         font-family:Bernina-SemiBold !important;
         font-size: 17px !important;
@@ -56,10 +66,4 @@ view-council-file-page {
 .toolbar-background-md,.toolbar-background-ios{
     background: none !important;
 }
-.agendadate-styles{
-        font-family: Bernina-Regular !important;
-        font-size: 1.08em !important;
-        color:#a9aaac !important;
-        text-align: right;        
-    }
 }

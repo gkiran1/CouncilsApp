@@ -66,6 +66,7 @@ import { PrivateDiscussionsListPage } from '../pages/discussions/private-discuss
 import { TransferCompletePage } from '../pages/transferadminrights/transfer-complete/transfercomplete.component';
 import { UnitTypeAgendaPage } from '../pages/unittype-agenda/unittype-agenda';
 import { CustomDateFormat } from '../pipes/custom-date-format';
+import { CustomTimeFormat } from '../pipes/custom-time-format';
 import { CouncilUsersModalPage } from '../modals/council-users/council-users';
 import { NotificationsPage } from '../pages/notifications/notifications-page/notifications.component';
 import { NotificationSettingsPage } from '../pages/notifications/notifications-settings/notificationsettings.component';
@@ -155,6 +156,7 @@ const cloudSettings: CloudSettings = {
     PrivateDiscussionsListPage,
     TransferCompletePage,
     CustomDateFormat,
+    CustomTimeFormat,
     UnitTypeAgendaPage,
     slide3Page,
     CouncilUsersModalPage,

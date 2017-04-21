@@ -6,9 +6,9 @@ open-council-file-page {
         position: absolute;
         top: 15px;
     }
-    // .row{
-    // border-bottom:1px solid #DEDEDE !important;
-    // }
+    .row{
+    border-bottom:1px solid #DEDEDE !important;
+    }
     ion-header .button-ios {
         margin: 0;
         padding: 0;
@@ -31,9 +31,13 @@ open-council-file-page {
 //         position: absolute;
 //         bottom: 0;
 //     }
+.item-md,.item-ios{
+    border-bottom: none !important;
+}
     .empty{    
     height: 20px;
-    border-top: 1px solid #dedede;    
+    border-top: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;    
 }
 .item-md.item-block .item-inner{
         border-bottom: none !important;
@@ -46,6 +50,7 @@ open-council-file-page {
 }
 .header-col{
     font-size: 1.42em !important;
+    margin-right: 16px;
 }
 .bgcolor{
     background-color: #FFFFFF !important;
@@ -60,6 +65,9 @@ open-council-file-page {
         font-family: Bernina-Regular !important;
         font-size: 1.08em !important;
         color:#a9aaac !important;
-        text-align: right;        
+        margin-left: 20px;   
+    }
+    .delete-styles{
+        margin: 9px 16px 9px 0px;
     }
 }

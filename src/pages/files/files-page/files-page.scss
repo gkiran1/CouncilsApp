@@ -3,7 +3,7 @@ files-page{
         font-family: Bernina-Regular !important;
         font-size: 1.08em !important;
         color:#a9aaac !important;
-        text-align: right;        
+        margin-left: 35px;        
     }
     .council-styles{
         font-family:Bernina-SemiBold !important;
@@ -30,10 +30,15 @@ files-page{
     .toolbar-background-md,.toolbar-background-ios{
     background: none !important;
 }
-    .empty{    
-    height: 20px;
-    border-top: 1px solid #dedede;    
+.empty{    
+    height: 20px;   
 }
+.btnFwd{
+    text-align: right;
+}
+.row{
+    border-bottom:1px solid #DEDEDE !important;
+    }
 .h3{
     font-size: 1.42em !important;
 }    

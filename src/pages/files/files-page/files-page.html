@@ -1,36 +1,39 @@
 <ion-header>
-     <ion-navbar>
-    <ion-buttons class="menu-button" left>
-      <button ion-button menuToggle >
+    <ion-navbar>
+        <ion-buttons class="menu-button" left>
+            <button ion-button menuToggle>
       <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" ></ion-icon>
     </button>
-    </ion-buttons>
-    <ion-title>Files</ion-title>
-    <ion-buttons class="menu-button" end>
-      <button ion-button (click)="notificationsPage()"  >
+        </ion-buttons>
+        <ion-title>Files</ion-title>
+        <ion-buttons class="menu-button" end>
+            <button ion-button (click)="notificationsPage()">
      <ion-icon class="icon councils-icon__notifications menu-icon">
          <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
       </ion-icon> 
       </button>
-    </ion-buttons>
-  </ion-navbar>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 <!--<ion-item-divider class="empty"></ion-item-divider>-->
-<ion-content padding center text-center>    
+<ion-content>
     <ng-container *ngIf="filesArray.length">
+        <ion-item-divider class="empty"></ion-item-divider>
         <ion-list inset>
-            <ion-item *ngFor="let item of filesArray">                
-                <button class="forwardBtn" ion-button item-right clear (click)="viewCouncilFile(item)">
+            <ion-item class="row" *ngFor="let item of filesArray" (click)="viewCouncilFile(item)">
+                <button ion-button item-right clear>
       <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" end></ion-icon>
       </button>
-                <p><span class="council-styles">{{item.councilname}}</span></p>
-                <p><span class="name-styles">{{item.filename}}</span></p>
-                <p>by <span ion-text color="secondary">{{item.createdUser}}</span></p>
-                <p class="date-styles">{{item.createdDate | customdateformat}}</p>
+                <span class="council-styles">{{item.councilname}}</span>
+                <p><span class="name-styles">{{item.councilname}} {{item.filename}}</span></p>
+                        <p>by <span ion-text color="secondary">{{item.createdUser}}</span>
+                        <span class="date-styles">{{item.createdDate | customtimeformat}}</span></p>
             </ion-item>
         </ion-list>
     </ng-container>
     <ng-container *ngIf="!filesArray.length">
-        <p class="text-content">There are no files</p>
+        <div class="nocontent-message">
+            <p>There are no files</p>
+        </div>
     </ng-container>
 </ion-content>

@@ -24,7 +24,7 @@
     <ion-item-divider class="empty"></ion-item-divider>
     <ion-item>
         <ng-container *ngIf="!listdisplayflag">
-            <ion-row *ngFor="let file of filesArray">
+            <ion-row class="row" *ngFor="let file of filesArray">
                 <ion-col width-10>
                     <ion-icon class="councils-icon__file menu-icon" name="document" color="secondary"></ion-icon>
                 </ion-col>
@@ -33,16 +33,13 @@
                     <p>by <span ion-text color="secondary">{{value.createdUser}}</span></p>
                     <p>
                         {{file.size}} {{file.type}} file
-                    </p>
-                    <p class="agendadate-styles">{{file.createdDate | customdateformat}}</p>
+                        <span class="agendadate-styles">{{file.createdDate | customdateformat}}</span></p>
                 </ion-col>
-                <ion-col width-10>
                     <ng-container *ngIf="deleteflag">
-                        <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="delete(file)">
-                            <ion-icon class="councils-icon__inactivate menu-icon" name="close-circle" color="secondary" item-right></ion-icon>
+                        <button color="secondary" class="delete-styles" id="councilsPage" name="councilsPage" ion-button clear (click)="delete(file)">
+                            <ion-icon class="councils-icon__inactivate menu-icon" name="close-circle" color="secondary"></ion-icon>
                             </button>
                     </ng-container>
-                </ion-col>
             </ion-row>
         </ng-container>
     </ion-item>

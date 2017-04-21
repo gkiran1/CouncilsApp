@@ -15,14 +15,14 @@
 <ion-content id="content1">
     <ion-item-divider class="empty"></ion-item-divider>
     <ion-list inset>
-        <ion-item *ngFor="let item of filesArray">
-            <button class="forwardBtn" ion-button item-right clear (click)="downloadFile(item)">
+        <ion-item *ngFor="let item of filesArray" (click)="downloadFile(item)">
+            <span class="council-styles">{{item.councilname}}</span>
+            <button ion-button item-right clear>
       <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" end></ion-icon>
       </button>
-            <p><span class="council-styles">{{item.councilname}}</span></p>
             <p><span class="name-styles">{{item.filename}}</span></p>
             <p>by <span ion-text color="secondary">{{item.createdUser}}</span></p>
-            <p class="date-styles">{{item.createdDate | customdateformat}}</p>
+            <p class="date-styles">{{item.createdDate | customtimeformat}}</p>
         </ion-item>
     </ion-list>
 </ion-content>
