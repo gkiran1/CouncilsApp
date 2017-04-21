@@ -15,7 +15,6 @@ import { LoginPage } from '../login/login';
 
 @Component({
   templateUrl: 'create-account.html',
-  selector: 'createaccount-page'
 
 })
 
