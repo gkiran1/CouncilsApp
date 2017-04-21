@@ -59,8 +59,8 @@ export class InviteMemberPage {
         this.council.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
         console.log(this.invite.councils);
 
-        this.http.post('https://councilsapi-165009.appspot.com/sendmail', {
-            "email": this.invite.email, "firstname": this.invite.firstname, "unitnum": this.invite.unitnumber
+        this.http.post('https://councilsapi-165009.appspot.com/sendmail', { 
+           "event":"invite", "email": this.invite.email, "firstname": this.invite.firstname, "unitnum": this.invite.unitnumber
         }).subscribe(res => {
             console.log('invite status:', res);
             if (res.status === 200) {
