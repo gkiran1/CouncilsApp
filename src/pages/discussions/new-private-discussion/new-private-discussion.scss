@@ -62,4 +62,10 @@ new-private-discussion-page {
     ion-searchbar{
         background: #F4F6F4 !important;
     }
+    ion-item{
+        align-items: flex-start !important;
+    }
+    ion-avatar{
+        margin-top: 0 !important;
+    }
 }
