@@ -78,4 +78,10 @@ open-council-discussion-page {
     ion-item h2{
         display: inline-block;
     }
+    .msg-col{
+        border-right: 1px solid lightgray;
+    }
+    ion-list{
+        margin-bottom: 0 !important;
+    }
 }

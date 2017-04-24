@@ -44,10 +44,10 @@
         '')}}
         </ion-label>
         <ion-row>
-            <ion-col width-80>
+            <ion-col width-80 class="msg-col">
                 <ion-textarea type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"></ion-textarea>
             </ion-col>
-            <ion-col width-20>
+            <ion-col width-20 text-center>
                 <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
             </ion-col>
         </ion-row>
