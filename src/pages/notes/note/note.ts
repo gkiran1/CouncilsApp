@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { AlertController, NavController, ActionSheetController, MenuController, ModalController, NavParams } from 'ionic-angular';
 import { NotesPage } from '../../notes/notes/notes';
@@ -22,7 +22,8 @@ export class NotePage {
         public actionSheetCtrl: ActionSheetController,
         public alertCtrl: AlertController,
         public nav: NavController,
-        public menuctrl: MenuController) {
+        public menuctrl: MenuController,
+        public elementRef: ElementRef) {
 
         let note = navParams.get('notesSelected');
         this.date = note.createddate;
@@ -49,7 +50,7 @@ export class NotePage {
     save(value) {
         let formattedAgendaObj = this.formatnoteObj(value);
         this.firebaseservice.updateNote(formattedAgendaObj, this.noteKey)
-            .then(res => { this.showAlert('Note has been updated.');})
+            .then(res => { this.showAlert('Note has been updated.'); })
             .catch(err => { this.showAlert('Unable to update the Note, please try after some time.') })
     }
 
@@ -89,4 +90,10 @@ export class NotePage {
         this.nav.pop();
     }
 
+    ionViewDidLoad() {
+        let textarea = this.elementRef.nativeElement.querySelector('textarea');
+        textarea.style.overflow = 'hidden';
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + "px";
+    }
 }
