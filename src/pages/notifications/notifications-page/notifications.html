@@ -14,7 +14,7 @@
 	<ng-container *ngIf="(notifications.length)">
 		<ion-list>
 			<ion-item *ngFor="let notification of notifications" text-wrap (click)="ActivityPage(notification)">
-				<h3 class="notification-txt-lbl">{{notification.text}}</h3>
+				<h3 [innerHTML]="notification.text"></h3>
 				<p class="createddate-lbl">{{notification.createddate| customdateformat}}</p>
 				<button ion-button item-right clear>
                  <ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon>
