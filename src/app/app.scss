@@ -371,13 +371,16 @@ ion-header ion-col h3 {
 .input-has-value .label-md[floating] {
     color: #3CB18A;
 }
-
+.picker-ios .picker-opt{
+    font-size: 15px !important;
+}
+.picker-md .picker-opt{
+    font-size: 17px !important;
+}
 .input-has-focus .label-ios[floating],
 .input-has-value .label-ios[floating] {
     color: #3CB18A;
 }
-
-
 .scroll-content {
     overflow-y: auto !important;
     padding-bottom: 0!important;
