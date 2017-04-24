@@ -12,25 +12,25 @@
 </ion-header>
 
 <ion-content class="background-styles">
-        <ion-item-divider class="empty"></ion-item-divider>
-    <!--<ion-list >-->
-        <ion-item class="item-noborder" (click)="agendalite()">
-            <ion-label class="council-styles">
-                Lite
-            </ion-label>
-            <button ion-button item-right clear>
-              <ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon>            
-            </button>
-        </ion-item>
-
-        <ion-item class="item-noborder" (click)="agenda()">
-            <ion-label class="council-styles">
-                Standard
-            </ion-label>
-            <button ion-button item-right clear>
+    <ion-item-divider class="empty"></ion-item-divider>
+    <ion-item class="item-noborder" (click)="agenda()">
+        <ion-label class="council-styles">
+            Standard
+        </ion-label>
+        <button ion-button item-right clear>
       <ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon>
       </button>
-        </ion-item>
-        <div class="page-blank-area"></div>
+    </ion-item>
+
+    <ion-item class="item-noborder" (click)="agendalite()">
+        <ion-label class="council-styles">
+            Lite
+        </ion-label>
+        <button ion-button item-right clear>
+              <ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon>            
+            </button>
+    </ion-item>
+
+    <div class="page-blank-area"></div>
     <!--</ion-list>-->
 </ion-content>
