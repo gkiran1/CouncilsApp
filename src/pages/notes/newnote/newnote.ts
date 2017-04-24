@@ -32,7 +32,6 @@ export class NewNotePage {
         note.createddate = moment().toISOString();
         this.firebaseservice.createNote(note)
             .then(res => {
-                this.showAlert('Note created successfully.');
                 this.nav.popToRoot();
             })
             .catch(err => this.showAlert(err))

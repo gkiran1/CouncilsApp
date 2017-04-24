@@ -200,7 +200,6 @@ export class NewAssignmentPage {
         .then(res => {
           console.log(res);
           this.createActivity(this.assignmentKey, 'completed');
-          this.showAlert('Assignment marked as completed!');
           this.nav.pop();
         })
         .catch(err => { console.error(err); this.showAlert('Unable to updated the Assignment, please try after some time') })
