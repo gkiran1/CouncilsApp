@@ -54,7 +54,7 @@ export class InactivateMembersPage {
                         this.menuctrl.close();
                         this.firebaseService.inactivateUser(user.$key, false)
                             .then(() => {
-                                this.emailservice.emailAccountInactive(user.firstname, user.lastname, user.unitnumber, user.email);
+                                this.emailservice.emailAccountInactive(user.firstname, user.lastname, user.email);
                                 this.nav.push(MemberInactivatedPage);
                             })
                             .catch(err => { this.showAlert('Unable to inactivate the member, please try after some time') });
