@@ -5,10 +5,12 @@ import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { MemberInactivatedPage } from '../member-inactivated/memberinactivated.component';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { EmailService } from '../../../providers/emailservice';
 
 @Component({
     templateUrl: 'inactivatemembers.html',
-    selector: 'inactivatemembers-page'
+    selector: 'inactivatemembers-page',
+    providers:[EmailService]
 })
 
 export class InactivateMembersPage {
@@ -19,7 +21,8 @@ export class InactivateMembersPage {
         private nav: NavController,
         private alertCtrl: AlertController,
         public actionSheetCtrl: ActionSheetController,
-        public menuctrl: MenuController, public af: AngularFire) {
+        public menuctrl: MenuController, public af: AngularFire,
+        public emailservice: EmailService) {
 
         const userUid = localStorage.getItem('securityToken');
         const unitNumber = Number(localStorage.getItem('unitNumber'));
@@ -51,6 +54,7 @@ export class InactivateMembersPage {
                         this.menuctrl.close();
                         this.firebaseService.inactivateUser(user.$key, false)
                             .then(() => {
+                                this.emailservice.emailAccountInactive(user.firstname, user.lastname, user.unitnumber, user.email);
                                 this.nav.push(MemberInactivatedPage);
                             })
                             .catch(err => { this.showAlert('Unable to inactivate the member, please try after some time') });

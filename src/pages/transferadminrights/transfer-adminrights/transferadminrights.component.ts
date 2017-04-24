@@ -5,10 +5,12 @@ import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { TransferCompletePage } from '../transfer-complete/transfercomplete.component';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { EmailService } from '../../../providers/emailservice';
 
 @Component({
     templateUrl: 'transferadminrights.html',
-    selector: 'transferadminrights-page'
+    selector: 'transferadminrights-page',
+    providers:[EmailService]
 })
 
 export class TransferAdminRightsPage {
@@ -20,7 +22,8 @@ export class TransferAdminRightsPage {
         private nav: NavController,
         private alertCtrl: AlertController,
         private actionSheetCtrl: ActionSheetController,
-        private menuctrl: MenuController
+        private menuctrl: MenuController,
+        public emailservice: EmailService
     ) {
         this.currentAdminId = localStorage.getItem('securityToken');
         const unitNumber = Number(localStorage.getItem('unitNumber'));
@@ -53,6 +56,7 @@ export class TransferAdminRightsPage {
                         this.firebaseService.transferAdminRights(this.currentAdminId, user.$key)
                             .then(() => {
                                 localStorage.setItem('isAdmin', 'false');
+                                
                                 this.nav.push(TransferCompletePage, { newAdmin: user });
                             })
                             .catch(err => { this.showAlert('Unable to transfer admin rights now, please try after some time') });

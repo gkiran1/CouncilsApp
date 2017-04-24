@@ -12,10 +12,12 @@ import { Invitee } from '../invite/invitee.model';
 import { Observable, Subject } from "rxjs/Rx";
 import { AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { EmailService } from '../../providers/emailservice';
+
 
 @Component({
   templateUrl: 'create-account.html',
-
+  providers: [EmailService]
 })
 
 export class CreateAccountPage {
@@ -25,7 +27,7 @@ export class CreateAccountPage {
   newUser: User = new User;
   createAccountForm;
 
-  constructor(public navCtrl: NavController, public firebaseService: FirebaseService, public alertCtrl: AlertController) { }
+  constructor(public navCtrl: NavController, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService) { }
 
   createAccount() {
     // password validation
@@ -68,6 +70,7 @@ export class CreateAccountPage {
           .catch(err => this.showAlert('failure', err.message));
         let v = setInterval(() => {
           if (flag) {
+            this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email);
             this.showAlert('success', 'Account Created Successfully..<br/> Redirecting to login Page..');
             this.navCtrl.push(LoginPage);
             clearInterval(v);
@@ -80,6 +83,10 @@ export class CreateAccountPage {
 
     });
     }
+  }
+
+  sendWelcomeMail() {
+
   }
 
   showAlert(reason, text) {

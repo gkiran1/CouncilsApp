@@ -5,10 +5,12 @@ import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { MemberReactivatedPage } from '../member-reactivated/memberreactivated.component';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { EmailService } from '../../../providers/emailservice';
 
 @Component({
     templateUrl: 'reactivatemembers.html',
-    selector: 'reactivatemembers-page'
+    selector: 'reactivatemembers-page',
+    providers:[EmailService]
 })
 
 export class ReactivateMembersPage {
@@ -19,7 +21,8 @@ export class ReactivateMembersPage {
         private nav: NavController,
         private alertCtrl: AlertController,
         public actionSheetCtrl: ActionSheetController,
-        public menuctrl: MenuController, public af: AngularFire) {
+        public menuctrl: MenuController, public af: AngularFire,
+        public emailservice: EmailService) {
         const userUid = localStorage.getItem('securityToken');
         const unitNumber = Number(localStorage.getItem('unitNumber'));
         this.users = [];
@@ -43,6 +46,7 @@ export class ReactivateMembersPage {
     reactivatemember(user: User) {
         this.firebaseService.reactivateUser(user.$key, true)
             .then(() => {
+                this.emailservice.emailReactivate(user.firstname, user.lastname, user.unitnumber, user.email);
                 this.nav.push(MemberReactivatedPage);
             })
             .catch(err => { this.showAlert('Unable to reactivate the member, please try after some time') });

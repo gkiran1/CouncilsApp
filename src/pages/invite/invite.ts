@@ -6,10 +6,12 @@ import { AlertController, NavController } from 'ionic-angular';
 import { AppService } from '../../providers/app-service';
 import { InvitationSuccessPage } from './success';
 import { Http } from '@angular/http';
+import { EmailService } from '../../providers/emailservice'
 
 @Component({
     templateUrl: 'invite.html',
-    selector: 'invite-page'
+    selector: 'invite-page',
+    providers:[EmailService]
 })
 export class InviteMemberPage {
     invite: Invitee;
@@ -17,7 +19,13 @@ export class InviteMemberPage {
     council;
     councilsLength = false;
     result: FirebaseObjectObservable<any>;
-    constructor(public http: Http, public navctrl: NavController, public fs: FirebaseService, public af: AngularFire, public alertCtrl: AlertController, public appService: AppService) {
+    constructor(public http: Http, 
+        public navctrl: NavController, 
+        public fs: FirebaseService, 
+        public af: AngularFire, 
+        public alertCtrl: AlertController, 
+        public appService: AppService,
+        public emailService: EmailService) {
         this.invite = new Invitee;
 
         this.af.auth.subscribe(auth => {
@@ -58,12 +66,9 @@ export class InviteMemberPage {
     inviteMember() {
         this.council.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
         console.log(this.invite.councils);
-
-        this.http.post('https://councilsapi-165009.appspot.com/sendmail', { 
-           "event":"invite", "email": this.invite.email, "firstname": this.invite.firstname, "unitnum": this.invite.unitnumber
-        }).subscribe(res => {
-            console.log('invite status:', res);
-            if (res.status === 200) {
+        this.emailService.inviteMemberEmail(this.invite.firstname, this.invite.unitnumber, this.invite.email).
+        subscribe(res => {
+            if(res.status === 200) {
                 this.fs.createInvitee(this.invite)
                     .then(res => {
                         this.navctrl.setRoot(InvitationSuccessPage)
@@ -72,7 +77,9 @@ export class InviteMemberPage {
             } else {
                 this.showAlert('Unable to invite member, please recheck the details and try again.');
             }
+
         });
+        
     }
 
     itemChanged() {

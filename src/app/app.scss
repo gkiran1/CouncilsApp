@@ -377,8 +377,15 @@ ion-header ion-col h3 {
     color: #3CB18A;
 }
 
+
 .scroll-content {
-    overflow-y: auto !important
+    overflow-y: auto !important;
+    padding-bottom: 0!important;
+}
+
+ion-app, ion-nav, ion-tab, ion-tabs, .app-root{
+  -webkit-transition: bottom 0.3s;
+  transition: bottom 0.3s;
 }
 
 button:disabled {

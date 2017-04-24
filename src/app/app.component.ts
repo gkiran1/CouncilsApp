@@ -14,6 +14,9 @@ import {
   PushToken
 } from '@ionic/cloud-angular';
 
+let y;
+let h;
+let offsetY;
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
@@ -26,12 +29,22 @@ export class MyApp {
 
   constructor(platform: Platform, public push: Push, public alertCtrl: AlertController) {
     platform.ready().then(() => {
-      
+
+      //Keyboard handler setup
+      this.keyboardSetup();
+
+      //Manually hiding splashscreen
       setTimeout(function () {
         Splashscreen.hide();
       }, 300);
+
+      //Default Statusbar style
       StatusBar.styleDefault();
+
+      //Status overlay set to false
       StatusBar.overlaysWebView(false);
+
+      
       var securityToken = localStorage.getItem('securityToken');
       var isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
 
@@ -75,6 +88,39 @@ export class MyApp {
 
     });
   }
+
+  keyboardSetup() {
+    window.addEventListener('native.keyboardshow', this.keyboardShowHandler);
+    window.addEventListener('native.keyboardhide', this.keyboardHideHandler);
+    window.addEventListener('touchstart', this.tapCoordinates);
+  }
+
+  keyboardShowHandler(e) {
+    let kH = e.keyboardHeight;
+    console.log(e.keyboardHeight);
+    let bodyMove = <HTMLElement>document.querySelector("ion-app"), bodyMoveStyle = bodyMove.style;
+    console.log("calculating " + kH + "-" + offsetY + "=" + (kH - offsetY));
+
+    if (offsetY < kH + 40) {
+      bodyMoveStyle.bottom = (kH - offsetY + 40) + "px";
+      bodyMoveStyle.top = "initial";
+    }
+  }
+
+  keyboardHideHandler() {
+    console.log('gone');
+    let removeStyles = <HTMLElement>document.querySelector("ion-app");
+    removeStyles.removeAttribute("style");
+  }
+
+
+  tapCoordinates(e) {
+    y = e.touches[0].clientY;
+    h = window.innerHeight;
+    offsetY = (h - y);
+    console.log("offset = " + offsetY);
+  }
+
 
   showAlert(errText) {
     let alert = this.alertCtrl.create({
