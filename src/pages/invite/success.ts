@@ -21,9 +21,9 @@ export class InvitationSuccessPage {
         // this.userObj = appservice.user;
     }
     inviteanother() {
-        this.navctrl.setRoot(InviteMemberPage);
+        this.navctrl.pop();
     }
     close() {
-        this.navctrl.pop();
+        this.navctrl.popToRoot();
     }
 }

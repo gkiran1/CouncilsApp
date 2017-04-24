@@ -71,7 +71,7 @@ export class InviteMemberPage {
             if(res.status === 200) {
                 this.fs.createInvitee(this.invite)
                     .then(res => {
-                        this.navctrl.setRoot(InvitationSuccessPage)
+                        this.navctrl.push(InvitationSuccessPage)
                     })
                     .catch(err => this.showAlert(err))
             } else {
