@@ -24,8 +24,9 @@ export class NotesPage {
             this.notesArray = [];
             this.firebaseservice.getNotes(userId).subscribe(notes => {
                 this.notesArray = notes;
-                this.notesArray.length = this.notesArray.length ? this.notesArray.length : null;
-                this.count$.next(this.notesArray.length);
+                let length = this.notesArray.length;
+                length = length ? length : null;
+                this.count$.next(length);
             });
         }
 
