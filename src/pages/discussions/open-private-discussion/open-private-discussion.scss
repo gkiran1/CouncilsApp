@@ -20,6 +20,8 @@ open-private-discussion-page {
         padding: 0;
     }
     .chat-content {
+        position: absolute;
+        max-height: 100%;
         bottom: 0;
     }
     .typings-label{
@@ -73,12 +75,12 @@ open-private-discussion-page {
     }
     .councils-icon__checkmark{
         position: absolute;
-        right: 5px;
+        right: 16px;
         font-size: 8px;
     }
     .councils-icon__double_checkmark{
         position: absolute;
-        right: 5px;
+        right: 16px;
         font-size: 8px;
     }
     ion-item h2{

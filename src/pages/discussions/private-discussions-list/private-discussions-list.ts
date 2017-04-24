@@ -31,8 +31,9 @@ export class PrivateDiscussionsListPage {
           return false;
         });
         this.isListEmpty = this.discussions.length ? false : true;
-        this.discussions.length = this.discussions.length ? this.discussions.length : null;
-        this.count$.next(this.discussions.length);
+        let length = this.discussions.length;
+        length = length ? length : null;
+        this.count$.next(length);
       });
     }
 

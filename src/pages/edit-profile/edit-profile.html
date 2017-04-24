@@ -13,8 +13,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content class="form-page" has-footer='true' overflow-scroll='true'>
-    <form [formGroup]="editProfileForm" (ngSubmit)="editProfileForm.value">
-
+    <form [formGroup]="editProfileForm" (ngsubmit)="editProfileForm.value">
         <ion-row>
             <ion-col class='photo-col'>
                 <ng-container *ngIf="!imageflag">
@@ -23,7 +22,7 @@
                 <ng-container *ngIf="imageflag && profile.avatar && profile.avatar !== 'avatar'">
                     <img src='{{profile.avatar}}' class="cameraBtn" (click)="cameraActionsPage()" />
                 </ng-container>
-                <ng-container *ngIf="!profile.avatar || profile.avatar === 'avatar'">
+                <ng-container *ngIf="(!profile.avatar || profile.avatar === 'avatar')&& imageflag">
                     <button class="cameraBtn" (click)="cameraActionsPage()">
             <ion-icon class="councils-icon__photo menu-icon"></ion-icon>
         </button>
@@ -60,7 +59,7 @@
                 Change Password</ion-label>
 
             <button ion-button item-right clear> 
-                <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
+                <ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon>
             </button>
         </ion-item>
         <ion-item-divider class="empty"></ion-item-divider>

@@ -99,7 +99,7 @@ export class EditProfilePage {
         if (this.isChangeflag) {
             this.showAlertPopup('failure', 'There are unsaved changes.do you want to discard it ?');
         } else {
-            this.nav.setRoot(SettingsPage);
+           this.nav.popToRoot();
         }
     }
     showAlert(reason, text) {
@@ -115,7 +115,7 @@ export class EditProfilePage {
             title: '',
             subTitle: text,
             buttons: [
-                { text: 'OK', handler: () => this.nav.push(SettingsPage) }
+                { text: 'OK', handler: () => this.nav.popToRoot() }
             ]
         });
         alert.present();
@@ -125,7 +125,7 @@ export class EditProfilePage {
             title: '',
             subTitle: text,
             buttons: [
-                { text: 'OK', handler: () => this.nav.push(SettingsPage) },
+                { text: 'OK', handler: () => this.nav.popToRoot() },
                 { text: 'Cancel' }
             ]
         });

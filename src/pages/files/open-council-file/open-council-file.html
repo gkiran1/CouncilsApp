@@ -32,8 +32,8 @@
                     <p><span class="council-styles">{{file.name}}</span></p>
                     <p>by <span ion-text color="secondary">{{value.createdUser}}</span></p>
                     <p>
-                        {{file.size}} {{file.type}} file
-                        <span class="agendadate-styles">{{file.createdDate | customdateformat}}</span></p>
+                        {{file.size}} {{file.type}} file</p>
+                        <p><span class="agendadate-styles">{{file.createdDate | customdateformat}}</span></p>
                 </ion-col>
                     <ng-container *ngIf="deleteflag">
                         <button color="secondary" class="delete-styles" id="councilsPage" name="councilsPage" ion-button clear (click)="delete(file)">

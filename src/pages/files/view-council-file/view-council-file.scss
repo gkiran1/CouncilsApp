@@ -24,7 +24,6 @@ view-council-file-page {
     }
     .date-styles{
         font-family: Bernina-Regular !important;
-        font-size: 1.08em !important;
         color:#a9aaac !important;        
     }
     .name-styles{
@@ -37,13 +36,9 @@ view-council-file-page {
         font-size: 17px !important;
         color:#35373A !important;
     }
-//     .image-content {
-//         position: absolute;
-//         bottom: 0;
-//     }
     .empty{    
     height: 20px;
-    border-top: 1px solid #dedede;    
+    border-bottom: 1px solid #e8e9eb !important;    
 }
 .item-md.item-block .item-inner{
         border-bottom: none !important;

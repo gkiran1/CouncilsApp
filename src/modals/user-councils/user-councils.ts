@@ -24,6 +24,7 @@ export class UserCouncilsModalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserCouncilsPage');
+    this.ele.nativeElement.querySelector('.searchbar-input').focus();
   }
   dismiss(council) {
     this.viewCtrl.dismiss(council);

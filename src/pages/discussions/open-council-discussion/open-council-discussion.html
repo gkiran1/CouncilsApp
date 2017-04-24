@@ -11,7 +11,7 @@
             </ion-col>
         </ion-row>
     </ion-navbar>
-    
+
 </ion-header>
 <ion-content id="content1">
     <!--<ion-scroll scrollY="true" class="messages">-->
@@ -33,25 +33,27 @@
                     <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(msg)?.user_avatar || (msg)?.user_avatar === 'avatar'" />
                 </ion-avatar>
                 <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
-                <ion-icon class="councils-icon__checkmark" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark" md="ios-checkmark"></ion-icon>
-                <p class="font2">{{msg.timestamp | customdateformat}}</p>
-                <p class="font5 line-height">{{msg.text}}</p>
+                <ion-icon class="councils-icon__checkmark" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark"
+                    md="ios-checkmark"></ion-icon>
+                    <p class="font2">{{msg.timestamp | customdateformat}}</p>
+                    <p class="font5 line-height">{{msg.text}}</p>
             </ion-item>
         </ion-list>
     </div>
     <!--</ion-scroll>-->
 </ion-content>
 <ion-footer>
-    <ion-label class="typings-label" color="secondary" *ngIf="discussion.typings">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
+    <ion-label class="typings-label" color="secondary" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
+        '')">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')}}
-    </ion-label>
-    <ion-row>
-        <ion-col width-80>
-            <ion-input type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"
-                (keyup)="keypresssed($event)"></ion-input>
-        </ion-col>
-        <ion-col width-20>
-            <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
-        </ion-col>
-    </ion-row>
+        </ion-label>
+        <ion-row>
+            <ion-col width-80>
+                <ion-textarea type="text" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"
+                    (keyup)="keypresssed($event)"></ion-textarea>
+            </ion-col>
+            <ion-col width-20>
+                <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
+            </ion-col>
+        </ion-row>
 </ion-footer>
