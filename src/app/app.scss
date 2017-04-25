@@ -322,10 +322,10 @@ ion-header ion-col {
 }
 
 .header-col {
-    display: flex;
+    display: flex !important;
+   align-items: center !important;
     /* align-items: center; */
     justify-content: center;
-    align-items: center;
     min-width: 44px;
     max-width: 44px;
     min-height: 44px;
@@ -796,6 +796,10 @@ ion-avatar {
         color: #35373a !important;
     }
 
+.header-col2{
+    display: flex !important;
+align-items: center !important;
+}
     
 
     
