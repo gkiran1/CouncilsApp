@@ -247,8 +247,8 @@ export class AgendaEditPage {
         let formattedAgendaObj = this.formatAgendaObj(value);
         this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
             .then(res => {
+                this.nav.popToRoot();
                 let userids = new Set();
-
                 if (formattedAgendaObj.openingprayeruserid) {
                     userids.add(formattedAgendaObj.openingprayeruserid);
                 }
@@ -285,6 +285,28 @@ export class AgendaEditPage {
                 this.nav.pop();
             })
             .catch(err => { this.showAlert('Unable to delete the Agenda, please try after some time.') })
+    }
+
+    showConfirm() {
+        let confirm = this.alertCtrl.create({
+            title: 'Are you sure you want to delete?',
+            // message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+            buttons: [
+                {
+                    text: 'Yes',
+                    handler: () => {
+                        this.delete();
+                    }
+                },
+                {
+                    text: 'No',
+                    handler: () => {
+                        console.log('Disagree clicked');
+                    }
+                }
+            ]
+        });
+        confirm.present();
     }
 
     showAlert(errText) {

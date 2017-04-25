@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { AngularFire } from 'angularfire2';
 import { CouncilUsersModalPage } from '../../../modals/council-users/council-users';
 import { UserCouncilsModalPage } from '../../../modals/user-councils/user-councils';
+import { AssignmentsListPage } from '../assignments-list/assignments-list';
 
 @Component({
   templateUrl: 'new-assignment.html',
@@ -213,6 +214,7 @@ export class NewAssignmentPage {
     let formattedAssignmentObj = this.formatAssignmentObj(value);
     this.firebaseservice.updateAssignment(formattedAssignmentObj, this.assignmentKey)
       .then(res => {
+        this.nav.popToRoot();
         console.log(res);
         this.createActivity(this.assignmentKey, 'updated');
       })
@@ -227,7 +229,6 @@ export class NewAssignmentPage {
       })
       .catch(err => { console.error(err); this.showAlert('Unable to delete the Assignment, please try after some time') })
   }
-
 
   showConfirm() {
     let confirm = this.alertCtrl.create({

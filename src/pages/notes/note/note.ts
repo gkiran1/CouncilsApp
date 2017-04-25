@@ -50,16 +50,39 @@ export class NotePage {
     save(value) {
         let formattedAgendaObj = this.formatnoteObj(value);
         this.firebaseservice.updateNote(formattedAgendaObj, this.noteKey)
-            .then(res => {})
+            .then(res => {
+                this.nav.popToRoot();
+            })
             .catch(err => { this.showAlert('Unable to update the Note, please try after some time.') })
     }
 
     delete() {
         this.firebaseservice.removeNote(this.noteKey)
-            .then(res => {this.nav.pop(); })
+            .then(res => { this.nav.pop(); })
             .catch(err => { this.showAlert('Unable to delete the Note, please try after some time.') })
     }
 
+    showConfirm() {
+        let confirm = this.alertCtrl.create({
+            title: 'Are you sure you want to delete?',
+            // message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+            buttons: [
+                {
+                    text: 'Yes',
+                    handler: () => {
+                        this.delete();
+                    }
+                },
+                {
+                    text: 'No',
+                    handler: () => {
+                        console.log('Disagree clicked');
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    }
 
     showAlert(errText) {
         let alert = this.alertCtrl.create({
