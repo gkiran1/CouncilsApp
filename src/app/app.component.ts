@@ -31,7 +31,7 @@ export class MyApp {
     platform.ready().then(() => {
 
       //Keyboard handler setup
-      this.keyboardSetup();
+      //this.keyboardSetup();
 
       //Manually hiding splashscreen
       setTimeout(function () {
