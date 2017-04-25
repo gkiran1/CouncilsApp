@@ -8,7 +8,7 @@
         <ion-icon *ngIf="isNewAssignment" class="councils-icon__close menu-icon" name="close" item-left color="secondary" (click)="cancel()"></ion-icon>
         <ion-icon *ngIf="!isNewAssignment" class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
       </ion-col>
-      <ion-col width-70>
+      <ion-col width-80 class="header-col2">
         <ion-title *ngIf="isNewAssignment" text-center>New Assignment</ion-title>
         <ion-title *ngIf="!isNewAssignment" text-center>Assignment</ion-title>
       </ion-col>
