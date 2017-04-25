@@ -12,12 +12,12 @@
         </ion-row>
     </ion-navbar>
 </ion-header>
-<ion-content id="content1">
+<ion-content id="content1" class="has-header">
     <!--<ion-scroll scrollY="true">-->
     <div class="chat-content">
         <ion-item text-wrap>
             <ion-label class="font1 line-height">
-                This is a private discussion with <span ion-text color="secondary">{{chatWith}}</span> created by <span ion-text color="secondary">You</span> on
+                This is a private discussion with <span ion-text color="secondary">{{chatWith}}</span> created by <span ion-text color="secondary">{{createdBy}}</span> on
                 {{discussion.createdDate | customdateformat}}. No one else can view this discussion.
             </ion-label>
         </ion-item>

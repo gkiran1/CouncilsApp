@@ -11,7 +11,7 @@ import { EmailService } from '../../providers/emailservice'
 @Component({
     templateUrl: 'invite.html',
     selector: 'invite-page',
-    providers:[EmailService]
+    providers: [EmailService]
 })
 export class InviteMemberPage {
     invite: Invitee;
@@ -19,11 +19,11 @@ export class InviteMemberPage {
     council;
     councilsLength = false;
     result: FirebaseObjectObservable<any>;
-    constructor(public http: Http, 
-        public navctrl: NavController, 
-        public fs: FirebaseService, 
-        public af: AngularFire, 
-        public alertCtrl: AlertController, 
+    constructor(public http: Http,
+        public navctrl: NavController,
+        public fs: FirebaseService,
+        public af: AngularFire,
+        public alertCtrl: AlertController,
         public appService: AppService,
         public emailService: EmailService) {
         this.invite = new Invitee;
@@ -66,20 +66,23 @@ export class InviteMemberPage {
     inviteMember() {
         this.council.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
         console.log(this.invite.councils);
-        this.emailService.inviteMemberEmail(this.invite.firstname, this.invite.unitnumber, this.invite.email).
-        subscribe(res => {
-            if(res.status === 200) {
-                this.fs.createInvitee(this.invite)
-                    .then(res => {
-                        this.navctrl.push(InvitationSuccessPage)
-                    })
-                    .catch(err => this.showAlert(err))
-            } else {
-                this.showAlert('Unable to invite member, please recheck the details and try again.');
-            }
+        this.emailService.inviteMemberEmail(this.invite.firstname, this.invite.unitnumber, this.invite.email)
+            .subscribe(res => {
+                if (res.status === 200) {
+                    this.fs.createInvitee(this.invite)
+                        .then(res => {
+                            this.navctrl.push(InvitationSuccessPage)
+                        })
+                        .catch(err => this.showAlert(err))
+                } else {
+                    this.showAlert('Unable to invite member, please recheck the details and try again.');
+                }
 
-        });
-        
+            }, err => {
+                console.log(err);
+                this.showAlert('Unable to invite member, please recheck the details and try again.');
+            })
+
     }
 
     itemChanged() {

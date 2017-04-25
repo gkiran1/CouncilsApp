@@ -137,7 +137,7 @@
 <ion-footer>
     <ion-toolbar>
         <ion-buttons class="deletebtn" start>
-            <button ion-button color="danger" (click)="delete(agendaliteeditForm.value)">Delete</button>
+            <button ion-button color="danger" (click)="showConfirm()">Delete</button>
         </ion-buttons>
         <ion-buttons end>
             <button ion-button color="secondary" (click)="edit(agendaliteeditForm.value)" [disabled]="!agendaliteeditForm.valid">Save</button>
