@@ -17,19 +17,22 @@
 
 </ion-header>
 <ion-content>
-  <ion-item-group>
-    <ng-container *ngIf="(personalAssignmentsArray.length || councilAssignmentsArray.length || completedAssignmentsArray.length)">
-      <ion-item-divider>PERSONAL</ion-item-divider>
-      <ion-item (click)="assignmentSelected(item, i,'personal')" *ngFor="let item of personalAssignmentsArray; let i = index" [attr.data-index]="i">
+
+  <ng-container *ngIf="(personalAssignmentsArray.length || councilAssignmentsArray.length || completedAssignmentsArray.length)">
+    <ion-item class="divider">PERSONAL</ion-item>
+    <ion-list>
+      <ion-item class="ion-item-middle"  (click)="assignmentSelected(item, i,'personal')" *ngFor="let item of personalAssignmentsArray; let i = index" [attr.data-index]="i">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': personalselectedIdx === i}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': personalselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
         <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
         <p class="font2"><span>{{item.councilname}}</span><span style="position: absolute;right: 10px">{{item.assigneddate | customdateformat}}</span></p>
       </ion-item>
+    </ion-list>
 
-      <ion-item-divider>COUNCIL</ion-item-divider>
-      <ion-item (click)="assignmentSelected(item, i,'council')" *ngFor="let item of councilAssignmentsArray; let i = index" [attr.data-index]="i">
+    <ion-item class="divider">COUNCIL</ion-item>
+    <ion-list>
+      <ion-item class="ion-item-middle"  (click)="assignmentSelected(item, i,'council')" *ngFor="let item of councilAssignmentsArray; let i = index" [attr.data-index]="i">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': councilselectedIdx === i}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': councilselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
@@ -37,18 +40,22 @@
         <p class="font2"><span>{{item.councilname}}</span><span style="position: absolute;right: 10px">{{item.assigneddate | customdateformat}}</span></p>
 
       </ion-item>
-      <ion-item-divider>COMPLETED</ion-item-divider>
-      <ion-item (click)="assignmentSelected(item, i,'completed')" *ngFor="let item of completedAssignmentsArray; let i = index"
+    </ion-list>
+
+    <ion-item class="divider">COMPLETED</ion-item>
+    <ion-list>
+      <ion-item class="ion-item-middle"  (click)="assignmentSelected(item, i,'completed')" *ngFor="let item of completedAssignmentsArray; let i = index"
         [attr.data-index]="i">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': completedselectedIdx === i}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': completedselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
         <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
         <p class="font2"><span>{{item.councilname}}</span><span class="right-align">{{item.assigneddate | customdateformat}}</span></p>
-        </ion-item>
-    </ng-container>
-    <ng-container *ngIf="!(councilAssignmentsArray.length || completedAssignmentsArray.length)">
-      <ion-label text-center class="text-content font1">There are no assignments</ion-label>
-    </ng-container>
-  </ion-item-group>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+  <ng-container *ngIf="!(councilAssignmentsArray.length || completedAssignmentsArray.length)">
+    <ion-label text-center class="text-content font1">There are no assignments</ion-label>
+  </ng-container>
+
 </ion-content>
