@@ -20,6 +20,7 @@ export class OpenPrivateDiscussionPage {
     msg = '';
     user;
     chatWith;
+    createdBy;
     isTyping = true;
     statusSubscription;
     constructor(public af: AngularFire, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService) {
@@ -30,6 +31,7 @@ export class OpenPrivateDiscussionPage {
                     fs.getPrivateDiscussionByKey(navparams.get('discussion')).subscribe(discussion => {
                         this.discussion = discussion;
                         this.chatWith = discussion.createdUserId === this.user.$key ? discussion.otherUserName : discussion.createdUserName;
+                        this.createdBy = discussion.createdUserId === this.user.$key ? 'You' : discussion.createdUserName;
                         this.discussion.messages = this.discussion.messages || [];
                         this.discussion.typings = this.discussion.typings || '';
                         this.discussion.messages = Object.keys(this.discussion.messages).map(e =>this.discussion.messages[e]);
