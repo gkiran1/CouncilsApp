@@ -10,11 +10,11 @@ import { EmailService } from '../../../providers/emailservice';
 @Component({
     templateUrl: 'inactivatemembers.html',
     selector: 'inactivatemembers-page',
-    providers:[EmailService]
+    providers: [EmailService]
 })
 
 export class InactivateMembersPage {
-    users: User[] = [];   
+    users: User[] = [];
 
     constructor(public appService: AppService,
         private firebaseService: FirebaseService,
@@ -54,7 +54,13 @@ export class InactivateMembersPage {
                         this.menuctrl.close();
                         this.firebaseService.inactivateUser(user.$key, false)
                             .then(() => {
-                                this.emailservice.emailAccountInactive(user.firstname, user.lastname, user.email);
+                                this.emailservice.emailAccountInactive(user.firstname, user.lastname, user.email).subscribe(res => {
+                                    if (res.status === 200) {
+                                        console.log(user.firstname + ' account inactivated');
+                                    } else {
+                                        console.log('Mail not sent for account inactivation');
+                                    }
+                                });
                                 this.nav.push(MemberInactivatedPage);
                             })
                             .catch(err => { this.showAlert('Unable to inactivate the member, please try after some time') });

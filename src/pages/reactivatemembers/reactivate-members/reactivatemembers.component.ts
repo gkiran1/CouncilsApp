@@ -10,11 +10,11 @@ import { EmailService } from '../../../providers/emailservice';
 @Component({
     templateUrl: 'reactivatemembers.html',
     selector: 'reactivatemembers-page',
-    providers:[EmailService]
+    providers: [EmailService]
 })
 
 export class ReactivateMembersPage {
-    users: User[] = [];   
+    users: User[] = [];
 
     constructor(public appService: AppService,
         private firebaseService: FirebaseService,
@@ -46,7 +46,13 @@ export class ReactivateMembersPage {
     reactivatemember(user: User) {
         this.firebaseService.reactivateUser(user.$key, true)
             .then(() => {
-                this.emailservice.emailReactivate(user.firstname, user.lastname, user.unitnumber, user.email);
+                this.emailservice.emailReactivate(user.firstname, user.lastname, user.unitnumber, user.email).subscribe(res => {
+                    if (res.status === 200) {
+                        console.log(user.firstname + ' account is reactivated');
+                    } else {
+                        console.log('Mail not sent for account reactivation');
+                    }
+                });
                 this.nav.push(MemberReactivatedPage);
             })
             .catch(err => { this.showAlert('Unable to reactivate the member, please try after some time') });
