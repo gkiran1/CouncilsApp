@@ -26,7 +26,11 @@ agenda-lite-edit{
             flex: 1;
         }
     }
-    .deletebtn{
-        position: absolute !important;
+    .bar-buttons-md{
+        order: 2;
     }
+    .bar-button-md{
+        font-size: 17px;
+    }
+
 }
