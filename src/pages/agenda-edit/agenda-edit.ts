@@ -283,7 +283,7 @@ export class AgendaEditPage {
                 Array.from(userids).forEach(id => {
                     this.createActivity('deleted', id);
                 });
-                this.showAlert('Agenda has been deleted.'); this.nav.pop();
+                this.nav.pop();
             })
             .catch(err => { this.showAlert('Unable to delete the Agenda, please try after some time.') })
     }

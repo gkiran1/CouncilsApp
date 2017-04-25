@@ -56,7 +56,7 @@ export class NotePage {
 
     delete() {
         this.firebaseservice.removeNote(this.noteKey)
-            .then(res => { this.showAlert('Note has been deleted.'); this.nav.pop(); })
+            .then(res => {this.nav.pop(); })
             .catch(err => { this.showAlert('Unable to delete the Note, please try after some time.') })
     }
 

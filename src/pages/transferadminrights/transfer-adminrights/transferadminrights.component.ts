@@ -10,12 +10,14 @@ import { EmailService } from '../../../providers/emailservice';
 @Component({
     templateUrl: 'transferadminrights.html',
     selector: 'transferadminrights-page',
-    providers:[EmailService]
+    providers: [EmailService]
 })
 
 export class TransferAdminRightsPage {
     users: User[] = [];
     currentAdminId: string;
+    userSubscription;
+    currentUser;
 
     constructor(public af: AngularFire,
         private firebaseService: FirebaseService,
@@ -25,24 +27,34 @@ export class TransferAdminRightsPage {
         private menuctrl: MenuController,
         public emailservice: EmailService
     ) {
-        this.currentAdminId = localStorage.getItem('securityToken');
-        const unitNumber = Number(localStorage.getItem('unitNumber'));
+
         this.users = [];
 
-        this.firebaseService.getUsersByUnitNumber(unitNumber).subscribe(usersObj => {
-            this.users = usersObj.filter(userObj => {
-                if (userObj.$key !== this.currentAdminId && userObj.isactive === true) {
-                    var userCouncilNames: string[] = [];
-                    userObj.councils.forEach(councilId => {
-                        this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
-                            userCouncilNames.push(councilObj[0].council);
-                            userObj.councilnames = userCouncilNames.join(', ');
+        this.userSubscription = this.af.auth.subscribe(auth => {
+            if (auth !== null) {
+                this.af.database.object('/users/' + auth.uid).subscribe(usr => {
+                    this.currentUser = usr;
+                    this.firebaseService.getUsersByUnitNumber(this.currentUser.unitNumber).subscribe(usersObj => {
+                        this.users = usersObj.filter(userObj => {
+                            if (userObj.$key !== this.currentUser.$key && userObj.isactive === true) {
+                                var userCouncilNames: string[] = [];
+                                userObj.councils.forEach(councilId => {
+                                    this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
+                                        userCouncilNames.push(councilObj[0].council);
+                                        userObj.councilnames = userCouncilNames.join(', ');
+                                    });
+                                });
+                                return userObj;
+                            }
                         });
                     });
-                    return userObj;
-                }
-            });
+                });
+            }
         });
+
+        // this.currentAdminId = localStorage.getItem('securityToken');
+        // const unitNumber = Number(localStorage.getItem('unitNumber'));
+
     }
 
     transferAdminRights(user) {
@@ -53,13 +65,21 @@ export class TransferAdminRightsPage {
                     cssClass: "actionsheet-items",
                     handler: () => {
                         this.menuctrl.close();
-                        this.firebaseService.transferAdminRights(this.currentAdminId, user.$key)
-                            .then(() => {
+                        this.firebaseService.transferAdminRights(this.currentAdminId, user.$key).
+                            then(() => {
+                                this.emailservice.emailTrasferAdmin(this.currentUser.firstname,
+                                    this.currentUser.lastname,
+                                    this.currentUser.unitnumber, user.email, user.firstname, user.lastname).subscribe(res => {
+                                        if (res.status === 200) {
+                                            console.log('Transferred Admin Rights');
+                                        } else {
+                                            console.log('Mail not sent for account inactivation');
+                                        }
+                                    });
+                            }).then(() => {
                                 localStorage.setItem('isAdmin', 'false');
-                                
                                 this.nav.push(TransferCompletePage, { newAdmin: user });
-                            })
-                            .catch(err => { this.showAlert('Unable to transfer admin rights now, please try after some time') });
+                            }).catch(err => { this.showAlert('Unable to transfer admin rights now, please try after some time') });
                     }
                 },
                 {

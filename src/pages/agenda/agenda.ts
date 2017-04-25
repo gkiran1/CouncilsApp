@@ -116,7 +116,6 @@ export class AgendaPage {
                 Array.from(userids).forEach(id => {
                     this.createActivity(key, id);
                 });
-                this.showAlert('Agenda created successfully.');
                 this.nav.popToRoot();
             })
             .catch(err => this.showAlert(err))
