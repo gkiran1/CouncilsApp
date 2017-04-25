@@ -12,12 +12,15 @@ export class UserCouncilsModalPage {
   councils = [];
   term: string = '';
   fromPage;
+  selectedCouncil;
   constructor(private ele: ElementRef, public af: AngularFire, public navParams: NavParams, public fs: FirebaseService, public navCtrl: NavController, public viewCtrl: ViewController) {
     let usercouncils = navParams.get('usercouncils');
+    let selectedCouncilObj = navParams.get('selectedCouncil');
     this.fromPage = navParams.get('fromPage');
     usercouncils.forEach(c => {
       fs.getCouncilByCouncilKey(c).subscribe(council => {
         this.councils.push(council);
+        if (selectedCouncilObj && council.$key === selectedCouncilObj.$key) this.selectedCouncil = council;
       });
     });
   }
