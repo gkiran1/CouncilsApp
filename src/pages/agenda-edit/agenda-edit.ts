@@ -261,7 +261,6 @@ export class AgendaEditPage {
                 Array.from(userids).forEach(id => {
                     this.createActivity('updated', id);
                 });
-                this.showAlert('Agenda has been updated.');
             })
             .catch(err => { this.showAlert('Unable to updated the Agenda, please try after some time.') })
     }

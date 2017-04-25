@@ -62,8 +62,6 @@ export class NewCouncilPage {
             this.firebaseservice.updateCouncilsInUser(user.$key, user.councils);
           }
         });
-
-        this.showAlert('Council created successfully..');
         this.nav.popToRoot();
       }
       else {

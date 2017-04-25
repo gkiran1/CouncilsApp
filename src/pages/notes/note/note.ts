@@ -50,7 +50,7 @@ export class NotePage {
     save(value) {
         let formattedAgendaObj = this.formatnoteObj(value);
         this.firebaseservice.updateNote(formattedAgendaObj, this.noteKey)
-            .then(res => { this.showAlert('Note has been updated.'); })
+            .then(res => {})
             .catch(err => { this.showAlert('Unable to update the Note, please try after some time.') })
     }
 

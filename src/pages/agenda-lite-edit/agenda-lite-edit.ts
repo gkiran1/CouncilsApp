@@ -243,7 +243,6 @@ export class AgendaLiteEditPage {
         Array.from(userids).forEach(id => {
           this.createActivity('updated', id);
         });
-        this.showAlert('Agenda Lite has been updated.');
       })
       .catch(err => { this.showAlert('Unable to updated the Agenda Lite, please try after some time.') })
   }
@@ -264,7 +263,7 @@ export class AgendaLiteEditPage {
         Array.from(userids).forEach(id => {
           this.createActivity('deleted', id);
         });
-        this.showAlert('Agenda Lite has been deleted.'); this.nav.pop();
+        this.nav.pop();
       })
       .catch(err => { this.showAlert('Unable to delete the Agenda Lite, please try after some time.') })
   }
