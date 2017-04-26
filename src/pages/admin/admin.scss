@@ -1,4 +1,37 @@
 admin-page {
    
-   
+   .no-padding{
+       margin-top: 28px !important;
+   }
+
+   .admin-header, .admin-header ion-label {
+       font-family: Bernina-SemiBold !important;
+       text-transform: uppercase;
+       font-size: 15px;
+   }
+
+   .list-page .scroll-content {
+       margin-top: 28px !important;
+       border-bottom: none !important;
+   }
+
+   .divider{
+        background: #FAFAFA !important;
+        border-bottom: none !important
+    }
+    .divider ion-label{
+        font-family: Bernina-semibold, sans-serif;
+        font-size: 13px !important;
+        color: #35373a !important;
+    }
+
+    .divider1{
+        background: #FAFAFA !important;
+    }
+    .divider1 ion-label{
+       margin-top: 28px !important;        
+        font-family: Bernina-semibold, sans-serif;
+        font-size: 13px !important;
+        color: #35373a !important;
+    }
 }
