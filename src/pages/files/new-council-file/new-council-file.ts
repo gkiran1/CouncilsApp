@@ -157,8 +157,7 @@ export class NewCouncilFilePage {
   // to upload a picture from gallery to the firebase.
   uploadPicture(value) {
     let loader = this.loadingCtrl.create({
-      spinner: 'crescent',
-      content: "Please wait while uploading...",
+      spinner: 'dots',
     });
     Camera.getPicture({
       quality: 95,
@@ -210,8 +209,7 @@ export class NewCouncilFilePage {
   // to upload files from the device.
   importFile(value) {
     let loader = this.loadingCtrl.create({
-      spinner: 'crescent',
-      content: "Please wait while uploading...",
+      spinner: 'dots',
     });
     if (this.platform.is('ios')) {
       var options = ["public.data", "public.audio"];

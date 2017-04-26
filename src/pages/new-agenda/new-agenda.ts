@@ -15,14 +15,14 @@ export class NewAgendaPage {
     }
 
     agendalite() {
-         this.nav.push(AgendaLitePage);
+        this.nav.push(AgendaLitePage, { direction: 'up' });
     }
 
-    agenda() {    
-        this.nav.push(AgendaPage);
+    agenda() {
+        this.nav.push(AgendaPage, { direction: 'up' });
     }
-    
+
     cancel() {
-        this.nav.pop();
+        this.nav.pop({ direction: 'down' });
     }
 }
