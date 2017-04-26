@@ -21,13 +21,25 @@ export class slide1Page {
         console.log(this.isAdmin);
     }
 
-    adminPage() {
+    setSelectedClass(button) {
+
+    (document.getElementById('adminPage')).classList.remove("menu-selected");
+    (document.getElementById('settingsPage')).classList.remove("menu-selected");
+    (document.getElementById('donationsPage')).classList.remove("menu-selected");
+
+    (document.getElementById(button)).classList.add("menu-selected");
+  }
+
+    adminPage(button) {
+        this.setSelectedClass(button);
         this.menuPage.nav.setRoot(AdminPage);
     }
-    settingsPage() {
+    settingsPage(button) {
+        this.setSelectedClass(button);
         this.menuPage.nav.setRoot(SettingsPage);
     }
-    donationsPage() {
+    donationsPage(button) {
+        this.setSelectedClass(button);
         this.menuPage.nav.setRoot(DonationsWelcomePage);
     }
 }

@@ -173,24 +173,42 @@ export class slide2Page {
     actionSheet.present();
   }
 
-  agendasPage() {
+  setSelectedClass(button) {
+
+    (document.getElementById('agendasPage')).classList.remove("menu-selected");
+    (document.getElementById('discussionsPage')).classList.remove("menu-selected");
+    (document.getElementById('assignmentsPage')).classList.remove("menu-selected");
+    (document.getElementById('filePage')).classList.remove("menu-selected");
+    (document.getElementById('privatediscussionPage')).classList.remove("menu-selected");
+    (document.getElementById('notesPage')).classList.remove("menu-selected");
+
+    (document.getElementById(button)).classList.add("menu-selected");
+  }
+
+  agendasPage(button) {
+    this.setSelectedClass(button);
     this.welcomePage.nav.setRoot(AgendasPage);
 
   }
-  councilDiscussionsPage() {
+  councilDiscussionsPage(button) {
+    this.setSelectedClass(button);
     this.welcomePage.nav.setRoot(CouncilDiscussionsListPage);
 
   }
-  assignmentsPage() {
+  assignmentsPage(button) {
+    this.setSelectedClass(button);
     this.welcomePage.nav.setRoot(AssignmentsListPage);
   }
-  privateDiscussionPage() {
+  privateDiscussionPage(button) {
+    this.setSelectedClass(button);
     this.welcomePage.nav.setRoot(PrivateDiscussionsListPage);
   }
-  filesPage() {
+  filesPage(button) {
+    this.setSelectedClass(button);
     this.welcomePage.nav.setRoot(FilesListPage);
   }
-  notePage() {
+  notePage(button) {
+    this.setSelectedClass(button);
     this.welcomePage.nav.setRoot(NotesPage)
   }
 

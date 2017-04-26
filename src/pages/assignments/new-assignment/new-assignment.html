@@ -16,18 +16,18 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <form [formGroup]="assignmentForm" (ngSubmit)="assignmentForm.value">
+  <form [formGroup]="assignmentForm" (ngSubmit)="assignmentForm.value" #assignment>
     <ion-item>
       <ion-label floating>Description</ion-label>
-      <ion-input type="text" name="description" formControlName="description" maxlength="500"></ion-input>
+      <ion-input type="text" name="description" formControlName="description" maxlength="500" #assignmentdesc tabindex></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Council</ion-label>
-      <ion-input type="text" readonly (touchstart)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil"></ion-input>
+      <ion-input type="text" readonly (touchstart)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil" #assignmentcouncil tabindex></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Assign to</ion-label>
-      <ion-input type="text" (input)="showList($event)" formControlName="assigneduser"></ion-input>
+      <ion-input type="text" (input)="showList($event)" formControlName="assigneduser" #assignmentuser tabindex></ion-input>
     </ion-item>
     <div *ngIf="showlist && assignmentForm.controls.assigneduser.value" class="assignto-list">
       <ng-container *ngFor="let user of users | search:term:'username'">
@@ -46,7 +46,7 @@
     <ion-item>
       <ion-label floating>Date & Time</ion-label>
       <ion-datetime displayFormat="DDDD, MMM D,YYYY, h:mm a" pickerFormat="DDD MMM D YYYY, h, mm, A" name="assigneddate" formControlName="assigneddate" 
-      minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"></ion-datetime>
+      minuteValues="00,05,10,15,20,25,30,35,40,45,50,55" #assignmentdate></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label floating>Notes</ion-label>

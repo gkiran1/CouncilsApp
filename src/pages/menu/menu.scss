@@ -29,5 +29,15 @@ page-welcome {
         bottom: 20px;
         position: fixed;
     }
+
+    .menu-selected {
+        background: #3cb18a !important;
+        color: #fff !important;
+        border-radius: 0 !important;
+    }
+
+    .menu-selected span, .menu-selected span ion-icon {
+        color: #fff !important;
+    }
 }
 

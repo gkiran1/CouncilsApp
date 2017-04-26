@@ -82,6 +82,9 @@ import { NotesPage } from '../pages/notes/notes/notes';
 import { NotePage } from '../pages/notes/note/note';
 import { GoogleCalenderPage } from '../pages/googlecalender/googlecalender.component';
 
+//Directives
+import { TabindexDirective } from '../directives/tabindex.directive';
+
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
   'core': {
@@ -172,7 +175,8 @@ const cloudSettings: CloudSettings = {
     NewNotePage,
     NotesPage,
     NotePage,
-    GoogleCalenderPage
+    GoogleCalenderPage,
+    TabindexDirective
   ],
 
   imports: [

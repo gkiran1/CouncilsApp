@@ -24,24 +24,24 @@
     </ion-row>
     <ion-row>
         <ion-label class="menu-title">Council</ion-label>
-        <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="councilsPage()">
+        <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="councilsPage('councilsPage')">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
                 </button>
     </ion-row>
-    <button clear menuToggle ion-button class="listbtn2" id="agendasPage" name="agendasPage" block (click)="agendasPage()" text-capitalize>
+    <button clear menuToggle ion-button class="listbtn2" id="agendasPage" name="agendasPage" block (click)="agendasPage('agendasPage')" text-capitalize>
                     Agendas <span class="count">{{agendasCount | async}}</span>
                 </button>
 
-    <button clear secondary class="listbtn2" ion-button id="discussionsPage" name="discussionsPage" menuToggle block (click)="councilDiscussionsPage()"
+    <button clear secondary class="listbtn2" ion-button id="discussionsPage" name="discussionsPage" menuToggle block (click)="councilDiscussionsPage('discussionsPage')"
         text-capitalize>
         Discussions <span class="count">{{councilDiscussionsCount | async}}</span>
         </button>
 
-    <button clear secondary class="listbtn2" id="assignmentsPage" name="assignmentsPage" ion-button block menuToggle (click)="assignmentsPage()"
+    <button clear secondary class="listbtn2" id="assignmentsPage" name="assignmentsPage" ion-button block menuToggle (click)="assignmentsPage('assignmentsPage')"
         text-capitalize>
             Assignments <span class="count">{{assignmentsCount | async}}</span>
             </button>
-    <button clear secondary class="listbtn2" id="filePage" name="filesPage" ion-button block menuToggle (click)="filesPage()"
+    <button clear secondary class="listbtn2" id="filePage" name="filesPage" ion-button block menuToggle (click)="filesPage('filePage')"
         text-capitalize>
                 Files <span class="count">{{filesCount | async}}</span>
                 </button>
@@ -53,9 +53,9 @@
     </ion-row>
 
     <button clear menuToggle ion-button color="secondary" id="privatediscussionPage" name="privatediscussionPage" class="listbtn2"
-        block (click)="privateDiscussionPage()" text-capitalize>Discussions <span class="count">{{privateDiscussionsCount | async}}</span></button>
+        block (click)="privateDiscussionPage('privatediscussionPage')" text-capitalize>Discussions <span class="count">{{privateDiscussionsCount | async}}</span></button>
 
-    <button clear menuToggle ion-button color="secondary" id="notesPage" name="notesPage" class="listbtn2" clear block (click)="notePage()"
+    <button clear menuToggle ion-button color="secondary" id="notesPage" name="notesPage" class="listbtn2" clear block (click)="notePage('notesPage')"
         text-capitalize>Notes<span class="count">{{notesCount | async}}</span>
                         </button>
 
