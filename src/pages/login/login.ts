@@ -45,8 +45,7 @@ export class LoginPage {
 
     private validateUser(loginCredentials) {
         let loader = this.loadingCtrl.create({
-            spinner: 'crescent',
-            content: "Please wait...",
+            spinner: 'dots',
         });
         loader.present();
         let flag = false;

@@ -34,8 +34,7 @@ export class ViewCouncilFilePage {
     }
     downloadFile(item) {
         let loader = this.loadingCtrl.create({
-            spinner: 'crescent',
-            content: "Please wait while opening file...",
+            spinner: 'dots',
         });
         if (this.platform.is('ios')) {
             var targetPath = cordova.file.documentsDirectory + '/CouncilDownloads/' + item.filename;

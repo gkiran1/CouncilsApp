@@ -73,8 +73,7 @@ export class DonationsSendPage {
   send(value) {
     console.log(value);
     let loader = this.loadingCtrl.create({
-      spinner: 'crescent',
-      content: "Please wait, while your request being processed..",
+      spinner: 'dots',
     });
     loader.present();
     Stripe.card.createToken({

@@ -37,8 +37,7 @@ export class CreateAccountPage {
     // username@domain.com
     else {
       let loader = this.loadingCtrl.create({
-        spinner: 'crescent',
-        content: "Please wait...",
+        spinner: 'dots',
       });
       loader.present();
       this.invitee$ = this.firebaseService.findInviteeByEmail(this.newUser.email);

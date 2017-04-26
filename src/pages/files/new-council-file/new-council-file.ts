@@ -105,8 +105,7 @@ export class NewCouncilFilePage {
   // to upload a picture to the firebase.
   takePicture(value) {
     let loader = this.loadingCtrl.create({
-      spinner: 'crescent',
-      content: "Please wait while uploading...",
+      spinner: 'dots',
     });
     Camera.getPicture({
       quality: 95,

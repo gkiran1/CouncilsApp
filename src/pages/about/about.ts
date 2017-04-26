@@ -21,8 +21,7 @@ export class AboutPage {
 
     constructor(public navCtrl: NavController, private service: FirebaseService, private loadingCtrl: LoadingController) {
         let loader = this.loadingCtrl.create({
-            spinner: 'crescent',
-            content: "Please wait...",
+            spinner: 'dots',
         });
         loader.present();
         service.getAboutus()

@@ -66,8 +66,7 @@ export class OpenCouncilFilePage {
     }
     delete(file) {
         let loader = this.loadingCtrl.create({
-            spinner: 'crescent',
-            content: "Deleting file...",
+            spinner: 'dots',
         });
         loader.present();
         //to delete files form the database using key
