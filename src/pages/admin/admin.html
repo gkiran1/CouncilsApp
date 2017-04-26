@@ -1,23 +1,22 @@
 <ion-header>
-	 <ion-navbar>
-    <ion-buttons class="menu-button" left>
-      <button ion-button menuToggle >
+	<ion-navbar>
+		<ion-buttons class="menu-button" left>
+			<button ion-button menuToggle>
       <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" ></ion-icon>
     </button>
-    </ion-buttons>
-    <ion-title>Admin</ion-title>
-    <ion-buttons class="menu-button" end>
-      <button ion-button (click)="notificationsPage()"  >
+		</ion-buttons>
+		<ion-title>Admin</ion-title>
+		<ion-buttons class="menu-button" end>
+			<button ion-button (click)="notificationsPage()">
      <ion-icon class="icon councils-icon__notifications menu-icon">
          <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
       </ion-icon> 
       </button>
-    </ion-buttons>
-  </ion-navbar>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 
 <ion-content class="list-page">
-	
 	<ion-item class="ion-item-first" (click)="activeCouncils()">
 		<ion-label class="label-styles">Active Councils</ion-label>
 		<button ion-button item-right clear>   
@@ -61,6 +60,4 @@
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
 	</ion-item>
-
-
 </ion-content>
