@@ -41,6 +41,8 @@ import { AgendaPage } from '../pages/agenda/agenda';
 import { OpenCouncilDiscussionPage } from '../pages/discussions/open-council-discussion/open-council-discussion'
 import { AgendaLiteEditPage } from '../pages/agenda-lite-edit/agenda-lite-edit';
 import { AgendaEditPage } from '../pages/agenda-edit/agenda-edit';
+import { ForgotPwd } from '../pages/forgotpwd/forgotpwd';
+import { ForgotPwdSuccess } from '../pages/forgotpwd/forgotpwd-success';
 
 //Ionic Push Module
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
@@ -176,7 +178,9 @@ const cloudSettings: CloudSettings = {
     NotesPage,
     NotePage,
     GoogleCalenderPage,
-    TabindexDirective
+    TabindexDirective,
+    ForgotPwd,
+    ForgotPwdSuccess
   ],
 
   imports: [
@@ -252,7 +256,9 @@ const cloudSettings: CloudSettings = {
     NewNotePage,
     NotesPage,
     NotePage,
-    GoogleCalenderPage
+    GoogleCalenderPage,
+    ForgotPwd,
+    ForgotPwdSuccess
   ],
 
   providers: [AuthService, AppService, FirebaseService]

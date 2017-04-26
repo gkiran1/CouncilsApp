@@ -27,9 +27,9 @@ export class EmailService {
 
 
     //Email to create account
-    emailForgotPassword(firstname, email) {
+    emailForgotPassword(email) {
         return this.http.post(this.mailApiUrl, { 
-           "event":"forgotpassword", "email": email, "firstname": firstname
+           "event":"forgotpassword", "email": email, "firstname": "Councils User"
         });
     }
 

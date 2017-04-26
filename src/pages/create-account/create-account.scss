@@ -1,4 +1,4 @@
-
+create-account {
 ion-input{
     padding-bottom:10px;
 }
@@ -45,9 +45,11 @@ ion-list ion-item{
         text-align: center;
     }
     .create-subheader {
+        font-family: Bernina-Regular !important;
         display: block;
         position: relative;
         margin-top: 14px;
         text-align: center;
         font-size: 17px;
     }
+}

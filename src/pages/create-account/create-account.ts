@@ -16,6 +16,7 @@ import { EmailService } from '../../providers/emailservice';
 
 
 @Component({
+  selector: 'create-account',
   templateUrl: 'create-account.html',
   providers: [EmailService]
 })

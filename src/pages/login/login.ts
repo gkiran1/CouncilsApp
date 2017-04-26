@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Rx';
 import { User } from '../../user/user';
 import { NgZone } from '@angular/core';
 import { NoAccessPage } from '../noaccess/noaccess.component';
+import { ForgotPwd } from '../forgotpwd/forgotpwd';
 
 @Component({
     selector: 'page-login',
@@ -33,6 +34,7 @@ export class LoginPage {
     }
 
     public forgotPassword() {
+        this.nav.push(ForgotPwd);
     }
 
     noAccount() {

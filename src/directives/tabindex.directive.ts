@@ -10,7 +10,7 @@ export class TabindexDirective {
 
 	@HostListener('keydown', ['$event']) onInputChange(e) {
 		var code = e.keyCode || e.which;
-		alert('here');
+		
 		if (code === 13) {
 			e.preventDefault();
 			this.inputRef.focusNext();
