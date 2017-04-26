@@ -72,6 +72,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.councils-icon__comment:before {
+  content: "\e914";
+}
+
 .councils-icon__add:before {
   content: "\e900";
 }
