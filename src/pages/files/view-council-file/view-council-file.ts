@@ -4,6 +4,7 @@ import { NavController, NavParams, Platform, LoadingController } from 'ionic-ang
 import { Subject, Subscription } from 'rxjs';
 import { Transfer, File } from 'ionic-native';
 import * as firebase from 'firebase';
+declare var FileTransfer;
 
 @Component({
     templateUrl: 'view-council-file.html',
@@ -15,6 +16,7 @@ export class ViewCouncilFilePage {
     profilePictureRef: any;
     councilId: any;
     councilName: any;
+    device: string;
     constructor(
         public fs: FirebaseService,
         public nav: NavController,
@@ -26,6 +28,15 @@ export class ViewCouncilFilePage {
         this.profilePictureRef = firebase.storage().ref('/files/');
         this.councilId = navparams.get('councilid')
         this.councilName = navparams.get('councilname');
+        platform.ready().then(() => {
+            if (this.platform.is('ios')) {
+                this.device = "ios";
+            }
+            else {
+                this.device = "android";
+            }
+
+        });
 
         fs.getFilesByCouncil(this.councilId).subscribe(files => {
             this.filesArray.push(...files);
@@ -36,10 +47,14 @@ export class ViewCouncilFilePage {
         let loader = this.loadingCtrl.create({
             spinner: 'dots',
         });
-        if (this.platform.is('ios')) {
+        loader.present();
+        if (this.device !== undefined && this.device !== 'android') {
+
             var targetPath = cordova.file.documentsDirectory + '/CouncilDownloads/' + item.filename;
+            alert(targetPath);
+
         } else {
-            var targetPath = cordova.file.dataDirectory + '/CouncilDownloads/' + item.filename;
+            var targetPath = cordova.file.cacheDirectory + '/CouncilDownloads/' + item.filename;
         }
         let ProfileRef = this.profilePictureRef.child(item.councilid + '//' + item.$key + '//' + item.filename)
         var filetype = (item.filename.substr(item.filename.lastIndexOf('.') + 1)).toUpperCase();
@@ -63,39 +78,35 @@ export class ViewCouncilFilePage {
             default:
                 break;
         }
-        let fileTransfer = new Transfer();
-        ProfileRef.getDownloadURL().then(function (url) {
-            // console.log(url);
+        let fileTransfer = new FileTransfer();
+        ProfileRef.getDownloadURL().then( (url)=> {
             var trustHosts = true;
-            var options = {};
-            loader.present();
-            fileTransfer.download(url, targetPath, trustHosts, options).then(res => {
+            fileTransfer.download(url, targetPath, function (res) {
                 loader.dismiss();
                 cordova.plugins.fileOpener2.open(
                     targetPath,
                     mimeType,
                     {
                         error: function (e) {
+                            loader.dismiss();
                             console.log(e);
-                            // alert('Error status: ' + e.status + ' - Error message: ' + e.message);
+                            alert('Error status: ' + e.status + ' - Error message: ' + e.message);
                         },
                         success: function () {
+                            loader.dismiss();
                             console.log('file opened successfully.');
-                            // alert('file opened successfully');
                         }
                     }
                 );
-            }).catch(err => {
+            }, function (e) {
                 loader.dismiss();
-                // alert('could not download file.' + JSON.stringify(err));
-                console.log(err);
+                alert('Target path:' + targetPath + JSON.stringify(e));
             })
 
-        }).catch(function (error) {
-            loader.dismiss();
-            // alert(error);
-            console.log(error);
-        });
+        }).catch( (error)=> {
+                loader.dismiss();
+                console.log(error);
+            });
 
     }
 
