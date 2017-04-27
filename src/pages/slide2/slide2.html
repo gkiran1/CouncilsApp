@@ -1,62 +1,66 @@
-<ion-list no-lines>
-    <ion-row>
-        <ion-col class="menu-avatar-col">
-            <ion-avatar>
-                <img [src]="(userObj)?.avatar" class="avatarImage" *ngIf="(userObj)?.avatar && (userObj)?.avatar !== 'avatar'" />
-                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj)?.avatar || (userObj)?.avatar === 'avatar'" />
-            </ion-avatar>
-        </ion-col>
-        <ion-col class="menu-user-col">
-            <ion-row>
-               <!--<ion-col *ngIf=isAdmin class="user-admin-col">
+<ion-content>
+    <ion-list no-lines>
+        <ion-row>
+            <ion-col class="menu-avatar-col">
+                <ion-avatar>
+                    <img [src]="(userObj)?.avatar" class="avatarImage" *ngIf="(userObj)?.avatar && (userObj)?.avatar !== 'avatar'" />
+                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj)?.avatar || (userObj)?.avatar === 'avatar'" />
+                </ion-avatar>
+            </ion-col>
+            <ion-col class="menu-user-col">
+                <ion-row>
+                    <!--<ion-col *ngIf=isAdmin class="user-admin-col">
                     <span><ion-icon class="icon councils-icon__admin user-admin-icon" color="primary"></ion-icon></span>
                 </ion-col>-->
-                <ion-col>
-                    <ion-row>
-                        <span class='user1'>{{(userObj)?.firstname}} {{(userObj)?.lastname}}</span>
-                    </ion-row>
-                    <ion-row>
-                        <span class='user2'>{{(userObj)?.calling}} - {{(userObj)?.unitnumber}}</span>
-                    </ion-row>
-                </ion-col>
-            </ion-row>
-        </ion-col>
-    </ion-row>
-    <ion-row>
-        <ion-label class="menu-title">Council</ion-label>
-        <button color="secondary" class="no-padding" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="councilsPage('councilsPage')">
+                    <ion-col>
+                        <ion-row>
+                            <span class='user1'>{{(userObj)?.firstname}} {{(userObj)?.lastname}}</span>
+                        </ion-row>
+                        <ion-row>
+                            <span class='user2'>{{(userObj)?.calling}} - {{(userObj)?.unitnumber}}</span>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-label class="menu-title">Council</ion-label>
+            <button color="secondary" class="no-padding" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right
+                (click)="councilsPage('councilsPage')">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
                 </button>
-    </ion-row>
-    <button clear menuToggle ion-button class="listbtn2" id="agendasPage" name="agendasPage" block (click)="agendasPage('agendasPage')" text-capitalize>
+        </ion-row>
+        <button clear menuToggle ion-button class="listbtn2" id="agendasPage" name="agendasPage" block (click)="agendasPage('agendasPage')"
+            text-capitalize>
                     Agendas <span class="count">{{agendasCount | async}}</span>
                 </button>
 
-    <button clear secondary class="listbtn2" ion-button id="discussionsPage" name="discussionsPage" menuToggle block (click)="councilDiscussionsPage('discussionsPage')"
-        text-capitalize>
+        <button clear secondary class="listbtn2" ion-button id="discussionsPage" name="discussionsPage" menuToggle block (click)="councilDiscussionsPage('discussionsPage')"
+            text-capitalize>
         Discussions <span class="count">{{councilDiscussionsCount | async}}</span>
         </button>
 
-    <button clear secondary class="listbtn2" id="assignmentsPage" name="assignmentsPage" ion-button block menuToggle (click)="assignmentsPage('assignmentsPage')"
-        text-capitalize>
+        <button clear secondary class="listbtn2" id="assignmentsPage" name="assignmentsPage" ion-button block menuToggle (click)="assignmentsPage('assignmentsPage')"
+            text-capitalize>
             Assignments <span class="count">{{assignmentsCount | async}}</span>
             </button>
-    <button clear secondary class="listbtn2" id="filePage" name="filesPage" ion-button block menuToggle (click)="filesPage('filePage')"
-        text-capitalize>
+        <button clear secondary class="listbtn2" id="filePage" name="filesPage" ion-button block menuToggle (click)="filesPage('filePage')"
+            text-capitalize>
                 Files <span class="count">{{filesCount | async}}</span>
                 </button>
-    <ion-row>
-        <ion-label class="menu-title">Private</ion-label>
-        <button ion-button icon-only class="no-padding" clear item-right color="secondary" (click)="privatePage()" text-capitalize>
+        <ion-row>
+            <ion-label class="menu-title">Private</ion-label>
+            <button ion-button icon-only class="no-padding" clear item-right color="secondary" (click)="privatePage()" text-capitalize>
                     <ion-icon id="privatecircle" name="privatecircle" class="councils-icon__add menu-icon" ng-reflect-color="light" item-right></ion-icon>
                 </button>
-    </ion-row>
+        </ion-row>
 
-    <button clear menuToggle ion-button color="secondary" id="privatediscussionPage" name="privatediscussionPage" class="listbtn2"
-        block (click)="privateDiscussionPage('privatediscussionPage')" text-capitalize>Discussions <span class="count">{{privateDiscussionsCount | async}}</span></button>
+        <button clear menuToggle ion-button color="secondary" id="privatediscussionPage" name="privatediscussionPage" class="listbtn2"
+            block (click)="privateDiscussionPage('privatediscussionPage')" text-capitalize>Discussions <span class="count">{{privateDiscussionsCount | async}}</span></button>
 
-    <button clear menuToggle ion-button color="secondary" id="notesPage" name="notesPage" class="listbtn2" clear block (click)="notePage('notesPage')"
-        text-capitalize>Notes<span class="count">{{notesCount | async}}</span>
+        <button clear menuToggle ion-button color="secondary" id="notesPage" name="notesPage" class="listbtn2" clear block (click)="notePage('notesPage')"
+            text-capitalize>Notes<span class="count">{{notesCount | async}}</span>
                         </button>
 
-</ion-list>
+    </ion-list>
+</ion-content>
