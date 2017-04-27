@@ -166,7 +166,7 @@ export class AgendaLitePage {
   }
 
   cancel() {
-    this.nav.pop({direction:'left'})
+    this.nav.pop({animate: true, direction: 'left'})
   }
   searchFn(event) {
     this.term = event.target.value;

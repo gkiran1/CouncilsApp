@@ -14,7 +14,8 @@
 </ion-header>
 
 <ion-content>
-    <ion-item *ngFor="let user of usersArray">
+    <ion-list>
+    <ion-item class="ion-item-middle" *ngFor="let user of usersArray">
         <ion-avatar item-left>
             <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
             <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
@@ -22,5 +23,6 @@
         <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
         <p> <span>{{user.calling}}</span></p>
     </ion-item>
+    </ion-list>
 
 </ion-content>

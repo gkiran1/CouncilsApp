@@ -9,7 +9,6 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AppService } from '../../providers/app-service';
 import { AgendaLitePage } from '../agenda-lite/agenda-lite';
 import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
-import { NewCouncilPage } from '../new-council/new-council';
 import { InviteMemberPage } from '../invite/invite';
 import { AssignmentsListPage } from '../assignments/assignments-list/assignments-list';
 import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
@@ -65,9 +64,9 @@ export class slide2Page {
     public notesPage: NotesPage,
     public welcomePage: MenuPage
   ) {
-     if (localStorage.getItem('isAdmin') === 'true') {
-            this.isAdmin = true;
-        }
+    if (localStorage.getItem('isAdmin') === 'true') {
+      this.isAdmin = true;
+    }
     this.userObj = null;
 
     this.userSubscription = this.af.auth.subscribe(auth => {
@@ -99,7 +98,7 @@ export class slide2Page {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewAgendaPage,{},{direction: 'up' });
+            this.nav.push(NewAgendaPage, {}, { animate: true, direction: 'up' });
 
           }
         },
@@ -108,7 +107,7 @@ export class slide2Page {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewCouncilDiscussionPage,{},{direction: 'up'});
+            this.nav.push(NewCouncilDiscussionPage, {}, { animate: true, direction: 'up' });
           }
         },
         {
@@ -118,7 +117,7 @@ export class slide2Page {
           handler: () => {
 
             this.menuctrl.close();
-            this.nav.push(NewAssignmentPage,{},{direction: 'up' });
+            this.nav.push(NewAssignmentPage, {}, { animate: true, direction: 'up' });
           }
         },
         {
