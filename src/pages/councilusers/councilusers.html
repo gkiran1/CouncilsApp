@@ -15,7 +15,8 @@
 
 <ion-content>
     <ion-list>
-    <ion-item class="ion-item-middle" *ngFor="let user of usersArray">
+        <ion-item [ngClass]="i===0?'ion-item-first':(i===usersArray.length - 1? 'ion-item-last': 'ion-item-middle')"
+        *ngFor="let user of usersArray; let i = index" [attr.data-index]="i">
         <ion-avatar item-left>
             <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
             <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
