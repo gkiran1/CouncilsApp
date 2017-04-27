@@ -44,7 +44,7 @@ export class ActiveCouncilsPage {
     }
 
     cancel() {
-        this.nav.pop({ animate: true, direction: 'left' });
+        this.nav.pop({ animate: true, direction: 'forward' });
     }
 
     getCount() {
