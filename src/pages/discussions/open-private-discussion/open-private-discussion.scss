@@ -92,4 +92,12 @@ open-private-discussion-page {
     ion-list{
         margin-bottom: 0 !important;
     }
+     ion-content{
+        background: #FAFAFA !important;
+    }
+    .description{
+         background: #FAFAFA !important;
+         padding-bottom:15px;
+         border-bottom: none;
+    }
 }

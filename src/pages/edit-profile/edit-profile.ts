@@ -66,8 +66,7 @@ export class EditProfilePage {
 
     editProfile(value) {
         let loader = this.loadingCtrl.create({
-            spinner: 'crescent',
-            content: "Please wait while updating profile...",
+            spinner: 'dots',
         });
         loader.present();
         if ((new RegExp(/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/).test(this.profile.phone))) {

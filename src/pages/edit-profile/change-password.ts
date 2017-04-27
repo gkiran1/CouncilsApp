@@ -52,8 +52,7 @@ export class ChangePasswordPage {
     }
     changePassword() {
         let loader = this.loadingCtrl.create({
-            spinner: 'crescent',
-            content: "Please wait while updating password...",
+            spinner: 'dots',
         });
         loader.present();
         //validate the user..to check password is correct or not.

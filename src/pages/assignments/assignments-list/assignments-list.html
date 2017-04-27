@@ -26,7 +26,7 @@
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': personalselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
         <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
-        <p class="font2"><span>{{item.councilname}}</span><span style="position: absolute;right: 10px">{{item.assigneddate | customdateformat}}</span></p>
+        <p class="font2"><span>{{item.councilname}}</span><span style="position: absolute;right: 10px"><ion-icon *ngIf="item.notes" class="councils-icon__comment menu-icon chat-icon"></ion-icon>&nbsp;&nbsp;{{item.assigneddate | customdateformat}}</span></p>
       </ion-item>
     </ion-list>
 
@@ -37,7 +37,7 @@
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': councilselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
         <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
-        <p class="font2"><span>{{item.councilname}}</span><span style="position: absolute;right: 10px">{{item.assigneddate | customdateformat}}</span></p>
+        <p class="font2"><span>{{item.councilname}}</span><span style="position: absolute;right: 10px"><ion-icon *ngIf="item.notes" class="councils-icon__comment menu-icon chat-icon"></ion-icon>&nbsp;&nbsp;{{item.assigneddate | customdateformat}}</span></p>
 
       </ion-item>
     </ion-list>
@@ -50,7 +50,7 @@
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': completedselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
         <ion-icon class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
-        <p class="font2"><span>{{item.councilname}}</span><span class="right-align">{{item.assigneddate | customdateformat}}</span></p>
+        <p class="font2"><span>{{item.councilname}}</span><span class="right-align"><ion-icon *ngIf="item.notes" class="councils-icon__comment menu-icon chat-icon"></ion-icon>&nbsp;&nbsp;{{item.assigneddate | customdateformat}}</span></p>
       </ion-item>
     </ion-list>
   </ng-container>

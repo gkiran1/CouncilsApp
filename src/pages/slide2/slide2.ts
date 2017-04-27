@@ -99,7 +99,7 @@ export class slide2Page {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewAgendaPage);
+            this.nav.push(NewAgendaPage,{},{direction: 'up' });
 
           }
         },
@@ -108,7 +108,7 @@ export class slide2Page {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewCouncilDiscussionPage);
+            this.nav.push(NewCouncilDiscussionPage,{},{direction: 'up'});
           }
         },
         {
@@ -118,7 +118,7 @@ export class slide2Page {
           handler: () => {
 
             this.menuctrl.close();
-            this.nav.push(NewAssignmentPage);
+            this.nav.push(NewAssignmentPage,{},{direction: 'up' });
           }
         },
         {

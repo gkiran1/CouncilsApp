@@ -89,8 +89,7 @@ export class OpenCouncilFilePage {
     }
     deleteFiles(filesArray) {
         let loader = this.loadingCtrl.create({
-            spinner: 'crescent',
-            content: "Deleting files...",
+            spinner: 'dots',
         });
         loader.present();
         this.filesArray.forEach((f, i) => {
@@ -162,8 +161,7 @@ export class OpenCouncilFilePage {
     // to upload a picture to the firebase.
     takePicture(value) {
         let loader = this.loadingCtrl.create({
-            spinner: 'crescent',
-            content: "Please wait while uploading...",
+            spinner: 'dots',
         });
         Camera.getPicture({
             quality: 95,
@@ -221,8 +219,7 @@ export class OpenCouncilFilePage {
     // to upload a picture from gallery to the firebase.
     uploadPicture(value) {
         let loader = this.loadingCtrl.create({
-            spinner: 'crescent',
-            content: "Please wait while uploading...",
+            spinner: 'dots',
         });
         Camera.getPicture({
             quality: 95,
@@ -281,8 +278,7 @@ export class OpenCouncilFilePage {
     // to upload files from the device.
     importFile(value) {
         let loader = this.loadingCtrl.create({
-            spinner: 'crescent',
-            content: "Please wait while uploading...",
+            spinner: 'dots',
         });
         FileChooser.open()
             .then(uri => {

@@ -40,6 +40,8 @@ assignments-list{
     }
     .divider{
         background: #FAFAFA !important;
+       border-bottom: none !important;
+
     }
     .divider ion-label{
         font-family: Bernina-semibold, sans-serif;
@@ -50,5 +52,8 @@ assignments-list{
         border-bottom: 1px solid lightgray;
         border-top: 1px solid lightgray;
         margin-bottom: 0 !important;
+    }
+    .chat-icon{
+        font-size:12px !important;
     }
 }
