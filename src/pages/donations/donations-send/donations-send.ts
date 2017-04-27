@@ -15,12 +15,12 @@ declare var Stripe: any;
 export class DonationsSendPage {
   donationForm: FormGroup;
   private token: string = '';
+  donationtype = 'onetime';
   constructor(public zone: NgZone, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public http: Http, fb: FormBuilder, public nav: NavController, public navParams: NavParams) {
     this.donationForm = fb.group({
       amount: ['', Validators.required],
       fullname: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, validateEmail])],
-      donationtype: ['onetime', Validators.required],
       creditcardNo: ['', Validators.compose([Validators.required, Validators.minLength(18), Validators.maxLength(18)])],
       creditValidthru: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5)])],
     });
@@ -70,6 +70,10 @@ export class DonationsSendPage {
     event.target.setSelectionRange(start, start);
   }
 
+  selectDonationtype(type) {
+    this.donationtype = type;
+  }
+
   send(value) {
     console.log(value);
     let loader = this.loadingCtrl.create({
@@ -96,9 +100,9 @@ export class DonationsSendPage {
           amount: Number.parseInt(value.amount.substr(2)) * 100, // adding decimals
           fullname: value.fullname,
           email: value.email,
-          donationtype: value.donationtype,
+          donationtype: this.donationtype,
           cardNo: value.creditcardNo.split('-').join(''),
-          userid:localStorage.getItem('securityToken')
+          userid: localStorage.getItem('securityToken')
         }
 
         let baseURL = 'https://councilsapi-165009.appspot.com/';

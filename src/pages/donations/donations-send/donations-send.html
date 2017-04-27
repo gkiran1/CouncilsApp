@@ -18,7 +18,7 @@
 
 <ion-content>
   <form [formGroup]="donationForm">
-    <ion-item>
+    <ion-item class="top-border">
       <ion-label floating>Amount</ion-label>
       <ion-input type="text" name="amount" maxLength='8' formControlName="amount" (input)="addCurrencySysmbol($event)"></ion-input>
     </ion-item>
@@ -30,24 +30,26 @@
       <ion-label floating>Email</ion-label>
       <ion-input type="email" name="email" formControlName="email"></ion-input>
     </ion-item>
-    <ion-list class="period-list" radio-group name="donationtype" formControlName="donationtype">
-      <ion-item>
-        <ion-label>One time donation</ion-label>
-        <ion-radio value="onetime" checked></ion-radio>
+    <ion-list class="period-list" no-lines>
+      <ion-item (click)="selectDonationtype('onetime')" class="top-border">
+        <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': donationtype === 'onetime'}"></ion-icon>
+        <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': donationtype !== 'onetime'}"></ion-icon>
+        <h3>One time donation</h3>
       </ion-item>
-      <ion-item>
-        <ion-label>Monthly donation</ion-label>
-        <ion-radio value="monthly"></ion-radio>
+      <ion-item (click)="selectDonationtype('monthly')">
+        <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': donationtype === 'monthly'}"></ion-icon>
+        <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': donationtype !== 'monthly'}"></ion-icon>
+        <h3>Monthly donation</h3>
       </ion-item>
     </ion-list>
     <ion-label class="sub-heading">
       CREDIT CARD INFO
     </ion-label>
-     <ion-item>
+    <ion-item class="top-border">
       <ion-label floating>Number</ion-label>
       <ion-input type="text" name="creditcardNo" (input)="formatToCreditNumber($event)" maxLength='18' formControlName="creditcardNo"></ion-input>
     </ion-item>
-     <ion-item>
+    <ion-item>
       <ion-label floating>Valid Thru</ion-label>
       <ion-input type="text" name="creditValidthru" (input)="formatToValidThru($event)" maxLength="5" formControlName="creditValidthru"></ion-input>
     </ion-item>

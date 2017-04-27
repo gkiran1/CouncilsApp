@@ -4,4 +4,10 @@ editmember-page {
         font-size: 17px !important;
         color: #35373a !important;
     }
+     ion-list{
+        border-bottom: 1px solid lightgray;
+    }
+    .checkbox-icon .checkbox-checked::before{
+        content: "\e914" !important;
+    }
 }
