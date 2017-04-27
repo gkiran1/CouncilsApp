@@ -11,38 +11,38 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <ion-item-divider class='color' color="light">Send me push notifications for:</ion-item-divider>
+    <ion-item-divider ><ion-label color="light-dary">Send me push notifications for:</ion-label></ion-item-divider>
     <ion-list *ngIf="notSettings" no-lines>
-        <ion-item text-wrap>
-            <h3 item-left>All Activity</h3>
+        <ion-item text-wrap class="ion-item-first">
+            <ion-label class="label-styles">All Activity</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.allactivity" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
-        <ion-item text-wrap>
-            <h3 item-left>Agendas</h3>
+        <ion-item text-wrap class="ion-item-middle">
+            <ion-label class="label-styles">Agendas</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.agendas" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
-        <ion-item text-wrap>
-            <h3 item-left>Discussions</h3>
+        <ion-item text-wrap class="ion-item-middle">
+            <ion-label class="label-styles">Discussions</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.discussions" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
-        <ion-item text-wrap>
-            <h3 item-left>Private discussions</h3>
+        <ion-item text-wrap class="ion-item-middle">
+            <ion-label class="label-styles">Private discussions</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.pvtdiscussions" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
-        <ion-item text-wrap>
-            <h3 item-left>My assignments</h3>
+        <ion-item text-wrap class="ion-item-middle">
+            <ion-label class="label-styles">My assignments</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.assignments" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
-        <ion-item text-wrap>
-            <h3 item-left>Admin closes my assignment</h3>
+        <ion-item text-wrap class="ion-item-middle">
+            <ion-label class="label-styles">Admin closes my assignment</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.closingassignment" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
-        <ion-item text-wrap>
-            <h3 item-left>Files</h3>
+        <ion-item text-wrap class="ion-item-middle">
+            <ion-label class="label-styles">Files</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.files" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
-        <ion-item text-wrap>
-            <h3 item-left>Admin activate or inactivate my account</h3>
+        <ion-item text-wrap class="ion-item-last">
+            <ion-label class="label-styles">Admin activate or inactivate my account</ion-label>
             <ion-checkbox [(ngModel)]="notSettings.actinactaccount" (ionChange)="updateNotSettings()" color="secondary" item-right></ion-checkbox>
         </ion-item>
     </ion-list>
