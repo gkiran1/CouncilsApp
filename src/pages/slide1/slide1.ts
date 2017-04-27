@@ -14,7 +14,7 @@ import { DonationsWelcomePage } from '../donations/donations-welcome/donations-w
 export class slide1Page {
     isAdmin: boolean = false;
     constructor(public nav: NavController,
-    public menuPage: MenuPage) {
+        public menuPage: MenuPage) {
         if (localStorage.getItem('isAdmin') === 'true') {
             this.isAdmin = true;
         }
@@ -22,13 +22,15 @@ export class slide1Page {
     }
 
     setSelectedClass(button) {
+        if (document.getElementById('adminPage')) {
+            (document.getElementById('adminPage')).classList.remove("menu-selected");
+        }
 
-    (document.getElementById('adminPage')).classList.remove("menu-selected");
-    (document.getElementById('settingsPage')).classList.remove("menu-selected");
-    (document.getElementById('donationsPage')).classList.remove("menu-selected");
+        (document.getElementById('settingsPage')).classList.remove("menu-selected");
+        (document.getElementById('donationsPage')).classList.remove("menu-selected");
 
-    (document.getElementById(button)).classList.add("menu-selected");
-  }
+        (document.getElementById(button)).classList.add("menu-selected");
+    }
 
     adminPage(button) {
         this.setSelectedClass(button);
