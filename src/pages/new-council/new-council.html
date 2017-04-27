@@ -34,10 +34,10 @@
 			</ion-item-divider>
 
 			<!--<div *ngFor="let user of users">-->
-			<ion-list inset>
+			<ion-list>
 				<ng-container *ngFor="let user of users">
 
-					<ion-item *ngIf="!(user.isadmin)">
+					<ion-item class="ion-item-middle" *ngIf="!(user.isadmin)">
 						<!--<ion-avatar item-left>
 							<img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar">
 							<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar" />
