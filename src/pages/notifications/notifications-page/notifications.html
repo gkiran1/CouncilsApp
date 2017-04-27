@@ -10,10 +10,10 @@
 		</ion-row>
 	</ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content class="list-page">
 	<ng-container *ngIf="(notifications.length)">
 		<ion-list>
-			<ion-item *ngFor="let notification of notifications" text-wrap (click)="ActivityPage(notification)">
+			<ion-item  [ngClass]="i === 0 ? 'ion-item-first': (i === notifications.length-1 ? 'ion-item-last' : 'ion-item-middle')" *ngFor="let notification of notifications; let i = index" text-wrap (click)="ActivityPage(notification)">
 				<h3 [innerHTML]="notification.text"></h3>
 				<p class="createddate-lbl">{{notification.createddate| customdateformat}}</p>
 				<button ion-button item-right clear>
