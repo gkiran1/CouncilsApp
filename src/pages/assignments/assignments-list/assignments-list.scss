@@ -56,4 +56,7 @@ assignments-list{
     .chat-icon{
         font-size:12px !important;
     }
+     ion-item:last-child .ion-item-middle.item-md.item-block .item-inner, .ion-item-middle.item-ios.item-block .item-inner{
+        border-bottom: none !important;
+    }
 }
