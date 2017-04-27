@@ -49,14 +49,11 @@ assignments-list{
         color: #35373a !important;
     }
     ion-list{
-        border-bottom: 1px solid lightgray;
+        // border-bottom: 1px solid lightgray;
         border-top: 1px solid lightgray;
         margin-bottom: 0 !important;
     }
     .chat-icon{
         font-size:12px !important;
-    }
-     ion-item:last-child .ion-item-middle.item-md.item-block .item-inner, .ion-item-middle.item-ios.item-block .item-inner{
-        border-bottom: none !important;
     }
 }
