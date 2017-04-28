@@ -13,13 +13,14 @@
 
 <ion-content>
 	<ion-list>
-		<ion-item *ngFor="let user of users">
+		<ion-item *ngFor="let user of users; let i = index"
+			[ngClass]="users.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === users.length - 1 ? 'ion-item-last' : 'ion-item-middle'))">
 			<ion-avatar item-left>
 				<img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
 				<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
 			</ion-avatar>
 			<h3>{{user.firstname}} {{user.lastname}}</h3>
-			<p><span>{{user.councilnames}}</span></p>
+			<p class="council-names">{{user.councilnames}}</p>
 				<button ion-button item-right clear (click)="inactivatemember(user)">   
            <ion-icon class="councils-icon__inactivate menu-icon" ></ion-icon>
         </button>
