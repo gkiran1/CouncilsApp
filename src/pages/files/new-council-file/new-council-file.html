@@ -4,21 +4,23 @@
             <ion-col class="header-col">
                 <ion-icon class="councils-icon__close menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
             </ion-col>
-            <ion-col width-80>
-                <h3>New Council File</h3>
+            <ion-col width-80 class="header-col2">
+                <ion-title text-center>New Council File</ion-title>
             </ion-col>
         </ion-row>
     </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="list-page">
     <form [formGroup]="newCouncilFileForm" (ngSubmit)="newCouncilFileForm.value">
         <ion-item-group>
-            <ion-item-divider>
-                <ion-label>Which council will be viewing this file?</ion-label>
+            <ion-item-divider class="empty">
+                <ion-label color="light-dary">Which council will be viewing this file?</ion-label>
             </ion-item-divider>
             <ion-list radio-group id="council" name="council" formControlName="council">
-                <ion-item *ngFor="let c of councils">
+                <ion-item 
+                [ngClass]="councils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === councils.length - 1? 'ion-item-last' : 'ion-item-middle'))" 
+                *ngFor="let c of councils; let i = index">
                     <ion-label color="dark">{{(c | async)?.council}}</ion-label>
                     <ion-radio [value]="c | async" color="secondary"></ion-radio>
                 </ion-item>
