@@ -164,6 +164,9 @@ export class AgendaLiteEditPage {
       (<FormControl>this.agendaliteeditForm.controls['assignments']).setValue('');
       (<FormControl>this.agendaliteeditForm.controls['completedassignments']).setValue('');
       (<FormControl>this.agendaliteeditForm.controls['closingprayer']).setValue('');
+      this.showlist = false;
+      this.showlist1 = false;
+      this.showlist2 = false;
       this.updateUsers(councils.$key);
       (<FormControl>this.agendaliteeditForm.controls['assignedcouncil']).setValue(councils.council);
       this.assignedcouncil = councils;
@@ -361,11 +364,11 @@ export class AgendaLiteEditPage {
     return index;
   }
 
-  showList(event) {
+   showList(event) {
     let v = event.target.value;
     if (v.charAt('0') !== '@') {
-      event.target.value = '';
-      this.showlist = false; return;
+      event.target.value = '@' + event.target.value;
+      (<FormControl>this.agendaliteeditForm.controls['openingprayer']).setValue(event.target.value);
     }
     this.term = v.substr(1);
     this.showlist = true;
@@ -374,8 +377,8 @@ export class AgendaLiteEditPage {
   showList1(event) {
     let v1 = event.target.value;
     if (v1.charAt('0') !== '@') {
-      event.target.value = '';
-      this.showlist1 = false; return;
+      event.target.value = '@' + event.target.value;
+      (<FormControl>this.agendaliteeditForm.controls['spiritualthought']).setValue(event.target.value);
     }
     this.term = v1.substr(1);
     this.showlist1 = true;
@@ -384,8 +387,8 @@ export class AgendaLiteEditPage {
   showList2(event) {
     let v2 = event.target.value;
     if (v2.charAt('0') !== '@') {
-      event.target.value = '';
-      this.showlist2 = false; return;
+      event.target.value = '@' + event.target.value;
+      (<FormControl>this.agendaliteeditForm.controls['closingprayer']).setValue(event.target.value);
     }
     this.term = v2.substr(1);
     this.showlist2 = true;

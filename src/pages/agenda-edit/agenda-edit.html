@@ -26,7 +26,7 @@
 
         <ion-item>
             <ion-label floating>Opening Hymn</ion-label>
-            <ion-input type="text" name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>
+            <ion-input type="text" (focus)="showList($event)" name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -50,7 +50,7 @@
 
         <ion-item>
             <ion-label floating>Spiritual Thought</ion-label>
-            <ion-input type="text" (input)="showList1($event)" formControlName="spiritualthought"></ion-input>
+            <ion-input type="text" (focus)="showList1($event)" (input)="showList1($event)" formControlName="spiritualthought"></ion-input>
         </ion-item>
         <div *ngIf="showlist1" class="assignto-list">
             <ng-container *ngFor="let user of users | search:term:'username'">
@@ -209,7 +209,7 @@
         </div>
         <ion-item>
             <ion-label floating>Closing Prayer</ion-label>
-            <ion-input type="text" (input)="showList2($event)" formControlName="closingprayer"></ion-input>
+            <ion-input type="text" (focus)="showList2($event)" (input)="showList2($event)" formControlName="closingprayer"></ion-input>
         </ion-item>
 
     </form>

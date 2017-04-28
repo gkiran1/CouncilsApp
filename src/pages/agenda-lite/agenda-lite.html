@@ -31,7 +31,7 @@
 
         <ion-item>
             <ion-label floating>Opening Prayer</ion-label>
-            <ion-input type="text" (input)="showList($event)" formControlName="openingprayer"></ion-input>
+            <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="openingprayer"></ion-input>
         </ion-item>
         <div *ngIf="showlist" class="assignto-list">
             <ng-container *ngFor="let user of users | search:term:'username'">
@@ -50,7 +50,7 @@
 
         <ion-item>
             <ion-label floating>Spiritual Thought</ion-label>
-            <ion-input type="text" (input)="showList1($event)" formControlName="spiritualthought"></ion-input>
+            <ion-input type="text" (focus)="showList1($event)" (input)="showList1($event)" formControlName="spiritualthought"></ion-input>
         </ion-item>
         <div *ngIf="showlist1" class="assignto-list">
             <ng-container *ngFor="let user of users | search:term:'username'">
@@ -66,6 +66,16 @@
                 </ion-item>
             </ng-container>
         </div>
+
+        <!--<ion-label >Assignments</ion-label>      
+               <ion-icon  (click)="toggleGroup()" item-right [name]="isGroupShown() ? 'add' : 'remove'"></ion-icon>
+        <ion-list *ngFor="let assignment of assignmentslist" >
+                          
+            <ion-item text-wrap >
+                    
+                <div>{{assignment.description}}</div>
+            </ion-item>
+        </ion-list>-->
 
         <ion-item>
             <ion-label *ngIf="!assignments">Assignments</ion-label>
@@ -95,7 +105,7 @@
                 </ion-textarea>
         </ion-item>
 
-         <div *ngIf="showlist2" class="assignto-list">
+        <div *ngIf="showlist2" class="assignto-list">
             <ng-container *ngFor="let user of users | search:term:'username'">
                 <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto2(user)">
                     <ion-avatar item-left>
@@ -111,9 +121,9 @@
         </div>
         <ion-item>
             <ion-label floating>Closing Prayer</ion-label>
-            <ion-input type="text" (input)="showList2($event)" formControlName="closingprayer"></ion-input>
+            <ion-input type="text" (focus)="showList2($event)" (input)="showList2($event)" formControlName="closingprayer"></ion-input>
         </ion-item>
-       
+
 
     </form>
 </ion-content>

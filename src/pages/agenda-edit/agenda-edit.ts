@@ -174,6 +174,9 @@ export class AgendaEditPage {
             (<FormControl>this.agendaeditForm.controls['assignments']).setValue('');
             (<FormControl>this.agendaeditForm.controls['completedassignments']).setValue('');
             (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue('');
+            this.showlist = false;
+            this.showlist1 = false;
+            this.showlist2 = false;
             this.updateUsers(council.$key);
             (<FormControl>this.agendaeditForm.controls['assignedcouncil']).setValue(council.council);
             this.assignedcouncil = council;
@@ -444,8 +447,8 @@ export class AgendaEditPage {
     showList(event) {
         let v = event.target.value;
         if (v.charAt('0') !== '@') {
-            event.target.value = '';
-            this.showlist = false; return;
+            event.target.value = '@' + event.target.value;
+            (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue(event.target.value);
         }
         this.term = v.substr(1);
         this.showlist = true;
@@ -454,8 +457,8 @@ export class AgendaEditPage {
     showList1(event) {
         let v1 = event.target.value;
         if (v1.charAt('0') !== '@') {
-            event.target.value = '';
-            this.showlist1 = false; return;
+            event.target.value = '@' + event.target.value;
+            (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue(event.target.value);
         }
         this.term = v1.substr(1);
         this.showlist1 = true;
@@ -464,8 +467,8 @@ export class AgendaEditPage {
     showList2(event) {
         let v2 = event.target.value;
         if (v2.charAt('0') !== '@') {
-            event.target.value = '';
-            this.showlist2 = false; return;
+            event.target.value = '@' + event.target.value;
+            (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue(event.target.value);
         }
         this.term = v2.substr(1);
         this.showlist2 = true;
