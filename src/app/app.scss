@@ -837,3 +837,66 @@ ion-content ion-item ion-label{
 ion-list ion-item{
     border-bottom-color: #f4f4f4;
 }
+
+/************************** Custom Radio & Checkbox ********************************************/
+
+
+/****************** Custom Radio ******************************/
+.radio-md .radio-icon, .radio-ios .radio-icon {
+    position: relative;
+    display: block;    
+    border: none;
+}
+
+.radio-md .radio-inner {
+    width:0;
+}
+
+.radio-md .radio-checked .radio-inner:after, 
+.radio-ios .radio-checked .radio-inner {
+
+    display:inline-block;
+    content: '';    
+ 
+    /*Make it a small rectangle so the border will create an L-shape*/
+    width: 9px;
+    height: 18px;
+ 
+    /*Add a white border on the bottom and left, creating that 'L' */
+    border: solid #3CB18A;
+    border-width: 0 3px 3px 0;
+ 
+    /*Rotate the L 45 degrees to turn it into a checkmark*/
+    transform: rotate(45deg);
+  
+}
+
+/******************** Custom Checkbox ****************************/
+
+.checkbox-ios .checkbox-checked .checkbox-inner,
+.checkbox-md .checkbox-checked .checkbox-inner  {
+    display: inline-block;
+    content: '';
+    width: 9px;
+    height: 18px;
+    border: solid #3CB18A;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-ios .checkbox-checked,
+.checkbox-md .checkbox-checked {
+    background: transparent;
+}
+
+.checkbox-ios .checkbox-checked {
+    border: none !important;
+    border-radius: none !important;
+}
+
+.checkbox-ios .checkbox-icon,
+.checkbox-md .checkbox-icon {
+    height: 24px;
+    width: 24px;
+    border: none;
+}
