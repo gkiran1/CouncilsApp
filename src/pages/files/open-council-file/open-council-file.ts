@@ -7,7 +7,10 @@ import { FirebaseService } from '../../../environments/firebase/firebase-service
 import { Camera, Toast, File, FileChooser, FilePath } from 'ionic-native';
 import { Content } from 'ionic-angular';
 import * as firebase from 'firebase';
+import { Subject, Subscription } from 'rxjs';
+import { AngularFire } from 'angularfire2';
 import * as moment from 'moment';
+declare var FileTransfer;
 
 @Component({
     templateUrl: 'open-council-file.html',
@@ -39,32 +42,80 @@ export class OpenCouncilFilePage {
     imagePath: any;
     profilePictureRef: any;
     pictureRef: any;
+    councilId: any;
+    councils: any;
+    size: any;
     openCouncilFileForm: FormGroup;
     filepath1: string;
+    isNewCouncilFileflag = true;
+    userSubscription: Subscription;
     now = moment().valueOf();
     constructor(public navparams: NavParams,
         public nav: NavController,
+        public af: AngularFire,
         public appservice: AppService,
         public firebaseservice: FirebaseService,
         public actionSheetCtrl: ActionSheetController,
         public menuctrl: MenuController,
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController) {
-
         this.profilePictureRef = firebase.storage().ref('/files/');
         appservice.getUser().subscribe(user => this.user = user);
-        this.file = navparams.get('file');
-        this.value = navparams.get('value');
-        this.file.$key = navparams.get('file1');
-        this.file.name = this.value.filename;
-        this.file.type = this.value.filetype;
-        this.filesArray.push(this.file);
-        firebaseservice.getFilesByKey(navparams.get('file1')).subscribe(res => {
-            this.file1 = res;
-        });
-        this.file.size = this.formatBytes(this.file.size);
+        this.isNewCouncilFileflag = navparams.get('flag');
+        // alert(this.isNewCouncilFileflag);
+        if (this.isNewCouncilFileflag) {
+            this.file = navparams.get('file');
+            this.value = navparams.get('value');
+            this.file.$key = navparams.get('file1');
+            this.file.name = this.value.filename;
+            this.file.type = this.value.filetype;
+            this.filesArray.push(this.file);
+            firebaseservice.getFilesByKey(navparams.get('file1')).subscribe(res => {
+                this.file1 = res;
+            });
+            this.file.size = this.formatBytes(this.file.size);
+        }
+        else {
+            this.file = navparams.get('item');
+            this.value = this.file;
+            console.log(this.file);
+            this.councilId = this.file.councilid;
+            this.userSubscription = this.af.auth.subscribe(auth => {
+                if (auth !== null) {
+                    firebaseservice.getFilesByCouncil(this.councilId).subscribe(files => {
+                        this.pictureRef = this.profilePictureRef.child(this.councilId + '//' + this.file.$key + '//' + this.value.filename).getMetadata();
+                        this.pictureRef.then((metadata) => {
+                            this.filesArray.push(...files);
+                            this.size = this.formatBytes(metadata.size);
+                            // this.subject.next(this.agendasArray.length);
+                        })
+                    });
+                }
+                // if (auth !== null) {
+                //     this.af.database.object('/users/' + auth.uid).subscribe(usr => {
+                //         this.user = usr;
+                //         console.log(this.file.councilid);
+                        
+                //         af.database.list('/files').subscribe(files => {
+                //             this.filesArray = [];
+                //             files.forEach(file => {
+                //                 if (this.user.councils.includes(this.file.councilid)) {
+                //                     this.pictureRef = this.profilePictureRef.child(this.councilId + '//' + this.file.$key + '//' + this.value.filename).getMetadata();
+                //                     this.pictureRef.then((metadata) => {
+                //                         this.filesArray.push(...files);
+                //                         this.size = this.formatBytes(metadata.size);
+                //                         // this.subject.next(this.agendasArray.length);
+                //                     })
+                //                 }
+                //             });
+                //         })
+                //     })
+                // }
+            });
+        }
     }
     delete(file) {
+        // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
             spinner: 'dots',
         });
@@ -72,7 +123,7 @@ export class OpenCouncilFilePage {
         //to delete files form the database using key
         this.firebaseservice.deleteFilesByKey(file.$key).then((res) => {
             //to delete files from the storage using file name
-            this.profilePictureRef.child(this.value.councilid + '//' + file.$key + '//' + file.name).delete().then(res => {
+            this.profilePictureRef.child(this.value.councilid + '//' + file.$key + '//' + (file.name || file.filename)).delete().then(res => {
                 this.filesArray.forEach((f, i) => {
                     if (f.$key == file.$key) {
                         loader.dismiss();
@@ -80,14 +131,19 @@ export class OpenCouncilFilePage {
                         console.log(this.filesArray);
                     }
                 })
+                loader.dismiss();
             }).catch((error) => {
+                loader.dismiss();
                 console.log(error);
             });
         }).catch((err) => {
+            loader.dismiss();
             console.log(err);
         });
     }
     deleteFiles(filesArray) {
+        console.log('filesArray:' + filesArray);
+        // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
             spinner: 'dots',
         });
@@ -95,17 +151,79 @@ export class OpenCouncilFilePage {
         this.filesArray.forEach((f, i) => {
             //to delete all the files in the array
             this.firebaseservice.deleteFilesByKey(filesArray[i].$key).then(res => {
-                this.profilePictureRef.child(this.value.councilid + '//' + filesArray[i].$key + '//' + this.filesArray[i].name).delete().then(res => {
+                this.profilePictureRef.child(this.value.councilid + '//' + filesArray[i].$key + '//' + (this.filesArray[i].name || this.filesArray[i].filename)).delete().then(res => {
                     loader.dismiss();
                     this.filesArray.splice(0, this.filesArray.length);
                 }).catch(err => {
+                    loader.dismiss();
                     console.log(err);
                 })
             }).catch(err => {
+                loader.dismiss();
                 console.log(err);
             })
 
         })
+    }
+    downloadFile(item) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'dots',
+        });
+        loader.present();
+        // path to download a file to mobile.
+        var targetPath = cordova.file.cacheDirectory + '/CouncilDownloads/' + item.filename;
+        let ProfileRef = this.profilePictureRef.child(item.councilid + '//' + item.$key + '//' + item.filename)
+        var filetype = (item.filename.substr(item.filename.lastIndexOf('.') + 1)).toUpperCase();
+        var mimeType;
+        switch (filetype) {
+            case 'PNG':
+                mimeType = 'image/png';
+                break;
+            case 'JPG':
+                mimeType = 'image/jpeg';
+                break;
+            case 'DOC':
+                mimeType = 'application/msword';
+                break;
+            case 'PDF':
+                mimeType = 'application/pdf';
+                break;
+            case 'XLS':
+                mimeType = 'application/vnd.ms-excel';
+                break;
+            default:
+                break;
+        }
+        let fileTransfer = new FileTransfer();
+        ProfileRef.getDownloadURL().then((url) => {
+            var trustHosts = true;
+            fileTransfer.download(url, targetPath, function (res) {
+                loader.dismiss();
+                cordova.plugins.fileOpener2.open(
+                    targetPath,
+                    mimeType,
+                    {
+                        error: function (e) {
+                            loader.dismiss();
+                            console.log(e);
+                            // alert('Error status: ' + e.status + ' - Error message: ' + e.message);
+                        },
+                        success: function () {
+                            loader.dismiss();
+                            console.log('file opened successfully.');
+                        }
+                    }
+                );
+            }, function (e) {
+                loader.dismiss();
+                // alert('Target path:' + targetPath + JSON.stringify(e));
+            })
+
+        }).catch((error) => {
+            loader.dismiss();
+            console.log(error);
+        });
+
     }
     edit() {
         this.deleteflag = true;
@@ -160,6 +278,7 @@ export class OpenCouncilFilePage {
     }
     // to upload a picture to the firebase.
     takePicture(value) {
+        // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
             spinner: 'dots',
         });
@@ -218,6 +337,7 @@ export class OpenCouncilFilePage {
     }
     // to upload a picture from gallery to the firebase.
     uploadPicture(value) {
+        // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
             spinner: 'dots',
         });
@@ -277,6 +397,7 @@ export class OpenCouncilFilePage {
     }
     // to upload files from the device.
     importFile(value) {
+        // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
             spinner: 'dots',
         });
@@ -362,6 +483,7 @@ export class OpenCouncilFilePage {
     }
     // to convert bytes to KB/MB/GB/TB formats
     formatBytes(bytes) {
+        // this.isNewCouncilFileflag = true;
         if (bytes < 1024) return bytes + "b";
         else if (bytes < 1048576) return Math.round(bytes / 1024) + "kb";
         else if (bytes < 1073741824) return Math.round(bytes / 1048576) + "mb";

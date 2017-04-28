@@ -20,32 +20,34 @@
         </ion-row>
     </ion-navbar>
 </ion-header>
-<ion-content id="content1">
-    <ion-item-divider class="empty"></ion-item-divider>
-    <ion-item>
-        <ng-container *ngIf="!listdisplayflag">
-            <ion-row class="row" *ngFor="let file of filesArray">
-                <ion-col width-10>
-                    <ion-icon class="councils-icon__file menu-icon" name="document" color="secondary"></ion-icon>
-                </ion-col>
-                <ion-col width-70>
-                    <p><span class="council-styles">{{file.name}}</span></p>
-                    <p>by <span ion-text color="secondary">{{value.createdUser}}</span></p>
-                    <p>
-                        {{file.size}} {{file.type}} file</p>
-                        <p><span class="agendadate-styles">{{file.createdDate | customdateformat}}</span></p>
-                </ion-col>
+<ion-content class="list-page" id="content1">
+    <ng-container *ngIf="!listdisplayflag">
+        <ion-list>
+            <ion-item [ngClass]="i === 0 ? 'ion-item-first': (i === filesArray.length-1 ? 'ion-item-last' : 'ion-item-middle')" *ngFor="let file of filesArray; let i = index"
+                text-wrap (click)="downloadFile(file)">
+                <ion-row>
+                    <ion-col width-10>
+                        <ion-icon class="councils-icon__file menu-icon" name="document" color="secondary"></ion-icon>
+                    </ion-col>
+                    <ion-col width-70>
+                        <p><span class="council-styles">{{file.name || file.filename}}</span></p>
+                        <p>by <span ion-text color="secondary">{{value.createdUser}}</span></p>
+                        <p>
+                            {{file.size || size}} {{file.type || file.filetype}} file
+                            <span class="agendadate-styles">{{file.createdDate | customdateformat}}</span></p>
+                    </ion-col>
                     <ng-container *ngIf="deleteflag">
                         <button color="secondary" class="delete-styles" id="councilsPage" name="councilsPage" ion-button clear (click)="delete(file)">
                             <ion-icon class="councils-icon__inactivate menu-icon" name="close-circle" color="secondary"></ion-icon>
                             </button>
                     </ng-container>
-            </ion-row>
-        </ng-container>
-    </ion-item>
+                </ion-row>
+                </ion-item>
+        </ion-list>
+    </ng-container>
 </ion-content>
 <ion-footer>
-    <ng-container *ngIf="!deleteflag">
+    <ng-container *ngIf="!deleteflag && isNewCouncilFileflag">
         <button ion-button color="secondary" clear block (click)="addFileActionsPage(value)">Add File</button>
     </ng-container>
     <ng-container *ngIf="deleteflag">

@@ -15,30 +15,47 @@ import { NotificationsPage } from '../../notifications/notifications-page/notifi
     selector: 'files-page'
 })
 export class FilesListPage {
+    councilsIds: any;
+    user;
     count$ = new Subject();
     filesArray = [];
     profilePictureRef: any;
     notificationsCount;
-
+    isFilesListPage = false;
+    userSubscription: Subscription;
     constructor(
         public fs: FirebaseService,
         public nav: NavController,
+        public af: AngularFire,
         public loadingCtrl: LoadingController) {
         this.filesArray = [];
         this.profilePictureRef = firebase.storage().ref('/files/');
-        if (localStorage.getItem('userCouncils') !== null) {
-            var councilsIds = localStorage.getItem('userCouncils').split(',');
-            councilsIds.forEach(councilId => {
-                fs.getFilesByCouncilId(councilId).subscribe(files => {
-                    this.filesArray.push(...files);
-                    let length = this.filesArray.length;
-                    length = length ? length : null;
-                    this.count$.next(length);
-                    // this.subject.next(this.agendasArray.length);
-                });
-            });
-        }
 
+        this.userSubscription = this.af.auth.subscribe(auth => {
+            if (auth !== null) {
+                this.af.database.object('/users/' + auth.uid).subscribe(usr => {
+                    this.user = usr;
+                    console.log(this.user);
+                    af.database.list('/files').subscribe(files => {
+                        this.filesArray = [];
+
+                          this.user.councils.forEach(council=>{
+                              let f;
+                                 files.forEach(file => {
+                                    if(council === file.councilid){
+                                        f = file;
+                                    }
+                                 });
+                                 if(f) this.filesArray.push(f);
+                            });
+                            
+                        let count = this.filesArray.length;
+                        count = count ? count : null;
+                        this.count$.next(count);
+                    })
+                })
+            }
+        });
         fs.getNotCnt().subscribe(count => {
             this.notificationsCount = count;
         });
@@ -47,7 +64,7 @@ export class FilesListPage {
     viewCouncilFile(item) {
         console.log(item);
         // alert(item.councilid)
-        this.nav.push(ViewCouncilFilePage, { councilid: item.councilid, councilname: item.councilname });
+        this.nav.push(OpenCouncilFilePage, { item: item, flag: this.isFilesListPage });
     }
     getCount() {
         return this.count$;

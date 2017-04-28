@@ -6,6 +6,10 @@ open-council-file-page {
         position: absolute;
         top: 15px;
     }
+    .list-page ion-item {
+        height: auto;
+        
+    }
     .row{
     border-bottom:1px solid #DEDEDE !important;
     }
@@ -27,9 +31,6 @@ open-council-file-page {
         font-size: 17px !important;
         color:#35373A !important;
     }
-.item-md,.item-ios{
-    border-bottom: none !important;
-}
     .empty{    
     height: 20px;
     border-top: 1px solid #e8e9eb;
@@ -60,7 +61,8 @@ open-council-file-page {
 .agendadate-styles{
         font-family: Bernina-Regular !important;
         color:#a9aaac !important;
-        // margin-left: 20px;   
+        position: absolute;
+        right: 16px;
     }
     .delete-styles{
         margin: 9px 16px 9px 0px;

@@ -16,18 +16,17 @@
     </ion-navbar>
 </ion-header>
 <!--<ion-item-divider class="empty"></ion-item-divider>-->
-<ion-content>
+<ion-content class="list-page">
     <ng-container *ngIf="filesArray.length">
-        <ion-item-divider class="empty"></ion-item-divider>
-        <ion-list inset>
-            <ion-item class="row" *ngFor="let item of filesArray" (click)="viewCouncilFile(item)">
+        <ion-list>
+            <ion-item [ngClass]="i === 0 ? 'ion-item-first': (i === filesArray.length-1 ? 'ion-item-last' : 'ion-item-middle')" *ngFor="let item of filesArray; let i = index" text-wrap (click)="viewCouncilFile(item)">
                 <button ion-button item-right clear>
       <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" end></ion-icon>
       </button>
                 <span class="council-styles">{{item.councilname}}</span>
                 <p><span class="name-styles">{{item.councilname}} {{item.filename}}</span></p>
-                        <p>by <span ion-text color="secondary">{{item.createdUser}}</span></p>
-                        <p><span class="date-styles">{{item.createdDate | customtimeformat}}</span></p>
+                        <p>by <span ion-text color="secondary">{{item.createdUser}}</span>
+                        <span class="date-styles">{{item.createdDate | customtimeformat}}</span></p>
             </ion-item>
         </ion-list>
     </ng-container>

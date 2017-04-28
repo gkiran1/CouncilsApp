@@ -519,7 +519,7 @@ export class FirebaseService {
                 orderByChild: 'councilid',
                 equalTo: councilId
             }
-        }).map(results => results);
+        }).take(1).map(results => results);
     }
     createDiscussion(discussion: any) {
         return this.rootRef.child('discussions').push(

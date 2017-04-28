@@ -31,7 +31,7 @@ export class NewCouncilFilePage {
     $key: '',
     images: []
   }
-
+  isNewCouncilFileflag=false;
   now = moment().valueOf();
 
   constructor(
@@ -134,8 +134,9 @@ export class NewCouncilFilePage {
             this.pictureRef.then((metadata) => {
               loader.dismiss();
               // Metadata now contains the metadata like filesize and type for 'images/...'
+              this.isNewCouncilFileflag=true;
               this.nav.push(OpenCouncilFilePage, {
-                file: metadata, file1: fileId, value: value
+                file: metadata, file1: fileId, value: value,flag:this.isNewCouncilFileflag
               });
             }).catch((error) => {
               loader.dismiss();
@@ -185,9 +186,10 @@ export class NewCouncilFilePage {
             this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
             this.pictureRef.then((metadata) => {
               loader.dismiss();
+              this.isNewCouncilFileflag=true;
               // Metadata now contains the metadata like filesize and type for 'images/...'
               this.nav.push(OpenCouncilFilePage, {
-                file: metadata, file1: fileId, value: value
+                file: metadata, file1: fileId, value: value,flag:this.isNewCouncilFileflag
               });
             }).catch((error) => {
               loader.dismiss();
@@ -283,9 +285,10 @@ export class NewCouncilFilePage {
                     this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
                     this.pictureRef.then((metadata) => {
                       loader.dismiss();
+                      this.isNewCouncilFileflag=true;
                       // Metadata now contains the metadata like filesize and type for 'images/...'
                       this.nav.push(OpenCouncilFilePage, {
-                        file: metadata, file1: fileId, value: value
+                        file: metadata, file1: fileId, value: value,flag:this.isNewCouncilFileflag
                       });
                     }).catch((error) => {
                       loader.dismiss();
