@@ -32,6 +32,8 @@ export class AgendaLitePage {
   showlist1 = false;
   showlist2 = false;
   user;
+  // shownGroup = null;
+  // isGroupShown = true;
 
   constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
@@ -80,6 +82,19 @@ export class AgendaLitePage {
 
   agendasArray = [];
   createagenda(agenda) {
+
+    // if ((this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== agenda.openingprayer) {
+    //   this.showAlert('Please assign to a valid user');
+    //   return;
+    // }
+    // if ((this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== agenda.spiritualthought) {
+    //   this.showAlert('Please assign to a valid user');
+    //   return;
+    // }
+    // if ((this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== agenda.closingprayer) {
+    //   this.showAlert('Please assign to a valid user');
+    //   return;
+    // }
     let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
     agenda.assigneddate = moment(assigneddate).toISOString();
     agenda.discussionitems = (agenda.discussionitems != undefined && agenda.discussionitems.length > 0) ? agenda.discussionitems.replace(/-/gi, '').trim() : '';
@@ -132,6 +147,9 @@ export class AgendaLitePage {
       (<FormControl>this.newagendaliteForm.controls['assignments']).setValue('');
       (<FormControl>this.newagendaliteForm.controls['completedassignments']).setValue('');
       (<FormControl>this.newagendaliteForm.controls['closingprayer']).setValue('');
+      this.showlist = false;
+      this.showlist1 = false;
+      this.showlist2 = false;
       this.updateUsers(councils.$key);
       (<FormControl>this.newagendaliteForm.controls['assignedcouncil']).setValue(councils.council);
       this.assignedcouncil = councils;
@@ -166,7 +184,7 @@ export class AgendaLitePage {
   }
 
   cancel() {
-    this.nav.pop({animate: true, direction: 'left'})
+    this.nav.pop({ animate: true, direction: 'left' })
   }
   searchFn(event) {
     this.term = event.target.value;
@@ -201,8 +219,8 @@ export class AgendaLitePage {
   showList(event) {
     let v = event.target.value;
     if (v.charAt('0') !== '@') {
-      event.target.value = '';
-      this.showlist = false; return;
+      event.target.value = '@' + event.target.value;
+      (<FormControl>this.newagendaliteForm.controls['openingprayer']).setValue(event.target.value);
     }
     this.term = v.substr(1);
     this.showlist = true;
@@ -211,8 +229,8 @@ export class AgendaLitePage {
   showList1(event) {
     let v1 = event.target.value;
     if (v1.charAt('0') !== '@') {
-      event.target.value = '';
-      this.showlist1 = false; return;
+      event.target.value = '@' + event.target.value;
+      (<FormControl>this.newagendaliteForm.controls['spiritualthought']).setValue(event.target.value);
     }
     this.term = v1.substr(1);
     this.showlist1 = true;
@@ -221,8 +239,8 @@ export class AgendaLitePage {
   showList2(event) {
     let v2 = event.target.value;
     if (v2.charAt('0') !== '@') {
-      event.target.value = '';
-      this.showlist2 = false; return;
+      event.target.value = '@' + event.target.value;
+      (<FormControl>this.newagendaliteForm.controls['closingprayer']).setValue(event.target.value);
     }
     this.term = v2.substr(1);
     this.showlist2 = true;
@@ -279,5 +297,17 @@ export class AgendaLitePage {
     }
     this.firebaseservice.createActivity(activity);
   }
+
+  // toggleGroup() {
+  //   if (this.isGroupShown==false) {
+  //     this.isGroupShown = true;
+  //   } else {
+  //     this.isGroupShown = false;
+  //   }
+  //   console.log("shownGroup",this.isGroupShown);
+  // };
+  // isGroupShown() {
+  //   return this.shownGroup === group;
+  // };
 
 }
