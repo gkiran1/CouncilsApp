@@ -46,4 +46,8 @@ agendas-page {
 .item-md [item-right]{
     margin: -11px -10px -11px 40px;    
 }
+ .ion-item-middle.item-ios.item-block:last-child .item-inner,
+    .ion-item-middle.item-md.item-block:last-child .item-inner{
+        border-bottom: none !important;
+    }
 }
