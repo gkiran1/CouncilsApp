@@ -33,20 +33,18 @@
 				<ion-label class="font1 line-height">Who do you want to add to this council?</ion-label>
 			</ion-item-divider>
 
-			<!--<div *ngFor="let user of users">-->
 			<ion-list>
 				<ng-container *ngFor="let user of users; let i = index">
-						<ion-item *ngIf="!(user.isadmin)" [ngClass]="i===0?'ion-item-first':(i===users.length - 1? 'ion-item-last': 'ion-item-middle')"
-							[attr.data-index]="i ">
-							<ion-avatar item-left>
+					<ion-item [ngClass]="i===0?'ion-item-first':(i===users.length - 1? 'ion-item-last': 'ion-item-middle')" [attr.data-index]="i">
+						<ion-avatar item-left>
 								<img [src]="(user)?.avatar " class="avatarImage " *ngIf="(user)?.avatar && (user)?.avatar !=='avatar' " />
 								<img src="assets/icon/noavatar.png " class="avatarImage " *ngIf="!(user)?.avatar || (user)?.avatar==='avatar' " />
 							</ion-avatar>
-							<ion-label>
-								<h4 class="username-styles ">{{user.firstname}} {{user.lastname}}</h4>
-								<p>{{user.councilnames}}</p>
-							</ion-label>
-							<ion-checkbox required [(ngModel)]="user.selected " color="secondary " name="checkbox " item-right name="selectedUser "></ion-checkbox>
+						<ion-label>
+							<h4 class="username-styles">{{user.firstname}} {{user.lastname}}</h4>
+							<p>{{user.councilnames}}</p>
+						</ion-label>
+						<ion-checkbox required [(ngModel)]="user.selected" color="secondary" name="checkbox" item-right name="selectedUser"></ion-checkbox>
 					</ion-item>
 				</ng-container>
 			</ion-list>
@@ -55,7 +53,7 @@
 </ion-content>
 
 <ion-footer>
-	<ion-toolbar class="createbtn " text-center>
-		<button ion-button clear color="secondary " name="Create " type="submit " (click)="createCouncil() " [disabled]="!newCouncilForm.form.valid ">Create</button>
+	<ion-toolbar class="createbtn" text-center>
+		<button ion-button clear color="secondary" name="Create" type="submit" (click)="createCouncil()" [disabled]="!newCouncilForm.form.valid">Create</button>
 	</ion-toolbar>
 </ion-footer>
