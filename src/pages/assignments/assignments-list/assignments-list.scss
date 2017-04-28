@@ -49,11 +49,22 @@ assignments-list{
         color: #35373a !important;
     }
     ion-list{
-        // border-bottom: 1px solid lightgray;
-        border-top: 1px solid lightgray;
+        border-bottom: 1px solid #E8E9EB;
+        border-top: 2px solid #E8E9EB;
         margin-bottom: 0 !important;
+    }
+    .list-md{
+         border-top: 2px solid #E8E9EB;
     }
     .chat-icon{
         font-size:12px !important;
+    }
+
+    .ion-item-middle.item-ios.item-block:last-child .item-inner,
+    .ion-item-middle.item-md.item-block:last-child .item-inner{
+        border-bottom: none !important;
+    }
+    .noborder.list.list-ios{
+        border:none !important;
     }
 }

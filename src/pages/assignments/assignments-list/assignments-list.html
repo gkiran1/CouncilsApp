@@ -20,8 +20,8 @@
 
   <ng-container *ngIf="(personalAssignmentsArray.length || councilAssignmentsArray.length || completedAssignmentsArray.length)">
     <ion-item class="divider" *ngIf="personalAssignmentsArray.length">PERSONAL</ion-item>
-    <ion-list>
-      <ion-item [ngClass]="i===0?'ion-item-first':(i===personalAssignmentsArray.length - 1? 'ion-item-last': 'ion-item-middle')"  (click)="assignmentSelected(item, i,'personal')" *ngFor="let item of personalAssignmentsArray; let i = index" [attr.data-index]="i">
+    <ion-list class="noborder">
+      <ion-item class="'ion-item-middle"  (click)="assignmentSelected(item, i,'personal')" *ngFor="let item of personalAssignmentsArray; let i = index" [attr.data-index]="i">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': personalselectedIdx === i}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': personalselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
@@ -32,7 +32,7 @@
 
     <ion-item class="divider" *ngIf="councilAssignmentsArray.length">COUNCIL</ion-item>
     <ion-list>
-      <ion-item  [ngClass]="i===0?'ion-item-first':(i===councilAssignmentsArray.length - 1? 'ion-item-last': 'ion-item-middle')"  (click)="assignmentSelected(item, i,'council')" *ngFor="let item of councilAssignmentsArray; let i = index" [attr.data-index]="i">
+      <ion-item class="ion-item-middle"  (click)="assignmentSelected(item, i,'council')" *ngFor="let item of councilAssignmentsArray; let i = index" [attr.data-index]="i">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': councilselectedIdx === i}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': councilselectedIdx !== i}"></ion-icon>
         <h3 class="inline-block">{{item.description}}</h3>
@@ -44,7 +44,7 @@
 
     <ion-item class="divider" *ngIf="completedAssignmentsArray.length">COMPLETED</ion-item>
     <ion-list>
-      <ion-item  [ngClass]="i===0?'ion-item-first':(i===completedAssignmentsArray.length - 1? 'ion-item-last': 'ion-item-middle')"  (click)="assignmentSelected(item, i,'completed')" *ngFor="let item of completedAssignmentsArray; let i = index"
+      <ion-item class="ion-item-middle" *ngFor="let item of completedAssignmentsArray; let i = index"
         [attr.data-index]="i">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': completedselectedIdx === i}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': completedselectedIdx !== i}"></ion-icon>
