@@ -4,14 +4,14 @@
             <ion-col class="header-col">
                 <ion-icon class="councils-icon__close menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
             </ion-col>
-            <ion-col width-80>
+            <ion-col width-80 class="header-col2">
                 <ion-title text-center>New Council Discussion</ion-title>
             </ion-col>
         </ion-row>
     </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="list-page">
     <form [formGroup]="newCouncilDiscussionForm" (ngSubmit)="newCouncilDiscussionForm.value" >
         <ion-item-group>
             <ion-item-divider>
@@ -21,14 +21,14 @@
             <ion-item>
                 <ion-input type="text" id="topic" name="topic" maxLength="25" formControlName="topic" placeholder="Discussion Topic" clearInput></ion-input>
             </ion-item>
-            <ion-item-divider>
+            <ion-item-divider class="empty">
                 <ion-label class="font2">Must be 25 characters or less</ion-label>
             </ion-item-divider>
             <ion-item-divider item-wrap>
                 <ion-label class="font1 line-height">Which council will be discussing this topic?</ion-label>
             </ion-item-divider>
             <ion-list radio-group id="council" name="council" formControlName="council">
-                <ion-item *ngFor="let c of councils">
+                <ion-item [ngClass]="i === 0 ? 'ion-item-first' : (i === councils.length - 1 ? 'ion-item-last' : 'ion-item-middle')" *ngFor="let c of councils; let i = index">
                     <ion-label class="font3">{{c.council}}</ion-label>
                     <ion-radio [value]="c" color="secondary" ></ion-radio>
                 </ion-item>
