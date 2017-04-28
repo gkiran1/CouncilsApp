@@ -20,7 +20,8 @@
         </ion-item>
 
         <div class="login-button-container">
-            <button name="loginbtn" id="loginbtn" ion-button block clear color="secondary" class="login-button" type="submit" [disabled]="!loginForm.form.valid" text-capitalize>Log In</button>
+            <ion-spinner name="dots" *ngIf="show" color="primary" ></ion-spinner>
+            <button name="loginbtn" *ngIf="!show" id="loginbtn" ion-button block clear color="secondary" class="login-button" type="submit" [disabled]="!loginForm.form.valid" text-capitalize>Log In</button>
         </div>
     </form>
 </ion-content>

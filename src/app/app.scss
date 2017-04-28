@@ -724,11 +724,19 @@ ion-avatar {
     border-bottom: none !important;
 }
 
+ion-badge, .badge-md {
+    border-radius:50%;
+    padding:3px;
+    width: 15px;
+    height: 15px;
+    font-family: Bernina-Regular;
+}
+
     .notification-badge {
         position:absolute; 
         font-weight: bold; 
-        top:-5px; 
-        left:9px; 
+        top:2px; 
+        left:15px; 
         font-size:9px
     }
     ion-title{
@@ -809,6 +817,11 @@ ion-avatar {
 align-items: center !important;
 }
     
+.login-button-container .spinner svg {
+    width: 42px !important;
+    height: 42px !important;
+    margin-top: 30px !important;
+}
 
     
 
@@ -837,6 +850,7 @@ ion-content ion-item ion-label{
 ion-list ion-item{
     border-bottom-color: #f4f4f4;
 }
+
 
 /************************** Custom Radio & Checkbox ********************************************/
 
@@ -900,3 +914,4 @@ ion-list ion-item{
     width: 24px;
     border: none;
 }
+
