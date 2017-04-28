@@ -33,4 +33,10 @@ agenda-lite-edit{
         font-size: 17px;
     }
 
+    ion-footer button:first-child{
+        padding-left:15px;
+    }
+    ion-footer button:last-child{
+        padding-right: 15px;
+    }
 }

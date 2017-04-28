@@ -77,4 +77,10 @@ new-assignment-page {
         font-size: 17px !important;
         color: #35373a !important;
     }
+    ion-footer button:first-child{
+        padding-left:15px;
+    }
+    ion-footer button:last-child{
+        padding-right: 15px;
+    }
 }
