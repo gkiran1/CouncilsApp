@@ -12,7 +12,9 @@
 </ion-header>
 <ion-content class="background-styles">
     <ion-list>
-        <ion-item class="ion-item-middle" *ngFor="let user of users">
+        <ion-item 
+        [ngClass]="users.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === users.length - 1 ? 'ion-item-last' : 'ion-item-middle'))"
+         *ngFor="let user of users; let i = index">
             <ion-avatar item-left>
                 <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
                 <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
