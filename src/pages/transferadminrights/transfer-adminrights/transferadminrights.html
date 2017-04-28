@@ -10,15 +10,17 @@
 		</ion-row>
 	</ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content class="background">
 	<ion-list>
-		<ion-item *ngFor="let user of users" (click)="transferAdminRights(user)">
+		<ion-item 
+		[ngClass]="users.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === users.length - 1 ? 'ion-item-last' : 'ion-item-middle'))"
+		*ngFor="let user of users; let i = index" (click)="transferAdminRights(user)">
 			<ion-avatar item-left>
 				<img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
 				<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
 			</ion-avatar>
 			<h3>{{user.firstname}} {{user.lastname}}</h3>
-			<p><span>{{user.councilnames}}</span></p>
+			<p class="council-names" >{{user.councilnames}}</p>
 		</ion-item>
 	</ion-list>
 </ion-content>
