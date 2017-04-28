@@ -311,34 +311,34 @@ export class AgendaPage {
     }
 
     showList(event) {
-        let v = event.target.value;
-        if (v.charAt('0') !== '@') {
-            event.target.value = '';
-            this.showlist = false; return;
-        }
-        this.term = v.substr(1);
-        this.showlist = true;
+    let v = event.target.value;
+    if (v.charAt('0') !== '@') {
+      event.target.value = '@' + event.target.value;
+      (<FormControl>this.newagendaForm.controls['openingprayer']).setValue(event.target.value);
     }
+    this.term = v.substr(1);
+    this.showlist = true;
+  }
 
-    showList1(event) {
-        let v1 = event.target.value;
-        if (v1.charAt('0') !== '@') {
-            event.target.value = '';
-            this.showlist1 = false; return;
-        }
-        this.term = v1.substr(1);
-        this.showlist1 = true;
+  showList1(event) {
+    let v1 = event.target.value;
+    if (v1.charAt('0') !== '@') {
+      event.target.value = '@' + event.target.value;
+      (<FormControl>this.newagendaForm.controls['spiritualthought']).setValue(event.target.value);
     }
+    this.term = v1.substr(1);
+    this.showlist1 = true;
+  }
 
-    showList2(event) {
-        let v2 = event.target.value;
-        if (v2.charAt('0') !== '@') {
-            event.target.value = '';
-            this.showlist2 = false; return;
-        }
-        this.term = v2.substr(1);
-        this.showlist2 = true;
+  showList2(event) {
+    let v2 = event.target.value;
+    if (v2.charAt('0') !== '@') {
+      event.target.value = '@' + event.target.value;
+      (<FormControl>this.newagendaForm.controls['closingprayer']).setValue(event.target.value);
     }
+    this.term = v2.substr(1);
+    this.showlist2 = true;
+  }
 
 
     bindAssignto(user) {
