@@ -440,6 +440,20 @@ button:disabled {
     border-bottom: 1px solid #e8e9eb !important;
 }
 
+.list-title-divider {
+    height: 42px;
+    background-color: #fafafa !important;
+    border: none !important;
+    color: #a9aaac;
+    padding-top:10px;
+}
+
+.empty-light {
+    height: 20px;
+    background-color: #fafafa !important;
+    border: none !important;
+}
+
 ion-content {
     display: flex;
     flex-direction: column;
