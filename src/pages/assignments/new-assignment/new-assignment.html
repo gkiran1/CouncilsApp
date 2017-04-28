@@ -19,15 +19,15 @@
   <form [formGroup]="assignmentForm" (ngSubmit)="assignmentForm.value" #assignment>
     <ion-item>
       <ion-label floating>Description</ion-label>
-      <ion-input type="text" name="description" formControlName="description" maxlength="500" #assignmentdesc tabindex></ion-input>
+      <ion-input type="text" name="description" formControlName="description" maxlength="500" #assignmentdesc></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Council</ion-label>
-      <ion-input type="text" readonly (touchstart)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil" #assignmentcouncil tabindex></ion-input>
+      <ion-input type="text" readonly (touchstart)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil" #assignmentcouncil></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Assign to</ion-label>
-      <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="assigneduser" #assignmentuser tabindex></ion-input>
+      <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="assigneduser" #assignmentuser></ion-input>
     </ion-item>
     <div *ngIf="showlist" class="assignto-list">
       <ng-container *ngFor="let user of users | search:term:'username'">

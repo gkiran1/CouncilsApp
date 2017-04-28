@@ -42,13 +42,13 @@ new-private-discussion-page {
     }
     .searchbar-ios .searchbar-input{
         padding: 6px 20px 6px 25px !important;
-        background: #F4F6FA !important;
+        background: #FAFAFA !important;
         border: none !important;
         box-shadow: none !important;
     }
      .searchbar-md .searchbar-input{
         padding: 6px 20px 6px 30px !important;
-        background: #F4F6FA !important;
+        background: #FAFAFA !important;
         border: none !important;
         box-shadow: none !important;
     }
@@ -60,7 +60,7 @@ new-private-discussion-page {
         padding-right: 0 !important;
     }
     ion-searchbar{
-        background: #F4F6F4 !important;
+        background: #FAFAFA !important;
     }
     ion-item{
         align-items: flex-start !important;
@@ -68,4 +68,17 @@ new-private-discussion-page {
     ion-avatar{
         margin-top: 0 !important;
     }
+    ion-list{
+        border-top:1px solid #E8E9EB !important;
+        border-bottom:1px solid #E8E9EB !important;
+    }
+    .list-md {
+        border-top:2px solid #E8E9EB !important;
+    }
+
+    .ion-item-middle.item-ios.item-block:last-child .item-inner,
+    .ion-item-middle.item-md.item-block:last-child .item-inner{
+        border-bottom: none !important;
+    }
+
 }
