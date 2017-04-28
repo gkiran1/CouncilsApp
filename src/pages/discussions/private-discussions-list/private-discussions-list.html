@@ -20,7 +20,7 @@
     <ion-item-group>
         <ng-container *ngIf="discussions.length">
             <ion-item-divider></ion-item-divider>
-            <ion-item (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
+            <ion-item class="ion-item-middle" (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
                 <ion-avatar item-left *ngIf="uid === item.createdUserId">
                     <img [src]="item.otherUserAvatar" *ngIf="item.otherUserAvatar && item.otherUserAvatar !== 'avatar'">
                     <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!item.otherUserAvatar || item.otherUserAvatar === 'avatar'" />

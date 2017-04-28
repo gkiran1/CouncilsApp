@@ -42,5 +42,13 @@ private-discussions-list-page{
         font-size: 13px !important;
         color: #a9aaac;
     }   
+
+    .ion-item-middle.item-ios.item-block:last-child .item-inner,
+    .ion-item-middle.item-md.item-block:last-child .item-inner{
+        border-bottom: none !important;
+    }
+    ion-item:last-child{
+         border-bottom:1px solid #E8E9EB !important;
+    }
     
 }
