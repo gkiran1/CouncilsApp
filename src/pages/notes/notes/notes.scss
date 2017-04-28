@@ -21,4 +21,19 @@ notes-page{
         right: 0;
         margin-right:10px;
     }
+
+    .list-page .scroll-content {
+        padding-top: 20px !important;
+    }
+
+    .list-page ion-item {
+        height: auto;
+    }
+
+    .single-item {
+        border-top: 1px solid #e8e9eb;
+        border-bottom: 1px solid #e8e9eb;
+    }
+
+    
 }

@@ -4,7 +4,7 @@
 			<ion-col class="header-col">
 				<ion-icon class="councils-icon__close menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
 			</ion-col>
-			<ion-col width-80>
+			<ion-col width-80 class="header-col2">
 				<ion-title text-center>Notifications</ion-title>
 			</ion-col>
 		</ion-row>
@@ -13,7 +13,7 @@
 <ion-content class="list-page">
 	<ng-container *ngIf="(notifications.length)">
 		<ion-list>
-			<ion-item  [ngClass]="i === 0 ? 'ion-item-first': (i === notifications.length-1 ? 'ion-item-last' : 'ion-item-middle')" *ngFor="let notification of notifications; let i = index" text-wrap (click)="ActivityPage(notification)">
+			<ion-item  [ngClass]="notifications.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first': (i === notifications.length-1 ? 'ion-item-last' : 'ion-item-middle'))" *ngFor="let notification of notifications; let i = index" text-wrap (click)="ActivityPage(notification)">
 				<h3 [innerHTML]="notification.text"></h3>
 				<p class="createddate-lbl">{{notification.createddate| customdateformat}}</p>
 				<button ion-button item-right clear>
