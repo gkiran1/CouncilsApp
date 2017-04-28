@@ -27,9 +27,9 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Assign to</ion-label>
-      <ion-input type="text" (input)="showList($event)" formControlName="assigneduser" #assignmentuser tabindex></ion-input>
+      <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="assigneduser" #assignmentuser tabindex></ion-input>
     </ion-item>
-    <div *ngIf="showlist && assignmentForm.controls.assigneduser.value" class="assignto-list">
+    <div *ngIf="showlist" class="assignto-list">
       <ng-container *ngFor="let user of users | search:term:'username'">
         <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto(user)">
           <ion-avatar item-left>
@@ -55,7 +55,6 @@
   </form>
 </ion-content>
 <ion-footer>
-
   <ng-container *ngIf="isNewAssignment">
     <ion-toolbar>
       <button ion-button clear block color="secondary" (click)="createAssignment(assignmentForm.value)" text-capitalize [disabled]="!assignmentForm.valid">Create</button>

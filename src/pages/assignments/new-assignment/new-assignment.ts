@@ -114,6 +114,7 @@ export class NewAssignmentPage {
     usercouncilsmodal.onDidDismiss(council => {
       if (!council) return;
       (<FormControl>this.assignmentForm.controls['assigneduser']).setValue('');
+      this.showlist = false;
       this.updateUsers(council.$key);
       (<FormControl>this.assignmentForm.controls['assignedcouncil']).setValue(council.council);
       this.assignedcouncil = council;
@@ -253,11 +254,11 @@ export class NewAssignmentPage {
   }
 
   showList(event) {
-
     let v = event.target.value;
     if (v.charAt('0') !== '@') {
-      event.target.value = '';
-      this.showlist = false; return;
+      event.target.value = '@' + event.target.value;
+      (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(event.target.value);
+      // this.showlist = false; return;
     }
     this.term = v.substr(1);
     this.showlist = true;
