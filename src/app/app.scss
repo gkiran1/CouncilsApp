@@ -446,6 +446,7 @@ button:disabled {
     border: none !important;
     color: #a9aaac;
     padding-top:10px;
+    font-size:17px !important; 
 }
 
 .empty-light {
@@ -934,5 +935,12 @@ ion-list ion-item{
     border: none;
 }
 
+/******************** Datetime roller *************************************/
 
+.picker-ios .picker-above-highlight,
+.picker-ios .picker-below-highlight,
+.picker-md .picker-above-highlight,
+.picker-md .picker-below-highlight {
+    display: block !important;
+}
 
