@@ -6,12 +6,14 @@ import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Subscription } from "rxjs";
 import { Slides } from 'ionic-angular';
 import * as firebase from 'firebase';
-import { GoogleCalenderPage } from '../googlecalender/googlecalender.component';
+import { SettingsPage } from '../settings/settings';
+import { AssignmentsListPage } from '../assignments/assignments-list/assignments-list';
+import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 
 @Component({
   selector: 'page-welcome',
   templateUrl: 'menu.html',
-  providers: [GoogleCalenderPage]
+  providers: [SettingsPage, AssignmentsListPage, ActiveCouncilsPage]
 })
 
 export class MenuPage {
@@ -25,7 +27,7 @@ export class MenuPage {
   constructor(
     public af: AngularFire,
     private firebaseService: FirebaseService,
-    public googlecalender: GoogleCalenderPage
+    public settingsPage: SettingsPage
   ) {
 
     this.userObj = null;
@@ -57,7 +59,7 @@ export class MenuPage {
           (localStorage.getItem('gcToken') !== 'null' &&
             localStorage.getItem('gcToken') !== null &&
             localStorage.getItem('gcToken') !== undefined)) {
-          googlecalender.sendInvite();
+          settingsPage.sendInvite();
         }
 
         this.firebaseService.getPrivateDiscussions().subscribe(discussions => {
