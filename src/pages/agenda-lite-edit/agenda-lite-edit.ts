@@ -40,7 +40,7 @@ export class AgendaLiteEditPage {
   agenda;
   shownGroup = false;
   shownGroup1 = false;
-  
+
   constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
     public nav: NavController, public actionSheetCtrl: ActionSheetController,
@@ -230,6 +230,18 @@ export class AgendaLiteEditPage {
   }
 
   edit(value) {
+    if (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== value.openingprayer) {
+      this.showAlert('Please assign to a valid user');
+      return;
+    }
+    if (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== value.spiritualthought) {
+      this.showAlert('Please assign to a valid user');
+      return;
+    }
+    if (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== value.closingprayer) {
+      this.showAlert('Please assign to a valid user');
+      return;
+    }
     value.discussionitems = (value.discussionitems != undefined && value.discussionitems.length > 0) ? value.discussionitems.replace(/-/gi, '').trim() : '';
     let formattedAgendaObj = this.formatAgendaObj(value);
     this.firebaseservice.updateAgendaLite(formattedAgendaObj, this.agendaKey)

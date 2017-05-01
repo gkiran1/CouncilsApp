@@ -91,6 +91,18 @@ export class AgendaPage {
 
     agendasArray = [];
     createagenda(agenda) {
+        if (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== agenda.openingprayer) {
+            this.showAlert('Please assign to a valid user');
+            return;
+        }
+        if (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== agenda.spiritualthought) {
+            this.showAlert('Please assign to a valid user');
+            return;
+        }
+        if (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== agenda.closingprayer) {
+            this.showAlert('Please assign to a valid user');
+            return;
+        }
         let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
         agenda.assigneddate = moment(assigneddate).toISOString();
         agenda.spiritualwelfare = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.replace(/-/gi, '').trim() : '';

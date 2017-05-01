@@ -245,6 +245,18 @@ export class AgendaEditPage {
     }
 
     edit(value) {
+        if (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== value.openingprayer) {
+            this.showAlert('Please assign to a valid user');
+            return;
+        }
+        if (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== value.spiritualthought) {
+            this.showAlert('Please assign to a valid user');
+            return;
+        }
+        if (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== value.closingprayer) {
+            this.showAlert('Please assign to a valid user');
+            return;
+        }
         value.spiritualwelfare = (value.spiritualwelfare != undefined && value.spiritualwelfare.length > 0) ? value.spiritualwelfare.replace(/-/gi, '').trim() : '';
         value.temporalwelfare = (value.temporalwelfare != undefined && value.temporalwelfare.length > 0) ? value.temporalwelfare.replace(/-/gi, '').trim() : '';
         value.fellowshipitems = (value.fellowshipitems != undefined && value.fellowshipitems.length > 0) ? value.fellowshipitems.replace(/-/gi, '').trim() : '';

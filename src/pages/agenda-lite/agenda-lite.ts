@@ -83,18 +83,18 @@ export class AgendaLitePage {
   agendasArray = [];
   createagenda(agenda) {
 
-    // if ((this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== agenda.openingprayer) {
-    //   this.showAlert('Please assign to a valid user');
-    //   return;
-    // }
-    // if ((this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== agenda.spiritualthought) {
-    //   this.showAlert('Please assign to a valid user');
-    //   return;
-    // }
-    // if ((this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== agenda.closingprayer) {
-    //   this.showAlert('Please assign to a valid user');
-    //   return;
-    // }
+    if (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== agenda.openingprayer) {
+      this.showAlert('Please assign to a valid user');
+      return;
+    }
+    if (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== agenda.spiritualthought) {
+      this.showAlert('Please assign to a valid user');
+      return;
+    }
+    if (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== agenda.closingprayer) {
+      this.showAlert('Please assign to a valid user');
+      return;
+    }
     let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
     agenda.assigneddate = moment(assigneddate).toISOString();
     agenda.discussionitems = (agenda.discussionitems != undefined && agenda.discussionitems.length > 0) ? agenda.discussionitems.replace(/-/gi, '').trim() : '';
@@ -184,7 +184,7 @@ export class AgendaLitePage {
   }
 
   cancel() {
-    this.nav.pop({ animate: true, direction: 'left' })
+    this.nav.pop({ animate: true, animation: 'transition', direction: 'back' })
   }
   searchFn(event) {
     this.term = event.target.value;
