@@ -35,7 +35,7 @@
 
 			<ion-list>
 				<ng-container *ngFor="let user of users; let i = index">
-					<ion-item [ngClass]="i===0?'ion-item-first':(i===users.length - 1? 'ion-item-last': 'ion-item-middle')" [attr.data-index]="i">
+					<ion-item *ngIf="!(user.isadmin)" [ngClass]="i===0?'ion-item-first':(i===users.length - 1? 'ion-item-last': 'ion-item-middle')" [attr.data-index]="i">
 						<ion-avatar item-left>
 								<img [src]="(user)?.avatar " class="avatarImage " *ngIf="(user)?.avatar && (user)?.avatar !=='avatar' " />
 								<img src="assets/icon/noavatar.png " class="avatarImage " *ngIf="!(user)?.avatar || (user)?.avatar==='avatar' " />
@@ -44,7 +44,8 @@
 							<h4 class="username-styles">{{user.firstname}} {{user.lastname}}</h4>
 							<p>{{user.councilnames}}</p>
 						</ion-label>
-						<ion-checkbox required [(ngModel)]="user.selected" color="secondary" name="checkbox" item-right name="selectedUser"></ion-checkbox>
+
+						<ion-checkbox [(ngModel)]="user.selected" (ionChange)="userToggle($event, user)" color="secondary" item-right [name]="user.$key"></ion-checkbox>
 					</ion-item>
 				</ng-container>
 			</ion-list>

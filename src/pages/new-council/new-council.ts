@@ -61,8 +61,8 @@ export class NewCouncilPage {
         this.firebaseservice.updateCouncilsInUser(this.currentUser.$key, this.currentUser.councils);
         localStorage.setItem('userCouncils', this.currentUser.councils.toString());
 
-        this.users.forEach(user => {
-          if (user.selected === true) {
+        this.selectedUsers.forEach(user => {
+          if (user.selected) {
             this.firebaseservice.createUserCouncils(user.$key, res);
             user.councils.push(res);
             this.firebaseservice.updateCouncilsInUser(user.$key, user.councils);
@@ -75,6 +75,19 @@ export class NewCouncilPage {
       }
     }).catch(err => this.showAlert(err))
 
+  }
+
+  selectedUsers = [];
+  userToggle(event, user) {
+    if (event.checked) {
+      this.selectedUsers.push(user)
+    } else {
+      this.selectedUsers.forEach((u, i) => {
+        if (u.$key === user.$key) {
+          this.selectedUsers.splice(i, 1);
+        }
+      })
+    }
   }
 
   showAlert(errText) {
