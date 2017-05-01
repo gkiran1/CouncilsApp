@@ -38,4 +38,16 @@ agenda-edit{
     ion-footer button:last-child{
         padding-right: 15px;
     }
+    .inactive{
+        display: none;
+    }
+    .assignment-styles{
+        // font-family: Bernina-Regular !important;        
+        font-size: 17px;
+        padding-left:16px;
+    }
+    .desc-styles {
+   font-family: 'Bernina-Regular', sans-serif !important;
+    font-size: 17px !important
+    }
 }

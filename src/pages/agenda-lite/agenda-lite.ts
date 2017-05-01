@@ -32,8 +32,8 @@ export class AgendaLitePage {
   showlist1 = false;
   showlist2 = false;
   user;
-  // shownGroup = null;
-  // isGroupShown = true;
+  shownGroup = false;
+  shownGroup1 = false;
 
   constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
@@ -298,16 +298,12 @@ export class AgendaLitePage {
     this.firebaseservice.createActivity(activity);
   }
 
-  // toggleGroup() {
-  //   if (this.isGroupShown==false) {
-  //     this.isGroupShown = true;
-  //   } else {
-  //     this.isGroupShown = false;
-  //   }
-  //   console.log("shownGroup",this.isGroupShown);
-  // };
-  // isGroupShown() {
-  //   return this.shownGroup === group;
-  // };
+  toggleGroup() {
+    this.shownGroup = !this.shownGroup;
+  };
+
+  toggleGroup1() {
+    this.shownGroup1 = !this.shownGroup1;
+  };
 
 }

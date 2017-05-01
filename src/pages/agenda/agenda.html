@@ -67,7 +67,25 @@
             </ng-container>
         </div>
 
-        <ion-item>
+        <ion-list>
+            <ion-label class="assignment-styles" (click)="toggleGroup()">
+                Assignments
+            </ion-label>
+            <ion-item *ngFor="let assignment of assignmentslist" text-wrap [ngClass]="{inactive: !shownGroup}">
+                <ion-label class="desc-styles">{{assignment.description}}</ion-label>
+            </ion-item>
+        </ion-list>
+
+        <ion-list>
+            <ion-label class="assignment-styles" (click)="toggleGroup1()">
+                Completed Assignments
+            </ion-label>
+            <ion-item *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
+                <div class="desc-styles">{{completedassignment.description}}</div>
+            </ion-item>
+        </ion-list>
+
+        <!--<ion-item>
             <ion-label *ngIf="!assignments">Assignments</ion-label>
             <ion-label floating color="secondary" *ngIf="assignments">Assignments</ion-label>
             <ion-select name="assignments" [(ngModel)]='assignments' formControlName="assignments">
@@ -85,7 +103,7 @@
                     <ion-option [value]="completedassignment">{{completedassignment.description}}</ion-option>
                 </ng-container>
             </ion-select>
-        </ion-item>
+        </ion-item>-->
 
         <ion-item>
             <ion-label *ngIf="!spiritualwelfare">Spiritual Welfare</ion-label>

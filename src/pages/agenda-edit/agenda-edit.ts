@@ -45,6 +45,9 @@ export class AgendaEditPage {
     showlist2 = false;
     user;
     agenda;
+    shownGroup = false;
+    shownGroup1 = false;
+
     constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
         public firebaseservice: FirebaseService, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
         public nav: NavController, public menuctrl: MenuController) {
@@ -557,4 +560,12 @@ export class AgendaEditPage {
         }
         this.firebaseservice.createActivity(activity);
     }
+
+    toggleGroup() {
+        this.shownGroup = !this.shownGroup;
+    };
+
+    toggleGroup1() {
+        this.shownGroup1 = !this.shownGroup1;
+    };
 }

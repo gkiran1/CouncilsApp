@@ -38,7 +38,9 @@ export class AgendaLiteEditPage {
   showlist2 = false;
   user;
   agenda;
-
+  shownGroup = false;
+  shownGroup1 = false;
+  
   constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
     public nav: NavController, public actionSheetCtrl: ActionSheetController,
@@ -364,7 +366,7 @@ export class AgendaLiteEditPage {
     return index;
   }
 
-   showList(event) {
+  showList(event) {
     let v = event.target.value;
     if (v.charAt('0') !== '@') {
       event.target.value = '@' + event.target.value;
@@ -444,4 +446,13 @@ export class AgendaLiteEditPage {
     }
     this.firebaseservice.createActivity(activity);
   }
+
+  toggleGroup() {
+    this.shownGroup = !this.shownGroup;
+  };
+
+  toggleGroup1() {
+    this.shownGroup1 = !this.shownGroup1;
+  };
+
 }
