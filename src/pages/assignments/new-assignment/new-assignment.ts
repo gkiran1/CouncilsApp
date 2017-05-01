@@ -163,7 +163,7 @@ export class NewAssignmentPage {
   }
 
   createAssignment(value) {
-    if ((this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
+    if (!this.assigneduser || (this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
       this.showAlert('Please assign to a valid user');
       return;
     }
