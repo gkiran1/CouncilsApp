@@ -44,13 +44,13 @@ export class ActiveCouncilsPage {
     }
 
     cancel() {
-        this.nav.pop({ animate: true, direction: 'forward' });
+        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 
     getCount() {
         return this.count$;
     }
     usersincouncils(myCouncils, council) {
-        this.nav.push(CouncilUsersPage, { myCouncils: myCouncils, council: council }, { animate: true, direction: 'right' });
+        this.nav.push(CouncilUsersPage, { myCouncils: myCouncils, council: council }, { animate: true, animation: 'transition', direction: 'forward' });
     }
 }
