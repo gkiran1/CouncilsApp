@@ -44,7 +44,7 @@
 
     <ion-item class="divider" *ngIf="completedAssignmentsArray.length">COMPLETED</ion-item>
     <ion-list>
-      <ion-item class="ion-item-middle" *ngFor="let item of completedAssignmentsArray; let i = index"
+      <ion-item class="ion-item-middle" (click)="assignmentSelected(item, i,'completed')" *ngFor="let item of completedAssignmentsArray; let i = index"
         [attr.data-index]="i">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': completedselectedIdx === i}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': completedselectedIdx !== i}"></ion-icon>
