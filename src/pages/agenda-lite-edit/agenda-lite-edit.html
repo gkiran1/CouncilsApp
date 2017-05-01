@@ -71,22 +71,30 @@
             </ng-container>
         </div>
 
-        <ion-list>
-            <ion-label class="assignment-styles" (click)="toggleGroup()">
+         <ion-list>
+            <ion-label *ngIf="!shownGroup" class="assignment-styles" (click)="toggleGroup()">
+                Assignments
+            </ion-label>
+            <ion-label *ngIf="shownGroup" class="assignment-styles1" (click)="toggleGroup()">
                 Assignments
             </ion-label>
             <ion-item *ngFor="let assignment of assignmentslist" text-wrap [ngClass]="{inactive: !shownGroup}">
                 <ion-label class="desc-styles">{{assignment.description}}</ion-label>
             </ion-item>
+            <ion-item-divider></ion-item-divider>
         </ion-list>
 
         <ion-list>
-            <ion-label class="assignment-styles" (click)="toggleGroup1()">
+            <ion-label *ngIf="!shownGroup1" class="assignment-styles" (click)="toggleGroup1()">
+                Completed Assignments
+            </ion-label>
+            <ion-label *ngIf="shownGroup1" class="assignment-styles1" (click)="toggleGroup1()">
                 Completed Assignments
             </ion-label>
             <ion-item *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
                 <div class="desc-styles">{{completedassignment.description}}</div>
             </ion-item>
+            <ion-item-divider></ion-item-divider>
         </ion-list>
 
         <ion-list>
