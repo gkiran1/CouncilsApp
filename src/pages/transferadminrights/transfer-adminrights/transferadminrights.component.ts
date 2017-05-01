@@ -67,6 +67,21 @@ export class TransferAdminRightsPage {
                         this.menuctrl.close();
                         this.firebaseService.transferAdminRights(this.currentAdminId, user.$key).
                             then(() => {
+
+                                // Updating councils(the new admin has to have all councils of the person who is transfering admin rights).
+
+                                var adminCouncils = localStorage.getItem('userCouncils').split(',');
+
+                                this.firebaseService.updateCouncilsInUser(user.$key, adminCouncils).then(() => {
+                                    this.firebaseService.deleteCouncilsInUserCouncils(user.$key).then((res) => {
+                                        if (res) {
+                                            adminCouncils.forEach(id => {
+                                                this.firebaseService.createUserCouncils(user.$key, id);
+                                            });
+                                        }
+                                    });
+                                });
+
                                 this.emailservice.emailTrasferAdmin(this.currentUser.firstname,
                                     this.currentUser.lastname,
                                     this.currentUser.unitnumber, user.email, user.firstname, user.lastname).subscribe(res => {
@@ -76,6 +91,7 @@ export class TransferAdminRightsPage {
                                             console.log('Mail not sent for account inactivation');
                                         }
                                     });
+
                             }).then(() => {
                                 localStorage.setItem('isAdmin', 'false');
                                 this.nav.push(TransferCompletePage, { newAdmin: user });
