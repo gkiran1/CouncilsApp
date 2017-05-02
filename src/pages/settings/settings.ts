@@ -121,14 +121,20 @@ export class SettingsPage {
 
         if (this.rootRef === undefined) {
             this.rootRef = firebase.database().ref();
-        } this.rootRef.child('agendas').endAt().limitToLast(1).on('child_added', function (snapshot) {
+        }
 
-            var agendaId = snapshot.getKey();
-            var councilId = snapshot.val()['councilid'];
-            var createdDate = snapshot.val()['agendadate'];
-            var councils = localStorage.getItem('userCouncils').split(',');
+        if (localStorage.getItem('childAdded') !== 'true' && localStorage.getItem('allowed') === 'true') {
 
-            if (localStorage.getItem('allowed') === 'true') {
+            localStorage.setItem('childAdded', 'true');
+
+            this.rootRef.child('agendas').endAt().limitToLast(1).on('child_added', function (snapshot) {
+
+                var agendaId = snapshot.getKey();
+                var councilId = snapshot.val()['councilid'];
+                var createdDate = snapshot.val()['agendadate'];
+                var councils = localStorage.getItem('userCouncils').split(',');
+
+                //if (localStorage.getItem('allowed') === 'true') {
 
                 firebase.database().ref().child('users/' + localStorage.getItem('securityToken')).update({ googlecalendaradded: true });
 
@@ -194,19 +200,19 @@ export class SettingsPage {
                         }
                     });
                 }
-            }
-        });
+                // }
+            });
 
-        //////////////////////////
+            //////////////////////////
 
-        this.rootRef.child('assignments').endAt().limitToLast(1).on('child_added', function (snapshot) {
+            this.rootRef.child('assignments').endAt().limitToLast(1).on('child_added', function (snapshot) {
 
-            var assignmentId = snapshot.getKey();
-            var councilId = snapshot.val()['councilid'];
-            var createdDate = snapshot.val()['assigneddate'];
-            var councils = localStorage.getItem('userCouncils').split(',');
+                var assignmentId = snapshot.getKey();
+                var councilId = snapshot.val()['councilid'];
+                var createdDate = snapshot.val()['assigneddate'];
+                var councils = localStorage.getItem('userCouncils').split(',');
 
-            if (localStorage.getItem('allowed') === 'true') {
+                // if (localStorage.getItem('allowed') === 'true') {
 
                 firebase.database().ref().child('users/' + localStorage.getItem('securityToken')).update({ googlecalendaradded: true })
 
@@ -272,7 +278,12 @@ export class SettingsPage {
                         }
                     });
                 }
-            }
-        });
+                // }
+            });
+
+
+        }
+
+
     }
 }
