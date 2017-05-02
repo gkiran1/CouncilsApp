@@ -87,7 +87,7 @@ export class AssignmentsListPage {
   }
 
   assignmentSelected(assignment, index, type) {
-    this.navCtrl.push(NewAssignmentPage, { assignment: assignment });
+    this.navCtrl.push(NewAssignmentPage, { assignment: assignment }, { animate: true, animation: 'transition', direction: 'forward' });
     if (type === 'council') {
       this.councilselectedIdx = index;
       this.personalselectedIdx = '';

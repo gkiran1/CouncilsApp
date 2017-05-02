@@ -39,7 +39,7 @@ export class CouncilDiscussionsListPage {
 
   }
   openDiscussion(discussion) {
-    this.nav.push(OpenCouncilDiscussionPage, { discussion: discussion })
+    this.nav.push(OpenCouncilDiscussionPage, { discussion: discussion }, { animate: true, animation: 'transition', direction: 'forward' })
   }
   getCount() {
     return this.count$;

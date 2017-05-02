@@ -42,16 +42,16 @@ export class SettingsPage {
     }
 
     viewEditProfilePage() {
-        this.navCtrl.push(EditProfilePage);
+        this.navCtrl.push(EditProfilePage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
     viewNotificationSettingsPage() {
-        this.navCtrl.push(NotificationSettingsPage);
+        this.navCtrl.push(NotificationSettingsPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
     viewFeedbackPage() {
-        this.navCtrl.push(SubmitFeedbackPage);
+        this.navCtrl.push(SubmitFeedbackPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
     viewAboutUSPage() {
-        this.navCtrl.push(AboutPage);
+        this.navCtrl.push(AboutPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
     viewGoogleCalenderPage() {
         this.googleCalendar();

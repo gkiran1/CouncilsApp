@@ -43,7 +43,7 @@ export class PrivateDiscussionsListPage {
 
   }
   openDiscussion(discussion) {
-    this.nav.push(OpenPrivateDiscussionPage, { discussion: discussion })
+    this.nav.push(OpenPrivateDiscussionPage, { discussion: discussion }, { animate: true, animation: 'transition', direction: 'forward' });
   }
   getCount() {
     return this.count$;

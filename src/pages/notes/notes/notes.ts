@@ -51,7 +51,7 @@ export class NotesPage {
     }
 
     notesSelected(notesSelected) {
-        this.nav.push(NotePage, { notesSelected: notesSelected });
+        this.nav.push(NotePage, { notesSelected: notesSelected }, { animate: true, animation: 'transition', direction: 'back' });
     }
 
     getCount() {

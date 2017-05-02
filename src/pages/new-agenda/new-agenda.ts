@@ -15,11 +15,11 @@ export class NewAgendaPage {
     }
 
     agendalite() {
-        this.nav.push(AgendaLitePage);
+        this.nav.push(AgendaLitePage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     agenda() {
-        this.nav.push(AgendaPage);
+        this.nav.push(AgendaPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     cancel() {

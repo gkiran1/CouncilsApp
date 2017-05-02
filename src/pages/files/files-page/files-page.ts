@@ -39,16 +39,16 @@ export class FilesListPage {
                     af.database.list('/files').subscribe(files => {
                         this.filesArray = [];
 
-                          this.user.councils.forEach(council=>{
-                              let f;
-                                 files.forEach(file => {
-                                    if(council === file.councilid){
-                                        f = file;
-                                    }
-                                 });
-                                 if(f) this.filesArray.push(f);
+                        this.user.councils.forEach(council => {
+                            let f;
+                            files.forEach(file => {
+                                if (council === file.councilid) {
+                                    f = file;
+                                }
                             });
-                            
+                            if (f) this.filesArray.push(f);
+                        });
+
                         let count = this.filesArray.length;
                         count = count ? count : null;
                         this.count$.next(count);
@@ -64,7 +64,7 @@ export class FilesListPage {
     viewCouncilFile(item) {
         console.log(item);
         // alert(item.councilid)
-        this.nav.push(OpenCouncilFilePage, { item: item, flag: this.isFilesListPage });
+        this.nav.push(OpenCouncilFilePage, { item: item, flag: this.isFilesListPage }, { animate: true, animation: 'transition', direction: 'forward' });
     }
     getCount() {
         return this.count$;

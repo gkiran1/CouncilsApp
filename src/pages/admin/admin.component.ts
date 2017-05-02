@@ -26,31 +26,31 @@ export class AdminPage {
     }
 
     activeCouncils() {
-        this.navCtrl.push(ActiveCouncilsPage);
+        this.navCtrl.push(ActiveCouncilsPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     createCouncils() {
-        this.navCtrl.push(NewCouncilPage);
+        this.navCtrl.push(NewCouncilPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     inviteMembers() {
-        this.navCtrl.push(InviteMemberPage);
+        this.navCtrl.push(InviteMemberPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     getActiveUsers() {
-        this.navCtrl.push(InactivateMembersPage);
+        this.navCtrl.push(InactivateMembersPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     editMembers() {
-        this.navCtrl.push(MembersListPage);
+        this.navCtrl.push(MembersListPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     getInactiveUsers() {
-        this.navCtrl.push(ReactivateMembersPage);
+        this.navCtrl.push(ReactivateMembersPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     transferAdminRights() {
-        this.navCtrl.push(TransferAdminRightsPage);
+        this.navCtrl.push(TransferAdminRightsPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     back() {

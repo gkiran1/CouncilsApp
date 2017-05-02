@@ -56,10 +56,10 @@ export class AgendasPage {
 
     agendaSelected(agendaselected) {
         if (agendaselected.islite) {
-            this.nav.push(AgendaLiteEditPage, { agendaselected: agendaselected });
+            this.nav.push(AgendaLiteEditPage, { agendaselected: agendaselected }, { animate: true, animation: 'transition', direction: 'forward' });
         }
         else {
-            this.nav.push(AgendaEditPage, { agendaselected: agendaselected });
+            this.nav.push(AgendaEditPage, { agendaselected: agendaselected }, { animate: true, animation: 'transition', direction: 'forward' });
         }
     }
 

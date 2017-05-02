@@ -42,7 +42,7 @@ export class MembersListPage {
     }
 
     editMember(user) {
-        this.nav.push(EditMemberPage, { selectedUser: user });
+        this.nav.push(EditMemberPage, { selectedUser: user }, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     back() {
