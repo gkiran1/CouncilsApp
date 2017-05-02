@@ -214,7 +214,7 @@ export class AgendaEditPage {
     }
 
     cancel() {
-        this.nav.pop();
+        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 
     formatAgendaObj(value) {
@@ -224,10 +224,10 @@ export class AgendaEditPage {
             councilid: this.assignedcouncil.$key,
             assigneddate: moment(assigneddate).toISOString(),
             openinghymn: value.openinghymn,
-            openingprayer: value.openingprayer === '' ? '' : this.openingprayer.firstname + ' ' + this.openingprayer.lastname,
-            openingprayeruserid: value.openingprayer === '' ? '' : this.openingprayer.$key,
-            spiritualthought: value.spiritualthought === '' ? '' : this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname,
-            spiritualthoughtuserid: value.spiritualthought === '' ? '' : this.spiritualthought.$key,
+            openingprayer: this.openingprayer ? this.openingprayer.firstname + ' ' + this.openingprayer.lastname : '',
+            openingprayeruserid: this.openingprayer ? this.openingprayer.$key : '',
+            spiritualthought: this.spiritualthought ? this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname : '',
+            spiritualthoughtuserid: this.spiritualthought ? this.spiritualthought.$key : '',
             assignments: (value.assignments === undefined || value.assignments === '') ? '' : value.assignments.$key,
             completedassignments: (value.completedassignments === undefined || value.completedassignments === '') ? '' : value.completedassignments.$key,
             spiritualwelfare: value.spiritualwelfare,
@@ -235,8 +235,8 @@ export class AgendaEditPage {
             fellowshipitems: value.fellowshipitems,
             missionaryitems: value.missionaryitems,
             event: value.event,
-            closingprayer: value.closingprayer === '' ? '' : this.closingprayer.firstname + ' ' + this.closingprayer.lastname,
-            closingprayeruserid: value.closingprayer === '' ? '' : this.closingprayer.$key,
+            closingprayer: this.closingprayer ? this.closingprayer.firstname + ' ' + this.closingprayer.lastname : '',
+            closingprayeruserid: this.closingprayer ? this.closingprayer.$key : '',
             createdby: value.createdby,
             createddate: new Date().toISOString(),
             isactive: value.isactive,
@@ -244,16 +244,17 @@ export class AgendaEditPage {
         }
     }
 
+
     edit(value) {
-        if (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== value.openingprayer) {
+        if (value.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== value.openingprayer)) {
             this.showAlert('Please assign to a valid user');
             return;
         }
-        if (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== value.spiritualthought) {
+        if (value.spiritualthought && (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== value.spiritualthought)) {
             this.showAlert('Please assign to a valid user');
             return;
         }
-        if (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== value.closingprayer) {
+        if (value.closingprayer && (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== value.closingprayer)) {
             this.showAlert('Please assign to a valid user');
             return;
         }

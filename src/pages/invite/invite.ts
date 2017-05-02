@@ -104,7 +104,7 @@ export class InviteMemberPage {
     }
 
     close() {
-        this.navctrl.pop();
+        this.navctrl.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 
 }

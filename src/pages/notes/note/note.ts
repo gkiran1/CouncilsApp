@@ -110,7 +110,7 @@ export class NotePage {
             'Z';
     };
     cancel() {
-        this.nav.pop();
+        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 
     ionViewDidLoad() {

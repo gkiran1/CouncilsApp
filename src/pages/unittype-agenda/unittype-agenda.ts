@@ -44,6 +44,6 @@ export class UnitTypeAgendaPage {
         console.log('search', event.target.value);
     }
     cancel() {
-        this.nav.pop();
+        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 }

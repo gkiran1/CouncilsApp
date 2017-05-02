@@ -8,7 +8,7 @@ import { FirebaseService } from '../../../environments/firebase/firebase-service
 })
 
 export class NotificationSettingsPage {
-    notSettings;    
+    notSettings;
     constructor(private nav: NavController, public firebaseService: FirebaseService) {
         var userId = localStorage.getItem('securityToken');
         firebaseService.setDefaultNotificationSettings(userId).then(() => {
@@ -21,6 +21,6 @@ export class NotificationSettingsPage {
         this.firebaseService.updateNotificationSettings(this.notSettings.$key, this.notSettings);
     }
     back() {
-        this.nav.pop();
+        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 }

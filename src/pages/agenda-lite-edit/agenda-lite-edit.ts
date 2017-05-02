@@ -203,7 +203,8 @@ export class AgendaLiteEditPage {
   }
 
   cancel() {
-    this.nav.pop();
+    this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
+
   }
 
   formatAgendaObj(value) {

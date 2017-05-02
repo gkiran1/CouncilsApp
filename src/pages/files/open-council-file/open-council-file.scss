@@ -59,13 +59,22 @@ open-council-file-page {
     background: none !important;
 }
 .agendadate-styles{
-        font-family: Bernina-Regular !important;
-        color:#a9aaac !important;
         position: absolute;
         right: 16px;
+    }
+    .font4{
+        font-family: Bernina-Regular !important;
+        font-size:13px;
+        color:#a9aaac !important;
     }
     .delete-styles{
         position: absolute;
         right: 16px;
+    }
+    .right-align{
+        position: absolute;
+        right: 0;
+        margin-top:20px;
+        margin-right:10px;
     }
 }

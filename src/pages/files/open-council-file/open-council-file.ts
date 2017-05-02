@@ -95,7 +95,7 @@ export class OpenCouncilFilePage {
                 //     this.af.database.object('/users/' + auth.uid).subscribe(usr => {
                 //         this.user = usr;
                 //         console.log(this.file.councilid);
-                        
+
                 //         af.database.list('/files').subscribe(files => {
                 //             this.filesArray = [];
                 //             files.forEach(file => {
@@ -117,7 +117,7 @@ export class OpenCouncilFilePage {
     delete(file) {
         // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
-           spinner:'hide',
+            spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         loader.present();
@@ -146,7 +146,7 @@ export class OpenCouncilFilePage {
         console.log('filesArray:' + filesArray);
         // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
-            spinner:'hide',
+            spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         loader.present();
@@ -169,7 +169,7 @@ export class OpenCouncilFilePage {
     }
     downloadFile(item) {
         let loader = this.loadingCtrl.create({
-            spinner:'hide',
+            spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         loader.present();
@@ -235,7 +235,8 @@ export class OpenCouncilFilePage {
         this.deleteflag = false;
     }
     back() {
-        this.nav.pop();
+        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
+
     }
     addFileActionsPage(value) {
         let actionSheet = this.actionSheetCtrl.create({
@@ -283,7 +284,7 @@ export class OpenCouncilFilePage {
     takePicture(value) {
         // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
-            spinner:'hide',
+            spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         Camera.getPicture({
@@ -345,7 +346,7 @@ export class OpenCouncilFilePage {
     uploadPicture(value) {
         // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
-            spinner:'hide',
+            spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         Camera.getPicture({
@@ -408,7 +409,7 @@ export class OpenCouncilFilePage {
     importFile(value) {
         // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
-            spinner:'hide',
+            spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         FileChooser.open()

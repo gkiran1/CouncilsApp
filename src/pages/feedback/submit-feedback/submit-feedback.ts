@@ -25,7 +25,8 @@ export class SubmitFeedbackPage {
     }
 
     back() {
-        this.navCtrl.setRoot(SettingsPage);
+        this.navCtrl.pop({ animate: true, animation: 'transition', direction: 'back' });
+
     }
 
 }

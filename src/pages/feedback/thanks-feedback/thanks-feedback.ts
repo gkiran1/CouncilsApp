@@ -13,8 +13,9 @@ export class ThanksFeedbackPage {
     goToHome() {
         this.navCtrl.popToRoot();
     }
-     cancel() {
-      this.navCtrl.pop();
+    cancel() {
+        this.navCtrl.pop({ animate: true, animation: 'transition', direction: 'back' });
+
     }
 
 }

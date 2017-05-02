@@ -46,6 +46,7 @@ export class MembersListPage {
     }
 
     back() {
-        this.nav.popTo(AdminPage);
+        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
+
     }
 }
