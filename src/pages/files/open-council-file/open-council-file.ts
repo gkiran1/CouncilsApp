@@ -338,6 +338,8 @@ export class OpenCouncilFilePage {
             loader.dismiss();
             console.log("ERROR -> " + JSON.stringify(error));
         });
+
+        loader.dismiss();
     }
     // to upload a picture from gallery to the firebase.
     uploadPicture(value) {
@@ -398,6 +400,8 @@ export class OpenCouncilFilePage {
             loader.dismiss();
             console.log("ERROR -> " + JSON.stringify(error));
         });
+
+        loader.dismiss();
 
     }
     // to upload files from the device.
@@ -486,6 +490,8 @@ export class OpenCouncilFilePage {
                 loader.dismiss();
                 console.log(e);
             });
+
+            loader.dismiss();
     }
     // to convert bytes to KB/MB/GB/TB formats
     formatBytes(bytes) {

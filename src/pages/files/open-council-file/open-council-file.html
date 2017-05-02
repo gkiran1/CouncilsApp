@@ -47,7 +47,7 @@
     </ng-container>
 </ion-content>
 <ion-footer>
-    <ng-container *ngIf="!deleteflag && isNewCouncilFileflag">
+    <ng-container *ngIf="!deleteflag">
         <button ion-button color="secondary" clear block (click)="addFileActionsPage(value)">Add File</button>
     </ng-container>
     <ng-container *ngIf="deleteflag">
