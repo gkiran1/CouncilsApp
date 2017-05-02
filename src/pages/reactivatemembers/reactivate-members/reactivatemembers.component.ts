@@ -75,7 +75,7 @@ export class ReactivateMembersPage {
     }
 
     back() {
-        this.nav.pop();
+        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 
     showAlert(errText) {

@@ -20,7 +20,8 @@ export class EditCompletePage {
     }
 
     back() {
-        this.navCtrl.pop();
+        this.navCtrl.pop({ animate: true, animation: 'transition', direction: 'back' });
+
     }
 
 }

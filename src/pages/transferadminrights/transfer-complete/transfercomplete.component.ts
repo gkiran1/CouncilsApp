@@ -16,6 +16,6 @@ export class TransferCompletePage {
     }
 
     back() {
-        this.navCtrl.popToRoot();
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', direction: 'back' });
     }
 }

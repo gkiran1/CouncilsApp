@@ -82,16 +82,15 @@ export class AgendaLitePage {
 
   agendasArray = [];
   createagenda(agenda) {
-
-    if (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== agenda.openingprayer) {
+    if (agenda.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== agenda.openingprayer)) {
       this.showAlert('Please assign to a valid user');
       return;
     }
-    if (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== agenda.spiritualthought) {
+    if (agenda.spiritualthought && (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== agenda.spiritualthought)) {
       this.showAlert('Please assign to a valid user');
       return;
     }
-    if (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== agenda.closingprayer) {
+    if (agenda.closingprayer && (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== agenda.closingprayer)) {
       this.showAlert('Please assign to a valid user');
       return;
     }

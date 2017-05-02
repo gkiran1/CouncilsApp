@@ -34,7 +34,7 @@ export class OpenPrivateDiscussionPage {
                         this.createdBy = discussion.createdUserId === this.user.$key ? 'You' : discussion.createdUserName;
                         this.discussion.messages = this.discussion.messages || [];
                         this.discussion.typings = this.discussion.typings || '';
-                        this.discussion.messages = Object.keys(this.discussion.messages).map(e =>this.discussion.messages[e]);
+                        this.discussion.messages = Object.keys(this.discussion.messages).map(e => this.discussion.messages[e]);
                     });
                 });
             }
@@ -42,7 +42,8 @@ export class OpenPrivateDiscussionPage {
 
     }
     back() {
-        this.nav.pop();
+        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
+
     }
 
     ionViewDidEnter() {
@@ -59,7 +60,7 @@ export class OpenPrivateDiscussionPage {
             });
         });
     }
-    ionViewDidLeave(){
+    ionViewDidLeave() {
         this.statusSubscription.unsubscribe();
     }
     send() {

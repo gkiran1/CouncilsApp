@@ -25,29 +25,27 @@
         <ion-list>
             <ion-item [ngClass]="i === 0 ? 'ion-item-first': (i === filesArray.length-1 ? 'ion-item-last' : 'ion-item-middle')" *ngFor="let file of filesArray; let i = index"
                 text-wrap (click)="downloadFile(file)">
+                <ion-icon item-left class="councils-icon__file menu-icon" name="document" color="secondary"></ion-icon>
                 <ion-row>
-                    <ion-col width-10>
-                        <ion-icon class="councils-icon__file menu-icon" name="document" color="secondary"></ion-icon>
-                    </ion-col>
-                    <ion-col width-70>
+                    <ion-col width-80>
                         <p><span class="council-styles">{{file.name || file.filename}}</span></p>
-                        <p>by <span ion-text color="secondary">{{value.createdUser}}</span></p>
-                        <p>
+                        <p class="font4">by <span ion-text color="secondary">{{value.createdUser}}</span></p>
+                        <p class="font4">
                             {{file.size || size}} {{file.type || file.filetype}} file
                             <span class="agendadate-styles">{{file.createdDate | customdateformat}}</span></p>
                     </ion-col>
-                    <ng-container *ngIf="deleteflag">
-                        <button color="secondary" class="delete-styles" id="councilsPage" name="councilsPage" ion-button clear (click)="delete(file)">
-                            <ion-icon class="councils-icon__inactivate menu-icon" name="close-circle" color="secondary"></ion-icon>
-                            </button>
-                    </ng-container>
+                    <ion-col width-20>
+                        <ng-container *ngIf="deleteflag">
+                            <ion-icon class="councils-icon__inactivate menu-icon right-align" name="close-circle" color="secondary" (click)="delete(file)"></ion-icon>
+                        </ng-container>
+                    </ion-col>
                 </ion-row>
-                </ion-item>
+            </ion-item>
         </ion-list>
     </ng-container>
 </ion-content>
 <ion-footer>
-    <ng-container *ngIf="!deleteflag && isNewCouncilFileflag">
+    <ng-container *ngIf="!deleteflag">
         <button ion-button color="secondary" clear block (click)="addFileActionsPage(value)">Add File</button>
     </ng-container>
     <ng-container *ngIf="deleteflag">

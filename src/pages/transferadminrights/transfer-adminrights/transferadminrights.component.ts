@@ -119,7 +119,7 @@ export class TransferAdminRightsPage {
     }
 
     back() {
-        this.nav.pop();
+        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 
 }

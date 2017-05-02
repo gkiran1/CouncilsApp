@@ -1095,7 +1095,7 @@ ion-list ion-item{
 	}
 
 	100%{
-        opacity: 1;
+        background-color:rgba(60,177,138,1);
     }
 }
 
@@ -1106,7 +1106,7 @@ ion-list ion-item{
 		background-color:rgba(60,177,138,.5)
 	}
 
-	100%{ opacity: 1 }
+	100%{ background-color:rgba(60,177,138,1); }
 }
 
 @-ms-keyframes bounce_circleG{
@@ -1116,7 +1116,7 @@ ion-list ion-item{
 		background-color:rgba(60,177,138,.5)
 	}
 
-	100%{ opacity: 1 }
+	100%{ background-color:rgba(60,177,138,1); }
 }
 
 @-webkit-keyframes bounce_circleG{
@@ -1126,7 +1126,7 @@ ion-list ion-item{
 		background-color:rgba(60,177,138,.5)
 	}
 
-	100%{ opacity: 0 }
+	100%{ background-color:rgba(60,177,138,1); }
 }
 
 @-moz-keyframes bounce_circleG{
@@ -1136,5 +1136,5 @@ ion-list ion-item{
 		background-color:rgba(60,177,138,.5)
 	}
 
-	100%{ opacity: 1 }
+	100%{ background-color:rgba(60,177,138,1); }
 }
