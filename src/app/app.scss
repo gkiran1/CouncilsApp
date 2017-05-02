@@ -946,15 +946,28 @@ ion-list ion-item{
 
 /*************************** Loader **************************************/
 
+
+
 .loading-ios .loading-wrapper,
-.loading-md .loading-wrapper {
-    box-shadow: none !important;
-}
-
-.loading-wrapper
+.loading-md .loading-wrapper,
 {
-
-   background: #fff !important;
+    padding:0 !important;
+    position: absolute !important;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    
+    opacity: 1;
+    transform: translateZ(0px);
+    background: #fff !important;
+     box-shadow: none !important;
+     align-items: center;
+    justify-content: center;
 }
 
 
