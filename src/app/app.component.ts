@@ -78,7 +78,7 @@ export class MyApp {
       platform.pause.subscribe(() => {
         isPause = true;
         localStorage.setItem('isMenuCentered', '0');
-        localStorage.setItem('isInstanceCreated', 'false');
+        localStorage.setItem('childAdded', 'false');
       });
 
       platform.resume.subscribe(() => {

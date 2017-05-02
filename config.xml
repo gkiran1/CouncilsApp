@@ -90,4 +90,10 @@
     <variable name="SENDER_ID" value="310008879834"/>
   </plugin>
   <icon src="resources/ios/icon/icon-small@3x.png"/>
+
+<access origin="https://*.google.com/*" />
+<access origin="https://*.googleapis.com/*" />
+<allow-navigation href="https://*.google.com/*" />
+<allow-navigation href="https://*.googleapis.com/*" />
+
 </widget>
