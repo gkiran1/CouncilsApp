@@ -52,7 +52,8 @@ export class ChangePasswordPage {
     }
     changePassword() {
         let loader = this.loadingCtrl.create({
-            spinner: 'dots',
+           spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         loader.present();
         //validate the user..to check password is correct or not.

@@ -20,7 +20,6 @@ import { ForgotPwd } from '../forgotpwd/forgotpwd';
 })
 
 export class LoginPage {
-    show:boolean = false;
     loading: Loading;
     loginCredentials = { email: '', password: '' };
     user: Observable<User>;
@@ -43,15 +42,15 @@ export class LoginPage {
     }
 
     public login() {
-        this.show = true;
         this.validateUser(this.loginCredentials);
     }
 
     private validateUser(loginCredentials) {
-        // let loader = this.loadingCtrl.create({
-        //     spinner: 'dots',
-        // });
-        // loader.present();
+        let loader = this.loadingCtrl.create({
+            spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+        });
+        loader.present();
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
             .then(uid => {
@@ -68,12 +67,12 @@ export class LoginPage {
                             this.nav.setRoot(NoAccessPage);
                         });
                     }
-                    //loader.dismiss();
+                    loader.dismiss();
                 })
 
             })
             .catch(err => {
-                //loader.dismiss();
+                loader.dismiss();
                 this.showAlert('failure', 'Your Emailid or Password is incorrect.')
             });
 

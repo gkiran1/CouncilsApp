@@ -105,7 +105,8 @@ export class NewCouncilFilePage {
   // to upload a picture to the firebase.
   takePicture(value) {
     let loader = this.loadingCtrl.create({
-      spinner: 'dots',
+      spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
     });
     Camera.getPicture({
       quality: 95,
@@ -158,7 +159,8 @@ export class NewCouncilFilePage {
   // to upload a picture from gallery to the firebase.
   uploadPicture(value) {
     let loader = this.loadingCtrl.create({
-      spinner: 'dots',
+      spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
     });
     Camera.getPicture({
       quality: 95,
@@ -211,7 +213,8 @@ export class NewCouncilFilePage {
   // to upload files from the device.
   importFile(value) {
     let loader = this.loadingCtrl.create({
-      spinner: 'dots',
+      spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
     });
     if (this.platform.is('ios')) {
       var options = ["public.data", "public.audio"];

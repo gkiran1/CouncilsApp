@@ -21,7 +21,8 @@ export class AboutPage {
 
     constructor(public navCtrl: NavController, private service: FirebaseService, private loadingCtrl: LoadingController) {
         let loader = this.loadingCtrl.create({
-            spinner: 'dots',
+            spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         loader.present();
         service.getAboutus()

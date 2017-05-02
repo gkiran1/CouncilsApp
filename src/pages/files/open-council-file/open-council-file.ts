@@ -117,7 +117,8 @@ export class OpenCouncilFilePage {
     delete(file) {
         // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
-            spinner: 'dots',
+           spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         loader.present();
         //to delete files form the database using key
@@ -145,7 +146,8 @@ export class OpenCouncilFilePage {
         console.log('filesArray:' + filesArray);
         // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
-            spinner: 'dots',
+            spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         loader.present();
         this.filesArray.forEach((f, i) => {
@@ -167,7 +169,8 @@ export class OpenCouncilFilePage {
     }
     downloadFile(item) {
         let loader = this.loadingCtrl.create({
-            spinner: 'dots',
+            spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         loader.present();
         // path to download a file to mobile.
@@ -280,7 +283,8 @@ export class OpenCouncilFilePage {
     takePicture(value) {
         // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
-            spinner: 'dots',
+            spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         Camera.getPicture({
             quality: 95,
@@ -339,7 +343,8 @@ export class OpenCouncilFilePage {
     uploadPicture(value) {
         // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
-            spinner: 'dots',
+            spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         Camera.getPicture({
             quality: 95,
@@ -399,7 +404,8 @@ export class OpenCouncilFilePage {
     importFile(value) {
         // this.isNewCouncilFileflag = true;
         let loader = this.loadingCtrl.create({
-            spinner: 'dots',
+            spinner:'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         FileChooser.open()
             .then(uri => {
