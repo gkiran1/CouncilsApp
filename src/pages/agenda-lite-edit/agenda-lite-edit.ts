@@ -38,6 +38,8 @@ export class AgendaLiteEditPage {
   showlist2 = false;
   user;
   agenda;
+  shownGroup = false;
+  shownGroup1 = false;
 
   constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
@@ -228,6 +230,18 @@ export class AgendaLiteEditPage {
   }
 
   edit(value) {
+    if (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== value.openingprayer) {
+      this.showAlert('Please assign to a valid user');
+      return;
+    }
+    if (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== value.spiritualthought) {
+      this.showAlert('Please assign to a valid user');
+      return;
+    }
+    if (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== value.closingprayer) {
+      this.showAlert('Please assign to a valid user');
+      return;
+    }
     value.discussionitems = (value.discussionitems != undefined && value.discussionitems.length > 0) ? value.discussionitems.replace(/-/gi, '').trim() : '';
     let formattedAgendaObj = this.formatAgendaObj(value);
     this.firebaseservice.updateAgendaLite(formattedAgendaObj, this.agendaKey)
@@ -364,7 +378,7 @@ export class AgendaLiteEditPage {
     return index;
   }
 
-   showList(event) {
+  showList(event) {
     let v = event.target.value;
     if (v.charAt('0') !== '@') {
       event.target.value = '@' + event.target.value;
@@ -444,4 +458,13 @@ export class AgendaLiteEditPage {
     }
     this.firebaseservice.createActivity(activity);
   }
+
+  toggleGroup() {
+    this.shownGroup = !this.shownGroup;
+  };
+
+  toggleGroup1() {
+    this.shownGroup1 = !this.shownGroup1;
+  };
+
 }

@@ -106,6 +106,7 @@ export class SettingsPage {
                 browserRef.close();
             }
             else if ((event["url"]).indexOf("http://localhost/callback#error=access_denied") >= 0) {
+                firebase.database().ref().child('users/' + localStorage.getItem('securityToken')).update({ googlecalendaradded: false });
                 localStorage.setItem('allowed', 'false');
                 browserRef.removeEventListener("exit", (event) => { });
                 browserRef.close();
@@ -116,14 +117,11 @@ export class SettingsPage {
 
     }
     sendInvite() {
-
         var apiKey = this.APIKEY;
 
         if (this.rootRef === undefined) {
             this.rootRef = firebase.database().ref();
-        }
-
-        this.rootRef.child('agendas').endAt().limitToLast(1).on('child_added', function (snapshot) {
+        } this.rootRef.child('agendas').endAt().limitToLast(1).on('child_added', function (snapshot) {
 
             var agendaId = snapshot.getKey();
             var councilId = snapshot.val()['councilid'];

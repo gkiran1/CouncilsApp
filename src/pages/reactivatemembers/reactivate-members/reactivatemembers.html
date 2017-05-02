@@ -12,19 +12,18 @@
 </ion-header>
 <ion-content class="background-styles">
     <ion-list>
-        <ion-item 
-        [ngClass]="users.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === users.length - 1 ? 'ion-item-last' : 'ion-item-middle'))"
-         *ngFor="let user of users; let i = index">
+        <ion-item class="bg-styles" [ngClass]="users.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === users.length - 1 ? 'ion-item-last' : 'ion-item-middle'))"
+            *ngFor="let user of users; let i = index">
             <ion-avatar item-left>
                 <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
                 <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
             </ion-avatar>
             <h3 class="font1">{{user.firstname}} {{user.lastname}}</h3>
-            <p><span class="font2">{{user.councilnames}}</span></p>          
+            <p><span class="font2">{{user.councilnames}}</span></p>
             <button ion-button item-right clear (click)="reactivatemember(user)">   
            <ion-icon class="councils-icon__reactivate menu-icon" ></ion-icon>
         </button>
-        </ion-item>
+            </ion-item>
     </ion-list>
     <ion-footer text-center>
         <button ion-button clear color="secondary" (click)="reactivateAll()" text-capitalize [disabled]="!(users[0])">Reactivate All</button>

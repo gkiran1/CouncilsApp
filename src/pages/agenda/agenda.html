@@ -21,7 +21,7 @@
         <ion-item>
             <ion-label floating>Date & Time</ion-label>
             <ion-datetime displayFormat="DDDD, MMM D,YYYY, h:mm a" pickerFormat="DDD MMM D YYYY, h, mm, A" name="assigneddate" formControlName="assigneddate"
-            minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"></ion-datetime>
+                minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"></ion-datetime>
         </ion-item>
 
         <ion-item>
@@ -67,25 +67,31 @@
             </ng-container>
         </div>
 
-        <ion-item>
-            <ion-label *ngIf="!assignments">Assignments</ion-label>
-            <ion-label floating color="secondary" *ngIf="assignments">Assignments</ion-label>
-            <ion-select name="assignments" [(ngModel)]='assignments' formControlName="assignments">
-                <ng-container *ngFor="let assignment of assignmentslist">
-                    <ion-option [value]="assignment">{{assignment.description}}</ion-option>
-                </ng-container>
-            </ion-select>
-        </ion-item>
+        <ion-list>
+            <ion-label *ngIf="!shownGroup" class="assignment-styles" (click)="toggleGroup()">
+                Assignments
+            </ion-label>
+            <ion-label *ngIf="shownGroup" class="assignment-styles1" (click)="toggleGroup()">
+                Assignments
+            </ion-label>
+            <ion-item class="ion-item-middle" *ngFor="let assignment of assignmentslist" text-wrap [ngClass]="{inactive: !shownGroup}">
+                <ion-label class="desc-styles">{{assignment.description}}</ion-label>
+            </ion-item>
+            <ion-item-divider></ion-item-divider>
+        </ion-list>
 
-        <ion-item>
-            <ion-label *ngIf="!completedassignments">Completed Assignments</ion-label>
-            <ion-label floating color="secondary" *ngIf="completedassignments">Completed Assignments</ion-label>
-            <ion-select name="completedassignments" [(ngModel)]='completedassignments' formControlName="completedassignments">
-                <ng-container *ngFor="let completedassignment of completedassignmentslist">
-                    <ion-option [value]="completedassignment">{{completedassignment.description}}</ion-option>
-                </ng-container>
-            </ion-select>
-        </ion-item>
+        <ion-list>
+            <ion-label *ngIf="!shownGroup1" class="assignment-styles" (click)="toggleGroup1()">
+                Completed Assignments
+            </ion-label>
+            <ion-label *ngIf="shownGroup1" class="assignment-styles1" (click)="toggleGroup1()">
+                Completed Assignments
+            </ion-label>
+            <ion-item class="ion-item-middle" *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
+                <div class="desc-styles">{{completedassignment.description}}</div>
+            </ion-item>
+            <ion-item-divider></ion-item-divider>
+        </ion-list>
 
         <ion-item>
             <ion-label *ngIf="!spiritualwelfare">Spiritual Welfare</ion-label>
