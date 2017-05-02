@@ -48,7 +48,7 @@ export class ChangePasswordPage {
         alert.present();
     }
     cancel() {
-        this.navCtrl.push(EditProfilePage);
+        this.navCtrl.pop({animate: true, animation: 'transition', direction:'back'});
     }
     changePassword() {
         let loader = this.loadingCtrl.create({

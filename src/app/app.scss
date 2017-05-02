@@ -944,3 +944,214 @@ ion-list ion-item{
     display: block !important;
 }
 
+/*************************** Loader **************************************/
+
+.loading-ios .loading-wrapper,
+.loading-md .loading-wrapper {
+    box-shadow: none !important;
+}
+
+.loading-wrapper
+{
+
+   background: #fff !important;
+}
+
+.backdrop {
+  background: #fff !important;
+}
+
+ion-backdrop {
+    background: #fff !important;
+}
+
+ion-backdrop[style] {
+    opacity: 1 !important;
+}
+
+
+div.backdrop {
+  
+  opacity: 1 !important;
+  background: #fff !important;
+}
+
+.circle-container{
+	
+	margin:auto;
+}
+
+.circleG_1{
+	background-color:rgb(250,250,250);
+	float:left;
+	height:11px;
+	margin-left:10px;
+	width:11px;
+	animation-name:bounce_circleG;
+		-o-animation-name:bounce_circleG;
+		-ms-animation-name:bounce_circleG;
+		-webkit-animation-name:bounce_circleG;
+		-moz-animation-name:bounce_circleG;
+	animation-duration:1s;
+		-o-animation-duration:1s;
+		-ms-animation-duration:1s;
+		-webkit-animation-duration:1s;
+		-moz-animation-duration:1s;
+	animation-iteration-count:infinite;
+		-o-animation-iteration-count:infinite;
+		-ms-animation-iteration-count:infinite;
+		-webkit-animation-iteration-count:infinite;
+		-moz-animation-iteration-count:infinite;
+	animation-direction:normal;
+		-o-animation-direction:normal;
+		-ms-animation-direction:normal;
+		-webkit-animation-direction:normal;
+		-moz-animation-direction:normal;
+	border-radius:7px;
+		-o-border-radius:7px;
+		-ms-border-radius:7px;
+		-webkit-border-radius:7px;
+		-moz-border-radius:7px;
+
+        margin-left: 0 !important;
+	animation-delay:.25s;
+		-o-animation-delay:.25s;
+		-ms-animation-delay:.25s;
+		-webkit-animation-delay:.25s;
+		-moz-animation-delay:.25s;
+}
+
+.circleG_2{
+	background-color:rgb(250,250,250);
+	float:left;
+	height:11px;
+	margin-left:10px;
+	width:11px;
+	animation-name:bounce_circleG;
+		-o-animation-name:bounce_circleG;
+		-ms-animation-name:bounce_circleG;
+		-webkit-animation-name:bounce_circleG;
+		-moz-animation-name:bounce_circleG;
+	animation-duration:1s;
+		-o-animation-duration:1s;
+		-ms-animation-duration:1s;
+		-webkit-animation-duration:1s;
+		-moz-animation-duration:1s;
+	animation-iteration-count:infinite;
+		-o-animation-iteration-count:infinite;
+		-ms-animation-iteration-count:infinite;
+		-webkit-animation-iteration-count:infinite;
+		-moz-animation-iteration-count:infinite;
+	animation-direction:normal;
+		-o-animation-direction:normal;
+		-ms-animation-direction:normal;
+		-webkit-animation-direction:normal;
+		-moz-animation-direction:normal;
+	border-radius:7px;
+		-o-border-radius:7px;
+		-ms-border-radius:7px;
+		-webkit-border-radius:7px;
+		-moz-border-radius:7px;
+
+        
+	animation-delay:.50s;
+		-o-animation-delay:.50s;
+		-ms-animation-delay:.50s;
+		-webkit-animation-delay:.50s;
+		-moz-animation-delay:.50s;
+}
+
+.circleG_3{
+	background-color:rgb(250,250,250);
+	float:left;
+	height:11px;
+	margin-left:10px;
+	width:11px;
+	animation-name:bounce_circleG;
+		-o-animation-name:bounce_circleG;
+		-ms-animation-name:bounce_circleG;
+		-webkit-animation-name:bounce_circleG;
+		-moz-animation-name:bounce_circleG;
+	animation-duration:1s;
+		-o-animation-duration:1s;
+		-ms-animation-duration:1s;
+		-webkit-animation-duration:1s;
+		-moz-animation-duration:1s;
+	animation-iteration-count:infinite;
+		-o-animation-iteration-count:infinite;
+		-ms-animation-iteration-count:infinite;
+		-webkit-animation-iteration-count:infinite;
+		-moz-animation-iteration-count:infinite;
+	animation-direction:normal;
+		-o-animation-direction:normal;
+		-ms-animation-direction:normal;
+		-webkit-animation-direction:normal;
+		-moz-animation-direction:normal;
+	border-radius:7px;
+		-o-border-radius:7px;
+		-ms-border-radius:7px;
+		-webkit-border-radius:7px;
+		-moz-border-radius:7px;
+
+        
+	animation-delay:.75s;
+		-o-animation-delay:.75s;
+		-ms-animation-delay:.75s;
+		-webkit-animation-delay:.75s;
+		-moz-animation-delay:.75s;
+}
+
+@keyframes bounce_circleG{
+	0%{
+        opacity: 0;
+    }
+
+	50%{
+		background-color:rgba(60,177,138,.5);
+        
+	}
+
+	100%{
+        opacity: 1;
+    }
+}
+
+@-o-keyframes bounce_circleG{
+	0%{ opacity: 0 }
+
+	50%{
+		background-color:rgba(60,177,138,.5)
+	}
+
+	100%{ opacity: 1 }
+}
+
+@-ms-keyframes bounce_circleG{
+	0%{ opacity: 0 }
+
+	50%{
+		background-color:rgba(60,177,138,.5)
+	}
+
+	100%{ opacity: 1 }
+}
+
+@-webkit-keyframes bounce_circleG{
+	0%{ opacity: 0 }
+
+	50%{
+		background-color:rgba(60,177,138,.5)
+	}
+
+	100%{ opacity: 0 }
+}
+
+@-moz-keyframes bounce_circleG{
+	0%{ opacity: 0 }
+
+	50%{
+		background-color:rgba(60,177,138,.5)
+	}
+
+	100%{ opacity: 1 }
+}
