@@ -24,6 +24,6 @@ export class InvitationSuccessPage {
         this.navctrl.pop();
     }
     close() {
-        this.navctrl.popToRoot();
+        this.navctrl.popToRoot({ animate: true, animation: 'transition', direction: 'back' });
     }
 }

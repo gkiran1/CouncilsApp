@@ -138,7 +138,7 @@ export class NewAssignmentPage {
     if (this.isNewAssignment) {
       this.nav.popToRoot();
     } else {
-      this.nav.pop();
+      this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 
   }

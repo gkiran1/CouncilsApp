@@ -14,7 +14,7 @@ export class DonationsThankyouPage {
     console.log('ionViewDidLoad DonationsThankyouPage');
   }
   cancel() {
-    this.nav.popToRoot();
+    this.nav.popToRoot({ animate: true, animation: 'transition', direction: 'back' });
   }
 
 }

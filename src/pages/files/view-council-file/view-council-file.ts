@@ -45,7 +45,7 @@ export class ViewCouncilFilePage {
     }
     downloadFile(item) {
         let loader = this.loadingCtrl.create({
-            spinner:'hide',
+            spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         loader.present();
@@ -80,7 +80,7 @@ export class ViewCouncilFilePage {
                 break;
         }
         let fileTransfer = new FileTransfer();
-        ProfileRef.getDownloadURL().then( (url)=> {
+        ProfileRef.getDownloadURL().then((url) => {
             var trustHosts = true;
             fileTransfer.download(url, targetPath, function (res) {
                 loader.dismiss();
@@ -104,14 +104,15 @@ export class ViewCouncilFilePage {
                 alert('Target path:' + targetPath + JSON.stringify(e));
             })
 
-        }).catch( (error)=> {
-                loader.dismiss();
-                console.log(error);
-            });
+        }).catch((error) => {
+            loader.dismiss();
+            console.log(error);
+        });
 
     }
 
     back() {
-        this.nav.pop();
+        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
+
     }
 }

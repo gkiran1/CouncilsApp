@@ -96,7 +96,7 @@ export class EditProfilePage {
         if (this.isChangeflag) {
             this.showAlertPopup('failure', 'There are unsaved changes.do you want to discard it ?');
         } else {
-           this.nav.popToRoot();
+           this.nav.popToRoot({ animate: true, animation: 'transition', direction: 'back' });
         }
     }
     showAlert(reason, text) {

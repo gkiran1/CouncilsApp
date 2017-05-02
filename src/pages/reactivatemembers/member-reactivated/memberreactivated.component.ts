@@ -14,6 +14,6 @@ export class MemberReactivatedPage {
         this.navCtrl.pop();
     }
     back() {
-        this.navCtrl.pop();
+        this.navCtrl.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 }
