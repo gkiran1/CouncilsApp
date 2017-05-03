@@ -79,9 +79,11 @@
                             <ion-icon name="councilscircle"  [ngClass]="shownGroup? 'councils-icon__close' : 'councils-icon__add menu-icon'"  item-right></ion-icon>
                                 </button>
             </ion-item>
-            <ion-item class="ion-item-middle" *ngFor="let assignment of assignmentslist" text-wrap [ngClass]="{inactive: !shownGroup}">
-                <ion-label class="desc-styles">{{assignment.description}}</ion-label>
-            </ion-item>
+            <ng-container *ngIf="assignmentslist.length">
+                <ion-item class="ion-item-middle" *ngFor="let assignment of assignmentslist" text-wrap [ngClass]="{inactive: !shownGroup}">
+                    <ion-label class="desc-styles">{{assignment.description}}</ion-label>
+                </ion-item>
+            </ng-container>
         </ion-list>
 
         <ion-list class="border-line">
@@ -93,7 +95,7 @@
                     Completed Assignments
                 </ion-label>
                 <button color="secondary"  class="no-padding"  name="councilsPage"  (click)="toggleGroup1()"  ion-button icon-only clear item-right>
-                    <ion-icon name="councilscircle"  [ngClass]="shownGroup? 'councils-icon__close' : 'councils-icon__add menu-icon'"  item-right></ion-icon>
+                    <ion-icon name="councilscircle"  [ngClass]="shownGroup1? 'councils-icon__close' : 'councils-icon__add menu-icon'"  item-right></ion-icon>
                         </button>
             </ion-item>
             <ion-item class="ion-item-middle" *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
@@ -106,7 +108,7 @@
             <ion-label floating color="secondary" *ngIf="discussionitems">Discussion Items</ion-label>
             <ion-textarea type="text" wrap="off" (focus)="discussionfocus()" elastic id="discussionitems" name="discussionitems" [(ngModel)]="discussionitems"
                 formControlName="discussionitems" maxlength="500" (keyup)="keypressed($event)">
-                </ion-textarea>
+            </ion-textarea>
         </ion-item>
 
         <div *ngIf="showlist2" class="assignto-list">
