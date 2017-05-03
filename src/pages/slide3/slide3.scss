@@ -1,10 +1,19 @@
 slide3{
+    .header-ios{
+        height: 72px;
+    }
+    .content-ios{
+        margin-top:72px;
+    }
     .heading{
         height: 64px;
-        background: #f4f4f4;
+        background: #FFF;
+        display: flex;
+        justify-content: center;
+        align-content: center;
      }
      .toolbar-title {
-        text-align: left;
+        text-align: center;
         padding:16px;
     }
     .name{
@@ -30,6 +39,7 @@ slide3{
         height: 46px !important;
     }
     ion-content{
+        margin-top: 57px;
         margin-bottom:40px;
     }
     .text-content{
