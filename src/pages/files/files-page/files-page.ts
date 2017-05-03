@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
+import { NewCouncilFilePage } from '../new-council-file/new-council-file';
 import { OpenCouncilFilePage } from '../open-council-file/open-council-file';
 import { ViewCouncilFilePage } from '../view-council-file/view-council-file';
 import { NavController, Platform, LoadingController } from 'ionic-angular';
@@ -74,5 +75,8 @@ export class FilesListPage {
     }
     notificationsPage() {
         this.nav.push(NotificationsPage);
+    }
+    addFile() {
+        this.nav.push(NewCouncilFilePage);
     }
 }
