@@ -43,22 +43,22 @@ export class ForgotPwd {
 
             // Uncomment this code when email service works. 
 
-            // this.emailService.emailForgotPassword(this.email).subscribe(res => {
-            //     if (res.status === 200) {
-            //         loader.dismiss();
-            //         this.navCtrl.push(ForgotPwdSuccess);
-            //     }
-            //     else {
-            //         loader.dismiss();
-            //         alert("Mail sending Failed. Please check your email and try")
-            //     }
-            // });
+            this.emailService.emailForgotPassword(this.email).subscribe(res => {
+                if (res.status === 200) {
+                    loader.dismiss();
+                    this.navCtrl.push(ForgotPwdSuccess);
+                }
+                else {
+                    loader.dismiss();
+                    alert("Mail sending Failed. Please check your email and try")
+                }
+            });
 
 
             //Comment this code when email service works.
 
-            loader.dismiss();
-            this.navCtrl.push(ForgotPwdSuccess);
+            // loader.dismiss();
+            // this.navCtrl.push(ForgotPwdSuccess);
 
         }
     }
