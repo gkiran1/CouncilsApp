@@ -7,7 +7,7 @@
         </div>
     </div>
   
-  <form class="formcontent" (ngSubmit)="createAccount()" #forgotpwdForm="ngForm">
+  <form class="formcontent" (ngSubmit)="sendEmail()" #forgotpwdForm="ngForm">
     <ion-item >
       <ion-label class="inputtype" floating> Email</ion-label>
             <ion-input  type="email" name="email" [(ngModel)]="email" id="email" required></ion-input>
