@@ -22,13 +22,11 @@ agenda-lite{
          font-family: Bernina-Regular !important; 
          color:darkgray;       
         font-size: 17px;
-        padding-left:16px;
     }
     .assignment-styles1{
          font-family: Bernina-Regular !important; 
          color:#3cb18a;       
         font-size: 14px;
-        padding-left:16px;
     }
     .desc-styles {
    font-family: 'Bernina-Regular', sans-serif !important;
@@ -39,5 +37,8 @@ agenda-lite{
     .ion-item-middle.item-md.item-block:last-child .item-inner{
         border-bottom: none !important;
     }
+.border-line{
+            border-bottom: 1px solid #e8e9eb;
 
+}
 }

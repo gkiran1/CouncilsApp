@@ -15,13 +15,13 @@
     <form [formGroup]="newagendaliteForm" (ngSubmit)="newagendaliteForm.value">
         <ion-item>
             <ion-label floating>Council</ion-label>
-            <ion-input type="text" readonly (touchstart)="showCouncilsModal($event, newagendaliteForm.value)" formControlName="assignedcouncil"></ion-input>
+            <ion-input type="text" readonly (click)="showCouncilsModal($event, newagendaliteForm.value)" formControlName="assignedcouncil"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Date & Time</ion-label>
             <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDD MMM D YYYY, h, mm, A" name="assigneddate" formControlName="assigneddate"
-            minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"></ion-datetime>
+                minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"></ion-datetime>
         </ion-item>
 
         <ion-item>
@@ -67,30 +67,38 @@
             </ng-container>
         </div>
 
-        <ion-list>
-            <ion-label *ngIf="!shownGroup" class="assignment-styles" (click)="toggleGroup()">
-                Assignments
-            </ion-label>
-            <ion-label *ngIf="shownGroup" class="assignment-styles1" (click)="toggleGroup()">
-                Assignments
-            </ion-label>
+        <ion-list class="border-line">
+            <ion-item>
+                <ion-label *ngIf="!shownGroup"  class="assignment-styles">
+                    Assignments
+                    </ion-label>
+                    <ion-label *ngIf="shownGroup"  class="assignment-styles1">
+                        Assignments
+                        </ion-label>
+                        <button color="secondary"  class="no-padding"  name="councilsPage"  (click)="toggleGroup()"  ion-button icon-only clear item-right>
+                            <ion-icon name="councilscircle"  [ngClass]="shownGroup? 'councils-icon__close' : 'councils-icon__add menu-icon'"  item-right></ion-icon>
+                                </button>
+            </ion-item>
             <ion-item class="ion-item-middle" *ngFor="let assignment of assignmentslist" text-wrap [ngClass]="{inactive: !shownGroup}">
                 <ion-label class="desc-styles">{{assignment.description}}</ion-label>
             </ion-item>
-            <ion-item-divider></ion-item-divider>
         </ion-list>
 
-        <ion-list>
-            <ion-label *ngIf="!shownGroup1" class="assignment-styles" (click)="toggleGroup1()">
-                Completed Assignments
-            </ion-label>
-            <ion-label *ngIf="shownGroup1" class="assignment-styles1" (click)="toggleGroup1()">
-                Completed Assignments
-            </ion-label>
+        <ion-list class="border-line">
+            <ion-item>
+                <ion-label *ngIf="!shownGroup1" class="assignment-styles">
+                    Completed Assignments
+                </ion-label>
+                <ion-label *ngIf="shownGroup1" class="assignment-styles1">
+                    Completed Assignments
+                </ion-label>
+                <button color="secondary"  class="no-padding"  name="councilsPage"  (click)="toggleGroup1()"  ion-button icon-only clear item-right>
+                    <ion-icon name="councilscircle"  [ngClass]="shownGroup? 'councils-icon__close' : 'councils-icon__add menu-icon'"  item-right></ion-icon>
+                        </button>
+            </ion-item>
             <ion-item class="ion-item-middle" *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
                 <div class="desc-styles">{{completedassignment.description}}</div>
             </ion-item>
-            <ion-item-divider></ion-item-divider>
         </ion-list>
 
         <ion-item>
