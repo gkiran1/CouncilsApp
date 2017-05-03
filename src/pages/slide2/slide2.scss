@@ -16,9 +16,6 @@ slide2 {
         color: #FFFFFF;
     }
 
-     .list {
-        margin-top: 16px;
-    }
     
 
     .count {
@@ -116,4 +113,27 @@ slide2 {
      border-bottom: 1px solid #e8e9eb;
 
 }
+
+.list-md {
+    padding: 19px 0 !important;
+}
+.list-ios {
+    padding: 32px 0 !important;
+}
+
+.name-board{
+   
+     border-bottom: 1px solid #e8e9eb !important;
+     display: flex;
+     justify-content: center;
+     align-content: center;
+     align-items: center;
+     align-self: center;
+width: 100%;
+    padding-bottom: 14px !important;
+
+}
+
+
+
 }
