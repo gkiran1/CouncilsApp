@@ -1,13 +1,41 @@
 <ion-list no-lines>
-        <button *ngIf=isAdmin clear  menuToggle ion-button class="settings-button" id="adminPage" name="AdminPage" block (click)="adminPage('adminPage')" text-capitalize>
-                    <ion-icon class="icon councils-icon__admin menu-icon" item-left></ion-icon><span>Admin</span>
-            </button>
-        <button clear menuToggle ion-button class="settings-button" name="settingsPage" id="settingsPage" block (click)="settingsPage('settingsPage')" text-capitalize>
-                    
-                    <ion-icon class="icon councils-icon__settings menu-icon" item-left></ion-icon>Settings
-            </button>
-            
-        <button clear ion-button  menuToggle class="settings-button" name="DonationsPage" id="donationsPage" block (click)="donationsPage('donationsPage')" text-capitalize>
-                    <ion-icon class="icon councils-icon__donations menu-icon" item-left></ion-icon>Donations
-            </button>
+<ion-row class="border-line">
+            <ion-col class="menu-avatar-col">
+                <ion-avatar >
+                    <img [src]="(userObj)?.avatar" class="avatarImage" *ngIf="(userObj)?.avatar && (userObj)?.avatar !== 'avatar'" />
+                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(userObj)?.avatar || (userObj)?.avatar === 'avatar'" />
+                </ion-avatar>
+            </ion-col>
+            <ion-col class="menu-user-col">
+                <ion-row item-center>
+                    <!--<ion-col *ngIf=isAdmin class="user-admin-col">
+                    <span><ion-icon class="icon councils-icon__admin user-admin-icon" color="primary"></ion-icon></span>
+                </ion-col>-->
+                    <ion-col>
+                        <ion-row>
+                            <span class="user1">{{(userObj)?.firstname}} {{(userObj)?.lastname}}</span>
+                        </ion-row>
+                        <ion-row >
+                            <span class="user2">@{{(userObj)?.calling}}</span>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        
+        <button clear menuToggle ion-button name="settingsPage" id="settingsPage" block (click)="settingsPage('settingsPage')"
+                text-capitalize>
+                Settings
+                </button>
+
+                <button clear ion-button menuToggle name="DonationsPage" id="donationsPage" block (click)="donationsPage('donationsPage')"
+                        text-capitalize>
+                        Donations
+               </button>
+
+         <button *ngIf=isAdmin clear menuToggle ion-button id="adminPage" name="AdminPage" block (click)="adminPage('adminPage')"
+                                text-capitalize>
+                                Admin
+                                </button>
+       
 </ion-list>

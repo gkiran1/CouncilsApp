@@ -68,7 +68,7 @@ slide2 {
         padding-left: 16px;
     }
     .user1 {
-        font-family: Bernina-Regular;
+        font-family: Bernina-Bold !important;
         font-size: 17px;
         color: #35373a !important;
         margin-bottom: 3px;
@@ -78,9 +78,9 @@ slide2 {
     .user2 {
         margin:0;
         padding:0;
-        font-family: Bernina-Regular;
-        font-size: 15px;
-        color: #a9aaac !important;
+        font-family: Bernina-Bold;
+        font-size: 17px;
+        color: #35373a !important;
     }
 
     .menu-avatar-col {
@@ -112,5 +112,8 @@ slide2 {
     .no-padding{
         padding: 0 !important;
     }
-    
+    .border-line{
+     border-bottom: 1px solid #e8e9eb;
+
+}
 }

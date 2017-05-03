@@ -37,5 +37,86 @@ slide1 {
     .button-ios.activated {
         color: #FFFFFF;
     }
+    
+    .item-md ion-avatar ion-img,
+    .item-md ion-avatar img {
+        width: 48px;
+        height: 48px;
+    }
+    .item-ios ion-avatar ion-img,
+    .item-ios ion-avatar img {
+        width: 48px;
+        height: 48px;
+    }
+ion-avatar img, ion-thumbnail img{
+ width: 40px !important;
+        height: 40px !important;
+        
+}
+
+    .item-md ion-avatar[item-left],
+    .item-md ion-thumbnail[item-left] {
+        margin: 0;
+    }
+    .item-ios ion-avatar[item-left],
+    .item-ios ion-thumbnail[item-left] {
+        margin: 0;
+    }
+    .item-md {
+        padding-left: 16px;
+    }
+    .item-ios {
+        padding-left: 16px;
+    }
+    .user1 {
+        font-family: Bernina-Bold;
+        font-size: 17px;
+        color: #35373a !important;
+        margin-bottom: 3px;
+        white-space: pre;
+        line-height: 17px;
+    }
+    .user2 {
+        margin:0;
+        padding:0;
+        font-family: Bernina-Regular;
+        font-size: 15px;
+        color: #a9aaac !important;
+    }
+
+    .menu-avatar-col {
+        padding:0 !important;
+        margin: 12px 0 16px 16px !important; 
+        max-width: 48px !important;       
+    }
+
+    .menu-user-col {
+        padding:0 !important;
+        margin: 16px 0 0 16px !important;
+
+    }
+    .menu-user-col ion-row, .menu-user-col ion-row ion-col, .menu-user-col ion-row ion-col {
+        padding: 0 !important;
+
+    } 
+    .user-admin-icon {
+        font-size: 17px !important;
+    }
+.border-line{
+     border-bottom: 1px solid #e8e9eb;
+
+}
+    .user-admin-col {
+        padding:0;
+        margin-right:6px;
+    }
+
+    .user-admin-col ion-row span {
+        padding:0;
+        margin:0;
+    }
+    .no-padding{
+        padding: 0 !important;
+    }
 
 }
