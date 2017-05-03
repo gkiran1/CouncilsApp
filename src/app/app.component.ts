@@ -44,13 +44,14 @@ export class MyApp {
       //Status overlay set to false
       StatusBar.overlaysWebView(false);
 
-      
+
       var securityToken = localStorage.getItem('securityToken');
       var isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
 
       if ((securityToken == null || securityToken == 'null') &&
         (isUserLoggedIn == 'null' || isUserLoggedIn == null || isUserLoggedIn == 'false')) {
-        localStorage.setItem('isInstanceCreated', 'false');
+        localStorage.setItem('childAdded', 'false');
+        localStorage.setItem('gcToken', 'null');
         this.rootPage = LoginPage;
       }
       else {
