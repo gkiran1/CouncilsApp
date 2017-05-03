@@ -85,7 +85,7 @@ import { NotePage } from '../pages/notes/note/note';
 import { GoogleCalenderPage } from '../pages/googlecalender/googlecalender.component';
 
 //Directives
-import { TabindexDirective } from '../directives/tabindex.directive';
+import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
 
 //Cloud Settings - Push Messaging
 const cloudSettings: CloudSettings = {
@@ -178,7 +178,7 @@ const cloudSettings: CloudSettings = {
     NotesPage,
     NotePage,
     GoogleCalenderPage,
-    TabindexDirective,
+    CloseKeyboardDirective,
     ForgotPwd,
     ForgotPwdSuccess
   ],
