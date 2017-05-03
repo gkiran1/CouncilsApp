@@ -24,10 +24,10 @@
     <ng-container *ngIf="!listdisplayflag">
         <ion-list>
             <ion-item [ngClass]="i === 0 ? 'ion-item-first': (i === filesArray.length-1 ? 'ion-item-last' : 'ion-item-middle')" *ngFor="let file of filesArray; let i = index"
-                text-wrap (click)="downloadFile(file)">
-                <ion-icon item-left class="councils-icon__file menu-icon" name="document" color="secondary"></ion-icon>
+                text-wrap>
+                <ion-icon item-left class="councils-icon__file menu-icon" name="document" color="secondary" (click)="downloadFile(file)"></ion-icon>
                 <ion-row>
-                    <ion-col width-80>
+                    <ion-col width-80 (click)="downloadFile(file)">
                         <p><span class="council-styles">{{file.name || file.filename}}</span></p>
                         <p class="font4">by <span ion-text color="secondary">{{value.createdUser}}</span></p>
                         <p class="font4">
