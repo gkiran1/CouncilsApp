@@ -232,13 +232,12 @@ export class FirebaseService {
         }).map(results => results);
     }
 
-
-
     createAssigment(assignment: any) {
         return this.rootRef.child('assignments').push(
             {
                 assigneddate: assignment.assigneddate,
                 assignedto: assignment.assigneduser,
+                assigneduser: assignment.assignedusername,
                 councilid: assignment.councilid,
                 councilname: assignment.councilname,
                 createdby: assignment.createdby,
@@ -360,6 +359,7 @@ export class FirebaseService {
         return this.af.database.list('assignments').update(assignmentKey, {
             assigneddate: assignment.assigneddate,
             assignedto: assignment.assigneduser,
+            assigneduser: assignment.assignedusername,
             councilid: assignment.councilid,
             councilname: assignment.councilname,
             createdby: assignment.createdby,

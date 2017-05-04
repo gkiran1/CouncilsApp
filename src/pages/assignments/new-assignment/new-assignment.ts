@@ -158,7 +158,8 @@ export class NewAssignmentPage {
       councilname: this.assignedcouncil.council,
       isactive: value.isactive,
       notes: value.notes,
-      isCompleted: value.isCompleted
+      isCompleted: value.isCompleted,
+      assignedusername: value.assigneduser
     }
   }
 
