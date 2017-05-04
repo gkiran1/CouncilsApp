@@ -18,19 +18,21 @@ export class CouncilDiscussionsListPage {
   notificationsCount;
 
   constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController) {
-    if (localStorage.getItem('userCouncils') !== null) {
-      var councilsIds = localStorage.getItem('userCouncils').split(',');
-      this.discussions = [];
-      fs.getDiscussions().subscribe(discussions => {
-        this.discussions = discussions.filter(discussion => {
-          //console.log('user.councils, discussion.councilid',councilsIds, discussion.councilid);
-          return councilsIds.indexOf(discussion.councilid) !== -1;
+    let uid = localStorage.getItem('securityToken');
+    if (uid !== null) {
+      this.af.database.object('/users/' + uid).subscribe(usr => {
+        this.discussions = [];
+        fs.getDiscussions().subscribe(discussions => {
+          this.discussions = discussions.filter(discussion => {
+            return usr.councils.indexOf(discussion.councilid) !== -1;
+          });
+          this.isListEmpty = this.discussions.length ? false : true;
+          let length = this.discussions.length;
+          length = length ? length : null;
+          this.count$.next(length);
         });
-        this.isListEmpty = this.discussions.length ? false : true;
-        let length = this.discussions.length;
-        length = length ? length : null;
-        this.count$.next(length);
       });
+
     }
 
     fs.getNotCnt().subscribe(count => {
