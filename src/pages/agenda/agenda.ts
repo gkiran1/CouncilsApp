@@ -117,19 +117,16 @@ export class AgendaPage {
 
         this.firebaseservice.createAgenda(agenda)
             .then(key => {
-                let userids = new Set();
                 if (agenda.openingprayeruserid) {
-                    userids.add(agenda.openingprayeruserid);
+                    this.createActivity(key, agenda.openingprayeruserid, 'opening prayer');
                 }
                 if (agenda.spiritualthoughtuserid) {
-                    userids.add(agenda.spiritualthoughtuserid);
+                    this.createActivity(key, agenda.spiritualthoughtuserid, 'spiritual thought');
                 }
                 if (agenda.closingprayeruserid) {
-                    userids.add(agenda.closingprayeruserid);
+                    this.createActivity(key, agenda.closingprayeruserid, 'closing prayer');
                 }
-                Array.from(userids).forEach(id => {
-                    this.createActivity(key, id);
-                });
+
                 this.nav.popToRoot();
             })
             .catch(err => this.showAlert(err))
@@ -385,12 +382,14 @@ export class AgendaPage {
             'Z';
     };
 
-    createActivity(agendaKey, userid) {
+    createActivity(agendaKey, userid, action) {
         let activity = {
             userid: userid,
-            entity: 'Agenda Standard',
+            entity: 'Agenda',
             entityid: agendaKey,
-            action: 'created',
+            action: action,
+            councilid: this.assignedcouncil.$key,
+            councilname: this.assignedcouncil.council,
             timestamp: new Date().toISOString(),
             createdUserId: this.user.$key,
             createdUserName: this.user.firstname + ' ' + this.user.lastname,

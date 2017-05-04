@@ -248,20 +248,15 @@ export class AgendaLiteEditPage {
     this.firebaseservice.updateAgendaLite(formattedAgendaObj, this.agendaKey)
       .then(res => {
         this.nav.popToRoot();
-        let userids = new Set();
         if (formattedAgendaObj.openingprayeruserid) {
-          userids.add(formattedAgendaObj.openingprayeruserid);
+          this.createActivity('opening prayer', formattedAgendaObj.openingprayeruserid);
         }
         if (formattedAgendaObj.spiritualthoughtuserid) {
-          userids.add(formattedAgendaObj.spiritualthoughtuserid);
+          this.createActivity('spiritual thought', formattedAgendaObj.spiritualthoughtuserid);
         }
         if (formattedAgendaObj.closingprayeruserid) {
-          userids.add(formattedAgendaObj.closingprayeruserid);
+          this.createActivity('closing prayer', formattedAgendaObj.closingprayeruserid, );
         }
-
-        Array.from(userids).forEach(id => {
-          this.createActivity('updated', id);
-        });
       })
       .catch(err => { this.showAlert('Unable to updated the Agenda Lite, please try after some time.') })
   }
@@ -269,19 +264,16 @@ export class AgendaLiteEditPage {
   delete() {
     this.firebaseservice.removeAgendaLite(this.agendaKey)
       .then(res => {
-        let userids = new Set();
         if (this.agenda.openingprayeruserid) {
-          userids.add(this.agenda.openingprayeruserid);
+          this.createActivity('opening prayer', this.agenda.openingprayeruserid);
         }
         if (this.agenda.spiritualthoughtuserid) {
-          userids.add(this.agenda.spiritualthoughtuserid);
+          this.createActivity('spiritual thought', this.agenda.spiritualthoughtuserid);
         }
         if (this.agenda.closingprayeruserid) {
-          userids.add(this.agenda.closingprayeruserid);
+          this.createActivity('closing prayer', this.agenda.closingprayeruserid, );
         }
-        Array.from(userids).forEach(id => {
-          this.createActivity('deleted', id);
-        });
+
         this.nav.pop();
       })
       .catch(err => { this.showAlert('Unable to delete the Agenda Lite, please try after some time.') })
@@ -449,9 +441,11 @@ export class AgendaLiteEditPage {
   createActivity(action, userid) {
     let activity = {
       userid: userid,
-      entity: 'Agenda Lite',
+      entity: 'Agenda',
       entityid: this.agendaKey,
       action: action,
+      councilid: this.assignedcouncil.$key,
+      councilname: this.assignedcouncil.council,
       timestamp: new Date().toISOString(),
       createdUserId: this.user.$key,
       createdUserName: this.user.firstname + ' ' + this.user.lastname,

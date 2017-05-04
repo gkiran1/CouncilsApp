@@ -14,13 +14,16 @@ import { OpenCouncilDiscussionPage } from '../discussions/open-council-discussio
 })
 export class slide3Page {
   activities;
+  user;
   constructor(public alertCtrl: AlertController, public af: AngularFire, public zone: NgZone, public nav: NavController, public fs: FirebaseService) {
     let uid = localStorage.getItem('securityToken');
     if (!uid) return; //Do nothing
-
-    this.fs.getActivities(uid).subscribe(activities => {
-      // activities.sort(function (a, b) { return (a.timestamp > b.timestamp) ? 1 : ((b.timestamp > a.timestamp) ? -1 : 0); });
-      this.activities = activities.reverse();;
+    this.fs.getUsersByKey(uid).subscribe(u => {
+      this.user = u[0];
+      this.fs.getActivities(uid).subscribe(activities => {
+        // activities.sort(function (a, b) { return (a.timestamp > b.timestamp) ? 1 : ((b.timestamp > a.timestamp) ? -1 : 0); });
+        this.activities = activities.reverse();;
+      });
     });
   }
 
