@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { EditMemberPage } from '../edit-member/editmember.component';
-import { AdminPage } from '../../admin/admin.component';
 
 @Component({
     templateUrl: 'memberslist.html',

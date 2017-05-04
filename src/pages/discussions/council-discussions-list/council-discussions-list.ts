@@ -3,7 +3,7 @@ import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { OpenCouncilDiscussionPage } from '../open-council-discussion/open-council-discussion'
 import { NavController } from 'ionic-angular';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 

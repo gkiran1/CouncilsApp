@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { NewCouncilFilePage } from '../new-council-file/new-council-file';
 import { OpenCouncilFilePage } from '../open-council-file/open-council-file';
-import { ViewCouncilFilePage } from '../view-council-file/view-council-file';
-import { NavController, Platform, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
-import { TransferObject } from '@ionic-native/transfer';
 import * as firebase from 'firebase';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 

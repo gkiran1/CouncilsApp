@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { InactivateMembersPage } from '../inactivatemembers/inactivate-members/inactivatemembers.component';
 import { ReactivateMembersPage } from '../reactivatemembers/reactivate-members/reactivatemembers.component';

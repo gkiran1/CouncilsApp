@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, ElementRef, ViewChild, AfterViewChecked, AfterViewInit, NgZone } from '@angular/core';
+import { Component, Input, ElementRef, AfterViewChecked, AfterViewInit, NgZone } from '@angular/core';
 
 declare var Swiper: any;
 

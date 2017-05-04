@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ActionSheetController, MenuController, LoadingController, Platform } from 'ionic-angular';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { OpenCouncilFilePage } from '../open-council-file/open-council-file';
-import { User } from '../../user/user';
-import { Camera, Toast, File, FileChooser, FilePath, ImagePicker } from 'ionic-native';
-import * as firebase from 'firebase';
+import { Camera, FileChooser, FilePath } from 'ionic-native';
 import * as moment from 'moment';
 declare var FilePicker;
 

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { MembersListPage } from '../members-list/memberslist.component';
-
 
 @Component({
     selector: 'editcomplete-page',

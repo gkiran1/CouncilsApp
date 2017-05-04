@@ -1,13 +1,12 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
 // import { FormBuilder,  Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { Camera, Toast, File, FileChooser, FilePath } from 'ionic-native';
-import { Content } from 'ionic-angular';
+import { Camera, FileChooser, FilePath } from 'ionic-native';
 import * as firebase from 'firebase';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import * as moment from 'moment';
 declare var FileTransfer;
