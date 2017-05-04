@@ -17,7 +17,8 @@ export class OpenCouncilDiscussionPage {
         $key: '',
         messages: [],
         councilid: '',
-        typings: ''
+        typings: '',
+        councilname: ''
     }
     msg = '';
     user;
@@ -67,7 +68,7 @@ export class OpenCouncilDiscussionPage {
                 .then(res => {
                     this.tagsSet.forEach(tag => {
                         if (chatObj.text.includes('@' + tag.split('/')[1])) {
-                            this.createActivity(this.discussion.$key, tag.split('/')[0]);
+                            this.createActivity(this.discussion.$key, tag.split('/')[0], chatObj.text);
                         }
                     });
                     this.tagsSet.clear();
@@ -132,12 +133,15 @@ export class OpenCouncilDiscussionPage {
             });
     }
 
-    createActivity(key, userid) {
+    createActivity(key, userid, msg) {
         let activity = {
             userid: userid,
             entity: 'Discussion',
             entityid: key,
+            entityDescription: msg,
             action: 'mentioned',
+            councilid: this.discussion.councilid,
+            councilname: this.discussion.councilname,
             timestamp: new Date().toISOString(),
             createdUserId: this.user.$key,
             createdUserName: this.user.firstname + ' ' + this.user.lastname,

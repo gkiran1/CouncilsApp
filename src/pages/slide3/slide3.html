@@ -13,9 +13,10 @@
         <!--<h3 class="name">{{activity.createdUserName}}</h3>-->
         <p class="text-content" *ngIf="activity.entity === 'Agenda'"><span class="username">@{{user.firstname + user.lastname}}</span> you’ve been invited to give the {{activity.action}}</p>
         <p class="text-content" *ngIf="activity.entity === 'Assignment'"><span class="username">@{{user.firstname + user.lastname}}</span> has been asked to {{activity.entityDescription}}</p>
-        <p class="text-content" *ngIf="activity.entity === 'Discussion'"><span class="username">@{{user.firstname + user.lastname}}</span> Your name has been mentioned in a discussion</p>
+        <p class="text-content" *ngIf="activity.entity === 'Discussion'">{{activity.entityDescription}}</p>
         <p class="timestamp">{{activity.timestamp | customdateformat}}</p>
-        <p class="timestamp">{{activity.councilname}} {{activity.entity}}</p>
+        <p class="timestamp" *ngIf="activity.entity !== 'Discussion'">{{activity.councilname}} {{activity.entity}}</p>
+        <p class="timestamp" *ngIf="activity.entity === 'Discussion'">{{activity.createdUserName}} {{activity.entity}}</p>
     </ion-item>
 </ion-content>
 <ion-footer>
