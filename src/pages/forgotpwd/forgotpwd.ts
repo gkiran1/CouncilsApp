@@ -62,4 +62,8 @@ export class ForgotPwd {
 
         }
     }
+    cancel() {
+        this.navCtrl.pop();
+    }
+
 }

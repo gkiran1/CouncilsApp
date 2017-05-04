@@ -68,14 +68,14 @@
         </div>
 
         <ion-list class="border-line">
-            <ion-item>
-                <ion-label *ngIf="!shownGroup"  class="assignment-styles">
+            <ion-item (click)="toggleGroup()">
+                <ion-label *ngIf="!shownGroup" class="assignment-styles">
                     Assignments
                     </ion-label>
-                    <ion-label *ngIf="shownGroup"  class="assignment-styles1">
+                    <ion-label *ngIf="shownGroup" class="assignment-styles1">
                         Assignments
                         </ion-label>
-                        <button color="secondary"  class="no-padding"  name="councilsPage"  (click)="toggleGroup()"  ion-button icon-only clear item-right>
+                        <button color="secondary"  class="no-padding"  name="councilsPage" ion-button icon-only clear item-right>
                             <ion-icon name="councilscircle"  [ngClass]="shownGroup? 'councils-icon__close menu-icon' : 'councils-icon__add menu-icon'"  item-right></ion-icon>
                                 </button>
             </ion-item>
@@ -85,15 +85,15 @@
         </ion-list>
 
         <ion-list class="border-line">
-            <ion-item>
+            <ion-item (click)="toggleGroup1()">
                 <ion-label *ngIf="!shownGroup1" class="assignment-styles">
                     Completed Assignments
                 </ion-label>
                 <ion-label *ngIf="shownGroup1" class="assignment-styles1">
                     Completed Assignments
                 </ion-label>
-                <button color="secondary"  class="no-padding"  name="councilsPage"  (click)="toggleGroup1()"  ion-button icon-only clear item-right>
-                    <ion-icon name="councilscircle"  [ngClass]="shownGroup1? 'councils-icon__close menu-icon' : 'councils-icon__add menu-icon'"  item-right></ion-icon>
+                <button color="secondary" class="no-padding" name="councilsPage" ion-button icon-only clear item-right>
+                    <ion-icon name="councilscircle" [ngClass]="shownGroup1? 'councils-icon__close menu-icon' : 'councils-icon__add menu-icon'"  item-right></ion-icon>
                         </button>
             </ion-item>
             <ion-item class="ion-item-middle" *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
