@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { User } from '../../../user/user';
-import { AlertController, NavController, NavParams, ActionSheetController, MenuController } from 'ionic-angular';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { NavController, NavParams } from 'ionic-angular';
 import { EditCompletePage } from '../edit-complete/editcomplete.component';
 
 @Component({

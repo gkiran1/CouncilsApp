@@ -1,9 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { AlertController, NavController, ActionSheetController, MenuController, ModalController, NavParams } from 'ionic-angular';
-import { NotesPage } from '../../notes/notes/notes';
-import * as moment from 'moment';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AlertController, NavController, ActionSheetController, MenuController,  NavParams } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     templateUrl: 'note.html',

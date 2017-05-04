@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input } from '@angular/core';
+import { Directive, HostListener } from '@angular/core';
 import { TextInput, Keyboard } from 'ionic-angular';
 
 @Directive({

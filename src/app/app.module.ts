@@ -9,7 +9,6 @@ import { AngularFireModule } from 'angularfire2';
 import { FirebaseConfig } from './../environments/firebase/firebase-config';
 import { FirebaseService } from './../environments/firebase/firebase-service';
 import { DisplayPage } from '../pages/display/display';
-import * as firebase from 'firebase';
 import { MenuPage } from '../pages/menu/menu';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { NewAssignmentPage } from '../pages/assignments/new-assignment/new-assignment';
