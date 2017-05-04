@@ -490,7 +490,8 @@ export class FirebaseService {
             createddate: agenda.createddate,
             // lastupdateddate: agenda.lastupdateddate,
             isactive: agenda.isactive,
-            islite: true
+            islite: true,
+            editedby: ''
         })
             .then((res) => {
                 return res.path.o[1];
@@ -587,7 +588,8 @@ export class FirebaseService {
             createddate: agenda.createddate,
             lastupdateddate: agenda.lastupdateddate,
             isactive: agenda.isactive,
-            islite: true
+            islite: true,
+            editedby: agenda.editedby
         }).then(() => {
             return "Agenda Lite has been updated."
         }).catch(err => { throw err });
@@ -621,7 +623,8 @@ export class FirebaseService {
             createddate: agenda.createddate,
             // lastupdateddate: agenda.lastupdateddate,
             isactive: agenda.isactive,
-            islite: false
+            islite: false,
+            editedby: ''
         })
             .then((res) => {
                 return res.path.o[1];
@@ -652,7 +655,8 @@ export class FirebaseService {
             createddate: agenda.createddate,
             lastupdateddate: agenda.lastupdateddate,
             isactive: agenda.isactive,
-            islite: false
+            islite: false,
+            editedby: agenda.editedby
         }).then(() => {
             return "Agenda Lite has been updated."
         }).catch(err => { throw err });

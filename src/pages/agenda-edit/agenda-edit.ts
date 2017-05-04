@@ -240,7 +240,8 @@ export class AgendaEditPage {
             createdby: value.createdby,
             createddate: new Date().toISOString(),
             isactive: value.isactive,
-            lastupdateddate: new Date().toISOString()
+            lastupdateddate: new Date().toISOString(),
+            editedby: this.user.firstname + ' ' + this.user.lastname
         }
     }
 
