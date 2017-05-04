@@ -1,15 +1,18 @@
-<ion-content padding center text-center>
-	<div class="content-center">
-		<div>
-			<h1>Success</h1>
-			<div class="page-message">
-				<h3>Check you email to reset your</h3>
-				<h3>password. Then Log in into your</h3>
-				<h3>Councils Account.</h3>
-			</div>
-			<div class="status-button-container">
+<ion-content class="background-style">
+        <ion-row class="message" text-center text-wrap>
+            <ion-col width-100 center>
+                <ion-label center class="title-styles">Success</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row text-center text-wrap>
+            <ion-col width-100 center>
+                <ion-label center class="content-styles">Check you email to reset your <br> password. Then Log in to your <br> Councils Account.</ion-label>
+            </ion-col>
+        </ion-row>
+		<ion-row class="status-button-container" text-center>
+			<ion-col width-100 center>
 				<button ion-button clear color="secondary" name="loginbtn" (click)="logIn()" text-capitalize>Log In</button>
-			</div>
-		</div>
-	</div>
+				
+			</ion-col>
+		</ion-row>
 </ion-content>

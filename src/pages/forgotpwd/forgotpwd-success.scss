@@ -4,4 +4,26 @@ forgotpwd-success {
         position:relative;
         padding-top: 14px;
     }
+    .message{
+    // position: relative;
+    // top:30%;
+    // margin:auto
+     padding-top:50% !important;
+
+}
+.title-styles{
+    font-family:Gotham-Medium !important;
+    font-size: 28px !important;
+    color: #35373a !important;
+    
+}
+.content-styles{
+    font-family:Bernina-Regular !important;
+    font-size: 17px !important;
+    color: #35373a !important;
+    margin-top: -12px !important;
+}
+.background-style{
+    background: #fafafa !important;
+}
 }
