@@ -15,7 +15,7 @@
 		<ion-list>
 			<ion-item  [ngClass]="notifications.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first': (i === notifications.length-1 ? 'ion-item-last' : 'ion-item-middle'))" *ngFor="let notification of notifications; let i = index" text-wrap (click)="ActivityPage(notification)">
 				<h3 [innerHTML]="notification.text"></h3>
-				<p class="createddate-lbl">{{notification.createddate| customdateformat}}</p>
+				<p class="createddate-lbl">{{notification.createddate| customtimeformat}}</p>
 				<button ion-button item-right clear>
                  <ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon>
                 </button>
