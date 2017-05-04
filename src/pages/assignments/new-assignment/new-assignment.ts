@@ -205,7 +205,7 @@ export class NewAssignmentPage {
       this.firebaseservice.updateAssignment(formattedAssignmentObj, this.assignmentKey)
         .then(res => {
           console.log(res);
-          this.createActivity(this.assignmentKey, 'completed');
+          // this.createActivity(this.assignmentKey, 'completed');
           this.nav.pop();
         })
         .catch(err => { console.error(err); this.showAlert('Unable to updated the Assignment, please try after some time') })
@@ -230,7 +230,7 @@ export class NewAssignmentPage {
     this.firebaseservice.removeAssignment(this.assignmentKey)
       .then(res => {
         console.log(res);
-        this.createActivity(this.assignmentKey, 'deleted');
+        // this.createActivity(this.assignmentKey, 'deleted');
         this.nav.pop();
       })
       .catch(err => { console.error(err); this.showAlert('Unable to delete the Assignment, please try after some time') })
@@ -298,7 +298,10 @@ export class NewAssignmentPage {
       userid: this.assigneduser.$key,
       entity: 'Assignment',
       entityid: assignmentKey,
+      entityDescription: this.assignmentForm.value.description,
       action: action,
+      councilid: this.assignedcouncil.$key,
+      councilname: this.assignedcouncil.council,
       timestamp: new Date().toISOString(),
       createdUserId: this.user.$key,
       createdUserName: this.user.firstname + ' ' + this.user.lastname,

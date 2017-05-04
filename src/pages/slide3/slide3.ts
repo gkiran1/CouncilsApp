@@ -42,21 +42,15 @@ export class slide3Page {
 
       this.nav.push(OpenCouncilDiscussionPage, { discussion: activity.entityid });
 
-    } else if (activity.entity === 'Agenda Standard') {
+    } else if (activity.entity === 'Agenda') {
       this.af.database.object('agendas/' + activity.entityid).take(1).subscribe(agenda => {
         if (agenda.isactive) {
           this.zone.run(() => {
-            this.nav.push(AgendaEditPage, { agendaselected: agenda });
-          });
-        } else {
-          this.showAlert('This agenda has been deleted!');
-        }
-      });
-    } else if (activity.entity === 'Agenda Lite') {
-      this.af.database.object('agendas/' + activity.entityid).take(1).subscribe(agenda => {
-        if (agenda.isactive) {
-          this.zone.run(() => {
-            this.nav.push(AgendaLiteEditPage, { agendaselected: agenda });
+            if (agenda.islite) {
+              this.nav.push(AgendaLiteEditPage, { agendaselected: agenda });
+            } else {
+              this.nav.push(AgendaEditPage, { agendaselected: agenda });
+            }
           });
         } else {
           this.showAlert('This agenda has been deleted!');

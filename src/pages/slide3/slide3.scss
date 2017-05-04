@@ -25,7 +25,7 @@ slide3{
         margin-top:10px;
     }
     .input-wrapper{
-        padding-left: 12px;
+        // padding-left: 12px;
         margin-bottom: 10px;
     }
     .item-block{
@@ -73,5 +73,8 @@ slide3{
   
     ion-item{
         border-bottom: none !important;
+    }
+    .username{
+        color:#32b38a;
     }
 }

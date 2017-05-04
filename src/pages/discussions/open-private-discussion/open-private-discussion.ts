@@ -49,6 +49,7 @@ export class OpenPrivateDiscussionPage {
     ionViewDidEnter() {
         this.content.scrollToBottom();
         this.statusSubscription = this.fs.getPrivateDiscussionByKey(this.navparams.get('discussion')).subscribe(discussion => {
+            discussion.messages = discussion.messages || [];
             Object.keys(discussion.messages).forEach(e => {
                 let message = discussion.messages[e];
                 if (message.userId !== this.user.$key && message.status !== 'read') {

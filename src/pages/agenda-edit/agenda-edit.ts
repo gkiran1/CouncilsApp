@@ -283,15 +283,15 @@ export class AgendaEditPage {
     delete() {
         this.firebaseservice.removeAgenda(this.agendaKey)
             .then(res => {
-                if (this.agenda.openingprayeruserid) {
-                    this.createActivity('opening prayer', this.agenda.openingprayeruserid);
-                }
-                if (this.agenda.spiritualthoughtuserid) {
-                    this.createActivity('spiritual thought', this.agenda.spiritualthoughtuserid);
-                }
-                if (this.agenda.closingprayeruserid) {
-                    this.createActivity('closing prayer', this.agenda.closingprayeruserid, );
-                }
+                // if (this.agenda.openingprayeruserid) {
+                //     this.createActivity('opening prayer', this.agenda.openingprayeruserid);
+                // }
+                // if (this.agenda.spiritualthoughtuserid) {
+                //     this.createActivity('spiritual thought', this.agenda.spiritualthoughtuserid);
+                // }
+                // if (this.agenda.closingprayeruserid) {
+                //     this.createActivity('closing prayer', this.agenda.closingprayeruserid, );
+                // }
 
                 this.nav.pop();
             })
