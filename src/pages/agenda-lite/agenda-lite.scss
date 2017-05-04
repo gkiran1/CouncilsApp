@@ -37,11 +37,14 @@ agenda-lite{
     .ion-item-middle.item-md.item-block:last-child .item-inner{
         border-bottom: none !important;
     }
-    .border-line{
-        border-bottom: 1px solid #e8e9eb;
-        margin-bottom:0 !important;
-    }
+    // .border-line{
+    //     border-bottom: 1px solid #e8e9eb;
+    //     margin-bottom:0 !important;
+    // }
     // ion-list{
     //     border:none !important;
     // }
+    .height-prop{
+        height: 70px
+    }
 }

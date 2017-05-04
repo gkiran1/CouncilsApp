@@ -48,7 +48,7 @@
             </ng-container>
         </div>
 
-        <ion-item class="border-line">
+        <ion-item>
             <ion-label floating>Spiritual Thought</ion-label>
             <ion-input type="text" (focus)="showList1($event)" (input)="showList1($event)" formControlName="spiritualthought"></ion-input>
         </ion-item>
@@ -67,13 +67,13 @@
             </ng-container>
         </div>
 
-        <ion-list class="border-line">
-            <ion-item (click)="toggleGroup()">
+        <!--<ion-list class="border-line">-->
+            <ion-item (click)="toggleGroup()" class="height-prop">
                 <ion-label *ngIf="!shownGroup"  class="assignment-styles">
-                    Assignments
+                    Assignment
                     </ion-label>
                     <ion-label *ngIf="shownGroup"  class="assignment-styles1">
-                        Assignments
+                        Assignment
                         </ion-label>
                         <button color="secondary"  class="no-padding"  name="councilsPage"  ion-button icon-only clear item-right>
                             <ion-icon name="councilscircle"  [ngClass]="shownGroup? 'councils-icon__close menu-icon' : 'councils-icon__add menu-icon'"  item-right></ion-icon>
@@ -84,10 +84,10 @@
                     <ion-label class="desc-styles">{{assignment.description}}</ion-label>
                 </ion-item>
             </ng-container>
-        </ion-list>
+        <!--</ion-list>-->
 
-        <ion-list class="border-line">
-            <ion-item  (click)="toggleGroup1()">
+        <!--<ion-list class="border-line">-->
+            <ion-item  (click)="toggleGroup1()" class="height-prop">
                 <ion-label *ngIf="!shownGroup1" class="assignment-styles">
                     Completed Assignments
                 </ion-label>
@@ -101,7 +101,7 @@
             <ion-item class="ion-item-middle" *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
                 <div class="desc-styles">{{completedassignment.description}}</div>
             </ion-item>
-        </ion-list>
+        <!--</ion-list>-->
 
         <ion-item>
             <ion-label *ngIf="!discussionitems">Discussion Items</ion-label>

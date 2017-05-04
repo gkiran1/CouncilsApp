@@ -71,8 +71,7 @@
             </ng-container>
         </div>
 
-         <ion-list class="border-line">
-            <ion-item (click)="toggleGroup()">
+            <ion-item (click)="toggleGroup()" class="height-prop">
                 <ion-label *ngIf="!shownGroup"  class="assignment-styles">
                     Assignments
                     </ion-label>
@@ -86,10 +85,8 @@
             <ion-item class="ion-item-middle" *ngFor="let assignment of assignmentslist" text-wrap [ngClass]="{inactive: !shownGroup}">
                 <ion-label class="desc-styles">{{assignment.description}}</ion-label>
             </ion-item>
-        </ion-list>
 
-        <ion-list class="border-line">
-            <ion-item (click)="toggleGroup1()">
+            <ion-item (click)="toggleGroup1()" class="height-prop">
                 <ion-label *ngIf="!shownGroup1" class="assignment-styles">
                     Completed Assignments
                 </ion-label>
@@ -103,7 +100,6 @@
             <ion-item class="ion-item-middle" *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
                 <div class="desc-styles">{{completedassignment.description}}</div>
             </ion-item>
-        </ion-list>
 
         <ion-list>
             <ng-container *ngIf="!discussionitemsObj.length">
