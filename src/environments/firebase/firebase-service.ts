@@ -246,7 +246,8 @@ export class FirebaseService {
                 isactive: assignment.isactive,
                 lastupdateddate: assignment.lastupdateddate,
                 notes: assignment.notes,
-                isCompleted: assignment.isCompleted
+                isCompleted: assignment.isCompleted,
+                completedby: assignment.completedby
             })
             .then((res) => {
                 return res.path.o[1];
@@ -368,7 +369,8 @@ export class FirebaseService {
             isactive: assignment.isactive,
             lastupdateddate: assignment.lastupdateddate,
             notes: assignment.notes,
-            isCompleted: assignment.isCompleted
+            isCompleted: assignment.isCompleted,
+            completedby: assignment.completedby
         })
             .then(() => {
                 return "Assignment has been updated!"

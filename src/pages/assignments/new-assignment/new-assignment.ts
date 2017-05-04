@@ -159,7 +159,8 @@ export class NewAssignmentPage {
       isactive: value.isactive,
       notes: value.notes,
       isCompleted: value.isCompleted,
-      assignedusername: value.assigneduser
+      assignedusername: value.assigneduser,
+      completedby: value.completedby
     }
   }
 
@@ -168,6 +169,7 @@ export class NewAssignmentPage {
       this.showAlert('Please assign to a valid user');
       return;
     }
+    value.completedby = '';
     let formattedAssignmentObj = this.formatAssignmentObj(value);
     if (moment(formattedAssignmentObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
       this.showAlert('Assignment Date/Time cannot be in past');
@@ -197,6 +199,7 @@ export class NewAssignmentPage {
     } else if ((this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
       this.showAlert('Please assign to a valid user');
     } else {
+      value.completedby = this.user.firstname + " " + this.user.lastname;
       value.isCompleted = true;
       let formattedAssignmentObj = this.formatAssignmentObj(value);
       this.firebaseservice.updateAssignment(formattedAssignmentObj, this.assignmentKey)
@@ -213,6 +216,7 @@ export class NewAssignmentPage {
       this.showAlert('Please assign to a valid user');
       return;
     }
+    value.completedby = '';
     let formattedAssignmentObj = this.formatAssignmentObj(value);
     this.firebaseservice.updateAssignment(formattedAssignmentObj, this.assignmentKey)
       .then(res => {
