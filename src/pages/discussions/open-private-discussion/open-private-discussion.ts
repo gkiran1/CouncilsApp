@@ -42,7 +42,7 @@ export class OpenPrivateDiscussionPage {
 
     }
     back() {
-        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
+        this.nav.popToRoot({ animate: true, animation: 'transition', direction: 'back' });
 
     }
 
