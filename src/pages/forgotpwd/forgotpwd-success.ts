@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, Loading } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 

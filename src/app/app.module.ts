@@ -21,7 +21,6 @@ import { NewCouncilPage } from '../pages/new-council/new-council'
 import { NewCouncilDiscussionPage } from '../pages/discussions/new-council-discussion/new-council-discussion';
 import { AssignmentsListPage } from '../pages/assignments/assignments-list/assignments-list';
 import { MomentModule } from 'angular2-moment';
-import { ActivityPage } from '../pages/activity/activity'
 import { ActiveCouncilsPage } from '../pages/activecouncils/activecouncils'
 import { AboutPage } from '../pages/about/about';
 import { SubmitFeedbackPage } from '../pages/feedback/submit-feedback/submit-feedback';
@@ -122,7 +121,6 @@ const cloudSettings: CloudSettings = {
     InviteMemberPage,
     InvitationSuccessPage,
     NewCouncilPage,
-    ActivityPage,
     ActiveCouncilsPage,
     NewCouncilDiscussionPage,
     AssignmentsListPage,
@@ -207,7 +205,6 @@ const cloudSettings: CloudSettings = {
     InviteMemberPage,
     InvitationSuccessPage,
     NewCouncilPage,
-    ActivityPage,
     ActiveCouncilsPage,
     NewCouncilDiscussionPage,
     AssignmentsListPage,

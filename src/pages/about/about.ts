@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { SettingsPage } from '../settings/settings';
-
 
 @Component({
     selector: 'page-about',
