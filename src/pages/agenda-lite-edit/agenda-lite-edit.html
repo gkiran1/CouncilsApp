@@ -103,7 +103,6 @@
             <div class="desc-styles">{{completedassignment.description}}</div>
         </ion-item>
 
-        <ion-list>
             <ng-container *ngIf="!discussionitemsObj.length">
                 <ion-item>
                     <ion-label *ngIf="!discussionitems">Discussion Items</ion-label>
@@ -122,7 +121,6 @@
                 </button>
                 </ion-item>
             </ng-container>
-        </ion-list>
 
         <div *ngIf="showlist2" class="assignto-list">
             <ng-container *ngFor="let user of users | search:term:'username'">
