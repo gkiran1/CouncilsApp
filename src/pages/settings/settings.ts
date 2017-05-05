@@ -1,22 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ActionSheetController, MenuController } from 'ionic-angular';
-import { InactivateMembersPage } from '../inactivatemembers/inactivate-members/inactivatemembers.component';
-import { ReactivateMembersPage } from '../reactivatemembers/reactivate-members/reactivatemembers.component';
-import { TransferAdminRightsPage } from '../transferadminrights/transfer-adminrights/transferadminrights.component';
-import { InviteMemberPage } from '../invite/invite';
+import { NavController } from 'ionic-angular';
 import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
-import { NewCouncilPage } from '../new-council/new-council';
 import { EditProfilePage } from '../edit-profile/edit-profile';
 import { SubmitFeedbackPage } from '../feedback/submit-feedback/submit-feedback';
 import { AboutPage } from '../about/about';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { AgendasPage } from '../agendas/agendas';
 import { AssignmentsListPage } from '../assignments/assignments-list/assignments-list';
-import { Subscription } from "rxjs";
 import { GoodbyePage } from '../goodbye/goodbye';
 import { NotificationSettingsPage } from '../notifications/notifications-settings/notificationsettings.component';
-import { GoogleCalenderPage } from '../googlecalender/googlecalender.component';
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 import * as firebase from 'firebase';
 

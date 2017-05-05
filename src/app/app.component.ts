@@ -2,11 +2,7 @@ import { Component } from '@angular/core';
 import { Platform, AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
-import { DisplayPage } from '../pages/display/display';
-import { CreateAccountPage } from '../pages/create-account/create-account';
 import { MenuPage } from '../pages/menu/menu';
-import { InviteMemberPage } from '../pages/invite/invite';
-import { NewCouncilPage } from '../pages/new-council/new-council';
 
 //Ionic Push, Push Token Imports
 import {

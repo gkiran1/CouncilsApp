@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, NavParams, Loading } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import * as firebase from 'firebase';
-import { Headers, Http, Response } from "@angular/http";
-import { AuthService } from '../../providers/auth-service';
-import { DisplayPage } from '../display/display';
+import { Http } from "@angular/http";
 import { MenuPage } from '../menu/menu';
 import { CreateAccountPage } from '../create-account/create-account';
 import { Observable } from 'rxjs/Rx';
