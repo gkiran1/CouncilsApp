@@ -136,7 +136,7 @@ export class NewAssignmentPage {
   }
   cancel() {
     if (this.isNewAssignment) {
-      this.nav.popToRoot();
+      this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
     } else {
       this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
     }

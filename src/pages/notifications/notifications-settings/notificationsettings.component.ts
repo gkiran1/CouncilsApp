@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 
 @Component({

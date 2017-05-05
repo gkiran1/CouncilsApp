@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
-
 import { NavController, LoadingController, Loading } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { NewAssignmentPage } from '../new-assignment/new-assignment';
-import { AppService } from '../../providers/app-service';
-import { FirebaseConfig } from '../../environments/firebase/firebase-config';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import * as firebase from 'firebase';
 import { User } from '../../user/user';
 import { Invitee } from '../invite/invitee.model';
-import { Observable, Subject } from "rxjs/Rx";
+import { Observable } from "rxjs/Rx";
 import { AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { EmailService } from '../../providers/emailservice';
@@ -48,12 +43,9 @@ export class CreateAccountPage {
         if (invitee) {
           this.newUser.firstname = invitee.firstname;
           this.newUser.lastname = invitee.lastname;
-
-
           //email is already der in user   
           //password is already der in user
           //lds org name is already der in user
-
           this.newUser.unittype = invitee.unittype;
           this.newUser.unitnumber = invitee.unitnumber;
           this.newUser.avatar = "avatar"; // time being hard coded..later need to work..

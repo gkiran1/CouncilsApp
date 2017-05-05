@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Platform } from 'ionic-angular';
-import { InAppBrowser } from 'ionic-native';
 import * as firebase from 'firebase';
 import { FirebaseService } from '../../environments/firebase/firebase-service'
 
