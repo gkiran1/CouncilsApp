@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, Loading } from 'ionic-angular';
-import { HomePage } from '../home/home';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { User } from '../../user/user';
 import { Invitee } from '../invite/invitee.model';

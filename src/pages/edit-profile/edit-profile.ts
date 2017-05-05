@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
-import { Nav, NavController, AlertController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { NavController, AlertController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChangePasswordPage } from '../edit-profile/change-password';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { User } from '../../user/user';
-import { Toast } from 'ionic-native';
 import { Camera } from 'ionic-native';
 import * as firebase from 'firebase';
-import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { Subscription } from "rxjs";
-import { SettingsPage } from '../settings/settings';
 
 @Component({
     selector: 'edit-profile',

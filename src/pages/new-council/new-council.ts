@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
-import { FirebaseConfig } from '../../environments/firebase/firebase-config';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-
-import * as firebase from 'firebase';
-import { User } from '../../user/user';
-import { Observable } from 'rxjs/Rx';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { Council } from './council'
 import { AlertController, NavController } from 'ionic-angular';
 import { Subscription } from "rxjs";

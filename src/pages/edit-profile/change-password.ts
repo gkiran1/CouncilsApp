@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppService } from '../../providers/app-service';
 import { User } from '../../user/user';
 import * as firebase from 'firebase';

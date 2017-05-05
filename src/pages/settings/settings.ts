@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 import { EditProfilePage } from '../edit-profile/edit-profile';
@@ -81,7 +81,6 @@ export class SettingsPage {
 
     googleCalendar() {
         this.rootRef = firebase.database().ref();
-        var apiKey = this.APIKEY;
 
         var browserRef = cordova.InAppBrowser.open('https://accounts.google.com/o/oauth2/auth?suppress_webview_warning=true&client_id='
             + this.CLIENT_ID + '&redirect_uri=' + this.REDIRECTURL
