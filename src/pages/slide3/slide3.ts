@@ -21,8 +21,12 @@ export class slide3Page {
     this.fs.getUsersByKey(uid).subscribe(u => {
       this.user = u[0];
       this.fs.getActivities(uid).subscribe(activities => {
-        // activities.sort(function (a, b) { return (a.timestamp > b.timestamp) ? 1 : ((b.timestamp > a.timestamp) ? -1 : 0); });
-        this.activities = activities; //.reverse();;
+        activities.sort(function (a, b) {
+          console.log('a,b', a, b);
+          return (a.timestamp > b.timestamp) ? -1 : ((b.timestamp > a.timestamp) ? 1 : 0);
+        });
+        this.activities = activities;
+        // this.activities = activities.reverse();;
       });
     });
   }
