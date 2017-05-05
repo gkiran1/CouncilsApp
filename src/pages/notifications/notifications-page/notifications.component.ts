@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, AlertController } from 'ionic-angular';
-import { Subject, Subscription } from 'rxjs';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { NewAssignmentPage } from '../../assignments/new-assignment/new-assignment';
 import { AgendaLiteEditPage } from '../../agenda-lite-edit/agenda-lite-edit';

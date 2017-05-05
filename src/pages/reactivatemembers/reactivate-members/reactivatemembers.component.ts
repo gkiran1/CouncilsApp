@@ -4,7 +4,7 @@ import { FirebaseService } from '../../../environments/firebase/firebase-service
 import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { MemberReactivatedPage } from '../member-reactivated/memberreactivated.component';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { EmailService } from '../../../providers/emailservice';
 
 @Component({

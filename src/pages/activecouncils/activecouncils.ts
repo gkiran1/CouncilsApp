@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { FirebaseConfig } from '../../environments/firebase/firebase-config';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { AppService } from '../../providers/app-service';
 import { Subject } from 'rxjs/Rx';
 import { AngularFire } from 'angularfire2';
 import { NavController } from 'ionic-angular';
@@ -21,7 +19,7 @@ export class ActiveCouncilsPage {
     user;
     userSubscription: Subscription;
 
-    constructor(public af: AngularFire, public firebaseservice: FirebaseService, public appservice: AppService, public nav: NavController) {
+    constructor(public af: AngularFire, public firebaseservice: FirebaseService, public nav: NavController) {
         this.userSubscription = this.af.auth.subscribe(auth => {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(usr => {

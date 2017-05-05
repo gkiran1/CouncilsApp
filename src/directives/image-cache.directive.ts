@@ -1,5 +1,5 @@
 
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef } from '@angular/core';
 
 declare var ImgCache: any;
 

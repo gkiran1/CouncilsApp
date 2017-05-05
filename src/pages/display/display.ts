@@ -1,13 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { NavController, AlertController, LoadingController, Loading, NavParams } from 'ionic-angular';
-import { RegisterPage } from '../register/register';
-import { AuthService } from '../../providers/auth-service';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
-import { LoginPage } from '../login/login';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service'
 import { AppService } from '../../providers/app-service';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 
 @Component({

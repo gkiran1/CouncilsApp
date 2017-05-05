@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { User } from '../../../user/user';
 import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { TransferCompletePage } from '../transfer-complete/transfercomplete.component';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { EmailService } from '../../../providers/emailservice';
 
 @Component({
