@@ -29,7 +29,10 @@ export class PrivateDiscussionsListPage {
             return true;
           }
           return false;
+        }).sort(function (a, b) {
+           return (a.createdDate > b.createdDate) ? -1 : ((b.createdDate > a.createdDate) ? 1 : 0);
         });
+
         this.isListEmpty = this.discussions.length ? false : true;
         let length = this.discussions.length;
         length = length ? length : null;

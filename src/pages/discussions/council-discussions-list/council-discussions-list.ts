@@ -25,6 +25,8 @@ export class CouncilDiscussionsListPage {
         fs.getDiscussions().subscribe(discussions => {
           this.discussions = discussions.filter(discussion => {
             return usr.councils.indexOf(discussion.councilid) !== -1;
+          }).sort(function (a, b) {
+            return (a.createdDate > b.createdDate) ? -1 : ((b.createdDate > a.createdDate) ? 1 : 0);
           });
           this.isListEmpty = this.discussions.length ? false : true;
           let length = this.discussions.length;
