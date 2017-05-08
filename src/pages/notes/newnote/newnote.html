@@ -15,12 +15,12 @@
   <form [formGroup]="newnoteForm" (ngSubmit)="newnoteForm.value">
     <ion-item>
       <ion-label floating>Title</ion-label>
-      <ion-input type="text" name="title" formControlName="title" maxlength="30"></ion-input>
+      <ion-input type="text" name="title" spellcheck="true" formControlName="title" maxlength="30"></ion-input>
     </ion-item>
 
      <ion-item>
       <ion-label floating>Note</ion-label>
-      <ion-textarea  type="text" elastic name="note" formControlName="note" maxlength="500"></ion-textarea>
+      <ion-textarea  type="text" elastic name="note" spellcheck="true" formControlName="note" maxlength="500"></ion-textarea>
     </ion-item>
 
   </form>

@@ -15,11 +15,11 @@
     <form [formGroup]="noteForm" (ngSubmit)="noteForm.value">
         <ion-label class="date">{{date | customdateformat}}</ion-label>
         <ion-item no-lines>
-            <ion-input class="title-style" type="text" name="title" formControlName="title" maxlength="30"></ion-input>
+            <ion-input class="title-style" spellcheck="true" type="text" name="title" formControlName="title" maxlength="30"></ion-input>
         </ion-item>
 
         <ion-item no-lines>
-            <ion-textarea class="note" type="text" elastic name="note" formControlName="note" maxlength="500"></ion-textarea>
+            <ion-textarea class="note" type="text" spellcheck="true" elastic name="note" formControlName="note" maxlength="500"></ion-textarea>
         </ion-item>
 
     </form>

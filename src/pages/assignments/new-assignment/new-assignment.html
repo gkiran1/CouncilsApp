@@ -19,7 +19,7 @@
   <form [formGroup]="assignmentForm" (ngSubmit)="assignmentForm.value" #assignment>
     <ion-item>
       <ion-label floating>Description</ion-label>
-      <ion-input type="text" name="description" formControlName="description" maxlength="500" #assignmentdesc closekeyboard></ion-input>
+      <ion-input type="text" spellcheck="true" name="description" formControlName="description" maxlength="500" #assignmentdesc closekeyboard></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Council</ion-label>
@@ -50,7 +50,7 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Notes</ion-label>
-      <ion-textarea name="notes" elastic formControlName="notes" closekeyboard></ion-textarea>
+      <ion-textarea name="notes" spellcheck="true" elastic formControlName="notes" closekeyboard></ion-textarea>
     </ion-item>
   </form>
 </ion-content>

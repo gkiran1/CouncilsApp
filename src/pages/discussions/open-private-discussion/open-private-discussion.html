@@ -45,7 +45,7 @@
         </ion-label>
         <ion-row>
             <ion-col width-80 class="msg-col">
-                <ion-textarea type="text" rows="1" id="msgFld" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"></ion-textarea>
+                <ion-textarea type="text" rows="1" id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"></ion-textarea>
             </ion-col>
             <ion-col width-20 text-center>
                 <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>

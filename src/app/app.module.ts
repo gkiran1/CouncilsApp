@@ -4,7 +4,6 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../providers/auth-service';
-import { RegisterPage } from '../pages/register/register';
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseConfig } from './../environments/firebase/firebase-config';
 import { FirebaseService } from './../environments/firebase/firebase-service';
@@ -111,7 +110,6 @@ const cloudSettings: CloudSettings = {
     MyApp,
     HomePage,
     LoginPage,
-    RegisterPage,
     DisplayPage,
     MenuPage,
     CreateAccountPage,
@@ -196,7 +194,6 @@ const cloudSettings: CloudSettings = {
     MyApp,
     HomePage,
     LoginPage,
-    RegisterPage,
     DisplayPage,
     MenuPage,
     CreateAccountPage,
