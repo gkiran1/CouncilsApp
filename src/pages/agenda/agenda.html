@@ -102,7 +102,7 @@
         <ion-item>
             <ion-label *ngIf="!spiritualwelfare">Spiritual Welfare</ion-label>
             <ion-label floating color="secondary" *ngIf="spiritualwelfare">Spiritual Welfare</ion-label>
-            <ion-textarea type="text" wrap="off" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare" [(ngModel)]="spiritualwelfare"
+            <ion-textarea type="text" spellcheck="true" wrap="off" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare" [(ngModel)]="spiritualwelfare"
                 formControlName="spiritualwelfare" maxlength="500" (keyup)="spiritualkey($event)">
                 </ion-textarea>
         </ion-item>
