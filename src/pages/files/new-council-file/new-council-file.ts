@@ -4,7 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { OpenCouncilFilePage } from '../open-council-file/open-council-file';
-import { Camera, FileChooser, FilePath } from 'ionic-native';
+import { User } from '../../user/user';
+import { Camera, Toast, File, FileChooser, FilePath, ImagePicker } from 'ionic-native';
+import * as firebase from 'firebase';
+
 import * as moment from 'moment';
 declare var FilePicker;
 
