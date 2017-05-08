@@ -33,8 +33,8 @@
                 <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
                 <ion-icon class="councils-icon__checkmark" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark"
                     md="ios-checkmark"></ion-icon>
-                    <p class="font2">{{msg.timestamp | customdateformat}}</p>
-                    <p class="font5 line-height">{{msg.text}}</p>
+                <p class="font2">{{msg.timestamp | customdateformat}}</p>
+                <p class="font5 line-height">{{msg.text}}</p>
             </ion-item>
         </ion-list>
     </div>
@@ -44,14 +44,23 @@
     <ion-label class="typings-label" color="secondary" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')}}
-        </ion-label>
-        <ion-row>
+    </ion-label>
+    <!--<ion-row>
             <ion-col width-80 class="msg-col">
-                <ion-textarea type="text" rows="1" id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"
+                <ion-textarea type="text" rows="1" elastic id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"
                     (keyup)="keypresssed($event)"></ion-textarea>
             </ion-col>
             <ion-col width-20 text-center>
                 <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
             </ion-col>
-        </ion-row>
+        </ion-row>-->
+    <ion-textarea type="text" rows="1" elastic id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg"
+        (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)"></ion-textarea>
+    <ion-row>
+        <ion-col width-80>
+        </ion-col>
+        <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
+        <ion-col width-20>
+        </ion-col>
+    </ion-row>
 </ion-footer>

@@ -87,6 +87,7 @@ export class OpenPrivateDiscussionPage {
                 this.content.scrollToBottom();
             }, 10);
             this.msg = '';
+             document.getElementsByTagName('textarea')[0].style.height = '24px'; //1 row height
         }
     }
     focusIn() {
