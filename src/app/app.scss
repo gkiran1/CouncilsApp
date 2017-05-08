@@ -432,6 +432,21 @@ button:disabled {
     background-position: 0 0;
 }
 
+.header-ios::after,
+.tabs-ios[tabsPlacement="top"]>.tabbar::after,
+.footer-ios::before,
+.tabs-ios[tabsPlacement="bottom"]>.tabbar::before {
+    background-image: none;
+}
+
+.footer-ios::before,
+.tabs-ios[tabsPlacement="bottom"]>.tabbar::before {
+    top: 0px;
+    bottom: 0px;
+    height: 0px;
+    background-position: 0 0;
+}
+
 .toolbar-background {
     background: #FFFFFF !important;
 }
