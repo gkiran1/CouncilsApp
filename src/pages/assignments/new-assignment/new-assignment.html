@@ -19,15 +19,18 @@
   <form [formGroup]="assignmentForm" (ngSubmit)="assignmentForm.value" #assignment>
     <ion-item>
       <ion-label floating>Description</ion-label>
-      <ion-input type="text" spellcheck="true" name="description" formControlName="description" maxlength="500" #assignmentdesc closekeyboard></ion-input>
+      <ion-input type="text" spellcheck="true" name="description" formControlName="description" maxlength="500" #assignmentdesc
+        closekeyboard></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Council</ion-label>
-      <ion-input type="text" readonly (touchstart)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil" #assignmentcouncil ></ion-input>
+      <ion-input type="text" readonly (click)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil"
+        #assignmentcouncil></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Assign to</ion-label>
-      <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="assigneduser" #assignmentuser closekeyboard></ion-input>
+      <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="assigneduser" #assignmentuser
+        closekeyboard></ion-input>
     </ion-item>
     <div *ngIf="showlist" class="assignto-list">
       <ng-container *ngFor="let user of users | search:term:'username'">
@@ -45,8 +48,8 @@
     </div>
     <ion-item>
       <ion-label floating>Date & Time</ion-label>
-      <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDD MMM D YYYY, h, mm, A" name="assigneddate" formControlName="assigneddate" 
-      minuteValues="00,05,10,15,20,25,30,35,40,45,50,55" #assignmentdate></ion-datetime>
+      <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDD MMM D YYYY, h, mm, A" name="assigneddate" formControlName="assigneddate"
+        minuteValues="00,05,10,15,20,25,30,35,40,45,50,55" #assignmentdate></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label floating>Notes</ion-label>
@@ -57,7 +60,8 @@
 <ion-footer>
   <ng-container *ngIf="isNewAssignment">
     <ion-toolbar>
-      <button ion-button clear block color="secondary" (click)="createAssignment(assignmentForm.value)" text-capitalize [disabled]="!assignmentForm.valid">Create</button>
+      <button ion-button clear block class="button button-clik" color="secondary" (click)="createAssignment(assignmentForm.value)"
+        text-capitalize [disabled]="!assignmentForm.valid">Create</button>
     </ion-toolbar>
   </ng-container>
   <ng-container *ngIf="!isNewAssignment && assignmentForm.value.isactive">
@@ -65,16 +69,16 @@
       <ion-buttons start>
         <button ion-button color="danger" (click)="showConfirm()">Delete</button>
       </ion-buttons>
-      <button ion-button clear block color="secondary" [disabled]="!assignmentForm.valid" (click)="complete(assignmentForm.value)">Complete</button>
+      <button ion-button clear block color="secondary" class="button button-clik" [disabled]="!assignmentForm.valid" (click)="complete(assignmentForm.value)">Complete</button>
       <ion-buttons end>
         <button ion-button color="secondary" [disabled]="!assignmentForm.valid || !assignmentForm.dirty" (click)="edit(assignmentForm.value)">Save</button>
       </ion-buttons>
     </ion-toolbar>
     <ion-toolbar *ngIf="!assignmentForm.value.isCompleted && !isPersonalAssignment">
-      <button ion-button clear block color="secondary" [disabled]="!assignmentForm.valid" (click)="complete(assignmentForm.value)">Complete</button>
+      <button ion-button clear block class="button button-clik" color="secondary" [disabled]="!assignmentForm.valid" (click)="complete(assignmentForm.value)">Complete</button>
     </ion-toolbar>
     <ion-toolbar *ngIf="assignmentForm.value.isCompleted">
-      <button ion-button class="danger-color" clear block (click)="showConfirm()">Delete</button>
+      <button ion-button color="danger" class="button button-clik" clear block (click)="showConfirm()">Delete</button>
     </ion-toolbar>
   </ng-container>
 

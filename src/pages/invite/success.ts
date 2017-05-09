@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { NavController } from 'ionic-angular';
 import { AngularFire } from 'angularfire2';
-
+import { InviteMemberPage } from '../invite/invite'
 @Component({
     selector: 'page-success',
     templateUrl: 'success.html'
@@ -20,7 +20,7 @@ export class InvitationSuccessPage {
         // this.userObj = appservice.user;
     }
     inviteanother() {
-        this.navctrl.pop();
+        this.navctrl.push(InviteMemberPage);
     }
     close() {
         this.navctrl.popToRoot({ animate: true, animation: 'transition', direction: 'back' });

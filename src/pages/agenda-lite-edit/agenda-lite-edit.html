@@ -150,7 +150,7 @@
             <button ion-button color="danger" (click)="showConfirm()">Delete</button>
         </ion-buttons>
         <ion-buttons end>
-            <button ion-button color="secondary" (click)="edit(agendaliteeditForm.value)" [disabled]="!agendaliteeditForm.valid">Save</button>
+            <button ion-button color="secondary" (click)="edit(agendaliteeditForm.value)" [disabled]="!agendaliteeditForm.valid || !agendaliteeditForm.dirty">Save</button>
         </ion-buttons>
     </ion-toolbar>
 </ion-footer>

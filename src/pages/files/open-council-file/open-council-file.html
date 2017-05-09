@@ -46,9 +46,9 @@
 </ion-content>
 <ion-footer>
     <ng-container *ngIf="!deleteflag">
-        <button ion-button color="secondary" clear block (click)="addFileActionsPage(value)">Add File</button>
+        <button ion-button color="secondary" class="button button-clik" clear block (click)="addFileActionsPage(value)">Add File</button>
     </ng-container>
     <ng-container *ngIf="deleteflag">
-        <button ion-button class="deletebtn" clear block (click)="deleteFiles(filesArray)">Delete All</button>
+        <button ion-button color="danger" class="button button-clik" clear block (click)="deleteFiles(filesArray)">Delete All</button>
     </ng-container>
 </ion-footer>
