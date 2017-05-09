@@ -1173,3 +1173,20 @@ ion-list ion-item{
 
 	100%{ background-color:rgba(60,177,138,1); }
 }
+
+
+//Disabling buttons background throught the application.
+//Override below properties in a specific component scss file, if required.
+
+.button-clear-ios.activated{
+    background: none !important;   
+}
+.button-ios.activated{
+    background: none !important;   
+}
+.button-clear-md.activated{
+    background: none !important;   
+}
+.button-md.activated{
+    background: none !important;   
+}
