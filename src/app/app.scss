@@ -1178,15 +1178,29 @@ ion-list ion-item{
 //Disabling buttons background throught the application.
 //Override below properties in a specific component scss file, if required.
 
-.button-clear-ios.activated{
-    background: none !important;   
-}
-.button-ios.activated{
-    background: none !important;   
-}
-.button-clear-md.activated{
-    background: none !important;   
-}
-.button-md.activated{
-    background: none !important;   
-}
+.button.button-clik {
+            border-color: transparent;
+            background: none;
+             }
+            .button.button-clik:hover {
+             background:none; 
+              text-decoration: none; }
+            .button.button-clik.active, .button.button-clik.activated {
+              background-color:#fafafa; }
+            .button.button-clik.button-clear {
+              border-color: transparent;
+              background: none;
+              box-shadow: none;
+              }
+            .button.button-clik.button-icon {
+              border-color: transparent;
+              background: none; }
+            .button.button-clik.button-outline {
+              
+              background: transparent;
+              color: none; }
+              .button.button-clik.button-outline.active, .button.button-clik.button-outline.activated {
+                background:none;
+                box-shadow: none;
+                 }
+

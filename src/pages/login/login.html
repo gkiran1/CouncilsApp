@@ -21,12 +21,12 @@
 
         <div class="login-button-container">
             <ion-spinner name="dots" *ngIf="show" color="primary" ></ion-spinner>
-            <button name="loginbtn" *ngIf="!show" id="loginbtn" ion-button block clear color="secondary" class="login-button" type="submit" [disabled]="!loginForm.form.valid" text-capitalize>Log In</button>
+            <button color="secondary" ion-button clear class="button button-clik" name="loginbtn" *ngIf="!show" id="loginbtn" type="submit" [disabled]="!loginForm.form.valid" text-capitalize>Log In</button>
         </div>
     </form>
 </ion-content>
 
 <ion-footer>
-        <button ion-button clear color="secondary" name="forgotPassword" block text-capitalize (click)="forgotPassword()">Forgot password?</button>
-        <button ion-button clear color="secondary" name="noAccount" block text-capitalize (click)="noAccount()">Don't have an account?</button>
+        <button color="secondary" ion-button clear class="button button-clik" name="forgotPassword" text-capitalize (click)="forgotPassword()">Forgot password?</button>
+        <button color="secondary" ion-button clear class="button button-clik" name="noAccount" text-capitalize (click)="noAccount()">Don't have an account?</button>
 </ion-footer>
