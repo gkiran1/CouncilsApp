@@ -2,8 +2,8 @@
   <ion-title>Select Council</ion-title>
 </ion-header>
 <ion-content>
-  <ion-searchbar (ionInput)="searchFn($event)" *ngIf="fromPage" class="font1" placeholder="For which council is this assignment?"></ion-searchbar>
-  <ion-searchbar (ionInput)="searchFn($event)" *ngIf="!fromPage" class="font1" placeholder="Which council will see this agenda?"></ion-searchbar>
+  <!--<ion-searchbar (ionInput)="searchFn($event)" *ngIf="fromPage" class="font1" placeholder="For which council is this assignment?"></ion-searchbar>
+  <ion-searchbar (ionInput)="searchFn($event)" *ngIf="!fromPage" class="font1" placeholder="Which council will see this agenda?"></ion-searchbar>-->
   <ion-list radio-group [(ngModel)]="selectedCouncil">
     <ion-item *ngFor="let council of councils | search:term:'council'">
       <ion-label>{{council.council}}</ion-label>
