@@ -52,13 +52,13 @@
                 <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
             </ion-col>
         </ion-row>-->
-    <ion-textarea type="text" rows="1" elastic id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()"
-        (focusout)="focusOut()"></ion-textarea>
+    <ion-textarea type="text" rows="1" elastic id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg"
+        (focus)="focusIn()" (focusout)="focusOut()"></ion-textarea>
     <ion-row>
         <ion-col width-80>
         </ion-col>
-        <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
         <ion-col width-20>
+            <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
         </ion-col>
     </ion-row>
 </ion-footer>
