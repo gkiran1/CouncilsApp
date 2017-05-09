@@ -156,7 +156,7 @@ export class AgendaLiteEditPage {
     this.users = [];
     this.assignmentslist = [];
     this.completedassignmentslist = [];
-    let usercouncilsmodal = this.modalCtrl.create(UserCouncilsModalPage, { usercouncils: this.usercouncils });
+    let usercouncilsmodal = this.modalCtrl.create(UserCouncilsModalPage, { usercouncils: this.usercouncils, selectedCouncil: this.assignedcouncil });
     usercouncilsmodal.present();
     usercouncilsmodal.onDidDismiss(councils => {
       if (!councils) return;
