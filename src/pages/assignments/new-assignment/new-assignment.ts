@@ -178,7 +178,7 @@ export class NewAssignmentPage {
       this.firebaseservice.createAssigment(formattedAssignmentObj)
         .then(key => {
           this.createActivity(key, 'created');
-          this.nav.popToRoot();
+          this.nav.setRoot(AssignmentsListPage);
         })
         .catch(err => this.showAlert(err))
     }

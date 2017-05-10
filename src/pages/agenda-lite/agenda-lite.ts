@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserCouncilsModalPage } from '../../modals/user-councils/user-councils';
 import { AngularFire } from 'angularfire2';
+import { AgendasPage } from '../agendas/agendas';
 
 @Component({
   templateUrl: 'agenda-lite.html',
@@ -111,7 +112,8 @@ export class AgendaLitePage {
         if (agenda.closingprayeruserid) {
           this.createActivity(key, agenda.closingprayeruserid, 'closing prayer');
         }
-        this.nav.popToRoot()
+        this.nav.setRoot(AgendasPage);
+
       })
       .catch(err => this.showAlert(err))
   }
