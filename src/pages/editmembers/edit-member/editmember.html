@@ -2,7 +2,9 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col">
-                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="back()"></ion-icon>
+                <button ion-button item-right clear class="button button-clik" (click)="back()">   
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary"></ion-icon>
+                                </button>
             </ion-col>
             <ion-col width-80 class="header-col2">
                 <ion-title text-center>{{selectedUser.firstname}} {{selectedUser.lastname}}</ion-title>
@@ -21,6 +23,6 @@
 </ion-content>
 <ion-footer>
     <ion-toolbar class="createbtn" text-center>
-        <button ion-button clear color="secondary" type="submit" (click)="updateCouncils()" [disabled]="!enableBtn">Save</button>
+        <button ion-button clear color="secondary" class="button button-clik" type="submit" (click)="updateCouncils()" [disabled]="!enableBtn">Save</button>
     </ion-toolbar>
 </ion-footer>

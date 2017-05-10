@@ -2,9 +2,9 @@
     <ion-navbar hideBackButton>
         <ion-row>
             <ion-col class="header-col">
-
-                <ion-icon class="councils-icon__back menu-icon" name="cancel" color="secondary" (click)="back()"></ion-icon>
-
+                <button ion-button item-right clear class="button button-clik" (click)="back()">   
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" color="secondary"></ion-icon>
+                </button>
             </ion-col>
             <ion-col width-80 class="header-col2">
                 <ion-title text-center>{{councilName}}</ion-title>
@@ -22,7 +22,7 @@
       </button>
             <p><span class="name-styles">{{item.filename}}</span></p>
             <p>by <span ion-text color="secondary">{{item.createdUser}}</span></p>
-             <p><span class="date-styles">{{item.createdDate | customtimeformat}}</span></p>
+            <p><span class="date-styles">{{item.createdDate | customtimeformat}}</span></p>
         </ion-item>
     </ion-list>
 </ion-content>

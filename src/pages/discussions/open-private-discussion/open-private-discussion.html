@@ -2,9 +2,9 @@
     <ion-navbar hideBackButton>
         <ion-row>
             <ion-col class="header-col">
-
-                <ion-icon class="councils-icon__back menu-icon" name="cancel" color="secondary" (click)="back()"></ion-icon>
-
+                <button ion-button item-right clear class="button button-clik" (click)="back()">   
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" color="secondary"></ion-icon>
+				</button>
             </ion-col>
             <ion-col width-80 class="header-col2">
                 <ion-title text-center>{{chatWith}}</ion-title>
@@ -17,9 +17,9 @@
     <div class="chat-content">
         <ion-item text-wrap class="description">
             <ion-label class="font1 line-height">
-                This is a private discussion with <span ion-text color="secondary">{{chatWith}}</span> created by <span ion-text
-                    color="secondary">{{createdBy}}</span> on {{discussion.createdDate | customdateformat}}. No one else can
-                view this discussion.
+                This is a private discussion with <span ion-text color="secondary">{{chatWith}}</span> created by
+                <span ion-text
+                    color="secondary">{{createdBy}}</span> on {{discussion.createdDate | customdateformat}}. No one else can view this discussion.
             </ion-label>
         </ion-item>
         <ion-list no-lines>
@@ -43,8 +43,8 @@
     <ion-label class="typings-label" color="secondary" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')}}
-    </ion-label>
-    <!--<ion-row>
+        </ion-label>
+        <!--<ion-row>
             <ion-col width-80 class="msg-col">
                 <ion-textarea type="text" rows="1" id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"></ion-textarea>
             </ion-col>
@@ -52,13 +52,13 @@
                 <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
             </ion-col>
         </ion-row>-->
-    <ion-textarea type="text" rows="1" elastic id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg"
-        (focus)="focusIn()" (focusout)="focusOut()"></ion-textarea>
-    <ion-row>
-        <ion-col width-80>
-        </ion-col>
-        <ion-col width-20>
-            <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
-        </ion-col>
-    </ion-row>
+        <ion-textarea type="text" rows="1" elastic id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg"
+            (focus)="focusIn()" (focusout)="focusOut()"></ion-textarea>
+            <ion-row>
+                <ion-col width-80>
+                </ion-col>
+                <ion-col width-20>
+                    <button ion-button class="button button-clik" color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
+                </ion-col>
+            </ion-row>
 </ion-footer>

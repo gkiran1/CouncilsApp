@@ -2,7 +2,9 @@
     <ion-navbar hideBackButton>
         <ion-row>
             <ion-col class="header-col">
-                <ion-icon class="councils-icon__back menu-icon" item-left color="secondary" (click)="cancel()"></ion-icon>
+                <button ion-button item-right clear class="button button-clik" (click)="cancel()">   
+                <ion-icon class="councils-icon__back menu-icon" item-left color="secondary"></ion-icon>
+                				</button>
             </ion-col>
             <ion-col width-80 class="header-col2">
                 <ion-title text-center>
@@ -15,15 +17,15 @@
 
 <ion-content>
     <ion-list>
-        <ion-item [ngClass]="i===0?'ion-item-first':(i===usersArray.length - 1? 'ion-item-last': 'ion-item-middle')"
-        *ngFor="let user of usersArray; let i = index" [attr.data-index]="i">
-        <ion-avatar item-left>
-            <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
-            <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
-        </ion-avatar>       
-        <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
-        <p> <span>{{user.calling}}</span></p>
-    </ion-item>
+        <ion-item [ngClass]="i===0?'ion-item-first':(i===usersArray.length - 1? 'ion-item-last': 'ion-item-middle')" *ngFor="let user of usersArray; let i = index"
+            [attr.data-index]="i">
+            <ion-avatar item-left>
+                <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
+                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
+            </ion-avatar>
+            <h4 class="council-styles">{{user.firstname}} {{user.lastname}}</h4>
+            <p> <span>{{user.calling}}</span></p>
+            </ion-item>
     </ion-list>
 
 </ion-content>

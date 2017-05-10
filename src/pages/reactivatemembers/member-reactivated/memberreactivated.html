@@ -2,7 +2,9 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col">
-                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="back()"></ion-icon>
+                <button ion-button item-right clear class="button button-clik" (click)="back()">   
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary"></ion-icon>
+                                </button>
             </ion-col>
             <ion-col width-80 class="header-col2">
                 <ion-title text-center>Reactivate Members</ion-title>
@@ -22,6 +24,6 @@
         </ion-col>
     </ion-row>
     <ion-footer text-center>
-        <button ion-button clear color="secondary" (click)="goToReactivateMembersPage()" text-capitalize>Reactivate Another</button>
+        <button ion-button clear color="secondary" class="button button-clik" (click)="goToReactivateMembersPage()" text-capitalize>Reactivate Another</button>
     </ion-footer>
 </ion-content>

@@ -2,7 +2,9 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col">
-                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="back()"></ion-icon>
+                <button ion-button item-right clear class="button button-clik" (click)="back()">   
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary"></ion-icon>
+                                </button>
             </ion-col>
             <ion-col width-80 class="header-col2">
                 <ion-title text-center><b>Feedback</b></ion-title>
@@ -24,7 +26,8 @@
         </ion-row>
 
         <ion-item class="border-top">
-            <ion-textarea name="feedback" spellcheck="true" [(ngModel)]="feedback" elastic required placeholder="Type your feedback here" maxlength="500"></ion-textarea>
+            <ion-textarea name="feedback" spellcheck="true" [(ngModel)]="feedback" elastic required placeholder="Type your feedback here"
+                maxlength="500"></ion-textarea>
         </ion-item>
         <ion-item-divider class="text-area-bottom"></ion-item-divider>
         <div class="page-blank-area"></div>
@@ -33,6 +36,7 @@
 
 <ion-footer>
     <ion-toolbar class="createbtn" text-center>
-        <button ion-button clear color="secondary" type="submit" (click)="submitFeedback()" text-capitalize [disabled]="!newFeedbackForm.form.valid">Submit Feedback</button>
+        <button ion-button clear color="secondary" class="button button-clik" type="submit" (click)="submitFeedback()" text-capitalize
+            [disabled]="!newFeedbackForm.form.valid">Submit Feedback</button>
     </ion-toolbar>
 </ion-footer>

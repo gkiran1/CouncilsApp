@@ -2,7 +2,9 @@
     <ion-navbar hideBackButton>
         <ion-row>
             <ion-col class="header-col">
-                <ion-icon class="councils-icon__back menu-icon" name="cancel" color="secondary" (click)="back()"></ion-icon>
+                <button ion-button item-right clear class="button button-clik" (click)="back()">  
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" color="secondary"></ion-icon>
+                				</button>
             </ion-col>
             <ion-col width-80 class="header-col2">
                 <ion-title text-center>{{discussion.topic}}</ion-title>
@@ -33,8 +35,8 @@
                 <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
                 <ion-icon class="councils-icon__checkmark" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark"
                     md="ios-checkmark"></ion-icon>
-                <p class="font2">{{msg.timestamp | customdateformat}}</p>
-                <p class="font5 line-height">{{msg.text}}</p>
+                    <p class="font2">{{msg.timestamp | customdateformat}}</p>
+                    <p class="font5 line-height">{{msg.text}}</p>
             </ion-item>
         </ion-list>
     </div>
@@ -44,8 +46,8 @@
     <ion-label class="typings-label" color="secondary" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')}}
-    </ion-label>
-    <!--<ion-row>
+        </ion-label>
+        <!--<ion-row>
             <ion-col width-80 class="msg-col">
                 <ion-textarea type="text" rows="1" elastic id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"
                     (keyup)="keypresssed($event)"></ion-textarea>
@@ -54,13 +56,13 @@
                 <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
             </ion-col>
         </ion-row>-->
-    <ion-textarea type="text" rows="1" elastic id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg"
-        (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)"></ion-textarea>
-    <ion-row>
-        <ion-col width-80>
-        </ion-col>
-        <ion-col width-20>
-            <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
-        </ion-col>
-    </ion-row>
+        <ion-textarea type="text" rows="1" elastic id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg"
+            (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)"></ion-textarea>
+            <ion-row>
+                <ion-col width-80>
+                </ion-col>
+                <ion-col width-20>
+                    <button ion-button color="secondary" class="button button-clik" clear (click)="send()" [disabled]="!msg">Send</button>
+                </ion-col>
+            </ion-row>
 </ion-footer>
