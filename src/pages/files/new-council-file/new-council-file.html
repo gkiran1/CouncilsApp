@@ -2,7 +2,9 @@
     <ion-navbar hideBackButton>
         <ion-row>
             <ion-col class="header-col">
-                <ion-icon class="councils-icon__close menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
+                <button ion-button item-right clear class="button button-clik" (click)="cancel()">   
+                <ion-icon class="councils-icon__close menu-icon" name="cancel" item-left color="secondary"></ion-icon>
+                                </button>
             </ion-col>
             <ion-col width-80 class="header-col2">
                 <ion-title text-center>New Council File</ion-title>
@@ -18,12 +20,11 @@
                 <ion-label color="light-dary">Which council will be viewing this file?</ion-label>
             </ion-item-divider>
             <ion-list radio-group id="council" name="council" formControlName="council">
-                <ion-item 
-                [ngClass]="councils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === councils.length - 1? 'ion-item-last' : 'ion-item-middle'))" 
-                *ngFor="let c of councils; let i = index">
+                <ion-item [ngClass]="councils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === councils.length - 1? 'ion-item-last' : 'ion-item-middle'))"
+                    *ngFor="let c of councils; let i = index">
                     <ion-label color="dark">{{(c | async)?.council}}</ion-label>
                     <ion-radio [value]="c | async" color="secondary"></ion-radio>
-                </ion-item>
+                    </ion-item>
             </ion-list>
         </ion-item-group>
     </form>

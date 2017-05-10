@@ -2,7 +2,9 @@
 	<ion-navbar hideBackButton="true">
 		<ion-row>
 			<ion-col class="header-col">
-				<ion-icon class="councils-icon__close menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
+				<button ion-button item-right clear class="button button-clik" (click)="cancel()">   
+				<ion-icon class="councils-icon__close menu-icon" name="cancel" item-left color="secondary"></ion-icon>
+				</button>
 			</ion-col>
 			<ion-col width-80 class="header-col2">
 				<ion-title text-center>Notifications</ion-title>
@@ -19,12 +21,12 @@
 				<button ion-button item-right clear>
                  <ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon>
                 </button>
-			</ion-item>
-		</ion-list>
-	</ng-container>
-	<ng-container *ngIf="!(notifications.length)">
-		<div class="nocontent-message">
-			<p>There are no notifications</p>
-		</div>
-	</ng-container>
-</ion-content>
+				</ion-item>
+				</ion-list>
+				</ng-container>
+				<ng-container *ngIf="!(notifications.length)">
+					<div class="nocontent-message">
+						<p>There are no notifications</p>
+					</div>
+				</ng-container>
+				</ion-content>

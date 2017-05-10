@@ -2,7 +2,9 @@
     <ion-navbar hideBackButton>
         <ion-row>
             <ion-col class="header-col">
-                <ion-icon class="councils-icon__close menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
+                <button ion-button item-right clear class="button button-clik" (click)="cancel()">
+                <ion-icon class="councils-icon__close menu-icon" name="cancel" item-left color="secondary"></ion-icon>
+                                </button>
             </ion-col>
             <ion-col width-80 class="header-col2">
                 <ion-title text-center>New Private Discussion</ion-title>
@@ -34,5 +36,6 @@
 </ion-content>
 
 <ion-footer>
-    <button ion-button color="secondary" class="button button-clik" clear block [disabled]="!NewPrivateDiscussionForm.valid" (click)="create(NewPrivateDiscussionForm.value)">Create</button>
+    <button ion-button color="secondary" class="button button-clik" clear block [disabled]="!NewPrivateDiscussionForm.valid"
+        (click)="create(NewPrivateDiscussionForm.value)">Create</button>
 </ion-footer>
