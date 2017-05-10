@@ -2,7 +2,9 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col">
-                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
+                <button ion-button item-right clear class="button button-clik" (click)="cancel()">   
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary"></ion-icon>
+                </button>
             </ion-col>
             <ion-col width-80 class="header-col2">
                 <ion-title text-center>Lite</ion-title>
@@ -103,24 +105,24 @@
             <div class="desc-styles">{{completedassignment.description}}</div>
         </ion-item>
 
-            <ng-container *ngIf="!discussionitemsObj.length">
-                <ion-item>
-                    <ion-label *ngIf="!discussionitems">Discussion Items</ion-label>
-                    <ion-label floating color="secondary" *ngIf="discussionitems">Discussion Items</ion-label>
-                    <ion-textarea type="text" wrap="off" spellcheck="true" (focus)="discussionfocus()" elastic id="discussionitems" name="discussionitems" [(ngModel)]="discussionitems"
-                        formControlName="discussionitems" maxlength="500" (keyup)="keypressed($event)">
-                        </ion-textarea>
-                </ion-item>
-            </ng-container>
-            <ng-container *ngIf="discussionitemsObj.length">
-                <ion-label class="label-styles">Discussion Items</ion-label>
-                <ion-item *ngFor="let item of discussionitemsObj" class="item-styles">
-                    <ion-input type="text" readonly [value]="item" formControlName='discussionitems'></ion-input>
-                    <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
+        <ng-container *ngIf="!discussionitemsObj.length">
+            <ion-item>
+                <ion-label *ngIf="!discussionitems">Discussion Items</ion-label>
+                <ion-label floating color="secondary" *ngIf="discussionitems">Discussion Items</ion-label>
+                <ion-textarea type="text" wrap="off" spellcheck="true" (focus)="discussionfocus()" elastic id="discussionitems" name="discussionitems"
+                    [(ngModel)]="discussionitems" formControlName="discussionitems" maxlength="500" (keyup)="keypressed($event)">
+                    </ion-textarea>
+            </ion-item>
+        </ng-container>
+        <ng-container *ngIf="discussionitemsObj.length">
+            <ion-label class="label-styles">Discussion Items</ion-label>
+            <ion-item *ngFor="let item of discussionitemsObj" class="item-styles">
+                <ion-input type="text" readonly [value]="item" formControlName='discussionitems'></ion-input>
+                <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
                 </button>
-                </ion-item>
-            </ng-container>
+            </ion-item>
+        </ng-container>
 
         <div *ngIf="showlist2" class="assignto-list">
             <ng-container *ngFor="let user of users | search:term:'username'">

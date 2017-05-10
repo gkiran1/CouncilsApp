@@ -2,7 +2,9 @@
     <ion-navbar hideBackButton="true">
         <ion-row>
             <ion-col class="header-col">
-                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary" (click)="cancel()"></ion-icon>
+                <button ion-button item-right clear class="button button-clik" (click)="cancel()">   
+                <ion-icon class="councils-icon__back menu-icon" name="cancel" item-left color="secondary"></ion-icon>
+                        </button>
             </ion-col>
             <ion-col width-80 class="header-col2">
                 <ion-title text-center>
@@ -66,6 +68,6 @@
     </form>
 </ion-content>
 <ion-footer text-center>
-    <button ion-button clear color="secondary" class="button button-clik"  text-capitalize name="savebtn" [disabled]="(!editProfileForm.valid || !editProfileForm.dirty) && isPicNotChanged"
+    <button ion-button clear color="secondary" class="button button-clik" text-capitalize name="savebtn" [disabled]="(!editProfileForm.valid || !editProfileForm.dirty) && isPicNotChanged"
         (click)="editProfile(editProfileForm.value)">Save</button>
 </ion-footer>
