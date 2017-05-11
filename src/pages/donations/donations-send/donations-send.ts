@@ -28,7 +28,6 @@ export class DonationsSendPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DonationsSendPage');
   }
 
   cancel() {
@@ -76,7 +75,6 @@ export class DonationsSendPage {
   }
 
   send(value) {
-    console.log(value);
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
       content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
@@ -90,12 +88,10 @@ export class DonationsSendPage {
       if (response.error) {
         // Show the errors on the form
         loader.dismiss();
-        console.log('error', response.error.message);
         this.showAlert(response.error.message);
       } else {
         // response contains id and card, which contains additional card details
         this.token = response.id;
-        console.log('token - ', this.token);
         // Insert the token into the form so it gets submitted to the server
         let data = {
           stripeToken: this.token,
@@ -118,13 +114,11 @@ export class DonationsSendPage {
         this.http.post(url, data)
           .subscribe(response => {
             loader.dismiss();
-            console.log('payment success', response);
             this.zone.run(() => {
               this.nav.push(DonationsThankyouPage);
             });
           }, err => {
             loader.dismiss();
-            console.log('Error:', err);
             this.showAlert('There has been an error processing your request, please try again');
           })
 

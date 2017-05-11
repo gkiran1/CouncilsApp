@@ -56,9 +56,7 @@ export class InactivateMembersPage {
                             .then(() => {
                                 this.emailservice.emailAccountInactive(user.firstname, user.lastname, user.email).subscribe(res => {
                                     if (res.status === 200) {
-                                        console.log(user.firstname + ' account inactivated');
                                     } else {
-                                        console.log('Mail not sent for account inactivation');
                                     }
                                 });
                                 this.nav.push(MemberInactivatedPage);

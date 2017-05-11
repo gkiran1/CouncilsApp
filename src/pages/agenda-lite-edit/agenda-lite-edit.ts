@@ -293,7 +293,6 @@ export class AgendaLiteEditPage {
         {
           text: 'No',
           handler: () => {
-            console.log('Disagree clicked');
           }
         }
       ]

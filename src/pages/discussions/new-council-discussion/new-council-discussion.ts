@@ -51,13 +51,11 @@ export class NewCouncilDiscussionPage {
     value.typings = '';
     this.firebaseservice.createDiscussion(value)
       .then(discussionId => {
-        console.log("discussion created successfully...", discussionId);
         this.nav.push(OpenCouncilDiscussionPage, {
           discussion: discussionId
         });
       })
       .catch(err => {
-        console.log(err);
         alert(err);
       })
 

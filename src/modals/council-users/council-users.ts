@@ -22,7 +22,6 @@ export class CouncilUsersModalPage {
             uc.forEach(e => {
                 this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
                     this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
-                        console.log('status', status);
                         u[0].status = status ? 'green' : 'gray';
                     });
                     this.usersArray.push(u[0]);

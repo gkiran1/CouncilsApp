@@ -59,7 +59,6 @@ export class AppService {
 
     setUser(user: FirebaseObjectObservable<any>) {
         this.user = user;
-        console.log('User details updated in AppService===>', this.user);
     }
     
     getUser(): FirebaseObjectObservable<User> {

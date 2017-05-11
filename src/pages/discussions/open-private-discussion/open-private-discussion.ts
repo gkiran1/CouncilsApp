@@ -55,7 +55,6 @@ export class OpenPrivateDiscussionPage {
                 if (message.userId !== this.user.$key && message.status !== 'read') {
                     this.fs.updatePrivateDiscussionMessageStatus(discussion.$key, e, 'read')
                         .catch(err => {
-                            console.log('Err:: open-council-discussion::', err);
                         });
                 }
             });
@@ -80,7 +79,6 @@ export class OpenPrivateDiscussionPage {
                     //
                 })
                 .catch(err => {
-                    console.log(err);
                 });
 
             setTimeout(() => {
@@ -99,7 +97,6 @@ export class OpenPrivateDiscussionPage {
                 //
             })
             .catch(err => {
-                console.log(err);
             });
     }
     focusOut() {
@@ -110,7 +107,6 @@ export class OpenPrivateDiscussionPage {
                 //
             })
             .catch(err => {
-                console.log(err);
             });
     }
 }

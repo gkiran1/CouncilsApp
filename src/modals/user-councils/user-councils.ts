@@ -26,7 +26,6 @@ export class UserCouncilsModalPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UserCouncilsPage');
     this.ele.nativeElement.querySelector('.searchbar-input').focus();
   }
   dismiss(council) {
@@ -37,7 +36,6 @@ export class UserCouncilsModalPage {
   }
   searchFn(event) {
     this.term = event.target.value;
-    console.log('search', event.target.value);
   }
 
 }

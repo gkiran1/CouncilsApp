@@ -82,7 +82,6 @@ export class EditProfilePage {
                     this.isPicNotChanged = true;
                 }).catch(err => {
                     loader.dismiss();
-                    console.log(err);
                 })
             });
 
@@ -176,7 +175,6 @@ export class EditProfilePage {
             this.imageflag = false;
             this.isChangeflag = true;
         }, error => {
-            console.log("ERROR -> " + JSON.stringify(error));
         });
     }
     // to upload a picture from gallery to the firebase.
@@ -199,7 +197,6 @@ export class EditProfilePage {
             this.isChangeflag = true;
             // this.showAlert('success',this.imagePath);                       
         }, error => {
-            console.log("ERROR -> " + JSON.stringify(error));
         });
     }
 

@@ -76,17 +76,14 @@ export class NewPrivateDiscussionPage {
     value.otherUserAvatar = value.otherUser.avatar;
     value.createdDate = moment().toISOString();
     value.typings = '';
-    console.log('NewPrivateDiscussionForm------------>', value);
 
     this.firebaseservice.createPrivateDiscussion(value)
       .then(discussionId => {
-        console.log("discussion created successfully...", discussionId);
         this.nav.push(OpenPrivateDiscussionPage, {
           discussion: discussionId
         });
       })
       .catch(err => {
-        console.log(err);
         alert(err);
       })
 
@@ -96,6 +93,5 @@ export class NewPrivateDiscussionPage {
   }
   searchFn(event) {
     this.term = event.target.value;
-    console.log('search', event.target.value);
   }
 }

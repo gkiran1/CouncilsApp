@@ -39,7 +39,6 @@ export class InviteMemberPage {
                     this.invite.isactive = true;
                     this.fs.getCouncilsByType(res.unitnumber).subscribe(councils => {
                         this.council = councils;
-                        console.log(councils, this.invite.councils);
                     });
                     this.invite.councils = [];
                 });
@@ -56,7 +55,6 @@ export class InviteMemberPage {
         //     this.invite.isactive = true;
         //     this.fs.getCouncilsByType(res.unittype).subscribe(councils => {
         //         this.council = councils;
-        //         console.log(councils, this.invite.councils);
         //     });
         //     this.invite.councils = [];
 
@@ -65,7 +63,6 @@ export class InviteMemberPage {
 
     inviteMember() {
         this.council.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
-        console.log(this.invite.councils);
         this.emailService.inviteMemberEmail(this.invite.firstname, this.invite.unitnumber, this.invite.email)
             .subscribe(res => {
                 if (res.status === 200) {
@@ -79,7 +76,6 @@ export class InviteMemberPage {
                 }
 
             }, err => {
-                console.log(err);
                 this.showAlert('Unable to invite member, please recheck the details and try again.');
             })
 

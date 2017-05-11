@@ -39,7 +39,6 @@ export class UnitTypeAgendaPage {
     }
     searchFn(event) {
         this.term = event.target.value;
-        console.log('search', event.target.value);
     }
     cancel() {
         this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });

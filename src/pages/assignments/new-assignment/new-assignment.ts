@@ -126,7 +126,6 @@ export class NewAssignmentPage {
       uc.forEach(e => {
         this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
           this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
-            console.log('status', status);
             u[0].status = status ? 'green' : 'gray';
           });
           this.users.push(u[0]);
@@ -204,11 +203,10 @@ export class NewAssignmentPage {
       let formattedAssignmentObj = this.formatAssignmentObj(value);
       this.firebaseservice.updateAssignment(formattedAssignmentObj, this.assignmentKey)
         .then(res => {
-          console.log(res);
           // this.createActivity(this.assignmentKey, 'completed');
           this.nav.pop();
         })
-        .catch(err => { console.error(err); this.showAlert('Unable to updated the Assignment, please try after some time') })
+        .catch(err => { this.showAlert('Unable to updated the Assignment, please try after some time') })
     }
   }
   edit(value) {
@@ -221,19 +219,17 @@ export class NewAssignmentPage {
     this.firebaseservice.updateAssignment(formattedAssignmentObj, this.assignmentKey)
       .then(res => {
         this.nav.popToRoot();
-        console.log(res);
         this.createActivity(this.assignmentKey, 'updated');
       })
-      .catch(err => { console.error(err); this.showAlert('Unable to updated the Assignment, please try after some time') })
+      .catch(err => { this.showAlert('Unable to updated the Assignment, please try after some time') })
   }
   delete() {
     this.firebaseservice.removeAssignment(this.assignmentKey)
       .then(res => {
-        console.log(res);
         // this.createActivity(this.assignmentKey, 'deleted');
         this.nav.pop();
       })
-      .catch(err => { console.error(err); this.showAlert('Unable to delete the Assignment, please try after some time') })
+      .catch(err => { this.showAlert('Unable to delete the Assignment, please try after some time') })
   }
 
   showConfirm() {
@@ -250,7 +246,6 @@ export class NewAssignmentPage {
         {
           text: 'No',
           handler: () => {
-            console.log('Disagree clicked');
           }
         }
       ]

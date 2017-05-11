@@ -85,9 +85,7 @@ export class TransferAdminRightsPage {
                                     this.currentUser.lastname,
                                     this.currentUser.unitnumber, user.email, user.firstname, user.lastname).subscribe(res => {
                                         if (res.status === 200) {
-                                            console.log('Transferred Admin Rights');
                                         } else {
-                                            console.log('Mail not sent for account inactivation');
                                         }
                                     });
 

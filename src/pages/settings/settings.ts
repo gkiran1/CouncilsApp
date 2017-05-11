@@ -57,7 +57,6 @@ export class SettingsPage {
         localStorage.setItem('isUserLoggedIn', 'false');
         localStorage.setItem('isMenuCentered', '0');
         this.firebaseService.signOut().then(() => {
-            console.log('Sign Out successfully..');
             this.navCtrl.setRoot(GoodbyePage);
         }).catch(err => {
             this.navCtrl.setRoot(GoodbyePage);
@@ -87,7 +86,6 @@ export class SettingsPage {
             + '&scope=https://www.googleapis.com/auth/calendar&approval_prompt=force&response_type=token', '_blank', 'location=no');
 
         browserRef.addEventListener('loadstart', function (event) {
-            console.log('eventurl', event.url);
             if ((event["url"]).indexOf("http://localhost/callback") >= 0 && (event["url"]).indexOf("access_token=") >= 0) {
                 var url = event["url"];
                 var token = url.split('access_token=')[1].split('&token_type')[0];
@@ -185,7 +183,6 @@ export class SettingsPage {
                                     if (jsonR.id) {
                                         //  alert("Invitation sent successfully for Agendas");
                                     }
-                                    console.log(jsonR);
                                 }
                             });
                         }
@@ -263,7 +260,6 @@ export class SettingsPage {
                                     if (jsonR.id) {
                                         //  alert("Invitation sent successfully for Assignments");
                                     }
-                                    console.log(jsonR);
                                 }
                             });
                         }

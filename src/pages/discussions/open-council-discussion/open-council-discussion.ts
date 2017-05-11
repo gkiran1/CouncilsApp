@@ -74,7 +74,6 @@ export class OpenCouncilDiscussionPage {
                     this.tagsSet.clear();
                 })
                 .catch(err => {
-                    console.log(err);
                 });
 
             setTimeout(() => {
@@ -97,7 +96,6 @@ export class OpenCouncilDiscussionPage {
                     this.tagsSet.add(`${user.$key}/${user.firstname} ${user.lastname}`);
                     this.msg = `${this.msg}${user.firstname} ${user.lastname}`
                     this.isModalDismissed = true;
-                    console.log('modal dismissed::', user);
                 });
                 this.councilusersModal.present();
                 this.isModalDismissed = false;
@@ -119,7 +117,6 @@ export class OpenCouncilDiscussionPage {
                 //
             })
             .catch(err => {
-                console.log(err);
             });
     }
     focusOut() {
@@ -130,7 +127,6 @@ export class OpenCouncilDiscussionPage {
                 //
             })
             .catch(err => {
-                console.log(err);
             });
     }
 

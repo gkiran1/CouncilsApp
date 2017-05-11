@@ -77,7 +77,6 @@ export class MenuPage {
                 if (message.userId !== auth.uid && message.status === 'sent') {
                   this.firebaseService.updatePrivateDiscussionMessageStatus(discussion.$key, e, 'delivered')
                     .catch(err => {
-                      console.log('Err:: open-council-discussion::', err);
                     });
                 }
               });

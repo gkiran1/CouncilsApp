@@ -48,9 +48,7 @@ export class ReactivateMembersPage {
             .then(() => {
                 this.emailservice.emailReactivate(user.firstname, user.lastname, user.unitnumber, user.email).subscribe(res => {
                     if (res.status === 200) {
-                        console.log(user.firstname + ' account is reactivated');
                     } else {
-                        console.log('Mail not sent for account reactivation');
                     }
                 });
                 this.nav.push(MemberReactivatedPage);
@@ -62,13 +60,11 @@ export class ReactivateMembersPage {
         this.users.forEach((usr) => {
             this.firebaseService.reactivateUser(usr.$key, true)
                 .then(() => {
-                    console.log('Member reactivated successfully..!!');
                 })
                 .catch(err => { this.showAlert('Unable to reactivate the member, please try after some time') });
         });
 
         if (this.users && this.users.length === 0) {
-            console.log(this.users);
             this.showAlert('All the members are reactivated successfully..!!!');
             this.nav.pop();
         }

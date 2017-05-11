@@ -11,7 +11,6 @@ export class DonationsThankyouPage {
   constructor(public nav: NavController, public navParams: NavParams) { }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DonationsThankyouPage');
   }
   cancel() {
     this.nav.popToRoot({ animate: true, animation: 'transition', direction: 'back' });

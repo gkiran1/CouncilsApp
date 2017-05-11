@@ -27,7 +27,6 @@ export class AssignmentsListPage {
   notificationsCount;
 
   constructor(public navCtrl: NavController, public fs: FirebaseService, public af: AngularFire) {
-    console.log('assignments constructor================>');
     // // ***TODO*** 
     // let uid = localStorage.getItem('securityToken');
     //  this.af.database.object('/users/' + uid).subscribe(u => {
@@ -103,7 +102,6 @@ export class AssignmentsListPage {
       this.completedselectedIdx = '';
     }
 
-    console.log('assignmentSelected', assignment);
   }
   cancel() {
     this.navCtrl.pop();

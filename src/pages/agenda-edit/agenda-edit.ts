@@ -183,7 +183,6 @@ export class AgendaEditPage {
             this.updateUsers(council.$key);
             (<FormControl>this.agendaeditForm.controls['assignedcouncil']).setValue(council.council);
             this.assignedcouncil = council;
-            console.log("this.assignedcouncil", this.assignedcouncil);
             this.getAssignmentsByCouncilId(council.$key).subscribe(assignments => {
                 assignments.forEach(assignObj => {
                     if (assignObj.isCompleted) {
@@ -313,7 +312,6 @@ export class AgendaEditPage {
                 {
                     text: 'No',
                     handler: () => {
-                        console.log('Disagree clicked');
                     }
                 }
             ]

@@ -124,7 +124,6 @@ export class FirebaseService {
                     .catch(err => { throw err });
             }
         }).then((res) => {
-            console.log(res.val());
             if (res.val()) {
                 throw "User has already invited..."
             }
@@ -301,7 +300,6 @@ export class FirebaseService {
     signOut() {
         return this.fireAuth.signOut().then(() => {
             this.ionicAuth.logout();
-            console.log('Sign Out successfully..')
         }).catch(err => {
             throw err;
         });
@@ -356,7 +354,6 @@ export class FirebaseService {
     }
 
     updateAssignment(assignment, assignmentKey) {
-        console.log('assignment.$key', assignmentKey);
         return this.af.database.list('assignments').update(assignmentKey, {
             assigneddate: assignment.assigneddate,
             assignedto: assignment.assigneduser,
@@ -379,7 +376,6 @@ export class FirebaseService {
     }
 
     removeAssignment(assignmentKey) {
-        console.log('assignment.$key', assignmentKey);
         return this.af.database.object('assignments/' + assignmentKey).update({ isactive: false });
     }
 
@@ -556,7 +552,7 @@ export class FirebaseService {
                 councilname: file.councilname,
                 createdDate: file.createdDate,
                 createdUser: file.createdUser,
-                createdBy: file.createdBy,
+                createdBy: file.createdBy, 
                 isActive: file.isActive,
             })
             .then((res) => {
@@ -564,7 +560,6 @@ export class FirebaseService {
                 return res.path.o[1];
             })
             .catch(err => {
-                // console.log(err);
                 throw err
             });
     }
@@ -596,7 +591,6 @@ export class FirebaseService {
     }
 
     removeAgendaLite(agendaKey) {
-        console.log('agendas.$key', agendaKey);
         return this.af.database.object('agendas/' + agendaKey).update({ isactive: false });
     }
 

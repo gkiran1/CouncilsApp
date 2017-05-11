@@ -20,7 +20,6 @@ export class DonationsWelcomePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DonationsWelcomePage');
   }
   sendDonationsPage() {
     this.nav.push(DonationsSendPage);
