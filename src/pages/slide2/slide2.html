@@ -1,19 +1,16 @@
 <ion-content>
     <ion-list no-lines>
-        <div class="name-board" >
-            
-                <span class="user2">Unit #{{(userObj)?.unitnumber}}</span>
-            
+        <div class="name-board">
+            <span class="user2">Unit #{{(userObj)?.unitnumber}}</span>
         </div>
         <ion-row class="first-menu">
-           
+
             <ion-label class="menu-title">Council</ion-label>
-            
-            <button color="secondary" ion-button clear item-right class="button button-clik" id="councilsPage" name="councilsPage" 
-                (click)="councilsPage('councilsPage')">
+
+            <button color="secondary" ion-button clear item-right class="button button-clik" id="councilsPage" name="councilsPage" (click)="councilsPage('councilsPage')">
                 <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
                 </button>
-           
+
         </ion-row>
         <button clear menuToggle ion-button class="listbtn2" id="agendasPage" name="agendasPage" block (click)="agendasPage('agendasPage')"
             text-capitalize>
@@ -35,7 +32,7 @@
                         </button>
                         <ion-row>
                             <ion-label class="menu-title">Private</ion-label>
-                            <button color="secondary" ion-button clear item-right class="button button-clik"  (click)="privatePage()">
+                            <button color="secondary" ion-button clear item-right class="button button-clik" (click)="privatePage()">
                     <ion-icon id="privatecircle" name="privatecircle" class="councils-icon__add menu-icon" ng-reflect-color="light" item-right></ion-icon>
                 </button>
                         </ion-row>
