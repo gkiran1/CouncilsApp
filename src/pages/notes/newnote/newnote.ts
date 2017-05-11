@@ -3,7 +3,8 @@ import { FirebaseService } from '../../../environments/firebase/firebase-service
 import { AlertController, NavController, ActionSheetController, MenuController, NavParams } from 'ionic-angular';
 
 import * as moment from 'moment';
-import { FormBuilder, FormGroup,  Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotesPage } from '../notes/notes'
 
 @Component({
     templateUrl: 'newnote.html',
@@ -32,7 +33,7 @@ export class NewNotePage {
         note.createddate = moment().toISOString();
         this.firebaseservice.createNote(note)
             .then(res => {
-                this.nav.popToRoot();
+                this.nav.setRoot(NotesPage);
             })
             .catch(err => this.showAlert(err))
     }

@@ -4,13 +4,13 @@
 <ion-content>
   <!--<ion-searchbar (ionInput)="searchFn($event)" *ngIf="fromPage" class="font1" placeholder="For which council is this assignment?"></ion-searchbar>
   <ion-searchbar (ionInput)="searchFn($event)" *ngIf="!fromPage" class="font1" placeholder="Which council will see this agenda?"></ion-searchbar>-->
-  <ion-list radio-group [(ngModel)]="selectedCouncil">
-    <ion-item *ngFor="let council of councils | search:term:'council'">
-      <ion-label>{{council.council}}</ion-label>
-      <ion-radio [value]="council"></ion-radio>
-    </ion-item>
-  </ion-list>
+  <!--<ion-list radio-group [(ngModel)]="selectedCouncil">-->
+  <ion-item *ngFor="let council of councils | search:term:'council'">
+    <ion-label (click)="dismiss(council)">{{council.council}}</ion-label>
+    <!--<ion-radio [value]="council"></ion-radio>-->
+  </ion-item>
+  <!--</ion-list>-->
 </ion-content>
-<ion-footer>
+<!--<ion-footer>
   <button ion-button clear block color="secondary" [disabled]="!selectedCouncil" (click)="dismiss(selectedCouncil)">Done</button>
-</ion-footer>
+</ion-footer>-->
