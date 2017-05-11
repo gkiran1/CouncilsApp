@@ -88,7 +88,7 @@ export class slide2Page {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewAgendaPage, {}, { animate: true, direction: 'up' });
+            this.welcomePage.nav.push(NewAgendaPage, {}, { animate: true, direction: 'up' });
 
           }
         },
@@ -97,7 +97,7 @@ export class slide2Page {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewCouncilDiscussionPage, {}, { animate: true, direction: 'up' });
+            this.welcomePage.nav.push(NewCouncilDiscussionPage, {}, { animate: true, direction: 'up' });
           }
         },
         {
@@ -107,7 +107,7 @@ export class slide2Page {
           handler: () => {
 
             this.menuctrl.close();
-            this.nav.push(NewAssignmentPage, {}, { animate: true, direction: 'up' });
+            this.welcomePage.nav.push(NewAssignmentPage, {}, { animate: true, direction: 'up' });
           }
         },
         {
@@ -116,7 +116,7 @@ export class slide2Page {
 
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewCouncilFilePage);
+            this.welcomePage.nav.push(NewCouncilFilePage);
           }
         },
         {
@@ -139,7 +139,7 @@ export class slide2Page {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewPrivateDiscussionPage);
+            this.welcomePage.nav.push(NewPrivateDiscussionPage);
           }
         },
         {
@@ -147,7 +147,7 @@ export class slide2Page {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-            this.nav.push(NewNotePage);
+            this.welcomePage.nav.push(NewNotePage);
           }
         },
         {
