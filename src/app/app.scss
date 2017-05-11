@@ -761,6 +761,15 @@ ion-avatar {
     border-bottom: none !important;
 }
 
+
+.input-item {
+    border: none !important;
+}
+
+.input-item .item-inner .input-wrapper {
+    border-bottom: 1px solid #e8e9eb;
+}
+
 ion-badge, .badge-md {
     border-radius:50%;
     padding:3px;
