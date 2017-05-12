@@ -771,12 +771,15 @@ ion-avatar {
 .input-item .item-inner .input-wrapper {
     border-bottom: 1px solid #e8e9eb;
 }
+.iconinput-item {
+    border: none !important;
+}
 .iconinput-item .item-inner {
-    border-bottom: 1px solid #e8e9eb;
+    border-bottom: 1px solid #e8e9eb !important;
 }
-.iconinput-item .item-inner .item-wrapper {
-    border-bottom: none;
-}
+// .iconinput-item .item-inner .item-wrapper {
+//     border-bottom: none;
+// }
 
 
 ion-badge, .badge-md {

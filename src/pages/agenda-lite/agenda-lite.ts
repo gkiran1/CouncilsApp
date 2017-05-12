@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { AlertController, NavController, ModalController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, ModalController, NavParams, ToastController } from 'ionic-angular';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserCouncilsModalPage } from '../../modals/user-councils/user-councils';
@@ -36,7 +36,7 @@ export class AgendaLitePage {
 
   constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
-    public nav: NavController) {
+    public nav: NavController, public toast: ToastController) {
 
     this.af.auth.subscribe(auth => {
       if (!auth) return;
@@ -82,15 +82,15 @@ export class AgendaLitePage {
   agendasArray = [];
   createagenda(agenda) {
     if (agenda.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== agenda.openingprayer)) {
-      this.showAlert('Please assign to a valid user');
+      this.showAlert('Invalid user');
       return;
     }
     if (agenda.spiritualthought && (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== agenda.spiritualthought)) {
-      this.showAlert('Please assign to a valid user');
+      this.showAlert('Invalid user');
       return;
     }
     if (agenda.closingprayer && (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== agenda.closingprayer)) {
-      this.showAlert('Please assign to a valid user');
+      this.showAlert('Invalid user');
       return;
     }
     let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
@@ -115,17 +115,24 @@ export class AgendaLitePage {
         this.nav.setRoot(AgendasPage);
 
       })
-      .catch(err => this.showAlert(err))
+      .catch(err => { this.showAlert('Internal server error.') })
   }
 
 
   showAlert(errText) {
-    let alert = this.alertCtrl.create({
-      title: '',
-      subTitle: errText,
-      buttons: ['OK']
-    });
-    alert.present();
+    // let alert = this.alertCtrl.create({
+    //   title: '',
+    //   subTitle: errText,
+    //   buttons: ['OK']
+    // });
+    // alert.present();
+
+    let toast = this.toast.create({
+            message: errText,
+            duration: 3000
+        })
+
+        toast.present();
   }
 
   showCouncilsModal(event, value) {

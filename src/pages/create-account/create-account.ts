@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, Loading } from 'ionic-angular';
+import { NavController, LoadingController, Loading, ToastController } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { User } from '../../user/user';
 import { Invitee } from '../invite/invitee.model';
@@ -22,12 +22,12 @@ export class CreateAccountPage {
   newUser: User = new User;
   createAccountForm;
 
-  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService) { }
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService, public toast: ToastController) { }
 
   createAccount() {
     // password validation
-    if (!(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/).test(this.newUser.password))) {
-      this.showAlert('failure', 'Password  should be minimum of 6 characters long and must contain atleast one uppercase character and a digit and should not contain any spaces.')
+    if (this.newUser.password.length < 6) {
+      this.showAlert('6 characters required');
     }
     // username@domain.com
     else {
@@ -64,7 +64,7 @@ export class CreateAccountPage {
               flag = true;
 
             })
-            .catch(err => this.showAlert('failure', err.message));
+            .catch(err => this.showAlert('Internal server error.'));
           loader.dismiss();
           let v = setInterval(() => {
             if (flag) {
@@ -76,7 +76,7 @@ export class CreateAccountPage {
           }, 50);
         } else {
           loader.dismiss();
-          this.showAlert('failure', 'You are not invited!');
+          this.showAlert('Not invited!');
         }
 
       });
@@ -87,13 +87,20 @@ export class CreateAccountPage {
 
   }
 
-  showAlert(reason, text) {
-    let alert = this.alertCtrl.create({
-      title: '',
-      subTitle: text,
-      buttons: ['OK']
-    });
-    alert.present();
+  showAlert(text) {
+    // let alert = this.alertCtrl.create({
+    //   title: '',
+    //   subTitle: text,
+    //   buttons: ['OK']
+    // });
+    // alert.present();
+
+    let toast = this.toast.create({
+      message: text,
+      duration: 3000
+    })
+
+    toast.present();
   }
 
 

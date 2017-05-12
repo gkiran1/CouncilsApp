@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { DonationsThankyouPage } from '../donations-thankyou/donations-thankyou';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { validateEmail } from '../../../custom-validators/custom-validator';
@@ -16,7 +16,8 @@ export class DonationsSendPage {
   donationForm: FormGroup;
   private token: string = '';
   donationtype = 'onetime';
-  constructor(public zone: NgZone, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public http: Http, fb: FormBuilder, public nav: NavController, public navParams: NavParams) {
+  constructor(public zone: NgZone, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public http: Http, fb: FormBuilder, public nav: NavController, public navParams: NavParams, public toast: ToastController,
+  ) {
     this.donationForm = fb.group({
       amount: ['', Validators.required],
       fullname: ['', Validators.required],
@@ -119,7 +120,7 @@ export class DonationsSendPage {
             });
           }, err => {
             loader.dismiss();
-            this.showAlert('There has been an error processing your request, please try again');
+            this.showAlert('Internal server error.');
           })
 
       }
@@ -127,11 +128,18 @@ export class DonationsSendPage {
   }
 
   showAlert(errText) {
-    let alert = this.alertCtrl.create({
-      title: '',
-      subTitle: errText,
-      buttons: ['OK']
-    });
-    alert.present();
+    // let alert = this.alertCtrl.create({
+    //   title: '',
+    //   subTitle: errText,
+    //   buttons: ['OK']
+    // });
+    // alert.present();
+
+    let toast = this.toast.create({
+      message: errText,
+      duration: 3000
+    })
+
+    toast.present();
   }
 }

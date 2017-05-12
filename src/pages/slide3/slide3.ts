@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, ToastController} from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
 import { NgZone } from '@angular/core';
@@ -15,7 +15,7 @@ import { OpenCouncilDiscussionPage } from '../discussions/open-council-discussio
 export class slide3Page {
   activities;
   user;
-  constructor(public alertCtrl: AlertController, public af: AngularFire, public zone: NgZone, public nav: NavController, public fs: FirebaseService) {
+  constructor(public alertCtrl: AlertController, public af: AngularFire, public zone: NgZone, public nav: NavController, public fs: FirebaseService, public toast: ToastController) {
     let uid = localStorage.getItem('securityToken');
     if (!uid) return; //Do nothing
     this.fs.getUsersByKey(uid).subscribe(u => {
@@ -63,12 +63,19 @@ export class slide3Page {
   }
 
   showAlert(errText) {
-    let alert = this.alertCtrl.create({
-      title: '',
-      subTitle: errText,
-      buttons: ['OK']
-    });
-    alert.present();
+    // let alert = this.alertCtrl.create({
+    //   title: '',
+    //   subTitle: errText,
+    //   buttons: ['OK']
+    // });
+    // alert.present();
+
+    let toast = this.toast.create({
+      message: errText,
+      duration: 3000
+    })
+
+    toast.present();
   }
 
 }

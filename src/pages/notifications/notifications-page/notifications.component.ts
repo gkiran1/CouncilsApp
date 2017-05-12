@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, AlertController } from 'ionic-angular';
+import { NavParams, NavController, ToastController, AlertController } from 'ionic-angular';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { NewAssignmentPage } from '../../assignments/new-assignment/new-assignment';
 import { AgendaLiteEditPage } from '../../agenda-lite-edit/agenda-lite-edit';
@@ -20,6 +20,7 @@ export class NotificationsPage {
     constructor(private nav: NavController,
         public navParams: NavParams,
         public firebaseService: FirebaseService,
+         public toast: ToastController,
         public alertCtrl: AlertController) {
         var userId = localStorage.getItem('securityToken');
         if (userId !== null) {
@@ -70,12 +71,19 @@ export class NotificationsPage {
     }
 
     showAlert(errText) {
-        let alert = this.alertCtrl.create({
-            title: '',
-            subTitle: errText,
-            buttons: ['OK']
-        });
-        alert.present();
+        // let alert = this.alertCtrl.create({
+        //     title: '',
+        //     subTitle: errText,
+        //     buttons: ['OK']
+        // });
+        // alert.present();
+
+        let toast = this.toast.create({
+            message: errText,
+            duration: 3000
+        })
+
+        toast.present();
     }
 
     cancel() {

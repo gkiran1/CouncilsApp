@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { AlertController, ActionSheetController, NavController, ModalController, MenuController, NavParams } from 'ionic-angular';
+import { AlertController, ActionSheetController, NavController, ModalController, MenuController, NavParams, ToastController } from 'ionic-angular';
 import { AgendasPage } from '../agendas/agendas';
 import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
 import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
@@ -43,7 +43,7 @@ export class AgendaLiteEditPage {
   constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
     public nav: NavController, public actionSheetCtrl: ActionSheetController,
-    public menuctrl: MenuController
+    public menuctrl: MenuController, public toast: ToastController
   ) {
 
     this.af.auth.subscribe(auth => {
@@ -232,15 +232,15 @@ export class AgendaLiteEditPage {
 
   edit(value) {
     if (value.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== value.openingprayer)) {
-      this.showAlert('Please assign to a valid user');
+      this.showAlert('Invalid user');
       return;
     }
     if (value.spiritualthought && (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== value.spiritualthought)) {
-      this.showAlert('Please assign to a valid user');
+      this.showAlert('Invalid user');
       return;
     }
     if (value.closingprayer && (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== value.closingprayer)) {
-      this.showAlert('Please assign to a valid user');
+      this.showAlert('Invalid user');
       return;
     }
     value.discussionitems = (value.discussionitems != undefined && value.discussionitems.length > 0) ? value.discussionitems.replace(/-/gi, '').trim() : '';
@@ -258,7 +258,7 @@ export class AgendaLiteEditPage {
           this.createActivity('closing prayer', formattedAgendaObj.closingprayeruserid, );
         }
       })
-      .catch(err => { this.showAlert('Unable to updated the Agenda Lite, please try after some time.') })
+      .catch(err => { this.showAlert('Internal server error.') })
   }
 
   delete() {
@@ -276,7 +276,7 @@ export class AgendaLiteEditPage {
 
         this.nav.pop();
       })
-      .catch(err => { this.showAlert('Unable to delete the Agenda Lite, please try after some time.') })
+      .catch(err => { this.showAlert('Internal server error.') })
   }
 
   showConfirm() {
@@ -333,12 +333,19 @@ export class AgendaLiteEditPage {
     actionSheet.present();
   }
   showAlert(errText) {
-    let alert = this.alertCtrl.create({
-      title: '',
-      subTitle: errText,
-      buttons: ['OK']
-    });
-    alert.present();
+    // let alert = this.alertCtrl.create({
+    //   title: '',
+    //   subTitle: errText,
+    //   buttons: ['OK']
+    // });
+    // alert.present();
+
+    let toast = this.toast.create({
+      message: errText,
+      duration: 3000
+    })
+
+    toast.present();
   }
 
   keypressed($event) {

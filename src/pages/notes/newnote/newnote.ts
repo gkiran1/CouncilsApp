@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { AlertController, NavController, ActionSheetController, MenuController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, ActionSheetController, MenuController, NavParams, ToastController} from 'ionic-angular';
 
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -19,7 +19,8 @@ export class NewNotePage {
         public actionSheetCtrl: ActionSheetController,
         public alertCtrl: AlertController,
         public nav: NavController,
-        public menuctrl: MenuController) {
+        public menuctrl: MenuController,
+        public toast: ToastController) {
 
         this.newnoteForm = fb.group({
             title: ['', Validators.required],
@@ -35,16 +36,23 @@ export class NewNotePage {
             .then(res => {
                 this.nav.setRoot(NotesPage);
             })
-            .catch(err => this.showAlert(err))
+            .catch(err => this.showAlert('Internal server error.'))
     }
 
     showAlert(errText) {
-        let alert = this.alertCtrl.create({
-            title: '',
-            subTitle: errText,
-            buttons: ['OK']
-        });
-        alert.present();
+        // let alert = this.alertCtrl.create({
+        //     title: '',
+        //     subTitle: errText,
+        //     buttons: ['OK']
+        // });
+        // alert.present();
+
+        let toast = this.toast.create({
+            message: errText,
+            duration: 3000
+        })
+
+        toast.present();
     }
     pad(number) {
         if (number < 10) {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AngularFire } from 'angularfire2';
 import { Council } from './council'
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, NavController, ToastController} from 'ionic-angular';
 import { Subscription } from "rxjs";
 
 @Component({
@@ -17,7 +17,7 @@ export class NewCouncilPage {
   userCouncils: any;
   userSubscription: Subscription;
 
-  constructor(public af: AngularFire, public firebaseservice: FirebaseService, public nav: NavController, public alertCtrl: AlertController) {
+  constructor(public af: AngularFire, public firebaseservice: FirebaseService, public nav: NavController, public alertCtrl: AlertController, public toast: ToastController) {
     // this.appservice.getUser().subscribe(user => {
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
@@ -68,7 +68,7 @@ export class NewCouncilPage {
       else {
         this.showAlert('Council already exists.');
       }
-    }).catch(err => this.showAlert(err))
+    }).catch(err => this.showAlert('Internal server error.'))
 
   }
 
@@ -86,12 +86,19 @@ export class NewCouncilPage {
   }
 
   showAlert(errText) {
-    let alert = this.alertCtrl.create({
-      title: '',
-      subTitle: errText,
-      buttons: ['OK']
-    });
-    alert.present();
+    // let alert = this.alertCtrl.create({
+    //   title: '',
+    //   subTitle: errText,
+    //   buttons: ['OK']
+    // });
+    // alert.present();
+
+    let toast = this.toast.create({
+      message: errText,
+      duration: 3000
+    })
+
+    toast.present();
   }
 
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { User } from '../../../user/user';
-import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
+import { AlertController, NavController, ActionSheetController, MenuController, ToastController } from 'ionic-angular';
 import { MemberInactivatedPage } from '../member-inactivated/memberinactivated.component';
 import { AngularFire } from 'angularfire2';
 import { EmailService } from '../../../providers/emailservice';
@@ -22,7 +22,7 @@ export class InactivateMembersPage {
         private alertCtrl: AlertController,
         public actionSheetCtrl: ActionSheetController,
         public menuctrl: MenuController, public af: AngularFire,
-        public emailservice: EmailService) {
+        public emailservice: EmailService, public toast: ToastController) {
 
         const userUid = localStorage.getItem('securityToken');
         const unitNumber = Number(localStorage.getItem('unitNumber'));
@@ -61,7 +61,7 @@ export class InactivateMembersPage {
                                 });
                                 this.nav.push(MemberInactivatedPage);
                             })
-                            .catch(err => { this.showAlert('Unable to inactivate the member, please try after some time') });
+                            .catch(err => { this.showAlert('Internal server error.') });
                     }
                 },
                 {
@@ -80,12 +80,19 @@ export class InactivateMembersPage {
     }
 
     showAlert(errText) {
-        let alert = this.alertCtrl.create({
-            title: '',
-            subTitle: errText,
-            buttons: ['OK']
-        });
-        alert.present();
+        // let alert = this.alertCtrl.create({
+        //     title: '',
+        //     subTitle: errText,
+        //     buttons: ['OK']
+        // });
+        // alert.present();
+
+         let toast = this.toast.create({
+      message: errText,
+      duration: 3000
+    })
+
+    toast.present();
     }
 
 }

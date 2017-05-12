@@ -1,6 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { AlertController, NavController, ActionSheetController, MenuController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, ActionSheetController, MenuController, NavParams, ToastController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotesPage } from '../notes/notes'
 
@@ -22,7 +22,8 @@ export class NotePage {
         public alertCtrl: AlertController,
         public nav: NavController,
         public menuctrl: MenuController,
-        public elementRef: ElementRef) {
+        public elementRef: ElementRef,
+        public toast: ToastController) {
 
         let note = navParams.get('notesSelected');
         this.date = note.createddate;
@@ -52,13 +53,13 @@ export class NotePage {
             .then(res => {
                 this.nav.setRoot(NotesPage);
             })
-            .catch(err => { this.showAlert('Unable to update the Note, please try after some time.') })
+            .catch(err => { this.showAlert('Internal server error.') })
     }
 
     delete() {
         this.firebaseservice.removeNote(this.noteKey)
             .then(res => { this.nav.pop(); })
-            .catch(err => { this.showAlert('Unable to delete the Note, please try after some time.') })
+            .catch(err => { this.showAlert('Internal server error.') })
     }
 
     showConfirm() {
@@ -83,12 +84,19 @@ export class NotePage {
     }
 
     showAlert(errText) {
-        let alert = this.alertCtrl.create({
-            title: '',
-            subTitle: errText,
-            buttons: ['OK']
-        });
-        alert.present();
+        // let alert = this.alertCtrl.create({
+        //     title: '',
+        //     subTitle: errText,
+        //     buttons: ['OK']
+        // });
+        // alert.present();
+
+        let toast = this.toast.create({
+      message: errText,
+      duration: 3000
+    })
+
+    toast.present();
     }
     pad(number) {
         if (number < 10) {

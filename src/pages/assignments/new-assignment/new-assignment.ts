@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { AlertController, NavController, NavParams, ModalController } from 'ionic-angular';
+import { AlertController, NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
 import { MenuPage } from '../../menu/menu';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -31,7 +31,7 @@ export class NewAssignmentPage {
   isPersonalAssignment;
   user;
 
-  constructor(public modalCtrl: ModalController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController) {
+  constructor(public modalCtrl: ModalController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController, public toast: ToastController) {
     let assignment = navParams.get('assignment');
     let description = navParams.get('item');
     this.uid = localStorage.getItem('securityToken');
@@ -165,13 +165,13 @@ export class NewAssignmentPage {
 
   createAssignment(value) {
     if (!this.assigneduser || (this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
-      this.showAlert('Please assign to a valid user');
+      this.showAlert('Invalid user');
       return;
     }
     value.completedby = '';
     let formattedAssignmentObj = this.formatAssignmentObj(value);
     if (moment(formattedAssignmentObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
-      this.showAlert('Assignment Date/Time cannot be in past');
+      this.showAlert('Invalid date');
     } else {
 
       this.firebaseservice.createAssigment(formattedAssignmentObj)
@@ -179,24 +179,30 @@ export class NewAssignmentPage {
           this.createActivity(key, 'created');
           this.nav.setRoot(AssignmentsListPage);
         })
-        .catch(err => this.showAlert(err))
+        .catch(err => this.showAlert('Internal server error.'))
     }
   }
 
   showAlert(errText) {
-    let alert = this.alertCtrl.create({
-      title: '',
-      subTitle: errText,
-      buttons: ['OK']
-    });
-    alert.present();
+    // let alert = this.alertCtrl.create({
+    //   title: '',
+    //   subTitle: errText,
+    //   buttons: ['OK']
+    // });
+    // alert.present();
+      let toast = this.toast.create({
+      message: errText,
+      duration: 3000
+    })
+
+    toast.present();
   }
 
   complete(value) {
     if (value.isCompleted) {
       this.showAlert('This assignment is already completed');
     } else if ((this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
-      this.showAlert('Please assign to a valid user');
+      this.showAlert('Invalid user');
     } else {
       value.completedby = this.user.firstname + " " + this.user.lastname;
       value.isCompleted = true;
@@ -206,12 +212,12 @@ export class NewAssignmentPage {
           // this.createActivity(this.assignmentKey, 'completed');
           this.nav.pop();
         })
-        .catch(err => { this.showAlert('Unable to updated the Assignment, please try after some time') })
+        .catch(err => { this.showAlert('Internal server error.') })
     }
   }
   edit(value) {
     if ((this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
-      this.showAlert('Please assign to a valid user');
+      this.showAlert('Invalid user');
       return;
     }
     value.completedby = '';
@@ -221,7 +227,7 @@ export class NewAssignmentPage {
         this.nav.popToRoot();
         this.createActivity(this.assignmentKey, 'updated');
       })
-      .catch(err => { this.showAlert('Unable to updated the Assignment, please try after some time') })
+      .catch(err => { this.showAlert('Internal server error.') })
   }
   delete() {
     this.firebaseservice.removeAssignment(this.assignmentKey)
@@ -229,7 +235,7 @@ export class NewAssignmentPage {
         // this.createActivity(this.assignmentKey, 'deleted');
         this.nav.pop();
       })
-      .catch(err => { this.showAlert('Unable to delete the Assignment, please try after some time') })
+      .catch(err => { this.showAlert('Internal server error.') })
   }
 
   showConfirm() {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { User } from '../../../user/user';
-import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
+import { AlertController, NavController, ActionSheetController, MenuController, ToastController} from 'ionic-angular';
 import { TransferCompletePage } from '../transfer-complete/transfercomplete.component';
 import { AngularFire } from 'angularfire2';
 import { EmailService } from '../../../providers/emailservice';
@@ -24,7 +24,8 @@ export class TransferAdminRightsPage {
         private alertCtrl: AlertController,
         private actionSheetCtrl: ActionSheetController,
         private menuctrl: MenuController,
-        public emailservice: EmailService
+        public emailservice: EmailService,
+        public toast: ToastController
     ) {
 
         this.users = [];
@@ -92,7 +93,7 @@ export class TransferAdminRightsPage {
                             }).then(() => {
                                 localStorage.setItem('isAdmin', 'false');
                                 this.nav.push(TransferCompletePage, { newAdmin: user });
-                            }).catch(err => { this.showAlert('Unable to transfer admin rights now, please try after some time') });
+                            }).catch(err => { this.showAlert('Internal server error.') });
                     }
                 },
                 {
@@ -107,12 +108,19 @@ export class TransferAdminRightsPage {
     }
 
     showAlert(errText) {
-        let alert = this.alertCtrl.create({
-            title: '',
-            subTitle: errText,
-            buttons: ['OK']
-        });
-        alert.present();
+        // let alert = this.alertCtrl.create({
+        //     title: '',
+        //     subTitle: errText,
+        //     buttons: ['OK']
+        // });
+        // alert.present();
+
+        let toast = this.toast.create({
+      message: errText,
+      duration: 3000
+    })
+
+    toast.present();
     }
 
     back() {

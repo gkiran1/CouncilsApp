@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Invitee } from './invitee.model';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, NavController, ToastController } from 'ionic-angular';
 import { AppService } from '../../providers/app-service';
 import { InvitationSuccessPage } from './success';
 import { Http } from '@angular/http';
@@ -25,6 +25,7 @@ export class InviteMemberPage {
         public af: AngularFire,
         public alertCtrl: AlertController,
         public appService: AppService,
+        public toast: ToastController,
         public emailService: EmailService) {
         this.invite = new Invitee;
 
@@ -70,13 +71,13 @@ export class InviteMemberPage {
                         .then(res => {
                             this.navctrl.push(InvitationSuccessPage)
                         })
-                        .catch(err => this.showAlert(err))
+                        .catch(err => this.showAlert('Already invited'))
                 } else {
-                    this.showAlert('Unable to invite member, please recheck the details and try again.');
+                    this.showAlert('Internal server error.');
                 }
 
             }, err => {
-                this.showAlert('Unable to invite member, please recheck the details and try again.');
+                this.showAlert('Internal server error.');
             })
 
     }
@@ -91,12 +92,19 @@ export class InviteMemberPage {
     }
 
     showAlert(errText) {
-        let alert = this.alertCtrl.create({
-            title: '',
-            subTitle: errText,
-            buttons: ['OK']
-        });
-        alert.present();
+        // let alert = this.alertCtrl.create({
+        //     title: '',
+        //     subTitle: errText,
+        //     buttons: ['OK']
+        // });
+        // alert.present();
+
+        let toast = this.toast.create({
+            message: errText,
+            duration: 3000
+        })
+
+        toast.present();
     }
 
     close() {

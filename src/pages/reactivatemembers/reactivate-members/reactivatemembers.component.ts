@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { User } from '../../../user/user';
-import { AlertController, NavController, ActionSheetController, MenuController } from 'ionic-angular';
+import { AlertController, NavController, ActionSheetController, MenuController, ToastController } from 'ionic-angular';
 import { MemberReactivatedPage } from '../member-reactivated/memberreactivated.component';
 import { AngularFire } from 'angularfire2';
 import { EmailService } from '../../../providers/emailservice';
@@ -21,6 +21,7 @@ export class ReactivateMembersPage {
         private nav: NavController,
         private alertCtrl: AlertController,
         public actionSheetCtrl: ActionSheetController,
+        public toast: ToastController,
         public menuctrl: MenuController, public af: AngularFire,
         public emailservice: EmailService) {
         const userUid = localStorage.getItem('securityToken');
@@ -53,7 +54,7 @@ export class ReactivateMembersPage {
                 });
                 this.nav.push(MemberReactivatedPage);
             })
-            .catch(err => { this.showAlert('Unable to reactivate the member, please try after some time') });
+            .catch(err => { this.showAlert('Internal server error.') });
     }
 
     reactivateAll() {
@@ -61,7 +62,7 @@ export class ReactivateMembersPage {
             this.firebaseService.reactivateUser(usr.$key, true)
                 .then(() => {
                 })
-                .catch(err => { this.showAlert('Unable to reactivate the member, please try after some time') });
+                .catch(err => { this.showAlert('Internal server error.') });
         });
 
         if (this.users && this.users.length === 0) {
@@ -75,12 +76,19 @@ export class ReactivateMembersPage {
     }
 
     showAlert(errText) {
-        let alert = this.alertCtrl.create({
-            title: '',
-            subTitle: errText,
-            buttons: ['OK']
-        });
-        alert.present();
+        // let alert = this.alertCtrl.create({
+        //     title: '',
+        //     subTitle: errText,
+        //     buttons: ['OK']
+        // });
+        // alert.present();
+
+        let toast = this.toast.create({
+            message: errText,
+            duration: 3000
+        })
+
+        toast.present();
     }
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppService } from '../../providers/app-service';
@@ -22,7 +22,7 @@ export class ChangePasswordPage {
         confirmnewpassword: ''
     };
 
-    constructor(fb: FormBuilder, public navCtrl: NavController, private firebaseService: FirebaseService, public appService: AppService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, ) {
+    constructor(fb: FormBuilder, public navCtrl: NavController, private firebaseService: FirebaseService, public appService: AppService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public toast: ToastController ) {
         this.profile = new User;
         appService.getUser().subscribe(user => {
             this.profile.firstname = user.firstname;
@@ -39,13 +39,20 @@ export class ChangePasswordPage {
 
         });
     }
-    showAlert(reason, text) {
-        let alert = this.alertCtrl.create({
-            title: '',
-            subTitle: text,
-            buttons: ['OK']
-        });
-        alert.present();
+    showAlert(text) {
+        // let alert = this.alertCtrl.create({
+        //     title: '',
+        //     subTitle: text,
+        //     buttons: ['OK']
+        // });
+        // alert.present();
+
+        let toast = this.toast.create({
+      message: text,
+      duration: 3000
+    })
+
+    toast.present();
     }
     cancel() {
         this.navCtrl.pop({animate: true, animation: 'transition', direction:'back'});
@@ -66,32 +73,32 @@ export class ChangePasswordPage {
                     if (this.password.newpassword == this.password.confirmnewpassword) {
                         return user.updatePassword(this.password.newpassword).then(res => {
                             loader.dismiss();
-                            this.showAlert('success', 'Your password updated successfully.');
+                            // this.showAlert('success', 'Your password updated successfully.');
                             this.navCtrl.push(EditProfilePage);
                         })
                             .catch(err => {
                                 loader.dismiss();
-                                this.showAlert('failure', err.message)
+                                this.showAlert('Internal server error.');
                             })
                     }
                     else {
                         loader.dismiss();
-                        this.showAlert('failure', 'Your password is not matching.');
+                        this.showAlert('Your password is not matching.');
                     }
                 }
                 else {
                     loader.dismiss();
-                    this.showAlert('failure', ' Your New Password  should be minimum of 6 characters long and must contain atleast one uppercase character and a digit and should not contain any spaces.')
+                    this.showAlert('6 characters required.')
                 }
             }
             else {
                 loader.dismiss();
-                this.showAlert('failure', 'user not exist.');
+                this.showAlert('user not exist.');
             }
             //  });           
         }).catch(err => {
             loader.dismiss();
-            this.showAlert('failure', 'your old password is wrong.')
+            this.showAlert('your old password is wrong.')
         })
 
     }
