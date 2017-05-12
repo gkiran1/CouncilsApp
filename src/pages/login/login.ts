@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, NavParams, Loading } from 'ionic-angular';
+import { NavController, AlertController, LoadingController, NavParams, Loading, ToastController } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Http } from "@angular/http";
 import { MenuPage } from '../menu/menu';
@@ -28,7 +28,8 @@ export class LoginPage {
         public alertCtrl: AlertController,
         public http: Http,
         private navParams: NavParams,
-        private zone: NgZone) {
+        private zone: NgZone,
+        public toast: ToastController) {
     }
 
     public forgotPassword() {
@@ -46,7 +47,7 @@ export class LoginPage {
     private validateUser(loginCredentials) {
         //this.show = true;
         let loader = this.loadingCtrl.create({
-            spinner:'hide',
+            spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         loader.present();
@@ -60,7 +61,12 @@ export class LoginPage {
                         localStorage.setItem('isUserLoggedIn', 'true');
                         localStorage.setItem('isMenuCentered', '0');
                         localStorage.setItem('isAdmin', usrs[0].isadmin.toString());
+                        let token = localStorage.getItem('pushtoken');
+                        if (token !== '') {
+                            this.firebaseService.setPushToken(uid, token);
+                        }
                     }
+
                     else {
                         this.zone.run(() => {
                             this.nav.setRoot(NoAccessPage);
@@ -73,7 +79,7 @@ export class LoginPage {
             .catch(err => {
                 loader.dismiss();
                 //this.show = false;
-                this.showAlert('failure', 'Your Emailid or Password is incorrect.')
+                this.showAlert('Invalid email or password')
             });
 
 
@@ -88,13 +94,19 @@ export class LoginPage {
         }, 50);
     }
 
-    showAlert(reason, text) {
-        let alert = this.alertCtrl.create({
-            title: '',
-            subTitle: text,
-            buttons: ['OK']
-        });
-        alert.present();
+    showAlert(text) {
+        // let alert = this.alertCtrl.create({
+        //     title: '',
+        //     subTitle: text,
+        //     buttons: ['OK']
+        // });
+        // alert.present();
+        let toast = this.toast.create({
+            message: text,
+            duration: 3000
+        })
+
+        toast.present();
     }
 
 }
