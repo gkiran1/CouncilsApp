@@ -15,23 +15,23 @@
 <ion-content>
 
     <form [formGroup]="newagendaForm" (ngSubmit)="newagendaForm.value">
-        <ion-item>
+        <ion-item class="input-item">
             <ion-label floating>Council</ion-label>
             <ion-input type="text" readonly (touchstart)="showCouncilsModal($event, newagendaForm.value)" formControlName="assignedcouncil"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item class="input-item">
             <ion-label floating>Date & Time</ion-label>
             <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDD MMM D YYYY, h, mm, A" name="assigneddate" formControlName="assigneddate"
                 minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"></ion-datetime>
         </ion-item>
 
-        <ion-item>
+        <ion-item class="input-item">
             <ion-label floating>Opening Hymn</ion-label>
             <ion-input type="text" spellcheck="true" name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item class="input-item">
             <ion-label floating>Opening Prayer</ion-label>
             <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="openingprayer"></ion-input>
         </ion-item>
@@ -50,7 +50,7 @@
             </ng-container>
         </div>
 
-        <ion-item>
+        <ion-item class="input-item">
             <ion-label floating>Spiritual Thought</ion-label>
             <ion-input type="text" (focus)="showList1($event)" (input)="showList1($event)" formControlName="spiritualthought"></ion-input>
         </ion-item>
@@ -69,7 +69,7 @@
             </ng-container>
         </div>
 
-        <ion-item (click)="toggleGroup()" class="height-prop">
+        <ion-item (click)="toggleGroup()" class="height-prop input-item">
             <ion-label *ngIf="!shownGroup" class="assignment-styles">
                 Assignments
                 </ion-label>
@@ -85,7 +85,7 @@
             <ion-label class="desc-styles">{{assignment.description}}</ion-label>
         </ion-item>
 
-        <ion-item (click)="toggleGroup1()" class="height-prop">
+        <ion-item (click)="toggleGroup1()" class="height-prop input-item">
             <ion-label *ngIf="!shownGroup1" class="assignment-styles">
                 Completed Assignments
             </ion-label>
@@ -101,7 +101,7 @@
             <div class="desc-styles">{{completedassignment.description}}</div>
         </ion-item>
 
-        <ion-item>
+        <ion-item class="input-item">
             <ion-label *ngIf="!spiritualwelfare">Spiritual Welfare</ion-label>
             <ion-label floating color="secondary" *ngIf="spiritualwelfare">Spiritual Welfare</ion-label>
             <ion-textarea type="text" spellcheck="true" wrap="off" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare"
@@ -109,7 +109,7 @@
                 </ion-textarea>
         </ion-item>
 
-        <ion-item>
+        <ion-item class="input-item">
             <ion-label *ngIf="!temporalwelfare">Temporal Welfare</ion-label>
             <ion-label floating color="secondary" *ngIf="temporalwelfare">Temporal Welfare</ion-label>
             <ion-textarea type="text" wrap="off" spellcheck="true" (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare"
@@ -117,7 +117,7 @@
                 </ion-textarea>
         </ion-item>
 
-        <ion-item>
+        <ion-item class="input-item">
             <ion-label *ngIf="!fellowshipitems">Fellowship Items</ion-label>
             <ion-label floating color="secondary" *ngIf="fellowshipitems">Fellowship Items</ion-label>
             <ion-textarea type="text" wrap="off" spellcheck="true" (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems"
@@ -125,7 +125,7 @@
                 </ion-textarea>
         </ion-item>
 
-        <ion-item>
+        <ion-item class="input-item">
             <ion-label *ngIf="!missionaryitems">Missionary Items</ion-label>
             <ion-label floating color="secondary" *ngIf="missionaryitems">Missionary Items</ion-label>
             <ion-textarea type="text" wrap="off" spellcheck="true" (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems"
@@ -133,7 +133,7 @@
                 </ion-textarea>
         </ion-item>
 
-        <ion-item>
+        <ion-item class="input-item">
             <ion-label *ngIf="!event">Events</ion-label>
             <ion-label floating color="secondary" *ngIf="event">Events</ion-label>
             <ion-textarea type="text" wrap="off" spellcheck="true" (focus)="eventfocus()" elastic id="event" name="event" [(ngModel)]="event"
@@ -155,7 +155,7 @@
                 </ion-item>
             </ng-container>
         </div>
-        <ion-item>
+        <ion-item class="input-item">
             <ion-label floating>Closing Prayer</ion-label>
             <ion-input type="text" (focus)="showList2($event)" (input)="showList2($event)" formControlName="closingprayer"></ion-input>
         </ion-item>

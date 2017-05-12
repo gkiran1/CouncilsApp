@@ -19,17 +19,17 @@
 </ion-header>
 <ion-content>
   <form [formGroup]="assignmentForm" (ngSubmit)="assignmentForm.value" #assignment>
-    <ion-item>
+    <ion-item class="input-item">
       <ion-label floating>Description</ion-label>
       <ion-input type="text" spellcheck="true" name="description" formControlName="description" maxlength="500" #assignmentdesc
         closekeyboard></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item class="input-item">
       <ion-label floating>Council</ion-label>
       <ion-input type="text" readonly (touchstart)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil"
         #assignmentcouncil></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item class="input-item">
       <ion-label floating>Assign to</ion-label>
       <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="assigneduser" #assignmentuser
         closekeyboard></ion-input>
@@ -48,12 +48,12 @@
         </ion-item>
       </ng-container>
     </div>
-    <ion-item>
+    <ion-item class="input-item">
       <ion-label floating>Date & Time</ion-label>
       <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDD MMM D YYYY, h, mm, A" name="assigneddate" formControlName="assigneddate"
         minuteValues="00,05,10,15,20,25,30,35,40,45,50,55" #assignmentdate></ion-datetime>
     </ion-item>
-    <ion-item>
+    <ion-item class="input-item">
       <ion-label floating>Notes</ion-label>
       <ion-textarea name="notes" spellcheck="true" elastic formControlName="notes" closekeyboard></ion-textarea>
     </ion-item>
