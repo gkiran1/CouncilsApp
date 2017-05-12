@@ -1214,3 +1214,16 @@ ion-list ion-item{
                 box-shadow: none;
                  }
 
+/******************************* Toast Message Styles **********************************************/
+.toast-md .toast-message,
+.toast-ios .toast-message {
+    padding: 1.5rem;
+    font-size: 1.4rem;
+    color: #fff;
+    background: #3cb18a;
+    box-shadow: -1px -1px 3px #888;
+    border: 1px solid #3cb18a;
+    border-radius: 5px;
+    text-align: center;
+    font-family: Bernina-Regular !important;
+}
