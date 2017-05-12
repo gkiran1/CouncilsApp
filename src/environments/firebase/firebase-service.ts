@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable, FirebaseApp } from 'angularfire2';
 import * as firebase from 'firebase';
-//import { User } from '../../providers/app-service';
 import { User } from '../../user/user';
 import { Headers, Http, Response } from "@angular/http";
-//import { Observable } from 'rxjs/Observable';
 import { Invitee } from '../../pages/invite/invitee.model';
 import { Observable, Subject, Subscription } from "rxjs/Rx";
 import { Council } from '../../pages/new-council/council';
-import {
-    Auth, UserDetails, IDetailedError,
-    Push, PushToken
-} from '@ionic/cloud-angular';
 
 @Injectable()
 export class FirebaseService {
@@ -19,7 +13,7 @@ export class FirebaseService {
     fireAuth: any;
     rootRef: any;
 
-    constructor(private af: AngularFire, public ionicAuth: Auth) {
+    constructor(private af: AngularFire) {
         this.fireAuth = firebase.auth();
         this.rootRef = firebase.database().ref();
     }
@@ -30,13 +24,8 @@ export class FirebaseService {
                 // Sign in the user.
                 return this.fireAuth.signInWithEmailAndPassword(user.email, user.password)
                     .then((authenticatedUser) => {
-                        let details: UserDetails = { 'email': user.email, 'password': user.password };
-                        return this.ionicAuth.signup(details).then(() => {
-                            // Successful login in firebase and ionic, create user profile.
-                            this.createAuthUser(user, authenticatedUser.uid);
-                        }).catch(function (error) {
-                            throw error;
-                        })
+                        // Successful login in firebase, create user profile.
+                        this.createAuthUser(user, authenticatedUser.uid);
                     }).catch(function (error) {
                         throw error;
                     });
@@ -74,12 +63,7 @@ export class FirebaseService {
     validateUser(email: string, password: string) {
         return this.fireAuth.signInWithEmailAndPassword(email, password)
             .then((authenticatedUser) => {
-                let details: UserDetails = { 'email': email, 'password': password };
-                return this.ionicAuth.login('basic', details).then(() => {
-                    return authenticatedUser.uid;
-                }).catch(err => {
-                    throw err;
-                })
+                return authenticatedUser.uid;
             })
             .catch(err => {
                 throw err;
@@ -100,7 +84,6 @@ export class FirebaseService {
     }
 
     createInvitee(invitee: Invitee) {
-
         var inviteee = this.rootRef.child('invitees').orderByChild('email').equalTo(invitee.email);
         return inviteee.once("value", function (snap) {
             if (!snap.exists()) {
@@ -143,7 +126,6 @@ export class FirebaseService {
         }).map(results => results);
     }
 
-
     getCouncilByKey(key: string): Observable<Council[]> {
         return this.af.database.list('councils', {
             query: {
@@ -168,18 +150,6 @@ export class FirebaseService {
             }
         });
     }
-
-    // createCouncil(council: Council) {
-    //     firebase.database().ref().child('councils').push(
-    //         {
-    //             council: council.council,
-    //             firstname: council.counciltype
-    //         })
-    //         .then(() => {
-    //             return "User is successfully invited..."
-    //         })
-    //         .catch(err => { throw err });
-    // }
 
     createUserCouncils(userUid: string, council: string) {
         this.rootRef.child('usercouncils').push({
@@ -262,6 +232,7 @@ export class FirebaseService {
             }
         });
     }
+
     getAssignmentsByCouncil(councilid: string): FirebaseListObservable<any[]> {
         return this.af.database.list('assignments', {
             query: {
@@ -299,7 +270,6 @@ export class FirebaseService {
 
     signOut() {
         return this.fireAuth.signOut().then(() => {
-            this.ionicAuth.logout();
         }).catch(err => {
             throw err;
         });
@@ -458,15 +428,6 @@ export class FirebaseService {
         })
     }
 
-    // getAllCouncils(counciltype: string): FirebaseListObservable<any[]> {
-    //     return this.af.database.list('councils', {
-    //         query: {
-    //             orderByChild: 'counciltype',
-    //             equalTo: counciltype
-    //         }
-    //     });
-    // }
-
     createAgendaLite(agenda: any) {
         return this.rootRef.child('agendas').push({
             agendacouncil: agenda.assignedcouncil,
@@ -503,6 +464,7 @@ export class FirebaseService {
             }
         })
     }
+
     getFilesByCouncilId(councilId: string) {
         return this.af.database.list('files', {
             query: {
@@ -512,6 +474,7 @@ export class FirebaseService {
             }
         }).map(results => results);
     }
+
     getFilesByCouncil(councilId: any) {
         return this.af.database.list('files', {
             query: {
@@ -520,6 +483,7 @@ export class FirebaseService {
             }
         }).take(1).map(results => results);
     }
+
     createDiscussion(discussion: any) {
         return this.rootRef.child('discussions').push(
             {
@@ -542,6 +506,7 @@ export class FirebaseService {
             })
             .catch(err => { throw err });
     }
+
     saveFile(file: any) {
         return this.rootRef.child('files').push(
             {
@@ -667,9 +632,11 @@ export class FirebaseService {
                     .update({ lastMsg: msg.text, lastMsgSentUser: msg.user_firstname + ' ' + msg.user_lastname, isNotificationReq: true });
             })
     }
+
     getDiscussionByKey(key) {
         return this.af.database.object(`discussions/${key}`);
     }
+
     getActiveUsersFromCouncil(councilId) {
         return this.af.database.list('usercouncils', {
             query: {
@@ -678,12 +645,15 @@ export class FirebaseService {
             }
         });
     }
+
     getDiscussions() {
         return this.af.database.list('discussions');
     }
+
     getUsers() {
         return this.af.database.list('users');
     }
+
     createPrivateDiscussion(discussion: any) {
         return this.rootRef.child('privatediscussions').push(
             {
@@ -708,30 +678,38 @@ export class FirebaseService {
             })
             .catch(err => { throw err });
     }
+
     getPrivateDiscussionByKey(key) {
         return this.af.database.object(`privatediscussions/${key}`);
     }
+
     updatePrivateDiscussionChat(discussionId, msg) {
         return this.af.database.list(`privatediscussions/${discussionId}/messages`).push(msg)
             .then(() => {
                 return this.af.database.object(`privatediscussions/${discussionId}`).update({ lastMsg: msg, isNotificationReq: true });
             })
     }
+
     getPrivateDiscussions() {
         return this.af.database.list('privatediscussions');
     }
+
     getFilesByKey(key) {
         return this.af.database.object(`files/${key}`);
     }
+
     updateDiscussion(discussionId, typings) {
         return this.af.database.object(`discussions/${discussionId}`).update({ typings: typings, isNotificationReq: false });
     }
+
     updatePrivateDiscussion(discussionId, typings) {
         return this.af.database.object(`privatediscussions/${discussionId}`).update({ typings: typings, isNotificationReq: false });
     }
+
     updatePrivateDiscussionMessageStatus(discussionId, messageId, status) {
         return this.af.database.object(`privatediscussions/${discussionId}/messages/${messageId}`).update({ status: status, isNotificationReq: false });
     }
+
     getNotifications(userId) {
         return this.af.database.list('notifications', {
             query: {
@@ -776,6 +754,7 @@ export class FirebaseService {
             }
         });
     }
+
     getNotificationSettings(userId) {
         return this.af.database.list('notificationsettings', {
             query: {
@@ -785,6 +764,7 @@ export class FirebaseService {
             }
         });
     }
+
     updateNotificationSettings(key, notSettings) {
         return this.af.database.list('notificationsettings').update(key, {
             allactivity: notSettings.allactivity,
@@ -799,26 +779,32 @@ export class FirebaseService {
             return "User notification settings has been updated."
         }).catch(err => { throw err });
     }
+
     updateIsReadInNotifications(key) {
         return this.af.database.object('notifications/' + key).update({ isread: true });
     }
+
     getAgendaByKey(key) {
         return this.af.database.object('agendas/' + key);
     }
+
     getAssignmentByKey(key) {
         return this.af.database.object('assignments/' + key);
     }
+
     deleteFilesByKey(key) {
         return this.af.database.object(`files/${key}`).remove().then(() => {
             return "file deleted from database."
         }).catch(err => { alert(err) });
     }
+
     checkNetworkStatus(uid, callback) {
         let userRef = this.rootRef.child('/presence/' + uid);
         userRef.on('value', function (snapshot) {
             callback(snapshot.val());
         });
     }
+
     createNote(note: any) {
         return this.rootRef.child('notes').push(
             {
@@ -827,8 +813,8 @@ export class FirebaseService {
                 title: note.title,
                 note: note.note,
             })
-
     }
+
     getNotes(userId) {
         return this.af.database.list('notes', {
             query: {
@@ -848,6 +834,7 @@ export class FirebaseService {
             return "Note has been updated."
         }).catch(err => { throw err });
     }
+
     removeNote(notekey) {
         return this.af.database.object('notes/' + notekey).remove();
     }
@@ -876,6 +863,7 @@ export class FirebaseService {
             closingprayeruserid: ''
         });
     }
+
     createActivity(activity) {
         return this.rootRef.child('activities').push({
             userid: activity.userid,
@@ -891,6 +879,7 @@ export class FirebaseService {
             createdUserAvatar: activity.createdUserAvatar
         });
     }
+
     getActivities(userId) {
         return this.af.database.list('activities', {
             query: {
@@ -906,20 +895,14 @@ export class FirebaseService {
         }).catch(err => {
             throw err;
         });
-
-        // return this.rootRef.child('users/' + userUid).update({ pushtoken: [] }).then(() => {
-        //     console.log('updated token');
-        // }).catch(err => {
-        //     throw err;
-        // });
-
-        // return this.af.database.list(`users/${userUid}/pushtoken`).push('test12')
-        //     .then(() => {
-        //         console.log('updated token');
-        //     }).catch(err => {
-        //         throw err;
-        //     });
     }
 
+    sendForgotEmailLink(email) {
+        return firebase.auth().sendPasswordResetEmail(email).then(() => {
+            console.log('Mail Sent');
+        }).catch((err) => {
+            throw err;
+        });
+    }
 
 }
