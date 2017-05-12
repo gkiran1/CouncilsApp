@@ -70,7 +70,7 @@
         </div>
 
         <!--<ion-list class="border-line">-->
-        <ion-item (click)="toggleGroup()" class="height-prop iconinput-item">
+        <ion-item (click)="toggleGroup()" class="height-prop input-item">
             <ion-label *ngIf="!shownGroup"  class="assignment-styles">
                 Assignments
                 </ion-label>
@@ -82,31 +82,23 @@
                              item-right></ion-icon>
                             </button>
         </ion-item>
-        <ng-container *ngIf="assignmentslist.length">
             <ion-item class="ion-item-middle" *ngFor="let assignment of assignmentslist" text-wrap [ngClass]="{inactive: !shownGroup}">
                 <ion-label class="desc-styles">{{assignment.description}}</ion-label>
             </ion-item>
-        </ng-container>
         <!--</ion-list>-->
 
         <!--<ion-list class="border-line">-->
-        <ion-item  (click)="toggleGroup1()" class="height-prop input-item">
-            <ion-row>
-                <ion-col>
+        <ion-item  (click)="toggleGroup1()" class="height-prop input-item">           
             <ion-label *ngIf="!shownGroup1" class="assignment-styles">
                 Completed Assignments
             </ion-label>
             <ion-label *ngIf="shownGroup1" class="assignment-styles1">
                 Completed Assignments
             </ion-label>
-                </ion-col>
-            <!--<button color="secondary"  class="no-padding"  name="councilsPage" ion-button icon-only clear item-right>-->
-                <ion-col>
+            <button color="secondary"  class="no-padding"  name="councilsPage" ion-button icon-only clear item-right>
                 <ion-icon name="councilscircle"  [ngClass]="shownGroup1? 'councils-icon__arrow_collapse icon-size' : 'councils-icon__arrow_expand icon-size'"
                      item-right></ion-icon>
-                    <!--</button>-->
-                </ion-col>
-            </ion-row>
+                    </button>
         </ion-item>
         <ion-item class="ion-item-middle" *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
             <div class="desc-styles">{{completedassignment.description}}</div>
