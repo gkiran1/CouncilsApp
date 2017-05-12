@@ -3,28 +3,28 @@ import { Platform, AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
-
-//Ionic Push, Push Token Imports
-import {
-  Push,
-  PushToken
-} from '@ionic/cloud-angular';
+import { FirebaseService } from '../environments/firebase/firebase-service';
 
 let y;
 let h;
 let offsetY;
 
 @Component({
-  template: `<ion-nav [root]="rootPage"></ion-nav>`
+  template: `<ion-nav [root]="rootPage"></ion-nav>`,
+  providers: [FirebaseService]
 })
-
-
 
 export class MyApp {
   rootPage: any;
+  securityToken;
+  isUserLoggedIn;
 
-  constructor(platform: Platform, public push: Push, public alertCtrl: AlertController) {
+  constructor(platform: Platform, public alertCtrl: AlertController, public firebaseService: FirebaseService) {
     platform.ready().then(() => {
+
+      if (platform.is('cordova') || platform.is('ios') || platform.is('android')) {
+        this.FCMSetup();
+      }
 
       //Keyboard handler setup
       //this.keyboardSetup();
@@ -40,12 +40,11 @@ export class MyApp {
       //Status overlay set to false
       StatusBar.overlaysWebView(false);
 
+      this.securityToken = localStorage.getItem('securityToken');
+      this.isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
 
-      var securityToken = localStorage.getItem('securityToken');
-      var isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
-
-      if ((securityToken == null || securityToken == 'null') &&
-        (isUserLoggedIn == 'null' || isUserLoggedIn == null || isUserLoggedIn == 'false')) {
+      if ((this.securityToken == null || this.securityToken == 'null') &&
+        (this.isUserLoggedIn == 'null' || this.isUserLoggedIn == null || this.isUserLoggedIn == 'false')) {
         localStorage.setItem('childAdded', 'false');
         localStorage.setItem('gcToken', 'null');
         this.rootPage = LoginPage;
@@ -54,23 +53,7 @@ export class MyApp {
         this.rootPage = MenuPage;
       }
 
-      //Push Register to App
-
-      this.push.register().then((t: PushToken) => {
-        return this.push.saveToken(t);
-      }).then((t: PushToken) => {
-        console.log('Token saved:', t.token);
-      });
-
       var isPause = false;
-
-      //Handler to Push Messages
-      this.push.rx.notification()
-        .subscribe((msg) => {
-          if (isPause) {
-            this.showAlert(msg.title + ': ' + msg.text);
-          }
-        });
 
       platform.pause.subscribe(() => {
         isPause = true;
@@ -110,14 +93,12 @@ export class MyApp {
     removeStyles.removeAttribute("style");
   }
 
-
   tapCoordinates(e) {
     y = e.touches[0].clientY;
     h = window.innerHeight;
     offsetY = (h - y);
     console.log("offset = " + offsetY);
   }
-
 
   showAlert(errText) {
     let alert = this.alertCtrl.create({
@@ -127,4 +108,18 @@ export class MyApp {
     });
     alert.present();
   }
+
+  FCMSetup() {
+    FCMPlugin.onTokenRefresh(function (token) {
+      localStorage.setItem('pushtoken', token);
+      if (this.securityToken !== null && this.securityToken !== 'null') {
+        this.firebaseService.updateToken(this.securityToken);
+      }
+    });
+
+    FCMPlugin.getToken(function (token) {
+      localStorage.setItem('pushtoken', token);
+    });
+  }
+
 }

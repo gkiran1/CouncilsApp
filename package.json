@@ -55,7 +55,7 @@
     "cordova-plugin-filepath",   
     "cordova-plugin-inappbrowser",
     "cordova-plugin-file-opener2",
-     "phonegap-plugin-push"
+     "cordova-plugin-fcm"
   ],
   "cordovaPlatforms": [
     "andriod",
