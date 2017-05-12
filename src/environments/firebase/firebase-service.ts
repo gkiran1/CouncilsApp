@@ -552,7 +552,7 @@ export class FirebaseService {
                 councilname: file.councilname,
                 createdDate: file.createdDate,
                 createdUser: file.createdUser,
-                createdBy: file.createdBy, 
+                createdBy: file.createdBy,
                 isActive: file.isActive,
             })
             .then((res) => {
@@ -899,5 +899,27 @@ export class FirebaseService {
             }
         });
     }
+
+    updateToken(userUid) {
+        return this.rootRef.child('users/' + userUid).update({ pushtoken: localStorage.getItem('pushtoken') }).then(() => {
+            console.log('updated token');
+        }).catch(err => {
+            throw err;
+        });
+
+        // return this.rootRef.child('users/' + userUid).update({ pushtoken: [] }).then(() => {
+        //     console.log('updated token');
+        // }).catch(err => {
+        //     throw err;
+        // });
+
+        // return this.af.database.list(`users/${userUid}/pushtoken`).push('test12')
+        //     .then(() => {
+        //         console.log('updated token');
+        //     }).catch(err => {
+        //         throw err;
+        //     });
+    }
+
 
 }
