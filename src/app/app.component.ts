@@ -8,7 +8,7 @@ import { FirebaseService } from '../environments/firebase/firebase-service';
 let y;
 let h;
 let offsetY;
-
+declare var FCMPlugin: any;
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`,
   providers: [FirebaseService]
@@ -110,16 +110,18 @@ export class MyApp {
   }
 
   FCMSetup() {
-    FCMPlugin.onTokenRefresh(function (token) {
-      localStorage.setItem('pushtoken', token);
-      if (this.securityToken !== null && this.securityToken !== 'null') {
-        this.firebaseService.updateToken(this.securityToken);
-      }
-    });
+    if (typeof FCMPlugin != 'undefined') {
+      FCMPlugin.onTokenRefresh(function (token) {
+        localStorage.setItem('pushtoken', token);
+        if (this.securityToken !== null && this.securityToken !== 'null') {
+          this.firebaseService.updateToken(this.securityToken);
+        }
+      });
 
-    FCMPlugin.getToken(function (token) {
-      localStorage.setItem('pushtoken', token);
-    });
+      FCMPlugin.getToken(function (token) {
+        localStorage.setItem('pushtoken', token);
+      });
+    }
   }
 
 }
