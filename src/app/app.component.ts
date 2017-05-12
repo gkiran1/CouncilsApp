@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { Platform, AlertController } from 'ionic-angular';
+import { Platform, AlertController, ToastController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
 import { FirebaseService } from '../environments/firebase/firebase-service';
+import { Observable } from 'rxjs/Observable';
+import { ConnectivityService } from '../providers/connectivityservice';
 
 let y;
 let h;
@@ -11,7 +13,7 @@ let offsetY;
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`,
-  providers: [FirebaseService]
+  providers: [FirebaseService, ConnectivityService]
 })
 
 export class MyApp {
@@ -19,9 +21,13 @@ export class MyApp {
   securityToken;
   isUserLoggedIn;
 
-  constructor(platform: Platform, public alertCtrl: AlertController, public firebaseService: FirebaseService) {
+  constructor(platform: Platform, 
+  public alertCtrl: AlertController, 
+  public toast: ToastController,
+  public firebaseService: FirebaseService) {
+    
     platform.ready().then(() => {
-
+      this.addConnectivityListeners();
       if (platform.is('cordova') || platform.is('ios') || platform.is('android')) {
         this.FCMSetup();
       }
@@ -66,6 +72,51 @@ export class MyApp {
         //localStorage.setItem('isMenuCentered', '0');
       });
 
+    });
+  }
+
+  addConnectivityListeners(){
+ 
+    let onOnline = () => {
+ 
+      let offlinemessage = this.offlineToast().instance;
+      if(offlinemessage != null)
+        offlinemessage.dismiss();
+
+      let onlinemessage = this.onlineToast();
+      onlinemessage.present();
+ 
+    };
+ 
+    let onOffline = () => {
+      let onlinemessage = this.onlineToast().instance;
+      if(onlinemessage != null)
+        onlinemessage.dismiss();
+
+      let offlinemessage = this.offlineToast();
+      offlinemessage.present();
+    };
+ 
+    document.addEventListener('online', onOnline, false);
+    document.addEventListener('offline', onOffline, false);
+ 
+  }
+
+  offlineToast() {
+    //if(state = 'offline')
+    return  this.toast.create({
+      message : "No network!",
+      duration: 3000
+    });
+    
+
+  }
+
+  onlineToast() {
+    //if(state = 'offline')
+    return  this.toast.create({
+      message : "Network connected!",
+      duration: 3000
     });
   }
 
