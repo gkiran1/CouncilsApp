@@ -1,7 +1,8 @@
 import { Component, ElementRef } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { AlertController, NavController, ActionSheetController, MenuController,  NavParams } from 'ionic-angular';
+import { AlertController, NavController, ActionSheetController, MenuController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotesPage } from '../notes/notes'
 
 @Component({
     templateUrl: 'note.html',
@@ -49,7 +50,7 @@ export class NotePage {
         let formattedAgendaObj = this.formatnoteObj(value);
         this.firebaseservice.updateNote(formattedAgendaObj, this.noteKey)
             .then(res => {
-                this.nav.popToRoot();
+                this.nav.setRoot(NotesPage);
             })
             .catch(err => { this.showAlert('Unable to update the Note, please try after some time.') })
     }
