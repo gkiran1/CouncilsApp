@@ -21,6 +21,8 @@ export class LoginPage {
     loading: Loading;
     loginCredentials = { email: '', password: '' };
     user: Observable<User>;
+    isValidEmail = false;
+
     constructor(
         public nav: NavController,
         public loadingCtrl: LoadingController,
@@ -30,6 +32,15 @@ export class LoginPage {
         private navParams: NavParams,
         private zone: NgZone,
         public toast: ToastController) {
+    }
+
+    keypresssed($event) {
+        if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+            this.isValidEmail = true;
+        }
+        else {
+            this.isValidEmail = false;
+        }
     }
 
     public forgotPassword() {
