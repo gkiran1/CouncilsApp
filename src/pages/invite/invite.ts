@@ -19,6 +19,8 @@ export class InviteMemberPage {
     council;
     councilsLength = false;
     result: FirebaseObjectObservable<any>;
+    isValidEmail = false;
+
     constructor(public http: Http,
         public navctrl: NavController,
         public fs: FirebaseService,
@@ -60,6 +62,15 @@ export class InviteMemberPage {
         //     this.invite.councils = [];
 
         // });
+    }
+
+    keypresssed($event) {
+        if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+            this.isValidEmail = true;
+        }
+        else {
+            this.isValidEmail = false;
+        }
     }
 
     inviteMember() {

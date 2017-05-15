@@ -21,7 +21,7 @@
             <ion-item-divider class="empty-light"></ion-item-divider>
             <ion-item>
                 <ion-label floating>Email</ion-label>
-                <ion-input class="council-styles" type="email" name="email" [(ngModel)]="invite.email" required></ion-input>
+                <ion-input class="council-styles" type="email" name="email" [(ngModel)]="invite.email" (keyup)="keypresssed($event)" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label floating>First Name</ion-label>
@@ -48,5 +48,5 @@
 </ion-content>
 <ion-footer>
     <button ion-button type="submit" class="button button-clik" (click)="inviteMember()" name="Invitebtn" clear block color="secondary"
-        text-capitalize [disabled]="!councilsLength || !InviteMemberForm.form.valid" text-capitalize>Invite</button>
+        text-capitalize [disabled]="!isValidEmail || !councilsLength || !InviteMemberForm.form.valid" text-capitalize>Invite</button>
 </ion-footer>
