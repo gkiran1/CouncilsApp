@@ -5,7 +5,7 @@
       <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" ></ion-icon>
     </button>
     </ion-buttons>
-    <ion-title>Notes</ion-title>
+    <ion-title>Promptings</ion-title>
     <ion-buttons class="menu-button" end>
       <button ion-button (click)="notificationsPage()"  >
      <ion-icon class="icon councils-icon__notifications menu-icon">
@@ -23,7 +23,7 @@
       [ngClass]="notesArray.length == 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i=== notesArray.length - 1 ? 'ion-item-last' : 'ion-item-middle'))" 
       *ngFor="let item of notesArray; let i = index">
         <h3 class="title">{{item.title}}</h3><span class="right-align"></span>
-        <button ion-button item-right clear>   
+        <button class="button button-clik" ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
         <p>{{item.note}}</p>

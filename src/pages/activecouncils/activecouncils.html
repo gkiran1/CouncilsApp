@@ -23,7 +23,7 @@
       <ion-item [ngClass]="i===0?'ion-item-first':(i===myCouncils.length - 1? 'ion-item-last': 'ion-item-middle')" (click)="usersincouncils(item.$key,item.council)"
         *ngFor="let item of myCouncils; let i = index" [attr.data-index]="i">
         <ion-label class="council-styles">{{item.council}}</ion-label>
-        <button ion-button item-right clear>
+        <button class="button button-clik" ion-button item-right clear>
       <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
       </button>
         </ion-item>
