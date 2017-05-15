@@ -36,49 +36,57 @@ export class CreateAccountPage {
         content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
       });
       loader.present();
-      this.invitee$ = this.firebaseService.findInviteeByEmail(this.newUser.email);
-      this.invitee$.subscribe(invitee => {
 
-        if (invitee) {
-          this.newUser.firstname = invitee.firstname;
-          this.newUser.lastname = invitee.lastname;
-          //email is already der in user   
-          //password is already der in user
-          //lds org name is already der in user
-          this.newUser.unittype = invitee.unittype;
-          this.newUser.unitnumber = invitee.unitnumber;
-          this.newUser.avatar = "avatar"; // time being hard coded..later need to work..
-          this.newUser.councils = invitee.councils;
-          this.newUser.calling = invitee.calling;
-          this.newUser.isadmin = false;
-          this.newUser.createdby = invitee.createdby;
-          this.newUser.createddate = '';
-          this.newUser.lastupdateddate = invitee.lastupdateddate;
-          this.newUser.isactive = true;
-
-          // after verifying and filling properties create new user.
-          let flag = false;
-          this.firebaseService.signupNewUser(this.newUser)
-            .then(res => {
-              //onSuccess redirect to Menu page
-              flag = true;
-
-            })
-            .catch(err => this.showAlert('Internal server error.'));
+      this.firebaseService.findUserByEmail(this.newUser.email).subscribe((usr) => {
+        if (usr) {
           loader.dismiss();
-          let v = setInterval(() => {
-            if (flag) {
-              this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email);
-              this.navCtrl.push(LoginPage);
-              loader.dismiss();
-              clearInterval(v);
-            }
-          }, 50);
-        } else {
-          loader.dismiss();
-          this.showAlert('Not invited!');
+          this.showAlert('User with email entered already exists.');
         }
+        else {
+          this.invitee$ = this.firebaseService.findInviteeByEmail(this.newUser.email);
+          this.invitee$.subscribe(invitee => {
 
+            if (invitee) {
+              this.newUser.firstname = invitee.firstname;
+              this.newUser.lastname = invitee.lastname;
+              //email is already der in user   
+              //password is already der in user
+              //lds org name is already der in user
+              this.newUser.unittype = invitee.unittype;
+              this.newUser.unitnumber = invitee.unitnumber;
+              this.newUser.avatar = "avatar"; // time being hard coded..later need to work..
+              this.newUser.councils = invitee.councils;
+              this.newUser.calling = invitee.calling;
+              this.newUser.isadmin = false;
+              this.newUser.createdby = invitee.createdby;
+              this.newUser.createddate = '';
+              this.newUser.lastupdateddate = invitee.lastupdateddate;
+              this.newUser.isactive = true;
+
+              // after verifying and filling properties create new user.
+              let flag = false;
+
+              this.firebaseService.signupNewUser(this.newUser)
+                .then(res => {
+                  //onSuccess redirect to Menu page
+                  flag = true;
+                }).catch(err => this.showAlert('Internal server error.'));
+
+              loader.dismiss();
+              let v = setInterval(() => {
+                if (flag) {
+                  this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email);
+                  this.navCtrl.push(LoginPage);
+                  loader.dismiss();
+                  clearInterval(v);
+                }
+              }, 50);
+            } else {
+              loader.dismiss();
+              this.showAlert('Not invited!');
+            }
+          });
+        }
       });
     }
   }

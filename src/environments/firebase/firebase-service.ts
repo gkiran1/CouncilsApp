@@ -74,6 +74,15 @@ export class FirebaseService {
         return this.af.database.object('users/' + userUid).map(result => result);
     }
 
+    findUserByEmail(email: string): Observable<Invitee> {
+        return this.af.database.list('users', {
+            query: {
+                orderByChild: 'email',
+                equalTo: email
+            }
+        }).map(results => results[0]);
+    }
+
     findInviteeByEmail(email: string): Observable<Invitee> {
         return this.af.database.list('invitees', {
             query: {
