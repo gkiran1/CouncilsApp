@@ -65,7 +65,7 @@ export class NewAssignmentPage {
         assignedcouncil: ['', Validators.required],
         assigneddate: [date, Validators.required],
         createdby: '',
-        createddate: '',
+        createddate: new Date().toISOString(),
         isactive: true, //default true
         lastupdateddate: '',
         notes: '',
@@ -190,7 +190,7 @@ export class NewAssignmentPage {
     //   buttons: ['OK']
     // });
     // alert.present();
-      let toast = this.toast.create({
+    let toast = this.toast.create({
       message: errText,
       duration: 3000
     })

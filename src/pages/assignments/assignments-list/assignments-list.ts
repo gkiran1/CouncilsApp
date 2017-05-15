@@ -45,6 +45,11 @@ export class AssignmentsListPage {
           this.user = usr;
           af.database.list('/assignments')
             .subscribe(assignments => {
+
+              assignments.sort(function (a, b) {
+                return (a.createddate > b.createddate) ? -1 : ((a.createddate < b.createddate) ? 1 : 0);
+              });
+
               this.councilAssignmentsArray = [];
               this.personalAssignmentsArray = [];
               this.completedAssignmentsArray = [];
