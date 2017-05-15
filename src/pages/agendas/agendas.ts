@@ -37,14 +37,18 @@ export class AgendasPage {
                                 if (this.user.councils.includes(agenda.councilid)) {
                                     this.agendasArray.push(agenda);
                                 }
-
                             });
 
                             let count = this.agendasArray.length;
                             count = count ? count : null;
                             this.count$.next(count);
+
+                            this.agendasArray.sort(function (a, b) {
+                                return (a.createddate > b.createddate) ? -1 : ((a.createddate < b.createddate) ? 1 : 0);
+                            });
+
                         });
-                })
+                });
             }
         });
 
