@@ -79,7 +79,7 @@
                 <ion-label *ngIf="shownGroup"  class="assignment-styles1">
                     Assignments
                     </ion-label>
-                    <button color="secondary"  class="no-padding"  name="councilsPage" ion-button icon-only clear item-right>
+                    <button color="secondary"  class="no-padding button button-clik"  name="councilsPage" ion-button icon-only clear item-right>
                         <ion-icon name="councilscircle"  [ngClass]="shownGroup? 'councils-icon__arrow_collapse icon-size' : 'councils-icon__arrow_expand icon-size'"
                              item-right></ion-icon>
                             </button>
@@ -95,7 +95,7 @@
             <ion-label *ngIf="shownGroup1" class="assignment-styles1">
                 Completed Assignments
             </ion-label>
-            <button color="secondary"  class="no-padding"  name="councilsPage" ion-button icon-only clear item-right>
+            <button color="secondary"  class="no-padding button button-clik"  name="councilsPage" ion-button icon-only clear item-right>
                 <ion-icon name="councilscircle"  [ngClass]="shownGroup1? 'councils-icon__arrow_collapse icon-size' : 'councils-icon__arrow_expand icon-size'"
                      item-right></ion-icon>
                     </button>
@@ -117,7 +117,7 @@
             <ion-label class="label-styles">Discussion Items</ion-label>
             <ion-item *ngFor="let item of discussionitemsObj" class="item-styles input-item">
                 <ion-input type="text" readonly [value]="item" formControlName='discussionitems'></ion-input>
-                <button color="secondary" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
+                <button color="secondary" class="no-padding button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
                 </button>
             </ion-item>
