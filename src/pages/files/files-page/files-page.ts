@@ -36,7 +36,6 @@ export class FilesListPage {
                     console.log(this.user);
                     af.database.list('/files').subscribe(files => {
                         this.filesArray = [];
-
                         this.user.councils.forEach(council => {
                             let f;
                             files.forEach(file => {
@@ -50,8 +49,13 @@ export class FilesListPage {
                         let count = this.filesArray.length;
                         count = count ? count : null;
                         this.count$.next(count);
-                    })
-                })
+
+                        this.filesArray.sort(function (a, b) {
+                            return (a.createdDate > b.createdDate) ? -1 : ((a.createdDate < b.createdDate) ? 1 : 0);
+                        });
+
+                    });
+                });
             }
         });
         fs.getNotCnt().subscribe(count => {
