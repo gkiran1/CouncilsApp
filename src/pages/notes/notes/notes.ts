@@ -24,15 +24,15 @@ export class NotesPage {
             if (auth !== null) {
                 this.notesArray = [];
                 this.firebaseservice.getNotes(auth.uid).subscribe(notes => {
-
-                    notes.sort(function (a, b) {
-                        return (a.createddate > b.createddate) ? -1 : ((a.createddate < b.createddate) ? 1 : 0);
-                    });
-
                     this.notesArray = notes;
                     let length = this.notesArray.length;
                     length = length ? length : null;
                     this.count$.next(length);
+
+                    this.notesArray.sort(function (a, b) {
+                        return (a.createddate > b.createddate) ? -1 : ((a.createddate < b.createddate) ? 1 : 0);
+                    });
+
                 });
             }
         });
