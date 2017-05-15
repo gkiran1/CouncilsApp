@@ -74,7 +74,7 @@ export class AgendaPage {
             event: [''],
             closingprayer: [''],
             createdby: localStorage.getItem('securityToken'),
-            createddate: new Date().toDateString(),
+            createddate: new Date().toISOString(),
             isactive: true,
             // lastupdateddate: ''
         });
@@ -141,11 +141,11 @@ export class AgendaPage {
         // alert.present();
 
         let toast = this.toast.create({
-      message: errText,
-      duration: 3000
-    })
+            message: errText,
+            duration: 3000
+        })
 
-    toast.present();
+        toast.present();
     }
 
     showCouncilsModal(event, value) {

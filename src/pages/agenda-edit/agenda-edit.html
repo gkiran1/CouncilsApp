@@ -23,7 +23,7 @@
         <ion-item class="input-item">
             <ion-label floating>Date & Time</ion-label>
             <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDD MMM D YYYY, h, mm, A" name="assigneddate" formControlName="assigneddate"
-                minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"></ion-datetime>
+                [max]="2500" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"></ion-datetime>
         </ion-item>
 
         <ion-item class="input-item">

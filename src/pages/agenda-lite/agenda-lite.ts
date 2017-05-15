@@ -65,7 +65,7 @@ export class AgendaLitePage {
       discussionitems: [''],
       closingprayer: [''],
       createdby: localStorage.getItem('securityToken'),
-      createddate: new Date().toDateString(),
+      createddate: new Date().toISOString(),
       isactive: true,
       lastupdateddate: ''
     });
