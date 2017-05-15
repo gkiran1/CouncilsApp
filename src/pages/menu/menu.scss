@@ -26,8 +26,9 @@ page-welcome {
         background: #3cb18a;
     }
     .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets {
-        bottom: 5px;
+        bottom: 3px;
         position: fixed;
+        background: #fff !important;     
     }
 
     .menu-selected {
@@ -39,5 +40,6 @@ page-welcome {
     .menu-selected span, .menu-selected span ion-icon {
         color: #fff !important;
     }
+
 }
 
