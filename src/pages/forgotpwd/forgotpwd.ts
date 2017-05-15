@@ -13,11 +13,22 @@ import { FirebaseService } from '../../environments/firebase/firebase-service';
 export class ForgotPwd {
 
     email: any;
+    isValidEmail = false;
 
     constructor(public navCtrl: NavController,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
         public firebaseService: FirebaseService) { }
+
+
+    keypresssed($event) {
+        if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+            this.isValidEmail = true;
+        }
+        else {
+            this.isValidEmail = false;
+        }
+    }
 
     sendEmail() {
         if (this.email !== '') {
