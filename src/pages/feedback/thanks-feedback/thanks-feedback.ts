@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { DisplayPage } from '../../display/display'
 
 @Component({
     selector: 'thanks-feedback',
@@ -11,7 +12,7 @@ export class ThanksFeedbackPage {
     constructor(public navCtrl: NavController, public navParams: NavParams) { }
 
     goToHome() {
-        this.navCtrl.popToRoot();
+        this.navCtrl.setRoot(DisplayPage);
     }
     cancel() {
         this.navCtrl.pop({ animate: true, animation: 'transition', direction: 'back' });
