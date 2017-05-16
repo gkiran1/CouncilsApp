@@ -52,43 +52,56 @@ export class EditProfilePage {
                 });
             }
         });
+
         this.editProfileForm = fb.group({
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
             email: ['', Validators.required],
             phone: ['', Validators.compose([Validators.required, Validators.pattern(/^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/)])],
-            ldsusername: ['', Validators.required],
-
+            ldsusername: ['', Validators.required]
         });
     }
 
     editProfile(value) {
+
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
+
         loader.present();
 
-        this.guestPicture = this.guestPicture || '';
-        this.profilePictureRef.child(this.profile.$key)
-            .putString(this.guestPicture, 'base64', { contentType: 'image/png' })
-            .then((savedPicture) => {
-                // this.showAlert('picture',savedPicture.downloadURL);
-                let avatar = this.guestPicture ? savedPicture.downloadURL : this.profile.avatar;
-                this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, avatar).then(res => {
-                    loader.dismiss();
-
-                    this.isChangeflag = false;
-                    this.isPicNotChanged = true;
-                }).catch(err => {
-                    loader.dismiss();
-                })
+        if (this.isPicNotChanged) {
+            this.firebaseService.updateProfileInfo(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername).then((res) => {
+                loader.dismiss();
+                this.isChangeflag = false;
+                this.isPicNotChanged = true;
+            }).catch(err => {
+                loader.dismiss();
             });
+        }
+        else {
+            this.guestPicture = this.guestPicture || '';
+            this.profilePictureRef.child(this.profile.$key)
+                .putString(this.guestPicture, 'base64', { contentType: 'image/png' })
+                .then((savedPicture) => {
+                    let avatar = this.guestPicture ? savedPicture.downloadURL : this.profile.avatar;
+                    this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, avatar).then(res => {
+                        loader.dismiss();
+                        this.isChangeflag = false;
+                        this.isPicNotChanged = true;
+                    }).catch(err => {
+                        loader.dismiss();
+                    });
+                });
+        }
 
     }
+
     viewChangePasswordPage() {
         this.nav.push(ChangePasswordPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
+
     cancel() {
         if (this.isChangeflag) {
             // this.showAlertPopup('failure', 'There are unsaved changes.do you want to discard it ?');
@@ -96,6 +109,7 @@ export class EditProfilePage {
             this.nav.popToRoot({ animate: true, animation: 'transition', direction: 'back' });
         }
     }
+
     showAlert(reason, text) {
         let alert = this.alertCtrl.create({
             title: '',
@@ -104,6 +118,7 @@ export class EditProfilePage {
         });
         alert.present();
     }
+
     showAlert1(reason, text) {
         let alert = this.alertCtrl.create({
             title: '',
@@ -114,6 +129,7 @@ export class EditProfilePage {
         });
         alert.present();
     }
+
     showAlertPopup(reason, text) {
         let alert = this.alertCtrl.create({
             title: '',
@@ -125,6 +141,7 @@ export class EditProfilePage {
         });
         alert.present();
     }
+
     // actions page when click on camera icon.
     cameraActionsPage() {
         let actionSheet = this.actionSheetCtrl.create({
@@ -157,6 +174,7 @@ export class EditProfilePage {
 
         actionSheet.present();
     }
+
     // to upload a picture to the firebase.
     takePicture() {
         Camera.getPicture({
@@ -177,6 +195,7 @@ export class EditProfilePage {
         }, error => {
         });
     }
+
     // to upload a picture from gallery to the firebase.
     uploadPicture() {
         Camera.getPicture({

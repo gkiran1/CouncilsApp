@@ -358,6 +358,80 @@ export class FirebaseService {
         return this.af.database.object('assignments/' + assignmentKey).update({ isactive: false });
     }
 
+    updateProfileInfo(userUid: string, firstname, lastname, email, phone, ldsusername) {
+        return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername }).then(() => {
+            // user profile needs to be updated in discussions node as well.
+            this.af.database.list('discussions').subscribe(discussions => {
+                discussions.forEach(discussion => {
+                    if (userUid === discussion.createdBy) {
+                        this.af.database.object(`discussions/${discussion.$key}`).update({
+                            createdUser: firstname + ' ' + lastname
+                        });
+                    }
+                    this.af.database.list(`discussions/${discussion.$key}/messages`).subscribe(messages => {
+                        messages.forEach(message => {
+                            if (userUid === message.userId) {
+                                this.af.database.object(`discussions/${discussion.$key}/messages/${message.$key}`).update({
+                                    user_firstname: firstname,
+                                    user_lastname: lastname
+                                });
+                            }
+                        });
+                    });
+                });
+            });
+            //updating privatediscussions
+            this.af.database.list('privatediscussions').subscribe(discussions => {
+                discussions.forEach(discussion => {
+                    if (userUid === discussion.createdUserId) {
+                        this.af.database.object(`privatediscussions/${discussion.$key}`).update({
+                            createdUserName: firstname + ' ' + lastname
+                        });
+                    }
+                    if (userUid === discussion.otherUserId) {
+                        this.af.database.object(`privatediscussions/${discussion.$key}`).update({
+                            otherUserName: firstname + ' ' + lastname,
+                            otherUserEmail: email
+                        });
+                    }
+                    if (userUid === discussion.lastMsg.userId) {
+                        this.af.database.object(`privatediscussions/${discussion.$key}/lastMsg`).update({
+                            user_firstname: firstname,
+                            user_lastname: lastname
+
+                        });
+                    }
+                    this.af.database.list(`privatediscussions/${discussion.$key}/messages`).subscribe(messages => {
+                        messages.forEach(message => {
+                            if (userUid === message.userId) {
+                                this.af.database.object(`privatediscussions/${discussion.$key}/messages/${message.$key}`).update({
+                                    user_firstname: firstname,
+                                    user_lastname: lastname
+                                });
+                            }
+                        });
+                    });
+                });
+            });
+            this.af.database.list('activities', {
+                query: {
+                    orderByChild: 'createdUserId',
+                    equalTo: userUid
+                }
+            })
+                .take(1).subscribe(activities => {
+                    activities.forEach(activity => {
+                        this.af.database.object('activities/' + activity.$key).update({
+                            createdUserName: firstname + ' ' + lastname
+                        });
+                    });
+                });
+            return "user profile updated successfully..."
+        }).catch(err => {
+            throw err;
+        })
+    }
+
     updateProfile(userUid: string, firstname, lastname, email, phone, ldsusername, avatar) {
         return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername, avatar }).then(() => {
             // user profile needs to be updated in discussions node as well.
