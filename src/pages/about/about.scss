@@ -2,14 +2,21 @@ page-about {
     p {
         text-align: justify;
         text-justify: inter-word;
-        font-size:15px;
+        font-size: 15px;
         font-family: Bernina-Regular;
     }
-
+    h3 {
+        text-align: justify;
+        text-justify: inter-word;
+        font-size: 15px;
+        font-family: Bernina-Regular;
+    }
     h5 {
         font-family: Bernina-SemiBold;
         font-size: 17px;
     }
+    span.li {
+        display: list-item;
+        margin-left: 2em
+    }
 }
-
-
