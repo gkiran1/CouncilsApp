@@ -1,13 +1,18 @@
 page-councilusers {
     .council-styles {
         font-family: Bernina-Regular !important;
-        font-size: 120% !important;
+        font-size: 17px!important;
         color: #35373a !important;
     }
       ion-list{
         // border-bottom: 1px solid lightgray;
         border-top: 1px solid lightgray;
         //  margin-bottom: 0 !important;
+    }
+    .user-styles{
+       font-family: Bernina-Regular !important;
+        font-size: 17px!important;
+        color: #a9aaac !important;
     }
 
 }
