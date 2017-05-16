@@ -33,26 +33,26 @@
             <ion-col class="username-col">
                 <ion-item>
                     <ion-label floating>First Name</ion-label>
-                    <ion-input type="text" name="firstname" [(ngModel)]="profile.firstname" formControlName="firstname"></ion-input>
+                    <ion-input type="text" name="firstname" [(ngModel)]="profile.firstname" formControlName="firstname" (keyup)="keypresssed($event)"></ion-input>
                 </ion-item>
                 <ion-item style="border:none !important">
                     <ion-label floating>Last Name</ion-label>
-                    <ion-input type="text" name="lastname" [(ngModel)]="profile.lastname" formControlName="lastname"></ion-input>
+                    <ion-input type="text" name="lastname" [(ngModel)]="profile.lastname" formControlName="lastname" (keyup)="keypresssed($event)"></ion-input>
                 </ion-item>
             </ion-col>
         </ion-row>
         <ion-item-divider class="empty"></ion-item-divider>
         <ion-item class="form-item-first">
             <ion-label floating>Email</ion-label>
-            <ion-input type="text" name="email" [(ngModel)]="profile.email" formControlName="email"></ion-input>
+            <ion-input type="text" name="email" [(ngModel)]="profile.email" formControlName="email" (keyup)="keypresssed($event)"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Phone</ion-label>
-            <ion-input type="text" name="phone" [(ngModel)]="profile.phone" formControlName="phone"></ion-input>
+            <ion-input type="text" name="phone" [(ngModel)]="profile.phone" formControlName="phone" (keyup)="keypresssed($event)"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>LDS.org username</ion-label>
-            <ion-input type="text" name="ldsusername" [(ngModel)]="profile.ldsusername" formControlName="ldsusername"></ion-input>
+            <ion-input type="text" name="ldsusername" [(ngModel)]="profile.ldsusername" formControlName="ldsusername" (keyup)="keypresssed($event)"></ion-input>
         </ion-item>
         <ion-item-divider class="empty"></ion-item-divider>
 
@@ -68,6 +68,6 @@
     </form>
 </ion-content>
 <ion-footer text-center>
-    <button ion-button clear color="secondary" class="button button-clik" text-capitalize name="savebtn" [disabled]="(!editProfileForm.valid || !editProfileForm.dirty) && isPicNotChanged"
+    <button ion-button clear color="secondary" class="button button-clik" text-capitalize name="savebtn" [disabled]="!isChangeflag"
         (click)="editProfile(editProfileForm.value)">Save</button>
 </ion-footer>
