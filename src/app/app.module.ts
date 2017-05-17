@@ -80,6 +80,7 @@ import { NewNotePage } from '../pages/notes/newnote/newnote';
 import { NotesPage } from '../pages/notes/notes/notes';
 import { NotePage } from '../pages/notes/note/note';
 import { GoogleCalenderPage } from '../pages/googlecalender/googlecalender.component';
+import { NewMenuPage } from '../pages/newmenu/newmenu';
 
 //Directives
 import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
@@ -175,7 +176,8 @@ const cloudSettings: CloudSettings = {
     GoogleCalenderPage,
     CloseKeyboardDirective,
     ForgotPwd,
-    ForgotPwdSuccess
+    ForgotPwdSuccess,
+    NewMenuPage
   ],
 
   imports: [
@@ -251,7 +253,8 @@ const cloudSettings: CloudSettings = {
     NotePage,
     GoogleCalenderPage,
     ForgotPwd,
-    ForgotPwdSuccess
+    ForgotPwdSuccess,
+    NewMenuPage
   ],
 
   providers: [AuthService, AppService, FirebaseService]

@@ -3,6 +3,7 @@ import { Platform, AlertController, ToastController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
+import { NewMenuPage } from '../pages/newmenu/newmenu';
 import { FirebaseService } from '../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
 import { ConnectivityService } from '../providers/connectivityservice';
