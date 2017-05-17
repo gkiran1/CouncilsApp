@@ -88,6 +88,11 @@ export class OpenCouncilFilePage {
                             this.size = this.formatBytes(metadata.size);
                             // this.subject.next(this.agendasArray.length);
                         })
+
+                        this.filesArray.sort(function (a, b) {
+                            return (a.createdDate > b.createdDate) ? -1 : ((a.createdDate < b.createdDate) ? 1 : 0);
+                        });
+
                     });
                 }
                 // if (auth !== null) {
@@ -491,7 +496,7 @@ export class OpenCouncilFilePage {
                 console.log(e);
             });
 
-            loader.dismiss();
+        loader.dismiss();
     }
     // to convert bytes to KB/MB/GB/TB formats
     formatBytes(bytes) {
