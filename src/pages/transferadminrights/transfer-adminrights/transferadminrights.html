@@ -20,7 +20,7 @@
 				<img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
 				<img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
 			</ion-avatar>
-			<h3>{{user.firstname}} {{user.lastname}}</h3>
+			<h3 class="font1">{{user.firstname}} {{user.lastname}}</h3>
 			<p class="council-names">{{user.councilnames}}</p>
 			</ion-item>
 	</ion-list>
