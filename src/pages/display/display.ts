@@ -4,6 +4,7 @@ import { FirebaseService } from '../../environments/firebase/firebase-service'
 import { AppService } from '../../providers/app-service';
 import { Subject } from 'rxjs';
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
+import { NewMenuPage } from '../newmenu/newmenu';
 
 @Component({
   selector: 'page-display',
@@ -29,7 +30,7 @@ export class DisplayPage {
   }
 
   notificationsPage() {
-    this.nav.push(NotificationsPage);
+    this.nav.push(NewMenuPage);
   }
 
 }

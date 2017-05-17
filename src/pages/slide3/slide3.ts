@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController} from 'ionic-angular';
+import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
 import { NgZone } from '@angular/core';
@@ -77,6 +77,8 @@ export class slide3Page {
 
     toast.present();
   }
-
+  cancel() {
+    this.nav.pop();
+  }
 }
 
