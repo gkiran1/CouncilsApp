@@ -73,6 +73,7 @@ export class ViewCouncilFilePage {
 
         fs.getFilesByCouncil(this.councilId).subscribe(files => {
             this.filesArray.push(...files);
+            this.filesArray.reverse();
         });
 
     }
@@ -332,7 +333,7 @@ export class ViewCouncilFilePage {
       spinner:'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
     });
-    if (!this.platform.is('android')) {
+    if (this.platform.is('android')) {
       // var options = ["public.data", "public.audio"];
       FilePicker.pickFile(
          (uri) =>{
