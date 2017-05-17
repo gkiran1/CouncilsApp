@@ -4,9 +4,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { OpenCouncilFilePage } from '../open-council-file/open-council-file';
+import { ViewCouncilFilePage } from '../view-council-file/view-council-file';
 import { User } from '../../user/user';
 import { Camera, Toast, File, FileChooser, FilePath, ImagePicker } from 'ionic-native';
 import * as firebase from 'firebase';
+
+import { AngularFire } from 'angularfire2';
+import { Subscription } from 'rxjs';
 
 import * as moment from 'moment';
 declare var FilePicker;
@@ -32,9 +36,11 @@ export class NewCouncilFilePage {
     $key: '',
     images: []
   }
+  createdUser: string;
   isNewCouncilFileflag=true;
   now = moment().valueOf();
-
+  userSubscription: Subscription;
+  
   constructor(
     fb: FormBuilder,
     public appservice: AppService,
@@ -44,6 +50,7 @@ export class NewCouncilFilePage {
     public menuctrl: MenuController,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
+    public af: AngularFire,
     public platform: Platform) {
     appservice.getUser().subscribe(user => {
       //console.log(user);
@@ -52,6 +59,7 @@ export class NewCouncilFilePage {
       user.councils.forEach(c => {
         this.councils.push(this.firebaseservice.getCouncilByCouncilKey(c));
       });
+      this.createdUser = user.firstname + ' ' + user.lastname;
       this.newCouncilFileForm = fb.group({
         council: ['', Validators.required],
         createdDate: '',
@@ -63,7 +71,7 @@ export class NewCouncilFilePage {
       });
     });
   }
-
+  
   chooseFileActionsPage(value) {
     let actionSheet = this.actionSheetCtrl.create({
       title: '',
@@ -123,7 +131,9 @@ export class NewCouncilFilePage {
       loader.present();
       this.guestPicture = imageData;
       this.imagePath = "data:image/jpeg;base64," + imageData;
+      value.filesize = this.fileSize(this.imagePath);
       value.createdDate = moment().toISOString();
+      value.createdUser = this.createdUser;
       value.councilid = value.council.$key;
       value.councilname = value.council.council;
       value.filename = 'Image' + '_' + this.now + '.png';
@@ -137,9 +147,9 @@ export class NewCouncilFilePage {
               loader.dismiss();
               // Metadata now contains the metadata like filesize and type for 'images/...'
               //isNewCouncilFileflag=false
-              this.nav.push(OpenCouncilFilePage, {
-                file: metadata, file1: fileId, value: value,flag:this.isNewCouncilFileflag
-              });
+              this.nav.push(ViewCouncilFilePage, {
+                councilid: value.councilid 
+              }, {animate: true, animation:'transition', direction:'forward'});
             }).catch((error) => {
               loader.dismiss();
               console.log(error);
@@ -163,6 +173,8 @@ export class NewCouncilFilePage {
       spinner:'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
     });
+    this.userSubscription = this.af.auth.subscribe(auth => {
+                if (auth !== null) {
     Camera.getPicture({
       quality: 95,
       destinationType: Camera.DestinationType.DATA_URL,
@@ -178,6 +190,8 @@ export class NewCouncilFilePage {
       this.guestPicture = imageData;
       this.imagePath = "data:image/jpeg;base64," + imageData;
       value.createdDate = moment().toISOString();
+      value.createdUser = this.createdUser;
+      value.filesize = this.fileSize(this.imagePath);
       value.councilid = value.council.$key;
       value.councilname = value.council.council;
       value.filename = 'Image' + '_' + this.now + '.png';
@@ -191,9 +205,9 @@ export class NewCouncilFilePage {
               loader.dismiss();
               //isNewCouncilFileflag=false
               // Metadata now contains the metadata like filesize and type for 'images/...'
-              this.nav.push(OpenCouncilFilePage, {
-                file: metadata, file1: fileId, value: value,flag:this.isNewCouncilFileflag
-              });
+               this.nav.push(ViewCouncilFilePage, {
+                        councilid: value.councilid, councilname: value.councilname },{ animate: true, animation: 'transition', direction: 'forward'
+                      });
             }).catch((error) => {
               loader.dismiss();
               console.log(error);
@@ -210,26 +224,32 @@ export class NewCouncilFilePage {
       loader.dismiss();
       console.log("ERROR -> " + JSON.stringify(error));
     });
+                }});
   }
+
+  fileSize(base64Img) {
+    var str = atob(base64Img); 
+    return str.length; 
+  }
+
   // to upload files from the device.
   importFile(value) {
     let loader = this.loadingCtrl.create({
       spinner:'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
     });
-    if (this.platform.is('ios')) {
-      var options = ["public.data", "public.audio"];
+    if (!this.platform.is('android')) {
+      // var options = ["public.data", "public.audio"];
       FilePicker.pickFile(
-        function (uri) {
+         (uri) =>{
           // alert(uri);
-          loader.present();
+           loader.present();
           this.uploadFile(uri, value, loader);
         },
         function (error) {
           loader.dismiss();
           // alert(error);
-        }, options
-      );
+        });
     }
     else {
       FileChooser.open()
@@ -243,13 +263,56 @@ export class NewCouncilFilePage {
         });
     }
   }
+  //const fileTransfer: TransferObject = this.transfer.create();
+  uploadInputFile($event) {
+    this.readFile($event.target);
+      
+  }
+
+  readFile(inputFile) {
+    let fileEntry = inputFile.files[0];
+    //alert(inputFile.value);
+    (<any>window).resolveLocalFileSystemURL(inputFile.value, this.gotFile, this.fail);
+    
+
+   
+  }
+
+  fail() {
+    alert('File failed');
+  }
+
+  gotFile(fileEntry) {
+    alert('file reading');
+    fileEntry.file(function(file) {
+      alert('file true');
+      let reader = new FileReader();
+      reader.onloadend = function(e) {
+        console.log("Text :" + this.result);
+      }
+      reader.readAsText(file);
+    });
+  }
+
   uploadFile(uri, value, loader) {
     this.file = uri.toString();
-    FilePath.resolveNativePath(this.file)
-      .then(filePath => {
+    // FilePath.resolveNativePath(this.file)
+    //   .then(filePath => {
+      let filePath = 'file:/'+this.file;
+      //alert('1:'+ filePath);
         (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
+          //alert('2:'+ JSON.stringify(res));
           res.file((resFile) => {
+            //alert('3:'+ JSON.stringify(resFile));
             var reader = new FileReader();
+            let newfile = new File();
+            File.readAsArrayBuffer(resFile, 'newimage')
+            .then(res=>{
+              //alert('res'+JSON.stringify(res));
+            })
+            .catch(err=>{
+             // alert(JSON.stringify(err));
+            })
             reader.readAsArrayBuffer(resFile);
             reader.onloadend = (evt: any) => {
               var imgBlob = new Blob([evt.target.result]);
@@ -276,11 +339,13 @@ export class NewCouncilFilePage {
                 default:
                   break;
               }
+              value.createdUser = this.createdUser;
               value.createdDate = moment().toISOString();
               value.councilid = value.council.$key;
               value.councilname = value.council.council;
               value.filename = filename;
               value.filetype = filetype;
+              value.filesize = imgBlob.size;
               // alert(mimeType);
               this.firebaseservice.saveFile(value).then(fileId => {
                 this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
@@ -291,8 +356,8 @@ export class NewCouncilFilePage {
                       loader.dismiss();
                       //isNewCouncilFileflag=false
                       // Metadata now contains the metadata like filesize and type for 'images/...'
-                      this.nav.push(OpenCouncilFilePage, {
-                        file: metadata, file1: fileId, value: value,flag:this.isNewCouncilFileflag
+                      this.nav.push(ViewCouncilFilePage, {
+                        councilid: value.councilid, councilname: value.councilname },{ animate: true, animation: 'transition', direction: 'forward'
                       });
                     }).catch((error) => {
                       loader.dismiss();
@@ -312,11 +377,11 @@ export class NewCouncilFilePage {
             }
           })
         })
-      }).catch(error => {
-        loader.dismiss();
-        // alert(error)
-        console.log(error);
-      });
+      // }).catch(error => {
+      //   loader.dismiss();
+      //   // alert(error)
+      //   console.log(error);
+      // });
   }
   cancel() {
     this.nav.pop();

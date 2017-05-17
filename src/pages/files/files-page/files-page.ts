@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { NewCouncilFilePage } from '../new-council-file/new-council-file';
 import { OpenCouncilFilePage } from '../open-council-file/open-council-file';
+import { ViewCouncilFilePage } from '../view-council-file/view-council-file';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
@@ -66,7 +67,7 @@ export class FilesListPage {
     viewCouncilFile(item) {
         console.log(item);
         // alert(item.councilid)
-        this.nav.push(OpenCouncilFilePage, { item: item, flag: this.isFilesListPage }, { animate: true, animation: 'transition', direction: 'forward' });
+        this.nav.push(ViewCouncilFilePage, { councilid: item.councilid, councilname: item.councilname }, { animate: true, animation: 'transition', direction: 'forward' });
     }
     getCount() {
         return this.count$;

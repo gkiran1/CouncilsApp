@@ -6,6 +6,10 @@ view-council-file-page {
         position: absolute;
         top: 15px;
     }
+    .list-page ion-item {
+        height: auto;
+        
+    }
     .row{
     border-bottom:1px solid #DEDEDE !important;
     }
@@ -22,22 +26,14 @@ view-council-file-page {
     ion-footer .button-ios {
         padding: 0;
     }
-    .date-styles{
-        font-family: Bernina-Regular !important;
-        color:#a9aaac !important;        
-    }
-    .name-styles{
-        font-family:Bernina-SemiBold !important;
-        font-size: 15px !important;
-        color:#a9aaac !important;
-    }
     .council-styles{
-        font-family:Bernina-SemiBold !important;
+        font-family:Bernina-Regular !important;
         font-size: 17px !important;
         color:#35373A !important;
     }
     .empty{    
     height: 20px;
+    border-top: 1px solid #e8e9eb;
     border-bottom: 1px solid #e8e9eb !important;    
 }
 .item-md.item-block .item-inner{
@@ -51,14 +47,34 @@ view-council-file-page {
 }
 .header-col{
     font-size: 1.42em !important;
+    margin-right: 16px;
 }
 .bgcolor{
     background-color: #FFFFFF !important;
 }
-.document{
-    font-size: 24px;
+.councils-icon__file{
+    margin-top: 20px !important;
 }
 .toolbar-background-md,.toolbar-background-ios{
     background: none !important;
 }
+.agendadate-styles{
+        position: absolute;
+        right: 16px;
+    }
+    .font4{
+        font-family: Bernina-Regular !important;
+        font-size:13px;
+        color:#a9aaac !important;
+    }
+    .delete-styles{
+        position: absolute;
+        right: 16px;
+    }
+    .right-align{
+        position: absolute;
+        right: 0;
+        margin-top:20px;
+        margin-right:10px;
+    }
 }
