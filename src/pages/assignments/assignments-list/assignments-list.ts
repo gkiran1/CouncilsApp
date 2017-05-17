@@ -8,6 +8,7 @@ import { NewAssignmentPage } from '../new-assignment/new-assignment';
 import { User } from '../../../user/user';
 import { Subscription } from "rxjs";
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
+import { NewMenuPage } from '../../newmenu/newmenu';
 
 @Component({
   templateUrl: 'assignments-list.html',
@@ -112,6 +113,6 @@ export class AssignmentsListPage {
     this.navCtrl.pop();
   }
   notificationsPage() {
-    this.navCtrl.push(NotificationsPage);
+    this.navCtrl.push(NewMenuPage);
   }
 }

@@ -8,6 +8,7 @@ import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import * as firebase from 'firebase';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
+import { NewMenuPage } from '../../newmenu/newmenu';
 
 @Component({
     templateUrl: 'files-page.html',
@@ -76,7 +77,7 @@ export class FilesListPage {
         this.nav.popToRoot();
     }
     notificationsPage() {
-        this.nav.push(NotificationsPage);
+        this.nav.push(NewMenuPage);
     }
     addFile() {
         this.nav.push(NewCouncilFilePage);

@@ -6,6 +6,7 @@ import { NavController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
+import { NewMenuPage } from '../../newmenu/newmenu';
 
 @Component({
   templateUrl: 'private-discussions-list.html',
@@ -55,6 +56,6 @@ export class PrivateDiscussionsListPage {
     this.nav.pop();
   }
   notificationsPage() {
-    this.nav.push(NotificationsPage);
+    this.nav.push(NewMenuPage);
   }
 }

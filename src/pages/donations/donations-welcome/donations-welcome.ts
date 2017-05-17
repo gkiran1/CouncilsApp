@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { DonationsSendPage } from '../donations-send/donations-send';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
+import { NewMenuPage } from '../../newmenu/newmenu';
 
 @Component({
   selector: 'page-donations-welcome',
@@ -28,6 +29,6 @@ export class DonationsWelcomePage {
     this.nav.pop();
   }
   notificationsPage() {
-    this.nav.push(NotificationsPage);
+    this.nav.push(NewMenuPage);
   }
 }

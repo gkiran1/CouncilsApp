@@ -6,6 +6,7 @@ import { NavController } from 'ionic-angular';
 import { Subject } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
+import { NewMenuPage } from '../../newmenu/newmenu';
 
 @Component({
   templateUrl: 'council-discussions-list.html',
@@ -52,6 +53,6 @@ export class CouncilDiscussionsListPage {
     this.nav.pop();
   }
   notificationsPage() {
-    this.nav.push(NotificationsPage);
+    this.nav.push(NewMenuPage);
   }
 }

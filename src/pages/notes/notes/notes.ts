@@ -6,6 +6,7 @@ import { NotePage } from '../../notes/note/note';
 import { Subject } from 'rxjs/Subject';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 import { AngularFire } from 'angularfire2';
+import { NewMenuPage } from '../../newmenu/newmenu';
 
 @Component({
     templateUrl: 'notes.html',
@@ -51,7 +52,7 @@ export class NotesPage {
     }
 
     notificationsPage() {
-        this.nav.push(NotificationsPage);
+        this.nav.push(NewMenuPage);
     }
 }
 

@@ -7,6 +7,7 @@ import { AgendaEditPage } from '../../agenda-edit/agenda-edit';
 import { OpenCouncilDiscussionPage } from '../../discussions/open-council-discussion/open-council-discussion';
 import { OpenPrivateDiscussionPage } from '../../discussions/open-private-discussion/open-private-discussion';
 import { ViewCouncilFilePage } from '../../files/view-council-file/view-council-file';
+import { NewMenuPage } from '../../newmenu/newmenu';
 
 @Component({
     templateUrl: 'notifications.html',

@@ -11,6 +11,7 @@ import { GoodbyePage } from '../goodbye/goodbye';
 import { NotificationSettingsPage } from '../notifications/notifications-settings/notificationsettings.component';
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 import * as firebase from 'firebase';
+import { NewMenuPage } from '../newmenu/newmenu';
 
 @Component({
     selector: 'settings-page',
@@ -67,7 +68,7 @@ export class SettingsPage {
         //this.navCtrl.setRoot(WelcomePage);
     }
     notificationsPage() {
-        this.navCtrl.push(NotificationsPage);
+        this.navCtrl.push(NewMenuPage);
     }
 
     rootRef: any;

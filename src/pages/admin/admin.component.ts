@@ -9,6 +9,7 @@ import { NewCouncilPage } from '../new-council/new-council';
 import { MembersListPage } from '../editmembers/members-list/memberslist.component';
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
+import { NewMenuPage } from '../newmenu/newmenu';
 
 @Component({
     selector: 'admin-page',
@@ -58,7 +59,7 @@ export class AdminPage {
     }
 
     notificationsPage() {
-        this.navCtrl.push(NotificationsPage);
+        this.navCtrl.push(NewMenuPage);
     }
 
 }

@@ -10,6 +10,7 @@ import { AgendaEditPage } from '../agenda-edit/agenda-edit';
 import { Subject, } from 'rxjs/Subject';
 import { Subscription } from "rxjs";
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
+import { NewMenuPage } from '../newmenu/newmenu';
 
 @Component({
     templateUrl: 'agendas.html',
@@ -72,7 +73,7 @@ export class AgendasPage {
     }
 
     notificationsPage() {
-        this.nav.push(NotificationsPage);
+        this.nav.push(NewMenuPage);
     }
 
 }
