@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { NavController, NavParams, Platform, LoadingController, ActionSheetController, MenuController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
-import { Transfer, File, Camera, FileChooser, FilePath } from 'ionic-native';
+import { Transfer, File, Camera, FileChooser, FilePath, ImagePicker } from 'ionic-native';
 import * as firebase from 'firebase';
 import { AppService } from '../../../providers/app-service';
 import * as moment from 'moment';
