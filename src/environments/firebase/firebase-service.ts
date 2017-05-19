@@ -594,7 +594,7 @@ export class FirebaseService {
         return this.rootRef.child('files').push(
             {
                 filename: file.filename,
-                // filesize: file.filesize,
+                filesize: file.filesize,
                 filetype: file.filetype,
                 councilid: file.councilid,
                 councilname: file.councilname,

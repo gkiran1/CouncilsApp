@@ -21,8 +21,22 @@ export class ViewCouncilFilePage {
         councilid: '',
         name: '',
         type: '',
-        size: ''
+        size: '',
+
     }
+
+    newFile = {
+        filename : '',
+        filetype: '',
+        createdUser: '',
+        filesize: 0,
+        councilid: '',
+        councilname: '',
+        createdBy: '',
+        createdDate: ''
+    }
+
+    importedFilePath : string;
     //files
     file1 = {
         $key: '',
@@ -41,6 +55,7 @@ export class ViewCouncilFilePage {
     councilId: any;
     councilName: any;
     createdUser: string;
+    createdBy: string;
     now = moment().valueOf();
     device: string;
     constructor(
@@ -68,11 +83,16 @@ export class ViewCouncilFilePage {
 
         });
         appservice.getUser().subscribe(user => {
+
             this.createdUser = user.firstname + ' ' + user.lastname;
+            this.createdBy = user.$key;
+            //console.log(this.createdUser);
         });
 
         fs.getFilesByCouncil(this.councilId).subscribe(files => {
+
             this.filesArray.push(...files);
+            console.log(this.filesArray);
             // this.filesArray.reverse();
             this.filesArray.sort(function (a, b) {
                 return (a.createdDate > b.createdDate) ? -1 : ((a.createdDate < b.createdDate) ? 1 : 0);
@@ -154,7 +174,7 @@ export class ViewCouncilFilePage {
 
     }
 
-    addFileActionsPage(value) {
+    addFileActionsPage(councilName, councilId) {
         let actionSheet = this.actionSheetCtrl.create({
             title: '',
             buttons: [
@@ -222,34 +242,35 @@ export class ViewCouncilFilePage {
             loader.present();
             this.guestPicture = imageData;
             this.imagePath = "data:image/jpeg;base64," + imageData;
-            this.value.createdDate = moment().toISOString();
-            this.value.councilid = value.council.$key;
-            this.value.councilname = value.council.council;
-            this.value.createdUser = this.createdUser;
-            this.value.filesize = this.fileSize(this.imagePath);
-            value.filename = 'Image' + '_' + this.now + '.png';
-            value.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
-            this.firebaseservice.saveFile(value).then(fileId => {
+            this.newFile.createdBy = this.createdBy;
+            this.newFile.createdDate = moment().toISOString();
+            this.newFile.councilid = this.councilId;
+            this.newFile.councilname = this.councilName;
+            this.newFile.createdUser = this.createdUser;
+            this.newFile.filesize = this.fileSize(imageData);
+            this.newFile.filename = 'Image' + '_' + this.now + '.png';
+            this.newFile.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
+            this.firebaseservice.saveFile(this.newFile).then(fileId => {
                 this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
                     .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
                     .then((savedPicture) => {
-                        this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
-                        this.pictureRef.then((metadata) => {
+                        // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
+                        // this.pictureRef.then((metadata) => {
                             loader.dismiss();
                             // Metadata now contains the metadata like filesize and type for 'images/...'
-                            this.file = metadata;
-                            this.file.size = this.formatBytes(this.file.size);
-                            this.file.$key = fileId;
-                            this.file.name = value.filename;
-                            this.file.type = value.filetype;
-                            this.filesArray.push(this.file);
-                            this.value.councilname = value.councilname;
-                            this.value.filename = value.filename;
-                            this.value.filetype = value.filetype;
-                        }).catch((error) => {
-                            loader.dismiss();
-                            console.log(error);
-                        });
+                        //     this.file = metadata;
+                        //     this.file.size = this.formatBytes(this.file.size);
+                        //     this.file.$key = fileId;
+                        //     this.file.name = value.filename;
+                        //     this.file.type = value.filetype;
+                        //     this.filesArray.push(this.file);
+                        //     this.value.councilname = value.councilname;
+                        //     this.value.filename = value.filename;
+                        //     this.value.filetype = value.filetype;
+                        // }).catch((error) => {
+                        //     loader.dismiss();
+                        //     console.log(error);
+                        // });
                     }).catch(err => {
                         loader.dismiss();
                         console.log(err);
@@ -286,34 +307,35 @@ export class ViewCouncilFilePage {
             loader.present();
             this.guestPicture = imageData;
             this.imagePath = "data:image/jpeg;base64," + imageData;
-            this.value.createdDate = moment().toISOString();
-            this.value.councilid = value.council.$key;
-            this.value.councilname = value.council.council;
-            this.value.createdUser = this.createdUser;
-            this.value.filesize = this.fileSize(this.imagePath);
-            value.filename = 'Image' + '_' + this.now + '.png';
-            value.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
-            this.firebaseservice.saveFile(value).then(fileId => {
+            this.newFile.createdDate = moment().toISOString();
+            this.newFile.councilid = this.councilId;
+            this.newFile.councilname = this.councilName;
+            this.newFile.createdUser = this.createdUser;
+            this.newFile.createdBy = this.createdBy
+            this.newFile.filesize = this.fileSize(imageData);
+            this.newFile.filename = 'Image' + '_' + this.now + '.png';
+            this.newFile.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
+            this.firebaseservice.saveFile(this.newFile).then(fileId => {
                 this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
                     .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
                     .then((savedPicture) => {
-                        this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
-                        this.pictureRef.then((metadata) => {
+                        // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
+                        // this.pictureRef.then((metadata) => {
                             loader.dismiss();
                             // Metadata now contains the metadata like filesize and type for 'images/...'
-                            this.file = metadata;
-                            this.file.size = this.formatBytes(this.file.size);
-                            this.file.$key = fileId;
-                            this.file.name = value.filename;
-                            this.file.type = value.filetype;
-                            this.filesArray.push(this.file);
-                            this.value.councilname = value.councilname;
-                            this.value.filename = value.filename;
-                            this.value.filetype = value.filetype;
-                        }).catch((error) => {
-                            loader.dismiss();
-                            console.log(error);
-                        });
+                            // this.file = metadata;
+                            // this.file.size = this.formatBytes(this.file.size);
+                            // this.file.$key = fileId;
+                            // this.file.name = value.filename;
+                            // this.file.type = value.filetype;
+                            // this.filesArray.push(this.file);
+                            // this.value.councilname = value.councilname;
+                            // this.value.filename = value.filename;
+                        //     // this.value.filetype = value.filetype;
+                        // }).catch((error) => {
+                        //     loader.dismiss();
+                        //     console.log(error);
+                        // });
                     }).catch(err => {
                         loader.dismiss();
                         console.log(err);
@@ -364,10 +386,10 @@ export class ViewCouncilFilePage {
     }
 
     uploadFile(uri, value, loader) {
-        this.file = uri.toString();
-        // FilePath.resolveNativePath(this.file)
-        //   .then(filePath => {
-        let filePath = 'file:/' + this.file;
+        this.importedFilePath = uri.toString();
+         FilePath.resolveNativePath(this.importedFilePath)
+           .then(filePath => {
+        //let filePath = 'file:/' + this.file;
         //alert('1:'+ filePath);
         (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
             //alert('2:'+ JSON.stringify(res));
@@ -408,15 +430,17 @@ export class ViewCouncilFilePage {
                         default:
                             break;
                     }
-                    value.createdUser = this.createdUser;
-                    value.createdDate = moment().toISOString();
-                    value.councilid = value.council.$key;
-                    value.councilname = value.council.council;
-                    value.filename = filename;
-                    value.filetype = filetype;
-                    value.filesize = imgBlob.size;
+                    console.log(this.createdUser);
+                    this.newFile.createdUser = this.createdUser;
+                    this.newFile.createdDate = moment().toISOString();
+                    this.newFile.councilid = this.councilId;
+                    this.newFile.councilname = this.councilName;
+                    this.newFile.filename = filename;
+                    this.newFile.filetype = filetype;
+                    this.newFile.filesize = imgBlob.size;
+                    this.newFile.createdBy = this.createdBy;
                     // alert(mimeType);
-                    this.firebaseservice.saveFile(value).then(fileId => {
+                    this.firebaseservice.saveFile(this.newFile).then(fileId => {
                         this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
                             .put(imgBlob, { contentType: mimeType })
                             .then((savedPicture) => {
@@ -448,11 +472,11 @@ export class ViewCouncilFilePage {
                 }
             })
         })
-        // }).catch(error => {
-        //   loader.dismiss();
-        //   // alert(error)
-        //   console.log(error);
-        // });
+        }).catch(error => {
+          loader.dismiss();
+          // alert(error)
+          console.log(error);
+        });
     }
     // to convert bytes to KB/MB/GB/TB formats
     formatBytes(bytes) {

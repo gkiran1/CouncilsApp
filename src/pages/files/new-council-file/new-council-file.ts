@@ -131,7 +131,7 @@ export class NewCouncilFilePage {
       loader.present();
       this.guestPicture = imageData;
       this.imagePath = "data:image/jpeg;base64," + imageData;
-      value.filesize = this.fileSize(this.imagePath);
+      value.filesize = this.fileSize(imageData);
       value.createdDate = moment().toISOString();
       value.createdUser = this.createdUser;
       value.councilid = value.council.$key;
@@ -191,7 +191,7 @@ export class NewCouncilFilePage {
       this.imagePath = "data:image/jpeg;base64," + imageData;
       value.createdDate = moment().toISOString();
       value.createdUser = this.createdUser;
-      value.filesize = this.fileSize(this.imagePath);
+      value.filesize = this.fileSize(imageData);
       value.councilid = value.council.$key;
       value.councilname = value.council.council;
       value.filename = 'Image' + '_' + this.now + '.png';
@@ -228,7 +228,10 @@ export class NewCouncilFilePage {
   }
 
   fileSize(base64Img) {
+    //alert(base64Img);
     var str = atob(base64Img); 
+    //alert(str);
+    //alert(str.length);
     return str.length; 
   }
 
@@ -238,7 +241,8 @@ export class NewCouncilFilePage {
       spinner:'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
     });
-    if (this.platform.is('android')) {
+    if (this.platform.is('ios')) {
+      //alert('if');
       // var options = ["public.data", "public.audio"];
       FilePicker.pickFile(
          (uri) =>{
@@ -252,13 +256,14 @@ export class NewCouncilFilePage {
         });
     }
     else {
+     // alert('else');
       FileChooser.open()
         .then(uri => {
           loader.present();
           this.uploadFile(uri, value, loader);
         }).catch(error => {
           loader.dismiss();
-          // alert(error)
+           //alert(error)
           console.log(error);
         });
     }
@@ -283,9 +288,9 @@ export class NewCouncilFilePage {
   }
 
   gotFile(fileEntry) {
-    alert('file reading');
+    //alert('file reading');
     fileEntry.file(function(file) {
-      alert('file true');
+      //alert('file true');
       let reader = new FileReader();
       reader.onloadend = function(e) {
         console.log("Text :" + this.result);
@@ -296,29 +301,32 @@ export class NewCouncilFilePage {
 
   uploadFile(uri, value, loader) {
     this.file = uri.toString();
-    // FilePath.resolveNativePath(this.file)
-    //   .then(filePath => {
-      let filePath = 'file:/'+this.file;
+     FilePath.resolveNativePath(this.file)
+       .then(filePath => {
+      //let filePath = 'file:/'+this.file;
       //alert('1:'+ filePath);
         (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
           //alert('2:'+ JSON.stringify(res));
           res.file((resFile) => {
             //alert('3:'+ JSON.stringify(resFile));
             var reader = new FileReader();
-            let newfile = new File();
+            //let newfile = new File();
             File.readAsArrayBuffer(resFile, 'newimage')
             .then(res=>{
               //alert('res'+JSON.stringify(res));
             })
             .catch(err=>{
-             // alert(JSON.stringify(err));
-            })
+              //alert('err file reader');
+              //alert(JSON.stringify(err));
+            });
             reader.readAsArrayBuffer(resFile);
             reader.onloadend = (evt: any) => {
               var imgBlob = new Blob([evt.target.result]);
+              //alert(imgBlob);
+              //alert(imgBlob.size);
               var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
               var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
-              // alert(filetype)
+              //alert(filetype)
               var mimeType;
               switch (filetype) {
                 case 'PNG':
@@ -346,42 +354,39 @@ export class NewCouncilFilePage {
               value.filename = filename;
               value.filetype = filetype;
               value.filesize = imgBlob.size;
-              // alert(mimeType);
+               //alert(mimeType);
               this.firebaseservice.saveFile(value).then(fileId => {
                 this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
                   .put(imgBlob, { contentType: mimeType })
                   .then((savedPicture) => {
-                    this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
-                    this.pictureRef.then((metadata) => {
+                    //alert('file saved');
+                    //this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
+                    //this.pictureRef.then((metadata) => {
                       loader.dismiss();
                       //isNewCouncilFileflag=false
                       // Metadata now contains the metadata like filesize and type for 'images/...'
                       this.nav.push(ViewCouncilFilePage, {
                         councilid: value.councilid, councilname: value.councilname },{ animate: true, animation: 'transition', direction: 'forward'
                       });
-                    }).catch((error) => {
-                      loader.dismiss();
-                      // alert(error);
-                      console.log(error);
-                    });
+                   
                   }).catch(error => {
                     loader.dismiss();
-                    // alert(error);
+                     //alert(error);
                     console.log(error);
                   })
               }).catch(error => {
                 loader.dismiss();
-                // alert(error);
+                 //alert(error);
                 console.log(error);
               })
             }
           })
         })
-      // }).catch(error => {
-      //   loader.dismiss();
-      //   // alert(error)
-      //   console.log(error);
-      // });
+      }).catch(error => {
+        loader.dismiss();
+         //alert(error)
+        console.log(error);
+      });
   }
   cancel() {
     this.nav.pop();

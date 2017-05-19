@@ -31,7 +31,7 @@
                         <p><span class="council-styles">{{file.filename}}</span></p>
                         <p class="font4">by <span ion-text color="secondary">{{file.createdUser}}</span></p>
                         <p class="font4">
-                            {{file.filesize || size}} {{file.type || file.filetype}} file
+                            {{formatBytes(file.filesize)}} {{file.filetype}} file
                             <span class="agendadate-styles">{{file.createdDate | customdateformat}}</span></p>
                     </ion-col>
                     <ion-col width-20>
@@ -46,7 +46,7 @@
 </ion-content>
 <ion-footer>
     <ng-container *ngIf="!deleteflag">
-        <button ion-button color="secondary" class="button button-clik" clear block (click)="addFileActionsPage(value)">Add File</button>
+        <button ion-button color="secondary" class="button button-clik" clear block (click)="addFileActionsPage(councilName, councilId)">Add File</button>
     </ng-container>
     <ng-container *ngIf="deleteflag">
         <button ion-button color="danger" class="button button-clik" clear block (click)="deleteFiles(filesArray)">Delete All</button>
