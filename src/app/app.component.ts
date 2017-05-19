@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform, AlertController, ToastController } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { StatusBar, Splashscreen, Keyboard } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
 import { NewMenuPage } from '../pages/newmenu/newmenu';
@@ -28,6 +28,7 @@ export class MyApp {
   public firebaseService: FirebaseService) {
     
     platform.ready().then(() => {
+      Keyboard.hideKeyboardAccessoryBar(false);
       this.addConnectivityListeners();
       if (platform.is('cordova') || platform.is('ios') || platform.is('android')) {
         this.FCMSetup();
