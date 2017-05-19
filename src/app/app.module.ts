@@ -85,26 +85,26 @@ import { NewMenuPage } from '../pages/newmenu/newmenu';
 //Directives
 import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
 
-//Cloud Settings - Push Messaging
-const cloudSettings: CloudSettings = {
-  'core': {
-    'app_id': '15fb1041'
-  },
-  'push': {
-    'sender_id': '619253720821',
-    'pluginConfig': {
-      'ios': {
-        'badge': true,
-        'sound': true
-      },
-      'android': {
-        'iconColor': '#343434'
-      }
-    }
-  }
-};
+// //Cloud Settings - Push Messaging
+// const cloudSettings: CloudSettings = {
+//   'core': {
+//     'app_id': '15fb1041'
+//   },
+//   'push': {
+//     'sender_id': '619253720821',
+//     'pluginConfig': {
+//       'ios': {
+//         'badge': true,
+//         'sound': true
+//       },
+//       'android': {
+//         'iconColor': '#343434'
+//       }
+//     }
+//   }
+// };
 
-//Cloud Settings - Push Messaging
+// //Cloud Settings - Push Messaging
 
 @NgModule({
   declarations: [
@@ -187,7 +187,7 @@ const cloudSettings: CloudSettings = {
     IonicModule.forRoot(MyApp, { platforms: { ios: { statusbarPadding: true } } }),
     AngularFireModule.initializeApp(FirebaseConfig),
     //Cloud Module Imports
-    CloudModule.forRoot(cloudSettings),
+    //CloudModule.forRoot(cloudSettings),
     SwiperModule
   ],
 
