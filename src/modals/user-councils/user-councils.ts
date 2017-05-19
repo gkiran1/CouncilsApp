@@ -8,32 +8,42 @@ import { ElementRef } from "@angular/core";
   selector: 'page-user-councils',
   templateUrl: 'user-councils.html'
 })
+
 export class UserCouncilsModalPage {
   councils = [];
   term: string = '';
   fromPage;
-  selectedCouncil;
+  selectedCouncilObj;
+
   constructor(private ele: ElementRef, public af: AngularFire, public navParams: NavParams, public fs: FirebaseService, public navCtrl: NavController, public viewCtrl: ViewController) {
     let usercouncils = navParams.get('usercouncils');
-    let selectedCouncilObj = navParams.get('selectedCouncil');
+    this.selectedCouncilObj = navParams.get('selectedCouncil');
     this.fromPage = navParams.get('fromPage');
     usercouncils.forEach(c => {
       fs.getCouncilByCouncilKey(c).subscribe(council => {
+        if (this.selectedCouncilObj && council.$key === this.selectedCouncilObj.$key) {
+          council['isActCouncil'] = true;
+        }
+        else {
+          council['isActCouncil'] = false;
+        }
         this.councils.push(council);
-        if (selectedCouncilObj && council.$key === selectedCouncilObj.$key) this.selectedCouncil = council;
       });
     });
   }
 
   ionViewDidLoad() {
-    this.ele.nativeElement.querySelector('.searchbar-input').focus();
+    //  this.ele.nativeElement.querySelector('.searchbar-input').focus();
   }
+
   dismiss(council) {
     this.viewCtrl.dismiss(council);
   }
+
   ngAfterViewInit() {
     this.ele.nativeElement.parentElement.setAttribute("class", this.ele.nativeElement.parentElement.getAttribute("class") + " user-councils-modal")
   }
+
   searchFn(event) {
     this.term = event.target.value;
   }
