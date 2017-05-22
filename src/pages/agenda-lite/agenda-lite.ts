@@ -128,11 +128,11 @@ export class AgendaLitePage {
     // alert.present();
 
     let toast = this.toast.create({
-            message: errText,
-            duration: 3000
-        })
+      message: errText,
+      duration: 3000
+    })
 
-        toast.present();
+    toast.present();
   }
 
   showCouncilsModal(event, value) {
@@ -199,6 +199,7 @@ export class AgendaLitePage {
       if (e.length > 27) {
         e = e.substr(0, 27);
       }
+      e  =  e.charAt(2) ?  e.substr(0,  2) +  e.charAt(2).toUpperCase() +  e.substr(3) :  e;
       return e;
     });
     $event.target.value = newValue.join('\n');
@@ -215,7 +216,6 @@ export class AgendaLitePage {
     if (this.discussionitems == undefined || this.discussionitems.length == 0) {
       this.discussionitems = "- "
     }
-
   }
 
   showList(event) {
