@@ -283,24 +283,25 @@ export class AgendaLiteEditPage {
   }
 
   showConfirm() {
-    let confirm = this.alertCtrl.create({
-      title: 'Are you sure you want to delete?',
-      // message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+    let actionSheet = this.actionSheetCtrl.create({
       buttons: [
         {
-          text: 'Yes',
+          text: 'Confirm delete',
+          cssClass: "actionsheet-items",
           handler: () => {
-            this.delete();
+            this.menuctrl.close();
+                 this.delete();
           }
         },
         {
-          text: 'No',
+          text: 'Cancel',
+          cssClass: "actionsheet-cancel",
           handler: () => {
           }
         }
       ]
     });
-    confirm.present();
+    actionSheet.present();
   }
 
   plusBtn(item) {

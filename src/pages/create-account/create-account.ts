@@ -40,7 +40,7 @@ export class CreateAccountPage {
       this.firebaseService.findUserByEmail(this.newUser.email).subscribe((usr) => {
         if (usr) {
           loader.dismiss();
-          this.showAlert('Email already exists.');
+          this.showAlert('Email taken');
         }
         else {
           this.invitee$ = this.firebaseService.findInviteeByEmail(this.newUser.email);

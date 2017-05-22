@@ -1,6 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { AlertController, NavController, ActionSheetController, MenuController, NavParams, ToastController} from 'ionic-angular';
+import { AlertController, NavController, ActionSheetController, MenuController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotesPage } from '../notes/notes'
 
@@ -63,40 +63,36 @@ export class NotePage {
     }
 
     showConfirm() {
-        let confirm = this.alertCtrl.create({
-            title: 'Are you sure you want to delete?',
-            // message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+        let actionSheet = this.actionSheetCtrl.create({
             buttons: [
                 {
-                    text: 'Yes',
+                    text: 'Confirm delete',
+                    cssClass: "actionsheet-items",
                     handler: () => {
+                        this.menuctrl.close();
                         this.delete();
+
+                        // .catch(err => { this.showAlert('Internal server error.') });
                     }
                 },
                 {
-                    text: 'No',
+                    text: 'Cancel',
+                    cssClass: "actionsheet-cancel",
                     handler: () => {
                     }
                 }
             ]
         });
-        confirm.present();
+        actionSheet.present();
     }
 
     showAlert(errText) {
-        // let alert = this.alertCtrl.create({
-        //     title: '',
-        //     subTitle: errText,
-        //     buttons: ['OK']
-        // });
-        // alert.present();
-
         let toast = this.toast.create({
-      message: errText,
-      duration: 3000
-    })
+            message: errText,
+            duration: 3000
+        })
 
-    toast.present();
+        toast.present();
     }
     pad(number) {
         if (number < 10) {

@@ -303,24 +303,27 @@ export class AgendaEditPage {
     }
 
     showConfirm() {
-        let confirm = this.alertCtrl.create({
-            title: 'Are you sure you want to delete?',
-            // message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+        let actionSheet = this.actionSheetCtrl.create({
             buttons: [
                 {
-                    text: 'Yes',
+                    text: 'Confirm delete',
+                    cssClass: "actionsheet-items",
                     handler: () => {
+                        this.menuctrl.close();
                         this.delete();
+
+                        // .catch(err => { this.showAlert('Internal server error.') });
                     }
                 },
                 {
-                    text: 'No',
+                    text: 'Cancel',
+                    cssClass: "actionsheet-cancel",
                     handler: () => {
                     }
                 }
             ]
         });
-        confirm.present();
+        actionSheet.present();  
     }
 
     showAlert(errText) {
@@ -399,7 +402,7 @@ export class AgendaEditPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;            
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -424,7 +427,7 @@ export class AgendaEditPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;            
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -449,7 +452,7 @@ export class AgendaEditPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;            
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
