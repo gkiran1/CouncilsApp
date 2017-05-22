@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { AlertController, NavController, ActionSheetController, MenuController, ModalController, NavParams,ToastController } from 'ionic-angular';
+import { AlertController, NavController, ActionSheetController, MenuController, ModalController, NavParams, ToastController } from 'ionic-angular';
 import { AgendasPage } from '../agendas/agendas';
 import { NewCouncilDiscussionPage } from '../discussions/new-council-discussion/new-council-discussion';
 import { NewAssignmentPage } from '../assignments/new-assignment/new-assignment';
@@ -50,7 +50,7 @@ export class AgendaEditPage {
 
     constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
         public firebaseservice: FirebaseService, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
-        public nav: NavController, public menuctrl: MenuController,  public toast: ToastController) {
+        public nav: NavController, public menuctrl: MenuController, public toast: ToastController) {
 
         this.af.auth.subscribe(auth => {
             if (!auth) return;
@@ -264,20 +264,24 @@ export class AgendaEditPage {
         value.missionaryitems = (value.missionaryitems != undefined && value.missionaryitems.length > 0) ? value.missionaryitems.replace(/-/gi, '').trim() : '';
         value.event = (value.event != undefined && value.event.length > 0) ? value.event.replace(/-/gi, '').trim() : '';
         let formattedAgendaObj = this.formatAgendaObj(value);
-        this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
-            .then(res => {
-                this.nav.popToRoot();
-                if (formattedAgendaObj.openingprayeruserid) {
-                    this.createActivity('opening prayer', formattedAgendaObj.openingprayeruserid);
-                }
-                if (formattedAgendaObj.spiritualthoughtuserid) {
-                    this.createActivity('spiritual thought', formattedAgendaObj.spiritualthoughtuserid);
-                }
-                if (formattedAgendaObj.closingprayeruserid) {
-                    this.createActivity('closing prayer', formattedAgendaObj.closingprayeruserid, );
-                }
-            })
-            .catch(err => { this.showAlert('Internal server error.') })
+        if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
+            this.showAlert('Invalid date');
+        } else {
+            this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
+                .then(res => {
+                    this.nav.popToRoot();
+                    if (formattedAgendaObj.openingprayeruserid) {
+                        this.createActivity('opening prayer', formattedAgendaObj.openingprayeruserid);
+                    }
+                    if (formattedAgendaObj.spiritualthoughtuserid) {
+                        this.createActivity('spiritual thought', formattedAgendaObj.spiritualthoughtuserid);
+                    }
+                    if (formattedAgendaObj.closingprayeruserid) {
+                        this.createActivity('closing prayer', formattedAgendaObj.closingprayeruserid, );
+                    }
+                })
+                .catch(err => { this.showAlert('Internal server error.') })
+        }
     }
 
     delete() {
@@ -327,7 +331,7 @@ export class AgendaEditPage {
         // });
         // alert.present();
 
-         let toast = this.toast.create({
+        let toast = this.toast.create({
             message: errText,
             duration: 3000
         })
@@ -346,6 +350,7 @@ export class AgendaEditPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -370,6 +375,7 @@ export class AgendaEditPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -393,6 +399,7 @@ export class AgendaEditPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;            
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -417,6 +424,7 @@ export class AgendaEditPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;            
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -441,6 +449,7 @@ export class AgendaEditPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;            
             return e;
         });
         $event.target.value = newValue.join('\n');

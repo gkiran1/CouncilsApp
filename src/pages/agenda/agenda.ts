@@ -113,24 +113,26 @@ export class AgendaPage {
         agenda.openingprayeruserid = (this.openingprayer !== undefined) ? this.openingprayer.$key : '';
         agenda.spiritualthoughtuserid = (this.spiritualthought !== undefined) ? this.spiritualthought.$key : '';
         agenda.closingprayeruserid = (this.closingprayer !== undefined) ? this.closingprayer.$key : '';
+        if (moment(assigneddate).isBefore(moment().set({ second: 0 }))) {
+            this.showAlert('Invalid date');
+        } else {
+            this.firebaseservice.createAgenda(agenda)
+                .then(key => {
+                    if (agenda.openingprayeruserid) {
+                        this.createActivity(key, agenda.openingprayeruserid, 'opening prayer');
+                    }
+                    if (agenda.spiritualthoughtuserid) {
+                        this.createActivity(key, agenda.spiritualthoughtuserid, 'spiritual thought');
+                    }
+                    if (agenda.closingprayeruserid) {
+                        this.createActivity(key, agenda.closingprayeruserid, 'closing prayer');
+                    }
 
-        this.firebaseservice.createAgenda(agenda)
-            .then(key => {
-                if (agenda.openingprayeruserid) {
-                    this.createActivity(key, agenda.openingprayeruserid, 'opening prayer');
-                }
-                if (agenda.spiritualthoughtuserid) {
-                    this.createActivity(key, agenda.spiritualthoughtuserid, 'spiritual thought');
-                }
-                if (agenda.closingprayeruserid) {
-                    this.createActivity(key, agenda.closingprayeruserid, 'closing prayer');
-                }
-
-                this.nav.setRoot(AgendasPage);
-            })
-            .catch(err => this.showAlert('Internal server error.'))
+                    this.nav.setRoot(AgendasPage);
+                })
+                .catch(err => this.showAlert('Internal server error.'))
+        }
     }
-
 
     showAlert(errText) {
         // let alert = this.alertCtrl.create({

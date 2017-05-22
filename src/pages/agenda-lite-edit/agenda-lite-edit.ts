@@ -245,22 +245,25 @@ export class AgendaLiteEditPage {
     }
     value.discussionitems = (value.discussionitems != undefined && value.discussionitems.length > 0) ? value.discussionitems.replace(/-/gi, '').trim() : '';
     let formattedAgendaObj = this.formatAgendaObj(value);
-    this.firebaseservice.updateAgendaLite(formattedAgendaObj, this.agendaKey)
-      .then(res => {
-        this.nav.popToRoot();
-        if (formattedAgendaObj.openingprayeruserid) {
-          this.createActivity('opening prayer', formattedAgendaObj.openingprayeruserid);
-        }
-        if (formattedAgendaObj.spiritualthoughtuserid) {
-          this.createActivity('spiritual thought', formattedAgendaObj.spiritualthoughtuserid);
-        }
-        if (formattedAgendaObj.closingprayeruserid) {
-          this.createActivity('closing prayer', formattedAgendaObj.closingprayeruserid, );
-        }
-      })
-      .catch(err => { this.showAlert('Internal server error.') })
+    if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
+      this.showAlert('Invalid date');
+    } else {
+      this.firebaseservice.updateAgendaLite(formattedAgendaObj, this.agendaKey)
+        .then(res => {
+          this.nav.popToRoot();
+          if (formattedAgendaObj.openingprayeruserid) {
+            this.createActivity('opening prayer', formattedAgendaObj.openingprayeruserid);
+          }
+          if (formattedAgendaObj.spiritualthoughtuserid) {
+            this.createActivity('spiritual thought', formattedAgendaObj.spiritualthoughtuserid);
+          }
+          if (formattedAgendaObj.closingprayeruserid) {
+            this.createActivity('closing prayer', formattedAgendaObj.closingprayeruserid, );
+          }
+        })
+        .catch(err => { this.showAlert('Internal server error.') })
+    }
   }
-
   delete() {
     this.firebaseservice.removeAgendaLite(this.agendaKey)
       .then(res => {
@@ -355,6 +358,7 @@ export class AgendaLiteEditPage {
       if (e.length > 27) {
         e = e.substr(0, 27);
       }
+      e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
       return e;
     });
     $event.target.value = newValue.join('\n');
