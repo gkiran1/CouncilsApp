@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, ActionSheetController, MenuController, LoadingController, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChangePasswordPage } from '../edit-profile/change-password';
 import { AppService } from '../../providers/app-service';
@@ -40,7 +40,8 @@ export class EditProfilePage {
         public actionSheetCtrl: ActionSheetController,
         public menuctrl: MenuController,
         public loadingCtrl: LoadingController,
-        public alertCtrl: AlertController) {
+        public alertCtrl: AlertController,
+        public toast: ToastController) {
 
         this.profile = new User;
 
@@ -107,7 +108,7 @@ export class EditProfilePage {
 
     cancel() {
         if (this.isChangeflag) {
-            // this.showAlertPopup('failure', 'There are unsaved changes.do you want to discard it ?');
+            this.showToaster('Click save to continue');
         } else {
             this.nav.popToRoot({ animate: true, animation: 'transition', direction: 'back' });
         }
@@ -120,6 +121,21 @@ export class EditProfilePage {
             buttons: ['OK']
         });
         alert.present();
+    }
+
+    showToaster(errText) {
+        // let alert = this.alertCtrl.create({
+        //   title: '',
+        //   subTitle: errText,
+        //   buttons: ['OK']
+        // });
+        // alert.present();
+        let toast = this.toast.create({
+            message: errText,
+            duration: 3000
+        })
+
+        toast.present();
     }
 
     showAlert1(reason, text) {
