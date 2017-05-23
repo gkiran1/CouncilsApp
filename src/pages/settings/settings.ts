@@ -123,7 +123,7 @@ export class SettingsPage {
                 var councilId = snapshot.val()['councilid'];
                 var createdDate = snapshot.val()['agendadate'];
                 var councils = localStorage.getItem('userCouncils').split(',');
-
+                var des = snapshot.val()['agendacouncil'];
                 //if (localStorage.getItem('allowed') === 'true') {
 
                 firebase.database().ref().child('users/' + localStorage.getItem('securityToken')).update({ googlecalendaradded: true });
@@ -145,7 +145,8 @@ export class SettingsPage {
                                 nodename: 'agendas',
                                 createddate: new Date().toISOString(),
                                 createdtime: new Date().toTimeString(),
-                                userrecievedid: localStorage.getItem('securityToken')
+                                userrecievedid: localStorage.getItem('securityToken'),
+                                description: des
                             }).catch(err => { throw err });
 
                             var request = gapi.client.request({
@@ -155,8 +156,8 @@ export class SettingsPage {
                                     'Authorization': 'Bearer ' + localStorage.getItem('gcToken')
                                 },
                                 'body': JSON.stringify({
-                                    "summary": 'Agendas',
-                                    "location": 'New Agenda',
+                                    "summary": 'Councils Agenda',
+                                    "location": '"' + des + ' Council' + '"',
                                     "description": 'New Agenda has been created',
                                     "start": {
                                         "dateTime": createdDate,
@@ -200,6 +201,7 @@ export class SettingsPage {
                 var councilId = snapshot.val()['councilid'];
                 var createdDate = snapshot.val()['assigneddate'];
                 var councils = localStorage.getItem('userCouncils').split(',');
+                var des = snapshot.val()['description'];
 
                 // if (localStorage.getItem('allowed') === 'true') {
 
@@ -219,7 +221,8 @@ export class SettingsPage {
                                 nodename: 'assignments',
                                 createddate: new Date().toISOString(),
                                 createdtime: new Date().toTimeString(),
-                                userrecievedid: localStorage.getItem('securityToken')
+                                userrecievedid: localStorage.getItem('securityToken'),
+                                description: des
                             }).catch(err => { throw err });
 
                             //Sending the google calendar invite from the google api
@@ -232,8 +235,8 @@ export class SettingsPage {
                                     'Authorization': 'Bearer ' + localStorage.getItem('gcToken')
                                 },
                                 'body': JSON.stringify({
-                                    "summary": 'Assignments',
-                                    "location": 'New Assignment',
+                                    "summary": 'Councils Assignment',
+                                    "location": '"' + des + '"',
                                     "description": 'New Assignment has been created',
                                     "start": {
                                         "dateTime": createdDate,
