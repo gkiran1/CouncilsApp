@@ -267,6 +267,9 @@ export class AgendaLiteEditPage {
   delete() {
     this.firebaseservice.removeAgendaLite(this.agendaKey)
       .then(res => {
+
+        this.firebaseservice.removeActivities(this.agendaKey);
+
         // if (this.agenda.openingprayeruserid) {
         //   this.createActivity('opening prayer', this.agenda.openingprayeruserid);
         // }
@@ -290,7 +293,7 @@ export class AgendaLiteEditPage {
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
-                 this.delete();
+            this.delete();
           }
         },
         {

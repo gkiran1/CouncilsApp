@@ -287,6 +287,9 @@ export class AgendaEditPage {
     delete() {
         this.firebaseservice.removeAgenda(this.agendaKey)
             .then(res => {
+
+                this.firebaseservice.removeActivities(this.agendaKey);
+
                 // if (this.agenda.openingprayeruserid) {
                 //     this.createActivity('opening prayer', this.agenda.openingprayeruserid);
                 // }
@@ -323,7 +326,7 @@ export class AgendaEditPage {
                 }
             ]
         });
-        actionSheet.present();  
+        actionSheet.present();
     }
 
     showAlert(errText) {

@@ -963,6 +963,17 @@ export class FirebaseService {
         });
     }
 
+    removeActivities(entityId) {
+        var activitiesRef = firebase.database().ref().child('activities').orderByChild('entityid').equalTo(entityId);
+
+        activitiesRef.once('value').then(function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                firebase.database().ref().child('activities/' + childSnapshot.key).remove();
+            });
+            return true;
+        });
+    }
+
     getActivities(userId) {
         return this.af.database.list('activities', {
             query: {
