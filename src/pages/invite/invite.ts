@@ -82,7 +82,7 @@ export class InviteMemberPage {
                         .then(res => {
                             this.navctrl.push(InvitationSuccessPage)
                         })
-                        .catch(err => this.showAlert('Already invited'))
+                        .catch(err => this.showAlert('Email taken'))
                 } else {
                     this.showAlert('Internal server error.');
                 }

@@ -89,7 +89,14 @@ export class DonationsSendPage {
       if (response.error) {
         // Show the errors on the form
         loader.dismiss();
-        this.showAlert(response.error.message);
+        if (response.error.code === 'incorrect_number') {
+          this.showAlert('Invalid card number');
+        } else if (response.error.code === 'invalid_expiry_year' || response.error.code === 'invalid_expiry_month') {
+          this.showAlert('Invalid expiration number');
+        } else {
+          this.showAlert(response.error.message);
+        }
+
       } else {
         // response contains id and card, which contains additional card details
         this.token = response.id;
