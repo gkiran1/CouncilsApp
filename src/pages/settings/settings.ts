@@ -17,7 +17,6 @@ import { NewMenuPage } from '../newmenu/newmenu';
     selector: 'settings-page',
     templateUrl: 'settings.html',
     providers: [AssignmentsListPage, ActiveCouncilsPage]
-
 })
 
 export class SettingsPage {
@@ -106,6 +105,7 @@ export class SettingsPage {
         this.sendInvite();
 
     }
+
     sendInvite() {
         var apiKey = this.APIKEY;
 
@@ -124,6 +124,8 @@ export class SettingsPage {
                 var createdDate = snapshot.val()['agendadate'];
                 var councils = localStorage.getItem('userCouncils').split(',');
                 var des = snapshot.val()['agendacouncil'];
+                var dt = new Date(createdDate);
+
                 //if (localStorage.getItem('allowed') === 'true') {
 
                 firebase.database().ref().child('users/' + localStorage.getItem('securityToken')).update({ googlecalendaradded: true });
@@ -164,7 +166,7 @@ export class SettingsPage {
                                         "timeZone": "Asia/Kolkata"
                                     },
                                     "end": {
-                                        "dateTime": createdDate,
+                                        "dateTime": dt.setHours(dt.getHours() + 1),
                                         "timeZone": "Asia/Kolkata" // TODO : Parameterize this timezone
                                     },
                                     "reminders": {
@@ -202,6 +204,7 @@ export class SettingsPage {
                 var createdDate = snapshot.val()['assigneddate'];
                 var councils = localStorage.getItem('userCouncils').split(',');
                 var des = snapshot.val()['description'];
+                var dt = new Date(createdDate);
 
                 // if (localStorage.getItem('allowed') === 'true') {
 
@@ -243,7 +246,7 @@ export class SettingsPage {
                                         "timeZone": "Asia/Kolkata"
                                     },
                                     "end": {
-                                        "dateTime": createdDate,
+                                        "dateTime": dt.setHours(dt.getHours() + 1),
                                         "timeZone": "Asia/Kolkata" // TODO : Parameterize this timezone
                                     },
                                     "reminders": {

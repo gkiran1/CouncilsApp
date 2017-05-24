@@ -327,6 +327,36 @@ export class AgendaPage {
         }
     }
 
+ onBlur() {
+    if (this.spiritualwelfare.trim() === '-') {
+      this.spiritualwelfare = "";
+    }
+  }
+
+   onBlur1() {
+    if (this.temporalwelfare.trim() === '-') {
+      this.temporalwelfare = "";
+    }
+  }
+
+ onBlur2() {
+    if (this.fellowshipitems.trim() === '-') {
+      this.fellowshipitems = "";
+    }
+  }
+
+   onBlur3() {
+    if (this.missionaryitems.trim() === '-') {
+      this.missionaryitems = "";
+    }
+  }
+
+   onBlur4() {
+    if (this.event.trim() === '-') {
+      this.event = "";
+    }
+  }
+
     pad(number) {
         if (number < 10) {
             return '0' + number;
@@ -418,4 +448,5 @@ export class AgendaPage {
     toggleGroup1() {
         this.shownGroup1 = !this.shownGroup1;
     };
+
 }

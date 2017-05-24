@@ -232,6 +232,9 @@ export class NewAssignmentPage {
   delete() {
     this.firebaseservice.removeAssignment(this.assignmentKey)
       .then(res => {
+
+        this.firebaseservice.removeActivities(this.assignmentKey);
+
         // this.createActivity(this.assignmentKey, 'deleted');
         this.nav.pop();
       })

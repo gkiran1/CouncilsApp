@@ -287,6 +287,9 @@ export class AgendaEditPage {
     delete() {
         this.firebaseservice.removeAgenda(this.agendaKey)
             .then(res => {
+
+                this.firebaseservice.removeActivities(this.agendaKey);
+
                 // if (this.agenda.openingprayeruserid) {
                 //     this.createActivity('opening prayer', this.agenda.openingprayeruserid);
                 // }
@@ -323,7 +326,7 @@ export class AgendaEditPage {
                 }
             ]
         });
-        actionSheet.present();  
+        actionSheet.present();
     }
 
     showAlert(errText) {
@@ -518,6 +521,36 @@ export class AgendaEditPage {
 
         this.closingprayer = user;
     }
+
+onBlur() {
+    if (this.spiritualwelfare.trim() === '-') {
+      this.spiritualwelfare = "";
+    }
+  }
+
+   onBlur1() {
+    if (this.temporalwelfare.trim() === '-') {
+      this.temporalwelfare = "";
+    }
+  }
+
+ onBlur2() {
+    if (this.fellowshipitems.trim() === '-') {
+      this.fellowshipitems = "";
+    }
+  }
+
+   onBlur3() {
+    if (this.missionaryitems.trim() === '-') {
+      this.missionaryitems = "";
+    }
+  }
+
+   onBlur4() {
+    if (this.event.trim() === '-') {
+      this.event = "";
+    }
+  }
 
     pad(number) {
         if (number < 10) {

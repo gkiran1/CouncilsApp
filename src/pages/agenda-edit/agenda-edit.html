@@ -106,7 +106,7 @@
                         <ion-item class="input-item">
                             <ion-label *ngIf="!spiritualwelfare">Spiritual Welfare</ion-label>
                             <ion-label floating color="secondary" *ngIf="spiritualwelfare">Spiritual Welfare</ion-label>
-                            <ion-textarea type="text" wrap="off" spellcheck="true" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare"
+                            <ion-textarea type="text" wrap="off" spellcheck="true" (blur)="onBlur()" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare"
                                 [(ngModel)]="spiritualwelfare" formControlName="spiritualwelfare" maxlength="500" (keyup)="spiritualkey($event)">
                                 </ion-textarea>
                         </ion-item>
@@ -128,7 +128,7 @@
                         <ion-item class="input-item">
                             <ion-label *ngIf="!temporalwelfare">Temporal Welfare</ion-label>
                             <ion-label floating color="secondary" *ngIf="temporalwelfare">Temporal Welfare</ion-label>
-                            <ion-textarea type="text" wrap="off" spellcheck="true" (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare"
+                            <ion-textarea type="text" wrap="off" spellcheck="true" (blur)="onBlur1()" (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare"
                                 [(ngModel)]="temporalwelfare" formControlName="temporalwelfare" maxlength="500" (keyup)="temporalkey($event)">
                                 </ion-textarea>
                         </ion-item>
@@ -149,7 +149,7 @@
                         <ion-item class="input-item">
                             <ion-label *ngIf="!fellowshipitems">Fellowship Items</ion-label>
                             <ion-label floating color="secondary" *ngIf="fellowshipitems">Fellowship Items</ion-label>
-                            <ion-textarea type="text" wrap="off" spellcheck="true" (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems"
+                            <ion-textarea type="text" wrap="off" spellcheck="true" (blur)="onBlur2()" (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems"
                                 [(ngModel)]="fellowshipitems" formControlName="fellowshipitems" maxlength="500" (keyup)="fellowshipkey($event)">
                                 </ion-textarea>
                         </ion-item>
@@ -170,7 +170,7 @@
                         <ion-item class="input-item">
                             <ion-label *ngIf="!missionaryitems">Missionary Items</ion-label>
                             <ion-label floating color="secondary" *ngIf="missionaryitems">Missionary Items</ion-label>
-                            <ion-textarea type="text" wrap="off" spellcheck="true" (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems"
+                            <ion-textarea type="text" wrap="off" spellcheck="true" (blur)="onBlur3()" (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems"
                                 [(ngModel)]="missionaryitems" formControlName="missionaryitems" maxlength="500" (keyup)="missionarykey($event)">
                                 </ion-textarea>
                         </ion-item>
@@ -191,7 +191,7 @@
                         <ion-item class="input-item">
                             <ion-label *ngIf="!event">Events</ion-label>
                             <ion-label floating color="secondary" *ngIf="event">Events</ion-label>
-                            <ion-textarea type="text" wrap="off" spellcheck="true" (focus)="eventfocus()" elastic id="event" name="event" [(ngModel)]="event"
+                            <ion-textarea type="text" wrap="off" spellcheck="true" (blur)="onBlur4()" (focus)="eventfocus()" elastic id="event" name="event" [(ngModel)]="event"
                                 formControlName="event" maxlength="500" (keyup)="eventkey($event)">
                                 </ion-textarea>
                         </ion-item>
