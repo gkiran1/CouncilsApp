@@ -475,5 +475,11 @@ export class AgendaLiteEditPage {
   toggleGroup1() {
     this.shownGroup1 = !this.shownGroup1;
   };
+ 
+  onBlur() {
+    if (this.discussionitems.trim() === '-') {
+      this.discussionitems = "";
+    }
+  }
 
 }
