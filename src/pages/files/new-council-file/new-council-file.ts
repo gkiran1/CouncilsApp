@@ -136,7 +136,7 @@ export class NewCouncilFilePage {
       value.createdUser = this.createdUser;
       value.councilid = value.council.$key;
       value.councilname = value.council.council;
-      value.filename = 'Image' + '_' + this.now + '.png';
+      value.filename = 'IMG' + this.now + '.png';
       value.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
       this.firebaseservice.saveFile(value).then(fileId => {
         this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
@@ -241,18 +241,18 @@ export class NewCouncilFilePage {
       spinner:'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
     });
-    if (this.platform.is('ios')) {
+    if (!this.platform.is('ios')) {
       //alert('if');
       // var options = ["public.data", "public.audio"];
       FilePicker.pickFile(
          (uri) =>{
-          // alert(uri);
+           //alert(uri);
            loader.present();
           this.uploadFile(uri, value, loader);
         },
         function (error) {
           loader.dismiss();
-          // alert(error);
+           //alert(error);
         });
     }
     else {
@@ -300,26 +300,33 @@ export class NewCouncilFilePage {
   }
 
   uploadFile(uri, value, loader) {
-    this.file = uri.toString();
-     FilePath.resolveNativePath(this.file)
-       .then(filePath => {
-      //let filePath = 'file:/'+this.file;
+    //loader.dismiss();
+     this.file = uri.toString();
+    //  FilePath.resolveNativePath(this.file)
+    //    .then(filePath => {
+      let filePath = 'file://'+this.file;
       //alert('1:'+ filePath);
         (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
-          //alert('2:'+ JSON.stringify(res));
+          //alert('2:'+ res);
           res.file((resFile) => {
             //alert('3:'+ JSON.stringify(resFile));
             var reader = new FileReader();
             //let newfile = new File();
-            File.readAsArrayBuffer(resFile, 'newimage')
-            .then(res=>{
-              //alert('res'+JSON.stringify(res));
-            })
-            .catch(err=>{
-              //alert('err file reader');
-              //alert(JSON.stringify(err));
-            });
+            // File.readAsArrayBuffer(res, 'newimage')
+            // .then(resN=>{
+            //   //alert('res'+JSON.stringify(res));
+            // })
+            // .catch(err=>{
+            //   alert('err file reader'+err);
+            //   //alert(JSON.stringify(err));
+            // });
+            //  setTimeout(() => {
+            //   alert('timeout tirgger');
+              
+            // },3000);
             reader.readAsArrayBuffer(resFile);
+           
+            
             reader.onloadend = (evt: any) => {
               var imgBlob = new Blob([evt.target.result]);
               //alert(imgBlob);
@@ -338,12 +345,19 @@ export class NewCouncilFilePage {
                 case 'DOC':
                   mimeType = 'application/msword';
                   break;
+                case 'DOCX':
+                  mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+                  break;
                 case 'PDF':
                   mimeType = 'application/pdf';
                   break;
                 case 'XLS':
                   mimeType = 'application/vnd.ms-excel';
                   break;
+                case 'XLSX':
+                  mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+                  break;
+
                 default:
                   break;
               }
@@ -381,12 +395,16 @@ export class NewCouncilFilePage {
               })
             }
           })
+        }).catch(err => {
+          //alert(err);
+          loader.dismiss();
+          console.log(err);
         })
-      }).catch(error => {
-        loader.dismiss();
-         //alert(error)
-        console.log(error);
-      });
+      // }).catch(error => {
+      //   //loader.dismiss();
+      //    //alert(error)
+      //   console.log(error);
+      // });
   }
   cancel() {
     this.nav.pop();
