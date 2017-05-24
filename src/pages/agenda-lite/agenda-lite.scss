@@ -50,4 +50,12 @@ agenda-lite{
     .icon-size{
         font-size: 10px !important;
     }
+      .icon-line.item-block .item-inner {
+        margin-right: 16px;
+        padding-right: 0px !important;
+        border-bottom: 1px solid #e8e9eb !important;
+    }
+    .icon-line.input-item .item-inner .input-wrapper{
+        border-bottom: none !important;
+    }
 }
