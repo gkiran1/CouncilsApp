@@ -21,7 +21,7 @@ export class NotificationsPage {
     constructor(private nav: NavController,
         public navParams: NavParams,
         public firebaseService: FirebaseService,
-         public toast: ToastController,
+        public toast: ToastController,
         public alertCtrl: AlertController) {
         var userId = localStorage.getItem('securityToken');
         if (userId !== null) {
@@ -43,9 +43,9 @@ export class NotificationsPage {
                         this.nav.push(AgendaEditPage, { agendaselected: agenda });
                     }
                 }
-                else {
-                    this.showAlert('This agenda has been deleted!');
-                }
+                // else {
+                //     this.showAlert('This agenda has been deleted!');
+                // }
             });
         }
         else if (notification.nodename === 'assignments') {
@@ -53,9 +53,9 @@ export class NotificationsPage {
                 if (assignment.isactive) {
                     this.nav.push(NewAssignmentPage, { assignment: assignment });
                 }
-                else {
-                    this.showAlert('This assignment has been deleted!');
-                }
+                // else {
+                //     this.showAlert('This assignment has been deleted!');
+                // }
             });
         }
         else if (notification.nodename === 'discussions') {

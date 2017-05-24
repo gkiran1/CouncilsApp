@@ -118,20 +118,19 @@ export class SettingsPage {
             localStorage.setItem('childAdded', 'true');
 
             this.rootRef.child('agendas').endAt().limitToLast(1).on('child_added', function (snapshot) {
-
                 var agendaId = snapshot.getKey();
                 var councilId = snapshot.val()['councilid'];
                 var createdDate = snapshot.val()['agendadate'];
                 var councils = localStorage.getItem('userCouncils').split(',');
                 var des = snapshot.val()['agendacouncil'];
                 var dt = new Date(createdDate);
-
+                dt.setHours(dt.getHours() + 1);
+                var enddate = dt.toISOString();
                 //if (localStorage.getItem('allowed') === 'true') {
 
                 firebase.database().ref().child('users/' + localStorage.getItem('securityToken')).update({ googlecalendaradded: true });
 
                 if (councils.indexOf(councilId) !== -1) {
-
                     var calendarRef = firebase.database().ref().child('calendarinvites').orderByChild('nodeid').equalTo(agendaId);
 
                     calendarRef.once("value", function (snap) {
@@ -166,7 +165,7 @@ export class SettingsPage {
                                         "timeZone": "Asia/Kolkata"
                                     },
                                     "end": {
-                                        "dateTime": dt.setHours(dt.getHours() + 1),
+                                        "dateTime": enddate,
                                         "timeZone": "Asia/Kolkata" // TODO : Parameterize this timezone
                                     },
                                     "reminders": {
@@ -205,7 +204,8 @@ export class SettingsPage {
                 var councils = localStorage.getItem('userCouncils').split(',');
                 var des = snapshot.val()['description'];
                 var dt = new Date(createdDate);
-
+                dt.setHours(dt.getHours() + 1);
+                var enddate = dt.toISOString();
                 // if (localStorage.getItem('allowed') === 'true') {
 
                 firebase.database().ref().child('users/' + localStorage.getItem('securityToken')).update({ googlecalendaradded: true })
@@ -246,7 +246,7 @@ export class SettingsPage {
                                         "timeZone": "Asia/Kolkata"
                                     },
                                     "end": {
-                                        "dateTime": dt.setHours(dt.getHours() + 1),
+                                        "dateTime": enddate,
                                         "timeZone": "Asia/Kolkata" // TODO : Parameterize this timezone
                                     },
                                     "reminders": {
