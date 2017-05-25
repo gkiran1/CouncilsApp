@@ -36,7 +36,7 @@
                 <ion-icon class="councils-icon__checkmark" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark"
                     md="ios-checkmark"></ion-icon>
                     <p class="font2">{{msg.timestamp | customdateformat}}</p>
-                    <p class="font5 line-height">{{msg.text}}</p>
+                    <p class="font5 line-height" [innerHTML]="msg.text | addtagcolor"></p>
             </ion-item>
         </ion-list>
     </div>
