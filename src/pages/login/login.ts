@@ -73,9 +73,9 @@ export class LoginPage {
                         localStorage.setItem('isMenuCentered', '0');
                         localStorage.setItem('isAdmin', usrs[0].isadmin.toString());
                         let token = localStorage.getItem('pushtoken');
-                        // if (token !== '') {
-                        //     this.firebaseService.setPushToken(uid, token);
-                        // }
+                        if (token !== '') {
+                            this.firebaseService.updateToken(uid);
+                        }
                     }
 
                     else {
