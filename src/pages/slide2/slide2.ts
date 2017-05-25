@@ -143,7 +143,7 @@ export class slide2Page {
           }
         },
         {
-          text: 'Add Note',
+          text: 'Add Prompting',
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
