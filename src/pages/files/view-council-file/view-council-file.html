@@ -26,8 +26,11 @@
         <ion-list>
             <ion-item [ngClass]="filesArray.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first': (i === filesArray.length-1 ? 'ion-item-last' : 'ion-item-middle'))" *ngFor="let file of filesArray; let i = index"
                 text-wrap>
-                <ion-icon item-left class="councils-icon__file menu-icon" name="document" color="secondary" (click)="downloadFile(file)"></ion-icon>
+                
                 <ion-row>
+                    <ion-col class="icon-col">
+                        <ion-icon class="councils-icon__file menu-icon" name="document" color="secondary" (click)="downloadFile(file)"></ion-icon>
+                    </ion-col>
                     <ion-col (click)="downloadFile(file)">
                         <p><span class="council-styles">{{file.filename}}</span></p>
                         <p class="font4">by <span ion-text color="secondary">{{file.createdUser}}</span></p>
