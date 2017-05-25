@@ -157,8 +157,7 @@ export class SettingsPage {
                                     'Authorization': 'Bearer ' + localStorage.getItem('gcToken')
                                 },
                                 'body': JSON.stringify({
-                                    "summary": 'Councils Agenda',
-                                    "location": '"' + des + ' Council' + '"',
+                                    "summary": 'Councils Agenda - ' + '"' + des + ' Council' + '"',
                                     "description": 'New Agenda has been created',
                                     "start": {
                                         "dateTime": createdDate,
@@ -238,8 +237,7 @@ export class SettingsPage {
                                     'Authorization': 'Bearer ' + localStorage.getItem('gcToken')
                                 },
                                 'body': JSON.stringify({
-                                    "summary": 'Councils Assignment',
-                                    "location": '"' + des + '"',
+                                    "summary": 'Councils Assignment - ' + '"' + des + '"',
                                     "description": 'New Assignment has been created',
                                     "start": {
                                         "dateTime": createdDate,
