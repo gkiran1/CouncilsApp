@@ -22,11 +22,11 @@ export class MyApp {
   securityToken;
   isUserLoggedIn;
 
-  constructor(platform: Platform, 
-  public alertCtrl: AlertController, 
-  public toast: ToastController,
-  public firebaseService: FirebaseService) {
-    
+  constructor(platform: Platform,
+    public alertCtrl: AlertController,
+    public toast: ToastController,
+    public firebaseService: FirebaseService) {
+
     platform.ready().then(() => {
       Keyboard.hideKeyboardAccessoryBar(false);
       this.addConnectivityListeners();
@@ -77,47 +77,47 @@ export class MyApp {
     });
   }
 
-  addConnectivityListeners(){
- 
+  addConnectivityListeners() {
+
     let onOnline = () => {
- 
+
       let offlinemessage = this.offlineToast().instance;
-      if(offlinemessage != null)
+      if (offlinemessage != null)
         offlinemessage.dismiss();
 
       let onlinemessage = this.onlineToast();
       onlinemessage.present();
- 
+
     };
- 
+
     let onOffline = () => {
       let onlinemessage = this.onlineToast().instance;
-      if(onlinemessage != null)
+      if (onlinemessage != null)
         onlinemessage.dismiss();
 
       let offlinemessage = this.offlineToast();
       offlinemessage.present();
     };
- 
+
     document.addEventListener('online', onOnline, false);
     document.addEventListener('offline', onOffline, false);
- 
+
   }
 
   offlineToast() {
     //if(state = 'offline')
-    return  this.toast.create({
-      message : "No network!",
+    return this.toast.create({
+      message: "No network!",
       duration: 3000
     });
-    
+
 
   }
 
   onlineToast() {
     //if(state = 'offline')
-    return  this.toast.create({
-      message : "Network connected!",
+    return this.toast.create({
+      message: "Network connected!",
       duration: 3000
     });
   }
@@ -173,6 +173,9 @@ export class MyApp {
 
       FCMPlugin.getToken(function (token) {
         localStorage.setItem('pushtoken', token);
+        if (this.securityToken !== null && this.securityToken !== 'null') {
+          this.firebaseService.updateToken(this.securityToken);
+        }
       });
     }
   }
