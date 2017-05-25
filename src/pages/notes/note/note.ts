@@ -58,7 +58,7 @@ export class NotePage {
 
     delete() {
         this.firebaseservice.removeNote(this.noteKey)
-            .then(res => { this.nav.pop(); })
+            .then(res => { this.nav.popToRoot(); })
             .catch(err => { this.showAlert('Internal server error.') })
     }
 
