@@ -28,12 +28,12 @@
       <ion-input type="email" name="email" formControlName="email"></ion-input>
     </ion-item>
     <ion-list class="period-list" no-lines>
-      <ion-item (click)="selectDonationtype('onetime')" class="top-border">
+      <ion-item (click)="selectDonationtype('onetime')" class="top-border topborderpadding">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': donationtype === 'onetime'}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': donationtype !== 'onetime'}"></ion-icon>
         <h3>One time donation</h3>
       </ion-item>
-      <ion-item (click)="selectDonationtype('monthly')">
+      <ion-item (click)="selectDonationtype('monthly')" class="border-gap">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': donationtype === 'monthly'}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': donationtype !== 'monthly'}"></ion-icon>
         <h3>Monthly donation</h3>

@@ -19,7 +19,7 @@ page-donations-send {
         font-size: 13px !important;
         color: #35373a !important;
         margin: 0;
-        padding: 11px 8px 11px 16px;
+        padding: 14px 8px 11px 16px;
         background-color:#FAFAFA !important;
     }
      ion-icon.active{
@@ -30,5 +30,11 @@ page-donations-send {
     }
     .top-border{
         border-top: 1px solid #E8E9EB !important;
+    }
+     .topborderpadding{
+        padding-top: 10px !important; 
+    }
+    .border-gap{
+        margin-top: -5px !important; 
     }
 }

@@ -14,7 +14,7 @@
 </ion-header>
 <ion-content>
     <ion-list>
-        <ion-item class="ion-item-middle" *ngFor="let user of users" (click)="editMember(user)">
+        <ion-item [ngClass]="i===0?'ion-item-first':(i===users.length - 1? 'ion-item-last': 'ion-item-middle')" *ngFor="let user of users; let i = index" [attr.data-index]="i" (click)="editMember(user)">
             <ion-avatar item-left>
                 <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
                 <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
