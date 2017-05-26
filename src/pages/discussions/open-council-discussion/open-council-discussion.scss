@@ -90,7 +90,7 @@ open-council-discussion-page {
     .description{
          background: #FAFAFA !important;
          padding-bottom:15px;
-         border-bottom: none;
+        //  border-bottom: none;
     }
     .text-input-ios,.text-input-md,.text-input-wp{
         margin: 5px 0 0 0 !important;
@@ -100,5 +100,8 @@ open-council-discussion-page {
     }
     .tag-color{
         color:#32b38a;
+    }
+    .description.item-ios,.description.item-md{
+        border-bottom: 2px solid #E8E9EB;
     }
 }

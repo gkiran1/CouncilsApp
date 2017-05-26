@@ -19,14 +19,14 @@
 	<form (ngSubmit)="createCouncil()" #newCouncilForm="ngForm">
 		<ion-item-group>
 			<ion-item-divider>
-				<ion-label class="font1">Choose a name for your council:</ion-label>
+				<ion-label class="font1 top-padding">Choose a name for your council:</ion-label>
 			</ion-item-divider>
 
 			<ion-item>
 				<ion-input type="text" id="council" name="council" spellcheck="true" maxlength="25" [(ngModel)]="newCouncil.council" placeholder="Council Name"
 					clearInput required></ion-input>
 			</ion-item>
-			<ion-item-divider>
+			<ion-item-divider class="empty">
 				<ion-label class="font2">
 					Must be 25 characters or less
 				</ion-label>

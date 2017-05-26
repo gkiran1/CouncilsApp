@@ -106,4 +106,7 @@ open-private-discussion-page {
     ion-footer .button-ios,ion-footer .button-md,ion-footer .button-wp{
         height: 1.5em;
     }
+     .description.item-ios,.description.item-md{
+        border-bottom: 2px solid #E8E9EB;
+    }
 }
