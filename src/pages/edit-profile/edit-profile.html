@@ -44,7 +44,7 @@
         <ion-item-divider class="empty"></ion-item-divider>
         <ion-item class="form-item-first">
             <ion-label floating>Email</ion-label>
-            <ion-input type="text" name="email" [(ngModel)]="profile.email" formControlName="email" (keyup)="keypresssed($event)"></ion-input>
+            <ion-input type="text" readonly name="email" [(ngModel)]="profile.email" formControlName="email" (keyup)="keypresssed($event)"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Phone</ion-label>
