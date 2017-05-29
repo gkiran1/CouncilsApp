@@ -68,6 +68,7 @@ export class LoginPage {
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
             .then(uid => {
+                this.FCMSetup();
                 this.firebaseService.getUsersByKey(uid).subscribe(usrs => {
                     if (usrs[0].isactive) {
                         flag = true;
@@ -83,7 +84,7 @@ export class LoginPage {
                     }
                     loader.dismiss();
                 });
-                this.FCMSetup();  // Need to be after subscribe
+
             })
             .catch(err => {
                 loader.dismiss();
