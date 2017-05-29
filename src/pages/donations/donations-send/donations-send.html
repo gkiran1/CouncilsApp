@@ -27,7 +27,7 @@
       <ion-label floating>Email</ion-label>
       <ion-input type="email" name="email" formControlName="email" validate-onblur></ion-input>
     </ion-item>
-    <ion-label class="error-msg" *ngIf="!donationForm.controls.email.valid && donationForm.controls.email.dirty">Please enter valid email</ion-label>
+    <ion-label class="error-msg" *ngIf="!donationForm.controls.email.valid && donationForm.controls.email.dirty">Invalid email</ion-label>
     <ion-list class="period-list" no-lines>
       <ion-item (click)="selectDonationtype('onetime')" class="top-border topborderpadding">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': donationtype === 'onetime'}"></ion-icon>
