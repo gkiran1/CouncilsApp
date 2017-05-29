@@ -14,7 +14,9 @@
 </ion-header>
 <ion-content>
     <ion-list>
-        <ion-item [ngClass]="i===0?'ion-item-first':(i===users.length - 1? 'ion-item-last': 'ion-item-middle')" *ngFor="let user of users; let i = index" [attr.data-index]="i" (click)="editMember(user)">
+        <ion-item [ngClass]="i===0?'ion-item-first':(i===users.length - 1? 'ion-item-last': 'ion-item-middle')" (click)="editMember(user)"
+            *ngFor="let user of users; let i = index" [attr.data-index]="i">
+            <!--<ion-item [ngClass]="i===0?'ion-item-first':(i===users.length - 1? 'ion-item-last': 'ion-item-middle')" *ngFor="let user of users; let i = index" [attr.data-index]="i" (click)="editMember(user)">-->
             <ion-avatar item-left>
                 <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
                 <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
@@ -26,6 +28,6 @@
              <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
 
             </button>
-        </ion-item>
+            </ion-item>
     </ion-list>
 </ion-content>
