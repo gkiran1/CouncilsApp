@@ -47,6 +47,7 @@ export class AgendaEditPage {
     agenda;
     shownGroup = false;
     shownGroup1 = false;
+    dateErr = false;
 
     constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
         public firebaseservice: FirebaseService, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
@@ -246,6 +247,7 @@ export class AgendaEditPage {
 
 
     edit(value) {
+        this.dateErr = false;
         if (value.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== value.openingprayer)) {
             this.showAlert('Invalid user');
             return;
@@ -265,7 +267,8 @@ export class AgendaEditPage {
         value.event = (value.event != undefined && value.event.length > 0) ? value.event.replace(/-/gi, '').trim() : '';
         let formattedAgendaObj = this.formatAgendaObj(value);
         if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
-            this.showAlert('Invalid date');
+            this.dateErr = true;
+            // this.showAlert('Invalid date');
         } else {
             this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
                 .then(res => {
@@ -522,35 +525,35 @@ export class AgendaEditPage {
         this.closingprayer = user;
     }
 
-onBlur() {
-    if (this.spiritualwelfare.trim() === '-') {
-      this.spiritualwelfare = "";
+    onBlur() {
+        if (this.spiritualwelfare.trim() === '-') {
+            this.spiritualwelfare = "";
+        }
     }
-  }
 
-   onBlur1() {
-    if (this.temporalwelfare.trim() === '-') {
-      this.temporalwelfare = "";
+    onBlur1() {
+        if (this.temporalwelfare.trim() === '-') {
+            this.temporalwelfare = "";
+        }
     }
-  }
 
- onBlur2() {
-    if (this.fellowshipitems.trim() === '-') {
-      this.fellowshipitems = "";
+    onBlur2() {
+        if (this.fellowshipitems.trim() === '-') {
+            this.fellowshipitems = "";
+        }
     }
-  }
 
-   onBlur3() {
-    if (this.missionaryitems.trim() === '-') {
-      this.missionaryitems = "";
+    onBlur3() {
+        if (this.missionaryitems.trim() === '-') {
+            this.missionaryitems = "";
+        }
     }
-  }
 
-   onBlur4() {
-    if (this.event.trim() === '-') {
-      this.event = "";
+    onBlur4() {
+        if (this.event.trim() === '-') {
+            this.event = "";
+        }
     }
-  }
 
     pad(number) {
         if (number < 10) {

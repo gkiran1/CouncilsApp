@@ -22,13 +22,13 @@
             <ion-input type="text" readonly (click)="showCouncilsModal($event, agendaliteeditForm.value)" formControlName="assignedcouncil"></ion-input>
         </ion-item>
 
-        <ion-item class="input-item">
+        <ion-item [class.invalid]="dateErr" class="input-item">
             <ion-label floating>Date & Time</ion-label>
             <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDD MMM D YYYY, h, mm, A" name="assigneddate" formControlName="assigneddate"
-                [max]="2500" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55">
+                validate-onblur [max]="2500" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55">
                 </ion-datetime>
         </ion-item>
-
+        <ion-label class="error-msg" *ngIf="dateErr">Invalid date</ion-label>
         <ion-item class="input-item">
             <ion-label floating>Opening Hymn</ion-label>
             <ion-input type="text" spellcheck="true" name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>
@@ -108,8 +108,8 @@
             <ion-item class="input-item">
                 <ion-label *ngIf="!discussionitems">Discussion Items</ion-label>
                 <ion-label floating color="secondary" *ngIf="discussionitems">Discussion Items</ion-label>
-                <ion-textarea type="text" wrap="off" spellcheck="true" (blur)="onBlur()" (focus)="discussionfocus()" elastic id="discussionitems" name="discussionitems"
-                    [(ngModel)]="discussionitems" formControlName="discussionitems" maxlength="500" (keyup)="keypressed($event)">
+                <ion-textarea type="text" wrap="off" spellcheck="true" (blur)="onBlur()" (focus)="discussionfocus()" elastic id="discussionitems"
+                    name="discussionitems" [(ngModel)]="discussionitems" formControlName="discussionitems" maxlength="500" (keyup)="keypressed($event)">
                     </ion-textarea>
             </ion-item>
         </ng-container>
@@ -117,9 +117,10 @@
             <ion-label class="label-styles">Discussion Items</ion-label>
             <ion-item *ngFor="let item of discussionitemsObj" class="item-styles input-item">
                 <ion-input type="text" readonly [value]="item" formControlName='discussionitems'></ion-input>
-                <button color="secondary" class="button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right (click)="plusBtn(item)">
+                <button color="secondary"  class="button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right
+                    (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
-                </button>
+                    </button>
             </ion-item>
         </ng-container>
 

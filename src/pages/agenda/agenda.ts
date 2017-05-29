@@ -37,6 +37,7 @@ export class AgendaPage {
     user;
     shownGroup = false;
     shownGroup1 = false;
+    dateErr = false;
 
     constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
         public firebaseservice: FirebaseService, public alertCtrl: AlertController,
@@ -90,6 +91,7 @@ export class AgendaPage {
 
     agendasArray = [];
     createagenda(agenda) {
+        this.dateErr = false;
         if (agenda.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== agenda.openingprayer)) {
             this.showAlert('Invalid user');
             return;
@@ -114,7 +116,8 @@ export class AgendaPage {
         agenda.spiritualthoughtuserid = (this.spiritualthought !== undefined) ? this.spiritualthought.$key : '';
         agenda.closingprayeruserid = (this.closingprayer !== undefined) ? this.closingprayer.$key : '';
         if (moment(assigneddate).isBefore(moment().set({ second: 0 }))) {
-            this.showAlert('Invalid date');
+            this.dateErr = true;
+            // this.showAlert('Invalid date');
         } else {
             this.firebaseservice.createAgenda(agenda)
                 .then(key => {
@@ -327,35 +330,35 @@ export class AgendaPage {
         }
     }
 
- onBlur() {
-    if (this.spiritualwelfare.trim() === '-') {
-      this.spiritualwelfare = "";
+    onBlur() {
+        if (this.spiritualwelfare.trim() === '-') {
+            this.spiritualwelfare = "";
+        }
     }
-  }
 
-   onBlur1() {
-    if (this.temporalwelfare.trim() === '-') {
-      this.temporalwelfare = "";
+    onBlur1() {
+        if (this.temporalwelfare.trim() === '-') {
+            this.temporalwelfare = "";
+        }
     }
-  }
 
- onBlur2() {
-    if (this.fellowshipitems.trim() === '-') {
-      this.fellowshipitems = "";
+    onBlur2() {
+        if (this.fellowshipitems.trim() === '-') {
+            this.fellowshipitems = "";
+        }
     }
-  }
 
-   onBlur3() {
-    if (this.missionaryitems.trim() === '-') {
-      this.missionaryitems = "";
+    onBlur3() {
+        if (this.missionaryitems.trim() === '-') {
+            this.missionaryitems = "";
+        }
     }
-  }
 
-   onBlur4() {
-    if (this.event.trim() === '-') {
-      this.event = "";
+    onBlur4() {
+        if (this.event.trim() === '-') {
+            this.event = "";
+        }
     }
-  }
 
     pad(number) {
         if (number < 10) {

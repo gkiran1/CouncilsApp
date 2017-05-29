@@ -33,6 +33,7 @@ export class AgendaLitePage {
   user;
   shownGroup = false;
   shownGroup1 = false;
+  dateErr = false;
 
   constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
@@ -81,6 +82,7 @@ export class AgendaLitePage {
 
   agendasArray = [];
   createagenda(agenda) {
+    this.dateErr = false;
     if (agenda.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== agenda.openingprayer)) {
       this.showAlert('Invalid user');
       return;
@@ -102,7 +104,8 @@ export class AgendaLitePage {
     agenda.closingprayeruserid = (this.closingprayer !== undefined) ? this.closingprayer.$key : '';
 
     if (moment(assigneddate).isBefore(moment().set({ second: 0 }))) {
-      this.showAlert('Invalid date');
+      this.dateErr = true;
+      // this.showAlert('Invalid date');
     } else {
       this.firebaseservice.createAgendaLite(agenda)
         .then(key => {
@@ -318,5 +321,5 @@ export class AgendaLitePage {
       this.discussionitems = "";
     }
   }
-  
+
 }

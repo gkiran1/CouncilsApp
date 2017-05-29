@@ -30,6 +30,7 @@ export class NewAssignmentPage {
   term;
   isPersonalAssignment;
   user;
+  dateErr = false;
 
   constructor(public modalCtrl: ModalController, public menuctrl: MenuController, public actionSheetCtrl: ActionSheetController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController, public toast: ToastController) {
     let assignment = navParams.get('assignment');
@@ -164,6 +165,7 @@ export class NewAssignmentPage {
   }
 
   createAssignment(value) {
+    this.dateErr = false;
     if (!this.assigneduser || (this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
       this.showAlert('Invalid user');
       return;
@@ -171,7 +173,8 @@ export class NewAssignmentPage {
     value.completedby = '';
     let formattedAssignmentObj = this.formatAssignmentObj(value);
     if (moment(formattedAssignmentObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
-      this.showAlert('Invalid date');
+      this.dateErr = true;
+      // this.showAlert('Invalid date');
     } else {
 
       this.firebaseservice.createAssigment(formattedAssignmentObj)

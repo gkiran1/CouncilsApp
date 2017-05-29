@@ -39,6 +39,7 @@ export class AgendaLiteEditPage {
   agenda;
   shownGroup = false;
   shownGroup1 = false;
+  dateErr = false;
 
   constructor(public af: AngularFire, public modalCtrl: ModalController, navParams: NavParams, fb: FormBuilder, public appservice: AppService,
     public firebaseservice: FirebaseService, public alertCtrl: AlertController,
@@ -231,6 +232,7 @@ export class AgendaLiteEditPage {
   }
 
   edit(value) {
+        this.dateErr = false;
     if (value.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== value.openingprayer)) {
       this.showAlert('Invalid user');
       return;
@@ -246,7 +248,8 @@ export class AgendaLiteEditPage {
     value.discussionitems = (value.discussionitems != undefined && value.discussionitems.length > 0) ? value.discussionitems.replace(/-/gi, '').trim() : '';
     let formattedAgendaObj = this.formatAgendaObj(value);
     if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
-      this.showAlert('Invalid date');
+            this.dateErr = true;
+      // this.showAlert('Invalid date');
     } else {
       this.firebaseservice.updateAgendaLite(formattedAgendaObj, this.agendaKey)
         .then(res => {
