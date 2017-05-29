@@ -17,7 +17,7 @@
     <ion-searchbar (ionInput)="searchFn($event)" class="font1" placeholder="Who do you want to chat with?"></ion-searchbar>
     <form [formGroup]="NewPrivateDiscussionForm" (ngSubmit)="NewPrivateDiscussionForm.value">
         <ion-item-group>
-            <ion-list radio-group id="otheruser" name="otheruser" formControlName="otherUser">
+            <ion-list radio-group id="otherUser" name="otherUser" formControlName="otherUser">
                 <ng-container *ngFor="let user of users | search:term:'username'">
                     <ion-item *ngIf="user.$key!==uid" class="flex-change ion-item-middle">
                         <ion-avatar item-left>

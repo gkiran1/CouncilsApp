@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { OpenPrivateDiscussionPage } from '../open-private-discussion/open-private-discussion';
 import * as moment from 'moment';
@@ -17,7 +16,7 @@ export class NewPrivateDiscussionPage {
   term: string = '';
   isLoading = true;
   uid;
-  constructor(public af: AngularFire, fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
+  constructor(public af: AngularFire, fb: FormBuilder, public firebaseservice: FirebaseService, public nav: NavController) {
     this.af.auth.subscribe(auth => {
       if (auth !== null) {
         this.af.database.object('/users/' + auth.uid).subscribe(user => {
@@ -56,7 +55,7 @@ export class NewPrivateDiscussionPage {
           this.NewPrivateDiscussionForm = fb.group({
             otherUser: ['', Validators.required],
             createdDate: '',
-            createdUserId: appservice.uid,
+            createdUserId: this.uid,
             createdUserName: user.firstname + ' ' + user.lastname,
             createdUserAvatar: user.avatar,
             createdUserEmail: user.email,
