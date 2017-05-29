@@ -983,7 +983,7 @@ export class FirebaseService {
         });
     }
 
-    updateToken(userUid) {
+    updateToken(userUid) {      
         return this.rootRef.child('users/' + userUid).update({ pushtoken: localStorage.getItem('pushtoken') }).then(() => {
             console.log('updated token');
         }).catch(err => {

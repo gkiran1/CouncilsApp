@@ -11,7 +11,7 @@ import { ConnectivityService } from '../providers/connectivityservice';
 let y;
 let h;
 let offsetY;
-declare var FCMPlugin: any;
+
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`,
   providers: [FirebaseService, ConnectivityService]
@@ -30,9 +30,6 @@ export class MyApp {
     platform.ready().then(() => {
       Keyboard.hideKeyboardAccessoryBar(false);
       this.addConnectivityListeners();
-      if (platform.is('cordova') || platform.is('ios') || platform.is('android')) {
-        this.FCMSetup();
-      }
 
       //Keyboard handler setup
       //this.keyboardSetup();
@@ -101,7 +98,6 @@ export class MyApp {
 
     document.addEventListener('online', onOnline, false);
     document.addEventListener('offline', onOffline, false);
-
   }
 
   offlineToast() {
@@ -110,8 +106,6 @@ export class MyApp {
       message: "No network!",
       duration: 3000
     });
-
-
   }
 
   onlineToast() {
@@ -160,24 +154,6 @@ export class MyApp {
       buttons: ['OK']
     });
     alert.present();
-  }
-
-  FCMSetup() {
-    if (typeof FCMPlugin != 'undefined') {
-      FCMPlugin.onTokenRefresh(function (token) {
-        localStorage.setItem('pushtoken', token);
-        if (this.securityToken !== null && this.securityToken !== 'null') {
-          this.firebaseService.updateToken(this.securityToken);
-        }
-      });
-
-      FCMPlugin.getToken(function (token) {
-        localStorage.setItem('pushtoken', token);
-        if (this.securityToken !== null && this.securityToken !== 'null') {
-          this.firebaseService.updateToken(this.securityToken);
-        }
-      });
-    }
   }
 
 }

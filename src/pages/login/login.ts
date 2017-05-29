@@ -10,6 +10,8 @@ import { NgZone } from '@angular/core';
 import { NoAccessPage } from '../noaccess/noaccess.component';
 import { ForgotPwd } from '../forgotpwd/forgotpwd';
 
+declare var FCMPlugin: any;
+
 @Component({
     selector: 'page-login',
     templateUrl: 'login.html',
@@ -31,7 +33,8 @@ export class LoginPage {
         public http: Http,
         private navParams: NavParams,
         private zone: NgZone,
-        public toast: ToastController) {
+        public toast: ToastController
+    ) {
     }
 
     keypresssed($event) {
@@ -72,17 +75,15 @@ export class LoginPage {
                         localStorage.setItem('isUserLoggedIn', 'true');
                         localStorage.setItem('isMenuCentered', '0');
                         localStorage.setItem('isAdmin', usrs[0].isadmin.toString());
-                        let token = localStorage.getItem('pushtoken');
                     }
-
                     else {
                         this.zone.run(() => {
                             this.nav.setRoot(NoAccessPage);
                         });
                     }
                     loader.dismiss();
-                })
-
+                });
+                this.FCMSetup();  // Need to be after subscribe
             })
             .catch(err => {
                 loader.dismiss();
@@ -102,18 +103,25 @@ export class LoginPage {
     }
 
     showAlert(text) {
-        // let alert = this.alertCtrl.create({
-        //     title: '',
-        //     subTitle: text,
-        //     buttons: ['OK']
-        // });
-        // alert.present();
         let toast = this.toast.create({
             message: text,
             duration: 3000
-        })
-
+        });
         toast.present();
+    }
+
+    FCMSetup() {
+        if (typeof FCMPlugin != 'undefined') {
+            FCMPlugin.onTokenRefresh(function (token) {
+                localStorage.setItem('pushtoken', token);
+            });
+            FCMPlugin.getToken(function (token) {
+                localStorage.setItem('pushtoken', token);
+            });
+        }
+        else {
+            localStorage.setItem('pushtoken', "");
+        }
     }
 
 }

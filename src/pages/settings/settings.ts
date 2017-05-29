@@ -53,15 +53,22 @@ export class SettingsPage {
         //  this.userSubscription.unsubscribe();
         this.assignmentsListPage.userSubscription.unsubscribe();
         this.activeCouncilsPage.userSubscription.unsubscribe();
-        localStorage.setItem('securityToken', null);
-        localStorage.setItem('isUserLoggedIn', 'false');
-        localStorage.setItem('isMenuCentered', '0');
-        this.firebaseService.signOut().then(() => {
-            this.navCtrl.setRoot(GoodbyePage);
-        }).catch(err => {
-            this.navCtrl.setRoot(GoodbyePage);
-            alert(err);
-        })
+
+        localStorage.setItem('pushtoken', '');
+
+        this.firebaseService.updateToken(localStorage.getItem('securityToken')).then(() => {
+            localStorage.setItem('securityToken', null);
+            localStorage.setItem('isUserLoggedIn', 'false');
+            localStorage.setItem('isMenuCentered', '0');
+
+            this.firebaseService.signOut().then(() => {
+                this.navCtrl.setRoot(GoodbyePage);
+            }).catch(err => {
+                this.navCtrl.setRoot(GoodbyePage);
+                alert(err);
+            });
+
+        });
     }
     back() {
         //this.navCtrl.setRoot(WelcomePage);
