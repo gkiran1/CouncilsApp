@@ -16,6 +16,8 @@ export class DonationsSendPage {
   donationForm: FormGroup;
   private token: string = '';
   donationtype = 'onetime';
+  showCardErr = false;
+  showExpDateErr = false;
   constructor(public zone: NgZone, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public http: Http, fb: FormBuilder, public nav: NavController, public navParams: NavParams, public toast: ToastController,
   ) {
     this.donationForm = fb.group({
@@ -42,6 +44,7 @@ export class DonationsSendPage {
     (<FormControl>this.donationForm.controls['amount']).setValue(amount);
   }
   formatToCreditNumber(event) {
+    this.showCardErr = false;
     let start = event.target.selectionStart;
     // let end = event.target.selectionEnd;
     let cardNumber = event.target.value.replace(/[^0-9]/g, '');
@@ -58,6 +61,7 @@ export class DonationsSendPage {
     event.target.setSelectionRange(start, start); // to set cursor position for inline editing - JS method 
   }
   formatToValidThru(event) {
+    this.showExpDateErr = false;
     let start = event.target.selectionStart;
     let validthru = event.target.value.replace(/[^0-9]/g, '');
     validthru = /^[^01]/.test(validthru) ? '0' + validthru : validthru;
@@ -76,6 +80,8 @@ export class DonationsSendPage {
   }
 
   send(value) {
+    this.showCardErr = false;
+    this.showExpDateErr = false;
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
       content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
@@ -90,9 +96,11 @@ export class DonationsSendPage {
         // Show the errors on the form
         loader.dismiss();
         if (response.error.code === 'incorrect_number') {
-          this.showAlert('Invalid card number');
+          // this.showAlert('Invalid card number');
+          this.showCardErr = true;
         } else if (response.error.code === 'invalid_expiry_year' || response.error.code === 'invalid_expiry_month') {
-          this.showAlert('Invalid expiration number');
+          //this.showAlert('Invalid expiration number');
+          this.showExpDateErr = true;
         } else {
           this.showAlert(response.error.message);
         }

@@ -82,6 +82,7 @@ import { NotePage } from '../pages/notes/note/note';
 import { GoogleCalenderPage } from '../pages/googlecalender/googlecalender.component';
 import { NewMenuPage } from '../pages/newmenu/newmenu';
 import { AddTagColor } from '../pipes/add-tag-color';
+import { ValidateOnBlurDirective } from '../directives/validate-onblur';
 
 //Directives
 import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
@@ -179,7 +180,8 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     ForgotPwd,
     ForgotPwdSuccess,
     NewMenuPage,
-    AddTagColor
+    AddTagColor,
+    ValidateOnBlurDirective
   ],
 
   imports: [
