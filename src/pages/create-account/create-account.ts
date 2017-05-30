@@ -21,16 +21,19 @@ export class CreateAccountPage {
   //user$: Observable<User> todo: R & D
   newUser: User = new User;
   createAccountForm;
+  emailErr = false;
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService, public toast: ToastController) { }
-
   createAccount() {
+    // this.passwordErr = false;
     // password validation
     if (this.newUser.password.length < 6) {
-      this.showAlert('6 characters required');
+      // this.passwordErr = true;
+      // this.showAlert('6 characters required');
     }
     // username@domain.com
     else {
+      this.emailErr = false;
       let loader = this.loadingCtrl.create({
         spinner: 'hide',
         content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
@@ -40,7 +43,8 @@ export class CreateAccountPage {
       this.firebaseService.findUserByEmail(this.newUser.email).subscribe((usr) => {
         if (usr) {
           loader.dismiss();
-          this.showAlert('Email taken');
+          this.emailErr = true;
+          // this.showAlert('Email taken');
         }
         else {
           this.invitee$ = this.firebaseService.findInviteeByEmail(this.newUser.email);
@@ -83,7 +87,7 @@ export class CreateAccountPage {
               }, 50);
             } else {
               loader.dismiss();
-              this.showAlert('Not invited!');
+               this.showAlert('Not invited!');
             }
           });
         }
