@@ -36,6 +36,7 @@
     "ionic-angular": "2.0.0",
     "ionic-native": "^2.9.0",
     "ionicons": "3.0.0",
+    "jazzicon": "^1.5.0",
     "rxjs": "5.0.0-beta.12",
     "sw-toolbox": "3.4.0",
     "zone.js": "0.6.26"
@@ -52,10 +53,10 @@
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard",
     "cordova-plugin-camera",
-    "cordova-plugin-filepath",   
+    "cordova-plugin-filepath",
     "cordova-plugin-inappbrowser",
     "cordova-plugin-file-opener2",
-     "cordova-plugin-fcm"
+    "cordova-plugin-fcm"
   ],
   "cordovaPlatforms": [
     "andriod",

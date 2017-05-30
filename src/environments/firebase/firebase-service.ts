@@ -18,14 +18,16 @@ export class FirebaseService {
         this.rootRef = firebase.database().ref();
     }
 
-    signupNewUser(user) {
+    signupNewUser(user, userAvatar) {
         return this.fireAuth.createUserWithEmailAndPassword(user.email, user.password)
             .then((newUser) => {
                 // Sign in the user.
                 return this.fireAuth.signInWithEmailAndPassword(user.email, user.password)
                     .then((authenticatedUser) => {
                         // Successful login in firebase, create user profile.
-                        this.createAuthUser(user, authenticatedUser.uid);
+                        this.createAuthUser(user, authenticatedUser.uid).then(res => {
+                            this.saveIdenticon(authenticatedUser.uid, userAvatar);
+                        });
                     }).catch(function (error) {
                         throw error;
                     });
@@ -58,6 +60,26 @@ export class FirebaseService {
             }).then(() => user.councils.forEach(counc => {
                 this.createUserCouncils(uid, counc);
             }));
+    }
+
+    saveIdenticon(uid: string, img: string) {
+        let avatarRef = firebase.storage().ref('/users/avatar/');
+        
+            avatarRef.child(uid)
+                .putString(img, 'base64', {contentType: 'image/svg+xml'})
+                .then((savedPicture) => {
+                    this.rootRef.child('users').child(uid).update({ 
+                            avatar: savedPicture.downloadURL
+                    }).then(done => {
+                        console.log('Avatar saved');
+                    }).catch(err =>{
+                        console.log('Avatar failed to save.', err);
+                    });
+               
+        }).catch(err => {
+            console.log('Error storing image', err);
+        });
+       
     }
 
     validateUser(email: string, password: string) {

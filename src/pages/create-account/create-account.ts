@@ -7,6 +7,7 @@ import { Observable } from "rxjs/Rx";
 import { AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { EmailService } from '../../providers/emailservice';
+import * as jazzicon from 'jazzicon';
 
 
 @Component({
@@ -65,8 +66,8 @@ export class CreateAccountPage {
 
               // after verifying and filling properties create new user.
               let flag = false;
-
-              this.firebaseService.signupNewUser(this.newUser)
+              let userAvatar = this.generateIdenticon();
+              this.firebaseService.signupNewUser(this.newUser, userAvatar)
                 .then(res => {
                   //onSuccess redirect to Menu page
                   flag = true;
@@ -93,6 +94,24 @@ export class CreateAccountPage {
 
   sendWelcomeMail() {
 
+  }
+
+   generateIdenticon() {
+    var el = jazzicon(100, Math.round(Math.random() * 10000000000))
+    var svg = el.querySelector('svg');
+   
+         var s = new XMLSerializer().serializeToString(el.querySelector('svg'));
+        //  var canvas = document.createElement('canvas');
+        //  var context = canvas.getContext('2d');
+        //  var img = new Image();
+         
+         var base64 = window.btoa(s);
+        //  img.src = 'data:image/svg+xml,'+base64;
+        //  context.drawImage(img, 0, 0);
+         return base64;
+         //this.firebaseService.saveIdenticon(uid, base64 );
+                    
+          
   }
 
   showAlert(text) {
