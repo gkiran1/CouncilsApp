@@ -53,10 +53,8 @@ export class SettingsPage {
         //  this.userSubscription.unsubscribe();
         this.assignmentsListPage.userSubscription.unsubscribe();
         this.activeCouncilsPage.userSubscription.unsubscribe();
-
-        localStorage.setItem('pushtoken', '');
-
-        this.firebaseService.updateToken(localStorage.getItem('securityToken')).then(() => {
+       
+        this.firebaseService.emptyToken(localStorage.getItem('securityToken')).then(() => {
             localStorage.setItem('securityToken', null);
             localStorage.setItem('isUserLoggedIn', 'false');
             localStorage.setItem('isMenuCentered', '0');

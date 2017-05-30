@@ -116,12 +116,14 @@ export class LoginPage {
             FCMPlugin.onTokenRefresh(function (token) {
                 localStorage.setItem('pushtoken', token);
             });
-            FCMPlugin.getToken(function (token) {
+            FCMPlugin.getToken(function (token) {              
                 localStorage.setItem('pushtoken', token);
             });
         }
         else {
-            localStorage.setItem('pushtoken', "");
+            if (localStorage.getItem('pushtoken') === null) {
+                localStorage.setItem('pushtoken', "");
+            }
         }
     }
 
