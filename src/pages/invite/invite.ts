@@ -20,6 +20,7 @@ export class InviteMemberPage {
     councilsLength = false;
     result: FirebaseObjectObservable<any>;
     isValidEmail = false;
+    emailErr = false;
 
     constructor(public http: Http,
         public navctrl: NavController,
@@ -74,6 +75,7 @@ export class InviteMemberPage {
     }
 
     inviteMember() {
+        this.emailErr = false;
         this.council.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
         this.emailService.inviteMemberEmail(this.invite.firstname, this.invite.unitnumber, this.invite.email)
             .subscribe(res => {
@@ -82,7 +84,9 @@ export class InviteMemberPage {
                         .then(res => {
                             this.navctrl.push(InvitationSuccessPage)
                         })
-                        .catch(err => this.showAlert('Email taken'))
+                        .catch(err => this.emailErr = true
+                        // this.showAlert('Email taken')
+                        )
                 } else {
                     this.showAlert('Internal server error.');
                 }
