@@ -24,6 +24,7 @@ export class LoginPage {
     loginCredentials = { email: '', password: '' };
     user: Observable<User>;
     isValidEmail = false;
+    isValidPwd = false;
 
     constructor(
         public nav: NavController,
@@ -38,12 +39,24 @@ export class LoginPage {
     }
 
     keypresssed($event) {
-        if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
-            this.isValidEmail = true;
-        }
-        else {
-            this.isValidEmail = false;
-        }
+        this.zone.run(() => {
+            if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+                this.isValidEmail = true;
+            }
+            else {
+                this.isValidEmail = false;
+            }
+        });
+    }
+
+    pwdChange($event) {
+        this.zone.run(() => {
+            if ($event.target.value !== '') {
+                this.isValidPwd = true;
+            } else {
+                this.isValidPwd = false;
+            }
+        });
     }
 
     public forgotPassword() {
@@ -116,7 +129,7 @@ export class LoginPage {
             FCMPlugin.onTokenRefresh(function (token) {
                 localStorage.setItem('pushtoken', token);
             });
-            FCMPlugin.getToken(function (token) {              
+            FCMPlugin.getToken(function (token) {
                 localStorage.setItem('pushtoken', token);
             });
         }
