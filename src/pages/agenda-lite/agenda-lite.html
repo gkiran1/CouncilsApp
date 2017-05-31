@@ -25,7 +25,8 @@
             <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDDD, MMM, D, YYYY, h, mm, A" ng-model="datetime" name="assigneddate" formControlName="assigneddate"
                 validate-onblur [max]="2500" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55" (ionChange)="onChange($event)"></ion-datetime>
         </ion-item>
-        <p class="error-msg" *ngIf="dateErr">Invalid date</p>
+        <ion-label class="error-msg" *ngIf="dateErr">Invalid date</ion-label>
+       
         <ion-item class="input-item">
             <ion-label floating>Opening Hymn</ion-label>
             <ion-input type="text" autocomplete="on" spellcheck="true" name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>

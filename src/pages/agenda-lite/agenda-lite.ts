@@ -80,7 +80,7 @@ export class AgendaLitePage {
     return this.firebaseservice.getAssignmentsByCouncil(councilId);
   }
   onChange($event) {
-    var newDate = new Date($event.year.value, $event.month.value-1, $event.day.value, $event.hour.value, $event.minute.value, $event.second.value);
+    var newDate = new Date($event.year.value, $event.month.value-1, $event.day.value, $event.hour.value, $event.minute.value);
     //alert(newDate);
     if(moment(newDate).isBefore(moment().set({ second: 0 })))
     {
@@ -90,8 +90,6 @@ export class AgendaLitePage {
       this.dateErr = false;
     }
   }
-
-  
 
   agendasArray = [];
   createagenda(agenda) {

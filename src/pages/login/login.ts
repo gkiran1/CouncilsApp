@@ -23,8 +23,9 @@ export class LoginPage {
     loading: Loading;
     loginCredentials = { email: '', password: '' };
     user: Observable<User>;
-    isValidEmail = false;
+    isValidEmail = true;
     isValidPwd = false;
+    emailErr = false;
 
     constructor(
         public nav: NavController,
@@ -39,6 +40,7 @@ export class LoginPage {
     }
 
     keypresssed($event) {
+            this.emailErr = false;
         this.zone.run(() => {
             if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
                 this.isValidEmail = true;

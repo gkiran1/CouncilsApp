@@ -163,6 +163,16 @@ export class AgendaEditPage {
     getAssignmentsByCouncilId(councilId: string) {
         return this.firebaseservice.getAssignmentsByCouncil(councilId);
     }
+    onChange($event) {
+        var newDate = new Date($event.year.value, $event.month.value - 1, $event.day.value, $event.hour.value, $event.minute.value);
+        //alert(newDate);
+        if (moment(newDate).isBefore(moment().set({ second: 0 }))) {
+            this.dateErr = true;
+        }
+        else {
+            this.dateErr = false;
+        }
+    }
 
     showCouncilsModal(event, value) {
         event.preventDefault();

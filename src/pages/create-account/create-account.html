@@ -9,7 +9,7 @@
   <form class="formcontent" (ngSubmit)="createAccount()" #createAccountForm="ngForm">
     <ion-item [class.invalid]="!isValidEmail || emailErr" class="input-item">
       <ion-label class="inputtype" floating>Email</ion-label>
-      <ion-input type="email" name="email" class="form-control" (blur)="emailChange($event)" [(ngModel)]="newUser.email" id="password"
+      <ion-input type="email" name="email" validate-onblur class="form-control" (blur)="emailChange($event)" [(ngModel)]="newUser.email" id="password"
         required></ion-input>
     </ion-item>
     <ion-label class="error-msg" *ngIf="emailErr">Email taken</ion-label>
