@@ -20,7 +20,7 @@
    
     <ion-item [class.invalid]="(password.errors && password.dirty)" class="input-item">
             <ion-label class="inputtype" floating> Password</ion-label>
-            <ion-input type="password" id="password" name="password" validate-onblur #password="ngModel" minlength='6' [(ngModel)]="loginCredentials.password" (keyup)="pwdChange($event)"
+            <ion-input type="password" id="password" name="password" validate-onblur class="form-control" #password="ngModel" minlength='6' [(ngModel)]="loginCredentials.password" (keyup)="pwdChange($event)"
                 required></ion-input>
         </ion-item>
     <ion-label class="error-msg" *ngIf="(password.errors && password.dirty)">6 characters required</ion-label>
