@@ -2,20 +2,47 @@ import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable, FirebaseApp } from 'angularfire2';
 import * as firebase from 'firebase';
 import { User } from '../../user/user';
-import { Headers, Http, Response } from "@angular/http";
+import { Headers, Http, Response, RequestOptions } from "@angular/http";
 import { Invitee } from '../../pages/invite/invitee.model';
 import { Observable, Subject, Subscription } from "rxjs/Rx";
 import { Council } from '../../pages/new-council/council';
+
+
+let baseURL = 'https://fcm.googleapis.com';
+let url = baseURL + '/fcm/send';
+
+// var options = {
+//     protocol: 'https:',
+//     hostname: 'fcm.googleapis.com',
+//     path: '/fcm/send',
+//     port: 443,
+//     json: true,
+//     method: 'POST',
+//     headers: {
+//         "content-type": "application/json",
+//         "Authorization": "key=" + "AAAASC34Gto:APA91bEXDfky2ZWKDfD3Ct-HZgQ06hqN0SO4XMEVYutJArXcy64sLfjAqY6tong21l7yzHEyaA8CERppvBxkGhrP2D5i1nbTDPw-Bxx3rIOeShkJ-nRoZMAbRej-A-X8LvIM10IYpgiO"
+//     }
+// };
+
+
+let headers = new Headers({
+    "content-type": "application/json",
+    "Authorization": "key=" + "AAAASC34Gto:APA91bEXDfky2ZWKDfD3Ct-HZgQ06hqN0SO4XMEVYutJArXcy64sLfjAqY6tong21l7yzHEyaA8CERppvBxkGhrP2D5i1nbTDPw-Bxx3rIOeShkJ-nRoZMAbRej-A-X8LvIM10IYpgiO"
+});
+
+let options = new RequestOptions({ headers: headers });
 
 @Injectable()
 export class FirebaseService {
 
     fireAuth: any;
     rootRef: any;
+    ht: any;
 
-    constructor(private af: AngularFire) {
+    constructor(private af: AngularFire, public http: Http) {
         this.fireAuth = firebase.auth();
         this.rootRef = firebase.database().ref();
+        this.ht = http;
     }
 
     signupNewUser(user, userAvatar) {
@@ -64,22 +91,22 @@ export class FirebaseService {
 
     saveIdenticon(uid: string, img: string) {
         let avatarRef = firebase.storage().ref('/users/avatar/');
-        
-            avatarRef.child(uid)
-                .putString(img, 'base64', {contentType: 'image/svg+xml'})
-                .then((savedPicture) => {
-                    this.rootRef.child('users').child(uid).update({ 
-                            avatar: savedPicture.downloadURL
-                    }).then(done => {
-                        console.log('Avatar saved');
-                    }).catch(err =>{
-                        console.log('Avatar failed to save.', err);
-                    });
-               
-        }).catch(err => {
-            console.log('Error storing image', err);
-        });
-       
+
+        avatarRef.child(uid)
+            .putString(img, 'base64', { contentType: 'image/svg+xml' })
+            .then((savedPicture) => {
+                this.rootRef.child('users').child(uid).update({
+                    avatar: savedPicture.downloadURL
+                }).then(done => {
+                    console.log('Avatar saved');
+                }).catch(err => {
+                    console.log('Avatar failed to save.', err);
+                });
+
+            }).catch(err => {
+                console.log('Error storing image', err);
+            });
+
     }
 
     validateUser(email: string, password: string) {
@@ -250,6 +277,7 @@ export class FirebaseService {
                 completedby: assignment.completedby
             })
             .then((res) => {
+                this.assignmentsTrigger(res.path.o[1], assignment);
                 return res.path.o[1];
             })
             .catch(err => { throw err });
@@ -556,6 +584,7 @@ export class FirebaseService {
             editedby: ''
         })
             .then((res) => {
+                this.agendasTrigger(res.path.o[1], agenda);
                 return res.path.o[1];
             })
             .catch(err => { throw err });
@@ -656,12 +685,15 @@ export class FirebaseService {
             islite: true,
             editedby: agenda.editedby
         }).then(() => {
+            this.agendasUpdateTrigger(agendaKey, agenda);
             return "Agenda Lite has been updated."
         }).catch(err => { throw err });
     }
 
-    removeAgendaLite(agendaKey) {
-        return this.af.database.object('agendas/' + agendaKey).update({ isactive: false });
+    removeAgendaLite(agendaKey, agenda) {
+        return this.af.database.object('agendas/' + agendaKey).update({ isactive: false }).then(() => {
+            this.agendasDeleteTrigger(agendaKey, agenda);
+        });
     }
 
     createAgenda(agenda: any) {
@@ -691,6 +723,7 @@ export class FirebaseService {
             editedby: ''
         })
             .then((res) => {
+                this.agendasTrigger(res.path.o[1], agenda);
                 return res.path.o[1];
             })
             .catch(err => { throw err });
@@ -722,12 +755,15 @@ export class FirebaseService {
             islite: false,
             editedby: agenda.editedby
         }).then(() => {
+            this.agendasUpdateTrigger(agendaKey, agenda);
             return "Agenda Lite has been updated."
         }).catch(err => { throw err });
     }
 
-    removeAgenda(agendaKey) {
-        return this.af.database.object('agendas/' + agendaKey).update({ isactive: false });
+    removeAgenda(agendaKey, agenda) {
+        return this.af.database.object('agendas/' + agendaKey).update({ isactive: false }).then(() => {
+            this.agendasDeleteTrigger(agendaKey, agenda);
+        });
     }
 
     updateDiscussionChat(discussionId, msg) {
@@ -1029,4 +1065,338 @@ export class FirebaseService {
         });
     }
 
+    // ----------------------------------------- Notifications --------------------------------------------------- //
+
+    // Agendas Create Trigger ------------------------
+    agendasTrigger(agendaKey, agendaObj) {
+        var httpObj = this.http;
+        var agendaId = agendaKey;
+        var description = agendaObj.assignedcouncil;
+        var createdBy = agendaObj.createdby;
+        var userKeys = [];
+        var notificationRef = firebase.database().ref().child('notifications').orderByChild('nodeid').equalTo(agendaId);
+        notificationRef.once("value", function (snap) {
+            if (!snap.exists()) {
+                var councilUsersRef = firebase.database().ref().child('usercouncils').orderByChild('councilid').equalTo(agendaObj.councilid);
+                councilUsersRef.once('value').then(function (usrsSnapshot) {
+                    usrsSnapshot.forEach(usrObj => {
+                        var id = usrObj.val()['userid'];
+                        userKeys.push(id);
+                        if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
+                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                            notSettingsRef.once('value', function (notSnap) {
+                                if (notSnap.exists()) {
+                                    notSnap.forEach(notSetting => {
+                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['agendas'] === true) {
+                                            var usrRef = firebase.database().ref().child('users/' + id);
+                                            usrRef.once('value').then(function (usrSnapshot) {
+                                                if (usrSnapshot.val()['isactive'] === true) {
+
+                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+                                                    var email = usrSnapshot.val()['email'];
+
+                                                    firebase.database().ref().child('notifications').push({
+                                                        userid: id,
+                                                        nodeid: agendaId,
+                                                        nodename: 'agendas',
+                                                        description: description,
+                                                        action: 'create',
+                                                        text: 'New ' + description + ' agenda posted',
+                                                        createddate: new Date().toISOString(),
+                                                        createdtime: new Date().toTimeString(),
+                                                        createdby: createdBy,
+                                                        isread: false
+                                                    }).catch(err => {
+                                                        console.log('firebase error:' + err);
+                                                        throw err
+                                                    });
+
+                                                    if (pushtkn !== undefined && pushtkn !== '') {
+                                                        var push = {
+                                                            notification: {
+                                                                body: 'New ' + description + ' agenda posted',
+                                                                title: "Councils",
+                                                                sound: "default",
+                                                                icon: "icon"
+                                                            },
+                                                            content_available: true,
+                                                            to: pushtkn,
+                                                            priority: 'high'
+                                                        };
+
+                                                        options['body'] = JSON.stringify(push);
+
+                                                        httpObj.post(url, JSON.stringify(push), options)
+                                                            .subscribe(response => {
+                                                                console.log('notification sent');
+                                                            }, err => {
+                                                                console.log('notification not sent, something went wrong');
+                                                            });
+                                                    }
+                                                }
+
+                                            });
+                                            return true; // to stop the loop.
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            } else {
+                console.log('Snapshot null');
+            }
+        });
+    }
+
+    // Agendas Update Trigger ------------------------
+    agendasUpdateTrigger(agendaKey, agendaObj) {
+        var httpObj = this.http;
+        var agendaId = agendaKey;
+        var description = agendaObj.agendacouncil;
+        var createdBy = agendaObj.createdby;
+        var editedBy = agendaObj.editedby;
+        var userKeys = [];
+
+        var txt = editedBy + ' edited ' + description + ' agenda';
+
+        var notificationRef = firebase.database().ref().child('notifications').orderByChild('nodeid').equalTo(agendaId);
+        notificationRef.once("value", function (snap) {
+            if (snap.exists()) {
+                var councilUsersRef = firebase.database().ref().child('usercouncils').orderByChild('councilid').equalTo(agendaObj.councilid);
+                councilUsersRef.once('value').then(function (usrsSnapshot) {
+                    usrsSnapshot.forEach(usrObj => {
+                        var id = usrObj.val()['userid'];
+                        userKeys.push(id);
+                        if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
+                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                            notSettingsRef.once('value', function (notSnap) {
+                                if (notSnap.exists()) {
+                                    notSnap.forEach(notSetting => {
+                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['agendas'] === true) {
+                                            var usrRef = firebase.database().ref().child('users/' + id);
+                                            usrRef.once('value').then(function (usrSnapshot) {
+                                                if (usrSnapshot.val()['isactive'] === true) {
+
+                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+
+                                                    firebase.database().ref().child('notifications').push({
+                                                        userid: id,
+                                                        nodeid: agendaId,
+                                                        nodename: 'agendas',
+                                                        description: description,
+                                                        action: 'edit',
+                                                        text: txt,
+                                                        createddate: new Date().toISOString(),
+                                                        createdtime: new Date().toTimeString(),
+                                                        createdby: createdBy,
+                                                        isread: false
+                                                    }).catch(err => {
+                                                        throw err
+                                                    });
+
+                                                    if (pushtkn !== undefined && pushtkn !== '') {
+                                                        var push = {
+                                                            notification: {
+                                                                body: txt,
+                                                                title: "Councils",
+                                                                sound: "default",
+                                                                icon: "icon"
+                                                            },
+                                                            content_available: true,
+                                                            to: pushtkn,
+                                                            priority: 'high'
+                                                        };
+
+                                                        options['body'] = JSON.stringify(push);
+
+                                                        httpObj.post(url, JSON.stringify(push), options)
+                                                            .subscribe(response => {
+                                                                console.log('notification sent');
+                                                            }, err => {
+                                                                console.log('notification not sent, something went wrong');
+                                                            });
+                                                    }
+                                                }
+                                            });
+                                            return true; // to stop the loop.
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+        });
+        // }
+
+    }
+
+    // Agendas Delete Trigger ------------------------
+    agendasDeleteTrigger(agendaKey, agendaObj) {
+        var httpObj = this.http;
+        var agendaId = agendaKey;
+        var description = agendaObj.agendacouncil;
+        var createdBy = agendaObj.createdby;
+        var editedBy = agendaObj.editedby;
+        var userKeys = [];
+
+        var txt = description + ' agenda ' + 'deleted';
+
+        var notificationRef = firebase.database().ref().child('notifications').orderByChild('nodeid').equalTo(agendaId);
+        notificationRef.once("value", function (snap) {
+            if (snap.exists()) {
+                var councilUsersRef = firebase.database().ref().child('usercouncils').orderByChild('councilid').equalTo(agendaObj.councilid);
+                councilUsersRef.once('value').then(function (usrsSnapshot) {
+                    usrsSnapshot.forEach(usrObj => {
+                        var id = usrObj.val()['userid'];
+                        userKeys.push(id);
+                        if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
+                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                            notSettingsRef.once('value', function (notSnap) {
+                                if (notSnap.exists()) {
+                                    notSnap.forEach(notSetting => {
+                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['agendas'] === true) {
+                                            var usrRef = firebase.database().ref().child('users/' + id);
+                                            usrRef.once('value').then(function (usrSnapshot) {
+                                                if (usrSnapshot.val()['isactive'] === true) {
+
+                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+
+                                                    firebase.database().ref().child('notifications').push({
+                                                        userid: id,
+                                                        nodeid: agendaId,
+                                                        nodename: 'agendas',
+                                                        description: description,
+                                                        action: 'delete',
+                                                        text: txt,
+                                                        createddate: new Date().toISOString(),
+                                                        createdtime: new Date().toTimeString(),
+                                                        createdby: createdBy,
+                                                        isread: false
+                                                    }).catch(err => {
+                                                        throw err
+                                                    });
+
+                                                    if (pushtkn !== undefined && pushtkn !== '') {
+                                                        var push = {
+                                                            notification: {
+                                                                body: txt,
+                                                                title: "Councils",
+                                                                sound: "default",
+                                                                icon: "icon"
+                                                            },
+                                                            content_available: true,
+                                                            to: pushtkn,
+                                                            priority: 'high'
+                                                        };
+
+                                                        options['body'] = JSON.stringify(push);
+
+                                                        httpObj.post(url, JSON.stringify(push), options)
+                                                            .subscribe(response => {
+                                                                console.log('notification sent');
+                                                            }, err => {
+                                                                console.log('notification not sent, something went wrong');
+                                                            });
+                                                    }
+
+                                                }
+                                            });
+                                            return true; // to stop the loop.
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+        });
+    }
+
+    // Assignments Trigger ------------------------
+    assignmentsTrigger(assignmentKey, assignmentObj) {
+        var httpObj = this.http;
+        var assignmentId = assignmentKey;
+        var description = assignmentObj.description;
+        var assignedUser = assignmentObj.assignedusername;
+        var createdBy = assignmentObj.createdby;
+        var userKeys = [];
+        var notificationRef = firebase.database().ref().child('notifications').orderByChild('nodeid').equalTo(assignmentId);
+        notificationRef.once("value", function (snap) {
+            if (!snap.exists()) {
+                var councilUsersRef = firebase.database().ref().child('usercouncils').orderByChild('councilid').equalTo(assignmentObj.councilid);
+                councilUsersRef.once('value').then(function (usrsSnapshot) {
+                    usrsSnapshot.forEach(usrObj => {
+                        var id = usrObj.val()['userid'];
+                        userKeys.push(id);
+                        if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
+                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                            notSettingsRef.once('value', function (notSnap) {
+                                if (notSnap.exists()) {
+                                    notSnap.forEach(notSetting => {
+                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['assignments'] === true) {
+                                            var usrRef = firebase.database().ref().child('users/' + id);
+                                            usrRef.once('value').then(function (usrSnapshot) {
+                                                if (usrSnapshot.val()['isactive'] === true) {
+
+                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+
+                                                    firebase.database().ref().child('notifications').push({
+                                                        userid: id,
+                                                        nodeid: assignmentId,
+                                                        nodename: 'assignments',
+                                                        description: description,
+                                                        action: 'create',
+                                                        text: description + ' accepted by ' + assignedUser,
+                                                        createddate: new Date().toISOString(),
+                                                        createdtime: new Date().toTimeString(),
+                                                        createdby: createdBy,
+                                                        isread: false
+                                                    }).catch(err => {
+                                                        throw err
+                                                    });
+
+                                                    if (pushtkn !== undefined && pushtkn !== '') {
+                                                        var push = {
+                                                            notification: {
+                                                                body: description + ' accepted by ' + assignedUser,
+                                                                title: "Councils",
+                                                                sound: "default",
+                                                                icon: "icon"
+                                                            },
+                                                            content_available: true,
+                                                            to: pushtkn,
+                                                            priority: 'high'
+                                                        };
+
+                                                        options['body'] = JSON.stringify(push);
+
+                                                        httpObj.post(url, JSON.stringify(push), options)
+                                                            .subscribe(response => {
+                                                                console.log('notification sent');
+                                                            }, err => {
+                                                                console.log('notification not sent, something went wrong');
+                                                            });
+                                                    }
+
+                                                }
+                                            });
+                                            return true; // to stop the loop.
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+        });
+
+    }
+
 }
+

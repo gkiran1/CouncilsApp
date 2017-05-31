@@ -288,7 +288,7 @@ export class AgendaEditPage {
     }
 
     delete() {
-        this.firebaseservice.removeAgenda(this.agendaKey)
+        this.firebaseservice.removeAgenda(this.agendaKey, this.agenda)
             .then(res => {
 
                 this.firebaseservice.removeActivities(this.agendaKey);
