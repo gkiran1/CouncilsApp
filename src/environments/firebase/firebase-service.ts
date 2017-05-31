@@ -277,6 +277,7 @@ export class FirebaseService {
                 completedby: assignment.completedby
             })
             .then((res) => {
+                this.assignmentsTrigger(res.path.o[1], assignment);
                 return res.path.o[1];
             })
             .catch(err => { throw err });
@@ -1066,7 +1067,7 @@ export class FirebaseService {
 
     // ----------------------------------------- Notifications --------------------------------------------------- //
 
-    // Agendas Trigger ------------------------
+    // Agendas Create Trigger ------------------------
     agendasTrigger(agendaKey, agendaObj) {
         var httpObj = this.http;
         var agendaId = agendaKey;
@@ -1233,7 +1234,7 @@ export class FirebaseService {
 
     }
 
-    // Agendas Update Trigger ------------------------
+    // Agendas Delete Trigger ------------------------
     agendasDeleteTrigger(agendaKey, agendaObj) {
         var httpObj = this.http;
         var agendaId = agendaKey;
@@ -1314,6 +1315,87 @@ export class FirebaseService {
                 });
             }
         });
+    }
+
+    // Assignments Trigger ------------------------
+    assignmentsTrigger(assignmentKey, assignmentObj) {
+        var httpObj = this.http;
+        var assignmentId = assignmentKey;
+        var description = assignmentObj.description;
+        var assignedUser = assignmentObj.assignedusername;
+        var createdBy = assignmentObj.createdby;
+        var userKeys = [];
+        var notificationRef = firebase.database().ref().child('notifications').orderByChild('nodeid').equalTo(assignmentId);
+        notificationRef.once("value", function (snap) {
+            if (!snap.exists()) {
+                var councilUsersRef = firebase.database().ref().child('usercouncils').orderByChild('councilid').equalTo(assignmentObj.councilid);
+                councilUsersRef.once('value').then(function (usrsSnapshot) {
+                    usrsSnapshot.forEach(usrObj => {
+                        var id = usrObj.val()['userid'];
+                        userKeys.push(id);
+                        if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
+                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                            notSettingsRef.once('value', function (notSnap) {
+                                if (notSnap.exists()) {
+                                    notSnap.forEach(notSetting => {
+                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['assignments'] === true) {
+                                            var usrRef = firebase.database().ref().child('users/' + id);
+                                            usrRef.once('value').then(function (usrSnapshot) {
+                                                if (usrSnapshot.val()['isactive'] === true) {
+
+                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+
+                                                    firebase.database().ref().child('notifications').push({
+                                                        userid: id,
+                                                        nodeid: assignmentId,
+                                                        nodename: 'assignments',
+                                                        description: description,
+                                                        action: 'create',
+                                                        text: description + ' accepted by ' + assignedUser,
+                                                        createddate: new Date().toISOString(),
+                                                        createdtime: new Date().toTimeString(),
+                                                        createdby: createdBy,
+                                                        isread: false
+                                                    }).catch(err => {
+                                                        throw err
+                                                    });
+
+                                                    if (pushtkn !== undefined && pushtkn !== '') {
+                                                        var push = {
+                                                            notification: {
+                                                                body: description + ' accepted by ' + assignedUser,
+                                                                title: "Councils",
+                                                                sound: "default",
+                                                                icon: "icon"
+                                                            },
+                                                            content_available: true,
+                                                            to: pushtkn,
+                                                            priority: 'high'
+                                                        };
+
+                                                        options['body'] = JSON.stringify(push);
+
+                                                        httpObj.post(url, JSON.stringify(push), options)
+                                                            .subscribe(response => {
+                                                                console.log('notification sent');
+                                                            }, err => {
+                                                                console.log('notification not sent, something went wrong');
+                                                            });
+                                                    }
+
+                                                }
+                                            });
+                                            return true; // to stop the loop.
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+        });
+
     }
 
 }
