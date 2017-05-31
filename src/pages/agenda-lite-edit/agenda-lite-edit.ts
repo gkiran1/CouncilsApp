@@ -232,7 +232,7 @@ export class AgendaLiteEditPage {
   }
 
   edit(value) {
-        this.dateErr = false;
+    this.dateErr = false;
     if (value.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== value.openingprayer)) {
       this.showAlert('Invalid user');
       return;
@@ -248,7 +248,7 @@ export class AgendaLiteEditPage {
     value.discussionitems = (value.discussionitems != undefined && value.discussionitems.length > 0) ? value.discussionitems.replace(/-/gi, '').trim() : '';
     let formattedAgendaObj = this.formatAgendaObj(value);
     if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
-            this.dateErr = true;
+      this.dateErr = true;
       // this.showAlert('Invalid date');
     } else {
       this.firebaseservice.updateAgendaLite(formattedAgendaObj, this.agendaKey)
@@ -268,7 +268,7 @@ export class AgendaLiteEditPage {
     }
   }
   delete() {
-    this.firebaseservice.removeAgendaLite(this.agendaKey)
+    this.firebaseservice.removeAgendaLite(this.agendaKey, this.agenda)
       .then(res => {
         this.firebaseservice.removeActivities(this.agendaKey);
 
@@ -477,7 +477,7 @@ export class AgendaLiteEditPage {
   toggleGroup1() {
     this.shownGroup1 = !this.shownGroup1;
   };
- 
+
   onBlur() {
     if (this.discussionitems.trim() === '-') {
       this.discussionitems = "";
