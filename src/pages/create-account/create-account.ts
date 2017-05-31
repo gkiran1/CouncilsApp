@@ -23,6 +23,7 @@ export class CreateAccountPage {
   newUser: User = new User;
   createAccountForm;
   emailErr = false;
+  isValidEmail = true;
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService, public toast: ToastController) { }
   createAccount() {
@@ -88,7 +89,7 @@ export class CreateAccountPage {
               }, 50);
             } else {
               loader.dismiss();
-               this.showAlert('Not invited!');
+              this.showAlert('Not invited!');
             }
           });
         }
@@ -100,22 +101,32 @@ export class CreateAccountPage {
 
   }
 
-   generateIdenticon() {
+  emailChange($event) {
+    this.emailErr = false;
+    if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+      this.isValidEmail = true;
+    }
+    else {
+      this.isValidEmail = false;
+    }
+  }
+
+  generateIdenticon() {
     var el = jazzicon(100, Math.round(Math.random() * 10000000000))
     var svg = el.querySelector('svg');
-   
-         var s = new XMLSerializer().serializeToString(el.querySelector('svg'));
-        //  var canvas = document.createElement('canvas');
-        //  var context = canvas.getContext('2d');
-        //  var img = new Image();
-         
-         var base64 = window.btoa(s);
-        //  img.src = 'data:image/svg+xml,'+base64;
-        //  context.drawImage(img, 0, 0);
-         return base64;
-         //this.firebaseService.saveIdenticon(uid, base64 );
-                    
-          
+
+    var s = new XMLSerializer().serializeToString(el.querySelector('svg'));
+    //  var canvas = document.createElement('canvas');
+    //  var context = canvas.getContext('2d');
+    //  var img = new Image();
+
+    var base64 = window.btoa(s);
+    //  img.src = 'data:image/svg+xml,'+base64;
+    //  context.drawImage(img, 0, 0);
+    return base64;
+    //this.firebaseService.saveIdenticon(uid, base64 );
+
+
   }
 
   showAlert(text) {

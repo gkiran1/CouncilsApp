@@ -7,17 +7,21 @@
   </div>
 
   <form class="formcontent" (ngSubmit)="createAccount()" #createAccountForm="ngForm">
-    <ion-item [class.invalid]="emailErr" class="input-item">
+    <ion-item [class.invalid]="!isValidEmail || emailErr" class="input-item">
       <ion-label class="inputtype" floating>Email</ion-label>
-      <ion-input type="email" name="email" class="form-control" [(ngModel)]="newUser.email" id="password" required></ion-input>
+      <ion-input type="email" name="email" class="form-control" (blur)="emailChange($event)" [(ngModel)]="newUser.email" id="password"
+        required></ion-input>
     </ion-item>
     <ion-label class="error-msg" *ngIf="emailErr">Email taken</ion-label>
+    <ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label>
+
     <ion-item [class.invalid]="(password.errors && password.dirty)" class="input-item">
       <ion-label class="inputtype" floating>Password</ion-label>
       <ion-input type="password" name="password" validate-onblur class="form-control" #password="ngModel" minlength='6' [(ngModel)]="newUser.password"
         id="email" required></ion-input>
     </ion-item>
     <ion-label class="error-msg" *ngIf="(password.errors && password.dirty)">6 characters required</ion-label>
+
     <ion-item class="input-item">
       <ion-label class="inputtype" floating> LDS.org username</ion-label>
       <ion-input type="text" name="ldsusername" [(ngModel)]="newUser.ldsusername" id="ldsusername" required></ion-input>

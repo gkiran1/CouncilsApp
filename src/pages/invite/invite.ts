@@ -19,7 +19,7 @@ export class InviteMemberPage {
     council;
     councilsLength = false;
     result: FirebaseObjectObservable<any>;
-    isValidEmail = false;
+    isValidEmail = true;
     emailErr = false;
 
     constructor(public http: Http,
@@ -66,6 +66,7 @@ export class InviteMemberPage {
     }
 
     keypresssed($event) {
+        this.emailErr = false;
         if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
             this.isValidEmail = true;
         }
