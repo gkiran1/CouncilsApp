@@ -399,6 +399,7 @@ export class FirebaseService {
             completedby: assignment.completedby
         })
             .then(() => {
+                this.assignmentsUpdateTrigger(assignmentKey, assignment);
                 return "Assignment has been updated!"
             })
             .catch(err => { throw err });
@@ -1397,6 +1398,104 @@ export class FirebaseService {
         });
 
     }
+
+    // Assignments Complete & Edit Trigger ------------------------
+    assignmentsUpdateTrigger(assignmentKey, assignmentObj) {
+        var httpObj = this.http;
+        var assignmentId = assignmentKey;
+        var description = assignmentObj.description;
+        var createdBy = assignmentObj.createdby;
+        var completedBy = assignmentObj.completedby;
+        var userKeys = [];
+
+        var action = '';
+        var txt = '';
+        var text = '';
+
+        if (assignmentObj.isCompleted === true) {
+            action = 'completed';
+            txt = 'update';
+            text = completedBy + ' completed ' + description;
+        } else if (assignmentObj.isCompleted === false) {
+            action = 'edited';
+            txt = 'edit';
+            text = description + ' edited';
+        }
+
+        if (action === 'completed' || action === 'edited') {
+            var notificationRef = firebase.database().ref().child('notifications').orderByChild('nodeid').equalTo(assignmentId);
+            notificationRef.once("value", function (snap) {
+                if ((snap.exists() && action === 'completed') || (snap.exists() && action === 'deleted') || (snap.exists() && action === 'edited')) {
+                    var councilUsersRef = firebase.database().ref().child('usercouncils').orderByChild('councilid').equalTo(assignmentObj.councilid);
+                    councilUsersRef.once('value').then(function (usrsSnapshot) {
+                        usrsSnapshot.forEach(usrObj => {
+                            var id = usrObj.val()['userid'];
+                            userKeys.push(id);
+                            if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
+                                var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                                notSettingsRef.once('value', function (notSnap) {
+                                    if (notSnap.exists()) {
+                                        notSnap.forEach(notSetting => {
+                                            if (notSetting.val()['allactivity'] === true || notSetting.val()['assignments'] === true) {
+                                                var usrRef = firebase.database().ref().child('users/' + id);
+                                                usrRef.once('value').then(function (usrSnapshot) {
+                                                    if (usrSnapshot.val()['isactive'] === true) {
+
+                                                        var pushtkn = usrSnapshot.val()['pushtoken'];
+
+                                                        firebase.database().ref().child('notifications').push({
+                                                            userid: id,
+                                                            nodeid: assignmentId,
+                                                            nodename: 'assignments',
+                                                            description: description,
+                                                            action: txt,
+                                                            text: text,
+                                                            createddate: new Date().toISOString(),
+                                                            createdtime: new Date().toTimeString(),
+                                                            createdby: createdBy,
+                                                            isread: false
+                                                        }).catch(err => {
+                                                            throw err
+                                                        });
+
+                                                        if (pushtkn !== undefined && pushtkn !== '') {
+                                                            var push = {
+                                                                notification: {
+                                                                    body: text,
+                                                                    title: "Councils",
+                                                                    sound: "default",
+                                                                    icon: "icon"
+                                                                },
+                                                                content_available: true,
+                                                                to: pushtkn,
+                                                                priority: 'high'
+                                                            };
+
+                                                            options['body'] = JSON.stringify(push);
+
+                                                            httpObj.post(url, JSON.stringify(push), options)
+                                                                .subscribe(response => {
+                                                                    console.log('notification sent');
+                                                                }, err => {
+                                                                    console.log('notification not sent, something went wrong');
+                                                                });
+                                                        }
+
+                                                    }
+                                                });
+                                                return true; // to stop the loop.
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+        }
+    }
+
 
 }
 
