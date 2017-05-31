@@ -31,13 +31,14 @@ export class NewAssignmentPage {
   isPersonalAssignment;
   user;
   dateErr = false;
+  assignment;
 
   constructor(public modalCtrl: ModalController, public menuctrl: MenuController, public actionSheetCtrl: ActionSheetController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController, public toast: ToastController) {
     let assignment = navParams.get('assignment');
     let description = navParams.get('item');
     this.uid = localStorage.getItem('securityToken');
     this.usercouncils = localStorage.getItem('userCouncils').split(',');
-
+    this.assignment = assignment;
     if (assignment) {
       this.isNewAssignment = false;
       this.isPersonalAssignment = assignment.assignedto === this.uid;
@@ -233,7 +234,7 @@ export class NewAssignmentPage {
       .catch(err => { this.showAlert('Internal server error.') })
   }
   delete() {
-    this.firebaseservice.removeAssignment(this.assignmentKey)
+    this.firebaseservice.removeAssignment(this.assignmentKey, this.assignment)
       .then(res => {
 
         this.firebaseservice.removeActivities(this.assignmentKey);

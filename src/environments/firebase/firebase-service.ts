@@ -405,8 +405,12 @@ export class FirebaseService {
             .catch(err => { throw err });
     }
 
-    removeAssignment(assignmentKey) {
-        return this.af.database.object('assignments/' + assignmentKey).update({ isactive: false });
+    removeAssignment(assignmentKey, assignment) {
+        return this.af.database.object('assignments/' + assignmentKey).update({ isactive: false }).then(() => {
+            if (assignment !== null) {
+                this.assignmentsDeleteTrigger(assignmentKey, assignment);
+            }
+        });
     }
 
     updateProfileInfo(userUid: string, firstname, lastname, email, phone, ldsusername) {
@@ -1155,7 +1159,7 @@ export class FirebaseService {
     agendasUpdateTrigger(agendaKey, agendaObj) {
         var httpObj = this.http;
         var agendaId = agendaKey;
-        var description = agendaObj.agendacouncil;
+        var description = agendaObj.assignedcouncil;
         var createdBy = agendaObj.createdby;
         var editedBy = agendaObj.editedby;
         var userKeys = [];
@@ -1247,74 +1251,77 @@ export class FirebaseService {
         var txt = description + ' agenda ' + 'deleted';
 
         var notificationRef = firebase.database().ref().child('notifications').orderByChild('nodeid').equalTo(agendaId);
-        notificationRef.once("value", function (snap) {
-            if (snap.exists()) {
-                var councilUsersRef = firebase.database().ref().child('usercouncils').orderByChild('councilid').equalTo(agendaObj.councilid);
-                councilUsersRef.once('value').then(function (usrsSnapshot) {
-                    usrsSnapshot.forEach(usrObj => {
-                        var id = usrObj.val()['userid'];
-                        userKeys.push(id);
-                        if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
-                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
-                            notSettingsRef.once('value', function (notSnap) {
-                                if (notSnap.exists()) {
-                                    notSnap.forEach(notSetting => {
-                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['agendas'] === true) {
-                                            var usrRef = firebase.database().ref().child('users/' + id);
-                                            usrRef.once('value').then(function (usrSnapshot) {
-                                                if (usrSnapshot.val()['isactive'] === true) {
+        notificationRef.once('value').then(function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                firebase.database().ref().child('notifications/' + childSnapshot.key).remove();
+            });
+            return true;
+        }).then(() => {
+            var councilUsersRef = firebase.database().ref().child('usercouncils').orderByChild('councilid').equalTo(agendaObj.councilid);
+            councilUsersRef.once('value').then(function (usrsSnapshot) {
+                usrsSnapshot.forEach(usrObj => {
+                    var id = usrObj.val()['userid'];
+                    userKeys.push(id);
+                    if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
+                        var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                        notSettingsRef.once('value', function (notSnap) {
+                            if (notSnap.exists()) {
+                                notSnap.forEach(notSetting => {
+                                    if (notSetting.val()['allactivity'] === true || notSetting.val()['agendas'] === true) {
+                                        var usrRef = firebase.database().ref().child('users/' + id);
+                                        usrRef.once('value').then(function (usrSnapshot) {
+                                            if (usrSnapshot.val()['isactive'] === true) {
 
-                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+                                                var pushtkn = usrSnapshot.val()['pushtoken'];
 
-                                                    firebase.database().ref().child('notifications').push({
-                                                        userid: id,
-                                                        nodeid: agendaId,
-                                                        nodename: 'agendas',
-                                                        description: description,
-                                                        action: 'delete',
-                                                        text: txt,
-                                                        createddate: new Date().toISOString(),
-                                                        createdtime: new Date().toTimeString(),
-                                                        createdby: createdBy,
-                                                        isread: false
-                                                    }).catch(err => {
-                                                        throw err
-                                                    });
+                                                firebase.database().ref().child('notifications').push({
+                                                    userid: id,
+                                                    nodeid: agendaId,
+                                                    nodename: 'agendas',
+                                                    description: description,
+                                                    action: 'delete',
+                                                    text: txt,
+                                                    createddate: new Date().toISOString(),
+                                                    createdtime: new Date().toTimeString(),
+                                                    createdby: createdBy,
+                                                    isread: false
+                                                }).catch(err => {
+                                                    throw err
+                                                });
 
-                                                    if (pushtkn !== undefined && pushtkn !== '') {
-                                                        var push = {
-                                                            notification: {
-                                                                body: txt,
-                                                                title: "Councils",
-                                                                sound: "default",
-                                                                icon: "icon"
-                                                            },
-                                                            content_available: true,
-                                                            to: pushtkn,
-                                                            priority: 'high'
-                                                        };
+                                                if (pushtkn !== undefined && pushtkn !== '') {
+                                                    var push = {
+                                                        notification: {
+                                                            body: txt,
+                                                            title: "Councils",
+                                                            sound: "default",
+                                                            icon: "icon"
+                                                        },
+                                                        content_available: true,
+                                                        to: pushtkn,
+                                                        priority: 'high'
+                                                    };
 
-                                                        options['body'] = JSON.stringify(push);
+                                                    options['body'] = JSON.stringify(push);
 
-                                                        httpObj.post(url, JSON.stringify(push), options)
-                                                            .subscribe(response => {
-                                                                console.log('notification sent');
-                                                            }, err => {
-                                                                console.log('notification not sent, something went wrong');
-                                                            });
-                                                    }
-
+                                                    httpObj.post(url, JSON.stringify(push), options)
+                                                        .subscribe(response => {
+                                                            console.log('notification sent');
+                                                        }, err => {
+                                                            console.log('notification not sent, something went wrong');
+                                                        });
                                                 }
-                                            });
-                                            return true; // to stop the loop.
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    });
+
+                                            }
+                                        });
+                                        return true; // to stop the loop.
+                                    }
+                                });
+                            }
+                        });
+                    }
                 });
-            }
+            });
         });
     }
 
@@ -1494,6 +1501,94 @@ export class FirebaseService {
                 }
             });
         }
+    }
+
+    // Assignments Update & Delete Trigger ------------------------
+    assignmentsDeleteTrigger(assignmentKey, assignmentObj) {
+        var httpObj = this.http;
+        var assignmentId = assignmentKey;
+        var description = assignmentObj.description;
+        var createdBy = assignmentObj.createdby;
+        var completedBy = assignmentObj.completedby;
+        var userKeys = [];
+
+        var action = 'deleted';
+        var txt = 'delete';
+        var text = description + ' deleted';
+
+        var notificationRef = firebase.database().ref().child('notifications').orderByChild('nodeid').equalTo(assignmentId);
+        notificationRef.once('value').then(function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                firebase.database().ref().child('notifications/' + childSnapshot.key).remove();
+            });
+            return true;
+        }).then(() => {
+            var councilUsersRef = firebase.database().ref().child('usercouncils').orderByChild('councilid').equalTo(assignmentObj.councilid);
+            councilUsersRef.once('value').then(function (usrsSnapshot) {
+                usrsSnapshot.forEach(usrObj => {
+                    var id = usrObj.val()['userid'];
+                    userKeys.push(id);
+                    if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
+                        var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                        notSettingsRef.once('value', function (notSnap) {
+                            if (notSnap.exists()) {
+                                notSnap.forEach(notSetting => {
+                                    if (notSetting.val()['allactivity'] === true || notSetting.val()['assignments'] === true) {
+                                        var usrRef = firebase.database().ref().child('users/' + id);
+                                        usrRef.once('value').then(function (usrSnapshot) {
+                                            if (usrSnapshot.val()['isactive'] === true) {
+
+                                                var pushtkn = usrSnapshot.val()['pushtoken'];
+
+                                                firebase.database().ref().child('notifications').push({
+                                                    userid: id,
+                                                    nodeid: assignmentId,
+                                                    nodename: 'assignments',
+                                                    description: description,
+                                                    action: txt,
+                                                    text: text,
+                                                    createddate: new Date().toISOString(),
+                                                    createdtime: new Date().toTimeString(),
+                                                    createdby: createdBy,
+                                                    isread: false
+                                                }).catch(err => {
+                                                    throw err
+                                                });
+
+                                                if (pushtkn !== undefined && pushtkn !== '') {
+                                                    var push = {
+                                                        notification: {
+                                                            body: text,
+                                                            title: "Councils",
+                                                            sound: "default",
+                                                            icon: "icon"
+                                                        },
+                                                        content_available: true,
+                                                        to: pushtkn,
+                                                        priority: 'high'
+                                                    };
+
+                                                    options['body'] = JSON.stringify(push);
+
+                                                    httpObj.post(url, JSON.stringify(push), options)
+                                                        .subscribe(response => {
+                                                            console.log('notification sent');
+                                                        }, err => {
+                                                            console.log('notification not sent, something went wrong');
+                                                        });
+                                                }
+
+                                            }
+                                        });
+                                        return true; // to stop the loop.
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
     }
 
 

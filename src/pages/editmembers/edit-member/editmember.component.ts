@@ -69,7 +69,7 @@ export class EditMemberPage {
                     assignments.forEach(assignment => {
                         if (updatedCouncils.indexOf(assignment.councilid) === -1) {
                             // Remove assignment in assignments since user is not in that council now..
-                            this.firebaseService.removeAssignment(assignment.$key)
+                            this.firebaseService.removeAssignment(assignment.$key, null)
                         }
                     });
                 });
