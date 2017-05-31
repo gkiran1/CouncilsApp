@@ -15,6 +15,7 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
 export class ChangePasswordPage {
     changePasswordForm: FormGroup;
     profile: User;
+    newpasswordErr = false;
     password = {
         password: '',
         oldpassword: '',
@@ -22,7 +23,7 @@ export class ChangePasswordPage {
         confirmnewpassword: ''
     };
 
-    constructor(fb: FormBuilder, public navCtrl: NavController, private firebaseService: FirebaseService, public appService: AppService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public toast: ToastController ) {
+    constructor(fb: FormBuilder, public navCtrl: NavController, private firebaseService: FirebaseService, public appService: AppService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public toast: ToastController) {
         this.profile = new User;
         appService.getUser().subscribe(user => {
             this.profile.firstname = user.firstname;
@@ -34,8 +35,8 @@ export class ChangePasswordPage {
         });
         this.changePasswordForm = fb.group({
             oldpassword: ['', Validators.required],
-            newpassword: ['', Validators.required],
-            confirmnewpassword: ['', Validators.required],
+            newpassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+            confirmnewpassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
 
         });
     }
@@ -48,18 +49,18 @@ export class ChangePasswordPage {
         // alert.present();
 
         let toast = this.toast.create({
-      message: text,
-      duration: 3000
-    })
+            message: text,
+            duration: 3000
+        })
 
-    toast.present();
+        toast.present();
     }
     cancel() {
-        this.navCtrl.pop({animate: true, animation: 'transition', direction:'back'});
+        this.navCtrl.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
     changePassword() {
         let loader = this.loadingCtrl.create({
-           spinner:'hide',
+            spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
         });
         loader.present();
@@ -78,27 +79,27 @@ export class ChangePasswordPage {
                         })
                             .catch(err => {
                                 loader.dismiss();
-                                this.showAlert('Internal server error.');
+                                this.showAlert('Internal server error');
                             })
                     }
                     else {
                         loader.dismiss();
-                        this.showAlert('Your password is not matching.');
+                        this.showAlert('Your password is not matching');
                     }
                 }
                 else {
                     loader.dismiss();
-                    this.showAlert('6 characters required.')
+                    // this.showAlert('6 characters required')
                 }
             }
             else {
                 loader.dismiss();
-                this.showAlert('user not exist.');
+                this.showAlert('user not exist');
             }
             //  });           
         }).catch(err => {
             loader.dismiss();
-            this.showAlert('your old password is wrong.')
+            this.showAlert('your old password is wrong')
         })
 
     }
