@@ -382,20 +382,36 @@ ion-header ion-col h3 {
     color: #3CB18A!important;
 }
 
+.label-ios[floating],
+.label-md[floating] {
+    transform: translate3d(0, 10px, 0) !important;
+}
+
 .input-has-focus .label-md[floating],
 .input-has-value .label-md[floating] {
     color: #3CB18A;
+    transform: translate3d(0, 3px, 0) scale(0.8) !important;
 }
+
+.input-has-focus .label-ios[floating],
+.input-has-value .label-ios[floating] {
+    color: #3CB18A;
+    transform: translate3d(0, 3px, 0) scale(0.8) !important;
+
+}
+
+.text-input-md,
+.text-input-ios {
+    margin-top:0 !important;
+}
+
 .picker-ios .picker-opt{
     font-size: 15px !important;
 }
 .picker-md .picker-opt{
     font-size: 17px !important;
 }
-.input-has-focus .label-ios[floating],
-.input-has-value .label-ios[floating] {
-    color: #3CB18A;
-}
+
 .scroll-content {
     overflow-y: auto !important;
     padding-bottom: 0!important;
@@ -1237,14 +1253,17 @@ ion-list ion-item{
 .toast-ios .toast-message {
     padding: 1.5rem;
     font-size: 1.4rem;
-    color: #35373a;
-    background: #FFFFFF;
+    color: #FFF;
+    background: #35373A;
     box-shadow: -1px -1px 3px #888;
-    border: 1px solid #F13822;
+    border: 1px solid #35373A;
     border-radius: 5px;
     text-align: center;
     font-family: Bernina-Regular !important;
 }
+
+
+/******************************* Inline Validation Styles **************************************/
  .invalid ion-input{
         border-bottom: 1px solid #F13822;
     }
@@ -1258,4 +1277,9 @@ ion-list ion-item{
         font-size: 15px !important;
         margin:0px !important;
 
+    }
+    .error-container {
+        padding:0;
+        margin: 0;
+        height: 20px !important;
     }
