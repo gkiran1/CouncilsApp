@@ -1,74 +1,69 @@
 // .item-md.item-block .item-inner{
-//     border-bottom:none !important;
-// }
-
-edit-profile {
-.scroll-content {
-    background: #fafafa;
-    padding-top: 28px !important;
-}
-
-.form-page ion-row {
-        background: #FFF;
-        border-top: 1px solid #e8e9eb !important;
-        border-bottom: 1px solid #e8e9eb !important;
-    }
-
-
-
-.cameraBtn {
-    
-    width: 112px;
-    height: 112px;
-    border-radius: 112px;
-    background-color: #fafafa;
-    border: 1px solid #e8e9eb;
-}
-
-.changepassword {
-    color: #35373A;
-    font-family: 'Bernina-Regular', 'sans-serif';
-    font-size: 17px;
-}
-
-
-
-.actionsheet-items {
-    color: #3cb18a !important;
-    font-family: Bernina-Regular !important;
-    font-size: 17px !important;
-}
-
-.actionsheet-cancel {
-    color: #35373A !important;
-    font-family: Bernina-Regular !important;
-    font-size: 17px !important;
-}
-
-
-    .photo-col {
-        margin-left:16px;
-        padding: 0;
-        max-width: 114px;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        align-items: center;
-        
-    }
-
-    .username-col {
-        margin-left:20px;
-        padding:0;
-    }
-
-    .username-col ion-item {
-        padding:0;
-        margin: 0;
-        border:none;
-    }
-
-    ion-input {
-        padding:0 !important;
-    }
-}
+ //     border-bottom:none !important;
+ // }
+ edit-profile {
+     .scroll-content {
+         background: #fafafa;
+         padding-top: 28px !important;
+         margin-top: 41px !important;
+     }
+     .form-page ion-row {
+         background: #FFF;
+         border-top: 1px solid #e8e9eb !important;
+         border-bottom: 1px solid #e8e9eb !important;
+     }
+     .cameraBtn {
+         width: 112px;
+         height: 112px;
+         border-radius: 112px;
+         background-color: #fafafa;
+         border: 1px solid #e8e9eb;
+         margin: auto;
+         margin-top: 30px;
+     }
+     .changepassword {
+         color: #35373A;
+         font-family: 'Bernina-Regular', 'sans-serif';
+         font-size: 17px;
+     }
+     .actionsheet-items {
+         color: #3cb18a !important;
+         font-family: Bernina-Regular !important;
+         font-size: 17px !important;
+     }
+     .actionsheet-cancel {
+         color: #35373A !important;
+         font-family: Bernina-Regular !important;
+         font-size: 17px !important;
+     }
+     .photo-col {
+         margin-left: 16px;
+         padding: 0;
+         max-width: 114px;
+         display: flex;
+         justify-content: center;
+         align-content: center;
+         align-items: center;
+     }
+     // .username-col {
+     //     margin-left:20px;
+     //     padding:0;
+     // }
+     .username-col ion-item {
+         padding: 0;
+         margin: 0;
+         border: none;
+     }
+     ion-input {
+         padding: 0 !important;
+     }
+     ion-item.form-item-first {
+         border-top: none !important;
+     }
+     ion-row {
+         padding-bottom: 20px;
+     }
+     ion-row div {
+         display: flex;
+     }
+ }
