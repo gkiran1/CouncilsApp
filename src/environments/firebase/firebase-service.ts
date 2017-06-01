@@ -150,7 +150,7 @@ export class FirebaseService {
                         email: invitee.email,
                         firstname: invitee.firstname,
                         lastname: invitee.lastname,
-                        calling: invitee.calling,
+                        // calling: invitee.calling,
                         unittype: invitee.unittype,
                         unitnumber: invitee.unitnumber,
                         councils: invitee.councils,
