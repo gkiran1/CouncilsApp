@@ -352,11 +352,13 @@ export class FirebaseService {
         });
     }
 
-    inactivateUser(userUid: string, isactive: boolean) {
+    inactivateUser(userUid: string, isactive: boolean, pushtoken: string) {
         return this.rootRef.child('users/' + userUid).update({ isactive: isactive, isnotificationreq: true }).then(() => {
             return "User inactivated successfully..."
         }).then(() => {
-            this.rootRef.child('users/' + userUid).update({ isnotificationreq: false })
+            this.rootRef.child('users/' + userUid).update({ isnotificationreq: false }).then(() => {
+                this.userUpdateTrigger(userUid, 'inactivate', pushtoken);
+            });
         }).catch(err => {
             throw err;
         });
@@ -1872,6 +1874,54 @@ export class FirebaseService {
             }
         });
         // }
+    }
+
+    // User Update Trigger ------------------------
+    userUpdateTrigger(userUid, action, tkn) {
+        var httpObj = this.http;
+        var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(userUid);
+        notSettingsRef.once('value', function (notSnap) {
+            if (notSnap.exists()) {
+                notSnap.forEach(notSetting => {
+                    if (notSetting.val()['allactivity'] === true || notSetting.val()['actinactaccount'] === true) {
+                        // if (snapshot.val()['isnotificationreq'] === true) {
+
+                        var description = '';
+
+                        if (action === 'inactivate') {
+                            description = 'Your account is deactivated'
+                        } else if (action === 'activate') {
+                            description = 'Your account is activated'
+                        }
+
+                        if (tkn !== undefined && tkn !== '') {
+                            var push = {
+                                notification: {
+                                    body: description,
+                                    title: "Councils",
+                                    sound: "default",
+                                    icon: "icon"
+                                },
+                                content_available: true,
+                                to: tkn,
+                                priority: 'high'
+                            };
+
+                            options['body'] = JSON.stringify(push);
+
+                            httpObj.post(url, JSON.stringify(push), options)
+                                .subscribe(response => {
+                                    console.log('notification sent');
+                                }, err => {
+                                    console.log('notification not sent, something went wrong');
+                                });
+                        }
+                        // }
+                        return true; // to stop the loop.
+                    }
+                });
+            }
+        });
     }
 
 }

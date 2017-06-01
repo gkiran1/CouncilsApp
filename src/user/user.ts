@@ -16,5 +16,6 @@ export class User {
     lastupdateddate: string;
     isactive: boolean;
     councilnames: string;
-    phone:string;
+    phone: string;
+    pushtoken: string;
 }

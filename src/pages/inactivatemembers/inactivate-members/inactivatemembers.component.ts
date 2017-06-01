@@ -52,7 +52,7 @@ export class InactivateMembersPage {
                     cssClass: "actionsheet-items",
                     handler: () => {
                         this.menuctrl.close();
-                        this.firebaseService.inactivateUser(user.$key, false)
+                        this.firebaseService.inactivateUser(user.$key, false, user.pushtoken)
                             .then(() => {
                                 this.emailservice.emailAccountInactive(user.firstname, user.lastname, user.email).subscribe(res => {
                                     if (res.status === 200) {
@@ -87,12 +87,12 @@ export class InactivateMembersPage {
         // });
         // alert.present();
 
-         let toast = this.toast.create({
-      message: errText,
-      duration: 3000
-    })
+        let toast = this.toast.create({
+            message: errText,
+            duration: 3000
+        })
 
-    toast.present();
+        toast.present();
     }
 
 }
