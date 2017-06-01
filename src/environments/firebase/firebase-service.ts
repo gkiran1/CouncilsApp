@@ -771,12 +771,14 @@ export class FirebaseService {
         });
     }
 
-    updateDiscussionChat(discussionId, msg) {
+    updateDiscussionChat(discussionId, msg, discussion) {
         return this.af.database.list(`discussions/${discussionId}/messages`).push(msg)
             .then(() => {
                 return this.af.database.object(`discussions/${discussionId}`)
-                    .update({ lastMsg: msg.text, lastMsgSentUser: msg.user_firstname + ' ' + msg.user_lastname, isNotificationReq: true });
-            })
+                    .update({ lastMsg: msg.text, lastMsgSentUser: msg.user_firstname + ' ' + msg.user_lastname, isNotificationReq: true }).then(() => {
+                        this.discussionsUpdateTrigger(msg, discussion);
+                    });
+            });
     }
 
     getDiscussionByKey(key) {
@@ -1669,6 +1671,66 @@ export class FirebaseService {
             }
         });
 
+    }
+
+    // Council Discussions Update Trigger ------------------------
+    discussionsUpdateTrigger(msg, discussion) {
+        //   if (discussion.isNotificationReq === true) {
+        var httpObj = this.http;
+        var description = discussion.topic;
+        var userName = msg.user_firstname;
+        var msg = msg.text;
+        var userKeys = [];
+        var councilUsersRef = firebase.database().ref().child('usercouncils').orderByChild('councilid').equalTo(discussion.councilid);
+        councilUsersRef.once('value').then(function (usrsSnapshot) {
+            usrsSnapshot.forEach(usrObj => {
+                var id = usrObj.val()['userid'];
+                userKeys.push(id);
+                if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
+                    var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                    notSettingsRef.once('value', function (notSnap) {
+                        if (notSnap.exists()) {
+                            notSnap.forEach(notSetting => {
+                                if (notSetting.val()['allactivity'] === true || notSetting.val()['discussions'] === true) {
+                                    var usrRef = firebase.database().ref().child('users/' + id);
+                                    usrRef.once('value').then(function (usrSnapshot) {
+                                        if (usrSnapshot.val()['isactive'] === true) {
+
+                                            var pushtkn = usrSnapshot.val()['pushtoken'];
+
+                                            if (pushtkn !== undefined && pushtkn !== '') {
+                                                var push = {
+                                                    notification: {
+                                                        body: 'Council Discussion - ' + description + ' - @' + userName + ': ' + msg,
+                                                        title: "Councils",
+                                                        sound: "default",
+                                                        icon: "icon"
+                                                    },
+                                                    content_available: true,
+                                                    to: pushtkn,
+                                                    priority: 'high'
+                                                };
+
+                                                options['body'] = JSON.stringify(push);
+
+                                                httpObj.post(url, JSON.stringify(push), options)
+                                                    .subscribe(response => {
+                                                        console.log('notification sent');
+                                                    }, err => {
+                                                        console.log('notification not sent, something went wrong');
+                                                    });
+                                            }
+                                        }
+                                    });
+                                    return true; // to stop the loop.
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+        //  }
     }
 
 }

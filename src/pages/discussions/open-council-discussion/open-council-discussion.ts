@@ -64,7 +64,7 @@ export class OpenCouncilDiscussionPage {
                 user_avatar: this.user.avatar,
                 status: 'sent'
             }
-            this.fs.updateDiscussionChat(this.discussion.$key, chatObj)
+            this.fs.updateDiscussionChat(this.discussion.$key, chatObj, this.discussion)
                 .then(res => {
                     this.tagsSet.forEach(tag => {
                         if (chatObj.text.includes('@' + tag.split('/')[1])) {
