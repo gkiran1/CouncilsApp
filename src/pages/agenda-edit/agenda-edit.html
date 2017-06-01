@@ -26,7 +26,7 @@
                 formControlName="assigneddate" validate-onblur [max]="2500" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"
                 (ionChange)="onChange($event)"></ion-datetime>
         </ion-item>
-        <ion-label class="error-msg" *ngIf="dateErr">Invalid date</ion-label>
+        <p class="error-container"><ion-label class="error-msg" *ngIf="dateErr">Invalid date</ion-label></p>
 
         <ion-item class="input-item">
             <ion-label floating>Opening Hymn</ion-label>

@@ -53,7 +53,7 @@
       <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDD MMM D YYYY, h, mm, A" name="assigneddate" formControlName="assigneddate"
       validate-onblur [max]="2500" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55" #assignmentdate></ion-datetime>
     </ion-item>
-    <ion-label class="error-msg" *ngIf="dateErr">Invalid date</ion-label>
+    <p class="error-container"><ion-label class="error-msg" *ngIf="dateErr">Invalid date</ion-label></p>
     <ion-item class="input-item">
       <ion-label floating>Notes</ion-label>
       <ion-textarea name="notes" spellcheck="true" elastic formControlName="notes" closekeyboard></ion-textarea>

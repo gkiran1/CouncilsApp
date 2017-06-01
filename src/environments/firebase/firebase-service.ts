@@ -821,6 +821,7 @@ export class FirebaseService {
                 isNotificationReq: discussion.isNotificationReq
             })
             .then((res) => {
+                this.privateDiscussionsTrigger(res.path.o[1], discussion);
                 //to get a reference of newly added object -res.path.o[1]
                 return res.path.o[1];
             })
@@ -1731,6 +1732,80 @@ export class FirebaseService {
             });
         });
         //  }
+    }
+
+    // Private Discussions Trigger ------------------------
+    privateDiscussionsTrigger(pvtDiscussionKey, discussion) {
+        var httpObj = this.http;
+        var privateDiscussionId = pvtDiscussionKey;
+        var description = discussion.createdUserName;
+        var createdBy = discussion.createdUserId;
+        var userId = discussion.otherUserId;
+
+        var notificationRef = firebase.database().ref().child('notifications').orderByChild('nodeid').equalTo(privateDiscussionId);
+        notificationRef.once("value", function (snap) {
+            if (!snap.exists()) {
+                var usrRef = firebase.database().ref().child('users/' + userId);
+                usrRef.once('value').then(function (usrSnapshot) {
+                    if (usrSnapshot.val()['isactive'] === true) {
+
+                        var pushtkn = usrSnapshot.val()['pushtoken'];
+                        var email = usrSnapshot.val()['email'];
+
+                        var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(userId);
+                        notSettingsRef.once('value', function (notSnap) {
+                            if (notSnap.exists()) {
+                                notSnap.forEach(notSetting => {
+                                    if (notSetting.val()['allactivity'] === true || notSetting.val()['pvtdiscussions'] === true) {
+                                        firebase.database().ref().child('notifications').push({
+                                            userid: userId,
+                                            nodeid: privateDiscussionId,
+                                            nodename: 'privatediscussions',
+                                            description: description,
+                                            action: 'create',
+                                            text: "<h3>" + "<span class='nottxt-lbl'>" + description + "</span>" + " private discussion invite" + "</h3>",
+                                            createddate: new Date().toISOString(),
+                                            createdtime: new Date().toTimeString(),
+                                            createdby: createdBy,
+                                            isread: false
+                                        }).catch(err => {
+                                            throw err
+                                        });
+
+                                        if (pushtkn !== undefined && pushtkn !== '') {
+                                            var push = {
+                                                notification: {
+                                                    body: description + ' private discussion invite',
+                                                    title: "Councils",
+                                                    sound: "default",
+                                                    icon: "icon"
+                                                },
+                                                content_available: true,
+                                                to: pushtkn,
+                                                priority: 'high'
+                                            };
+
+                                            options['body'] = JSON.stringify(push);
+
+                                            httpObj.post(url, JSON.stringify(push), options)
+                                                .subscribe(response => {
+                                                    console.log('notification sent');
+                                                }, err => {
+                                                    console.log('notification not sent, something went wrong');
+                                                });
+                                        }
+
+                                        return true; // to stop the loop.
+                                    }
+                                });
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
+
     }
 
 }

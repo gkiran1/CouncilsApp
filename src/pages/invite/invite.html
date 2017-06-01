@@ -19,22 +19,22 @@
     <form (ngSubmit)="inviteMember()" #InviteMemberForm="ngForm">
         <ion-item-group>
             <ion-item-divider class="empty-light"></ion-item-divider>
-            <ion-item [class.invalid]="!isValidEmail || emailErr">
+            <ion-item class="input-item" [class.invalid]="!isValidEmail || emailErr">
                 <ion-label floating>Email</ion-label>
                 <ion-input class="council-styles" type="email" name="email" validate-onblur [(ngModel)]="invite.email" (blur)="keypresssed($event)" required></ion-input>
             </ion-item>
-            <ion-label class="error-msg" *ngIf="emailErr">Email taken</ion-label>
-            <ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label>
+            <p class="error-container"><ion-label class="error-msg" *ngIf="emailErr">Email taken</ion-label></p>
+            <p class="error-container"><ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label></p>
 
-            <ion-item>
+            <ion-item class="input-item">
                 <ion-label floating>First Name</ion-label>
                 <ion-input class="council-styles" type="text" name="firstname" [(ngModel)]="invite.firstname" required></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item class="input-item">
                 <ion-label floating>Last Name</ion-label>
                 <ion-input class="council-styles" type="text" name="lastname" [(ngModel)]="invite.lastname" required></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item class="input-item">
                 <ion-label floating>Calling</ion-label>
                 <ion-input class="council-styles" type="text" spellcheck="true" name="calling" [(ngModel)]="invite.calling" required></ion-input>
             </ion-item>
