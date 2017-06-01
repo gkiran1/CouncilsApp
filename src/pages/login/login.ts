@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, NavParams, Loading, ToastController } from 'ionic-angular';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Http } from "@angular/http";
 import { MenuPage } from '../menu/menu';
@@ -9,6 +10,8 @@ import { User } from '../../user/user';
 import { NgZone } from '@angular/core';
 import { NoAccessPage } from '../noaccess/noaccess.component';
 import { ForgotPwd } from '../forgotpwd/forgotpwd';
+
+import { validateEmail } from '../../custom-validators/custom-validator';
 
 declare var FCMPlugin: any;
 
@@ -26,7 +29,7 @@ export class LoginPage {
     isValidEmail = true;
     isValidPwd = false;
     emailErr = false;
-
+    loginForm: FormGroup;
     constructor(
         public nav: NavController,
         public loadingCtrl: LoadingController,
@@ -35,8 +38,15 @@ export class LoginPage {
         public http: Http,
         private navParams: NavParams,
         private zone: NgZone,
-        public toast: ToastController
+        public toast: ToastController,
+        fb: FormBuilder
     ) {
+
+        this.loginForm = fb.group({
+      
+      email: ['', Validators.compose([Validators.required, validateEmail])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+    });
     }
 
     keypresssed($event) {

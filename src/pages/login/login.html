@@ -9,25 +9,23 @@
 
     </div>
 
-    <form class="formcontent" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
-        <ion-item [class.invalid]="!isValidEmail || emailErr" class="input-item">
+    <form class="formcontent" [formGroup]="loginForm">
+        <ion-item [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty" class="input-item">
             <ion-label class="inputtype" floating> Email</ion-label>
-            <ion-input type="email" name="email" id="email" validate-onblur class="form-control" (blur)="keypresssed($event)" [(ngModel)]="loginCredentials.email"
-                required></ion-input>
+            <ion-input type="email" name="email" id="email" formControlName="email" validate-onblur></ion-input>
         </ion-item>
-        <p class="error-container"><ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label></p>
+        <p class="error-container"><ion-label class="error-msg" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">Invalid email</ion-label></p>
    
-    <ion-item [class.invalid]="(password.errors && password.dirty)" class="input-item">
+    <ion-item [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty" class="input-item">
             <ion-label class="inputtype" floating> Password</ion-label>
-            <ion-input type="password" id="password" name="password" validate-onblur class="form-control" #password="ngModel" minlength='6' [(ngModel)]="loginCredentials.password" (keyup)="pwdChange($event)"
-                required></ion-input>
+            <ion-input type="password" id="password" name="password" minLength='6' formControlName="password" validate-onblur ></ion-input>
         </ion-item>
-    <p class="error-container"><ion-label class="error-msg" *ngIf="(password.errors && password.dirty)">6 characters required</ion-label></p>
+    <p class="error-container"><ion-label class="error-msg" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">6 characters required</ion-label></p>
 
         <div class="login-button-container">
             <ion-spinner name="dots" *ngIf="show" color="primary"></ion-spinner>
             <button color="secondary" ion-button clear class="button button-clik" name="loginbtn" *ngIf="!show" id="loginbtn" type="submit"
-                [disabled]="!isValidEmail || !isValidPwd" text-capitalize>Log In</button>
+                [disabled]="!loginForm.controls.email.valid || !loginForm.controls.password.valid" text-capitalize (click)="validateUser(loginForm.value)">Log In</button>
         </div>
     </form>
 </ion-content>
