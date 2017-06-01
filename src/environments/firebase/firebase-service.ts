@@ -832,11 +832,13 @@ export class FirebaseService {
         return this.af.database.object(`privatediscussions/${key}`);
     }
 
-    updatePrivateDiscussionChat(discussionId, msg) {
+    updatePrivateDiscussionChat(discussionId, msg, discussion) {
         return this.af.database.list(`privatediscussions/${discussionId}/messages`).push(msg)
             .then(() => {
-                return this.af.database.object(`privatediscussions/${discussionId}`).update({ lastMsg: msg, isNotificationReq: true });
-            })
+                return this.af.database.object(`privatediscussions/${discussionId}`).update({ lastMsg: msg, isNotificationReq: true }).then(() => {
+                    this.privateDiscussionsUpdateTrigger(msg, discussion);
+                });
+            });
     }
 
     getPrivateDiscussions() {
@@ -1806,6 +1808,70 @@ export class FirebaseService {
             }
         });
 
+    }
+
+    // Private Discussions Update Trigger ------------------------
+    privateDiscussionsUpdateTrigger(msg, discussion) {
+        //if (snapshot.val()['isNotificationReq'] === true) {
+        var httpObj = this.http;
+        var description = msg.text;
+        var email = '';
+        var name = '';
+        var id = '';
+
+        if (msg.userId !== discussion.createdUserId) {
+            email = discussion.createdUserEmail;
+            name = discussion.otherUserName;
+            id = discussion.createdUserId;
+        } else if (msg.userId !== discussion.otherUserId) {
+            email = discussion.otherUserEmail;
+            name = discussion.createdUserName;
+            id = discussion.otherUserId;
+        }
+
+        var usrRef = firebase.database().ref().child('users/' + id);
+        usrRef.once('value').then(function (usrSnapshot) {
+            if (usrSnapshot.val()['isactive'] === true) {
+
+                var pushtkn = usrSnapshot.val()['pushtoken'];
+
+                var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                notSettingsRef.once('value', function (notSnap) {
+                    if (notSnap.exists()) {
+                        notSnap.forEach(notSetting => {
+                            if (notSetting.val()['allactivity'] === true || notSetting.val()['pvtdiscussions'] === true) {
+
+                                if (pushtkn !== undefined && pushtkn !== '') {
+                                    var push = {
+                                        notification: {
+                                            body: 'Private discussion - @' + name + ': ' + description,
+                                            title: "Councils",
+                                            sound: "default",
+                                            icon: "icon"
+                                        },
+                                        content_available: true,
+                                        to: pushtkn,
+                                        priority: 'high'
+                                    };
+
+                                    options['body'] = JSON.stringify(push);
+
+                                    httpObj.post(url, JSON.stringify(push), options)
+                                        .subscribe(response => {
+                                            console.log('notification sent');
+                                        }, err => {
+                                            console.log('notification not sent, something went wrong');
+                                        });
+                                }
+
+                                return true; // to stop the loop.
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        // }
     }
 
 }

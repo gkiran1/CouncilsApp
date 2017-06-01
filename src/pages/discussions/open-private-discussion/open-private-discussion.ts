@@ -74,7 +74,7 @@ export class OpenPrivateDiscussionPage {
                 user_avatar: this.user.avatar,
                 status: 'sent'
             }
-            this.fs.updatePrivateDiscussionChat(this.discussion.$key, chatObj)
+            this.fs.updatePrivateDiscussionChat(this.discussion.$key, chatObj, this.discussion)
                 .then(res => {
                     //
                 })
@@ -85,7 +85,7 @@ export class OpenPrivateDiscussionPage {
                 this.content.scrollToBottom();
             }, 10);
             this.msg = '';
-             document.getElementsByTagName('textarea')[0].style.height = '24px'; //1 row height
+            document.getElementsByTagName('textarea')[0].style.height = '24px'; //1 row height
         }
     }
     focusIn() {
