@@ -80,6 +80,28 @@ view-council-file-page {
 
     .icon-col {
         flex: 0;
+        padding-right: 10px;
+        padding-left: 10px;
         
+    }
+    ion-col p{
+        margin:2px;
+    }
+    ion-list ion-row{
+        margin-left:15px;
+    }
+  
+    .ion-item-middle, .ion-item-last{
+        border-top: 1px solid #e8e9eb !important;
+    }
+    .ion-item-last{
+         border-bottom:none !important;
+    }
+    .ion-item-first{
+        border-top:none !important;
+    }
+    ion-list{
+         border-top: 1px solid #e8e9eb !important;
+         border-bottom: 1px solid #e8e9eb !important;
     }
 }

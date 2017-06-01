@@ -21,33 +21,33 @@
     </ion-navbar>
 </ion-header>
 <ion-content id="content1" class="list-page">
-     <form [formGroup]="newCouncilFileForm" (ngSubmit)="newCouncilFileForm.value">
-    <ng-container *ngIf="!listdisplayflag">
-        <ion-list>
-            <ion-item [ngClass]="filesArray.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first': (i === filesArray.length-1 ? 'ion-item-last' : 'ion-item-middle'))" *ngFor="let file of filesArray; let i = index"
-                text-wrap>
-                
-                <ion-row>
+    <form [formGroup]="newCouncilFileForm" (ngSubmit)="newCouncilFileForm.value">
+        <ng-container *ngIf="!listdisplayflag">
+            <ion-list>
+                <!--<ion-item text-wrap>-->
+
+                <ion-row [ngClass]="filesArray.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first': (i === filesArray.length-1 ? 'ion-item-last' : 'ion-item-middle'))"
+                    *ngFor="let file of filesArray; let i = index">
                     <ion-col class="icon-col">
                         <ion-icon class="councils-icon__file menu-icon" name="document" color="secondary" (click)="downloadFile(file)"></ion-icon>
                     </ion-col>
-                    <ion-col (click)="downloadFile(file)">
+                    <ion-col style="position:relative" (click)="downloadFile(file)">
                         <p><span class="council-styles">{{file.filename}}</span></p>
                         <p class="font4">by <span ion-text color="secondary">{{file.createdUser}}</span></p>
                         <p class="font4">
                             {{formatBytes(file.filesize)}} {{file.filetype}} file
                             <span class="agendadate-styles">{{file.createdDate | customdateformat}}</span></p>
                     </ion-col>
-                    <ion-col width-20>
+                    <ion-col width-10>
                         <ng-container *ngIf="deleteflag">
                             <ion-icon class="councils-icon__inactivate menu-icon right-align" name="close-circle" color="secondary" (click)="delete(file)"></ion-icon>
                         </ng-container>
                     </ion-col>
                 </ion-row>
-                </ion-item>
-        </ion-list>
-    </ng-container>
-     </form>
+                <!--</ion-item>-->
+            </ion-list>
+        </ng-container>
+    </form>
 </ion-content>
 <ion-footer>
     <ng-container *ngIf="!deleteflag">
