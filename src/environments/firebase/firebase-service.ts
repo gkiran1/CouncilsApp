@@ -664,6 +664,7 @@ export class FirebaseService {
                 isActive: file.isActive,
             })
             .then((res) => {
+                this.filesTrigger(res.path.o[1], file);
                 //to get a reference of newly added object -res.path.o[1]
                 return res.path.o[1];
             })
@@ -1921,6 +1922,88 @@ export class FirebaseService {
                         // }
                         return true; // to stop the loop.
                     }
+                });
+            }
+        });
+    }
+
+    // Files Trigger ------------------------
+    filesTrigger(fileKey, file) {
+        var httpObj = this.http;
+        var fileId = fileKey;
+        var description = file.councilname;
+        var createdBy = file.createdBy;
+        var createdUser = file.createdUser;
+        var name = file.filename;
+        var userKeys = [];
+        var notificationRef = firebase.database().ref().child('notifications').orderByChild('nodeid').equalTo(fileId);
+        notificationRef.once("value", function (snap) {
+            if (!snap.exists()) {
+                var councilUsersRef = firebase.database().ref().child('usercouncils').orderByChild('councilid').equalTo(file.councilid);
+                councilUsersRef.once('value').then(function (usrsSnapshot) {
+                    usrsSnapshot.forEach(usrObj => {
+                        var id = usrObj.val()['userid'];
+                        userKeys.push(id);
+                        if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
+                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                            notSettingsRef.once('value', function (notSnap) {
+                                if (notSnap.exists()) {
+                                    notSnap.forEach(notSetting => {
+                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['files'] === true) {
+                                            var usrRef = firebase.database().ref().child('users/' + id);
+                                            usrRef.once('value').then(function (usrSnapshot) {
+                                                if (usrSnapshot.val()['isactive'] === true) {
+
+                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+                                                    var txt = 'New ' + name + ' file uploaded';
+
+                                                    firebase.database().ref().child('notifications').push({
+                                                        userid: id,
+                                                        nodeid: fileId,
+                                                        nodename: 'files',
+                                                        description: description,
+                                                        action: 'create',
+                                                        text: txt,
+                                                        createddate: new Date().toISOString(),
+                                                        createdtime: new Date().toTimeString(),
+                                                        createdby: createdBy,
+                                                        isread: false
+                                                    }).catch(err => {
+                                                        throw err
+                                                    });
+
+                                                    if (pushtkn !== undefined && pushtkn !== '') {
+                                                        var push = {
+                                                            notification: {
+                                                                body: createdUser + ' sent you a file ' + name,
+                                                                title: "Councils",
+                                                                sound: "default",
+                                                                icon: "icon"
+                                                            },
+                                                            content_available: true,
+                                                            to: pushtkn,
+                                                            priority: 'high'
+                                                        };
+
+                                                        options['body'] = JSON.stringify(push);
+
+                                                        httpObj.post(url, JSON.stringify(push), options)
+                                                            .subscribe(response => {
+                                                                console.log('notification sent');
+                                                            }, err => {
+                                                                console.log('notification not sent, something went wrong');
+                                                            });
+                                                    }
+
+                                                }
+                                            });
+                                            return true; // to stop the loop.
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
                 });
             }
         });
