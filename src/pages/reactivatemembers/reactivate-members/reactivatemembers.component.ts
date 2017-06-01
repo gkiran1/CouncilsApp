@@ -45,7 +45,7 @@ export class ReactivateMembersPage {
     }
 
     reactivatemember(user: User) {
-        this.firebaseService.reactivateUser(user.$key, true)
+        this.firebaseService.reactivateUser(user.$key, true, user.pushtoken)
             .then(() => {
                 this.emailservice.emailReactivate(user.firstname, user.lastname, user.unitnumber, user.email).subscribe(res => {
                     if (res.status === 200) {
@@ -59,7 +59,7 @@ export class ReactivateMembersPage {
 
     reactivateAll() {
         this.users.forEach((usr) => {
-            this.firebaseService.reactivateUser(usr.$key, true)
+            this.firebaseService.reactivateUser(usr.$key, true, usr.pushtoken)
                 .then(() => {
                 })
                 .catch(err => { this.showAlert('Internal server error.') });

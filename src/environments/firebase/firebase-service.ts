@@ -364,11 +364,13 @@ export class FirebaseService {
         });
     }
 
-    reactivateUser(userUid: string, isactive: boolean) {
+    reactivateUser(userUid: string, isactive: boolean, pushtoken: string) {
         return this.rootRef.child('users/' + userUid).update({ isactive: isactive, isnotificationreq: true }).then(() => {
             return "User reactivated successfully..."
         }).then(() => {
-            this.rootRef.child('users/' + userUid).update({ isnotificationreq: false })
+            this.rootRef.child('users/' + userUid).update({ isnotificationreq: false }).then(() => {
+                this.userUpdateTrigger(userUid, 'activate', pushtoken);
+            });
         }).catch(err => {
             throw err;
         });
