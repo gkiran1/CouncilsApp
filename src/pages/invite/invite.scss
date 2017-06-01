@@ -42,7 +42,12 @@ invite-page{
 }
 
 .empty-light {
-    border-bottom: 1px solid #e8e9eb !important;
+    // border-bottom: 1px solid #e8e9eb !important;
+    background: #fff !important;
+}
+.list-title-divider{
+    background: #fff !important;
+    height: 60px;
 }
 
 }
