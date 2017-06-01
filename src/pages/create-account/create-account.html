@@ -12,15 +12,15 @@
       <ion-input type="email" name="email" validate-onblur class="form-control" (blur)="emailChange($event)" [(ngModel)]="newUser.email" id="password"
         required></ion-input>
     </ion-item>
-    <ion-label class="error-msg" *ngIf="emailErr">Email taken</ion-label>
-    <ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label>
+    <p class="error-container"><ion-label class="error-msg" *ngIf="emailErr">Email taken</ion-label>
+    <p class="error-container"><ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label></p>
 
     <ion-item [class.invalid]="(password.errors && password.dirty)" class="input-item">
       <ion-label class="inputtype" floating>Password</ion-label>
       <ion-input type="password" name="password" validate-onblur class="form-control" #password="ngModel" minlength='6' [(ngModel)]="newUser.password"
         id="email" required></ion-input>
     </ion-item>
-    <ion-label class="error-msg" *ngIf="(password.errors && password.dirty)">6 characters required</ion-label>
+    <p class="error-container"><ion-label class="error-msg" *ngIf="(password.errors && password.dirty)">6 characters required</ion-label></p>
 
     <ion-item class="input-item">
       <ion-label class="inputtype" floating> LDS.org username</ion-label>
