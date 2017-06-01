@@ -48,7 +48,7 @@
       <ion-input type="text" name="creditcardNo" (input)="formatToCreditNumber($event)" maxLength='18' formControlName="creditcardNo"></ion-input>
     </ion-item>
     <p class="error-container"><ion-label class="error-msg" *ngIf="showCardErr">Invalid card number</ion-label></p>
-    <ion-item class="input-item" [class.invalid]="showExpDateErr">
+    <ion-item [class.invalid]="showExpDateErr">
       <ion-label floating>Valid Thru</ion-label>
       <ion-input type="text" name="creditValidthru" (input)="formatToValidThru($event)" maxLength="5" formControlName="creditValidthru"></ion-input>
     </ion-item>
