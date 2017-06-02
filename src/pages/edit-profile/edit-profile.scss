@@ -19,12 +19,13 @@
          background-color: #fafafa;
          border: 1px solid #e8e9eb;
          margin: auto;
-         margin-top: 30px;
+         margin-top: 10px;
      }
      .changepassword {
          color: #35373A;
          font-family: 'Bernina-Regular', 'sans-serif';
          font-size: 17px;
+         padding-left: 10px;
      }
      .actionsheet-items {
          color: #3cb18a !important;
@@ -61,9 +62,18 @@
          border-top: none !important;
      }
      ion-row {
-         padding-bottom: 20px;
+         padding-bottom: 0 !important;
      }
      ion-row div {
          display: flex;
+     }
+     .ion-row-edit-content {
+         padding-bottom: 20px !important;
+     }
+     ion-col {
+         padding: 10px;
+     }
+     ion-item {
+         padding-left: 0 !important;
      }
  }

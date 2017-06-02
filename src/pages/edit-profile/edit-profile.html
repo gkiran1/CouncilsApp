@@ -16,7 +16,7 @@
 </ion-header>
 <ion-content class="form-page" has-footer='true' overflow-scroll='true'>
     <form [formGroup]="editProfileForm" (ngsubmit)="editProfileForm.value">
-        <ion-row>
+        <ion-row class="ion-row-edit-content">
             <ion-col>
                 <div>
                     <ng-container *ngIf="!imageflag">
