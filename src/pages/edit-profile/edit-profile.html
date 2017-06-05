@@ -14,46 +14,47 @@
         </ion-row>
     </ion-navbar>
 </ion-header>
-<ion-content class="form-page" has-footer='true' overflow-scroll='true'>
+<ion-content has-footer='true' overflow-scroll='true'>
     <form [formGroup]="editProfileForm" (ngsubmit)="editProfileForm.value">
-        <ion-row class="ion-row-edit-content">
-            <ion-col>
-                <div>
-                    <ng-container *ngIf="!imageflag">
-                        <img src='{{imagePath}}' class="cameraBtn" (click)="cameraActionsPage()" />
-                    </ng-container>
-                    <ng-container *ngIf="imageflag && profile.avatar && profile.avatar !== 'avatar'">
-                        <img src='{{profile.avatar}}' class="cameraBtn" (click)="cameraActionsPage()" />
-                    </ng-container>
-                    <ng-container *ngIf="(!profile.avatar || profile.avatar === 'avatar')&& imageflag">
-                        <button class="cameraBtn" (click)="cameraActionsPage()">
+
+        <div class="div-img">
+            <ng-container *ngIf="!imageflag">
+                <img src='{{imagePath}}' class="cameraBtn" (click)="cameraActionsPage()" />
+            </ng-container>
+            <ng-container *ngIf="imageflag && profile.avatar && profile.avatar !== 'avatar'">
+                <img src='{{profile.avatar}}' class="cameraBtn" (click)="cameraActionsPage()" />
+            </ng-container>
+            <ng-container *ngIf="(!profile.avatar || profile.avatar === 'avatar')&& imageflag">
+                <button class="cameraBtn" (click)="cameraActionsPage()">
                      <ion-icon class="councils-icon__photo menu-icon"></ion-icon>
                     </button>
-                    </ng-container>
-                </div>
-                <ion-item>
-                    <ion-label floating>First Name</ion-label>
-                    <ion-input type="text" name="firstname" [(ngModel)]="profile.firstname" formControlName="firstname" (keyup)="keypresssed($event)"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label floating>Last Name</ion-label>
-                    <ion-input type="text" name="lastname" [(ngModel)]="profile.lastname" formControlName="lastname" (keyup)="keypresssed($event)"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label floating>Email</ion-label>
-                    <ion-input type="text" readonly name="email" [(ngModel)]="profile.email" formControlName="email" (keyup)="keypresssed($event)"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label floating>Phone</ion-label>
-                    <ion-input type="text" name="phone" *ngIf="!profile.phone" formControlName="phone1" (keyup)="phonekeypresssed($event)"></ion-input>
-                    <ion-input type="text" name="phone" *ngIf="profile.phone" [(ngModel)]="profile.phone" formControlName="phone" (keyup)="keypresssed($event)"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label floating>LDS.org username</ion-label>
-                    <ion-input type="text" name="ldsusername" [(ngModel)]="profile.ldsusername" formControlName="ldsusername" (keyup)="keypresssed($event)"></ion-input>
-                </ion-item>
-            </ion-col>
-        </ion-row>
+            </ng-container>
+        </div>
+
+        <ion-item class="input-item">
+            <ion-label floating>First Name</ion-label>
+            <ion-input type="text" name="firstname" [(ngModel)]="profile.firstname" formControlName="firstname" (keyup)="keypresssed($event)"></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+            <ion-label floating>Last Name</ion-label>
+            <ion-input type="text" name="lastname" [(ngModel)]="profile.lastname" formControlName="lastname" (keyup)="keypresssed($event)"></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" readonly name="email" [(ngModel)]="profile.email" formControlName="email" (keyup)="keypresssed($event)"></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+            <ion-label floating>Phone</ion-label>
+            <ion-input type="text" name="phone" *ngIf="!profile.phone" formControlName="phone1" (keyup)="phonekeypresssed($event)"></ion-input>
+            <ion-input type="text" name="phone" *ngIf="profile.phone" [(ngModel)]="profile.phone" formControlName="phone" (keyup)="keypresssed($event)"></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+            <ion-label floating>LDS.org username</ion-label>
+            <ion-input type="text" name="ldsusername" [(ngModel)]="profile.ldsusername" formControlName="ldsusername" (keyup)="keypresssed($event)"></ion-input>
+        </ion-item>
+
+
+        <ion-item-divider class="empty"></ion-item-divider>
 
         <ion-item class="form-item-first" (click)="viewChangePasswordPage()">
             <ion-label class="changepassword">
