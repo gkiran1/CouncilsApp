@@ -114,7 +114,7 @@
         </ng-container>
         <ng-container *ngIf="spiritualwelfareObj.length">
             <ion-label class="label-styles">Spiritual Welfare</ion-label>
-            <ion-item *ngFor="let item of spiritualwelfareObj" class="item-styles input-item">
+            <ion-item *ngFor="let item of spiritualwelfareObj" class="item-styles input-item icon-line">
                 <ion-input type="text" readonly [value]="item" formControlName='spiritualwelfare' maxlength="500"></ion-input>
                 <button color="secondary"  class="button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right
                     (click)="plusBtn(item)">
@@ -133,7 +133,7 @@
         </ng-container>
         <ng-container *ngIf="temporalwelfareObj.length">
             <ion-label class="label-styles">Temporal Welfare</ion-label>
-            <ion-item *ngFor="let item of temporalwelfareObj" class="item-styles input-item">
+            <ion-item *ngFor="let item of temporalwelfareObj" class="item-styles input-item icon-line">
                 <ion-input type="text" readonly [value]="item" formControlName='temporalwelfare' maxlength="500"></ion-input>
                 <button color="secondary"  class="button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right
                     (click)="plusBtn(item)">
@@ -152,7 +152,7 @@
         </ng-container>
         <ng-container *ngIf="fellowshipitemsObj.length">
             <ion-label class="label-styles">Fellowship Items</ion-label>
-            <ion-item *ngFor="let item of fellowshipitemsObj" class="item-styles input-item">
+            <ion-item *ngFor="let item of fellowshipitemsObj" class="item-styles input-item icon-line">
                 <ion-input type="text" readonly [value]="item" formControlName='fellowshipitems' maxlength="500"></ion-input>
                 <button color="secondary"  class="button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right
                     (click)="plusBtn(item)">
@@ -171,7 +171,7 @@
         </ng-container>
         <ng-container *ngIf="missionaryitemsObj.length">
             <ion-label class="label-styles">Missionary Items</ion-label>
-            <ion-item *ngFor="let item of missionaryitemsObj" class="item-styles input-item">
+            <ion-item *ngFor="let item of missionaryitemsObj" class="item-styles input-item icon-line">
                 <ion-input type="text" readonly [value]="item" formControlName='missionaryitems' maxlength="500"></ion-input>
                 <button color="secondary"  class="button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right
                     (click)="plusBtn(item)">
@@ -190,7 +190,7 @@
         </ng-container>
         <ng-container *ngIf="eventObj.length">
             <ion-label class="label-styles input-item">Events</ion-label>
-            <ion-item *ngFor="let item of eventObj" class="item-styles input-item">
+            <ion-item *ngFor="let item of eventObj" class="item-styles input-item icon-line">
                 <ion-input type="text" readonly [value]="item" formControlName='event' maxlength="500"></ion-input>
                 <button color="secondary" id="councilsPage"  class="button button-clik" name="councilsPage" ion-button icon-only clear item-right
                     (click)="plusBtn(item)">

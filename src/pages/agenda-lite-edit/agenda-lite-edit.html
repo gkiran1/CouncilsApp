@@ -117,7 +117,7 @@
         </ng-container>
         <ng-container *ngIf="discussionitemsObj.length">
             <ion-label class="label-styles">Discussion Items</ion-label>
-            <ion-item *ngFor="let item of discussionitemsObj" class="item-styles input-item">
+            <ion-item *ngFor="let item of discussionitemsObj" class="item-styles input-item icon-line">
                 <ion-input type="text" readonly [value]="item" formControlName='discussionitems'></ion-input>
                 <button color="secondary"  class="button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right
                     (click)="plusBtn(item)">
