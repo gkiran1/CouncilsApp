@@ -107,7 +107,7 @@ export class AgendaLitePage {
     }
     let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
     agenda.assigneddate = moment(assigneddate).toISOString();
-    agenda.discussionitems = (agenda.discussionitems != undefined && agenda.discussionitems.length > 0) ? agenda.discussionitems.replace(/-/gi, '').trim() : '';
+    agenda.discussionitems = (agenda.discussionitems != undefined && agenda.discussionitems.length > 0) ? agenda.discussionitems.replace(/[- ]/gi, '').trim() : '';
     agenda.councilid = this.assignedcouncil.$key;
     agenda.openingprayeruserid = (this.openingprayer !== undefined) ? this.openingprayer.$key : '';
     agenda.spiritualthoughtuserid = (this.spiritualthought !== undefined) ? this.spiritualthought.$key : '';
