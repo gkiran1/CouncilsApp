@@ -109,6 +109,7 @@ export class NewAssignmentPage {
       this.showAlert('This is a deleted assignment!');
     }
   }
+   
   showCouncilsModal(event, value) {
     event.preventDefault();
     let usercouncilsmodal = this.modalCtrl.create(UserCouncilsModalPage, { fromPage: 'assignment', usercouncils: this.usercouncils, selectedCouncil: this.assignedcouncil });
@@ -164,7 +165,16 @@ export class NewAssignmentPage {
       completedby: value.completedby
     }
   }
-
+onChange($event) {
+    var newDate = new Date($event.year.value, $event.month.value - 1, $event.day.value, $event.hour.value, $event.minute.value);
+    //alert(newDate);
+    if (moment(newDate).isBefore(moment().set({ second: 0 }))) {
+      this.dateErr = true;
+    }
+    else {
+      this.dateErr = false;
+    }
+  }
   createAssignment(value) {
     this.dateErr = false;
     if (!this.assigneduser || (this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
