@@ -375,15 +375,17 @@ export class AgendaEditPage {
         $event.target.value = newValue.join('\n');
 
         if (keycode == '13') {
-            if (this.spiritualwelfare) {
-                this.spiritualwelfare = this.spiritualwelfare + "- ";
+            let sw = this.agendaeditForm.value.spiritualwelfare;
+            if (sw) {
+                (<FormControl>this.agendaeditForm.controls['spiritualwelfare']).setValue(sw + '- ');
             }
         }
     }
 
     spiritualfocus($event) {
-        if (this.spiritualwelfare == undefined || this.spiritualwelfare.length == 0) {
-            this.spiritualwelfare = "- "
+        let sw = this.agendaeditForm.value.spiritualwelfare;
+        if (sw == undefined || sw.length == 0) {
+            (<FormControl>this.agendaeditForm.controls['spiritualwelfare']).setValue("- ");
         }
     }
 
@@ -400,15 +402,18 @@ export class AgendaEditPage {
         $event.target.value = newValue.join('\n');
 
         if (keycode == '13') {
-            if (this.temporalwelfare) {
-                this.temporalwelfare = this.temporalwelfare + "- ";
+
+            let tw = this.agendaeditForm.value.temporalwelfare;
+            if (tw) {
+                (<FormControl>this.agendaeditForm.controls['temporalwelfare']).setValue(tw + '- ');
             }
         }
     }
 
     temporalfocus($event) {
-        if (this.temporalwelfare == undefined || this.temporalwelfare.length == 0) {
-            this.temporalwelfare = "- "
+        let tw = this.agendaeditForm.value.temporalwelfare;
+        if (tw == undefined || tw.length == 0) {
+            (<FormControl>this.agendaeditForm.controls['temporalwelfare']).setValue("- ");
         }
     }
     fellowshipkey($event) {
@@ -424,15 +429,17 @@ export class AgendaEditPage {
         $event.target.value = newValue.join('\n');
 
         if (keycode == '13') {
-            if (this.fellowshipitems) {
-                this.fellowshipitems = this.fellowshipitems + "- ";
+            let fs = this.agendaeditForm.value.fellowshipitems;
+            if (fs) {
+                (<FormControl>this.agendaeditForm.controls['fellowshipitems']).setValue(fs + '- ');
             }
         }
     }
 
     fellowshipfocus($event) {
-        if (this.fellowshipitems == undefined || this.fellowshipitems.length == 0) {
-            this.fellowshipitems = "- "
+        let fs = this.agendaeditForm.value.fellowshipitems;
+        if (fs == undefined || fs.length == 0) {
+            (<FormControl>this.agendaeditForm.controls['fellowshipitems']).setValue("- ");
         }
     }
 
@@ -449,15 +456,17 @@ export class AgendaEditPage {
         $event.target.value = newValue.join('\n');
 
         if (keycode == '13') {
-            if (this.missionaryitems) {
-                this.missionaryitems = this.missionaryitems + "- ";
+            let mi = this.agendaeditForm.value.missionaryitems;
+            if (mi) {
+                (<FormControl>this.agendaeditForm.controls['missionaryitems']).setValue(mi + '- ');
             }
         }
     }
 
     missionaryfocus($event) {
-        if (this.missionaryitems == undefined || this.missionaryitems.length == 0) {
-            this.missionaryitems = "- "
+        let mi = this.agendaeditForm.value.missionaryitems;
+        if (mi == undefined || mi.length == 0) {
+            (<FormControl>this.agendaeditForm.controls['missionaryitems']).setValue("- ");
         }
     }
 
@@ -474,15 +483,17 @@ export class AgendaEditPage {
         $event.target.value = newValue.join('\n');
 
         if (keycode == '13') {
-            if (this.event) {
-                this.event = this.event + "- ";
+            let ev = this.agendaeditForm.value.event;
+            if (ev) {
+                (<FormControl>this.agendaeditForm.controls['event']).setValue(ev + '- ');
             }
         }
     }
 
     eventfocus($event) {
-        if (this.event == undefined || this.event.length == 0) {
-            this.event = "- "
+        let ev = this.agendaeditForm.value.event;
+        if (ev == undefined || ev.length == 0) {
+            (<FormControl>this.agendaeditForm.controls['event']).setValue("- ");
         }
     }
 
@@ -533,36 +544,6 @@ export class AgendaEditPage {
         (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue(user.firstname + ' ' + user.lastname);
 
         this.closingprayer = user;
-    }
-
-    onBlur() {
-        if (this.spiritualwelfare.trim() === '-') {
-            this.spiritualwelfare = "";
-        }
-    }
-
-    onBlur1() {
-        if (this.temporalwelfare.trim() === '-') {
-            this.temporalwelfare = "";
-        }
-    }
-
-    onBlur2() {
-        if (this.fellowshipitems.trim() === '-') {
-            this.fellowshipitems = "";
-        }
-    }
-
-    onBlur3() {
-        if (this.missionaryitems.trim() === '-') {
-            this.missionaryitems = "";
-        }
-    }
-
-    onBlur4() {
-        if (this.event.trim() === '-') {
-            this.event = "";
-        }
     }
 
     pad(number) {

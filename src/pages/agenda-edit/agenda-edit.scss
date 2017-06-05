@@ -79,5 +79,12 @@ agenda-edit{
     .icon-line.input-item .item-inner .input-wrapper{
         border-bottom: none !important;
     }
+
+    .flex-direction .item-inner{
+        flex-direction: column !important;
+    }
+    .flex-direction textarea{
+        height: 24px;
+    }
  
 }
