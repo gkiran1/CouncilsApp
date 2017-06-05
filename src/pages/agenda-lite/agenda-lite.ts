@@ -80,10 +80,9 @@ export class AgendaLitePage {
     return this.firebaseservice.getAssignmentsByCouncil(councilId);
   }
   onChange($event) {
-    var newDate = new Date($event.year.value, $event.month.value-1, $event.day.value, $event.hour.value, $event.minute.value);
+    var newDate = new Date($event.year.value, $event.month.value - 1, $event.day.value, $event.hour.value, $event.minute.value);
     //alert(newDate);
-    if(moment(newDate).isBefore(moment().set({ second: 0 })))
-    {
+    if (moment(newDate).isBefore(moment().set({ second: 0 }))) {
       this.dateErr = true;
     }
     else {
@@ -221,17 +220,20 @@ export class AgendaLitePage {
     });
     $event.target.value = newValue.join('\n');
 
+
     if (keycode == '13') {
-      if (this.discussionitems) {
-        this.discussionitems = this.discussionitems + "- ";
+      let di = this.newagendaliteForm.value.discussionitems;
+      if (di) {
+        (<FormControl>this.newagendaliteForm.controls['discussionitems']).setValue(di + '- ');
       }
     }
 
   }
 
   discussionfocus($event) {
-    if (this.discussionitems == undefined || this.discussionitems.length == 0) {
-      this.discussionitems = "- "
+    let di = this.newagendaliteForm.value.discussionitems;
+    if (di == undefined || di.length == 0) {
+      (<FormControl>this.newagendaliteForm.controls['discussionitems']).setValue("- ");
     }
   }
 
@@ -326,11 +328,5 @@ export class AgendaLitePage {
   toggleGroup1() {
     this.shownGroup1 = !this.shownGroup1;
   };
-
-  onBlur() {
-    if (this.discussionitems.trim() === '-') {
-      this.discussionitems = "";
-    }
-  }
 
 }

@@ -80,4 +80,10 @@ agenda-lite-edit{
         border-bottom: none !important;
     }
 
+    .flex-direction .item-inner{
+        flex-direction: column !important;
+    }
+    .flex-direction textarea{
+        height: 24px;
+    }
 }

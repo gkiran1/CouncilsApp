@@ -106,11 +106,10 @@
         </ion-item>
         <!--</ion-list>-->
 
-        <ion-item class="input-item">
-            <ion-label *ngIf="!discussionitems">Discussion Items</ion-label>
-            <ion-label floating color="secondary" *ngIf="discussionitems">Discussion Items</ion-label>
-            <ion-textarea type="text" wrap="off" autocomplete="true" (blur)="onBlur()" spellcheck="true" (focus)="discussionfocus()"
-                elastic id="discussionitems" name="discussionitems" [(ngModel)]="discussionitems" formControlName="discussionitems"
+        <ion-item class="input-item flex-direction">
+             <ion-label floating >Discussion Items</ion-label>
+            <ion-textarea rows="1" wrap="off" autocomplete="true" spellcheck="true" (focus)="discussionfocus()"
+                elastic id="discussionitems" name="discussionitems" formControlName="discussionitems"
                 maxlength="500" (keyup)="keypressed($event)">
                 </ion-textarea>
         </ion-item>

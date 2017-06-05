@@ -379,18 +379,19 @@ export class AgendaLiteEditPage {
     $event.target.value = newValue.join('\n');
 
     if (keycode == '13') {
-      if (this.discussionitems) {
-        this.discussionitems = this.discussionitems + "- ";
+      let di = this.agendaliteeditForm.value.discussionitems;
+      if (di) {
+        (<FormControl>this.agendaliteeditForm.controls['discussionitems']).setValue(di + '- ');
       }
     }
 
   }
 
   discussionfocus($event) {
-    if (this.discussionitems == undefined || this.discussionitems.length == 0) {
-      this.discussionitems = "- "
+    let di = this.agendaliteeditForm.value.discussionitems;
+    if (di == undefined || di.length == 0) {
+      (<FormControl>this.agendaliteeditForm.controls['discussionitems']).setValue("- ");
     }
-
   }
   trackByIndex(index: number, obj: any): any {
     return index;
@@ -486,11 +487,5 @@ export class AgendaLiteEditPage {
   toggleGroup1() {
     this.shownGroup1 = !this.shownGroup1;
   };
-
-  onBlur() {
-    if (this.discussionitems.trim() === '-') {
-      this.discussionitems = "";
-    }
-  }
 
 }
