@@ -30,6 +30,10 @@ export class LoginPage {
     isValidPwd = false;
     emailErr = false;
     loginForm: FormGroup;
+    showInValidEml = false;
+    showInValidPwd = false;
+
+
     constructor(
         public nav: NavController,
         public loadingCtrl: LoadingController,
@@ -42,15 +46,14 @@ export class LoginPage {
         fb: FormBuilder
     ) {
 
-        this.loginForm = fb.group({
-      
-      email: ['', Validators.compose([Validators.required, validateEmail])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
-    });
+        // this.loginForm = fb.group({
+        //     email: ['', Validators.compose([Validators.required, validateEmail])],
+        //     password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+        // });
     }
 
     keypresssed($event) {
-            this.emailErr = false;
+        this.showInValidEml = false;
         this.zone.run(() => {
             if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
                 this.isValidEmail = true;
@@ -62,8 +65,9 @@ export class LoginPage {
     }
 
     pwdChange($event) {
+        this.showInValidPwd = false;
         this.zone.run(() => {
-            if ($event.target.value !== '') {
+            if ($event.target.value !== '' && $event.target.value.length >= 6) {
                 this.isValidPwd = true;
             } else {
                 this.isValidPwd = false;
@@ -109,12 +113,21 @@ export class LoginPage {
                     }
                     loader.dismiss();
                 });
-
             })
             .catch(err => {
-                loader.dismiss();
+                this.firebaseService.findUserByEmail(loginCredentials.email).subscribe((usr) => {
+                    loader.dismiss();
+                    if (usr) {
+                        this.showInValidEml = false;
+                        this.showInValidPwd = true;
+                    }
+                    else {
+                        this.showInValidEml = true;
+                        this.showInValidPwd = false;
+                    }
+                });
                 //this.show = false;
-                this.showAlert('Invalid email or password')
+                //this.showAlert('Invalid email or password')
             });
 
         let v = setInterval(() => {
