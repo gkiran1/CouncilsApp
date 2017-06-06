@@ -9,7 +9,6 @@ import { LoginPage } from '../login/login';
 import { EmailService } from '../../providers/emailservice';
 import * as jazzicon from 'jazzicon';
 
-
 @Component({
   selector: 'create-account',
   templateUrl: 'create-account.html',
@@ -70,23 +69,15 @@ export class CreateAccountPage {
               this.newUser.isactive = true;
 
               // after verifying and filling properties create new user.
-              let flag = false;
+              // let flag = false;
               let userAvatar = this.generateIdenticon();
               this.firebaseService.signupNewUser(this.newUser, userAvatar)
                 .then(res => {
-                  //onSuccess redirect to Menu page
-                  flag = true;
-                }).catch(err => this.showAlert('Internal server error.'));
-
-              let v = setInterval(() => {
-                if (flag) {
+                  //onSuccess redirect to Menu page                
                   this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email);
                   this.navCtrl.push(LoginPage);
                   loader.dismiss();
-                  clearInterval(v);
-                }
-              }, 50);
-
+                }).catch(err => this.showAlert('Internal server error.'));
             } else {
               loader.dismiss();
               this.showAlert('Not invited!');
