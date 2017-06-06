@@ -22,11 +22,12 @@
 
         <ion-item [class.invalid]="dateErr" class="input-item">
             <ion-label floating>Date & Time</ion-label>
-            <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDDD, MMM, D, YYYY, h, mm, A" ng-model="datetime" name="assigneddate" formControlName="assigneddate"
-                validate-onblur [max]="2500" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55" (ionChange)="onChange($event)"></ion-datetime>
+            <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDDD, MMM, D, YYYY, h, mm, A" ng-model="datetime" name="assigneddate"
+                formControlName="assigneddate" validate-onblur [max]="2500" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"
+                (ionChange)="onChange($event)"></ion-datetime>
         </ion-item>
-        <p class="error-container"><ion-label class="error-msg" *ngIf="dateErr">Invalid date</ion-label></p>
-       
+        <ion-label class="error-msg" *ngIf="dateErr">Invalid date</ion-label>
+
         <ion-item class="input-item">
             <ion-label floating>Opening Hymn</ion-label>
             <ion-input type="text" autocomplete="on" spellcheck="true" name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>
@@ -107,11 +108,10 @@
         <!--</ion-list>-->
 
         <ion-item class="input-item flex-direction">
-             <ion-label floating >Discussion Items</ion-label>
-            <ion-textarea rows="1" wrap="off" autocomplete="true" spellcheck="true" (focus)="discussionfocus()"
-                elastic id="discussionitems" name="discussionitems" formControlName="discussionitems"
-                maxlength="500" (keyup)="keypressed($event)">
-                </ion-textarea>
+            <ion-label floating>Discussion Items</ion-label>
+            <ion-textarea rows="1" wrap="off" autocomplete="true" spellcheck="true" (focus)="discussionfocus()" elastic id="discussionitems"
+                name="discussionitems" formControlName="discussionitems" maxlength="500" (keyup)="keypressed($event)">
+            </ion-textarea>
         </ion-item>
 
         <div *ngIf="showlist2" class="assignto-list">

@@ -29,9 +29,9 @@
                 (ionChange)="onChange($event)">
             </ion-datetime>
         </ion-item>
-        <p class="error-container">
-            <ion-label class="error-msg" *ngIf="dateErr">Invalid date</ion-label>
-        </p>
+
+        <ion-label class="error-msg" *ngIf="dateErr">Invalid date</ion-label>
+
         <ion-item class="input-item">
             <ion-label floating>Opening Hymn</ion-label>
             <ion-input type="text" spellcheck="true" name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>

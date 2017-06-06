@@ -27,7 +27,7 @@
       <ion-label floating>Email</ion-label>
       <ion-input type="email" name="email" formControlName="email" validate-onblur></ion-input>
     </ion-item>
-    <p class="error-container"><ion-label class="error-msg" *ngIf="!donationForm.controls.email.valid && donationForm.controls.email.dirty">Invalid email</ion-label></p>
+    <ion-label class="error-msg" *ngIf="!donationForm.controls.email.valid && donationForm.controls.email.dirty">Invalid email</ion-label>
     <ion-list class="period-list" no-lines>
       <ion-item (click)="selectDonationtype('onetime')" class="top-border topborderpadding">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': donationtype === 'onetime'}"></ion-icon>
@@ -47,12 +47,14 @@
       <ion-label floating>Number</ion-label>
       <ion-input type="text" name="creditcardNo" (input)="formatToCreditNumber($event)" maxLength='18' formControlName="creditcardNo"></ion-input>
     </ion-item>
-    <p class="error-container"><ion-label class="error-msg" *ngIf="showCardErr">Invalid card number</ion-label></p>
+    <ion-label class="error-msg" *ngIf="showCardErr">Invalid card number</ion-label>
     <ion-item [class.invalid]="showExpDateErr">
       <ion-label floating>Valid Thru</ion-label>
       <ion-input type="text" name="creditValidthru" (input)="formatToValidThru($event)" maxLength="5" formControlName="creditValidthru"></ion-input>
     </ion-item>
-    <p class="error-container"><ion-label class="error-msg" *ngIf="showExpDateErr">Invalid expiration number</ion-label></p>
+
+    <ion-label class="error-msg" *ngIf="showExpDateErr">Invalid expiration number</ion-label>
+
   </form>
 </ion-content>
 <ion-footer>
