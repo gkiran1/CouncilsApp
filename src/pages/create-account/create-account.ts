@@ -76,17 +76,15 @@ export class CreateAccountPage {
                 .then(res => {
                   //onSuccess redirect to Menu page
                   flag = true;
+                  let v = setInterval(() => {
+                    if (flag) {
+                      this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email);
+                      this.navCtrl.push(LoginPage);
+                      loader.dismiss();
+                      clearInterval(v);
+                    }
+                  }, 50);
                 }).catch(err => this.showAlert('Internal server error.'));
-
-              loader.dismiss();
-              let v = setInterval(() => {
-                if (flag) {
-                  this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email);
-                  this.navCtrl.push(LoginPage);
-                  loader.dismiss();
-                  clearInterval(v);
-                }
-              }, 50);
             } else {
               loader.dismiss();
               this.showAlert('Not invited!');
