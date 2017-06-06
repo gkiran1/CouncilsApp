@@ -1,37 +1,36 @@
 <ion-content has-footer="true">
-    <div class="login-header">
+	<div class="login-header">
 
-        <span class="login-title">Log In</span>
-        <div class="login-subheader">
-            Log in to your Councils account
-        </div>
-        <!--<p class="subtext2">to create your Councils account</p>-->
+		<span class="login-title">Log In</span>
+		<div class="login-subheader">
+			Log in to your Councils account
+		</div>
+		<!--<p class="subtext2">to create your Councils account</p>-->
 
-    </div>
+	</div>
+	<form class="formcontent" [formGroup]="loginForm">
+		<ion-item [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty" class="input-item">
+			<ion-label class="inputtype" floating> Email</ion-label>
+			<ion-input type="email" name="email" id="email" formControlName="email" validate-onblur></ion-input>
+		</ion-item>
+		<ion-label class="error-msg" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">Invalid email</ion-label>
 
-    <form class="formcontent" [formGroup]="loginForm">
-        <ion-item [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty" class="input-item">
-            <ion-label class="inputtype" floating> Email</ion-label>
-            <ion-input type="email" name="email" id="email" formControlName="email" validate-onblur></ion-input>
-        </ion-item>
-        <p class="error-container"><ion-label class="error-msg" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">Invalid email</ion-label></p>
-   
-    <ion-item [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty" class="input-item">
-            <ion-label class="inputtype" floating> Password</ion-label>
-            <ion-input type="password" id="password" name="password" minLength='6' formControlName="password" validate-onblur ></ion-input>
-        </ion-item>
-    <p class="error-container"><ion-label class="error-msg" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">6 characters required</ion-label></p>
+		<ion-item [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty" class="input-item">
+			<ion-label class="inputtype" floating> Password</ion-label>
+			<ion-input type="password" id="password" name="password" minLength='6' formControlName="password" validate-onblur></ion-input>
+		</ion-item>
+		<ion-label class="error-msg" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">6 characters required</ion-label>
 
-        <div class="login-button-container">
-            <ion-spinner name="dots" *ngIf="show" color="primary"></ion-spinner>
-            <button color="secondary" ion-button clear class="button button-clik" name="loginbtn" *ngIf="!show" id="loginbtn" type="submit"
-                [disabled]="!loginForm.controls.email.valid || !loginForm.controls.password.valid" text-capitalize (click)="validateUser(loginForm.value)">Log In</button>
-        </div>
-    </form>
+		<div class="login-button-container">
+			<ion-spinner name="dots" *ngIf="show" color="primary"></ion-spinner>
+			<button color="secondary" ion-button clear class="button button-clik" name="loginbtn" *ngIf="!show" id="loginbtn" type="submit"
+				[disabled]="!loginForm.controls.email.valid || !loginForm.controls.password.valid" text-capitalize (click)="validateUser(loginForm.value)">Log In</button>
+		</div>
+	</form>
 </ion-content>
 
 <ion-footer>
-    <button ion-button clear color="secondary" class="button button-clik forgotPasswordstyles" name="forgotPassword" block text-capitalize
-        (click)="forgotPassword()">Forgot password?</button>
-        <button ion-button clear color="secondary" class="button button-clik" name="noAccount" block text-capitalize (click)="noAccount()">Don't have an account?</button>
+	<button ion-button clear color="secondary" class="button button-clik forgotPasswordstyles" name="forgotPassword" block text-capitalize
+		(click)="forgotPassword()">Forgot password?</button>
+	<button ion-button clear color="secondary" class="button button-clik" name="noAccount" block text-capitalize (click)="noAccount()">Don't have an account?</button>
 </ion-footer>
