@@ -7,6 +7,7 @@ import { NewMenuPage } from '../pages/newmenu/newmenu';
 import { FirebaseService } from '../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
 import { ConnectivityService } from '../providers/connectivityservice';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 let y;
 let h;
@@ -25,12 +26,15 @@ export class MyApp {
   constructor(platform: Platform,
     public alertCtrl: AlertController,
     public toast: ToastController,
-    public firebaseService: FirebaseService) {
+    public firebaseService: FirebaseService,
+    private nativeAudio: NativeAudio) {
 
     platform.ready().then(() => {
       Keyboard.hideKeyboardAccessoryBar(false);
       this.addConnectivityListeners();
 
+      //Load Audio
+      this.nativeAudio.preloadSimple('chime','assets/audio/chime.mp3');
       //Keyboard handler setup
       //this.keyboardSetup();
 

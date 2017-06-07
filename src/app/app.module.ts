@@ -83,6 +83,7 @@ import { GoogleCalenderPage } from '../pages/googlecalender/googlecalender.compo
 import { NewMenuPage } from '../pages/newmenu/newmenu';
 import { AddTagColor } from '../pipes/add-tag-color';
 import { ValidateOnBlurDirective } from '../directives/validate-onblur';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 //Directives
 import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
@@ -261,6 +262,6 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     NewMenuPage
   ],
 
-  providers: [AuthService, AppService, FirebaseService]
+  providers: [AuthService, AppService, FirebaseService, NativeAudio]
 })
 export class AppModule { }
