@@ -79,7 +79,7 @@ export class ChangePasswordPage {
                         })
                             .catch(err => {
                                 loader.dismiss();
-                                this.showAlert('Internal server error');
+                                this.showAlert('Connection error');
                             })
                     }
                     else {

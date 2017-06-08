@@ -61,7 +61,7 @@ export class InactivateMembersPage {
                                 });
                                 this.nav.push(MemberInactivatedPage);
                             })
-                            .catch(err => { this.showAlert('Internal server error.') });
+                            .catch(err => { this.showAlert('Connection error.') });
                     }
                 },
                 {

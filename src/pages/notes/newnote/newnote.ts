@@ -36,7 +36,7 @@ export class NewNotePage {
             .then(res => {
                 this.nav.setRoot(NotesPage);
             })
-            .catch(err => this.showAlert('Internal server error.'))
+            .catch(err => this.showAlert('Connection error.'))
     }
 
     showAlert(errText) {

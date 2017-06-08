@@ -5,6 +5,7 @@ import { AppService } from '../../providers/app-service';
 import { Subject } from 'rxjs';
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 import { NewMenuPage } from '../newmenu/newmenu';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
   selector: 'page-display',
@@ -20,11 +21,12 @@ export class DisplayPage {
   constructor(private navParams: NavParams,
     public appService: AppService,
     public firebaseService: FirebaseService,
-    private nav: NavController) {
+    private nav: NavController, private nativeAudio: NativeAudio) {
     this.registerCredentials.email = navParams.data.email;
     this.registerCredentials.ldsorgusername = navParams.data.ldsorgusername;
 
     firebaseService.getNotCnt().subscribe(count => {
+      this.nativeAudio.play('chime');
       this.notificationsCount = count;
     });
   }

@@ -9,6 +9,7 @@ import { AngularFire } from 'angularfire2';
 import * as firebase from 'firebase';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 import { NewMenuPage } from '../../newmenu/newmenu';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
     templateUrl: 'files-page.html',
@@ -27,7 +28,7 @@ export class FilesListPage {
         public fs: FirebaseService,
         public nav: NavController,
         public af: AngularFire,
-        public loadingCtrl: LoadingController) {
+        public loadingCtrl: LoadingController, private nativeAudio: NativeAudio) {
         this.filesArray = [];
         this.profilePictureRef = firebase.storage().ref('/files/');
 
@@ -61,6 +62,7 @@ export class FilesListPage {
             }
         });
         fs.getNotCnt().subscribe(count => {
+            this.nativeAudio.play('chime');
             this.notificationsCount = count;
         });
     }

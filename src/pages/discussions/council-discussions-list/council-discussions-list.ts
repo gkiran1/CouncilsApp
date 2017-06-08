@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 import { NewMenuPage } from '../../newmenu/newmenu';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
   templateUrl: 'council-discussions-list.html',
@@ -18,7 +19,7 @@ export class CouncilDiscussionsListPage {
   isListEmpty = false;
   notificationsCount;
 
-  constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController) {
+  constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController, private nativeAudio: NativeAudio) {
     let uid = localStorage.getItem('securityToken');
     if (uid !== null) {
       this.af.database.object('/users/' + uid).subscribe(usr => {
@@ -39,6 +40,7 @@ export class CouncilDiscussionsListPage {
     }
 
     fs.getNotCnt().subscribe(count => {
+      this.nativeAudio.play('chime');
       this.notificationsCount = count;
     });
 
