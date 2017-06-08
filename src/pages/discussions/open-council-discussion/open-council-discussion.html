@@ -56,7 +56,7 @@
                 <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
             </ion-col>
         </ion-row>-->
-        <ion-textarea type="text" rows="1" elastic id="msgFld" spellautocomplete spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg"
+        <ion-textarea type="text" rows="1" elastic id="msgFld" spellautocomplete placeholder="Write a message..." [(ngModel)]="msg"
             (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)" autocomplete="true"></ion-textarea>
             <ion-row>
                 <ion-col width-80>
