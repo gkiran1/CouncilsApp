@@ -11,6 +11,7 @@ import { Subject, } from 'rxjs/Subject';
 import { Subscription } from "rxjs";
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 import { NewMenuPage } from '../newmenu/newmenu';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
     templateUrl: 'agendas.html',
@@ -24,7 +25,7 @@ export class AgendasPage {
     userSubscription: Subscription;
     notificationsCount;
 
-    constructor(public nav: NavController, public af: AngularFire, public firebaseservice: FirebaseService) {
+    constructor(public nav: NavController, public af: AngularFire, public firebaseservice: FirebaseService, private nativeAudio: NativeAudio) {
 
         this.userSubscription = this.af.auth.subscribe(auth => {
             if (auth !== null) {
@@ -54,6 +55,7 @@ export class AgendasPage {
         });
 
         firebaseservice.getNotCnt().subscribe(count => {
+            this.nativeAudio.play('chime');
             this.notificationsCount = count;
         });
 

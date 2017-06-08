@@ -9,6 +9,7 @@ import { User } from '../../../user/user';
 import { Subscription } from "rxjs";
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 import { NewMenuPage } from '../../newmenu/newmenu';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
   templateUrl: 'assignments-list.html',
@@ -27,7 +28,7 @@ export class AssignmentsListPage {
   completedselectedIdx;
   notificationsCount;
 
-  constructor(public navCtrl: NavController, public fs: FirebaseService, public af: AngularFire) {
+  constructor(public navCtrl: NavController, public fs: FirebaseService, public af: AngularFire, private nativeAudio: NativeAudio) {
     // // ***TODO*** 
     // let uid = localStorage.getItem('securityToken');
     //  this.af.database.object('/users/' + uid).subscribe(u => {
@@ -82,6 +83,7 @@ export class AssignmentsListPage {
     });
 
     fs.getNotCnt().subscribe(count => {
+      this.nativeAudio.play('chime');
       this.notificationsCount = count;
     });
 

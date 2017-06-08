@@ -12,6 +12,7 @@ import { NotificationSettingsPage } from '../notifications/notifications-setting
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 import * as firebase from 'firebase';
 import { NewMenuPage } from '../newmenu/newmenu';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
     selector: 'settings-page',
@@ -27,8 +28,9 @@ export class SettingsPage {
         public appService: AppService,
         public assignmentsListPage: AssignmentsListPage,
         public activeCouncilsPage: ActiveCouncilsPage,
-        private firebaseService: FirebaseService) {
+        private firebaseService: FirebaseService, private nativeAudio: NativeAudio) {
         firebaseService.getNotCnt().subscribe(count => {
+            this.nativeAudio.play('chime');
             this.notificationsCount = count;
         });
     }
@@ -53,7 +55,7 @@ export class SettingsPage {
         //  this.userSubscription.unsubscribe();
         this.assignmentsListPage.userSubscription.unsubscribe();
         this.activeCouncilsPage.userSubscription.unsubscribe();
-       
+
         this.firebaseService.emptyToken(localStorage.getItem('securityToken')).then(() => {
             localStorage.setItem('securityToken', null);
             localStorage.setItem('isUserLoggedIn', 'false');

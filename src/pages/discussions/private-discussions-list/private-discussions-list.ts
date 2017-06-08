@@ -7,6 +7,7 @@ import { Subject, Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 import { NewMenuPage } from '../../newmenu/newmenu';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
   templateUrl: 'private-discussions-list.html',
@@ -20,7 +21,7 @@ export class PrivateDiscussionsListPage {
   isListEmpty = false;
   notificationsCount;
 
-  constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController) {
+  constructor(public af: AngularFire, public as: AppService, fs: FirebaseService, public nav: NavController, private nativeAudio: NativeAudio) {
     if (localStorage.getItem('securityToken') !== null) {
       this.uid = localStorage.getItem('securityToken');
       this.discussions = [];
@@ -31,7 +32,7 @@ export class PrivateDiscussionsListPage {
           }
           return false;
         }).sort(function (a, b) {
-           return (a.createdDate > b.createdDate) ? -1 : ((b.createdDate > a.createdDate) ? 1 : 0);
+          return (a.createdDate > b.createdDate) ? -1 : ((b.createdDate > a.createdDate) ? 1 : 0);
         });
 
         this.isListEmpty = this.discussions.length ? false : true;
@@ -42,6 +43,7 @@ export class PrivateDiscussionsListPage {
     }
 
     fs.getNotCnt().subscribe(count => {
+      this.nativeAudio.play('chime');
       this.notificationsCount = count;
     });
 
