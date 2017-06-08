@@ -58,7 +58,7 @@ export class NotePage {
 
     delete() {
         this.firebaseservice.removeNote(this.noteKey)
-            .then(res => { this.nav.popToRoot(); })
+            .then((res) => { this.nav.pop(); })
             .catch(err => { this.showAlert('Connection error.') })
     }
 

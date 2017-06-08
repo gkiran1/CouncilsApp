@@ -5,6 +5,7 @@ import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { Content } from 'ionic-angular';
 import { AngularFire } from 'angularfire2';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
     templateUrl: 'open-private-discussion.html',
@@ -23,29 +24,32 @@ export class OpenPrivateDiscussionPage {
     createdBy;
     isTyping = true;
     statusSubscription;
-    constructor(public af: AngularFire, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService) {
+    buttonClicked = true;
+    constructor(public af: AngularFire, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService, private nativeAudio: NativeAudio) {
         this.af.auth.subscribe(auth => {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(usr => {
                     this.user = usr;
                     fs.getPrivateDiscussionByKey(navparams.get('discussion')).subscribe(discussion => {
                         this.discussion = discussion;
+                        if (this.buttonClicked === false && discussion.lastMsg.user_firstname + ' ' + discussion.lastMsg.user_lastname !== this.user.firstname + ' ' + this.user.lastname && discussion.isNotificationReq) {
+                            this.nativeAudio.play('chime');
+                        }
                         this.chatWith = discussion.createdUserId === this.user.$key ? discussion.otherUserName : discussion.createdUserName;
                         this.createdBy = discussion.createdUserId === this.user.$key ? 'You' : discussion.createdUserName;
                         this.discussion.messages = this.discussion.messages || [];
                         this.discussion.typings = this.discussion.typings || '';
                         this.discussion.messages = Object.keys(this.discussion.messages).map(e => this.discussion.messages[e]);
+                        this.buttonClicked = false;
                     });
                 });
             }
         });
-
     }
+
     back() {
         this.nav.popToRoot({ animate: true, animation: 'transition', direction: 'back' });
-
     }
-
     ionViewDidEnter() {
         this.content.scrollToBottom();
         this.statusSubscription = this.fs.getPrivateDiscussionByKey(this.navparams.get('discussion')).subscribe(discussion => {
