@@ -20,7 +20,7 @@ export class NotesPage {
     notificationsCount;
     userSubscription;
 
-    constructor(public nav: NavController, public af: AngularFire, public as: AppService, public firebaseservice: FirebaseService, private nativeAudio: NativeAudio) {
+    constructor(public nav: NavController, public af: AngularFire, public firebaseservice: FirebaseService, private nativeAudio: NativeAudio) {
 
         this.userSubscription = this.af.auth.subscribe(auth => {
             if (auth !== null) {
@@ -46,7 +46,7 @@ export class NotesPage {
     }
 
     notesSelected(notesSelected) {
-        this.nav.push(NotePage, { notesSelected: notesSelected }, { animate: true, animation: 'transition', direction: 'back' });
+        this.nav.push(NotePage, { notesSelected: notesSelected }, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     getCount() {
