@@ -84,6 +84,7 @@ import { NewMenuPage } from '../pages/newmenu/newmenu';
 import { AddTagColor } from '../pipes/add-tag-color';
 import { ValidateOnBlurDirective } from '../directives/validate-onblur';
 import { NativeAudio } from '@ionic-native/native-audio';
+import { SpellCheckDirective } from '../directives/spellcheck.directive';
 
 //Directives
 import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
@@ -182,7 +183,8 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     ForgotPwdSuccess,
     NewMenuPage,
     AddTagColor,
-    ValidateOnBlurDirective
+    ValidateOnBlurDirective,
+    SpellCheckDirective
   ],
 
   imports: [
