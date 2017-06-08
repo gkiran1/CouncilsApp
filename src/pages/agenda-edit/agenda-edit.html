@@ -32,7 +32,7 @@
 
         <ion-item class="input-item">
             <ion-label floating>Opening Hymn</ion-label>
-            <ion-input type="text" spellcheck="true" name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>
+            <ion-input type="text" spellautocomplete name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>
         </ion-item>
 
         <ion-item class="input-item">
@@ -108,7 +108,7 @@
         <ng-container *ngIf="!spiritualwelfareObj.length">
             <ion-item class="input-item flex-direction">
                 <ion-label floating>Spiritual Welfare</ion-label>
-                <ion-textarea rows="1" wrap="off" spellcheck="true" (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare"
+                <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="spiritualfocus()" elastic id="spiritualwelfare" name="spiritualwelfare"
                     formControlName="spiritualwelfare" maxlength="500" (keyup)="spiritualkey($event)"></ion-textarea>
             </ion-item>
         </ng-container>
@@ -126,7 +126,7 @@
         <ng-container *ngIf="!temporalwelfareObj.length">
             <ion-item class="input-item flex-direction">
                 <ion-label floating>Temporal Welfare</ion-label>
-                <ion-textarea rows="1" wrap="off" spellcheck="true" (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare"
+                <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare"
                     formControlName="temporalwelfare" maxlength="500" (keyup)="temporalkey($event)">
                 </ion-textarea>
             </ion-item>
@@ -145,7 +145,7 @@
         <ng-container *ngIf="!fellowshipitemsObj.length">
             <ion-item class="input-item flex-direction">
                 <ion-label floating>Fellowship Items</ion-label>
-                <ion-textarea rows="1" wrap="off" spellcheck="true" (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems"
+                <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems"
                     formControlName="fellowshipitems" maxlength="500" (keyup)="fellowshipkey($event)">
                 </ion-textarea>
             </ion-item>
@@ -164,7 +164,7 @@
         <ng-container *ngIf="!missionaryitemsObj.length">
             <ion-item class="input-item flex-direction">
                 <ion-label floating>Missionary Items</ion-label>
-                <ion-textarea rows="1" wrap="off" spellcheck="true" (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems"
+                <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems"
                     formControlName="missionaryitems" maxlength="500" (keyup)="missionarykey($event)">
                 </ion-textarea>
             </ion-item>
@@ -183,7 +183,7 @@
         <ng-container *ngIf="!eventObj.length">
             <ion-item class="input-item flex-direction">
                 <ion-label floating>Events</ion-label>
-                <ion-textarea rows="1" wrap="off" spellcheck="true" (focus)="eventfocus()" elastic id="event" name="event" formControlName="event"
+                <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="eventfocus()" elastic id="event" name="event" formControlName="event"
                     maxlength="500" (keyup)="eventkey($event)">
                 </ion-textarea>
             </ion-item>
