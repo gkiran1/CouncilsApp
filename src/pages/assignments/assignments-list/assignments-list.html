@@ -30,7 +30,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-item class="divider" *ngIf="councilAssignmentsArray.length">COUNCIL</ion-item>
+    <ion-item class="divider heading-styles" *ngIf="councilAssignmentsArray.length">COUNCIL</ion-item>
     <ion-list>
       <ion-item class="ion-item-middle"  (click)="assignmentSelected(item, i,'council')" *ngFor="let item of councilAssignmentsArray; let i = index" [attr.data-index]="i">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': councilselectedIdx === i}"></ion-icon>
@@ -42,7 +42,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-item class="divider" *ngIf="completedAssignmentsArray.length">COMPLETED</ion-item>
+    <ion-item class="divider heading-styles" *ngIf="completedAssignmentsArray.length">COMPLETED</ion-item>
     <ion-list>
       <ion-item class="ion-item-middle" (click)="assignmentSelected(item, i,'completed')" *ngFor="let item of completedAssignmentsArray; let i = index"
         [attr.data-index]="i">
