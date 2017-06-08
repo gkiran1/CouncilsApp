@@ -268,7 +268,7 @@ export class ViewCouncilFilePage {
             this.newFile.createdUser = this.createdUser;
             this.newFile.filesize = this.fileSize(imageData);
             this.newFile.filename = 'IMG' + this.now + '.png';
-            this.newFile.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
+            this.newFile.filetype = (this.newFile.filename.substr(this.newFile.filename.lastIndexOf('.') + 1)).toUpperCase();
             this.firebaseservice.saveFile(this.newFile).then(fileId => {
                 this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
                     .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
@@ -330,10 +330,10 @@ export class ViewCouncilFilePage {
             this.newFile.councilid = this.councilId;
             this.newFile.councilname = this.councilName;
             this.newFile.createdUser = this.createdUser;
-            this.newFile.createdBy = this.createdBy
+            this.newFile.createdBy = this.createdBy;
             this.newFile.filesize = this.fileSize(imageData);
-            this.newFile.filename = 'Image' + '_' + this.now + '.png';
-            this.newFile.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
+            this.newFile.filename = 'IMG' + this.now + '.png';
+            this.newFile.filetype = (this.newFile.filename.substr(this.newFile.filename.lastIndexOf('.') + 1)).toUpperCase();
             this.firebaseservice.saveFile(this.newFile).then(fileId => {
                 this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
                     .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
