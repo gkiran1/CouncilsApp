@@ -6,6 +6,7 @@ import { FirebaseService } from '../../../environments/firebase/firebase-service
 import { Content } from 'ionic-angular';
 import { CouncilUsersModalPage } from '../../../modals/council-users/council-users';
 import { AngularFire } from 'angularfire2';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
     templateUrl: 'open-council-discussion.html',
@@ -27,7 +28,8 @@ export class OpenCouncilDiscussionPage {
     isModalDismissed = true;
     isTyping = true;
     tagsSet = new Set();
-    constructor(public af: AngularFire, public modalCtrl: ModalController, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService) {
+    buttonClicked = true;
+    constructor(public af: AngularFire, public modalCtrl: ModalController, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService, private nativeAudio: NativeAudio) {
         // as.getUser().subscribe(user => this.user = user);
         this.af.auth.subscribe(auth => {
             if (auth !== null) {
@@ -38,9 +40,13 @@ export class OpenCouncilDiscussionPage {
                         this.discussion.messages = this.discussion.messages || [];
                         this.discussion.messages = Object.keys(this.discussion.messages).map(e => this.discussion.messages[e]);
                         this.discussion.typings = this.discussion.typings || '';
+                        if (this.buttonClicked === false && discussion.lastMsgSentUser !== this.user.firstname + ' ' + this.user.lastname && discussion.isNotificationReq) {
+                            this.nativeAudio.play('chime');
+                        }
                         fs.getActiveUsersFromCouncil(discussion.councilid).subscribe(users => {
                             this.activeusersCount = users.length;
                         });
+                        this.buttonClicked = false;
                     });
                 });
             }
