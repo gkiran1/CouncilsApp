@@ -273,7 +273,7 @@ export class AgendaLiteEditPage {
             this.createActivity('closing prayer', formattedAgendaObj.closingprayeruserid, );
           }
         })
-        .catch(err => { this.showAlert('Internal server error.') })
+        .catch(err => { this.showAlert('Connection error.') })
     }
   }
   delete() {
@@ -293,7 +293,7 @@ export class AgendaLiteEditPage {
 
         this.nav.pop();
       })
-      .catch(err => { this.showAlert('Internal server error.') })
+      .catch(err => { this.showAlert('Connection error.') })
   }
 
   showConfirm() {

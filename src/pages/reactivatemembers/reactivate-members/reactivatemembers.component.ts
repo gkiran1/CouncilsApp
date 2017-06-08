@@ -54,7 +54,7 @@ export class ReactivateMembersPage {
                 });
                 this.nav.push(MemberReactivatedPage);
             })
-            .catch(err => { this.showAlert('Internal server error.') });
+            .catch(err => { this.showAlert('Connection error.') });
     }
 
     reactivateAll() {
@@ -62,7 +62,7 @@ export class ReactivateMembersPage {
             this.firebaseService.reactivateUser(usr.$key, true, usr.pushtoken)
                 .then(() => {
                 })
-                .catch(err => { this.showAlert('Internal server error.') });
+                .catch(err => { this.showAlert('Connection error.') });
         });
 
         if (this.users && this.users.length === 0) {

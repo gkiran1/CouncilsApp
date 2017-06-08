@@ -193,7 +193,7 @@ onChange($event) {
           this.createActivity(key, 'created');
           this.nav.setRoot(AssignmentsListPage);
         })
-        .catch(err => this.showAlert('Internal server error.'))
+        .catch(err => this.showAlert('Connection error.'))
     }
   }
 
@@ -226,7 +226,7 @@ onChange($event) {
           // this.createActivity(this.assignmentKey, 'completed');
           this.nav.pop();
         })
-        .catch(err => { this.showAlert('Internal server error.') })
+        .catch(err => { this.showAlert('Connection error.') })
     }
   }
   edit(value) {
@@ -241,7 +241,7 @@ onChange($event) {
         this.nav.popToRoot();
         this.createActivity(this.assignmentKey, 'updated');
       })
-      .catch(err => { this.showAlert('Internal server error.') })
+      .catch(err => { this.showAlert('Connection error.') })
   }
   delete() {
     this.firebaseservice.removeAssignment(this.assignmentKey, this.assignment)
@@ -252,7 +252,7 @@ onChange($event) {
         // this.createActivity(this.assignmentKey, 'deleted');
         this.nav.pop();
       })
-      .catch(err => { this.showAlert('Internal server error.') })
+      .catch(err => { this.showAlert('Connection error.') })
   }
 
   showConfirm() {
@@ -265,7 +265,7 @@ onChange($event) {
             this.menuctrl.close();
             this.delete();
 
-            // .catch(err => { this.showAlert('Internal server error.') });
+            // .catch(err => { this.showAlert('Connection error.') });
           }
         },
         {

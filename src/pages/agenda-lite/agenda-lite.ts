@@ -131,7 +131,7 @@ export class AgendaLitePage {
           this.nav.setRoot(AgendasPage);
 
         })
-        .catch(err => { this.showAlert('Internal server error.') })
+        .catch(err => { this.showAlert('Connection error.') })
     }
 
   }

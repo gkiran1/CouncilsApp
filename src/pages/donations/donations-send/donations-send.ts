@@ -135,7 +135,7 @@ export class DonationsSendPage {
             });
           }, err => {
             loader.dismiss();
-            this.showAlert('Internal server error.');
+            this.showAlert('Connection error.');
           })
 
       }

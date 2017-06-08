@@ -89,11 +89,11 @@ export class InviteMemberPage {
                         // this.showAlert('Email taken')
                         )
                 } else {
-                    this.showAlert('Internal server error.');
+                    this.showAlert('Connection error.');
                 }
 
             }, err => {
-                this.showAlert('Internal server error.');
+                this.showAlert('Connection error.');
             })
 
     }

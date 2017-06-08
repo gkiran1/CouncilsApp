@@ -53,13 +53,13 @@ export class NotePage {
             .then(res => {
                 this.nav.setRoot(NotesPage);
             })
-            .catch(err => { this.showAlert('Internal server error.') })
+            .catch(err => { this.showAlert('Connection error.') })
     }
 
     delete() {
         this.firebaseservice.removeNote(this.noteKey)
             .then(res => { this.nav.popToRoot(); })
-            .catch(err => { this.showAlert('Internal server error.') })
+            .catch(err => { this.showAlert('Connection error.') })
     }
 
     showConfirm() {
@@ -72,7 +72,7 @@ export class NotePage {
                         this.menuctrl.close();
                         this.delete();
 
-                        // .catch(err => { this.showAlert('Internal server error.') });
+                        // .catch(err => { this.showAlert('Connection error.') });
                     }
                 },
                 {

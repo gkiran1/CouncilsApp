@@ -107,7 +107,7 @@ export class MyApp {
   offlineToast() {
     //if(state = 'offline')
     return this.toast.create({
-      message: "No network!",
+      message: "Offline",
       duration: 3000
     });
   }
@@ -115,7 +115,7 @@ export class MyApp {
   onlineToast() {
     //if(state = 'offline')
     return this.toast.create({
-      message: "Network connected!",
+      message: "Online",
       duration: 3000
     });
   }

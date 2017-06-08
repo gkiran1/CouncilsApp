@@ -93,7 +93,7 @@ export class TransferAdminRightsPage {
                             }).then(() => {
                                 localStorage.setItem('isAdmin', 'false');
                                 this.nav.push(TransferCompletePage, { newAdmin: user });
-                            }).catch(err => { this.showAlert('Internal server error.') });
+                            }).catch(err => { this.showAlert('Connection error.') });
                     }
                 },
                 {

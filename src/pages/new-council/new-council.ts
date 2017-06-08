@@ -68,7 +68,7 @@ export class NewCouncilPage {
       else {
         this.showAlert('Council already exists.');
       }
-    }).catch(err => this.showAlert('Internal server error.'))
+    }).catch(err => this.showAlert('Connection error.'))
 
   }
 

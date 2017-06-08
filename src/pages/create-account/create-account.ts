@@ -77,7 +77,7 @@ export class CreateAccountPage {
                   this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email);
                   this.navCtrl.push(LoginPage);
                   loader.dismiss();
-                }).catch(err => this.showAlert('Internal server error.'));
+                }).catch(err => this.showAlert('Connection error.'));
             } else {
               loader.dismiss();
               this.showAlert('Not invited!');

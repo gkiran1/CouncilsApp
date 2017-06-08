@@ -293,7 +293,7 @@ export class AgendaEditPage {
                         this.createActivity('closing prayer', formattedAgendaObj.closingprayeruserid, );
                     }
                 })
-                .catch(err => { this.showAlert('Internal server error.') })
+                .catch(err => { this.showAlert('Connection error.') })
         }
     }
 
@@ -315,7 +315,7 @@ export class AgendaEditPage {
 
                 this.nav.pop();
             })
-            .catch(err => { this.showAlert('Internal server error.') })
+            .catch(err => { this.showAlert('Connection error.') })
     }
 
     showConfirm() {
@@ -328,7 +328,7 @@ export class AgendaEditPage {
                         this.menuctrl.close();
                         this.delete();
 
-                        // .catch(err => { this.showAlert('Internal server error.') });
+                        // .catch(err => { this.showAlert('Connection error.') });
                     }
                 },
                 {
