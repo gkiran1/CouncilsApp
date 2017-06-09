@@ -18,7 +18,7 @@
 <ion-content>
     <form (ngSubmit)="inviteMember()" #InviteMemberForm="ngForm">
         <ion-item-group>
-            <ion-item-divider class="empty-light"></ion-item-divider>
+            <!--<ion-item-divider class="empty-light"></ion-item-divider>-->
             <ion-item class="input-item" [class.invalid]="!isValidEmail || emailErr">
                 <ion-label floating>Email</ion-label>
                 <ion-input class="council-styles" type="email" name="email" validate-onblur [(ngModel)]="invite.email" (blur)="keypresssed($event)"
