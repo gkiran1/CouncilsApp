@@ -59,7 +59,7 @@ export class SettingsPage {
             localStorage.setItem('isUserLoggedIn', 'false');
             localStorage.setItem('isMenuCentered', '0');
             localStorage.setItem('NotificationsCount', '');
-
+            localStorage.setItem('isAdmin', 'false');
             this.firebaseService.signOut().then(() => {
                 this.navCtrl.setRoot(GoodbyePage);
             }).catch(err => {
