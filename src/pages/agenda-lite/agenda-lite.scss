@@ -66,4 +66,19 @@ agenda-lite{
         height: 24px;
     }
 
+    ion-avatar img,
+ion-thumbnail img {
+    display: block;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+}
+
+ion-avatar {
+    background: #F4F6FA;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+}
+
 }
