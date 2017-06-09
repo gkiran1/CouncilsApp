@@ -5,7 +5,6 @@ import { DonationsSendPage } from '../donations-send/donations-send';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { NewMenuPage } from '../../newmenu/newmenu';
-import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
   selector: 'page-donations-welcome',
@@ -15,9 +14,8 @@ export class DonationsWelcomePage {
 
   notificationsCount;
 
-  constructor(public nav: NavController, public navParams: NavParams, public firebaseservice: FirebaseService, private nativeAudio: NativeAudio) {
-    firebaseservice.getNotCnt().subscribe(count => {
-      this.nativeAudio.play('chime');
+  constructor(public nav: NavController, public navParams: NavParams, public firebaseservice: FirebaseService) {
+    firebaseservice.getNotCnt().subscribe(count => {     
       this.notificationsCount = count;
     });
   }

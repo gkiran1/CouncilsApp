@@ -88,6 +88,7 @@ export class NotificationsPage {
     }
 
     cancel() {
+        localStorage.setItem('NotificationsCount', '');
         this.nav.pop().then(() => {
             this.notifications.forEach(notification => {
                 this.firebaseService.updateIsReadInNotifications(notification.$key);

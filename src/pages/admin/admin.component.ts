@@ -10,7 +10,6 @@ import { MembersListPage } from '../editmembers/members-list/memberslist.compone
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { NewMenuPage } from '../newmenu/newmenu';
-import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
     selector: 'admin-page',
@@ -20,12 +19,10 @@ import { NativeAudio } from '@ionic-native/native-audio';
 export class AdminPage {
 
     notificationsCount;
-    constructor(private navCtrl: NavController, public firebaseservice: FirebaseService, private nativeAudio: NativeAudio) {
-        firebaseservice.getNotCnt().subscribe(count => {
-            this.nativeAudio.play('chime');
+    constructor(private navCtrl: NavController, public firebaseservice: FirebaseService) {
+        firebaseservice.getNotCnt().subscribe(count => {           
             this.notificationsCount = count;
         });
-
     }
 
     activeCouncils() {

@@ -17,6 +17,7 @@ export class DisplayPage {
   notifications;
   notificationsCount;
   count$ = new Subject();
+  // buttonClicked = true;
 
   constructor(private navParams: NavParams,
     public appService: AppService,
@@ -26,8 +27,17 @@ export class DisplayPage {
     this.registerCredentials.ldsorgusername = navParams.data.ldsorgusername;
 
     firebaseService.getNotCnt().subscribe(count => {
-      this.nativeAudio.play('chime');
+
       this.notificationsCount = count;
+
+      if (localStorage.getItem('NotificationsCount') === '') {
+        localStorage.setItem('NotificationsCount', this.notificationsCount);
+      }
+      if (localStorage.getItem('NotificationsCount') !== this.notificationsCount.toString()) {
+        this.nativeAudio.play('chime');
+        localStorage.setItem('NotificationsCount', this.notificationsCount);
+      }
+
     });
   }
 

@@ -34,7 +34,7 @@ export class MyApp {
       this.addConnectivityListeners();
 
       //Load Audio
-      this.nativeAudio.preloadSimple('chime','assets/audio/chime.mp3');
+      this.nativeAudio.preloadSimple('chime', 'assets/audio/chime.mp3');
       //Keyboard handler setup
       //this.keyboardSetup();
 
@@ -48,6 +48,8 @@ export class MyApp {
 
       //Status overlay set to false
       StatusBar.overlaysWebView(false);
+
+      localStorage.setItem('NotificationsCount', '');
 
       this.securityToken = localStorage.getItem('securityToken');
       this.isUserLoggedIn = localStorage.getItem('isUserLoggedIn');

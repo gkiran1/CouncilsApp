@@ -7,7 +7,6 @@ import { Subject } from 'rxjs/Subject';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
 import { AngularFire } from 'angularfire2';
 import { NewMenuPage } from '../../newmenu/newmenu';
-import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
     templateUrl: 'notes.html',
@@ -20,7 +19,7 @@ export class NotesPage {
     notificationsCount;
     userSubscription;
 
-    constructor(public nav: NavController, public af: AngularFire, public firebaseservice: FirebaseService, private nativeAudio: NativeAudio) {
+    constructor(public nav: NavController, public af: AngularFire, public firebaseservice: FirebaseService) {
 
         this.userSubscription = this.af.auth.subscribe(auth => {
             if (auth !== null) {
@@ -39,8 +38,7 @@ export class NotesPage {
             }
         });
 
-        firebaseservice.getNotCnt().subscribe(count => {
-            this.nativeAudio.play('chime');
+        firebaseservice.getNotCnt().subscribe(count => {            
             this.notificationsCount = count;
         });
     }
