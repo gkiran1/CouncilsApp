@@ -108,5 +108,9 @@ ion-avatar {
     height: 36px !important;
     border-radius: 50% !important;
 }
+.invalid ion-datetime{
+        border-bottom: 1px solid #F13822;
+    }
+
  
 }
