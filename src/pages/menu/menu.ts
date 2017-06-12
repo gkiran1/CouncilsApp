@@ -90,15 +90,15 @@ export class MenuPage {
 
 
     this.switcher.update();
-    // if (localStorage.getItem('isMenuCentered') === '0') {
-    //   localStorage.setItem('isMenuCentered', '1');
+    if (localStorage.getItem('isMenuCentered') === '0') {
+      localStorage.setItem('isMenuCentered', '1');
       setTimeout(() => {
         this.switcher.update();
 
-        //this.switcher.slideTo(1, 0);
+        this.switcher.slideTo(0, 0);
 
       }, 300);
-    //}
+    }
 
   }
 
