@@ -938,6 +938,12 @@ ion-list ion-item{
 
 
 /****************** Custom Radio ******************************/
+.item-ios .radio-ios,
+.item-md .radio-md{
+margin: 5px 10px 9px 0;
+}
+
+
 .radio-md .radio-icon, .radio-ios .radio-icon {
     position: relative;
     display: block;    
