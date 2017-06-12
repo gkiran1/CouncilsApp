@@ -822,7 +822,9 @@ ion-badge, .badge-md {
         text-align: center;
     }
 
-    
+    .datetime-ios, .datetime-md{
+        padding-top:3px !important;
+    }
     
 
     /***************************** List Page Styles **********************************************/
