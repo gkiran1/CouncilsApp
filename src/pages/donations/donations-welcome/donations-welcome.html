@@ -1,13 +1,13 @@
 <ion-header>
-   <ion-navbar>
+  <ion-navbar>
     <ion-buttons class="menu-button" left>
-      <button ion-button menuToggle >
+      <button ion-button menuToggle>
       <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" ></ion-icon>
     </button>
     </ion-buttons>
     <ion-title>Donations</ion-title>
     <ion-buttons class="menu-button" end>
-      <button ion-button (click)="notificationsPage()"  >
+      <button ion-button (click)="notificationsPage()">
      <ion-icon class="icon councils-icon__notifications menu-icon">
          <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
       </ion-icon> 
@@ -19,7 +19,7 @@
 <ion-content>
   <div class="donations-container">
     <ion-label class="main-text">Join our Monthly Giving Program</ion-label>
-    <ion-label class="sub-text">100% of your donation supports development of this platform so members can more effectively magnify their callings.</ion-label>
+    <ion-label class="sub-text">100% of your donation supports development of this platform</ion-label>
     <button class="donation-btn button button-clik" ion-button clear block color="secondary" (click)="sendDonationsPage()">Send Donation</button>
   </div>
 </ion-content>
