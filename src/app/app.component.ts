@@ -34,7 +34,7 @@ export class MyApp {
       this.addConnectivityListeners();
 
       //Load Audio
-      this.nativeAudio.preloadSimple('chime', 'assets/audio/chime.mp3');
+      this.nativeAudio.preloadSimple('chime', 'assets/audio/oringz-w426.mp3');
       //Keyboard handler setup
       //this.keyboardSetup();
 
