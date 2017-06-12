@@ -8,6 +8,7 @@ import { FirebaseService } from '../environments/firebase/firebase-service';
 import { Observable } from 'rxjs/Observable';
 import { ConnectivityService } from '../providers/connectivityservice';
 import { NativeAudio } from '@ionic-native/native-audio';
+import { Badge } from '@ionic-native/badge';
 
 let y;
 let h;
@@ -27,14 +28,19 @@ export class MyApp {
     public alertCtrl: AlertController,
     public toast: ToastController,
     public firebaseService: FirebaseService,
-    private nativeAudio: NativeAudio) {
+    public nativeAudio: NativeAudio,
+    public badge: Badge) {
 
     platform.ready().then(() => {
       Keyboard.hideKeyboardAccessoryBar(false);
       this.addConnectivityListeners();
 
+
+
       //Load Audio
       this.nativeAudio.preloadSimple('chime', 'assets/audio/oringz-w426.mp3');
+
+      this.fcmBadgeUpdate();
       //Keyboard handler setup
       //this.keyboardSetup();
 
@@ -78,6 +84,32 @@ export class MyApp {
       });
 
     });
+  }
+
+  fcmBadgeUpdate() {
+    if (typeof FCMPlugin != 'undefined') {
+
+      FCMPlugin.onNotification((d) => {
+        this.setBadge();
+      });
+    }
+  }
+
+  setBadge() {
+    let notificationCount = localStorage.getItem('NotificationsCount');
+    alert(notificationCount);
+    if (notificationCount !== undefined && notificationCount !== '') {
+      alert(notificationCount);
+      let count = Number(notificationCount);
+      alert(count);
+      if (count > 0) {
+        count = count + 1;
+        this.badge.increase(count);
+      }
+      else {
+        this.badge.set(1);
+      }
+    }
   }
 
   addConnectivityListeners() {

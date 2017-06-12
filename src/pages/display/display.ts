@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 import { NewMenuPage } from '../newmenu/newmenu';
 import { NativeAudio } from '@ionic-native/native-audio';
+import { Badge } from '@ionic-native/badge';
 
 @Component({
   selector: 'page-display',
@@ -22,10 +23,11 @@ export class DisplayPage {
   constructor(private navParams: NavParams,
     public appService: AppService,
     public firebaseService: FirebaseService,
-    private nav: NavController, private nativeAudio: NativeAudio) {
+    private nav: NavController, private nativeAudio: NativeAudio,
+    public badge:Badge) {
     this.registerCredentials.email = navParams.data.email;
     this.registerCredentials.ldsorgusername = navParams.data.ldsorgusername;
-
+   
     firebaseService.getNotCnt().subscribe(count => {
 
       this.notificationsCount = count;
@@ -36,13 +38,14 @@ export class DisplayPage {
       if (localStorage.getItem('NotificationsCount') !== this.notificationsCount.toString()) {
         this.nativeAudio.play('chime');
         localStorage.setItem('NotificationsCount', this.notificationsCount);
-      }
+        this.badge.set(this.notificationsCount);
+      }   
 
     });
   }
 
   notificationsPage() {
     this.nav.push(NewMenuPage);
-  }
+  } 
 
 }

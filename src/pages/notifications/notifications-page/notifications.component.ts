@@ -8,6 +8,7 @@ import { OpenCouncilDiscussionPage } from '../../discussions/open-council-discus
 import { OpenPrivateDiscussionPage } from '../../discussions/open-private-discussion/open-private-discussion';
 import { ViewCouncilFilePage } from '../../files/view-council-file/view-council-file';
 import { NewMenuPage } from '../../newmenu/newmenu';
+import { Badge } from '@ionic-native/badge';
 
 @Component({
     templateUrl: 'notifications.html',
@@ -22,7 +23,8 @@ export class NotificationsPage {
         public navParams: NavParams,
         public firebaseService: FirebaseService,
         public toast: ToastController,
-        public alertCtrl: AlertController) {
+        public alertCtrl: AlertController,
+        public badge:Badge) {
         var userId = localStorage.getItem('securityToken');
         if (userId !== null) {
             this.notifications = [];
@@ -89,6 +91,7 @@ export class NotificationsPage {
 
     cancel() {
         localStorage.setItem('NotificationsCount', '');
+        this.badge.clear();
         this.nav.pop().then(() => {
             this.notifications.forEach(notification => {
                 this.firebaseService.updateIsReadInNotifications(notification.$key);
