@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AlertController, ActionSheetController, NavController, ModalController, MenuController, NavParams, ToastController } from 'ionic-angular';
@@ -10,12 +10,14 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { CouncilUsersModalPage } from '../../modals/council-users/council-users';
 import { UserCouncilsModalPage } from '../../modals/user-councils/user-councils';
 import { AngularFire } from 'angularfire2';
+import { Content } from 'ionic-angular';
 
 @Component({
   templateUrl: 'agenda-lite-edit.html',
   selector: 'agenda-lite-edit'
 })
 export class AgendaLiteEditPage {
+  @ViewChild(Content) content: Content;
   minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
   users = [];
   councils = [];
@@ -425,6 +427,10 @@ export class AgendaLiteEditPage {
     }
     this.term = v2.substr(1);
     this.showlist2 = true;
+    setTimeout(()=>{
+      this.content.scrollToBottom();
+    })
+    
   }
 
   bindAssignto(user) {

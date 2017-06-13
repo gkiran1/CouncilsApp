@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppService } from '../../providers/app-service';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AlertController, NavController, ModalController, NavParams, ToastController } from 'ionic-angular';
@@ -7,12 +7,14 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { UserCouncilsModalPage } from '../../modals/user-councils/user-councils';
 import { AngularFire } from 'angularfire2';
 import { AgendasPage } from '../agendas/agendas';
+import { Content } from 'ionic-angular';
 
 @Component({
   templateUrl: 'agenda-lite.html',
   selector: 'agenda-lite'
 })
 export class AgendaLitePage {
+  @ViewChild(Content) content: Content;
   minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
   users = [];
   assignmentslist = [];
@@ -265,6 +267,9 @@ export class AgendaLitePage {
     }
     this.term = v2.substr(1);
     this.showlist2 = true;
+    setTimeout(() => {
+      this.content.scrollToBottom();
+    })
   }
 
   bindAssignto(user) {
