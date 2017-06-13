@@ -97,11 +97,11 @@ export class MyApp {
 
   setBadge() {
     let notificationCount = localStorage.getItem('NotificationsCount');
-    alert(notificationCount);
+    //alert(notificationCount);
     if (notificationCount !== undefined && notificationCount !== '') {
-      alert(notificationCount);
+      //alert(notificationCount);
       let count = Number(notificationCount);
-      alert(count);
+      //alert(count);
       if (count > 0) {
         count = count + 1;
         this.badge.increase(count);
