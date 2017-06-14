@@ -86,20 +86,12 @@ export class MenuPage {
       };
     });
   }
+
   menuOpened() {
-
-
     this.switcher.update();
-    if (localStorage.getItem('isMenuCentered') === '0') {
-      localStorage.setItem('isMenuCentered', '1');
-      setTimeout(() => {
-        this.switcher.update();
-
-        this.switcher.slideTo(0, 0);
-
-      }, 300);
-    }
-
+    setTimeout(() => {
+      this.switcher.update();
+      this.switcher.slideTo(this.switcher.getActiveIndex(), 0);
+    },300);
   }
-
 }
