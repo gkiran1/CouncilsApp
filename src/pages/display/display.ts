@@ -31,6 +31,7 @@ export class DisplayPage {
     firebaseService.getNotCnt().subscribe(count => {
 
       this.notificationsCount = count;
+      this.badge.set(this.notificationsCount);
 
       if (localStorage.getItem('NotificationsCount') === '') {
         localStorage.setItem('NotificationsCount', this.notificationsCount);
@@ -38,7 +39,7 @@ export class DisplayPage {
       if (localStorage.getItem('NotificationsCount') !== this.notificationsCount.toString()) {
         this.nativeAudio.play('chime');
         localStorage.setItem('NotificationsCount', this.notificationsCount);
-        this.badge.set(this.notificationsCount);
+       
       }   
 
     });
