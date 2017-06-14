@@ -24,13 +24,13 @@ agendas-page {
         font-family: Bernina-Regular !important;
         font-size: 17px !important;
         color: #3cb18a !important;
-        margin-left: -55px !important;
+        margin: 0px !important;
     }
     .agendacouncil-styles {
         font-family: Bernina-Regular !important;
         font-size: 13px !important;
         color: #a9aaac !important;
-        margin-left: -55px !important;
+        // margin-left: -55px !important;
     }
 
     .background-color{
@@ -38,7 +38,7 @@ agendas-page {
     }
    
     .menu-style{
-        padding-top: 10px;
+        padding-top: 15px;
     }
     .item-ios [item-right] {
     margin: -11px -10px -11px 40px;
@@ -49,5 +49,9 @@ agendas-page {
  .ion-item-middle.item-ios.item-block:last-child .item-inner,
     .ion-item-middle.item-md.item-block:last-child .item-inner{
         border-bottom: none !important;
+    }
+ 
+    ion-row > ion-icon{
+        padding-right:10px;
     }
 }
