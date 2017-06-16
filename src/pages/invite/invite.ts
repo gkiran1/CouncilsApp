@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Invitee } from './invitee.model';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
-import { AlertController, NavController, ToastController } from 'ionic-angular';
+import { AlertController, NavController, LoadingController, ToastController } from 'ionic-angular';
 import { AppService } from '../../providers/app-service';
 import { InvitationSuccessPage } from './success';
 import { Http } from '@angular/http';
@@ -29,7 +29,7 @@ export class InviteMemberPage {
         public alertCtrl: AlertController,
         public appService: AppService,
         public toast: ToastController,
-        public emailService: EmailService) {
+        public emailService: EmailService, public loadingCtrl: LoadingController, ) {
         this.invite = new Invitee;
 
         this.af.auth.subscribe(auth => {
@@ -76,6 +76,13 @@ export class InviteMemberPage {
     }
 
     inviteMember() {
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+        });
+
+        loader.present();
+
         this.emailErr = false;
         this.council.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
         this.emailService.inviteMemberEmail(this.invite.firstname, this.invite.unitnumber, this.invite.email)
@@ -83,19 +90,20 @@ export class InviteMemberPage {
                 if (res.status === 200) {
                     this.fs.createInvitee(this.invite)
                         .then(res => {
+                            loader.dismiss();
                             this.navctrl.push(InvitationSuccessPage)
                         })
                         .catch(err => this.emailErr = true
                         // this.showAlert('Email taken')
                         )
                 } else {
+                    loader.dismiss();
                     this.showAlert('Connection error.');
                 }
-
             }, err => {
+                loader.dismiss();
                 this.showAlert('Connection error.');
             })
-
     }
 
     itemChanged() {
