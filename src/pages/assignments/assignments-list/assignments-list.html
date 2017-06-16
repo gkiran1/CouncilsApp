@@ -20,7 +20,7 @@
 
   <ng-container *ngIf="(personalAssignmentsArray.length || councilAssignmentsArray.length || completedAssignmentsArray.length)">
     <ion-item class="divider" *ngIf="personalAssignmentsArray.length">PERSONAL</ion-item>
-    <ion-list class="noborder">
+    <ion-list class="noborder"  *ngIf="personalAssignmentsArray.length">
       <ion-item class="ion-item-middle"  (click)="assignmentSelected(item, i,'personal')" *ngFor="let item of personalAssignmentsArray; let i = index" [attr.data-index]="i">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': personalselectedIdx === i}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': personalselectedIdx !== i}"></ion-icon>
@@ -31,7 +31,7 @@
     </ion-list>
 
     <ion-item class="divider heading-styles" *ngIf="councilAssignmentsArray.length">COUNCIL</ion-item>
-    <ion-list>
+    <ion-list *ngIf="councilAssignmentsArray.length">
       <ion-item class="ion-item-middle"  (click)="assignmentSelected(item, i,'council')" *ngFor="let item of councilAssignmentsArray; let i = index" [attr.data-index]="i">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': councilselectedIdx === i}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': councilselectedIdx !== i}"></ion-icon>
@@ -43,7 +43,7 @@
     </ion-list>
 
     <ion-item class="divider heading-styles" *ngIf="completedAssignmentsArray.length">COMPLETED</ion-item>
-    <ion-list>
+    <ion-list *ngIf="completedAssignmentsArray.length">
       <ion-item class="ion-item-middle" (click)="assignmentSelected(item, i,'completed')" *ngFor="let item of completedAssignmentsArray; let i = index"
         [attr.data-index]="i">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': completedselectedIdx === i}"></ion-icon>
@@ -54,7 +54,7 @@
       </ion-item>
     </ion-list>
   </ng-container>
-  <ng-container *ngIf="!(councilAssignmentsArray.length || completedAssignmentsArray.length)">
+  <ng-container *ngIf="!(personalAssignmentsArray.length || councilAssignmentsArray.length || completedAssignmentsArray.length)">
     <ion-label text-center class="text-content font1">There are no assignments</ion-label>
   </ng-container>
 
