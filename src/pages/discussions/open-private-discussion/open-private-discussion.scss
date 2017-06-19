@@ -25,9 +25,10 @@ open-private-discussion-page {
         bottom: 0;
     }
     .typings-label{
-       // position: fixed;
+       position: fixed;
         z-index: 99;
-       /// bottom: 11%;
+        color: #a9aaac !important;
+        bottom: 11%;
     }
     .msg-sendername{
         display: inline-block;
