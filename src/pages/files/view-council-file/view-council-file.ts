@@ -27,7 +27,7 @@ export class ViewCouncilFilePage {
     }
 
     newFile = {
-        filename : '',
+        filename: '',
         filetype: '',
         createdUser: '',
         filesize: 0,
@@ -38,7 +38,7 @@ export class ViewCouncilFilePage {
         isActive: true,
     }
 
-    importedFilePath : string;
+    importedFilePath: string;
     //files
     file1 = {
         $key: '',
@@ -63,7 +63,7 @@ export class ViewCouncilFilePage {
     now = moment().valueOf();
     device: string;
     constructor(
-        fb:FormBuilder,
+        fb: FormBuilder,
         public fs: FirebaseService,
         public appservice: AppService,
         public nav: NavController,
@@ -95,14 +95,14 @@ export class ViewCouncilFilePage {
         });
 
         this.newCouncilFileForm = fb.group({
-        council: ['', Validators.required],
-        createdDate: '',
-        createdBy: appservice.uid,
-        createdUser: this.createdUser,
-        isActive: true,
-        images: [],
-        councilname: ''
-      });
+            council: ['', Validators.required],
+            createdDate: '',
+            createdBy: appservice.uid,
+            createdUser: this.createdUser,
+            isActive: true,
+            images: [],
+            councilname: ''
+        });
 
         this.bindFilesList();
 
@@ -189,8 +189,12 @@ export class ViewCouncilFilePage {
     }
 
     back() {
-        this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
-
+        if (this.nav.getPrevious().name === 'NewCouncilFilePage') {
+            this.nav.popToRoot();
+        }
+        else {
+            this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
+        }
     }
 
     addFileActionsPage(value) {
@@ -275,8 +279,8 @@ export class ViewCouncilFilePage {
                     .then((savedPicture) => {
                         // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
                         // this.pictureRef.then((metadata) => {
-                            loader.dismiss();
-                            // Metadata now contains the metadata like filesize and type for 'images/...'
+                        loader.dismiss();
+                        // Metadata now contains the metadata like filesize and type for 'images/...'
                         //     this.file = metadata;
                         //     this.file.size = this.formatBytes(this.file.size);
                         //     this.file.$key = fileId;
@@ -340,16 +344,16 @@ export class ViewCouncilFilePage {
                     .then((savedPicture) => {
                         // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
                         // this.pictureRef.then((metadata) => {
-                            loader.dismiss();
-                            // Metadata now contains the metadata like filesize and type for 'images/...'
-                            // this.file = metadata;
-                            // this.file.size = this.formatBytes(this.file.size);
-                            // this.file.$key = fileId;
-                            // this.file.name = value.filename;
-                            // this.file.type = value.filetype;
-                            // this.filesArray.push(this.file);
-                            // this.value.councilname = value.councilname;
-                            // this.value.filename = value.filename;
+                        loader.dismiss();
+                        // Metadata now contains the metadata like filesize and type for 'images/...'
+                        // this.file = metadata;
+                        // this.file.size = this.formatBytes(this.file.size);
+                        // this.file.$key = fileId;
+                        // this.file.name = value.filename;
+                        // this.file.type = value.filetype;
+                        // this.filesArray.push(this.file);
+                        // this.value.councilname = value.councilname;
+                        // this.value.filename = value.filename;
                         //     // this.value.filetype = value.filetype;
                         // }).catch((error) => {
                         //     loader.dismiss();
@@ -405,8 +409,8 @@ export class ViewCouncilFilePage {
     }
 
     uploadFile(uri, value, loader) {
-         this.importedFilePath = uri.toString();
-         //alert(this.importedFilePath);
+        this.importedFilePath = uri.toString();
+        //alert(this.importedFilePath);
         //  FilePath.resolveNativePath(this.importedFilePath)
         //    .then(filePath => {
         let filePath = 'file://' + this.importedFilePath;
@@ -431,7 +435,7 @@ export class ViewCouncilFilePage {
                     //alert(imgBlob.size);
                     var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
                     var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
-                     //alert(filetype)
+                    //alert(filetype)
                     var mimeType;
                     switch (filetype) {
                         case 'PNG':
@@ -471,7 +475,7 @@ export class ViewCouncilFilePage {
                     this.newFile.filesize = imgBlob.size;
                     this.newFile.createdBy = this.createdBy;
                     this.newFile.isActive = true;
-                     //alert(JSON.stringify(this.newFile));
+                    //alert(JSON.stringify(this.newFile));
                     this.firebaseservice.saveFile(this.newFile).then(fileId => {
                         //alert('meta data saved'+fileId);
                         this.profilePictureRef.child(this.councilId + '//' + fileId + '//' + filename)
@@ -480,15 +484,15 @@ export class ViewCouncilFilePage {
                                 //alert('file saved');
                                 // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
                                 // this.pictureRef.then((metadata) => {
-                                    this.bindFilesList();
-                                    loader.dismiss();
-                                    //isNewCouncilFileflag=false
-                                    // Metadata now contains the metadata like filesize and type for 'images/...'
-                                    // this.nav.push(ViewCouncilFilePage, {
-                                    //     councilid: value.councilid, councilname: value.councilname
-                                    // }, {
-                                    //         animate: true, animation: 'transition', direction: 'forward'
-                                    //     });
+                                this.bindFilesList();
+                                loader.dismiss();
+                                //isNewCouncilFileflag=false
+                                // Metadata now contains the metadata like filesize and type for 'images/...'
+                                // this.nav.push(ViewCouncilFilePage, {
+                                //     councilid: value.councilid, councilname: value.councilname
+                                // }, {
+                                //         animate: true, animation: 'transition', direction: 'forward'
+                                //     });
                                 // }).catch((error) => {
                                 //     loader.dismiss();
                                 //      alert(error);
@@ -496,12 +500,12 @@ export class ViewCouncilFilePage {
                                 // });
                             }).catch(error => {
                                 loader.dismiss();
-                                 //alert(error);
+                                //alert(error);
                                 console.log(error);
                             })
                     }).catch(error => {
                         loader.dismiss();
-                         //alert(error);
+                        //alert(error);
                         console.log(error);
                     })
                 }
