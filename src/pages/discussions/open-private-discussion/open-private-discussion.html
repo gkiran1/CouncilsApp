@@ -36,15 +36,17 @@
                 <p class="font5 line-height">{{msg.text}}</p>
             </ion-item>
         </ion-list>
+
     </div>
     <!--</ion-scroll>-->
+   
 </ion-content>
-<ion-label class="typings-label" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
+  <ion-label class="typings-label" [ngStyle]="{'bottom':tbottom}" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')}}
         </ion-label>
 <ion-footer>
-    
+      
         <!--<ion-row>
             <ion-col width-80 class="msg-col">
                 <ion-textarea type="text" rows="1" id="msgFld" spellautocomplete placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"></ion-textarea>
@@ -55,7 +57,7 @@
         </ion-row>--> 
 
         <ion-textarea type="text" rows="1" elastic id="msgFld" spellautocomplete placeholder="Write a message..." [(ngModel)]="msg"
-            (focus)="focusIn()" (focusout)="focusOut()"></ion-textarea>
+            (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)"></ion-textarea>
             <ion-row>
                 <ion-col width-80>
                 </ion-col>

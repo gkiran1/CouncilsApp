@@ -28,7 +28,10 @@ open-private-discussion-page {
        position: fixed;
         z-index: 99;
         color: #a9aaac !important;
-        bottom: 11%;
+        background: #fff;
+        width: 100%;
+        margin: 0;
+        //  bottom: 11%;
     }
     .msg-sendername{
         display: inline-block;

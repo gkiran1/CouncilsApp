@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 // import { FormBuilder,  Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
@@ -25,7 +25,8 @@ export class OpenPrivateDiscussionPage {
     isTyping = true;
     statusSubscription;
     buttonClicked = true;
-    constructor(public af: AngularFire, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService, private nativeAudio: NativeAudio) {
+    tbottom = '';
+    constructor(public af: AngularFire, public ele: ElementRef, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService, private nativeAudio: NativeAudio) {
         this.af.auth.subscribe(auth => {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(usr => {
@@ -52,6 +53,7 @@ export class OpenPrivateDiscussionPage {
     }
     ionViewDidEnter() {
         this.content.scrollToBottom();
+        this.tbottom = this.ele.nativeElement.querySelector('ion-footer').offsetHeight + 'px';
         this.statusSubscription = this.fs.getPrivateDiscussionByKey(this.navparams.get('discussion')).subscribe(discussion => {
             discussion.messages = discussion.messages || [];
             Object.keys(discussion.messages).forEach(e => {
@@ -112,5 +114,9 @@ export class OpenPrivateDiscussionPage {
             })
             .catch(err => {
             });
+    }
+
+    keypresssed($event) {
+        this.tbottom = this.ele.nativeElement.querySelector('ion-footer').offsetHeight + 'px';
     }
 }

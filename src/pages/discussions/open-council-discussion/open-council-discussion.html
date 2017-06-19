@@ -41,13 +41,14 @@
         </ion-list>
     </div>
     <!--</ion-scroll>-->
+    
 </ion-content>
- <ion-label class="typings-label" color="secondary" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
+
+<ion-footer>
+    <ion-label class="typings-label" [ngStyle]="{'bottom':tbottom}" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')}}
         </ion-label>
-<ion-footer>
-   
         <!--<ion-row>
             <ion-col width-80 class="msg-col">
                 <ion-textarea type="text" rows="1" elastic id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"
