@@ -1,7 +1,14 @@
-page-welcome{
+page-welcome {
     .page-message {
         display: block;
-        position:relative;
+        position: relative;
         padding-top: 14px;
+    }
+    p {
+        font-family: Gotham-Medium, sans-serif;
+        font-size: 2.8rem !important;
+        color: #35373a !important;
+        padding: 3px;
+        margin: 0px;
     }
 }
