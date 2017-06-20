@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "310008879834",
-    "firebase_url": "https://councils-45092.firebaseio.com",
-    "project_id": "councils-45092",
-    "storage_bucket": "councils-45092.appspot.com"
+    "project_number": "92555477583",
+    "firebase_url": "https://councilsdb.firebaseio.com",
+    "project_id": "councilsdb",
+    "storage_bucket": "councilsdb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:310008879834:android:9154556522d3253c",
+        "mobilesdk_app_id": "1:92555477583:android:9154556522d3253c",
         "android_client_info": {
           "package_name": "com.councilsapp.io"
         }
       },
       "oauth_client": [
         {
-          "client_id": "310008879834-t866m8flshn51k35bvqn6789hnfdn8h6.apps.googleusercontent.com",
+          "client_id": "92555477583-vu79tu5r8b5kg65s174l19ugt82oajtl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCqbESw0U8YEWpu9MbHNZvzyAdz6Pd2Z4E"
+          "current_key": "AIzaSyAU0aJdqxDdrCkAwQtiXiBKymDl5tjn2WI"
         }
       ],
       "services": {
