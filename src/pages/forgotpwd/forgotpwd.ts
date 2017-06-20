@@ -14,6 +14,7 @@ export class ForgotPwd {
 
     email: any;
     isValidEmail = false;
+    showInValidEml = false;
 
     constructor(public navCtrl: NavController,
         public loadingCtrl: LoadingController,
@@ -22,6 +23,7 @@ export class ForgotPwd {
 
 
     keypresssed($event) {
+        this.showInValidEml = false;
         if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
             this.isValidEmail = true;
         }
@@ -43,7 +45,8 @@ export class ForgotPwd {
                 loader.dismiss();
                 this.navCtrl.push(ForgotPwdSuccess);
             }).catch((err) => {
-                alert("Mail sending Failed. Please check your email and try");
+                loader.dismiss();
+                this.showInValidEml = true;
             });
         }
     }

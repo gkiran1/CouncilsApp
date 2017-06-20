@@ -1,26 +1,26 @@
-
-<ion-content >
-        <div class="create-header">
-        <span class="create-title">Forgot Password</span>
-        <div class="create-subheader">
-            Please enter your email address<br> and Councils will send you<br> an email to reset your password.
-        </div>
+<ion-content>
+  <div class="create-header">
+    <span class="create-title">Forgot Password</span>
+    <div class="create-subheader">
+      Please enter your email address<br> and Councils will send you<br> an email to reset your password.
     </div>
-  
+  </div>
+
   <form class="formcontent" (ngSubmit)="sendEmail()" #forgotpwdForm="ngForm">
-    <ion-item class="input-item">
+    <ion-item [class.invalid]="showInValidEml" class="input-item">
       <ion-label class="inputtype" floating> Email</ion-label>
-            <ion-input  type="email" name="email" [(ngModel)]="email" id="email" (keyup)="keypresssed($event)" required></ion-input>
+      <ion-input type="email" name="email" [(ngModel)]="email" id="email" (keyup)="keypresssed($event)" required></ion-input>
     </ion-item>
-    
+    <ion-label class="error-msg" *ngIf="showInValidEml">Invalid email</ion-label>
     <div class="createBtn">
-      <button ion-button block clear class="button button-clik" color="secondary" name="resetpassword" type="submit" text-capitalize [disabled]="!isValidEmail || !forgotpwdForm.form.valid" text-capitalize>Reset Password</button>
+      <button ion-button block clear class="button button-clik" color="secondary" name="resetpassword" type="submit" text-capitalize
+        [disabled]="!isValidEmail || !forgotpwdForm.form.valid" text-capitalize>Reset Password</button>
     </div>
   </form>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <button class="cancelBtn button button-clik" ion-button clear color="secondary" name="Cancel" block text-capitalize (click)="cancel()" text-capitalize>Cancel</button>
+    <button class="cancelBtn button button-clik" ion-button clear color="secondary" name="Cancel" block text-capitalize (click)="cancel()"
+      text-capitalize>Cancel</button>
   </ion-toolbar>
 </ion-footer>
-
