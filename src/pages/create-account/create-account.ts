@@ -8,6 +8,7 @@ import { AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { EmailService } from '../../providers/emailservice';
 import * as jazzicon from 'jazzicon';
+import { WelcomePage } from '../welcome/welcome.component';
 
 @Component({
   selector: 'create-account',
@@ -75,7 +76,8 @@ export class CreateAccountPage {
                 .then(res => {
                   //onSuccess redirect to Menu page                
                   this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email);
-                  this.navCtrl.push(LoginPage);
+                  //this.navCtrl.push(LoginPage);
+                  this.navCtrl.push(WelcomePage);
                   loader.dismiss();
                 }).catch(err => this.showAlert('Connection error.'));
             } else {

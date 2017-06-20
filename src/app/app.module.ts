@@ -86,6 +86,8 @@ import { ValidateOnBlurDirective } from '../directives/validate-onblur';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { Badge } from '@ionic-native/badge';
 import { SpellCheckDirective } from '../directives/spellcheck.directive';
+import { WelcomePage } from '../pages/welcome/welcome.component';
+
 
 //Directives
 import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
@@ -186,7 +188,8 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     NewMenuPage,
     AddTagColor,
     ValidateOnBlurDirective,
-    SpellCheckDirective
+    SpellCheckDirective,
+    WelcomePage
   ],
 
   imports: [
@@ -263,7 +266,8 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     GoogleCalenderPage,
     ForgotPwd,
     ForgotPwdSuccess,
-    NewMenuPage
+    NewMenuPage,
+    WelcomePage
   ],
 
   providers: [AuthService, AppService, FirebaseService, NativeAudio, Badge]
