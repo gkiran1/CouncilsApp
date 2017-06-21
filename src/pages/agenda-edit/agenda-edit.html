@@ -35,10 +35,13 @@
             <ion-input type="text" spellautocomplete name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>
         </ion-item>
 
-        <ion-item class="input-item">
+        <ion-item [class.invalid]="invalidOpeningPrayerUsr" class="input-item">
             <ion-label floating>Opening Prayer</ion-label>
             <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="openingprayer"></ion-input>
         </ion-item>
+
+        <ion-label class="error-msg" *ngIf="invalidOpeningPrayerUsr">Invalid user</ion-label>
+
         <div *ngIf="showlist" class="assignto-list">
             <ng-container *ngFor="let user of users | search:term:'username'">
                 <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto(user)">
@@ -54,10 +57,13 @@
             </ng-container>
         </div>
 
-        <ion-item class="input-item">
+        <ion-item [class.invalid]="invalidSpiritualThoughtUsr" class="input-item">
             <ion-label floating>Spiritual Thought</ion-label>
             <ion-input type="text" (focus)="showList1($event)" (input)="showList1($event)" formControlName="spiritualthought"></ion-input>
         </ion-item>
+
+        <ion-label class="error-msg" *ngIf="invalidSpiritualThoughtUsr">Invalid user</ion-label>
+
         <div *ngIf="showlist1" class="assignto-list">
             <ng-container *ngFor="let user of users | search:term:'username'">
                 <ion-item class="list-item" *ngIf="user.$key!==uid" (click)="bindAssignto1(user)">
@@ -213,10 +219,13 @@
                 </ion-item>
             </ng-container>
         </div>
-        <ion-item class="input-item">
+        <ion-item [class.invalid]="invalidClosingPrayerUsr" class="input-item">
             <ion-label floating>Closing Prayer</ion-label>
             <ion-input type="text" (focus)="showList2($event)" (input)="showList2($event)" formControlName="closingprayer"></ion-input>
         </ion-item>
+
+        <ion-label class="error-msg" *ngIf="invalidClosingPrayerUsr">Invalid user</ion-label>
+
     </form>
 </ion-content>
 
