@@ -1,122 +1,120 @@
-agenda-lite-edit{
+agenda-lite-edit {
     .item-styles {
         font-family: Bernina-Regular !important;
         font-size: 13px !important;
         color: #35373a !important;
     }
-    .label-styles{
-        font-family: Bernina-Regular !important;     
-        font-size: 14px !important;           
-        color:#3cb18a !important;
-        padding-left:5%;
+    .label-styles {
+        font-family: Bernina-Regular !important;
+        font-size: 14px !important;
+        color: #3cb18a !important;
+        padding-left: 5%;
     }
-     .assignto-list{
+    .assignto-list {
         position: relative;
         z-index: 99;
         max-height: 200px;
         width: 100%;
         overflow-y: scroll;
     }
-    .assignto-list{
-        ion-label{
+    .assignto-list {
+        ion-label {
             display: flex;
             align-items: center;
         }
-        ion-label h4{
+        ion-label h4 {
             flex: 1;
         }
     }
-    .bar-buttons-md{
+    .bar-buttons-md {
         order: 2;
     }
-    .bar-button-md{
+    .bar-button-md {
         font-size: 17px;
     }
-
-    ion-footer button:first-child{
-        padding-left:15px;
+    ion-footer button:first-child {
+        padding-left: 15px;
     }
-    ion-footer button:last-child{
+    ion-footer button:last-child {
         padding-right: 15px;
     }
-   .inactive{
+    .inactive {
         display: none;
     }
-    .assignment-styles{
-         font-family: Bernina-Regular !important; 
-         color:darkgray;       
+    .assignment-styles {
+        font-family: Bernina-Regular !important;
+        color: darkgray;
         font-size: 17px;
     }
-    .assignment-styles1{
-         font-family: Bernina-Regular !important; 
-         color:#3cb18a;       
+    .assignment-styles1 {
+        font-family: Bernina-Regular !important;
+        color: #3cb18a;
         font-size: 14px;
     }
     .desc-styles {
-   font-family: 'Bernina-Regular', sans-serif !important;
-    font-size: 17px !important;
-    color:black;
+        font-family: 'Bernina-Regular', sans-serif !important;
+        font-size: 17px !important;
+        color: black;
     }
-// .border-line{
-//         border-bottom: 1px solid #e8e9eb;
-//         margin-bottom:0 !important;
-
-// }
-.list-ios{
-    margin: 0px;
-}
- .height-prop{
+    // .border-line{
+    //         border-bottom: 1px solid #e8e9eb;
+    //         margin-bottom:0 !important;
+    // }
+    .list-ios {
+        margin: 0px;
+    }
+    .height-prop {
         height: 70px
     }
-    .icon-size{
+    .icon-size {
         font-size: 10px !important;
     }
-   .icon-line.item-block .item-inner {
+    .icon-line.item-block .item-inner {
         margin-right: 16px;
         padding-right: 0px !important;
         border-bottom: 1px solid #e8e9eb !important;
     }
-    .icon-line.input-item .item-inner .input-wrapper{
+    .icon-line.input-item .item-inner .input-wrapper {
         border-bottom: none !important;
     }
-
-    .flex-direction .item-inner{
+    .flex-direction .item-inner {
         flex-direction: column !important;
     }
-    .flex-direction textarea{
+    .flex-direction textarea {
         height: 24px;
     }
-     input:read-only{
+    input:read-only {
         margin: 0 !important;
     }
-     ion-item .button-clik{
-        margin-right:0 !important;
+    ion-item .button-clik {
+        margin-right: 0 !important;
         padding-right: 0 !important;
     }
-
     ion-avatar img,
-ion-thumbnail img {
-    display: block;
-    width: 30px !important;
-    height: 30px !important;
-    border-radius: 50% !important;
-}
-
-ion-avatar {
-    background: #F4F6FA;
-    width: 30px !important;
-    height: 30px !important;
-     min-width: 30px !important;
-    min-height: 30px !important;
-    border-radius: 50% !important;
-}
-.invalid ion-datetime{
+    ion-thumbnail img {
+        display: block;
+        width: 30px !important;
+        height: 30px !important;
+        border-radius: 50% !important;
+    }
+    ion-avatar {
+        background: #F4F6FA;
+        width: 30px !important;
+        height: 30px !important;
+        min-width: 30px !important;
+        min-height: 30px !important;
+        border-radius: 50% !important;
+    }
+    .invalid ion-datetime {
         border-bottom: 1px solid #F13822;
     }
-    .font4{
+    .font4 {
         font-family: Bernina-Regular, sans-serif;
         font-size: 15px !important;
         color: #35373a !important;
     }
-
+    .no-assignments {
+        font-size: 15px;
+        color: #a9aaac;
+    }
 }

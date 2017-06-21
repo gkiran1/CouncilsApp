@@ -99,8 +99,8 @@
             </ion-item>
         </ng-container>
         <ng-container *ngIf="!assignmentslist.length">
-             <ion-item class="ion-item-middle" text-wrap [ngClass]="{inactive: !shownGroup}">
-                <ion-label class="desc-styles">No Assignments</ion-label>
+            <ion-item class="ion-item-middle" text-wrap [ngClass]="{inactive: !shownGroup}">
+                <ion-label class="no-assignments">No Assignments</ion-label>
             </ion-item>
         </ng-container>
 
@@ -117,15 +117,15 @@
                     </button>
         </ion-item>
         <ng-container *ngIf="completedassignmentslist.length">
-        <ion-item class="ion-item-middle" *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
-            <div class="desc-styles">{{completedassignment.description}}</div>
-        </ion-item>
-         </ng-container>
-         <ng-container *ngIf="!completedassignmentslist.length">
-        <ion-item class="ion-item-middle" text-wrap [ngClass]="{inactive: !shownGroup1}">
-            <div class="desc-styles">No Completed Assignments</div>
-        </ion-item>
-         </ng-container>
+            <ion-item class="ion-item-middle" *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
+                <div class="desc-styles">{{completedassignment.description}}</div>
+            </ion-item>
+        </ng-container>
+        <ng-container *ngIf="!completedassignmentslist.length">
+            <ion-item class="ion-item-middle" text-wrap [ngClass]="{inactive: !shownGroup1}">
+                <div class="no-assignments">No Completed Assignments</div>
+            </ion-item>
+        </ng-container>
 
         <ng-container *ngIf="!discussionitemsObj.length">
             <ion-item class="input-item flex-direction">
