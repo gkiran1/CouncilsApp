@@ -145,6 +145,7 @@ export class CreateAccountPage {
   }
 
   keypresssed($event) {
+    this.isValidEmail = true;
     this.emailErr = false;
     this.isInvitedEmail = true;
   }
