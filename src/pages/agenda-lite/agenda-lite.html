@@ -90,9 +90,16 @@
                              item-right></ion-icon>
                             </button>
         </ion-item>
-        <ion-item class="ion-item-middle" *ngFor="let assignment of assignmentslist" text-wrap [ngClass]="{inactive: !shownGroup}">
-            <ion-label class="desc-styles">{{assignment.description}}</ion-label>
-        </ion-item>
+        <ng-container *ngIf="assignmentslist.length">
+            <ion-item class="ion-item-middle" *ngFor="let assignment of assignmentslist" text-wrap [ngClass]="{inactive: !shownGroup}">
+                <ion-label class="desc-styles">{{assignment.description}}</ion-label>
+            </ion-item>
+        </ng-container>
+        <ng-container *ngIf="!assignmentslist.length">
+             <ion-item class="ion-item-middle" text-wrap [ngClass]="{inactive: !shownGroup}">
+                <ion-label class="desc-styles">No Assignments</ion-label>
+            </ion-item>
+        </ng-container>
         <!--</ion-list>-->
 
         <!--<ion-list class="border-line">-->
@@ -108,16 +115,24 @@
                      item-right></ion-icon>
                     </button>
         </ion-item>
+        <ng-container *ngIf="completedassignmentslist.length">
         <ion-item class="ion-item-middle" *ngFor="let completedassignment of completedassignmentslist" text-wrap [ngClass]="{inactive: !shownGroup1}">
             <div class="desc-styles">{{completedassignment.description}}</div>
         </ion-item>
+         </ng-container>
+         <ng-container *ngIf="!completedassignmentslist.length">
+        <ion-item class="ion-item-middle" text-wrap [ngClass]="{inactive: !shownGroup1}">
+            <div class="desc-styles">No Completed Assignments</div>
+        </ion-item>
+         </ng-container>
+          
         <!--</ion-list>-->
 
         <ion-item class="input-item flex-direction">
             <ion-label floating>Discussion Items</ion-label>
             <ion-textarea rows="1" wrap="off" autocomplete="true" spellautocomplete (focus)="discussionfocus()" elastic id="discussionitems"
                 name="discussionitems" formControlName="discussionitems" maxlength="500" (keyup)="keypressed($event)">
-            </ion-textarea>
+                </ion-textarea>
         </ion-item>
 
         <div *ngIf="showlist2" class="assignto-list">
