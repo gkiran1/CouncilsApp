@@ -75,9 +75,14 @@ open-council-discussion-page {
         align-items: flex-start;
     }
     .councils-icon__checkmark{
+        // position: absolute;
+        // right: 16px;
+        font-size: 8px;
+    }
+    .right-align{
         position: absolute;
         right: 16px;
-        font-size: 8px;
+        font-size: 12px;
     }
     ion-item h2{
         display: inline-block;

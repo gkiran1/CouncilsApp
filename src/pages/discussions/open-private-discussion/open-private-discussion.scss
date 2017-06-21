@@ -71,21 +71,26 @@ open-private-discussion-page {
         font-size: 17px !important;
         color: #35373a !important;
     }
-    .red-status{
+    .read-status{
         color:#478aff;
     }
     .item-block{
         align-items: flex-start;
     }
     .councils-icon__checkmark{
-        position: absolute;
-        right: 16px;
+        // position: absolute;
+        // right: 16px;
         font-size: 8px;
     }
     .councils-icon__double_checkmark{
+        // position: absolute;
+        // right: 16px;
+        font-size: 8px;
+    }
+    .right-align{
         position: absolute;
         right: 16px;
-        font-size: 8px;
+        font-size: 12px;
     }
     ion-item h2{
         display: inline-block;

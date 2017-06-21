@@ -33,9 +33,11 @@
                     <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(msg)?.user_avatar || (msg)?.user_avatar === 'avatar'" />
                 </ion-avatar>
                 <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
-                <ion-icon class="councils-icon__checkmark" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark"
-                    md="ios-checkmark"></ion-icon>
-                    <p class="font2">{{msg.timestamp | customdateformat}}</p>
+                <!--<ion-icon class="councils-icon__checkmark" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark"
+                    md="ios-checkmark"></ion-icon>-->
+                    <p class="font2">{{msg.timestamp | customdateformat}}
+                        <span class="right-align" *ngIf="msg.userId === user.$key && msg.status === 'sent'">sent <ion-icon class="councils-icon__checkmark"></ion-icon></span>
+                    </p>
                     <p class="font5 line-height" [innerHTML]="msg.text | addtagcolor"></p>
             </ion-item>
         </ion-list>

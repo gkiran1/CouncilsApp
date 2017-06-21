@@ -18,8 +18,8 @@
         <ion-item text-wrap class="description">
             <ion-label class="font1 line-height">
                 This is a private discussion with <span ion-text color="secondary">{{chatWith}}</span> created by
-                <span ion-text
-                    color="secondary">{{createdBy}}</span> on {{discussion.createdDate | customdateformat}}. No one else can view this discussion.
+                <span ion-text color="secondary">{{createdBy}}</span> on {{discussion.createdDate | customdateformat}}. No
+                one else can view this discussion.
             </ion-label>
         </ion-item>
         <ion-list no-lines>
@@ -29,40 +29,43 @@
                     <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(msg)?.user_avatar || (msg)?.user_avatar === 'avatar'" />
                 </ion-avatar>
                 <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
-                <ion-icon class="councils-icon__checkmark" *ngIf="msg.userId === user.$key && msg.status === 'sent'"></ion-icon>
-                <ion-icon class="councils-icon__double_checkmark" *ngIf="msg.userId === user.$key && msg.status === 'delivered'"></ion-icon>
-                <ion-icon class="councils-icon__double_checkmark red-status" *ngIf="msg.userId === user.$key && msg.status === 'read'"></ion-icon>
-                <p class="font2">{{msg.timestamp | customdateformat}}</p>
+
+                <!--<ion-icon class="councils-icon__double_checkmark" *ngIf="msg.userId === user.$key && msg.status === 'delivered'"></ion-icon>-->
+
+                <p class="font2">{{msg.timestamp | customdateformat}}
+                    <span class="right-align" *ngIf="msg.userId === user.$key && msg.status === 'sent'">sent <ion-icon class="councils-icon__checkmark"></ion-icon></span>
+                    <span class="right-align" *ngIf="msg.userId === user.$key && msg.status === 'read'">read <ion-icon class="councils-icon__double_checkmark read-status" ></ion-icon></span>
+                </p>
                 <p class="font5 line-height">{{msg.text}}</p>
             </ion-item>
         </ion-list>
 
     </div>
     <!--</ion-scroll>-->
-   
+
 </ion-content>
-  <ion-label class="typings-label" [ngStyle]="{'bottom':tbottom}" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
+<ion-label class="typings-label" [ngStyle]="{'bottom':tbottom}" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
         '')">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
-        '')}}
-        </ion-label>
+    '')}}
+</ion-label>
 <ion-footer>
-      
-        <!--<ion-row>
+
+    <!--<ion-row>
             <ion-col width-80 class="msg-col">
                 <ion-textarea type="text" rows="1" id="msgFld" spellautocomplete placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"></ion-textarea>
             </ion-col>
             <ion-col width-20 text-center>
                 <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
             </ion-col>
-        </ion-row>--> 
+        </ion-row>-->
 
-        <ion-textarea type="text" rows="1" elastic id="msgFld" spellautocomplete placeholder="Write a message..." [(ngModel)]="msg"
-            (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)"></ion-textarea>
-            <ion-row>
-                <ion-col width-80>
-                </ion-col>
-                <ion-col width-20>
-                    <button ion-button class="button button-clik" color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
-                </ion-col>
-            </ion-row>
+    <ion-textarea type="text" rows="1" elastic id="msgFld" spellautocomplete placeholder="Write a message..." [(ngModel)]="msg"
+        (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)"></ion-textarea>
+    <ion-row>
+        <ion-col width-80>
+        </ion-col>
+        <ion-col width-20>
+            <button ion-button class="button button-clik" color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
+        </ion-col>
+    </ion-row>
 </ion-footer>
