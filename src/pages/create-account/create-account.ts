@@ -24,6 +24,7 @@ export class CreateAccountPage {
   createAccountForm;
   emailErr = false;
   isValidEmail = true;
+  isInvitedEmail = true;
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService, public toast: ToastController) { }
   createAccount() {
@@ -82,7 +83,8 @@ export class CreateAccountPage {
                 }).catch(err => this.showAlert('Connection error.'));
             } else {
               loader.dismiss();
-              this.showAlert('Not invited!');
+              this.isInvitedEmail = false;
+              //this.showAlert('Not invited!');
             }
           });
         }
@@ -95,7 +97,6 @@ export class CreateAccountPage {
   }
 
   emailChange($event) {
-    this.emailErr = false;
     if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
       this.isValidEmail = true;
     }
@@ -141,6 +142,11 @@ export class CreateAccountPage {
 
   cancel() {
     this.navCtrl.pop();
+  }
+
+  keypresssed($event) {
+    this.emailErr = false;
+    this.isInvitedEmail = true;
   }
 
 }
