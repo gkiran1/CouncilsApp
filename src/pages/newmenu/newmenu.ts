@@ -63,27 +63,27 @@ export class NewMenuPage {
           settingsPage.sendInvite();
         }
 
-        this.firebaseService.getPrivateDiscussions().subscribe(discussions => {
-          let privatediscussions = discussions.filter(discussion => {
-            if (auth.uid === discussion.createdUserId || auth.uid === discussion.otherUserId) {
-              return true;
-            }
-            return false;
-          });
-          privatediscussions.forEach(discussionEle => {
-            this.firebaseService.getPrivateDiscussionByKey(discussionEle.$key).subscribe(discussion => {
-              discussion.messages = discussion.messages || [];
-              Object.keys(discussion.messages).forEach(e => {
-                let message = discussion.messages[e];
-                if (message.userId !== auth.uid && message.status === 'sent') {
-                  this.firebaseService.updatePrivateDiscussionMessageStatus(discussion.$key, e, 'delivered')
-                    .catch(err => {
-                    });
-                }
-              });
-            });
-          });
-        });
+        // this.firebaseService.getPrivateDiscussions().subscribe(discussions => {
+        //   let privatediscussions = discussions.filter(discussion => {
+        //     if (auth.uid === discussion.createdUserId || auth.uid === discussion.otherUserId) {
+        //       return true;
+        //     }
+        //     return false;
+        //   });
+        //   privatediscussions.forEach(discussionEle => {
+        //     this.firebaseService.getPrivateDiscussionByKey(discussionEle.$key).subscribe(discussion => {
+        //       discussion.messages = discussion.messages || [];
+        //       Object.keys(discussion.messages).forEach(e => {
+        //         let message = discussion.messages[e];
+        //         if (message.userId !== auth.uid && message.status === 'sent') {
+        //           this.firebaseService.updatePrivateDiscussionMessageStatus(discussion.$key, e, 'delivered')
+        //             .catch(err => {
+        //             });
+        //         }
+        //       });
+        //     });
+        //   });
+        // });
       };
     });
   }
