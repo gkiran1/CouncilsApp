@@ -32,6 +32,7 @@ export class NewAssignmentPage {
   user;
   dateErr = false;
   assignment;
+  invalidUser = false;
 
   constructor(public modalCtrl: ModalController, public menuctrl: MenuController, public actionSheetCtrl: ActionSheetController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController, public toast: ToastController) {
     let assignment = navParams.get('assignment');
@@ -109,7 +110,7 @@ export class NewAssignmentPage {
       this.showAlert('This is a deleted assignment!');
     }
   }
-   
+
   showCouncilsModal(event, value) {
     event.preventDefault();
     let usercouncilsmodal = this.modalCtrl.create(UserCouncilsModalPage, { fromPage: 'assignment', usercouncils: this.usercouncils, selectedCouncil: this.assignedcouncil });
@@ -165,7 +166,7 @@ export class NewAssignmentPage {
       completedby: value.completedby
     }
   }
-onChange($event) {
+  onChange($event) {
     var newDate = new Date($event.year.value, $event.month.value - 1, $event.day.value, $event.hour.value, $event.minute.value);
     //alert(newDate);
     if (moment(newDate).isBefore(moment().set({ second: 0 }))) {
@@ -178,7 +179,8 @@ onChange($event) {
   createAssignment(value) {
     this.dateErr = false;
     if (!this.assigneduser || (this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
-      this.showAlert('Invalid user');
+      //this.showAlert('Invalid user');
+      this.invalidUser = true;
       return;
     }
     value.completedby = '';
@@ -216,7 +218,8 @@ onChange($event) {
     if (value.isCompleted) {
       this.showAlert('This assignment is already completed');
     } else if ((this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
-      this.showAlert('Invalid user');
+      //this.showAlert('Invalid user');
+      this.invalidUser = true;
     } else {
       value.completedby = this.user.firstname + " " + this.user.lastname;
       value.isCompleted = true;
@@ -231,7 +234,8 @@ onChange($event) {
   }
   edit(value) {
     if ((this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
-      this.showAlert('Invalid user');
+      //this.showAlert('Invalid user');
+      this.invalidUser = true;
       return;
     }
     value.completedby = '';
@@ -280,6 +284,7 @@ onChange($event) {
   }
 
   showList(event) {
+    this.invalidUser = false;
     let v = event.target.value;
     if (v.charAt('0') !== '@') {
       event.target.value = '@' + event.target.value;
