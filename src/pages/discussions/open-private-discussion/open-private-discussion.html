@@ -34,7 +34,7 @@
 
                 <p class="font2">{{msg.timestamp | customdateformat}}
                     <span class="right-align" *ngIf="msg.userId === user.$key && msg.status === 'sent'">sent <ion-icon class="councils-icon__checkmark"></ion-icon></span>
-                    <span class="right-align" *ngIf="msg.userId === user.$key && msg.status === 'read'">read <ion-icon class="councils-icon__double_checkmark read-status" ></ion-icon></span>
+                    <span class="right-align" *ngIf="msg.userId === user.$key && msg.status === 'read'">read <ion-icon class="councils-icon__checkmark read-status" ></ion-icon></span>
                 </p>
                 <p class="font5 line-height">{{msg.text}}</p>
             </ion-item>
