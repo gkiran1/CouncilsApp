@@ -1,41 +1,41 @@
 <ion-content>
-	<div class="create-header">
-		<span class="create-title">Create Account</span>
-		<div class="create-subheader">
-			Choose an email and password<br>to create your Councils account
-		</div>
-	</div>
+  <div class="create-header">
+    <span class="create-title">Create Account</span>
+    <div class="create-subheader">
+      Choose an email and password<br>to create your Councils account
+    </div>
+  </div>
 
-	<form class="formcontent" (ngSubmit)="createAccount()" #createAccountForm="ngForm">
-		<ion-item [class.invalid]="!isValidEmail || emailErr || !isInvitedEmail" class="input-item">
-			<ion-label class="inputtype" floating>Email</ion-label>
-			<ion-input type="email" name="email" validate-onblur class="form-control" (blur)="emailChange($event)" (keyup)="keypresssed($event)" [(ngModel)]="newUser.email"
-				id="password" required></ion-input>
-		</ion-item>
-		<ion-label class="error-msg" *ngIf="emailErr">Email taken</ion-label>
-		<ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label>
-		<ion-label class="error-msg" *ngIf="!isInvitedEmail">Non invited email</ion-label>
+  <form class="formcontent" (ngSubmit)="createAccount()" #createAccountForm="ngForm">
+    <ion-item [class.invalid]="!isValidEmail || emailErr || !isInvitedEmail" class="input-item">
+      <ion-label class="inputtype" floating>Email</ion-label>
+      <ion-input type="email" name="email" validate-onblur class="form-control" (blur)="emailChange($event)" (keyup)="keypresssed($event)"
+        [(ngModel)]="newUser.email" id="password" required></ion-input>
+    </ion-item>
+    <ion-label class="error-msg" *ngIf="emailErr">Email taken</ion-label>
+    <ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label>
+    <ion-label class="error-msg" *ngIf="!isInvitedEmail">Non-Invited email</ion-label>
 
-		<ion-item [class.invalid]="(password.errors && password.dirty)" class="input-item">
-			<ion-label class="inputtype" floating>Password</ion-label>
-			<ion-input type="password" name="password" validate-onblur class="form-control" #password="ngModel" minlength='6' [(ngModel)]="newUser.password"
-				id="email" required></ion-input>
-		</ion-item>
-		<ion-label class="error-msg" *ngIf="(password.errors && password.dirty)">6 characters required</ion-label>
+    <ion-item [class.invalid]="(password.errors && password.dirty)" class="input-item">
+      <ion-label class="inputtype" floating>Password</ion-label>
+      <ion-input type="password" name="password" validate-onblur class="form-control" #password="ngModel" minlength='6' [(ngModel)]="newUser.password"
+        id="email" required></ion-input>
+    </ion-item>
+    <ion-label class="error-msg" *ngIf="(password.errors && password.dirty)">6 characters required</ion-label>
 
-		<ion-item class="input-item">
-			<ion-label class="inputtype" floating> LDS.org username</ion-label>
-			<ion-input type="text" name="ldsusername" [(ngModel)]="newUser.ldsusername" id="ldsusername" required></ion-input>
-		</ion-item>
-		<div class="createBtn">
-			<button ion-button block clear class="button button-clik" color="secondary" name="CreateAccount" type="submit" text-capitalize
-				[disabled]="!createAccountForm.form.valid" text-capitalize>Create Account</button>
-		</div>
-	</form>
+    <ion-item class="input-item">
+      <ion-label class="inputtype" floating> LDS.org username</ion-label>
+      <ion-input type="text" name="ldsusername" [(ngModel)]="newUser.ldsusername" id="ldsusername" required></ion-input>
+    </ion-item>
+    <div class="createBtn">
+      <button ion-button block clear class="button button-clik" color="secondary" name="CreateAccount" type="submit" text-capitalize
+        [disabled]="!createAccountForm.form.valid" text-capitalize>Create Account</button>
+    </div>
+  </form>
 </ion-content>
 <ion-footer>
-	<ion-toolbar>
-		<button class="cancelBtn button button-clik" ion-button clear color="secondary" name="Cancel" block text-capitalize (click)="cancel()"
-			text-capitalize>Cancel</button>
-	</ion-toolbar>
+  <ion-toolbar>
+    <button class="cancelBtn button button-clik" ion-button clear color="secondary" name="Cancel" block text-capitalize (click)="cancel()"
+      text-capitalize>Cancel</button>
+  </ion-toolbar>
 </ion-footer>
