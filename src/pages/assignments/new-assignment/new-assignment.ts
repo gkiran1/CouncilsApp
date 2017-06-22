@@ -33,6 +33,7 @@ export class NewAssignmentPage {
   dateErr = false;
   assignment;
   invalidUser = false;
+  isAssigntoTouched = false;
 
   constructor(public modalCtrl: ModalController, public menuctrl: MenuController, public actionSheetCtrl: ActionSheetController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController, public toast: ToastController) {
     let assignment = navParams.get('assignment');
@@ -130,7 +131,7 @@ export class NewAssignmentPage {
       uc.forEach(e => {
         this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
           this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
-            u[0].status = status ? 'green' : 'gray';
+            u[0].status = status ? '#3cb18a' : '#a9aaac';
           });
           this.users.push(u[0]);
         });
@@ -233,6 +234,7 @@ export class NewAssignmentPage {
     }
   }
   edit(value) {
+    this.isAssigntoTouched = false;
     if ((this.assigneduser.firstname + ' ' + this.assigneduser.lastname) !== value.assigneduser) {
       //this.showAlert('Invalid user');
       this.invalidUser = true;
@@ -295,6 +297,7 @@ export class NewAssignmentPage {
     this.showlist = true;
   }
   bindAssignto(user) {
+    this.isAssigntoTouched = true;
     this.showlist = false;
     (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(user.firstname + ' ' + user.lastname);
     this.assigneduser = user;
