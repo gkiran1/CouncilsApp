@@ -261,7 +261,7 @@ export class AgendaLiteEditPage {
       this.invalidClosingPrayerUsr = true;
     }
     if (!this.invalidOpeningPrayerUsr && !this.invalidSpiritualThoughtUsr && !this.invalidClosingPrayerUsr) {
-      value.discussionitems = (value.discussionitems != undefined && value.discussionitems.length > 0) ? value.discussionitems.replace(/[- ]/gi, '').trim() : '';
+      value.discussionitems = (value.discussionitems != undefined && value.discussionitems.length > 0) ? value.discussionitems.replace(/- /gi, '').trim() : '';
       let formattedAgendaObj = this.formatAgendaObj(value);
       if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
         this.dateErr = true;

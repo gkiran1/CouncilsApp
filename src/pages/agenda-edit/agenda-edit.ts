@@ -277,10 +277,10 @@ export class AgendaEditPage {
             this.invalidClosingPrayerUsr = true;
         }
         if (!this.invalidOpeningPrayerUsr && !this.invalidSpiritualThoughtUsr && !this.invalidClosingPrayerUsr) {
-            value.spiritualwelfare = (value.spiritualwelfare != undefined && value.spiritualwelfare.length > 0) ? value.spiritualwelfare.replace(/[- ]/gi, '').trim() : '';
-            value.temporalwelfare = (value.temporalwelfare != undefined && value.temporalwelfare.length > 0) ? value.temporalwelfare.replace(/[- ]/gi, '').trim() : '';
-            value.fellowshipitems = (value.fellowshipitems != undefined && value.fellowshipitems.length > 0) ? value.fellowshipitems.replace(/[- ]/gi, '').trim() : '';
-            value.missionaryitems = (value.missionaryitems != undefined && value.missionaryitems.length > 0) ? value.missionaryitems.replace(/[- ]/gi, '').trim() : '';
+            value.spiritualwelfare = (value.spiritualwelfare != undefined && value.spiritualwelfare.length > 0) ? value.spiritualwelfare.replace(/- /gi, '').trim() : '';
+            value.temporalwelfare = (value.temporalwelfare != undefined && value.temporalwelfare.length > 0) ? value.temporalwelfare.replace(/- /gi, '').trim() : '';
+            value.fellowshipitems = (value.fellowshipitems != undefined && value.fellowshipitems.length > 0) ? value.fellowshipitems.replace(/- /gi, '').trim() : '';
+            value.missionaryitems = (value.missionaryitems != undefined && value.missionaryitems.length > 0) ? value.missionaryitems.replace(/- /gi, '').trim() : '';
             value.event = (value.event != undefined && value.event.length > 0) ? value.event.replace(/-/gi, '').trim() : '';
             let formattedAgendaObj = this.formatAgendaObj(value);
             if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
