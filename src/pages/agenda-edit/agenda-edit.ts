@@ -263,6 +263,42 @@ export class AgendaEditPage {
 
 
     edit(value) {
+
+        if (value.spiritualwelfare !== '' && this.spiritualwelfareObj.length === 0) {
+            value.spiritualwelfare = value.spiritualwelfare.replace(/- /gi, '').trim();
+        }
+        else if (this.spiritualwelfareObj.length > 0) {
+            value.spiritualwelfare = this.spiritualwelfareObj.join('\n');
+        }
+
+        if (value.temporalwelfare !== '' && this.temporalwelfareObj.length === 0) {
+            value.temporalwelfare = value.temporalwelfare.replace(/- /gi, '').trim();
+        }
+        else if (this.temporalwelfareObj.length > 0) {
+            value.temporalwelfare = this.temporalwelfareObj.join('\n');
+        }
+
+        if (value.fellowshipitems !== '' && this.fellowshipitemsObj.length === 0) {
+            value.fellowshipitems = value.fellowshipitems.replace(/- /gi, '').trim();
+        }
+        else if (this.fellowshipitemsObj.length > 0) {
+            value.fellowshipitems = this.fellowshipitemsObj.join('\n');
+        }
+
+        if (value.missionaryitems !== '' && this.missionaryitemsObj.length === 0) {
+            value.missionaryitems = value.missionaryitems.replace(/- /gi, '').trim();
+        }
+        else if (this.missionaryitemsObj.length > 0) {
+            value.missionaryitems = this.missionaryitemsObj.join('\n');
+        }
+
+        if (value.event !== '' && this.eventObj.length === 0) {
+            value.event = value.event.replace(/- /gi, '').trim();
+        }
+        else if (this.eventObj.length > 0) {
+            value.event = this.eventObj.join('\n');
+        }
+
         this.dateErr = false;
         if (value.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== value.openingprayer)) {
             //this.showAlert('Invalid user');  

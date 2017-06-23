@@ -247,6 +247,13 @@ export class AgendaLiteEditPage {
   }
 
   edit(value) {
+    if (value.discussionitems !== '' && this.discussionitemsObj.length === 0) {
+      value.discussionitems = value.discussionitems.replace(/- /gi, '').trim();
+    }
+    else if (this.discussionitemsObj.length > 0) {
+      value.discussionitems = this.discussionitemsObj.join('\n');
+    }
+
     this.dateErr = false;
     if (value.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== value.openingprayer)) {
       //this.showAlert('Invalid user');
