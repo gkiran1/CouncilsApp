@@ -17,7 +17,7 @@
     <form [formGroup]="noteForm" (ngSubmit)="noteForm.value">
         <ion-label class="date">{{date | customdateformat}}</ion-label>
         <ion-item no-lines>
-            <ion-input class="title-style" spellautocomplete type="text" name="title" formControlName="title" maxlength="25"></ion-input>
+            <ion-input class="title-style" spellautocomplete type="text" name="title" formControlName="title" maxlength="25" (keyup)="keypressed($event)"></ion-input>
         </ion-item>
 
         <ion-item no-lines>

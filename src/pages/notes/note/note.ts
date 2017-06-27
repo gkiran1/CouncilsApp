@@ -121,4 +121,10 @@ export class NotePage {
         textarea.style.height = 'auto';
         textarea.style.height = textarea.scrollHeight + "px";
     }
+
+    keypressed($event) {
+        if ($event.target.value.length > 25) {
+            return false;
+        }
+    }
 }

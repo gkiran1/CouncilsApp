@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { AlertController, NavController, ActionSheetController, MenuController, NavParams, ToastController} from 'ionic-angular';
+import { AlertController, NavController, ActionSheetController, MenuController, NavParams, ToastController } from 'ionic-angular';
 
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -64,4 +64,11 @@ export class NewNotePage {
     cancel() {
         this.nav.pop();
     }
+
+    keypressed($event) {
+        if ($event.target.value.length > 25) {
+            return false;
+        }
+    }
+
 }

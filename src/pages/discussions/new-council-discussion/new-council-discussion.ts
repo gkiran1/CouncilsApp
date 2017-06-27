@@ -63,4 +63,11 @@ export class NewCouncilDiscussionPage {
   cancel() {
     this.nav.pop();
   }
+
+  keypressed($event) {
+    if ($event.target.value.length > 25) {
+      return false;
+    }
+  }
+
 }

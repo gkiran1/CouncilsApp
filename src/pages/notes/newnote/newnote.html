@@ -17,7 +17,7 @@
     <form [formGroup]="newnoteForm" (ngSubmit)="newnoteForm.value">
         <ion-item class="input-item">
             <ion-label floating>Title</ion-label>
-            <ion-input type="text" name="title" spellautocomplete formControlName="title" maxlength="25"></ion-input>
+            <ion-input type="text" name="title" spellautocomplete formControlName="title" maxlength="25" (keyup)="keypressed($event)"></ion-input>
         </ion-item>
 
         <ion-item class="input-item">
