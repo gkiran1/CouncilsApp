@@ -58,9 +58,11 @@ export class OpenCouncilDiscussionPage {
     }
 
     ionViewDidEnter() {
-        let style = window.getComputedStyle(this.ele.nativeElement.querySelector('.scroll-content'))
-        let newBottom = (Number.parseFloat(style.getPropertyValue('margin-bottom').replace(/px/, '')) + 12) + 'px';
-        this.ele.nativeElement.querySelector('.scroll-content').style.marginBottom = newBottom;
+        if (this.discussion.typings) {
+            let style = window.getComputedStyle(this.ele.nativeElement.querySelector('.scroll-content'))
+            let newBottom = (Number.parseFloat(style.getPropertyValue('margin-bottom').replace(/px/, '')) + 10) + 'px';
+            this.ele.nativeElement.querySelector('.scroll-content').style.marginBottom = newBottom;
+        }
         this.content.scrollToBottom();
         this.tbottom = this.ele.nativeElement.querySelector('ion-footer').offsetHeight + 'px';
         this.platform.pause.subscribe(() => {
