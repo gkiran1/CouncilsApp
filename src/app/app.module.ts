@@ -86,6 +86,7 @@ import { ValidateOnBlurDirective } from '../directives/validate-onblur';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { Badge } from '@ionic-native/badge';
 import { SpellCheckDirective } from '../directives/spellcheck.directive';
+import { MaxLengthDirective } from '../directives/maxlength.directive';
 import { WelcomePage } from '../pages/welcome/welcome.component';
 
 
@@ -189,6 +190,7 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     AddTagColor,
     ValidateOnBlurDirective,
     SpellCheckDirective,
+    MaxLengthDirective,
     WelcomePage
   ],
 
