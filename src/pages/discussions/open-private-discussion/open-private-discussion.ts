@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Platform, NavController, NavParams } from 'ionic-angular';
 // import { FormBuilder,  Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
@@ -26,7 +26,7 @@ export class OpenPrivateDiscussionPage {
     statusSubscription;
     buttonClicked = true;
     tbottom = '';
-    constructor(public af: AngularFire, public ele: ElementRef, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService, private nativeAudio: NativeAudio) {
+    constructor(public platform: Platform, public af: AngularFire, public ele: ElementRef, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService, private nativeAudio: NativeAudio) {
         this.af.auth.subscribe(auth => {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(usr => {
@@ -64,6 +64,15 @@ export class OpenPrivateDiscussionPage {
                         });
                 }
             });
+        });
+        this.platform.pause.subscribe(() => {
+            this.discussion.typings = this.discussion.typings.replace(', ' + this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '');
+            this.fs.updatePrivateDiscussion(this.discussion.$key, this.discussion.typings)
+                .then(res => {
+                    //
+                })
+                .catch(err => {
+                });
         });
     }
     ionViewDidLeave() {

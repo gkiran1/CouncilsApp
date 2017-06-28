@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { Platform, NavController, NavParams, ModalController } from 'ionic-angular';
 // import { FormBuilder,  Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
@@ -30,7 +30,7 @@ export class OpenCouncilDiscussionPage {
     tagsSet = new Set();
     buttonClicked = true;
     tbottom = '';
-    constructor(public af: AngularFire, public ele: ElementRef, public modalCtrl: ModalController, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService, private nativeAudio: NativeAudio) {
+    constructor(public platform: Platform, public af: AngularFire, public ele: ElementRef, public modalCtrl: ModalController, public navparams: NavParams, public nav: NavController, public as: AppService, public fs: FirebaseService, private nativeAudio: NativeAudio) {
         // as.getUser().subscribe(user => this.user = user);
         this.af.auth.subscribe(auth => {
             if (auth !== null) {
@@ -60,6 +60,15 @@ export class OpenCouncilDiscussionPage {
     ionViewDidEnter() {
         this.content.scrollToBottom();
         this.tbottom = this.ele.nativeElement.querySelector('ion-footer').offsetHeight + 'px';
+        this.platform.pause.subscribe(() => {
+            this.discussion.typings = this.discussion.typings.replace(', ' + this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '');
+            this.fs.updatePrivateDiscussion(this.discussion.$key, this.discussion.typings)
+                .then(res => {
+                    //
+                })
+                .catch(err => {
+                });
+        });
     }
     send() {
         if (this.msg) {
