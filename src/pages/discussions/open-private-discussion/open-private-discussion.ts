@@ -52,6 +52,9 @@ export class OpenPrivateDiscussionPage {
         this.nav.popToRoot({ animate: true, animation: 'transition', direction: 'back' });
     }
     ionViewDidEnter() {
+        let style = window.getComputedStyle(this.ele.nativeElement.querySelector('.scroll-content'))
+        let newBottom = (Number.parseFloat(style.getPropertyValue('margin-bottom').replace(/px/, '')) + 12) + 'px';
+        this.ele.nativeElement.querySelector('.scroll-content').style.marginBottom = newBottom;
         this.content.scrollToBottom();
         this.tbottom = this.ele.nativeElement.querySelector('ion-footer').offsetHeight + 'px';
         this.statusSubscription = this.fs.getPrivateDiscussionByKey(this.navparams.get('discussion')).subscribe(discussion => {
