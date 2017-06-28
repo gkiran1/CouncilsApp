@@ -31,6 +31,7 @@ open-council-discussion-page {
         background: #fff;
         width: 100%;
         margin: 0;
+        padding-left: 16px;
         //  bottom: 11%;
     }
     .msg-sendername{
@@ -116,4 +117,7 @@ open-council-discussion-page {
     ion-footer ion-textarea{
         padding-left: 16px !important;
     }
+    .scroll-content{
+       margin-bottom: 83px !important;
+   }
 }

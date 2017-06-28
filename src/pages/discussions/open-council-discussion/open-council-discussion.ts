@@ -62,7 +62,7 @@ export class OpenCouncilDiscussionPage {
         this.tbottom = this.ele.nativeElement.querySelector('ion-footer').offsetHeight + 'px';
         this.platform.pause.subscribe(() => {
             this.discussion.typings = this.discussion.typings.replace(', ' + this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '');
-            this.fs.updatePrivateDiscussion(this.discussion.$key, this.discussion.typings)
+            this.fs.updateDiscussion(this.discussion.$key, this.discussion.typings)
                 .then(res => {
                     //
                 })
