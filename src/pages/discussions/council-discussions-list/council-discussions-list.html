@@ -20,7 +20,7 @@
     <ion-item-group>
         <ng-container *ngIf="discussions.length">
             <ion-item-divider></ion-item-divider>
-            <ion-item (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
+            <ion-item class="ion-item-middle" (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
                 <h3 class="topic">{{item.topic}}</h3><span class="right-align"><ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon></span>
                 <p>{{item.lastMsg}}</p>
                 <span> {{item.councilname}}</span><span class="right-align">{{item.createdDate | customdateformat}}</span>
