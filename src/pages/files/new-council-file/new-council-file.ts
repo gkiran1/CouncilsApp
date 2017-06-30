@@ -357,11 +357,11 @@ export class NewCouncilFilePage {
 
           reader.onloadend = (evt: any) => {
             var imgBlob = new Blob([evt.target.result]);
-            alert(imgBlob);
-            alert(imgBlob.size);
+            //alert(imgBlob);
+            //alert(imgBlob.size);
             var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
             var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
-            alert(filetype)
+            //alert(filetype)
             var mimeType;
             switch (filetype) {
               case 'PNG':
