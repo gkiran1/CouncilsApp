@@ -38,17 +38,19 @@ export class FilesListPage {
                     console.log(this.user);
                     af.database.list('/files').subscribe(files => {
                         this.filesArray = [];
+                        let count = 0;
                         this.user.councils.forEach(council => {
                             let f;
                             files.forEach(file => {
                                 if (council === file.councilid) {
                                     f = file;
+                                    count++;
                                 }
                             });
                             if (f) this.filesArray.push(f);
                         });
 
-                        let count = files? files.length : 0;
+
                         count = count ? count : null;
                         this.count$.next(count);
 
@@ -60,7 +62,7 @@ export class FilesListPage {
                 });
             }
         });
-        fs.getNotCnt().subscribe(count => {           
+        fs.getNotCnt().subscribe(count => {
             this.notificationsCount = count;
         });
     }
