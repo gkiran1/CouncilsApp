@@ -1,7 +1,7 @@
 import {Directive, ElementRef, Renderer, AfterViewInit} from "@angular/core";
 
 @Directive({
-  selector: '[maxlength]'
+  selector: '[maxlength25]'
 })
 
 export class MaxLengthDirective implements AfterViewInit {

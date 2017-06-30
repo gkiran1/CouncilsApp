@@ -88,6 +88,9 @@ import { Badge } from '@ionic-native/badge';
 import { SpellCheckDirective } from '../directives/spellcheck.directive';
 import { MaxLengthDirective } from '../directives/maxlength.directive';
 import { WelcomePage } from '../pages/welcome/welcome.component';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FilePath } from '@ionic-native/file-path';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 
 //Directives
@@ -272,6 +275,6 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     WelcomePage
   ],
 
-  providers: [AuthService, AppService, FirebaseService, NativeAudio, Badge]
+  providers: [AuthService, AppService, FirebaseService, NativeAudio, Badge, FileChooser, AndroidPermissions, FilePath]
 })
 export class AppModule { }
