@@ -48,7 +48,7 @@ export class FilesListPage {
                             if (f) this.filesArray.push(f);
                         });
 
-                        let count = this.filesArray.length;
+                        let count = files? files.length : 0;
                         count = count ? count : null;
                         this.count$.next(count);
 
