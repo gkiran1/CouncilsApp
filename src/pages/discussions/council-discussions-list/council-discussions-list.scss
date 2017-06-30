@@ -5,7 +5,7 @@ council-discussions-list-page{
         margin-right:10px;
     }
     .item-md,.item-ios,.item-wp{
-        padding-right:16px;
+        // padding-right:16px;
         position: relative;
     }
     .topic{
@@ -27,5 +27,16 @@ council-discussions-list-page{
         font-family: 'Bernina-Regular', sans-serif;
         font-size: 13px;
         color: #a9aaac;
-    }    
+    }  
+    ion-content{
+         background-color: #f7f7f7 !important;
+    }  
+    .ion-item-middle.item-ios.item-block:last-child .item-inner,
+    .ion-item-middle.item-md.item-block:last-child .item-inner{
+        border-bottom: none !important;
+    }
+    ion-item:last-child{
+         border-bottom:1px solid #E8E9EB !important;
+    }
+    
 }
