@@ -91,6 +91,7 @@ import { WelcomePage } from '../pages/welcome/welcome.component';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { DisplayFirstPage } from '../pages/display-first/display-first';
 
 
 //Directives
@@ -194,7 +195,8 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     ValidateOnBlurDirective,
     SpellCheckDirective,
     MaxLengthDirective,
-    WelcomePage
+    WelcomePage,
+    DisplayFirstPage
   ],
 
   imports: [
@@ -272,7 +274,8 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     ForgotPwd,
     ForgotPwdSuccess,
     NewMenuPage,
-    WelcomePage
+    WelcomePage,
+    DisplayFirstPage
   ],
 
   providers: [AuthService, AppService, FirebaseService, NativeAudio, Badge, FileChooser, AndroidPermissions, FilePath]

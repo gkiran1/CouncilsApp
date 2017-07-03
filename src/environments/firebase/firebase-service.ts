@@ -83,7 +83,8 @@ export class FirebaseService {
                 isactive: user.isactive,
                 guestpicture: user.avatar,
                 isnotificationreq: false,
-                googlecalendaradded: false
+                googlecalendaradded: false,
+                isfirstlogin:true
             }).then(() => user.councils.forEach(counc => {
                 this.createUserCouncils(uid, counc);
             }));
@@ -1076,6 +1077,13 @@ export class FirebaseService {
         return firebase.auth().sendPasswordResetEmail(email).then(() => {
             console.log('Mail Sent');
         }).catch((err) => {
+            throw err;
+        });
+    }
+     updateLoginInfo(userUid) {
+        return this.rootRef.child('users/' + userUid).update({ isfirstlogin: false }).then(() => {
+            console.log('updated Login info');
+        }).catch(err => {
             throw err;
         });
     }

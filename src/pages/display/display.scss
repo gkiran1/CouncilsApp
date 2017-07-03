@@ -15,7 +15,7 @@ page-display {
         text-align: center;
     }
     .image {
-        margin-top: 21%;
+        margin-top: 30%;
     }
     .content {
         text-align: center;
@@ -27,14 +27,26 @@ page-display {
         font-family: Bernina-Regular;
     }
     .least {
-        font-size: 17px;
-        color: #35373a;
-        font-family: Bernina-Regular;
-    }
-    .matt {
         font-size: 13px;
         color: #a9aaac;
         font-family: Bernina-Regular;
+    }
+    .matt {
+        font-size: 10px;
+        color: #a9aaac;
+        font-family: Bernina-Regular;
        margin-top: -22px;
+    }
+    .least ion-label{
+        margin:0 0 16px 0;
+    }
+    .img-title{
+        margin: 0;
+        margin-top: 4px;
+        margin-left: 96px;
+        font-size: 7px;
+        color: #a9aaac;
+        width: 100%;
+       
     }   
 }

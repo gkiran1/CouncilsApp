@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons class="menu-button" left>
+      <button ion-button menuToggle>
+      <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" id="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title>Welcome</ion-title>
+    <ion-buttons class="menu-button" end>
+      <button ion-button (click)="notificationsPage()">
+     <ion-icon class="icon councils-icon__notifications menu-icon">
+         <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
+      </ion-icon> 
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div>
+    <ion-label center class="welcome-label">Welcome<br> to Councils!</ion-label>
+    <ion-label center class="intro-text">click on the menu to start creating<br> agendas, discussion or assignments.</ion-label>
+  </div>
+</ion-content>

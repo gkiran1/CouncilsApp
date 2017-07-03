@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav } from 'ionic-angular';
 import { DisplayPage } from '../display/display';
+import { DisplayFirstPage } from '../display-first/display-first';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Subscription } from "rxjs";
@@ -19,7 +20,7 @@ import { ActiveCouncilsPage } from '../activecouncils/activecouncils';
 export class MenuPage {
   @ViewChild('switcher') switcher: Slides;
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = DisplayPage;
+  rootPage: any;
   userObj: FirebaseObjectObservable<any>;
   userSubscription: Subscription;
   rootRef;
@@ -48,6 +49,12 @@ export class MenuPage {
 
         this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
           this.userObj = usrs[0];
+          if (usrs[0].isfirstlogin) {
+            this.rootPage = DisplayFirstPage;
+            this.firebaseService.updateLoginInfo(auth.uid);
+          } else {
+            this.rootPage = DisplayPage;
+          }
           localStorage.setItem('unitType', usrs[0].unittype);
           localStorage.setItem('unitNumber', usrs[0].unitnumber.toString());
           localStorage.setItem('userCouncils', usrs[0].councils.toString());
@@ -92,6 +99,6 @@ export class MenuPage {
     setTimeout(() => {
       this.switcher.update();
       this.switcher.slideTo(this.switcher.getActiveIndex(), 0);
-    },300);
+    }, 300);
   }
 }
