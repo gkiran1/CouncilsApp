@@ -26,8 +26,12 @@ page-display-first{
         color:#35373a;
     }
     ion-content div{
-        position: relative;
+        position: absolute;
         top:30%;
+        width: 100%;
+    }
+    ion-label{
+        margin-right: 0 !important;
     }
  
 }
