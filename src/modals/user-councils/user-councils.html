@@ -4,7 +4,7 @@
 <ion-content>
   <!--<ion-searchbar (ionInput)="searchFn($event)" *ngIf="fromPage" class="font1" placeholder="For which council is this assignment?"></ion-searchbar>
   <ion-searchbar (ionInput)="searchFn($event)" *ngIf="!fromPage" class="font1" placeholder="Which council will see this agenda?"></ion-searchbar>-->
-  <ion-list radio-group>
+  <ion-list radio-group class="ionlist">
 
     <ion-item *ngIf="(areaCouncils.length)" class="unittype">Area</ion-item>
     <ion-item [ngClass]="areaCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === areaCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))"

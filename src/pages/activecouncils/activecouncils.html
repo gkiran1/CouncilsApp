@@ -19,7 +19,7 @@
 
   <ng-container *ngIf="user.councils.length">
     <ion-item-divider class="divider"></ion-item-divider>
-    <ion-list>
+    <ion-list class='ionlist'>
       <!--<ion-item [ngClass]="i===0?'ion-item-first':(i===myCouncils.length - 1? 'ion-item-last': 'ion-item-middle')" (click)="usersincouncils(item.$key,item.council)"
         *ngFor="let item of myCouncils; let i = index" [attr.data-index]="i">
         <ion-label class="council-styles">{{item.council}}</ion-label>

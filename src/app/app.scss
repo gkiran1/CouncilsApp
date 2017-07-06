@@ -1,1293 +1,1308 @@
- // http://ionicframework.com/docs/v2/theming/
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
-@font-face {
-    font-family: "Gotham-Medium";
-    src: url('../assets/fonts/GOTHMMED.eot');
-    src: url('../assets/fonts/GOTHMMED.eot') format('embedded-opentype'), url('../assets/fonts/GOTHMMED.woff') format('woff'), url('../assets/fonts/GOTHMMED.ttf') format('truetype'), url('../assets/fonts/GOTHMMED.svg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Bernina-Regular";
-    src: url('../assets/fonts/BerninaSans-Regular.eot');
-    src: url('../assets/fonts/BerninaSans-Regular.eot') format('embedded-opentype'), url('../assets/fonts/BerninaSans-Regular.woff') format('woff'), url('../assets/fonts/BerninaSans-Regular.ttf') format('truetype'), url('../assets/fonts/BerninaSans-Regular.svg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Bernina-SemiBold";
-    src: url('../assets/fonts/BerninaSans-Semibold.eot');
-    src: url('../assets/fonts/BerninaSans-Semibold.eot') format('embedded-opentype'), url('../assets/fonts/BerninaSans-Semibold.woff') format('woff'), url('../assets/fonts/BerninaSans-Semibold.ttf') format('truetype'), url('../assets/fonts/BerninaSans-Semibold.svg') format('svg');
-    font-weight: 600;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Bernina-Bold";
-    src: url('../assets/fonts/BerninaSans-Semibold.eot');
-    src: url('../assets/fonts/BerninaSans-Semibold.eot') format('embedded-opentype'), url('../assets/fonts/BerninaSans-Semibold.woff') format('woff'), url('../assets/fonts/BerninaSans-Semibold.ttf') format('truetype'), url('../assets/fonts/BerninaSans-Semibold.svg') format('svg');
-    font-weight: 700;
-    font-style: normal;
-}
-
-/************************************ Icons **************************************/
-
-@font-face {
-  font-family: 'councils-icons';
-  src:  url('../assets/fonts/councils-icons.eot?1p3suo');
-  src:  url('../assets/fonts/councils-icons.eot?1p3suo#iefix') format('embedded-opentype'),
-    url('../assets/fonts/councils-icons.ttf?1p3suo') format('truetype'),
-    url('../assets/fonts/councils-icons.woff?1p3suo') format('woff'),
-    url('../assets/fonts/councils-icons.svg?1p3suo#councils-icons') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-.icon {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'councils-icons' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.councils-icon__comment:before {
-  content: "\e914";
-}
-
-.councils-icon__list_checkmark:before {
-  content: "\e915";
-}
-
-.councils-icon__arrow_collapse:before {
-  content: "\e916";
-}
-.councils-icon__arrow_expand:before {
-  content: "\e917";
-}
-
-.councils-icon__add:before {
-  content: "\e900";
-}
-.councils-icon__admin:before {
-  content: "\e901";
-}
-.councils-icon__agenda:before {
-  content: "\e902";
-}
-.councils-icon__back:before {
-  content: "\e903";
-}
-.councils-icon__chevron_right:before {
-  content: "\e904";
-}
-.councils-icon__close:before {
-  content: "\e905";
-}
-.councils-icon__donations:before {
-  content: "\e906";
-}
-.councils-icon__file:before {
-  content: "\e907";
-}
-.councils-icon__inactivate:before {
-  content: "\e908";
-}
-.councils-icon__left_menu:before {
-  content: "\e909";
-}
-.councils-icon__notifications:before {
-  content: "\e90a";
-}
-.councils-icon__photo:before {
-  content: "\e90b";
-}
-.councils-icon__radio_1:before {
-  content: "\e90c";
-}
-.councils-icon__radio_2:before {
-  content: "\e90d";
-}
-.councils-icon__reactivate:before {
-  content: "\e90e";
-}
-.councils-icon__search:before {
-  content: "\e90f";
-}
-.councils-icon__settings:before {
-  content: "\e910";
-}
-.councils-icon__share:before {
-  content: "\e911";
-}
-.councils-icon__checkmark:before {
-  content: "\e912";
-}
-.councils-icon__double_checkmark:before {
-  content: "\e913";
-}
-/*************************************************************************************/
-
-html {
-    font-size: 62.5%;
-    /* [1] */
-}
-
-@function parseInt($n) {
-    /* [2] */
-    @return $n / ($n * 0+1);
-}
-
-@mixin rem($property,
-$values) {
-    $px: ();
-    /* [3] */
-    $rem: ();
-    /* [3] */
-    @each $value in $values {
-        /* [4] */
-        @if $value==0 or $value==auto {
-            /* [5] */
-            $px: append($px, $value);
-            $rem: append($rem, $value);
-        }
-        @else {
-            $unit: unit($value);
-            /* [6] */
-            $val: parseInt($value);
-            /* [6] */
-            @if $unit=="px" {
-                /* [7] */
-                $px: append($px, $value);
-                $rem: append($rem, ($val / 10 * 1rem));
-            }
-            @if $unit=="rem" {
-                /* [7] */
-                $px: append($px, ($val * 10 * 1px));
-                $rem: append($rem, $value);
-            }
-        }
-    }
-    #{$property}: $px;
-    /* [8] */
-    #{$property}: $rem;
-    /* [8] */
-}
-
-body {
-    @include rem(font-size,
-    1.6rem);
-    font-family: Bernina-Regular, sans-serif;
-}
-
-input,
-textarea {
-    font-family: 'Bernina-Regular', sans-serif !important;
-    font-size: 1.7rem !important;
-}
-
-.toolbar-ios, .toolbar-md {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 0;
-    margin-right:0;
-}
-
-.toolbar-title {
-    overflow: visible !important;
-}
-
-.toolbar-title-md,
-.toolbar-title-ios {
-    font-family: "Bernina-Bold", sans-serif;
-    font-size: 1.7rem !important;
-    color: #35373A !important;
-}
-
-.title-ios {
-    padding: 25px 40px 1px !important;
-}
-
-.nocontent-message {
-    display: table;
-    height: 100%;
-    width: 100%;
-    background: #fafafa;
-    padding: -16px;
-}
-
-.nocontent-message p {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    vertical-align: center;
-    font-family: Bernina-Regular !important;
-    font-size: 1.7rem !important;
-    color: #a9aaac;
-    width: 100%;
-}
-
-.header-md,
-.header-ios {
-    display: block;
-    text-align: center;
-    background: #FFFFFF;
-    border-bottom: 1px solid #dcd9d8 !important;
-}
-
-h1 {
-    font-family: Gotham-Medium, sans-serif;
-    font-size: 2.8rem !important;
-    color: #35373a !important;
-}
-
-.row2 {
-    font-family: Gotham-Medium;
-    font-size: 2.8rem;
-    color: #35373a !important;
-}
-
-.row4 {
-    font-family: Bernina-Regular;
-    font-size: 1.7rem;
-    color: #35373a !important;
-}
-
-h3 {
-    font-family: Bernina-Regular, sans-serif;
-    font-size: 1.7rem !important;
-    color: #35373a !important;
-}
-
-.subtitle {
-    font-family: Bernina-Regular, sans-serif;
-    font-size: 1.7rem !important;
-    color: #35373a !important;
-}
-
-.footer-md,
-.footer-ios {
-    background: #FFFFFF;
-    border-top: 1px solid #dcd9d8;
-}
-
-button,
-.button-md,
-.button-ios {
-    font-family: "Bernina-Regular", sans-serif;
-    font-size: 1.7rem;
-    text-transform: capitalize !important;
-    color: #3CB18A;
-}
-
-.content-center {
-    height: 100%;
-    /* Or 100vh */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.status-button-container {
-    display: block;
-    position: relative;
-    padding-top: 12.8rem;
-    margin: auto;
-}
-
-p {
-    font-family: Bernina-Regular, sans-serif;
-}
-
-.cancel-font {
-    font-size: 2.4rem;
-}
-
-.ion-md-close {
-    font-size: 2.4rem;
-    position: absolute;
-    top: 1.5rem;
-}
-
-ion-header ion-col {
-    padding: 0;
-}
-
-.header-col {
-    display: flex !important;
-   align-items: center !important;
-    /* align-items: center; */
-    justify-content: center;
-    min-width: 44px;
-    max-width: 44px;
-    min-height: 44px;
-    max-height: 44px;
-}
-
-.header-left-icon {
-    font-size: 24px;
-}
-
-ion-header ion-col h3 {
-    font-weight: bold;
-    font-family: "Bernina-Bold", sans-serif;
-    font-size: 1.7rem !important;
-    color: #35373A !important;
-}
-
-.picker-opt {
-    text-overflow: initial !important;
-}
-
-.picker-md .picker-toolbar-cancel {
-    flex: 1 !important;
-}
-
-.picker-md .picker-button,
-.picker-md .picker-button.activated {
-    color: #3CB18A!important;
-}
-
-.picker-ios .picker-button,
-.picker-ios .picker-button.activated {
-    color: #3CB18A!important;
-}
-
-.picker-md .picker-prefix,
-.picker-md .picker-suffix,
-.picker-md .picker-opt.picker-opt-selected {
-    color: #3CB18A!important;
-}
-
-.label-ios[floating],
-.label-md[floating] {
-    transform: translate3d(0, 12px, 0) !important;
-}
-
-.input-has-focus .label-md[floating],
-.input-has-value .label-md[floating] {
-    color: #3CB18A;
-    transform: translate3d(0, 3px, 0) scale(0.8) !important;
-}
-
-.input-has-focus .label-ios[floating],
-.input-has-value .label-ios[floating] {
-    color: #3CB18A;
-    transform: translate3d(0, 3px, 0) scale(0.8) !important;
-
-}
-
-.text-input-md,
-.text-input-ios {
-    margin-top:0 !important;
-}
-
-.picker-ios .picker-opt{
-    font-size: 15px !important;
-}
-.picker-md .picker-opt{
-    font-size: 17px !important;
-}
-
-.scroll-content {
-    overflow-y: auto !important;
-    padding-bottom: 0!important;
-}
-
-ion-app, ion-nav, ion-tab, ion-tabs, .app-root{
-  -webkit-transition: bottom 0.3s;
-  transition: bottom 0.3s;
-}
-
-button:disabled {
-    color: #222;
-}
-
-.item-divider-ios,
-.item-divider-md,
-.item-divider-wp {
-    color: #35373A;
-    background-color: #f7f7f7
-}
-
-.header-md::after,
-.tabs-md[tabsPlacement="top"]>.tabbar::after,
-.footer-md::before,
-.tabs-md[tabsPlacement="bottom"]>.tabbar::before {
-    background-image: none;
-}
-
-.footer-md::before,
-.tabs-md[tabsPlacement="bottom"]>.tabbar::before {
-    top: 0px;
-    bottom: 0px;
-    height: 0px;
-    background-position: 0 0;
-}
-
-.header-ios::after,
-.tabs-ios[tabsPlacement="top"]>.tabbar::after,
-.footer-ios::before,
-.tabs-ios[tabsPlacement="bottom"]>.tabbar::before {
-    background-image: none;
-}
-
-.footer-ios::before,
-.tabs-ios[tabsPlacement="bottom"]>.tabbar::before {
-    top: 0px;
-    bottom: 0px;
-    height: 0px;
-    background-position: 0 0;
-}
-
-.toolbar-background {
-    background: #FFFFFF !important;
-}
-
-.slide-zoom {
-    height: 100% !important;
-}
-
-.empty {
-    height: 28px;
-    background-color: #fafafa !important;
-    border-top: 1px solid #e8e9eb !important;
-    border-bottom: 1px solid #e8e9eb !important;
-}
-
-.list-title-divider {
-    height: 42px;
-    background-color: #fafafa !important;
-    border: none !important;
-    color: #a9aaac;
-    padding-top:10px;
-    font-size:17px !important; 
-}
-
-.empty-light {
-    height: 20px;
-    background-color: #fafafa !important;
-    border: none !important;
-}
-
-ion-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-ion-content .page-blank-area {
-    align-items: stretch;
-}
-
-.page-blank-area {
-    flex: 1;
-    background-color: #fafafa !important;
-    height: 100%;
-}
-
-.item-inner {
-    font-family: Bernina-Regular !important;
-}
-
-.bordered-item.item-ios.item-block .item-inner,
-.bordered-item.item-md.item-block .item-inner {
-    border-bottom: 1px solid #e8e9eb !important;
-}
-
-.item-noborder.div {
-    border: none !important;
-}
-
-.menu-button {
-        margin: 0 !important;
-        padding: 0 !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-    }
-
-    .menu-icon {
-        color: #32b38a;
-        font-size: 24px !important;
-    }
-
-    .bar-button-menutoggle-md {
-        margin:0 !important;
-        padding: 0 !important;
-    }
-
-    .bar-button-menutoggle-md ion-icon {
-        padding-left: 10px !important;
-    }
-
-
-/****************************** Action Sheet Styles **********************************/
-
-.action-sheet-ios .action-sheet-button {
-    height: 4.1rem !important;
-    min-height: 4.1rem !important;
-    font-size: 1.7rem !important;
-    border-radius: 0;
-}
-
-.action-sheet-md .action-sheet-button {
-    height: 4.1rem !important;
-    min-height: 4.1rem !important;
-    font-family: Bernina-Regular;
-    font-size: 1.7rem !important;
-    border-radius: 0;
-    text-align: center;
-    border-bottom: 1px solid #d6d6da;
-}
-
-.action-sheet-ios .action-sheet-title {
-    font-family: Bernina-SemiBold !important;
-    font-size: 13px !important;
-    color: #35373A !important;
-    height: 3.2rem !important;
-    padding-top: 17px !important;
-    display: flex;
-    text-align: center !important;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    border-radius: 0;
-}
-
-.action-sheet-md .action-sheet-title {
-    font-family: Bernina-SemiBold !important;
-    font-size: 13px !important;
-    color: #35373A !important;
-    height: 3.2rem !important;
-    padding-top: 17px !important;    
-    display: flex;
-    text-align: center !important;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    border-radius: 0;
-    border-bottom: 1px solid #d6d6da;
-}
-
-.action-sheet-container {
-    padding: 0 !important;
-    border-radius: 0;
-    background: rgba(256, 256, 256, .9) !important;
-    opacity: .9;
-    margin-bottom: 0;
-}
-
-.action-sheet-group {
-    background: rgba(256, 256, 256, .9) !important;
-    opacity: .9;
-    border-radius: 0;
-    margin-bottom: 0;
-}
-
-.action-sheet-ios .action-sheet-group {
-    border-radius: 0;
-}
-
-.action-sheet-ios .action-sheet-group:last-child {
-    margin-bottom: 0;
-}
-
-.action-sheet-ios .action-sheet-group .button-inner {
-    -webkit-justify-content: center !important;
-    -ms-flex-pack: center !important;
-    justify-content: center !important;
-    border-radius: 0 !important;
-    margin-bottom: 0;
-    background: rgba(256, 256, 256, .9);
-}
-
-.action-sheet-md .action-sheet-group .button-inner {
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: center;
-}
-
-.action-sheet-md .action-sheet-title {
-    text-align: center !important;
-    font-size: 13px !important;
-    border-radius: 0;
-}
-
-.actionsheet-items {
-    color: #3cb18a !important;
-    font-family: Bernina-Regular !important;
-    font-size: 17rpx !important;
-    background: rgba(256, 256, 256, .9);
-    border-radius: 0;
-}
-
-.actionsheet-cancel {
-    color: #35373A !important;
-    font-family: Bernina-Regular !important;
-    font-size: 17px !important;
-}
-
-.item-radio-checked {
-    background: #f4f6fa;
-}
-
-
-/*************************** End - AcionSheet Styles ******************************/
-
-// uncomment below media query if you need to grayout the modal backdrop.
-@media not all and (min-height: 600px) and (min-width: 768px) {
-    ion-modal ion-backdrop {
-        visibility: visible;
-        opacity: 0 !important;
-    }
-}
-
-.modal-wrapper {
-    position: absolute;
-    width: 100%;
-    height: 40%;
-    top: 50%;
-}
-
-ion-avatar img,
-ion-thumbnail img {
-    display: block;
-    width: 48px !important;
-    height: 48px !important;
-    border-radius: 50% !important;
-}
-
-ion-avatar {
-    background: #F4F6FA;
-    width: 48px !important;
-    height: 48px !important;
-    border-radius: 50% !important;
-}
-
-.fwd-arrow-grey {
-    color: #cbd1cf !important;
-    font-size: 13px !important;
-     
-}
-
-.cancel-button {
-    font-size: 24px !important;
-}
-
-.item-checkbox-checked {
-    background: #f4f6fa;
-        
-    }
-
-
-.item-md{
-        border-bottom: 1px solid #E8E9EB;
-    }
-     .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
-    border-bottom-color: #E8E9EB !important;
-    box-shadow: none !important;
-}
-.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
-    border-bottom-color: none !important;
-    box-shadow: none !important;
-}
-.item-md.item-block .item-inner {
-    padding-right: 8px;
-    border-bottom: none !important;
-}
-    .item-ios{
-        border-bottom: 1px solid #E8E9EB;
-    }
-    .item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
-    border-bottom-color: #E8E9EB !important;
-    box-shadow: none !important;
-}
-.item-ios.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
-    border-bottom-color: none !important;
-    box-shadow: none !important;
-}
-.item-md.item-input.input-has-focus .item-inner {
-        border-bottom-color: #DEDEDE !important;
-        box-shadow: none !important;
-    }
-    .item-md.item-input.input-has-focus .item-inner {
-        border-bottom-color: #DEDEDE !important;
-        box-shadow: none !important;
-    }
-    .list-md .item-input.input-has-focus:last-child {
-        border-bottom-color: #DEDEDE !important;
-        box-shadow: none !important;
-    }
-    .list-md .item-input.input-has-focus:last-child .item-inner {
-        box-shadow: none;
-    }
-    .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
-        border-bottom-color: #DEDEDE !important;
-        box-shadow: none !important;
-    }
-    .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child {
-        border-bottom-color: #DEDEDE !important;
-        box-shadow: none !important;
-    }
-    .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child .item-inner {
-        box-shadow: none;
-    }
-    .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
-        border-bottom-color: #DEDEDE !important;
-        box-shadow: none !important;
-    }
-    .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child {
-        border-bottom-color: #DEDEDE !important;
-        box-shadow: none !important;
-    }
-    .item-md.item-block .item-inner,
-    .item-ios.item-block .item-inner,
-    .item-ios.item-block .item-inner {
-        border-bottom: none !important;
-    }
-    
-.item-ios.item-block .item-inner {
-    padding-right: 8px;
-    border-bottom: none !important;
-}
-
-
-.input-item {
-    border: none !important;
-}
-
-.input-item .item-inner {
-    padding-right: 16px !important;
-}
-
-.input-item .item-inner .input-wrapper {
-    border-bottom: 1px solid #e8e9eb;
-}
-.iconinput-item {
-    border: none !important;
-}
-.iconinput-item .item-inner {
-    border-bottom: 1px solid #e8e9eb !important;
-}
-// .iconinput-item .item-inner .item-wrapper {
-//     border-bottom: none;
-// }
-
-
-ion-badge, .badge-md {
-    border-radius:50%;
-    padding:3px;
-    width: 15px;
-    height: 15px;
-    font-family: Bernina-Regular;
-}
-
-    .notification-badge {
-        position:absolute; 
-        font-weight: bold; 
-        top:2px; 
-        left:15px; 
-        font-size:9px
-    }
-    ion-title{
-        height:100%;
-        text-align: center;
-    }
-
-    .datetime-ios, .datetime-md{
-        padding-top:3px !important;
-    }
-    
-
-    /***************************** List Page Styles **********************************************/
-
-     .list-page .scroll-content {
-        background: #fafafa;
-        padding-top: 28px !important;
-    }
-
-    
-
-
-    .list-page ion-item {
-        height: 48px;
-        
-    }
-
-    .list-page .ion-idv-item {
-         border-top: 1px solid #e8e9eb !important;
-        border-bottom: 1px solid #e8e9eb !important;
-    }
-
-    
-
-
-    .ion-item-first {
-        border-top:1px solid #e8e9eb !important;
-        border-bottom: none !important;
-    }
-    
-    .ion-item-middle {
-        border: none  !important;
-    }
-
-    .ion-item-last {
-        border-bottom: 1px solid #e8e9eb !important;
-        border-top: none !important;
-    }    
-
-    .ion-item-first.item-md.item-block .item-inner,
-    .ion-item-first.item-ios.item-block .item-inner {
-        border-bottom: 1px solid #e8e9eb  !important;
-    }
-
-    .ion-item-middle.item-md.item-block .item-inner,
-    .ion-item-middle.item-ios.item-block .item-inner {
-        border-bottom: 1px solid #e8e9eb  !important;
-    }
-
-    .ion-item-last .item-inner {
-        border: none !important;
-    }
-
-    .empty {
-        border:none !important;
-        height: 28px;
-    }
-
-    
-    
-
-    .label-styles {
-        font-family: Bernina-Regular !important;
-        font-size: 17px !important;
-        color: #35373a !important;
-    }
-
-.header-col2{
-    display: flex !important;
-align-items: center !important;
-}
-    
-.login-button-container .spinner svg {
-    width: 42px !important;
-    height: 42px !important;
-    margin-top: 30px !important;
-}
-
-    
-.input-cover {
-    position: static !important;
-}
-
-/************************ Form-Page Styles ************************************************/
-
-.form-page ion-item {
-        border-top: none !important;
-        border-bottom: 1px solid #e8e9eb !important;
-    }
-
-    ion-item.form-item-first {
-        border-top: 1px solid #e8e9eb !important;
-        border-bottom: 1px solid #e8e9eb !important;
-    }
-
-    ion-item.form-item-first .item-inner {
-        border: none !important;
-    }
-
-
+// http://ionicframework.com/docs/v2/theming/
+ // App Global Sass
+ // --------------------------------------------------
+ // Put style rules here that you want to apply globally. These
+ // styles are for the entire app and not just one component.
+ // Additionally, this file can be also used as an entry point
+ // to import other Sass files to be included in the output CSS.
+ //
+ // Shared Sass variables, which can be used to adjust Ionic's
+ // default Sass variables, belong in "theme/variables.scss".
+ //
+ // To declare rules for a specific mode, create a child rule
+ // for the .md, .ios, or .wp mode classes. The mode class is
+ // automatically applied to the <body> element in the app.
+ @font-face {
+     font-family: "Gotham-Medium";
+     src: url('../assets/fonts/GOTHMMED.eot');
+     src: url('../assets/fonts/GOTHMMED.eot') format('embedded-opentype'), url('../assets/fonts/GOTHMMED.woff') format('woff'), url('../assets/fonts/GOTHMMED.ttf') format('truetype'), url('../assets/fonts/GOTHMMED.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+ }
  
-ion-content ion-item ion-label{
-    color:#a9aaad;
-}
-ion-list ion-item{
-    border-bottom-color: #f4f4f4;
-}
-
-
-/************************** Custom Radio & Checkbox ********************************************/
-
-
-/****************** Custom Radio ******************************/
-.item-ios .radio-ios,
-.item-md .radio-md{
-margin: 5px 10px 9px 0;
-}
-
-
-.radio-md .radio-icon, .radio-ios .radio-icon {
-    position: relative;
-    display: block;    
-    border: none;
-}
-
-.radio-md .radio-inner {
-    width:0;
-}
-
-.radio-md .radio-checked .radio-inner:after, 
-.radio-ios .radio-checked .radio-inner {
-
-    display:inline-block;
-    content: '';    
+ @font-face {
+     font-family: "Bernina-Regular";
+     src: url('../assets/fonts/BerninaSans-Regular.eot');
+     src: url('../assets/fonts/BerninaSans-Regular.eot') format('embedded-opentype'), url('../assets/fonts/BerninaSans-Regular.woff') format('woff'), url('../assets/fonts/BerninaSans-Regular.ttf') format('truetype'), url('../assets/fonts/BerninaSans-Regular.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+ }
  
-    /*Make it a small rectangle so the border will create an L-shape*/
-    width: 8px;
-    height: 15px;
+ @font-face {
+     font-family: "Bernina-SemiBold";
+     src: url('../assets/fonts/BerninaSans-Semibold.eot');
+     src: url('../assets/fonts/BerninaSans-Semibold.eot') format('embedded-opentype'), url('../assets/fonts/BerninaSans-Semibold.woff') format('woff'), url('../assets/fonts/BerninaSans-Semibold.ttf') format('truetype'), url('../assets/fonts/BerninaSans-Semibold.svg') format('svg');
+     font-weight: 600;
+     font-style: normal;
+ }
  
-    /*Add a white border on the bottom and left, creating that 'L' */
-    border: solid #3CB18A;
-    border-width: 0 2px 2px 0;
-    border-radius: 3px 1px;
-    /*Rotate the L 45 degrees to turn it into a checkmark*/
-    transform: rotate(45deg);
-  
-}
-
-.radio-ios .radio-inner,
-.radio-md .radio-inner {
-    top: 0px !important
-}
-
-/******************** Custom Checkbox ****************************/
-
-.checkbox-ios .checkbox-checked .checkbox-inner,
-.checkbox-md .checkbox-checked .checkbox-inner  {
-    display: inline-block;
-    content: '';
-    width: 8px;
-    height: 15px;
-    border: solid #3CB18A;
-    border-width: 0 2px 2px 0;
-    border-radius: 3px 1px;
-    transform: rotate(45deg);
-}
-
-.checkbox-ios .checkbox-checked,
-.checkbox-md .checkbox-checked {
-    background: transparent;
-}
-
-.checkbox-ios .checkbox-checked {
-    border: none !important;
-    border-radius: none !important;
-}
-
-.checkbox-ios .checkbox-icon,
-.checkbox-md .checkbox-icon {
-    height: 24px;
-    width: 24px;
-    border: none;
-}
-
-/******************** Datetime roller *************************************/
-
-.picker-ios .picker-above-highlight,
-.picker-ios .picker-below-highlight,
-.picker-md .picker-above-highlight,
-.picker-md .picker-below-highlight {
-    display: block !important;
-}
-
-/*************************** Loader **************************************/
-
-
-
-.loading-ios .loading-wrapper,
-.loading-md .loading-wrapper,
-{
-    padding:0 !important;
-    position: absolute !important;
-    top: 0px;
-    left: 0px;
-    display: flex;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-    max-height: none !important;
-    border-radius: 0 !important;
-    
-    opacity: 1;
-    transform: translateZ(0px);
-    background: #fff !important;
+ @font-face {
+     font-family: "Bernina-Bold";
+     src: url('../assets/fonts/BerninaSans-Semibold.eot');
+     src: url('../assets/fonts/BerninaSans-Semibold.eot') format('embedded-opentype'), url('../assets/fonts/BerninaSans-Semibold.woff') format('woff'), url('../assets/fonts/BerninaSans-Semibold.ttf') format('truetype'), url('../assets/fonts/BerninaSans-Semibold.svg') format('svg');
+     font-weight: 700;
+     font-style: normal;
+ }
+ /************************************ Icons **************************************/
+ 
+ @font-face {
+     font-family: 'councils-icons';
+     src: url('../assets/fonts/councils-icons.eot?1p3suo');
+     src: url('../assets/fonts/councils-icons.eot?1p3suo#iefix') format('embedded-opentype'), url('../assets/fonts/councils-icons.ttf?1p3suo') format('truetype'), url('../assets/fonts/councils-icons.woff?1p3suo') format('woff'), url('../assets/fonts/councils-icons.svg?1p3suo#councils-icons') format('svg');
+     font-weight: normal;
+     font-style: normal;
+ }
+ 
+ .icon {
+     /* use !important to prevent issues with browser extensions that change fonts */
+     font-family: 'councils-icons' !important;
+     speak: none;
+     font-style: normal;
+     font-weight: normal;
+     font-variant: normal;
+     text-transform: none;
+     line-height: 1;
+     /* Better Font Rendering =========== */
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+ }
+ 
+ .councils-icon__comment:before {
+     content: "\e914";
+ }
+ 
+ .councils-icon__list_checkmark:before {
+     content: "\e915";
+ }
+ 
+ .councils-icon__arrow_collapse:before {
+     content: "\e916";
+ }
+ 
+ .councils-icon__arrow_expand:before {
+     content: "\e917";
+ }
+ 
+ .councils-icon__add:before {
+     content: "\e900";
+ }
+ 
+ .councils-icon__admin:before {
+     content: "\e901";
+ }
+ 
+ .councils-icon__agenda:before {
+     content: "\e902";
+ }
+ 
+ .councils-icon__back:before {
+     content: "\e903";
+ }
+ 
+ .councils-icon__chevron_right:before {
+     content: "\e904";
+ }
+ 
+ .councils-icon__close:before {
+     content: "\e905";
+ }
+ 
+ .councils-icon__donations:before {
+     content: "\e906";
+ }
+ 
+ .councils-icon__file:before {
+     content: "\e907";
+ }
+ 
+ .councils-icon__inactivate:before {
+     content: "\e908";
+ }
+ 
+ .councils-icon__left_menu:before {
+     content: "\e909";
+ }
+ 
+ .councils-icon__notifications:before {
+     content: "\e90a";
+ }
+ 
+ .councils-icon__photo:before {
+     content: "\e90b";
+ }
+ 
+ .councils-icon__radio_1:before {
+     content: "\e90c";
+ }
+ 
+ .councils-icon__radio_2:before {
+     content: "\e90d";
+ }
+ 
+ .councils-icon__reactivate:before {
+     content: "\e90e";
+ }
+ 
+ .councils-icon__search:before {
+     content: "\e90f";
+ }
+ 
+ .councils-icon__settings:before {
+     content: "\e910";
+ }
+ 
+ .councils-icon__share:before {
+     content: "\e911";
+ }
+ 
+ .councils-icon__checkmark:before {
+     content: "\e912";
+ }
+ 
+ .councils-icon__double_checkmark:before {
+     content: "\e913";
+ }
+ /*************************************************************************************/
+ 
+ html {
+     font-size: 62.5%;
+     /* [1] */
+ }
+ 
+ @function parseInt($n) {
+     /* [2] */
+     @return $n / ($n * 0+1);
+ }
+ 
+ @mixin rem($property,
+ $values) {
+     $px: ();
+     /* [3] */
+     $rem: ();
+     /* [3] */
+     @each $value in $values {
+         /* [4] */
+         @if $value==0 or $value==auto {
+             /* [5] */
+             $px: append($px, $value);
+             $rem: append($rem, $value);
+         }
+         @else {
+             $unit: unit($value);
+             /* [6] */
+             $val: parseInt($value);
+             /* [6] */
+             @if $unit=="px" {
+                 /* [7] */
+                 $px: append($px, $value);
+                 $rem: append($rem, ($val / 10 * 1rem));
+             }
+             @if $unit=="rem" {
+                 /* [7] */
+                 $px: append($px, ($val * 10 * 1px));
+                 $rem: append($rem, $value);
+             }
+         }
+     }
+     #{$property}: $px;
+     /* [8] */
+     #{$property}: $rem;
+     /* [8] */
+ }
+ 
+ body {
+     @include rem(font-size,
+     1.6rem);
+     font-family: Bernina-Regular, sans-serif;
+ }
+ 
+ input,
+ textarea {
+     font-family: 'Bernina-Regular', sans-serif !important;
+     font-size: 1.7rem !important;
+ }
+ 
+ .toolbar-ios,
+ .toolbar-md {
+     padding-left: 0;
+     padding-right: 0;
+     margin-left: 0;
+     margin-right: 0;
+ }
+ 
+ .toolbar-title {
+     overflow: visible !important;
+ }
+ 
+ .toolbar-title-md,
+ .toolbar-title-ios {
+     font-family: "Bernina-Bold", sans-serif;
+     font-size: 1.7rem !important;
+     color: #35373A !important;
+ }
+ 
+ .title-ios {
+     padding: 25px 40px 1px !important;
+ }
+ 
+ .nocontent-message {
+     display: table;
+     height: 100%;
+     width: 100%;
+     background: #fafafa;
+     padding: -16px;
+ }
+ 
+ .nocontent-message p {
+     position: absolute;
+     left: 50%;
+     top: 50%;
+     transform: translate(-50%, -50%);
+     text-align: center;
+     vertical-align: center;
+     font-family: Bernina-Regular !important;
+     font-size: 1.7rem !important;
+     color: #a9aaac;
+     width: 100%;
+ }
+ 
+ .header-md,
+ .header-ios {
+     display: block;
+     text-align: center;
+     background: #FFFFFF;
+     border-bottom: 1px solid #dcd9d8 !important;
+ }
+ 
+ h1 {
+     font-family: Gotham-Medium, sans-serif;
+     font-size: 2.8rem !important;
+     color: #35373a !important;
+ }
+ 
+ .row2 {
+     font-family: Gotham-Medium;
+     font-size: 2.8rem;
+     color: #35373a !important;
+ }
+ 
+ .row4 {
+     font-family: Bernina-Regular;
+     font-size: 1.7rem;
+     color: #35373a !important;
+ }
+ 
+ h3 {
+     font-family: Bernina-Regular, sans-serif;
+     font-size: 1.7rem !important;
+     color: #35373a !important;
+ }
+ 
+ .subtitle {
+     font-family: Bernina-Regular, sans-serif;
+     font-size: 1.7rem !important;
+     color: #35373a !important;
+ }
+ 
+ .footer-md,
+ .footer-ios {
+     background: #FFFFFF;
+     border-top: 1px solid #dcd9d8;
+ }
+ 
+ button,
+ .button-md,
+ .button-ios {
+     font-family: "Bernina-Regular", sans-serif;
+     font-size: 1.7rem;
+     text-transform: capitalize !important;
+     color: #3CB18A;
+ }
+ 
+ .content-center {
+     height: 100%;
+     /* Or 100vh */
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+ 
+ .status-button-container {
+     display: block;
+     position: relative;
+     padding-top: 12.8rem;
+     margin: auto;
+ }
+ 
+ p {
+     font-family: Bernina-Regular, sans-serif;
+ }
+ 
+ .cancel-font {
+     font-size: 2.4rem;
+ }
+ 
+ .ion-md-close {
+     font-size: 2.4rem;
+     position: absolute;
+     top: 1.5rem;
+ }
+ 
+ ion-header ion-col {
+     padding: 0;
+ }
+ 
+ .header-col {
+     display: flex !important;
+     align-items: center !important;
+     /* align-items: center; */
+     justify-content: center;
+     min-width: 44px;
+     max-width: 44px;
+     min-height: 44px;
+     max-height: 44px;
+ }
+ 
+ .header-left-icon {
+     font-size: 24px;
+ }
+ 
+ ion-header ion-col h3 {
+     font-weight: bold;
+     font-family: "Bernina-Bold", sans-serif;
+     font-size: 1.7rem !important;
+     color: #35373A !important;
+ }
+ 
+ .picker-opt {
+     text-overflow: initial !important;
+ }
+ 
+ .picker-md .picker-toolbar-cancel {
+     flex: 1 !important;
+ }
+ 
+ .picker-md .picker-button,
+ .picker-md .picker-button.activated {
+     color: #3CB18A!important;
+ }
+ 
+ .picker-ios .picker-button,
+ .picker-ios .picker-button.activated {
+     color: #3CB18A!important;
+ }
+ 
+ .picker-md .picker-prefix,
+ .picker-md .picker-suffix,
+ .picker-md .picker-opt.picker-opt-selected {
+     color: #3CB18A!important;
+ }
+ 
+ .label-ios[floating],
+ .label-md[floating] {
+     transform: translate3d(0, 12px, 0) !important;
+ }
+ 
+ .input-has-focus .label-md[floating],
+ .input-has-value .label-md[floating] {
+     color: #3CB18A;
+     transform: translate3d(0, 3px, 0) scale(0.8) !important;
+ }
+ 
+ .input-has-focus .label-ios[floating],
+ .input-has-value .label-ios[floating] {
+     color: #3CB18A;
+     transform: translate3d(0, 3px, 0) scale(0.8) !important;
+ }
+ 
+ .text-input-md,
+ .text-input-ios {
+     margin-top: 0 !important;
+ }
+ 
+ .picker-ios .picker-opt {
+     font-size: 15px !important;
+ }
+ 
+ .picker-md .picker-opt {
+     font-size: 17px !important;
+ }
+ 
+ .scroll-content {
+     overflow-y: auto !important;
+     padding-bottom: 0!important;
+ }
+ 
+ ion-app,
+ ion-nav,
+ ion-tab,
+ ion-tabs,
+ .app-root {
+     -webkit-transition: bottom 0.3s;
+     transition: bottom 0.3s;
+ }
+ 
+ button:disabled {
+     color: #222;
+ }
+ 
+ .item-divider-ios,
+ .item-divider-md,
+ .item-divider-wp {
+     color: #35373A;
+     background-color: #f7f7f7
+ }
+ 
+ .header-md::after,
+ .tabs-md[tabsPlacement="top"]>.tabbar::after,
+ .footer-md::before,
+ .tabs-md[tabsPlacement="bottom"]>.tabbar::before {
+     background-image: none;
+ }
+ 
+ .footer-md::before,
+ .tabs-md[tabsPlacement="bottom"]>.tabbar::before {
+     top: 0px;
+     bottom: 0px;
+     height: 0px;
+     background-position: 0 0;
+ }
+ 
+ .header-ios::after,
+ .tabs-ios[tabsPlacement="top"]>.tabbar::after,
+ .footer-ios::before,
+ .tabs-ios[tabsPlacement="bottom"]>.tabbar::before {
+     background-image: none;
+ }
+ 
+ .footer-ios::before,
+ .tabs-ios[tabsPlacement="bottom"]>.tabbar::before {
+     top: 0px;
+     bottom: 0px;
+     height: 0px;
+     background-position: 0 0;
+ }
+ 
+ .toolbar-background {
+     background: #FFFFFF !important;
+ }
+ 
+ .slide-zoom {
+     height: 100% !important;
+ }
+ 
+ .empty {
+     height: 28px;
+     background-color: #fafafa !important;
+     border-top: 1px solid #e8e9eb !important;
+     border-bottom: 1px solid #e8e9eb !important;
+ }
+ 
+ .list-title-divider {
+     height: 42px;
+     background-color: #fafafa !important;
+     border: none !important;
+     color: #a9aaac;
+     padding-top: 10px;
+     font-size: 17px !important;
+ }
+ 
+ .empty-light {
+     height: 20px;
+     background-color: #fafafa !important;
+     border: none !important;
+ }
+ 
+ ion-content {
+     display: flex;
+     flex-direction: column;
+     height: 100%;
+ }
+ 
+ ion-content .page-blank-area {
+     align-items: stretch;
+ }
+ 
+ .page-blank-area {
+     flex: 1;
+     background-color: #fafafa !important;
+     height: 100%;
+ }
+ 
+ .item-inner {
+     font-family: Bernina-Regular !important;
+ }
+ 
+ .bordered-item.item-ios.item-block .item-inner,
+ .bordered-item.item-md.item-block .item-inner {
+     border-bottom: 1px solid #e8e9eb !important;
+ }
+ 
+ .item-noborder.div {
+     border: none !important;
+ }
+ 
+ .menu-button {
+     margin: 0 !important;
+     padding: 0 !important;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: 44px;
+     height: 44px;
+ }
+ 
+ .menu-icon {
+     color: #32b38a;
+     font-size: 24px !important;
+ }
+ 
+ .bar-button-menutoggle-md {
+     margin: 0 !important;
+     padding: 0 !important;
+ }
+ 
+ .bar-button-menutoggle-md ion-icon {
+     padding-left: 10px !important;
+ }
+ /****************************** Action Sheet Styles **********************************/
+ 
+ .action-sheet-ios .action-sheet-button {
+     height: 4.1rem !important;
+     min-height: 4.1rem !important;
+     font-size: 1.7rem !important;
+     border-radius: 0;
+ }
+ 
+ .action-sheet-md .action-sheet-button {
+     height: 4.1rem !important;
+     min-height: 4.1rem !important;
+     font-family: Bernina-Regular;
+     font-size: 1.7rem !important;
+     border-radius: 0;
+     text-align: center;
+     border-bottom: 1px solid #d6d6da;
+ }
+ 
+ .action-sheet-ios .action-sheet-title {
+     font-family: Bernina-SemiBold !important;
+     font-size: 13px !important;
+     color: #35373A !important;
+     height: 3.2rem !important;
+     padding-top: 17px !important;
+     display: flex;
+     text-align: center !important;
+     align-content: center;
+     align-items: center;
+     justify-content: center;
+     width: 100%;
+     border-radius: 0;
+ }
+ 
+ .action-sheet-md .action-sheet-title {
+     font-family: Bernina-SemiBold !important;
+     font-size: 13px !important;
+     color: #35373A !important;
+     height: 3.2rem !important;
+     padding-top: 17px !important;
+     display: flex;
+     text-align: center !important;
+     align-content: center;
+     align-items: center;
+     justify-content: center;
+     width: 100%;
+     border-radius: 0;
+     border-bottom: 1px solid #d6d6da;
+ }
+ 
+ .action-sheet-container {
+     padding: 0 !important;
+     border-radius: 0;
+     background: rgba(256, 256, 256, .9) !important;
+     opacity: .9;
+     margin-bottom: 0;
+ }
+ 
+ .action-sheet-group {
+     background: rgba(256, 256, 256, .9) !important;
+     opacity: .9;
+     border-radius: 0;
+     margin-bottom: 0;
+ }
+ 
+ .action-sheet-ios .action-sheet-group {
+     border-radius: 0;
+ }
+ 
+ .action-sheet-ios .action-sheet-group:last-child {
+     margin-bottom: 0;
+ }
+ 
+ .action-sheet-ios .action-sheet-group .button-inner {
+     -webkit-justify-content: center !important;
+     -ms-flex-pack: center !important;
+     justify-content: center !important;
+     border-radius: 0 !important;
+     margin-bottom: 0;
+     background: rgba(256, 256, 256, .9);
+ }
+ 
+ .action-sheet-md .action-sheet-group .button-inner {
+     -webkit-justify-content: flex-start;
+     -ms-flex-pack: start;
+     justify-content: center;
+ }
+ 
+ .action-sheet-md .action-sheet-title {
+     text-align: center !important;
+     font-size: 13px !important;
+     border-radius: 0;
+ }
+ 
+ .actionsheet-items {
+     color: #3cb18a !important;
+     font-family: Bernina-Regular !important;
+     font-size: 17rpx !important;
+     background: rgba(256, 256, 256, .9);
+     border-radius: 0;
+ }
+ 
+ .actionsheet-cancel {
+     color: #35373A !important;
+     font-family: Bernina-Regular !important;
+     font-size: 17px !important;
+ }
+ 
+ .item-radio-checked {
+     background: #f4f6fa;
+ }
+ /*************************** End - AcionSheet Styles ******************************/
+ 
+ // uncomment below media query if you need to grayout the modal backdrop.
+ @media not all and (min-height: 600px) and (min-width: 768px) {
+     ion-modal ion-backdrop {
+         visibility: visible;
+         opacity: 0 !important;
+     }
+ }
+ 
+ .modal-wrapper {
+     position: absolute;
+     width: 100%;
+     height: 40%;
+     top: 50%;
+ }
+ 
+ ion-avatar img,
+ ion-thumbnail img {
+     display: block;
+     width: 48px !important;
+     height: 48px !important;
+     border-radius: 50% !important;
+ }
+ 
+ ion-avatar {
+     background: #F4F6FA;
+     width: 48px !important;
+     height: 48px !important;
+     border-radius: 50% !important;
+ }
+ 
+ .fwd-arrow-grey {
+     color: #cbd1cf !important;
+     font-size: 13px !important;
+ }
+ 
+ .cancel-button {
+     font-size: 24px !important;
+ }
+ 
+ .item-checkbox-checked {
+     background: #f4f6fa;
+ }
+ 
+ .item-md {
+     border-bottom: 1px solid #E8E9EB;
+ }
+ 
+ .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+     border-bottom-color: #E8E9EB !important;
+     box-shadow: none !important;
+ }
+ 
+ .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+     border-bottom-color: none !important;
+     box-shadow: none !important;
+ }
+ 
+ .item-md.item-block .item-inner {
+     padding-right: 8px;
+     border-bottom: none !important;
+ }
+ 
+ .item-ios {
+     border-bottom: 1px solid #E8E9EB;
+ }
+ 
+ .item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+     border-bottom-color: #E8E9EB !important;
+     box-shadow: none !important;
+ }
+ 
+ .item-ios.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+     border-bottom-color: none !important;
+     box-shadow: none !important;
+ }
+ 
+ .item-md.item-input.input-has-focus .item-inner {
+     border-bottom-color: #DEDEDE !important;
+     box-shadow: none !important;
+ }
+ 
+ .item-md.item-input.input-has-focus .item-inner {
+     border-bottom-color: #DEDEDE !important;
+     box-shadow: none !important;
+ }
+ 
+ .list-md .item-input.input-has-focus:last-child {
+     border-bottom-color: #DEDEDE !important;
+     box-shadow: none !important;
+ }
+ 
+ .list-md .item-input.input-has-focus:last-child .item-inner {
+     box-shadow: none;
+ }
+ 
+ .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+     border-bottom-color: #DEDEDE !important;
+     box-shadow: none !important;
+ }
+ 
+ .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child {
+     border-bottom-color: #DEDEDE !important;
+     box-shadow: none !important;
+ }
+ 
+ .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child .item-inner {
+     box-shadow: none;
+ }
+ 
+ .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+     border-bottom-color: #DEDEDE !important;
+     box-shadow: none !important;
+ }
+ 
+ .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child {
+     border-bottom-color: #DEDEDE !important;
+     box-shadow: none !important;
+ }
+ 
+ .item-md.item-block .item-inner,
+ .item-ios.item-block .item-inner,
+ .item-ios.item-block .item-inner {
+     border-bottom: none !important;
+ }
+ 
+ .item-ios.item-block .item-inner {
+     padding-right: 8px;
+     border-bottom: none !important;
+ }
+ 
+ .input-item {
+     border: none !important;
+ }
+ 
+ .input-item .item-inner {
+     padding-right: 16px !important;
+ }
+ 
+ .input-item .item-inner .input-wrapper {
+     border-bottom: 1px solid #e8e9eb;
+ }
+ 
+ .iconinput-item {
+     border: none !important;
+ }
+ 
+ .iconinput-item .item-inner {
+     border-bottom: 1px solid #e8e9eb !important;
+ }
+ 
+ // .iconinput-item .item-inner .item-wrapper {
+ //     border-bottom: none;
+ // }
+ ion-badge,
+ .badge-md {
+     border-radius: 50%;
+     padding: 3px;
+     width: 15px;
+     height: 15px;
+     font-family: Bernina-Regular;
+ }
+ 
+ .notification-badge {
+     position: absolute;
+     font-weight: bold;
+     top: 2px;
+     left: 15px;
+     font-size: 9px
+ }
+ 
+ ion-title {
+     height: 100%;
+     text-align: center;
+ }
+ 
+ .datetime-ios,
+ .datetime-md {
+     padding-top: 3px !important;
+ }
+ /***************************** List Page Styles **********************************************/
+ 
+ .list-page .scroll-content {
+     background: #fafafa;
+     padding-top: 28px !important;
+ }
+ 
+ .list-page ion-item {
+     height: 48px;
+ }
+ 
+ .list-page .ion-idv-item {
+     border-top: 1px solid #e8e9eb !important;
+     border-bottom: 1px solid #e8e9eb !important;
+ }
+ 
+ .ionlist .ion-idv-item {
+     border-top: 1px solid #e8e9eb !important;
+     border-bottom: 1px solid #e8e9eb !important;
+ }
+ 
+ .ion-item-first {
+     border-top: 1px solid #e8e9eb !important;
+     border-bottom: none !important;
+ }
+ 
+ .ion-item-middle {
+     border: none !important;
+ }
+ 
+ .ion-item-last {
+     border-bottom: 1px solid #e8e9eb !important;
+     border-top: none !important;
+ }
+ 
+ .ion-item-first.item-md.item-block .item-inner,
+ .ion-item-first.item-ios.item-block .item-inner {
+     border-bottom: 1px solid #e8e9eb !important;
+ }
+ 
+ .ion-item-middle.item-md.item-block .item-inner,
+ .ion-item-middle.item-ios.item-block .item-inner {
+     border-bottom: 1px solid #e8e9eb !important;
+ }
+ 
+ .ion-item-last .item-inner {
+     border: none !important;
+ }
+ 
+ .empty {
+     border: none !important;
+     height: 28px;
+ }
+ 
+ .label-styles {
+     font-family: Bernina-Regular !important;
+     font-size: 17px !important;
+     color: #35373a !important;
+ }
+ 
+ .header-col2 {
+     display: flex !important;
+     align-items: center !important;
+ }
+ 
+ .login-button-container .spinner svg {
+     width: 42px !important;
+     height: 42px !important;
+     margin-top: 30px !important;
+ }
+ 
+ .input-cover {
+     position: static !important;
+ }
+ /************************ Form-Page Styles ************************************************/
+ 
+ .form-page ion-item {
+     border-top: none !important;
+     border-bottom: 1px solid #e8e9eb !important;
+ }
+ 
+ ion-item.form-item-first {
+     border-top: 1px solid #e8e9eb !important;
+     border-bottom: 1px solid #e8e9eb !important;
+ }
+ 
+ ion-item.form-item-first .item-inner {
+     border: none !important;
+ }
+ 
+ ion-content ion-item ion-label {
+     color: #a9aaad;
+ }
+ 
+ ion-list ion-item {
+     border-bottom-color: #f4f4f4;
+ }
+ /************************** Custom Radio & Checkbox ********************************************/
+ /****************** Custom Radio ******************************/
+ 
+ .item-ios .radio-ios,
+ .item-md .radio-md {
+     margin: 5px 10px 9px 0;
+ }
+ 
+ .radio-md .radio-icon,
+ .radio-ios .radio-icon {
+     position: relative;
+     display: block;
+     border: none;
+ }
+ 
+ .radio-md .radio-inner {
+     width: 0;
+ }
+ 
+ .radio-md .radio-checked .radio-inner:after,
+ .radio-ios .radio-checked .radio-inner {
+     display: inline-block;
+     content: '';
+     /*Make it a small rectangle so the border will create an L-shape*/
+     width: 8px;
+     height: 15px;
+     /*Add a white border on the bottom and left, creating that 'L' */
+     border: solid #3CB18A;
+     border-width: 0 2px 2px 0;
+     border-radius: 3px 1px;
+     /*Rotate the L 45 degrees to turn it into a checkmark*/
+     transform: rotate(45deg);
+ }
+ 
+ .radio-ios .radio-inner,
+ .radio-md .radio-inner {
+     top: 0px !important
+ }
+ /******************** Custom Checkbox ****************************/
+ 
+ .checkbox-ios .checkbox-checked .checkbox-inner,
+ .checkbox-md .checkbox-checked .checkbox-inner {
+     display: inline-block;
+     content: '';
+     width: 8px;
+     height: 15px;
+     border: solid #3CB18A;
+     border-width: 0 2px 2px 0;
+     border-radius: 3px 1px;
+     transform: rotate(45deg);
+ }
+ 
+ .checkbox-ios .checkbox-checked,
+ .checkbox-md .checkbox-checked {
+     background: transparent;
+ }
+ 
+ .checkbox-ios .checkbox-checked {
+     border: none !important;
+     border-radius: none !important;
+ }
+ 
+ .checkbox-ios .checkbox-icon,
+ .checkbox-md .checkbox-icon {
+     height: 24px;
+     width: 24px;
+     border: none;
+ }
+ /******************** Datetime roller *************************************/
+ 
+ .picker-ios .picker-above-highlight,
+ .picker-ios .picker-below-highlight,
+ .picker-md .picker-above-highlight,
+ .picker-md .picker-below-highlight {
+     display: block !important;
+ }
+ /*************************** Loader **************************************/
+ 
+ .loading-ios .loading-wrapper,
+ .loading-md .loading-wrapper,
+ {
+     padding: 0 !important;
+     position: absolute !important;
+     top: 0px;
+     left: 0px;
+     display: flex;
+     width: 100% !important;
+     height: 100% !important;
+     max-width: none !important;
+     max-height: none !important;
+     border-radius: 0 !important;
+     opacity: 1;
+     transform: translateZ(0px);
+     background: #fff !important;
      box-shadow: none !important;
      align-items: center;
-    justify-content: center;
-}
-
-
-
-.circle-container{
-	
-	margin:auto;
-}
-
-.circleG_1{
-	background-color:rgb(250,250,250);
-	float:left;
-	height:11px;
-	margin-left:10px;
-	width:11px;
-	animation-name:bounce_circleG;
-		-o-animation-name:bounce_circleG;
-		-ms-animation-name:bounce_circleG;
-		-webkit-animation-name:bounce_circleG;
-		-moz-animation-name:bounce_circleG;
-	animation-duration:1s;
-		-o-animation-duration:1s;
-		-ms-animation-duration:1s;
-		-webkit-animation-duration:1s;
-		-moz-animation-duration:1s;
-	animation-iteration-count:infinite;
-		-o-animation-iteration-count:infinite;
-		-ms-animation-iteration-count:infinite;
-		-webkit-animation-iteration-count:infinite;
-		-moz-animation-iteration-count:infinite;
-	animation-direction:normal;
-		-o-animation-direction:normal;
-		-ms-animation-direction:normal;
-		-webkit-animation-direction:normal;
-		-moz-animation-direction:normal;
-	border-radius:7px;
-		-o-border-radius:7px;
-		-ms-border-radius:7px;
-		-webkit-border-radius:7px;
-		-moz-border-radius:7px;
-
-        margin-left: 0 !important;
-	animation-delay:.25s;
-		-o-animation-delay:.25s;
-		-ms-animation-delay:.25s;
-		-webkit-animation-delay:.25s;
-		-moz-animation-delay:.25s;
-}
-
-.circleG_2{
-	background-color:rgb(250,250,250);
-	float:left;
-	height:11px;
-	margin-left:10px;
-	width:11px;
-	animation-name:bounce_circleG;
-		-o-animation-name:bounce_circleG;
-		-ms-animation-name:bounce_circleG;
-		-webkit-animation-name:bounce_circleG;
-		-moz-animation-name:bounce_circleG;
-	animation-duration:1s;
-		-o-animation-duration:1s;
-		-ms-animation-duration:1s;
-		-webkit-animation-duration:1s;
-		-moz-animation-duration:1s;
-	animation-iteration-count:infinite;
-		-o-animation-iteration-count:infinite;
-		-ms-animation-iteration-count:infinite;
-		-webkit-animation-iteration-count:infinite;
-		-moz-animation-iteration-count:infinite;
-	animation-direction:normal;
-		-o-animation-direction:normal;
-		-ms-animation-direction:normal;
-		-webkit-animation-direction:normal;
-		-moz-animation-direction:normal;
-	border-radius:7px;
-		-o-border-radius:7px;
-		-ms-border-radius:7px;
-		-webkit-border-radius:7px;
-		-moz-border-radius:7px;
-
-        
-	animation-delay:.50s;
-		-o-animation-delay:.50s;
-		-ms-animation-delay:.50s;
-		-webkit-animation-delay:.50s;
-		-moz-animation-delay:.50s;
-}
-
-.circleG_3{
-	background-color:rgb(250,250,250);
-	float:left;
-	height:11px;
-	margin-left:10px;
-	width:11px;
-	animation-name:bounce_circleG;
-		-o-animation-name:bounce_circleG;
-		-ms-animation-name:bounce_circleG;
-		-webkit-animation-name:bounce_circleG;
-		-moz-animation-name:bounce_circleG;
-	animation-duration:1s;
-		-o-animation-duration:1s;
-		-ms-animation-duration:1s;
-		-webkit-animation-duration:1s;
-		-moz-animation-duration:1s;
-	animation-iteration-count:infinite;
-		-o-animation-iteration-count:infinite;
-		-ms-animation-iteration-count:infinite;
-		-webkit-animation-iteration-count:infinite;
-		-moz-animation-iteration-count:infinite;
-	animation-direction:normal;
-		-o-animation-direction:normal;
-		-ms-animation-direction:normal;
-		-webkit-animation-direction:normal;
-		-moz-animation-direction:normal;
-	border-radius:7px;
-		-o-border-radius:7px;
-		-ms-border-radius:7px;
-		-webkit-border-radius:7px;
-		-moz-border-radius:7px;
-
-        
-	animation-delay:.75s;
-		-o-animation-delay:.75s;
-		-ms-animation-delay:.75s;
-		-webkit-animation-delay:.75s;
-		-moz-animation-delay:.75s;
-}
-
-@keyframes bounce_circleG{
-	0%{
-        opacity: 0;
-    }
-
-	50%{
-		background-color:rgba(60,177,138,.5);
-        
-	}
-
-	100%{
-        background-color:rgba(60,177,138,1);
-    }
-}
-
-@-o-keyframes bounce_circleG{
-	0%{ opacity: 0 }
-
-	50%{
-		background-color:rgba(60,177,138,.5)
-	}
-
-	100%{ background-color:rgba(60,177,138,1); }
-}
-
-@-ms-keyframes bounce_circleG{
-	0%{ opacity: 0 }
-
-	50%{
-		background-color:rgba(60,177,138,.5)
-	}
-
-	100%{ background-color:rgba(60,177,138,1); }
-}
-
-@-webkit-keyframes bounce_circleG{
-	0%{ opacity: 0 }
-
-	50%{
-		background-color:rgba(60,177,138,.5)
-	}
-
-	100%{ background-color:rgba(60,177,138,1); }
-}
-
-@-moz-keyframes bounce_circleG{
-	0%{ opacity: 0 }
-
-	50%{
-		background-color:rgba(60,177,138,.5)
-	}
-
-	100%{ background-color:rgba(60,177,138,1); }
-}
-
-
-//Disabling buttons background throught the application.
-//Override below properties in a specific component scss file, if required.
-
-.button.button-clik {
-            border-color: transparent;
-            background: none;
-             }
-            .button.button-clik:hover {
-             background:none; 
-              text-decoration: none; }
-            .button.button-clik.active, .button.button-clik.activated {
-              background-color:#fafafa; }
-            .button.button-clik.button-clear {
-              border-color: transparent;
-              background: none;
-              box-shadow: none;
-              }
-            .button.button-clik.button-icon {
-              border-color: transparent;
-              background: none; }
-            .button.button-clik.button-outline {
-              
-              background: transparent;
-              color: none; }
-              .button.button-clik.button-outline.active, .button.button-clik.button-outline.activated {
-                background:none;
-                box-shadow: none;
-                 }
-
-/******************************* Toast Message Styles **********************************************/
-.toast-md .toast-message,
-.toast-ios .toast-message {
-    padding: 1.5rem;
-    font-size: 1.4rem;
-    color: #FFF;
-    background: #35373A;
-    box-shadow: -1px -1px 3px #888;
-    border: 1px solid #35373A;
-    border-radius: 5px;
-    text-align: center;
-    font-family: Bernina-Regular !important;
-}
-
-
-/******************************* Inline Validation Styles **************************************/
- .invalid ion-input{
-        border-bottom: 1px solid #F13822;
-    }
-    .invalid ion-label{
-        color:#F13822 !important;
-    }
-
-     .error-msg{
-        padding-left:16px;
-        color:#F13822 !important;
-        font-size: 15px !important;
-        margin:0px !important;
-
-    }
-    .error-container {
-        padding:0;
-        margin: 0;
-        height: 20px !important;
-    }
+     justify-content: center;
+ }
+ 
+ .circle-container {
+     margin: auto;
+ }
+ 
+ .circleG_1 {
+     background-color: rgb(250, 250, 250);
+     float: left;
+     height: 11px;
+     margin-left: 10px;
+     width: 11px;
+     animation-name: bounce_circleG;
+     -o-animation-name: bounce_circleG;
+     -ms-animation-name: bounce_circleG;
+     -webkit-animation-name: bounce_circleG;
+     -moz-animation-name: bounce_circleG;
+     animation-duration: 1s;
+     -o-animation-duration: 1s;
+     -ms-animation-duration: 1s;
+     -webkit-animation-duration: 1s;
+     -moz-animation-duration: 1s;
+     animation-iteration-count: infinite;
+     -o-animation-iteration-count: infinite;
+     -ms-animation-iteration-count: infinite;
+     -webkit-animation-iteration-count: infinite;
+     -moz-animation-iteration-count: infinite;
+     animation-direction: normal;
+     -o-animation-direction: normal;
+     -ms-animation-direction: normal;
+     -webkit-animation-direction: normal;
+     -moz-animation-direction: normal;
+     border-radius: 7px;
+     -o-border-radius: 7px;
+     -ms-border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     margin-left: 0 !important;
+     animation-delay: .25s;
+     -o-animation-delay: .25s;
+     -ms-animation-delay: .25s;
+     -webkit-animation-delay: .25s;
+     -moz-animation-delay: .25s;
+ }
+ 
+ .circleG_2 {
+     background-color: rgb(250, 250, 250);
+     float: left;
+     height: 11px;
+     margin-left: 10px;
+     width: 11px;
+     animation-name: bounce_circleG;
+     -o-animation-name: bounce_circleG;
+     -ms-animation-name: bounce_circleG;
+     -webkit-animation-name: bounce_circleG;
+     -moz-animation-name: bounce_circleG;
+     animation-duration: 1s;
+     -o-animation-duration: 1s;
+     -ms-animation-duration: 1s;
+     -webkit-animation-duration: 1s;
+     -moz-animation-duration: 1s;
+     animation-iteration-count: infinite;
+     -o-animation-iteration-count: infinite;
+     -ms-animation-iteration-count: infinite;
+     -webkit-animation-iteration-count: infinite;
+     -moz-animation-iteration-count: infinite;
+     animation-direction: normal;
+     -o-animation-direction: normal;
+     -ms-animation-direction: normal;
+     -webkit-animation-direction: normal;
+     -moz-animation-direction: normal;
+     border-radius: 7px;
+     -o-border-radius: 7px;
+     -ms-border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     animation-delay: .50s;
+     -o-animation-delay: .50s;
+     -ms-animation-delay: .50s;
+     -webkit-animation-delay: .50s;
+     -moz-animation-delay: .50s;
+ }
+ 
+ .circleG_3 {
+     background-color: rgb(250, 250, 250);
+     float: left;
+     height: 11px;
+     margin-left: 10px;
+     width: 11px;
+     animation-name: bounce_circleG;
+     -o-animation-name: bounce_circleG;
+     -ms-animation-name: bounce_circleG;
+     -webkit-animation-name: bounce_circleG;
+     -moz-animation-name: bounce_circleG;
+     animation-duration: 1s;
+     -o-animation-duration: 1s;
+     -ms-animation-duration: 1s;
+     -webkit-animation-duration: 1s;
+     -moz-animation-duration: 1s;
+     animation-iteration-count: infinite;
+     -o-animation-iteration-count: infinite;
+     -ms-animation-iteration-count: infinite;
+     -webkit-animation-iteration-count: infinite;
+     -moz-animation-iteration-count: infinite;
+     animation-direction: normal;
+     -o-animation-direction: normal;
+     -ms-animation-direction: normal;
+     -webkit-animation-direction: normal;
+     -moz-animation-direction: normal;
+     border-radius: 7px;
+     -o-border-radius: 7px;
+     -ms-border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     animation-delay: .75s;
+     -o-animation-delay: .75s;
+     -ms-animation-delay: .75s;
+     -webkit-animation-delay: .75s;
+     -moz-animation-delay: .75s;
+ }
+ 
+ @keyframes bounce_circleG {
+     0% {
+         opacity: 0;
+     }
+     50% {
+         background-color: rgba(60, 177, 138, .5);
+     }
+     100% {
+         background-color: rgba(60, 177, 138, 1);
+     }
+ }
+ 
+ @-o-keyframes bounce_circleG {
+     0% {
+         opacity: 0
+     }
+     50% {
+         background-color: rgba(60, 177, 138, .5)
+     }
+     100% {
+         background-color: rgba(60, 177, 138, 1);
+     }
+ }
+ 
+ @-ms-keyframes bounce_circleG {
+     0% {
+         opacity: 0
+     }
+     50% {
+         background-color: rgba(60, 177, 138, .5)
+     }
+     100% {
+         background-color: rgba(60, 177, 138, 1);
+     }
+ }
+ 
+ @-webkit-keyframes bounce_circleG {
+     0% {
+         opacity: 0
+     }
+     50% {
+         background-color: rgba(60, 177, 138, .5)
+     }
+     100% {
+         background-color: rgba(60, 177, 138, 1);
+     }
+ }
+ 
+ @-moz-keyframes bounce_circleG {
+     0% {
+         opacity: 0
+     }
+     50% {
+         background-color: rgba(60, 177, 138, .5)
+     }
+     100% {
+         background-color: rgba(60, 177, 138, 1);
+     }
+ }
+ 
+ //Disabling buttons background throught the application.
+ //Override below properties in a specific component scss file, if required.
+ .button.button-clik {
+     border-color: transparent;
+     background: none;
+ }
+ 
+ .button.button-clik:hover {
+     background: none;
+     text-decoration: none;
+ }
+ 
+ .button.button-clik.active,
+ .button.button-clik.activated {
+     background-color: #fafafa;
+ }
+ 
+ .button.button-clik.button-clear {
+     border-color: transparent;
+     background: none;
+     box-shadow: none;
+ }
+ 
+ .button.button-clik.button-icon {
+     border-color: transparent;
+     background: none;
+ }
+ 
+ .button.button-clik.button-outline {
+     background: transparent;
+     color: none;
+ }
+ 
+ .button.button-clik.button-outline.active,
+ .button.button-clik.button-outline.activated {
+     background: none;
+     box-shadow: none;
+ }
+ /******************************* Toast Message Styles **********************************************/
+ 
+ .toast-md .toast-message,
+ .toast-ios .toast-message {
+     padding: 1.5rem;
+     font-size: 1.4rem;
+     color: #FFF;
+     background: #35373A;
+     box-shadow: -1px -1px 3px #888;
+     border: 1px solid #35373A;
+     border-radius: 5px;
+     text-align: center;
+     font-family: Bernina-Regular !important;
+ }
+ /******************************* Inline Validation Styles **************************************/
+ 
+ .invalid ion-input {
+     border-bottom: 1px solid #F13822;
+ }
+ 
+ .invalid ion-label {
+     color: #F13822 !important;
+ }
+ 
+ .error-msg {
+     padding-left: 16px;
+     color: #F13822 !important;
+     font-size: 15px !important;
+     margin: 0px !important;
+ }
+ 
+ .error-container {
+     padding: 0;
+     margin: 0;
+     height: 20px !important;
+ }

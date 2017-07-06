@@ -17,7 +17,7 @@
 </ion-header>
 <ion-content>
     <form (ngSubmit)="inviteMember()" #InviteMemberForm="ngForm">
-        <ion-item-group>
+        <ion-item-group class="ionlist">
             <!--<ion-item-divider class="empty-light"></ion-item-divider>-->
             <ion-item class="input-item" [class.invalid]="!isValidEmail || emailErr">
                 <ion-label floating>Email</ion-label>
