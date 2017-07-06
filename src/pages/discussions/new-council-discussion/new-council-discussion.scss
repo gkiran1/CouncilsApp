@@ -5,39 +5,47 @@ new-council-discussion-page {
     .text-input-md {
         margin: 13px 8px 13px 0 !important;
     }
-    .font1{
+    .font1 {
         font-family: Bernina-Regular, sans-serif;
         font-size: 17px !important;
         color: #a9aaac !important;
     }
-    .font2{
+    .font2 {
         font-family: 'Bernina-Regular', sans-serif;
         font-size: 13px;
         color: #a9aaac;
     }
-      .font4{
+    .font4 {
         font-family: 'Bernina-Regular', sans-serif;
         font-size: 13px;
         color: #F13822;
     }
-    .line-height{
+    .line-height {
         line-height: 24px;
         white-space: normal;
     }
-    .font3{
+    .font3 {
         font-family: Bernina-Regular, sans-serif;
         font-size: 17px !important;
         color: #35373a !important;
     }
-    #topic{
-        height:48px;
+    #topic {
+        height: 48px;
     }
-    ion-item-divider{
-       background: #FAFAFA !important;
+    ion-item-divider {
+        background: #FAFAFA !important;
     }
-
     .list-page .scroll-content {
         padding-top: 10px !important;
     }
-
+    .unittype {
+        background: #FAFAFA !important;
+        border-bottom: none !important;
+        text-transform: uppercase;
+    }
+    .unittype ion-label {
+        font-family: Bernina-semibold, sans-serif;
+        font-size: 13px !important;
+        color: #35373a !important;
+    }
 }

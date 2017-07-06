@@ -13,17 +13,61 @@ import { AngularFire } from 'angularfire2';
 })
 export class NewCouncilDiscussionPage {
   newCouncilDiscussionForm: FormGroup;
-  councils;
+  //councils;
+  areaCouncils = []
+  stakeCouncils = [];
+  wardCouncils = [];
+  addedCouncils = [];
+
   constructor(navParams: NavParams, public af: AngularFire, fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
     let topicitem = navParams.get('item');
+    var unitType = localStorage.getItem('unitType');
 
     this.af.auth.subscribe(auth => {
       if (auth !== null) {
         this.af.database.object('/users/' + auth.uid).subscribe(user => {
-          this.councils = [];
+          //this.councils = [];
           user.councils.forEach(c => {
             this.firebaseservice.getCouncilByCouncilKey(c).subscribe(council => {
-              this.councils.push(council);
+
+              if (unitType === 'Area') {
+                if (council['under'] === 'Added') {
+                  this.addedCouncils.push(council);
+                }
+                else if (council['council'] === 'Stake Presidents') {
+                  this.stakeCouncils.push(council);
+                }
+                else {
+                  this.areaCouncils.push(council);
+                }
+              }
+              else if (unitType === 'Stake') {
+                if (council['under'] === 'Added') {
+                  this.addedCouncils.push(council);
+                }
+                else if (council['council'] === 'Stake Presidents') {
+                  this.areaCouncils.push(council);
+                }
+                else if (council['council'] === 'Bishops') {
+                  this.wardCouncils.push(council);
+                }
+                else {
+                  this.stakeCouncils.push(council);
+                }
+              }
+              else if (unitType === 'Ward') {
+                if (council['under'] === 'Added') {
+                  this.addedCouncils.push(council);
+                }
+                else if (council['council'] === 'Bishops') {
+                  this.stakeCouncils.push(council);
+                }
+                else {
+                  this.wardCouncils.push(council);
+                }
+              }
+
+              //this.councils.push(council);
             });
           });
 

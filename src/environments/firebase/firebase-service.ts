@@ -84,7 +84,7 @@ export class FirebaseService {
                 guestpicture: user.avatar,
                 isnotificationreq: false,
                 googlecalendaradded: false,
-                isfirstlogin:true
+                isfirstlogin: true
             }).then(() => user.councils.forEach(counc => {
                 this.createUserCouncils(uid, counc);
             }));
@@ -231,7 +231,8 @@ export class FirebaseService {
                         council: council.council,
                         unittype: council.counciltype,
                         unitnumber: Number(council.unitnumber),
-                        council_unitnumber: council + '_' + council.unitnumber
+                        council_unitnumber: council + '_' + council.unitnumber,
+                        under: 'Added'
                     }).then(res => {
                         return res.key;
                     }).catch(err => {
@@ -1080,7 +1081,7 @@ export class FirebaseService {
             throw err;
         });
     }
-     updateLoginInfo(userUid) {
+    updateLoginInfo(userUid) {
         return this.rootRef.child('users/' + userUid).update({ isfirstlogin: false }).then(() => {
             console.log('updated Login info');
         }).catch(err => {

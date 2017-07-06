@@ -21,8 +21,8 @@
             </ion-item-divider>
 
             <ion-item>
-                <ion-input type="text" id="topic" name="topic" spellautocomplete formControlName="topic" placeholder="Discussion Topic"
-                    clearInput maxlength="25" (keyup)="keypressed($event)"></ion-input>
+                <ion-input type="text" id="topic" name="topic" spellautocomplete formControlName="topic" placeholder="Discussion Topic" clearInput
+                    maxlength="25" (keyup)="keypressed($event)"></ion-input>
             </ion-item>
             <ion-item-divider class="empty">
                 <ion-label class="font2" *ngIf="!topic || topic.length <= 25">Must be 25 characters or less</ion-label>
@@ -32,10 +32,35 @@
                 <ion-label class="font1 line-height">Which council will be discussing this topic?</ion-label>
             </ion-item-divider>
             <ion-list radio-group id="council" name="council" formControlName="council">
-                <ion-item [ngClass]="i === 0 ? 'ion-item-first' : (i === councils.length - 1 ? 'ion-item-last' : 'ion-item-middle')" *ngFor="let c of councils; let i = index">
+                <!--<ion-item [ngClass]="i === 0 ? 'ion-item-first' : (i === councils.length - 1 ? 'ion-item-last' : 'ion-item-middle')" *ngFor="let c of councils; let i = index">
+                    <ion-label class="font3">{{c.council}}</ion-label>
+                    <ion-radio [value]="c" color="secondary"></ion-radio>
+                </ion-item>-->
+              
+                <ion-item *ngIf="(areaCouncils.length)" class="unittype">Area</ion-item>
+                <ion-item [ngClass]="areaCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === areaCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))" *ngFor="let c of areaCouncils; let i = index">
                     <ion-label class="font3">{{c.council}}</ion-label>
                     <ion-radio [value]="c" color="secondary"></ion-radio>
                 </ion-item>
+
+                <ion-item *ngIf="(stakeCouncils.length)" class="unittype">Stake</ion-item>
+                <ion-item [ngClass]="stakeCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === stakeCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))" *ngFor="let c of stakeCouncils; let i = index">
+                    <ion-label class="font3">{{c.council}}</ion-label>
+                    <ion-radio [value]="c" color="secondary"></ion-radio>
+                </ion-item>
+
+                <ion-item *ngIf="(wardCouncils.length)" class="unittype">Ward</ion-item>
+                <ion-item [ngClass]="wardCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === wardCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))" *ngFor="let c of wardCouncils; let i = index">
+                    <ion-label class="font3">{{c.council}}</ion-label>
+                    <ion-radio [value]="c" color="secondary"></ion-radio>
+                </ion-item>
+
+                <ion-item *ngIf="(addedCouncils.length)" class="unittype">Added</ion-item>
+                <ion-item [ngClass]="addedCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === addedCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))" *ngFor="let c of addedCouncils; let i = index">
+                    <ion-label class="font3">{{c.council}}</ion-label>
+                    <ion-radio [value]="c" color="secondary"></ion-radio>
+                </ion-item>
+
             </ion-list>
         </ion-item-group>
     </form>

@@ -1,41 +1,50 @@
 page-user-councils {
-    ion-content{
+    ion-content {
         // margin-top: 40px;
     }
-    ion-title{
+    ion-title {
         padding: 16px;
     }
-
-   .searchbar-ios .searchbar-input{
+    .searchbar-ios .searchbar-input {
         padding: 6px 20px 6px 25px !important;
         background: #FAFAFA !important;
         border: none !important;
         box-shadow: none !important;
     }
-     .searchbar-md .searchbar-input{
+    .searchbar-md .searchbar-input {
         padding: 6px 20px 6px 30px !important;
         background: #FAFAFA !important;
         border: none !important;
         box-shadow: none !important;
     }
     .searchbar-search-icon {
-        left:8px !important;
+        left: 8px !important;
     }
-    .searchbar-clear-icon{
-        right:0 !important;
+    .searchbar-clear-icon {
+        right: 0 !important;
         padding-right: 0 !important;
     }
-    ion-searchbar{
+    ion-searchbar {
         background: #FAFAFA !important;
     }
-    ion-list{
-        border-top:2px solid #E8E9EB !important;
+    ion-list {
+        border-top: 2px solid #E8E9EB !important;
     }
-
+    .unittype {
+        background: #FAFAFA !important;
+        border-bottom: none !important;
+        text-transform: uppercase;
+    }
+    .unittype ion-label {
+        font-family: Bernina-semibold, sans-serif;
+        font-size: 13px !important;
+        color: #35373a !important;
+    }
 }
-.user-councils-modal{
+
+.user-councils-modal {
     position: absolute;
     top: 0;
-    width:100%;
+    width: 100%;
     height: 100%;
 }

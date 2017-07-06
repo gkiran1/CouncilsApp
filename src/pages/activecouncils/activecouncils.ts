@@ -19,7 +19,15 @@ export class ActiveCouncilsPage {
     user;
     userSubscription: Subscription;
 
+    areaCouncils = []
+    stakeCouncils = [];
+    wardCouncils = [];
+    addedCouncils = [];
+
     constructor(public af: AngularFire, public firebaseservice: FirebaseService, public nav: NavController) {
+
+        var unitType = localStorage.getItem('unitType');
+
         this.userSubscription = this.af.auth.subscribe(auth => {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(usr => {
@@ -27,9 +35,49 @@ export class ActiveCouncilsPage {
                     this.myCouncils = [];
                     if (this.user.councils) {
                         this.user.councils.forEach(e => {
-                            this.firebaseservice.getCouncilByKey(e).subscribe(councilObj => {
-                                this.myCouncils.push(...councilObj);
+                            this.firebaseservice.getCouncilByKey(e).subscribe(council => {
+                                //this.myCouncils.push(...council);
+
+
+                                if (unitType === 'Area') {
+                                    if (council[0]['under'] === 'Added') {
+                                        this.addedCouncils.push(council[0]);
+                                    }
+                                    else if (council[0]['council'] === 'Stake Presidents') {
+                                        this.stakeCouncils.push(council[0]);
+                                    }
+                                    else {
+                                        this.areaCouncils.push(council[0]);
+                                    }
+                                }
+                                else if (unitType === 'Stake') {
+                                    if (council[0]['under'] === 'Added') {
+                                        this.addedCouncils.push(council[0]);
+                                    }
+                                    else if (council[0]['council'] === 'Stake Presidents') {
+                                        this.areaCouncils.push(council[0]);
+                                    }
+                                    else if (council[0]['council'] === 'Bishops') {
+                                        this.wardCouncils.push(council[0]);
+                                    }
+                                    else {
+                                        this.stakeCouncils.push(council[0]);
+                                    }
+                                }
+                                else if (unitType === 'Ward') {
+                                    if (council[0]['under'] === 'Added') {
+                                        this.addedCouncils.push(council[0]);
+                                    }
+                                    else if (council[0]['council'] === 'Bishops') {
+                                        this.stakeCouncils.push(council[0]);
+                                    }
+                                    else {
+                                        this.wardCouncils.push(council[0]);
+                                    }
+                                }
+
                                 this.count$.next(this.user.councils.length);
+
                             });
                         });
                     }

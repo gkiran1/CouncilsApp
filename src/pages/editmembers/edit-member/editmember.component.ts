@@ -16,6 +16,11 @@ export class EditMemberPage {
     councilsObj = [];
     enableBtn = false;
 
+    areaCouncils = []
+    stakeCouncils = [];
+    wardCouncils = [];
+    addedCouncils = [];
+
     constructor(public navParams: NavParams,
         public navCtrl: NavController,
         private firebaseService: FirebaseService) {
@@ -24,39 +29,131 @@ export class EditMemberPage {
         this.selectedUserCouncils = this.selectedUser.councils;
         this.enableBtn = false;
 
+        var unitType = localStorage.getItem('unitType');
+
         this.adminCouncils.forEach(counId => {
             var isMemberCncl = false;
-            this.firebaseService.getCouncilByKey(counId).subscribe((councilObj) => {
+            this.firebaseService.getCouncilByKey(counId).subscribe((council) => {
                 if (this.selectedUserCouncils.indexOf(counId) !== -1) {
                     isMemberCncl = true;
                 }
-                this.councilsObj.push({
-                    councilName: councilObj[0].council,
-                    isMemberCouncil: isMemberCncl,
-                    councilId: counId
-                });
+
+                if (unitType === 'Area') {
+                    if (council[0].under === 'Added') {
+                        this.addedCouncils.push({
+                            councilName: council[0].council,
+                            isMemberCouncil: isMemberCncl,
+                            councilId: counId
+                        });
+                    }
+                    else if (council[0].council !== 'Stake Presidents') {
+                        this.areaCouncils.push({
+                            councilName: council[0].council,
+                            isMemberCouncil: isMemberCncl,
+                            councilId: counId
+                        });
+                    }
+                }
+                else if (unitType === 'Stake') {
+                    if (council[0].under === 'Added') {
+                        this.addedCouncils.push({
+                            councilName: council[0].council,
+                            isMemberCouncil: isMemberCncl,
+                            councilId: counId
+                        });
+                    }
+                    else if (council[0].council !== 'Stake Presidents' && council[0].council !== 'Bishops') {
+                        this.stakeCouncils.push({
+                            councilName: council[0].council,
+                            isMemberCouncil: isMemberCncl,
+                            councilId: counId
+                        });
+                    }
+                }
+                else if (unitType === 'Ward') {
+                    if (council[0].under === 'Added') {
+                        this.addedCouncils.push({
+                            councilName: council[0].council,
+                            isMemberCouncil: isMemberCncl,
+                            councilId: counId
+                        });
+                    }
+                    else if (council[0].council !== 'Bishops') {
+                        this.wardCouncils.push({
+                            councilName: council[0].council,
+                            isMemberCouncil: isMemberCncl,
+                            councilId: counId
+                        });
+                    }
+                }
             });
         });
     }
 
     enableSaveBtn() {
         this.enableBtn = false;
-        this.councilsObj.forEach(obj => {
+
+        this.areaCouncils.forEach(obj => {
             if (obj.isMemberCouncil) {
                 this.enableBtn = true;
                 return;
             }
         });
+
+        if (this.enableBtn === false) {
+            this.stakeCouncils.forEach(obj => {
+                if (obj.isMemberCouncil) {
+                    this.enableBtn = true;
+                    return;
+                }
+            });
+        }
+        if (this.enableBtn === false) {
+            this.wardCouncils.forEach(obj => {
+                if (obj.isMemberCouncil) {
+                    this.enableBtn = true;
+                    return;
+                }
+            });
+        }
+        if (this.enableBtn === false) {
+            this.addedCouncils.forEach(obj => {
+                if (obj.isMemberCouncil) {
+                    this.enableBtn = true;
+                    return;
+                }
+            });
+        }
     }
 
     updateCouncils() {
         this.enableBtn = false;
         var updatedCouncils = [];
-        this.councilsObj.forEach(obj => {
+
+        this.areaCouncils.forEach(obj => {
             if (obj.isMemberCouncil) {
                 updatedCouncils.push(obj.councilId);
             }
         });
+
+        this.stakeCouncils.forEach(obj => {
+            if (obj.isMemberCouncil) {
+                updatedCouncils.push(obj.councilId);
+            }
+        });
+
+        this.wardCouncils.forEach(obj => {
+            if (obj.isMemberCouncil) {
+                updatedCouncils.push(obj.councilId);
+            }
+        });
+
+        this.addedCouncils.forEach(obj => {
+            if (obj.isMemberCouncil) {
+                updatedCouncils.push(obj.councilId);
+            }
+        });
+
         this.firebaseService.updateCouncilsInUser(this.selectedUser.$key, updatedCouncils).then((res) => {
             this.firebaseService.deleteCouncilsInUserCouncils(this.selectedUser.$key).then((res) => {
                 if (res) {

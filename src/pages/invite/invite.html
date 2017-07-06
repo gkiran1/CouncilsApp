@@ -42,7 +42,31 @@
 
             <ion-item-divider class="list-title-divider">Which councils can they access</ion-item-divider>
 
-            <ion-item *ngFor="let c of council; let i = index" [ngClass]="council.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === council.length - 1 ? 'ion-item-last' : 'ion-item-middle'))">
+            <!--<ion-item *ngFor="let c of council; let i = index" [ngClass]="council.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === council.length - 1 ? 'ion-item-last' : 'ion-item-middle'))">
+                <ion-label color="dark">{{c.council}}</ion-label>
+                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council"></ion-checkbox>
+            </ion-item>-->
+
+            <ion-item *ngIf="(areaCouncils.length)" class="unittype">Area</ion-item>
+            <ion-item *ngFor="let c of areaCouncils; let i = index" [ngClass]="areaCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === areaCouncils.length - 1 ? 'ion-item-last' : 'ion-item-middle'))">
+                <ion-label color="dark">{{c.council}}</ion-label>
+                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council"></ion-checkbox>
+            </ion-item>
+
+            <ion-item *ngIf="(stakeCouncils.length)" class="unittype">Stake</ion-item>
+            <ion-item *ngFor="let c of stakeCouncils; let i = index" [ngClass]="stakeCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === stakeCouncils.length - 1 ? 'ion-item-last' : 'ion-item-middle'))">
+                <ion-label color="dark">{{c.council}}</ion-label>
+                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council"></ion-checkbox>
+            </ion-item>
+
+            <ion-item *ngIf="(wardCouncils.length)" class="unittype">Ward</ion-item>
+            <ion-item *ngFor="let c of wardCouncils; let i = index" [ngClass]="wardCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === wardCouncils.length - 1 ? 'ion-item-last' : 'ion-item-middle'))">
+                <ion-label color="dark">{{c.council}}</ion-label>
+                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council"></ion-checkbox>
+            </ion-item>
+
+            <ion-item *ngIf="(addedCouncils.length)" class="unittype">Added</ion-item>
+            <ion-item *ngFor="let c of addedCouncils; let i = index" [ngClass]="addedCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === addedCouncils.length - 1 ? 'ion-item-last' : 'ion-item-middle'))">
                 <ion-label color="dark">{{c.council}}</ion-label>
                 <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council"></ion-checkbox>
             </ion-item>

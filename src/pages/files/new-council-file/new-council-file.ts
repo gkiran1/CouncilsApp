@@ -45,6 +45,11 @@ export class NewCouncilFilePage {
   now = moment().valueOf();
   userSubscription: Subscription;
 
+  areaCouncils = []
+  stakeCouncils = [];
+  wardCouncils = [];
+  addedCouncils = [];
+
   constructor(
     fb: FormBuilder,
     public appservice: AppService,
@@ -67,8 +72,49 @@ export class NewCouncilFilePage {
       //console.log(user);
       this.profilePictureRef = firebase.storage().ref('/files/');
       this.councils = [];
+      var unitType = localStorage.getItem('unitType');
+
       user.councils.forEach(c => {
-        this.councils.push(this.firebaseservice.getCouncilByCouncilKey(c));
+
+        this.firebaseservice.getCouncilByCouncilKey(c).subscribe(council => {
+          if (unitType === 'Area') {
+            if (council['under'] === 'Added') {
+              this.addedCouncils.push(council);
+            }
+            else if (council['council'] === 'Stake Presidents') {
+              this.stakeCouncils.push(council);
+            }
+            else {
+              this.areaCouncils.push(council);
+            }
+          }
+          else if (unitType === 'Stake') {
+            if (council['under'] === 'Added') {
+              this.addedCouncils.push(council);
+            }
+            else if (council['council'] === 'Stake Presidents') {
+              this.areaCouncils.push(council);
+            }
+            else if (council['council'] === 'Bishops') {
+              this.wardCouncils.push(council);
+            }
+            else {
+              this.stakeCouncils.push(council);
+            }
+          }
+          else if (unitType === 'Ward') {
+            if (council['under'] === 'Added') {
+              this.addedCouncils.push(council);
+            }
+            else if (council['council'] === 'Bishops') {
+              this.stakeCouncils.push(council);
+            }
+            else {
+              this.wardCouncils.push(council);
+            }
+          }
+        });
+        //this.councils.push(this.firebaseservice.getCouncilByCouncilKey(c));
       });
       this.createdUser = user.firstname + ' ' + user.lastname;
       this.newCouncilFileForm = fb.group({
@@ -219,7 +265,7 @@ export class NewCouncilFilePage {
                 this.nav.push(ViewCouncilFilePage, {
                   councilid: value.councilid, councilname: value.councilname
                 }, {
-                  animate: true, animation: 'transition', direction: 'forward'
+                    animate: true, animation: 'transition', direction: 'forward'
                   });
                 // }).catch((error) => {
                 //   loader.dismiss();
@@ -410,7 +456,7 @@ export class NewCouncilFilePage {
                   this.nav.push(ViewCouncilFilePage, {
                     councilid: value.councilid, councilname: value.councilname
                   }, {
-                    animate: true, animation: 'transition', direction: 'forward'
+                      animate: true, animation: 'transition', direction: 'forward'
                     });
 
                 }).catch(error => {

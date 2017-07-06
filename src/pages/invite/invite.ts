@@ -22,6 +22,11 @@ export class InviteMemberPage {
     isValidEmail = true;
     emailErr = false;
 
+    areaCouncils = []
+    stakeCouncils = [];
+    wardCouncils = [];
+    addedCouncils = [];
+
     constructor(public http: Http,
         public navctrl: NavController,
         public fs: FirebaseService,
@@ -31,6 +36,8 @@ export class InviteMemberPage {
         public toast: ToastController,
         public emailService: EmailService, public loadingCtrl: LoadingController, ) {
         this.invite = new Invitee;
+
+        var unitType = localStorage.getItem('unitType');
 
         this.af.auth.subscribe(auth => {
             if (auth !== null) {
@@ -42,7 +49,36 @@ export class InviteMemberPage {
                     this.invite.lastupdateddate = new Date().toDateString();
                     this.invite.isactive = true;
                     this.fs.getCouncilsByType(res.unitnumber).subscribe(councils => {
-                        this.council = councils;
+                        // this.council = councils;
+
+                        councils.forEach(council => {
+
+                            if (unitType === 'Area') {
+                                if (council.under === 'Added') {
+                                    this.addedCouncils.push(council);
+                                }
+                                else if (council.council !== 'Stake Presidents') {
+                                    this.areaCouncils.push(council);
+                                }
+                            }
+                            else if (unitType === 'Stake') {
+                                if (council.under === 'Added') {
+                                    this.addedCouncils.push(council);
+                                }
+                                else if (council.council !== 'Stake Presidents' && council.council !== 'Bishops') {
+                                    this.stakeCouncils.push(council);
+                                }
+                            }
+                            else if (unitType === 'Ward') {
+                                if (council.under === 'Added') {
+                                    this.addedCouncils.push(council);
+                                }
+                                else if (council.council !== 'Bishops') {
+                                    this.wardCouncils.push(council);
+                                }
+                            }
+                        });
+
                     });
                     this.invite.councils = [];
                 });
@@ -84,7 +120,12 @@ export class InviteMemberPage {
         loader.present();
 
         this.emailErr = false;
-        this.council.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
+
+        this.areaCouncils.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
+        this.stakeCouncils.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
+        this.wardCouncils.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
+        this.addedCouncils.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
+
         this.emailService.inviteMemberEmail(this.invite.firstname, this.invite.unitnumber, this.invite.email)
             .subscribe(res => {
                 if (res.status === 200) {
@@ -108,11 +149,36 @@ export class InviteMemberPage {
 
     itemChanged() {
         this.councilsLength = false;
-        this.council.forEach(e => {
+        this.areaCouncils.forEach(e => {
             if (e.selected) {
                 this.councilsLength = true;
+                return;
             }
         });
+        if (this.councilsLength === false) {
+            this.stakeCouncils.forEach(e => {
+                if (e.selected) {
+                    this.councilsLength = true;
+                    return;
+                }
+            });
+        }
+        if (this.councilsLength === false) {
+            this.wardCouncils.forEach(e => {
+                if (e.selected) {
+                    this.councilsLength = true;
+                    return;
+                }
+            });
+        }
+        if (this.councilsLength === false) {
+            this.addedCouncils.forEach(e => {
+                if (e.selected) {
+                    this.councilsLength = true;
+                    return;
+                }
+            });
+        }
     }
 
     showAlert(errText) {
