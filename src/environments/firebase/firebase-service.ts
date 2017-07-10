@@ -94,8 +94,7 @@ export class FirebaseService {
                 googlecalendaradded: false,
                 isfirstlogin: true
             }).then(() => user.councils.forEach(counc => {
-                this.createUserCouncils(uid, counc);
-                firebase.auth().currentUser.displayName = user.firstname + user.lastname;
+                this.createUserCouncils(uid, counc);                
             }));
     }
 
