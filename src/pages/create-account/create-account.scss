@@ -1,38 +1,40 @@
 create-account {
-
-.createBtn{
-    margin-top: 20px;
-}
-.createBtn button:disabled{
-color:#222;
-}
-.cancelBtn{
-    font-size: 17px;
-}
-ion-list ion-item .mainheading{
-    margin-top: 50px;
-    font-size:15px;
-}
-ion-list ion-item .subtext1{
-    margin-top:10px;
-    font-size:12px;
-
-}
-ion-list ion-item .subtext2{
-    font-size:12px;
-
-}
-ion-content ion-item ion-label{
-    color:#a9aaad;
-}
-ion-list ion-item{
-    border-bottom-color: #f4f4f4;
-
-}
-.inputtype {
-    // font-size:12px;
-}
-   .create-title {
+    .createBtn {
+        margin-top: 20px;
+    }
+    .createBtn button:disabled {
+        color: #222;
+    }
+    .cancelBtn {
+        font-size: 17px;
+    }
+    ion-list ion-item .mainheading {
+        margin-top: 50px;
+        font-size: 15px;
+    }
+    ion-list ion-item .subtext1 {
+        margin-top: 10px;
+        font-size: 12px;
+    }
+    ion-list ion-item .subtext2 {
+        font-size: 12px;
+    }
+    ion-content ion-item ion-label {
+        color: #a9aaad;
+    }
+    .lbl-note {
+        color: #a9aaad !important;
+        padding-left: 16px !important;
+        font-size: 13px !important;
+        margin: 0px !important;
+    }
+    ion-list ion-item {
+        border-bottom-color: #f4f4f4;
+    }
+    .inputtype {
+        // font-size:12px;
+    }
+    .create-title {
         font-family: Gotham-Medium, sans-serif;
         font-size: 28px;
         color: #35373A;
@@ -49,5 +51,11 @@ ion-list ion-item{
         margin-top: 14px;
         text-align: center;
         font-size: 17px;
+    }
+    .error-msg {
+        padding-left: 16px;
+        color: #F13822 !important;
+        font-size: 13px !important;
+        margin: 0px !important;
     }
 }
