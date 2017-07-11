@@ -26,7 +26,26 @@ directory-page {
         display: flex;
         align-items: center;
     }
+    .searchbar-ios .searchbar-input {
+        padding: 6px 20px 6px 25px !important;
+        background: #FAFAFA !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    .searchbar-md .searchbar-input {
+        padding: 6px 20px 6px 30px !important;
+        background: #FAFAFA !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    .searchbar-search-icon {
+        left: 8px !important;
+    }
+    .searchbar-clear-icon {
+        right: 0 !important;
+        padding-right: 0 !important;
+    }
     ion-searchbar {
         background: #FAFAFA !important;
-    }   
+    }
 }
