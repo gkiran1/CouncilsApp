@@ -18,4 +18,5 @@ export class User {
     councilnames: string;
     phone: string;
     pushtoken: string;
+    status: string;
 }

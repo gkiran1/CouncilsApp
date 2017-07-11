@@ -48,12 +48,20 @@ export class FirebaseService {
     signupNewUser(user, userAvatar) {
         return this.fireAuth.createUserWithEmailAndPassword(user.email, user.password)
             .then((newUser) => {
-                // Sign in the user.
+                // Sign in the user.             
                 return this.fireAuth.signInWithEmailAndPassword(user.email, user.password)
                     .then((authenticatedUser) => {
-                        // Successful login in firebase, create user profile.
-                        this.createAuthUser(user, authenticatedUser.uid).then(res => {
-                            this.saveIdenticon(authenticatedUser.uid, userAvatar);
+                        var usr = firebase.auth().currentUser;
+                        usr.updateProfile({
+                            displayName: user.firstname + ' ' + user.lastname,
+                            photoURL: userAvatar.url
+                        }).then(res => {
+                            // Successful login in firebase, create user profile.
+                            this.createAuthUser(user, authenticatedUser.uid).then(res => {
+                                this.saveIdenticon(authenticatedUser.uid, userAvatar);
+                            });
+                        }).catch(function (error) {
+                            throw error;
                         });
                     }).catch(function (error) {
                         throw error;
@@ -86,7 +94,7 @@ export class FirebaseService {
                 googlecalendaradded: false,
                 isfirstlogin: true
             }).then(() => user.councils.forEach(counc => {
-                this.createUserCouncils(uid, counc);
+                this.createUserCouncils(uid, counc);                
             }));
     }
 

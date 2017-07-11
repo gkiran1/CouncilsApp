@@ -1,0 +1,51 @@
+directory-page {
+    ion-list {
+        border-bottom: 1px solid lightgray;
+    }
+    .font1 {
+        font-family: Bernina-Regular, sans-serif;
+        font-size: 17px !important;
+        color: #35373a !important;
+        flex: 1;
+    }
+    .font2 {
+        font-family: 'Bernina-Regular', sans-serif;
+        font-size: 17px;
+        color: #a9aaac;
+    }
+    .ion-item-last {
+        border-bottom: none !important;
+    }
+    .item-ios {
+        border-bottom: none !important;
+    }
+    .item-md {
+        border-bottom: none !important;
+    }
+    ion-label {
+        display: flex;
+        align-items: center;
+    }
+    .searchbar-ios .searchbar-input {
+        padding: 6px 20px 6px 25px !important;
+        background: #FAFAFA !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    .searchbar-md .searchbar-input {
+        padding: 6px 20px 6px 30px !important;
+        background: #FAFAFA !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    .searchbar-search-icon {
+        left: 8px !important;
+    }
+    .searchbar-clear-icon {
+        right: 0 !important;
+        padding-right: 0 !important;
+    }
+    ion-searchbar {
+        background: #FAFAFA !important;
+    }
+}
