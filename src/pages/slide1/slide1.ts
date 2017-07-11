@@ -7,11 +7,12 @@ import { DonationsWelcomePage } from '../donations/donations-welcome/donations-w
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Subscription } from "rxjs";
 import { FirebaseService } from '../../environments/firebase/firebase-service';
+import { DirectoryPage } from '../directory/directory.component';
 
 @Component({
     templateUrl: 'slide1.html',
     selector: 'slide1',
-    providers: [AdminPage, SettingsPage, DonationsWelcomePage]
+    providers: [AdminPage, SettingsPage, DonationsWelcomePage, DirectoryPage]
 })
 
 export class slide1Page {
@@ -46,6 +47,7 @@ export class slide1Page {
 
         (document.getElementById('settingsPage')).classList.remove("menu-selected");
         (document.getElementById('donationsPage')).classList.remove("menu-selected");
+        (document.getElementById('directoryPage')).classList.remove("menu-selected");
 
         (document.getElementById(button)).classList.add("menu-selected");
     }
@@ -61,5 +63,9 @@ export class slide1Page {
     donationsPage(button) {
         this.setSelectedClass(button);
         this.menuPage.nav.setRoot(DonationsWelcomePage);
+    }
+    directoryPage(button) {
+        this.setSelectedClass(button);
+        this.menuPage.nav.push(DirectoryPage);
     }
 }
