@@ -35,6 +35,10 @@ export class DirectoryPage {
                         userObj.status = status ? '#3cb18a' : '#a9aaac';
                     });
                     this.users.push(userObj);
+
+                    this.users.sort(function (a, b) {
+                        return (a.status === '#3cb18a' && b.status === '#a9aaac') ? -1 : ((a.status === '#a9aaac' && b.status === '#3cb18a') ? 1 : 0);
+                    });
                 });
             });
         }
@@ -51,12 +55,17 @@ export class DirectoryPage {
                                     usrs[0].status = status ? '#3cb18a' : '#a9aaac';
                                 });
                                 this.users.push(usrs[0]);
+
+                                this.users.sort(function (a, b) {
+                                    return (a.status === '#3cb18a' && b.status === '#a9aaac') ? -1 : ((a.status === '#a9aaac' && b.status === '#3cb18a') ? 1 : 0);
+                                });
+
                             }
                         });
                     });
                 });
             });
-        }
+        }      
     }
 
     getUsersByCouncilId(councilId: string) {
