@@ -10,7 +10,7 @@ export class EmailService {
     mailApiUrl = 'https://councilsapi-165009.appspot.com/sendmail';
 
     //Email to invite member
-    inviteMemberEmail(firstname, unitnum, email, adminname) {
+    inviteMemberEmail(name, unitnum, email, adminname) {
 
         return this.http.post(this.mailApiUrl, {
             "event": "invite", "email": email, "name": name, "unitnum": unitnum, "adminname": adminname
