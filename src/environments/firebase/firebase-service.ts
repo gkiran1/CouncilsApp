@@ -329,11 +329,12 @@ export class FirebaseService {
         });
     }
 
-    saveFeedback(comments, createdBy, createdDate) {
+    saveFeedback(feedback: any) {
         this.rootRef.child('feedback').push({
-            "comments": comments,
-            "createdby": createdBy,
-            "createddate": createdDate
+            createdby: feedback.createdby,
+            createddate: feedback.createddate,
+            feedbacktopic: feedback.feedbacktopic,
+            describe: feedback.describe,
         });
     }
 
