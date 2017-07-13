@@ -208,10 +208,12 @@ export class AgendaLiteEditPage {
       this.users = [];
       uc.forEach(e => {
         this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
-          this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
-            u[0].status = status ? '#3cb18a' : '#a9aaac';
-          });
-          this.users.push(u[0]);
+          if (u[0].isactive) {
+            this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
+              u[0].status = status ? '#3cb18a' : '#a9aaac';
+            });
+            this.users.push(u[0]);
+          }
         });
       });
     });
