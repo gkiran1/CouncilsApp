@@ -31,14 +31,16 @@ export class DirectoryPage {
             this.firebaseService.getUsersByUnitNumber(unitNumber).subscribe(usersObj => {
                 this.users = [];
                 usersObj.forEach(userObj => {
-                    this.firebaseService.checkNetworkStatus(userObj.$key, function (status) {
-                        userObj.status = status ? '#3cb18a' : '#a9aaac';
-                    });
-                    this.users.push(userObj);
+                    if (userObj.isactive) {
+                        this.firebaseService.checkNetworkStatus(userObj.$key, function (status) {
+                            userObj.status = status ? '#3cb18a' : '#a9aaac';
+                        });
+                        this.users.push(userObj);
 
-                    this.users.sort(function (a, b) {
-                        return (a.status === '#3cb18a' && b.status === '#a9aaac') ? -1 : ((a.status === '#a9aaac' && b.status === '#3cb18a') ? 1 : 0);
-                    });
+                        this.users.sort(function (a, b) {
+                            return (a.status === '#3cb18a' && b.status === '#a9aaac') ? -1 : ((a.status === '#a9aaac' && b.status === '#3cb18a') ? 1 : 0);
+                        });
+                    }
                 });
             });
         }
@@ -49,23 +51,24 @@ export class DirectoryPage {
                 this.getUsersByCouncilId(councilId).subscribe(councilUsers => {
                     councilUsers.forEach(councilUser => {
                         this.firebaseService.getUsersByKey(councilUser.userid).subscribe(usrs => {
-                            userKeys.push(usrs[0].$key);
-                            if (userKeys.indexOf(usrs[0].$key) === userKeys.lastIndexOf(usrs[0].$key)) {
-                                this.firebaseService.checkNetworkStatus(usrs[0].$key, function (status) {
-                                    usrs[0].status = status ? '#3cb18a' : '#a9aaac';
-                                });
-                                this.users.push(usrs[0]);
+                            if (usrs[0].isactive) {
+                                userKeys.push(usrs[0].$key);
+                                if (userKeys.indexOf(usrs[0].$key) === userKeys.lastIndexOf(usrs[0].$key)) {
+                                    this.firebaseService.checkNetworkStatus(usrs[0].$key, function (status) {
+                                        usrs[0].status = status ? '#3cb18a' : '#a9aaac';
+                                    });
+                                    this.users.push(usrs[0]);
 
-                                this.users.sort(function (a, b) {
-                                    return (a.status === '#3cb18a' && b.status === '#a9aaac') ? -1 : ((a.status === '#a9aaac' && b.status === '#3cb18a') ? 1 : 0);
-                                });
-
+                                    this.users.sort(function (a, b) {
+                                        return (a.status === '#3cb18a' && b.status === '#a9aaac') ? -1 : ((a.status === '#a9aaac' && b.status === '#3cb18a') ? 1 : 0);
+                                    });
+                                }
                             }
                         });
                     });
                 });
             });
-        }      
+        }
     }
 
     getUsersByCouncilId(councilId: string) {
