@@ -94,7 +94,7 @@ export class FirebaseService {
                 googlecalendaradded: false,
                 isfirstlogin: true
             }).then(() => user.councils.forEach(counc => {
-                this.createUserCouncils(uid, counc);                
+                this.createUserCouncils(uid, counc);
             }));
     }
 
@@ -1115,33 +1115,34 @@ export class FirebaseService {
                         var id = usrObj.val()['userid'];
                         userKeys.push(id);
                         if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
-                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
-                            notSettingsRef.once('value', function (notSnap) {
-                                if (notSnap.exists()) {
-                                    notSnap.forEach(notSetting => {
-                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['agendas'] === true) {
-                                            var usrRef = firebase.database().ref().child('users/' + id);
-                                            usrRef.once('value').then(function (usrSnapshot) {
-                                                if (usrSnapshot.val()['isactive'] === true) {
+                            var usrRef = firebase.database().ref().child('users/' + id);
+                            usrRef.once('value').then(function (usrSnapshot) {
+                                if (usrSnapshot.val()['isactive'] === true) {
 
-                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
-                                                    var email = usrSnapshot.val()['email'];
+                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+                                    var email = usrSnapshot.val()['email'];
 
-                                                    firebase.database().ref().child('notifications').push({
-                                                        userid: id,
-                                                        nodeid: agendaId,
-                                                        nodename: 'agendas',
-                                                        description: description,
-                                                        action: 'create',
-                                                        text: 'New ' + description + ' agenda posted',
-                                                        createddate: new Date().toISOString(),
-                                                        createdtime: new Date().toTimeString(),
-                                                        createdby: createdBy,
-                                                        isread: false
-                                                    }).catch(err => {
-                                                        console.log('firebase error:' + err);
-                                                        throw err
-                                                    });
+                                    firebase.database().ref().child('notifications').push({
+                                        userid: id,
+                                        nodeid: agendaId,
+                                        nodename: 'agendas',
+                                        description: description,
+                                        action: 'create',
+                                        text: 'New ' + description + ' agenda posted',
+                                        createddate: new Date().toISOString(),
+                                        createdtime: new Date().toTimeString(),
+                                        createdby: createdBy,
+                                        isread: false
+                                    }).catch(err => {
+                                        console.log('firebase error:' + err);
+                                        throw err
+                                    });
+
+                                    var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                                    notSettingsRef.once('value', function (notSnap) {
+                                        if (notSnap.exists()) {
+                                            notSnap.forEach(notSetting => {
+                                                if (notSetting.val()['allactivity'] === true || notSetting.val()['agendas'] === true) {
 
                                                     if (pushtkn !== undefined && pushtkn !== '') {
                                                         var push = {
@@ -1165,10 +1166,9 @@ export class FirebaseService {
                                                                 console.log('notification not sent, something went wrong');
                                                             });
                                                     }
+                                                    return true; // to stop the loop.
                                                 }
-
                                             });
-                                            return true; // to stop the loop.
                                         }
                                     });
                                 }
@@ -1202,32 +1202,32 @@ export class FirebaseService {
                         var id = usrObj.val()['userid'];
                         userKeys.push(id);
                         if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
-                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
-                            notSettingsRef.once('value', function (notSnap) {
-                                if (notSnap.exists()) {
-                                    notSnap.forEach(notSetting => {
-                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['agendas'] === true) {
-                                            var usrRef = firebase.database().ref().child('users/' + id);
-                                            usrRef.once('value').then(function (usrSnapshot) {
-                                                if (usrSnapshot.val()['isactive'] === true) {
+                            var usrRef = firebase.database().ref().child('users/' + id);
+                            usrRef.once('value').then(function (usrSnapshot) {
+                                if (usrSnapshot.val()['isactive'] === true) {
 
-                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+                                    var pushtkn = usrSnapshot.val()['pushtoken'];
 
-                                                    firebase.database().ref().child('notifications').push({
-                                                        userid: id,
-                                                        nodeid: agendaId,
-                                                        nodename: 'agendas',
-                                                        description: description,
-                                                        action: 'edit',
-                                                        text: txt,
-                                                        createddate: new Date().toISOString(),
-                                                        createdtime: new Date().toTimeString(),
-                                                        createdby: createdBy,
-                                                        isread: false
-                                                    }).catch(err => {
-                                                        throw err
-                                                    });
+                                    firebase.database().ref().child('notifications').push({
+                                        userid: id,
+                                        nodeid: agendaId,
+                                        nodename: 'agendas',
+                                        description: description,
+                                        action: 'edit',
+                                        text: txt,
+                                        createddate: new Date().toISOString(),
+                                        createdtime: new Date().toTimeString(),
+                                        createdby: createdBy,
+                                        isread: false
+                                    }).catch(err => {
+                                        throw err
+                                    });
 
+                                    var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                                    notSettingsRef.once('value', function (notSnap) {
+                                        if (notSnap.exists()) {
+                                            notSnap.forEach(notSetting => {
+                                                if (notSetting.val()['allactivity'] === true || notSetting.val()['agendas'] === true) {
                                                     if (pushtkn !== undefined && pushtkn !== '') {
                                                         var push = {
                                                             notification: {
@@ -1250,9 +1250,9 @@ export class FirebaseService {
                                                                 console.log('notification not sent, something went wrong');
                                                             });
                                                     }
+                                                    return true; // to stop the loop.
                                                 }
                                             });
-                                            return true; // to stop the loop.
                                         }
                                     });
                                 }
@@ -1262,8 +1262,6 @@ export class FirebaseService {
                 });
             }
         });
-        // }
-
     }
 
     // Agendas Delete Trigger ------------------------
@@ -1290,32 +1288,32 @@ export class FirebaseService {
                     var id = usrObj.val()['userid'];
                     userKeys.push(id);
                     if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
-                        var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
-                        notSettingsRef.once('value', function (notSnap) {
-                            if (notSnap.exists()) {
-                                notSnap.forEach(notSetting => {
-                                    if (notSetting.val()['allactivity'] === true || notSetting.val()['agendas'] === true) {
-                                        var usrRef = firebase.database().ref().child('users/' + id);
-                                        usrRef.once('value').then(function (usrSnapshot) {
-                                            if (usrSnapshot.val()['isactive'] === true) {
+                        var usrRef = firebase.database().ref().child('users/' + id);
+                        usrRef.once('value').then(function (usrSnapshot) {
+                            if (usrSnapshot.val()['isactive'] === true) {
 
-                                                var pushtkn = usrSnapshot.val()['pushtoken'];
+                                var pushtkn = usrSnapshot.val()['pushtoken'];
 
-                                                firebase.database().ref().child('notifications').push({
-                                                    userid: id,
-                                                    nodeid: agendaId,
-                                                    nodename: 'agendas',
-                                                    description: description,
-                                                    action: 'delete',
-                                                    text: txt,
-                                                    createddate: new Date().toISOString(),
-                                                    createdtime: new Date().toTimeString(),
-                                                    createdby: createdBy,
-                                                    isread: false
-                                                }).catch(err => {
-                                                    throw err
-                                                });
+                                firebase.database().ref().child('notifications').push({
+                                    userid: id,
+                                    nodeid: agendaId,
+                                    nodename: 'agendas',
+                                    description: description,
+                                    action: 'delete',
+                                    text: txt,
+                                    createddate: new Date().toISOString(),
+                                    createdtime: new Date().toTimeString(),
+                                    createdby: createdBy,
+                                    isread: false
+                                }).catch(err => {
+                                    throw err
+                                });
 
+                                var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                                notSettingsRef.once('value', function (notSnap) {
+                                    if (notSnap.exists()) {
+                                        notSnap.forEach(notSetting => {
+                                            if (notSetting.val()['allactivity'] === true || notSetting.val()['agendas'] === true) {
                                                 if (pushtkn !== undefined && pushtkn !== '') {
                                                     var push = {
                                                         notification: {
@@ -1338,10 +1336,9 @@ export class FirebaseService {
                                                             console.log('notification not sent, something went wrong');
                                                         });
                                                 }
-
+                                                return true; // to stop the loop.
                                             }
                                         });
-                                        return true; // to stop the loop.
                                     }
                                 });
                             }
@@ -1369,32 +1366,33 @@ export class FirebaseService {
                         var id = usrObj.val()['userid'];
                         userKeys.push(id);
                         if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
-                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
-                            notSettingsRef.once('value', function (notSnap) {
-                                if (notSnap.exists()) {
-                                    notSnap.forEach(notSetting => {
-                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['assignments'] === true) {
-                                            var usrRef = firebase.database().ref().child('users/' + id);
-                                            usrRef.once('value').then(function (usrSnapshot) {
-                                                if (usrSnapshot.val()['isactive'] === true) {
 
-                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+                            var usrRef = firebase.database().ref().child('users/' + id);
+                            usrRef.once('value').then(function (usrSnapshot) {
+                                if (usrSnapshot.val()['isactive'] === true) {
 
-                                                    firebase.database().ref().child('notifications').push({
-                                                        userid: id,
-                                                        nodeid: assignmentId,
-                                                        nodename: 'assignments',
-                                                        description: description,
-                                                        action: 'create',
-                                                        text: description + ' accepted by ' + assignedUser,
-                                                        createddate: new Date().toISOString(),
-                                                        createdtime: new Date().toTimeString(),
-                                                        createdby: createdBy,
-                                                        isread: false
-                                                    }).catch(err => {
-                                                        throw err
-                                                    });
+                                    var pushtkn = usrSnapshot.val()['pushtoken'];
 
+                                    firebase.database().ref().child('notifications').push({
+                                        userid: id,
+                                        nodeid: assignmentId,
+                                        nodename: 'assignments',
+                                        description: description,
+                                        action: 'create',
+                                        text: description + ' accepted by ' + assignedUser,
+                                        createddate: new Date().toISOString(),
+                                        createdtime: new Date().toTimeString(),
+                                        createdby: createdBy,
+                                        isread: false
+                                    }).catch(err => {
+                                        throw err
+                                    });
+
+                                    var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                                    notSettingsRef.once('value', function (notSnap) {
+                                        if (notSnap.exists()) {
+                                            notSnap.forEach(notSetting => {
+                                                if (notSetting.val()['allactivity'] === true || notSetting.val()['assignments'] === true) {
                                                     if (pushtkn !== undefined && pushtkn !== '') {
                                                         var push = {
                                                             notification: {
@@ -1417,10 +1415,9 @@ export class FirebaseService {
                                                                 console.log('notification not sent, something went wrong');
                                                             });
                                                     }
-
+                                                    return true; // to stop the loop.
                                                 }
                                             });
-                                            return true; // to stop the loop.
                                         }
                                     });
                                 }
@@ -1430,7 +1427,6 @@ export class FirebaseService {
                 });
             }
         });
-
     }
 
     // Assignments Complete & Edit Trigger ------------------------
@@ -1466,32 +1462,32 @@ export class FirebaseService {
                             var id = usrObj.val()['userid'];
                             userKeys.push(id);
                             if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
-                                var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
-                                notSettingsRef.once('value', function (notSnap) {
-                                    if (notSnap.exists()) {
-                                        notSnap.forEach(notSetting => {
-                                            if (notSetting.val()['allactivity'] === true || notSetting.val()['assignments'] === true) {
-                                                var usrRef = firebase.database().ref().child('users/' + id);
-                                                usrRef.once('value').then(function (usrSnapshot) {
-                                                    if (usrSnapshot.val()['isactive'] === true) {
+                                var usrRef = firebase.database().ref().child('users/' + id);
+                                usrRef.once('value').then(function (usrSnapshot) {
+                                    if (usrSnapshot.val()['isactive'] === true) {
 
-                                                        var pushtkn = usrSnapshot.val()['pushtoken'];
+                                        var pushtkn = usrSnapshot.val()['pushtoken'];
 
-                                                        firebase.database().ref().child('notifications').push({
-                                                            userid: id,
-                                                            nodeid: assignmentId,
-                                                            nodename: 'assignments',
-                                                            description: description,
-                                                            action: txt,
-                                                            text: text,
-                                                            createddate: new Date().toISOString(),
-                                                            createdtime: new Date().toTimeString(),
-                                                            createdby: createdBy,
-                                                            isread: false
-                                                        }).catch(err => {
-                                                            throw err
-                                                        });
+                                        firebase.database().ref().child('notifications').push({
+                                            userid: id,
+                                            nodeid: assignmentId,
+                                            nodename: 'assignments',
+                                            description: description,
+                                            action: txt,
+                                            text: text,
+                                            createddate: new Date().toISOString(),
+                                            createdtime: new Date().toTimeString(),
+                                            createdby: createdBy,
+                                            isread: false
+                                        }).catch(err => {
+                                            throw err
+                                        });
 
+                                        var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                                        notSettingsRef.once('value', function (notSnap) {
+                                            if (notSnap.exists()) {
+                                                notSnap.forEach(notSetting => {
+                                                    if (notSetting.val()['allactivity'] === true || notSetting.val()['assignments'] === true) {
                                                         if (pushtkn !== undefined && pushtkn !== '') {
                                                             var push = {
                                                                 notification: {
@@ -1514,10 +1510,9 @@ export class FirebaseService {
                                                                     console.log('notification not sent, something went wrong');
                                                                 });
                                                         }
-
+                                                        return true; // to stop the loop.
                                                     }
                                                 });
-                                                return true; // to stop the loop.
                                             }
                                         });
                                     }
@@ -1556,32 +1551,33 @@ export class FirebaseService {
                     var id = usrObj.val()['userid'];
                     userKeys.push(id);
                     if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
-                        var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
-                        notSettingsRef.once('value', function (notSnap) {
-                            if (notSnap.exists()) {
-                                notSnap.forEach(notSetting => {
-                                    if (notSetting.val()['allactivity'] === true || notSetting.val()['assignments'] === true) {
-                                        var usrRef = firebase.database().ref().child('users/' + id);
-                                        usrRef.once('value').then(function (usrSnapshot) {
-                                            if (usrSnapshot.val()['isactive'] === true) {
 
-                                                var pushtkn = usrSnapshot.val()['pushtoken'];
+                        var usrRef = firebase.database().ref().child('users/' + id);
+                        usrRef.once('value').then(function (usrSnapshot) {
+                            if (usrSnapshot.val()['isactive'] === true) {
 
-                                                firebase.database().ref().child('notifications').push({
-                                                    userid: id,
-                                                    nodeid: assignmentId,
-                                                    nodename: 'assignments',
-                                                    description: description,
-                                                    action: txt,
-                                                    text: text,
-                                                    createddate: new Date().toISOString(),
-                                                    createdtime: new Date().toTimeString(),
-                                                    createdby: createdBy,
-                                                    isread: false
-                                                }).catch(err => {
-                                                    throw err
-                                                });
+                                var pushtkn = usrSnapshot.val()['pushtoken'];
 
+                                firebase.database().ref().child('notifications').push({
+                                    userid: id,
+                                    nodeid: assignmentId,
+                                    nodename: 'assignments',
+                                    description: description,
+                                    action: txt,
+                                    text: text,
+                                    createddate: new Date().toISOString(),
+                                    createdtime: new Date().toTimeString(),
+                                    createdby: createdBy,
+                                    isread: false
+                                }).catch(err => {
+                                    throw err
+                                });
+
+                                var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                                notSettingsRef.once('value', function (notSnap) {
+                                    if (notSnap.exists()) {
+                                        notSnap.forEach(notSetting => {
+                                            if (notSetting.val()['allactivity'] === true || notSetting.val()['assignments'] === true) {
                                                 if (pushtkn !== undefined && pushtkn !== '') {
                                                     var push = {
                                                         notification: {
@@ -1604,10 +1600,9 @@ export class FirebaseService {
                                                             console.log('notification not sent, something went wrong');
                                                         });
                                                 }
-
+                                                return true; // to stop the loop.
                                             }
                                         });
-                                        return true; // to stop the loop.
                                     }
                                 });
                             }
@@ -1635,32 +1630,33 @@ export class FirebaseService {
                         var id = usrObj.val()['userid'];
                         userKeys.push(id);
                         if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
-                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
-                            notSettingsRef.once('value', function (notSnap) {
-                                if (notSnap.exists()) {
-                                    notSnap.forEach(notSetting => {
-                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['discussions'] === true) {
-                                            var usrRef = firebase.database().ref().child('users/' + id);
-                                            usrRef.once('value').then(function (usrSnapshot) {
-                                                if (usrSnapshot.val()['isactive'] === true) {
 
-                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+                            var usrRef = firebase.database().ref().child('users/' + id);
+                            usrRef.once('value').then(function (usrSnapshot) {
+                                if (usrSnapshot.val()['isactive'] === true) {
 
-                                                    firebase.database().ref().child('notifications').push({
-                                                        userid: id,
-                                                        nodeid: discussionId,
-                                                        nodename: 'discussions',
-                                                        description: description,
-                                                        action: 'create',
-                                                        text: description + ' created in ' + councilName,
-                                                        createddate: new Date().toISOString(),
-                                                        createdtime: new Date().toTimeString(),
-                                                        createdby: createdBy,
-                                                        isread: false
-                                                    }).catch(err => {
-                                                        throw err
-                                                    });
+                                    var pushtkn = usrSnapshot.val()['pushtoken'];
 
+                                    firebase.database().ref().child('notifications').push({
+                                        userid: id,
+                                        nodeid: discussionId,
+                                        nodename: 'discussions',
+                                        description: description,
+                                        action: 'create',
+                                        text: description + ' created in ' + councilName,
+                                        createddate: new Date().toISOString(),
+                                        createdtime: new Date().toTimeString(),
+                                        createdby: createdBy,
+                                        isread: false
+                                    }).catch(err => {
+                                        throw err
+                                    });
+
+                                    var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                                    notSettingsRef.once('value', function (notSnap) {
+                                        if (notSnap.exists()) {
+                                            notSnap.forEach(notSetting => {
+                                                if (notSetting.val()['allactivity'] === true || notSetting.val()['discussions'] === true) {
                                                     if (pushtkn !== undefined && pushtkn !== '') {
                                                         var push = {
                                                             notification: {
@@ -1683,9 +1679,9 @@ export class FirebaseService {
                                                                 console.log('notification not sent, something went wrong');
                                                             });
                                                     }
+                                                    return true; // to stop the loop.
                                                 }
                                             });
-                                            return true; // to stop the loop.
                                         }
                                     });
                                 }
@@ -1776,25 +1772,26 @@ export class FirebaseService {
                         var pushtkn = usrSnapshot.val()['pushtoken'];
                         var email = usrSnapshot.val()['email'];
 
+                        firebase.database().ref().child('notifications').push({
+                            userid: userId,
+                            nodeid: privateDiscussionId,
+                            nodename: 'privatediscussions',
+                            description: description,
+                            action: 'create',
+                            text: "<h3>" + "<span class='nottxt-lbl'>" + description + "</span>" + " private discussion invite" + "</h3>",
+                            createddate: new Date().toISOString(),
+                            createdtime: new Date().toTimeString(),
+                            createdby: createdBy,
+                            isread: false
+                        }).catch(err => {
+                            throw err
+                        });
+
                         var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(userId);
                         notSettingsRef.once('value', function (notSnap) {
                             if (notSnap.exists()) {
                                 notSnap.forEach(notSetting => {
                                     if (notSetting.val()['allactivity'] === true || notSetting.val()['pvtdiscussions'] === true) {
-                                        firebase.database().ref().child('notifications').push({
-                                            userid: userId,
-                                            nodeid: privateDiscussionId,
-                                            nodename: 'privatediscussions',
-                                            description: description,
-                                            action: 'create',
-                                            text: "<h3>" + "<span class='nottxt-lbl'>" + description + "</span>" + " private discussion invite" + "</h3>",
-                                            createddate: new Date().toISOString(),
-                                            createdtime: new Date().toTimeString(),
-                                            createdby: createdBy,
-                                            isread: false
-                                        }).catch(err => {
-                                            throw err
-                                        });
 
                                         if (pushtkn !== undefined && pushtkn !== '') {
                                             var push = {
@@ -1824,7 +1821,6 @@ export class FirebaseService {
                                 });
                             }
                         });
-
                     }
                 });
             }
@@ -1962,33 +1958,33 @@ export class FirebaseService {
                         var id = usrObj.val()['userid'];
                         userKeys.push(id);
                         if (userKeys.indexOf(id) === userKeys.lastIndexOf(id)) {
-                            var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
-                            notSettingsRef.once('value', function (notSnap) {
-                                if (notSnap.exists()) {
-                                    notSnap.forEach(notSetting => {
-                                        if (notSetting.val()['allactivity'] === true || notSetting.val()['files'] === true) {
-                                            var usrRef = firebase.database().ref().child('users/' + id);
-                                            usrRef.once('value').then(function (usrSnapshot) {
-                                                if (usrSnapshot.val()['isactive'] === true) {
+                            var usrRef = firebase.database().ref().child('users/' + id);
+                            usrRef.once('value').then(function (usrSnapshot) {
+                                if (usrSnapshot.val()['isactive'] === true) {
 
-                                                    var pushtkn = usrSnapshot.val()['pushtoken'];
-                                                    var txt = 'New ' + name + ' file uploaded';
+                                    var pushtkn = usrSnapshot.val()['pushtoken'];
+                                    var txt = 'New ' + name + ' file uploaded';
 
-                                                    firebase.database().ref().child('notifications').push({
-                                                        userid: id,
-                                                        nodeid: fileId,
-                                                        nodename: 'files',
-                                                        description: description,
-                                                        action: 'create',
-                                                        text: txt,
-                                                        createddate: new Date().toISOString(),
-                                                        createdtime: new Date().toTimeString(),
-                                                        createdby: createdBy,
-                                                        isread: false
-                                                    }).catch(err => {
-                                                        throw err
-                                                    });
+                                    firebase.database().ref().child('notifications').push({
+                                        userid: id,
+                                        nodeid: fileId,
+                                        nodename: 'files',
+                                        description: description,
+                                        action: 'create',
+                                        text: txt,
+                                        createddate: new Date().toISOString(),
+                                        createdtime: new Date().toTimeString(),
+                                        createdby: createdBy,
+                                        isread: false
+                                    }).catch(err => {
+                                        throw err
+                                    });
 
+                                    var notSettingsRef = firebase.database().ref().child('notificationsettings').orderByChild('userid').equalTo(id);
+                                    notSettingsRef.once('value', function (notSnap) {
+                                        if (notSnap.exists()) {
+                                            notSnap.forEach(notSetting => {
+                                                if (notSetting.val()['allactivity'] === true || notSetting.val()['files'] === true) {
                                                     if (pushtkn !== undefined && pushtkn !== '') {
                                                         var push = {
                                                             notification: {
@@ -2011,10 +2007,9 @@ export class FirebaseService {
                                                                 console.log('notification not sent, something went wrong');
                                                             });
                                                     }
-
+                                                    return true; // to stop the loop.
                                                 }
                                             });
-                                            return true; // to stop the loop.
                                         }
                                     });
                                 }
