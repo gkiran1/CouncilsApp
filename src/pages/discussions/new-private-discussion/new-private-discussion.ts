@@ -25,18 +25,20 @@ export class NewPrivateDiscussionPage {
             this.firebaseservice.getUsersByCouncil(councilid).subscribe(uc => {
               uc.forEach(e => {
                 this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
-                  let v = this.users.some(i => {
-                    return i.$key === u[0].$key;
-                  });
-                  u[0].councilsString = '';
-                  u[0].councils.forEach(c => {
-                    this.firebaseservice.getCouncilByCouncilKey(c).subscribe(council => {
-                      u[0].councilsString = `${u[0].councilsString}${u[0].councilsString ? ',' : ''} ${council.council}`;
+                  if (u[0].isactive) {
+                    let v = this.users.some(i => {
+                      return i.$key === u[0].$key;
                     });
-                  });
-                  if (!v) {
-                    this.users.push(u[0]);
-                    this.isLoading = false;
+                    u[0].councilsString = '';
+                    u[0].councils.forEach(c => {
+                      this.firebaseservice.getCouncilByCouncilKey(c).subscribe(council => {
+                        u[0].councilsString = `${u[0].councilsString}${u[0].councilsString ? ',' : ''} ${council.council}`;
+                      });
+                    });
+                    if (!v) {
+                      this.users.push(u[0]);
+                      this.isLoading = false;
+                    }
                   }
                 });
               });
