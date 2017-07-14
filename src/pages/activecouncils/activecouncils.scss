@@ -1,7 +1,7 @@
 page-activecouncils {
-    ion-content{
-         background-color: #f7f7f7 !important;
-    }  
+    ion-content {
+        background-color: #f7f7f7 !important;
+    }
     .text-content {
         position: absolute;
         top: 50%;
@@ -36,5 +36,16 @@ page-activecouncils {
         font-family: Bernina-semibold, sans-serif;
         font-size: 13px !important;
         color: #35373a !important;
+    }
+    .unittype1 {
+        background: #FAFAFA !important;
+        border-bottom: none !important;
+        text-transform: uppercase;
+    }
+    .unittype1 ion-label {
+        font-family: Bernina-semibold, sans-serif;
+        font-size: 13px !important;
+        color: #35373a !important;
+        padding-top: 22px !important;
     }
 }

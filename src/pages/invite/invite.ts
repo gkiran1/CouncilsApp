@@ -28,6 +28,8 @@ export class InviteMemberPage {
     addedCouncils = [];
     adminname;
 
+    firstShown;
+
     constructor(public http: Http,
         public navctrl: NavController,
         public fs: FirebaseService,
@@ -79,6 +81,20 @@ export class InviteMemberPage {
                                     this.wardCouncils.push(council);
                                 }
                             }
+
+                            if (this.areaCouncils.length > 0) {
+                                this.firstShown = 'Area';
+                            }
+                            else if (this.stakeCouncils.length > 0) {
+                                this.firstShown = 'Stake';
+                            }
+                            else if (this.wardCouncils.length > 0) {
+                                this.firstShown = 'Ward';
+                            }
+                            else if (this.addedCouncils.length > 0) {
+                                this.firstShown = 'Added';
+                            }
+
                         });
 
                     });

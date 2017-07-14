@@ -15,7 +15,7 @@ export class ThanksFeedbackPage {
         this.navCtrl.setRoot(DisplayPage);
     }
     cancel() {
-        this.navCtrl.pop({ animate: true, animation: 'transition', direction: 'back' });
+        this.navCtrl.popToRoot();
 
     }
 
