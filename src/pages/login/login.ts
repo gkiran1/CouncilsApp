@@ -50,6 +50,7 @@ export class LoginPage {
         //     email: ['', Validators.compose([Validators.required, validateEmail])],
         //     password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
         // });
+        localStorage.setItem('Firsttimeinstall', 'false');
     }
 
     keypresssed($event) {

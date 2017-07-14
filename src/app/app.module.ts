@@ -93,6 +93,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { DisplayFirstPage } from '../pages/display-first/display-first';
 import { DirectoryPage } from '../pages/directory/directory.component';
+import {MainScreenPage} from '../pages/mainscreen/mainscreen';
 
 //Directives
 import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
@@ -197,7 +198,9 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     MaxLengthDirective,
     WelcomePage,
     DisplayFirstPage,
-    DirectoryPage
+    DirectoryPage,
+    MainScreenPage
+
   ],
 
   imports: [
@@ -277,7 +280,9 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     NewMenuPage,
     WelcomePage,
     DisplayFirstPage,
-    DirectoryPage
+    DirectoryPage,
+    MainScreenPage
+
   ],
 
   providers: [AuthService, AppService, FirebaseService, NativeAudio, Badge, FileChooser, AndroidPermissions, FilePath]
