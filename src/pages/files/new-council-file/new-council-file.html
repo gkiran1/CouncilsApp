@@ -26,28 +26,28 @@
                     <ion-radio [value]="c | async" color="secondary"></ion-radio>
                 </ion-item>-->
 
-                <ion-item *ngIf="(areaCouncils.length)" class="unittype">Area</ion-item>
+                <ion-item *ngIf="(areaCouncils.length)" [ngClass]="firstShown === 'Area' ? 'unittype' : 'unittype1'">Area</ion-item>
                 <ion-item [ngClass]="areaCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === areaCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))"
                     *ngFor="let c of areaCouncils; let i = index">
                     <ion-label color="dark">{{c.council}}</ion-label>
                     <ion-radio [value]="c" color="secondary"></ion-radio>
                 </ion-item>
 
-                <ion-item *ngIf="(stakeCouncils.length)" class="unittype">Stake</ion-item>
+                <ion-item *ngIf="(stakeCouncils.length)" [ngClass]="firstShown === 'Stake' ? 'unittype' : 'unittype1'">Stake</ion-item>
                 <ion-item [ngClass]="stakeCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === stakeCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))"
                     *ngFor="let c of stakeCouncils; let i = index">
                     <ion-label color="dark">{{c.council}}</ion-label>
                     <ion-radio [value]="c" color="secondary"></ion-radio>
                 </ion-item>
 
-                <ion-item *ngIf="(wardCouncils.length)" class="unittype">Ward</ion-item>
+                <ion-item *ngIf="(wardCouncils.length)" [ngClass]="firstShown === 'Ward' ? 'unittype' : 'unittype1'">Ward</ion-item>
                 <ion-item [ngClass]="wardCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === wardCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))"
                     *ngFor="let c of wardCouncils; let i = index">
                     <ion-label color="dark">{{c.council}}</ion-label>
                     <ion-radio [value]="c" color="secondary"></ion-radio>
                 </ion-item>
 
-                <ion-item *ngIf="(addedCouncils.length)" class="unittype">Added</ion-item>
+                <ion-item *ngIf="(addedCouncils.length)" [ngClass]="firstShown === 'Added' ? 'unittype' : 'unittype1'">Added</ion-item>
                 <ion-item [ngClass]="addedCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === addedCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))"
                     *ngFor="let c of addedCouncils; let i = index">
                     <ion-label color="dark">{{c.council}}</ion-label>

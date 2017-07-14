@@ -19,6 +19,8 @@ export class NewCouncilDiscussionPage {
   wardCouncils = [];
   addedCouncils = [];
 
+  firstShown;
+
   constructor(navParams: NavParams, public af: AngularFire, fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
     let topicitem = navParams.get('item');
     var unitType = localStorage.getItem('unitType');
@@ -67,7 +69,19 @@ export class NewCouncilDiscussionPage {
                 }
               }
 
-              //this.councils.push(council);
+              if (this.areaCouncils.length > 0) {
+                this.firstShown = 'Area';
+              }
+              else if (this.stakeCouncils.length > 0) {
+                this.firstShown = 'Stake';
+              }
+              else if (this.wardCouncils.length > 0) {
+                this.firstShown = 'Ward';
+              }
+              else if (this.addedCouncils.length > 0) {
+                this.firstShown = 'Added';
+              }
+
             });
           });
 

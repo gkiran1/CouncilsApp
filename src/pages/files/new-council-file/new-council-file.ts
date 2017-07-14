@@ -50,6 +50,8 @@ export class NewCouncilFilePage {
   wardCouncils = [];
   addedCouncils = [];
 
+  firstShown;
+
   constructor(
     fb: FormBuilder,
     public appservice: AppService,
@@ -113,6 +115,20 @@ export class NewCouncilFilePage {
               this.wardCouncils.push(council);
             }
           }
+
+          if (this.areaCouncils.length > 0) {
+            this.firstShown = 'Area';
+          }
+          else if (this.stakeCouncils.length > 0) {
+            this.firstShown = 'Stake';
+          }
+          else if (this.wardCouncils.length > 0) {
+            this.firstShown = 'Ward';
+          }
+          else if (this.addedCouncils.length > 0) {
+            this.firstShown = 'Added';
+          }
+
         });
         //this.councils.push(this.firebaseservice.getCouncilByCouncilKey(c));
       });
