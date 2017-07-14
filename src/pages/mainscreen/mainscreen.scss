@@ -1,12 +1,25 @@
 page-mainscreen{
 .buttonstyles{
   // display: flex;
-position: absolute;
-vertical-align: middle;
+// position: absolute;
+// top:50%;
 }
 .svgstyles{
-  width: 70%;
+  width: 60%;
+  // margin: auto;
+ position: absolute;
+ top:40%;
+left: 20%;
+}
+ion-buttons{
   position: absolute;
-vertical-align: middle;
+  bottom: 10%;
+  display: flex;
+  width: 70%;
+  left:15%;
+}
+
+.loginbtnstyle{
+  color: #ffffff !important;
 }
 }
