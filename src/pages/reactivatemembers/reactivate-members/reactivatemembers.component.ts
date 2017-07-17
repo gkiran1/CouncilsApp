@@ -15,6 +15,7 @@ import { EmailService } from '../../../providers/emailservice';
 
 export class ReactivateMembersPage {
     users: User[] = [];
+    adminname;
 
     constructor(public appService: AppService,
         private firebaseService: FirebaseService,
@@ -27,6 +28,10 @@ export class ReactivateMembersPage {
         const userUid = localStorage.getItem('securityToken');
         const unitNumber = Number(localStorage.getItem('unitNumber'));
         this.users = [];
+
+        this.firebaseService.getUsersByKey(userUid).subscribe(user => {
+            this.adminname = user[0].firstname + " " + user[0].lastname;
+        });
 
         this.firebaseService.getUsersByUnitNumber(unitNumber).subscribe(usersObj => {
             this.users = usersObj.filter(userObj => {
@@ -47,7 +52,7 @@ export class ReactivateMembersPage {
     reactivatemember(user: User) {
         this.firebaseService.reactivateUser(user.$key, true, user.pushtoken)
             .then(() => {
-                this.emailservice.emailReactivate(user.firstname, user.lastname, user.unitnumber, user.email).subscribe(res => {
+                this.emailservice.emailReactivate(user.firstname + " " + user.lastname, user.unitnumber, user.email, this.adminname).subscribe(res => {
                     if (res.status === 200) {
                     } else {
                     }

@@ -1,14 +1,16 @@
 <ion-content>
-    <ng-container *ngFor="let user of usersArray">
-        <ion-item class="list-item" *ngIf="user.$key!==uid" (touchstart)="dismiss(user)">
-            <ion-avatar item-left>
-                <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
-                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
-            </ion-avatar>
-            <h4 class="council-styles font4">{{user.firstname}} {{user.lastname}}</h4>
-            <svg height="8" width="8">
-                <circle cx="4" cy="4" r="4" [attr.fill]='user.status' />
-            </svg>
-        </ion-item>
-    </ng-container>
+    <div class="list-container">
+        <ng-container *ngFor="let user of usersArray">
+            <ion-item class="list-item" *ngIf="user.$key!==uid" (touchstart)="dismiss(user)">
+                <ion-avatar item-left>
+                    <img [src]="(user)?.avatar" class="avatarImage" *ngIf="(user)?.avatar && (user)?.avatar !== 'avatar'" />
+                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
+                </ion-avatar>
+                <h4 class="council-styles font4">{{user.firstname}} {{user.lastname}}</h4>
+                <svg height="8" width="8">
+                    <circle cx="4" cy="4" r="4" [attr.fill]='user.status' />
+                </svg>
+            </ion-item>
+        </ng-container>
+    </div>
 </ion-content>

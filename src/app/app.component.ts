@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { ConnectivityService } from '../providers/connectivityservice';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { Badge } from '@ionic-native/badge';
+import { MainScreenPage } from '../pages/mainscreen/mainscreen';
 
 let y;
 let h;
@@ -56,11 +57,17 @@ export class MyApp {
       StatusBar.overlaysWebView(false);
 
       localStorage.setItem('NotificationsCount', '');
+      // localStorage.setItem('Firsttimeinstall', 'true');
 
       this.securityToken = localStorage.getItem('securityToken');
       this.isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
 
-      if ((this.securityToken == null || this.securityToken == 'null') &&
+      if (localStorage.getItem('Firsttimeinstall') === 'true' ||
+        localStorage.getItem('Firsttimeinstall') === null ||
+        localStorage.getItem('Firsttimeinstall') === undefined) {
+        this.rootPage = MainScreenPage;
+      }
+      else if ((this.securityToken == null || this.securityToken == 'null') &&
         (this.isUserLoggedIn == 'null' || this.isUserLoggedIn == null || this.isUserLoggedIn == 'false')) {
         localStorage.setItem('childAdded', 'false');
         localStorage.setItem('gcToken', 'null');

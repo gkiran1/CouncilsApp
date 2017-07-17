@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { ThanksFeedbackPage } from '../thanks-feedback/thanks-feedback';
 import { AppService } from '../../../providers/app-service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
     selector: 'submit-feedback',
@@ -12,13 +14,23 @@ import { AppService } from '../../../providers/app-service';
 
 export class SubmitFeedbackPage {
 
-    public feedback: string;
+    // public feedback: string;
 
-    constructor(public navCtrl: NavController, private ser: FirebaseService, private appSer: AppService) {
+    newFeedbackForm: FormGroup;
+
+    constructor(public navCtrl: NavController, fb: FormBuilder, private ser: FirebaseService, private appSer: AppService) {
+
+        this.newFeedbackForm = fb.group({
+            feedbacktopic: ['', Validators.required],
+            describe: ['', Validators.required],
+            createdby: localStorage.getItem('securityToken'),
+            createddate: '',
+        });
     }
 
-    submitFeedback() {
-        this.ser.saveFeedback(this.feedback, this.appSer.uid, new Date().toDateString());
+    submitFeedback(feedback) {
+        feedback.createddate = moment().toISOString();
+        this.ser.saveFeedback(feedback);
         this.navCtrl.push(ThanksFeedbackPage);
     }
 
@@ -27,4 +39,9 @@ export class SubmitFeedbackPage {
 
     }
 
+    keypressed($event) {
+        if ($event.target.value.length > 25) {
+            return false;
+        }
+    }
 }

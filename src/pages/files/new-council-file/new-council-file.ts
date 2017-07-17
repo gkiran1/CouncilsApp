@@ -50,6 +50,8 @@ export class NewCouncilFilePage {
   wardCouncils = [];
   addedCouncils = [];
 
+  firstShown;
+
   constructor(
     fb: FormBuilder,
     public appservice: AppService,
@@ -113,6 +115,20 @@ export class NewCouncilFilePage {
               this.wardCouncils.push(council);
             }
           }
+
+          if (this.areaCouncils.length > 0) {
+            this.firstShown = 'Area';
+          }
+          else if (this.stakeCouncils.length > 0) {
+            this.firstShown = 'Stake';
+          }
+          else if (this.wardCouncils.length > 0) {
+            this.firstShown = 'Ward';
+          }
+          else if (this.addedCouncils.length > 0) {
+            this.firstShown = 'Added';
+          }
+
         });
         //this.councils.push(this.firebaseservice.getCouncilByCouncilKey(c));
       });
@@ -159,6 +175,7 @@ export class NewCouncilFilePage {
         },
         {
           text: 'Cancel',
+          role: 'cancel',
           cssClass: "actionsheet-cancel",
           handler: () => {
           }
@@ -359,26 +376,26 @@ export class NewCouncilFilePage {
     });
   }
 
-  uploadFile(uri, value, loader) {
+    uploadFile(uri, value, loader) {
     //loader.dismiss();
     this.file = uri.toString();
 
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-      success => {
-        console.log('Camera granted');
-      },
-      err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
-    );
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
-      success => {
-        console.log('External Storage granted');
-      },
-      err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE)
-    );
+    // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+    //   success => {
+    //     console.log('Camera granted');
+    //   },
+    //   err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
+    // );
+    // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
+    //   success => {
+    //     console.log('External Storage granted');
+    //   },
+    //   err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE)
+    // );
 
-    (<any>window).FilePath.resolveNativePath(uri, (filePath) => {
+    //(<any>window).FilePath.resolveNativePath(uri, (filePath) => {
 
-      //let filePath = 'file:///'+this.file;
+      let filePath = 'file://'+this.file;
       //alert('1:'+ filePath);
       (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
         //alert('2:'+ res);
@@ -442,7 +459,7 @@ export class NewCouncilFilePage {
             value.filename = filename;
             value.filetype = filetype;
             value.filesize = imgBlob.size;
-            //alert(mimeType);
+            ////alert(mimeType);
             this.firebaseservice.saveFile(value).then(fileId => {
               this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename)
                 .put(imgBlob, { contentType: mimeType })
@@ -456,7 +473,7 @@ export class NewCouncilFilePage {
                   this.nav.push(ViewCouncilFilePage, {
                     councilid: value.councilid, councilname: value.councilname
                   }, {
-                      animate: true, animation: 'transition', direction: 'forward'
+                    animate: true, animation: 'transition', direction: 'forward'
                     });
 
                 }).catch(error => {
@@ -477,11 +494,11 @@ export class NewCouncilFilePage {
       //   loader.dismiss();
       //   console.log(err);
       // })
-    }, (error) => {
-      //loader.dismiss();
-      //alert(error)
-      console.log(error);
-    });
+    // }, (error) => {
+    //   //loader.dismiss();
+    //   alert(error)
+    //   console.log(error);
+    // });
   }
 
 

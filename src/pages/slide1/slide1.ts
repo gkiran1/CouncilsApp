@@ -66,6 +66,6 @@ export class slide1Page {
     }
     directoryPage(button) {
         this.setSelectedClass(button);
-        this.menuPage.nav.push(DirectoryPage);
+        this.menuPage.nav.setRoot(DirectoryPage);
     }
 }

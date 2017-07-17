@@ -24,6 +24,8 @@ export class ActiveCouncilsPage {
     wardCouncils = [];
     addedCouncils = [];
 
+    firstShown;
+
     constructor(public af: AngularFire, public firebaseservice: FirebaseService, public nav: NavController) {
 
         var unitType = localStorage.getItem('unitType');
@@ -74,6 +76,19 @@ export class ActiveCouncilsPage {
                                     else {
                                         this.wardCouncils.push(council[0]);
                                     }
+                                }
+
+                                if (this.areaCouncils.length > 0) {
+                                    this.firstShown = 'Area';
+                                }
+                                else if (this.stakeCouncils.length > 0) {
+                                    this.firstShown = 'Stake';
+                                }
+                                else if (this.wardCouncils.length > 0) {
+                                    this.firstShown = 'Ward';
+                                }
+                                else if (this.addedCouncils.length > 0) {
+                                    this.firstShown = 'Added';
                                 }
 
                                 this.count$.next(this.user.councils.length);

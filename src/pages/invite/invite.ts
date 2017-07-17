@@ -26,6 +26,9 @@ export class InviteMemberPage {
     stakeCouncils = [];
     wardCouncils = [];
     addedCouncils = [];
+    adminname;
+
+    firstShown;
 
     constructor(public http: Http,
         public navctrl: NavController,
@@ -42,6 +45,7 @@ export class InviteMemberPage {
         this.af.auth.subscribe(auth => {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(res => {
+                    this.adminname = res.firstname + " " + res.lastname;
                     this.invite.unittype = res.unittype;
                     this.invite.unitnumber = res.unitnumber;
                     this.invite.createdby = appService.uid;
@@ -77,6 +81,20 @@ export class InviteMemberPage {
                                     this.wardCouncils.push(council);
                                 }
                             }
+
+                            if (this.areaCouncils.length > 0) {
+                                this.firstShown = 'Area';
+                            }
+                            else if (this.stakeCouncils.length > 0) {
+                                this.firstShown = 'Stake';
+                            }
+                            else if (this.wardCouncils.length > 0) {
+                                this.firstShown = 'Ward';
+                            }
+                            else if (this.addedCouncils.length > 0) {
+                                this.firstShown = 'Added';
+                            }
+
                         });
 
                     });
@@ -126,7 +144,7 @@ export class InviteMemberPage {
         this.wardCouncils.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
         this.addedCouncils.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
 
-        this.emailService.inviteMemberEmail(this.invite.firstname, this.invite.unitnumber, this.invite.email)
+        this.emailService.inviteMemberEmail(this.invite.firstname + " " + this.invite.lastname, this.invite.unitnumber, this.invite.email, this.adminname)
             .subscribe(res => {
                 if (res.status === 200) {
                     this.fs.createInvitee(this.invite)

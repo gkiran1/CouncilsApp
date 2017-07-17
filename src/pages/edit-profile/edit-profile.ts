@@ -184,6 +184,7 @@ export class EditProfilePage {
                 },
                 {
                     text: 'Cancel',
+                    role: 'cancel',
                     cssClass: "actionsheet-cancel",
                     handler: () => {
                     }
