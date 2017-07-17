@@ -566,45 +566,48 @@
      padding-left: 10px !important;
  }
  /****************************** Action Sheet Styles **********************************/
+
+ .action-sheet-md .action-sheet-container,
+ .action-sheet-ios .action-sheet-container,
+ .action-sheet-container {
+    padding: 0 10px !important;
+    background: transparent !important;
+}
+
+.action-sheet-md .action-sheet-group,
+.action-sheet-ios .action-sheet-group,
+ .action-sheet-group
+ {
+    overflow: hidden;
+    margin-bottom: 8px !important;
+    border-radius: 13px !important;
+    
+}
  
  .action-sheet-ios .action-sheet-button {
      height: 4.1rem !important;
      min-height: 4.1rem !important;
      font-size: 1.7rem !important;
-     border-radius: 0;
-     background: white;
+   
  }
- 
+ .action-sheet-ios .action-sheet-button,
  .action-sheet-md .action-sheet-button {
      height: 4.1rem !important;
      min-height: 4.1rem !important;
      font-family: Bernina-Regular;
      font-size: 1.7rem !important;
-     border-radius: 0;
+    
      text-align: center;
      border-bottom: 1px solid #d6d6da;
-     background: white;
+     background: rgba(256, 256, 256, .9);
  }
  
+ .action-sheet-ios .action-sheet-button:last-child,
  .action-sheet-md .action-sheet-button:last-child {
      border-bottom: none !important;
  }
- .action-sheet-ios .action-sheet-title {
-     font-family: Bernina-SemiBold !important;
-     font-size: 13px !important;
-     color: #35373A !important;
-     height: 3.2rem !important;
-     padding-top: 17px !important;
-     display: flex;
-     text-align: center !important;
-     align-content: center;
-     align-items: center;
-     justify-content: center;
-     width: 100%;
-     border-radius: 0;
-     background: white;
- }
  
+ .action-sheet-ios .action-sheet-title,
  .action-sheet-md .action-sheet-title {
      font-family: Bernina-SemiBold !important;
      font-size: 13px !important;
@@ -619,40 +622,19 @@
      width: 100%;
      border-radius: 0;
      border-bottom: 1px solid #d6d6da;
-     background: white;
- }
- 
- .action-sheet-container {
- //   padding: 0 !important;
- //   border-radius: 0;
- //   background: rgba(256, 256, 256, .9) !important;
-      opacity: .9;
-      margin-bottom: 10px;
- }
- 
- .action-sheet-group {
-    //  background: rgba(256, 256, 256, .9) !important;
-    //  opacity: .9;
-     border-radius: 0;
-     margin-bottom: 0;
- }
- 
-//  .action-sheet-ios .action-sheet-group {
-//      border-radius: 0;
-//  }
- 
- .action-sheet-ios .action-sheet-group:last-child {
-     margin-bottom: 0;
- }
- 
- .action-sheet-ios .action-sheet-group .button-inner {
-     -webkit-justify-content: center !important;
-     -ms-flex-pack: center !important;
-     justify-content: center !important;
-     border-radius: 0 !important;
-     margin-bottom: 0;
      background: rgba(256, 256, 256, .9);
  }
+ 
+ 
+ 
+
+
+ .action-sheet-md .action-sheet-group:last-child,
+ .action-sheet-ios .action-sheet-group:last-child {
+     margin-bottom: 10px !important;
+ }
+ 
+ 
  
  .action-sheet-md .action-sheet-group .button-inner {
      -webkit-justify-content: flex-start;
@@ -669,9 +651,9 @@
  .actionsheet-items {
      color: #3cb18a !important;
      font-family: Bernina-Regular !important;
-     font-size: 17rpx !important;
+     font-size: 17px !important;
      background: rgba(256, 256, 256, .9);
-     border-radius: 0;
+     
  }
  
  .actionsheet-cancel {

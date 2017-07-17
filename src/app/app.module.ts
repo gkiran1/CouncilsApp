@@ -204,7 +204,7 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     MaterialModule.forRoot(),
     MomentModule,
     FormsModule,
-    IonicModule.forRoot(MyApp, { platforms: { ios: { statusbarPadding: true } } }),
+    IonicModule.forRoot(MyApp, { platforms: { ios: { statusbarPadding: true }, mode: 'ios' } }),
     AngularFireModule.initializeApp(FirebaseConfig),
     //Cloud Module Imports
     //CloudModule.forRoot(cloudSettings),

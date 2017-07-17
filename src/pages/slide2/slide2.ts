@@ -121,6 +121,7 @@ export class slide2Page {
         },
         {
           text: 'Cancel',
+          role: 'cancel',
           cssClass: "actionsheet-cancel",
           handler: () => {
           }
@@ -152,6 +153,7 @@ export class slide2Page {
         },
         {
           text: 'Cancel',
+          role: 'cancel',
           cssClass: "actionsheet-cancel",
           handler: () => {
           }
