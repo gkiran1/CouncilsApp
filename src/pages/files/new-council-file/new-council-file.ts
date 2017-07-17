@@ -380,22 +380,22 @@ export class NewCouncilFilePage {
     //loader.dismiss();
     this.file = uri.toString();
 
-    // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-    //   success => {
-    //     console.log('Camera granted');
-    //   },
-    //   err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
-    // );
-    // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
-    //   success => {
-    //     console.log('External Storage granted');
-    //   },
-    //   err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE)
-    // );
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+      success => {
+        console.log('Camera granted');
+      },
+      err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
+    );
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
+      success => {
+        console.log('External Storage granted');
+      },
+      err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE)
+    );
 
-    //(<any>window).FilePath.resolveNativePath(uri, (filePath) => {
+    (<any>window).FilePath.resolveNativePath(uri, (filePath) => {
 
-      let filePath = 'file://'+this.file;
+      //let filePath = 'file://'+this.file;
       //alert('1:'+ filePath);
       (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
         //alert('2:'+ res);
@@ -494,11 +494,11 @@ export class NewCouncilFilePage {
       //   loader.dismiss();
       //   console.log(err);
       // })
-    // }, (error) => {
-    //   //loader.dismiss();
-    //   alert(error)
-    //   console.log(error);
-    // });
+    }, (error) => {
+      loader.dismiss();
+      //alert(error)
+      console.log(error);
+    });
   }
 
 
