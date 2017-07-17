@@ -420,21 +420,21 @@ export class ViewCouncilFilePage {
 
     uploadFile(uri, value, loader) {
         this.importedFilePath = uri.toString();
-        // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-        //     success => {
-        //         console.log('Camera granted');
-        //     },
-        //     err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
-        // );
-        // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
-        //     success => {
-        //         console.log('External Storage granted');
-        //     },
-        //     err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE)
-        // );
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+            success => {
+                console.log('Camera granted');
+            },
+            err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
+        );
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
+            success => {
+                console.log('External Storage granted');
+            },
+            err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE)
+        );
         //alert(this.importedFilePath);
-        //(<any>window).FilePath.resolveNativePath(uri, (filePath) => {
-        let filePath = 'file://' + this.importedFilePath;
+        (<any>window).FilePath.resolveNativePath(uri, (filePath) => {
+        //let filePath = 'file://' + this.importedFilePath;
         //alert('1:'+ filePath);
         (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
             //alert('2:'+ JSON.stringify(res));
@@ -537,11 +537,11 @@ export class ViewCouncilFilePage {
         //   loader.dismiss();
         //   console.log(err);
         // })
-        // }, (error) => {
-        //     //loader.dismiss();
-        //     //alert(error)
-        //     console.log(error);
-        // });
+        }, (error) => {
+            loader.dismiss();
+            //alert(error)
+            console.log(error);
+        });
     }
 
 
