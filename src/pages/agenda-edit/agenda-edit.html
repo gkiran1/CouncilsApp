@@ -135,7 +135,7 @@
         <ng-container *ngIf="spiritualwelfareObj.length">
             <ion-label class="label-styles">Spiritual Welfare</ion-label>
             <ion-item *ngFor="let item of spiritualwelfareObj; let i = index; trackBy: trackByIndex" class="item-styles input-item icon-line">
-                <ion-input type="text" [(ngModel)]="spiritualwelfareObj[i]" [ngModelOptions]="{standalone: true}"  maxlength="500"></ion-input>
+                <ion-input type="text" [(ngModel)]="spiritualwelfareObj[i]" [ngModelOptions]="{standalone: true}" maxlength="500"></ion-input>
                 <button color="secondary"  class="button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right
                     (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
@@ -148,32 +148,13 @@
                 <ion-label floating>Temporal Welfare</ion-label>
                 <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare"
                     formControlName="temporalwelfare" maxlength="500" (keyup)="temporalkey($event)">
-                </ion-textarea>
+                    </ion-textarea>
             </ion-item>
         </ng-container>
         <ng-container *ngIf="temporalwelfareObj.length">
             <ion-label class="label-styles">Temporal Welfare</ion-label>
             <ion-item *ngFor="let item of temporalwelfareObj; let i = index; trackBy: trackByIndex" class="item-styles input-item icon-line">
-                <ion-input type="text" [(ngModel)]="temporalwelfareObj[i]" [ngModelOptions]="{standalone: true}"  maxlength="500"></ion-input>
-                <button color="secondary"  class="button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right
-                    (click)="plusBtn(item)">
-                    <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
-                    </button>
-            </ion-item>
-        </ng-container>
-
-        <ng-container *ngIf="!fellowshipitemsObj.length">
-            <ion-item class="input-item flex-direction">
-                <ion-label floating>Fellowship Items</ion-label>
-                <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems"
-                    formControlName="fellowshipitems" maxlength="500" (keyup)="fellowshipkey($event)">
-                </ion-textarea>
-            </ion-item>
-        </ng-container>
-        <ng-container *ngIf="fellowshipitemsObj.length">
-            <ion-label class="label-styles">Fellowship Items</ion-label>
-            <ion-item *ngFor="let item of fellowshipitemsObj; let i = index; trackBy: trackByIndex" class="item-styles input-item icon-line">
-                <ion-input type="text" [(ngModel)]="fellowshipitemsObj[i]" [ngModelOptions]="{standalone: true}" maxlength="500"></ion-input>
+                <ion-input type="text" [(ngModel)]="temporalwelfareObj[i]" [ngModelOptions]="{standalone: true}" maxlength="500"></ion-input>
                 <button color="secondary"  class="button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right
                     (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
@@ -186,7 +167,7 @@
                 <ion-label floating>Missionary Items</ion-label>
                 <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems"
                     formControlName="missionaryitems" maxlength="500" (keyup)="missionarykey($event)">
-                </ion-textarea>
+                    </ion-textarea>
             </ion-item>
         </ng-container>
         <ng-container *ngIf="missionaryitemsObj.length">
@@ -200,18 +181,94 @@
             </ion-item>
         </ng-container>
 
+        <ng-container *ngIf="!retentionObj.length">
+            <ion-item class="input-item flex-direction">
+                <ion-label floating>Retention </ion-label>
+                <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="retentionfocus()" elastic id="retention" name="retention" formControlName="retention"
+                    maxlength="500" (keyup)="retentionkey($event)">
+                    </ion-textarea>
+            </ion-item>
+        </ng-container>
+        <ng-container *ngIf="retentionObj.length">
+            <ion-label class="label-styles input-item">Retention </ion-label>
+            <ion-item *ngFor="let item of retentionObj,let i=index;trackBy:trackByIndex" class="item-styles input-item icon-line">
+                <ion-input [(ngModel)]="retentionObj[i]" [ngModelOptions]="{standalone:true}" maxlength="500"></ion-input>
+                <button color="secondary" id="councilsPage"  class="button button-clik" name="councilsPage" ion-button icon-only clear item-right
+                    (click)="plusBtn(item)">
+                    <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
+                    </button>
+            </ion-item>
+        </ng-container>
+
+        <ng-container *ngIf="!activationObj.length">
+            <ion-item class="input-item flex-direction">
+                <ion-label floating>Activation </ion-label>
+                <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="activationfocus()" elastic id="activation" name="activation"
+                    formControlName="activation" maxlength="500" (keyup)="activationkey($event)">
+                    </ion-textarea>
+            </ion-item>
+        </ng-container>
+        <ng-container *ngIf="activationObj.length">
+            <ion-label class="label-styles input-item">Activation </ion-label>
+            <ion-item *ngFor="let item of activationObj,let i=index;trackBy:trackByIndex" class="item-styles input-item icon-line">
+                <ion-input [(ngModel)]="activationObj[i]" [ngModelOptions]="{standalone:true}" maxlength="500"></ion-input>
+                <button color="secondary" id="councilsPage"  class="button button-clik" name="councilsPage" ion-button icon-only clear item-right
+                    (click)="plusBtn(item)">
+                    <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
+                    </button>
+            </ion-item>
+        </ng-container>
+
+        <ng-container *ngIf="!historyObj.length">
+            <ion-item class="input-item flex-direction">
+                <ion-label floating>Temple & Family History</ion-label>
+                <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="historyfocus()" elastic id="history" name="history" formControlName="history"
+                    maxlength="500" (keyup)="historykey($event)">
+                    </ion-textarea>
+            </ion-item>
+        </ng-container>
+        <ng-container *ngIf="historyObj.length">
+            <ion-label class="label-styles input-item">Temple & Family History</ion-label>
+            <ion-item *ngFor="let item of historyObj,let i=index;trackBy:trackByIndex" class="item-styles input-item icon-line">
+                <ion-input [(ngModel)]="historyObj[i]" [ngModelOptions]="{standalone:true}" maxlength="500"></ion-input>
+                <button color="secondary" id="councilsPage"  class="button button-clik" name="councilsPage" ion-button icon-only clear item-right
+                    (click)="plusBtn(item)">
+                    <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
+                    </button>
+            </ion-item>
+        </ng-container>
+
+        <ng-container *ngIf="!gospellearningObj.length">
+            <ion-item class="input-item flex-direction">
+                <ion-label floating>Gospel Learning</ion-label>
+                <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="gospellearningfocus()" elastic id="gospellearning" name="gospellearning"
+                    formControlName="gospellearning" maxlength="500" (keyup)="gospellearningkey($event)">
+                    </ion-textarea>
+            </ion-item>
+        </ng-container>
+        <ng-container *ngIf="gospellearningObj.length">
+            <ion-label class="label-styles input-item">Gospel Learning</ion-label>
+            <ion-item *ngFor="let item of gospellearningObj,let i=index;trackBy:trackByIndex" class="item-styles input-item icon-line">
+                <ion-input [(ngModel)]="gospellearningObj[i]" [ngModelOptions]="{standalone:true}" maxlength="500"></ion-input>
+                <button color="secondary" id="councilsPage"  class="button button-clik" name="councilsPage" ion-button icon-only clear item-right
+                    (click)="plusBtn(item)">
+                    <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>
+                    </button>
+            </ion-item>
+        </ng-container>
+
         <ng-container *ngIf="!eventObj.length">
             <ion-item class="input-item flex-direction">
                 <ion-label floating>Events</ion-label>
                 <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="eventfocus()" elastic id="event" name="event" formControlName="event"
                     maxlength="500" (keyup)="eventkey($event)">
-                </ion-textarea>
+                    </ion-textarea>
             </ion-item>
         </ng-container>
         <ng-container *ngIf="eventObj.length">
             <ion-label class="label-styles input-item">Events</ion-label>
             <ion-item *ngFor="let item of eventObj; let i = index; trackBy: trackByIndex" class="item-styles input-item icon-line">
-                <ion-input  [(ngModel)]="eventObj[i]" [ngModelOptions]="{standalone: true}"  maxlength="500"></ion-input>
+                <ion-input [(ngModel)]="eventObj[i]" [ngModelOptions]="{standalone: true}" maxlength="500"></ion-input>
                 <button color="secondary" id="councilsPage"  class="button button-clik" name="councilsPage" ion-button icon-only clear item-right
                     (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>

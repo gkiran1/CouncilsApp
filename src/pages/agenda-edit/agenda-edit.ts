@@ -33,13 +33,19 @@ export class AgendaEditPage {
     closingprayer;
     spiritualwelfareObj = [];
     temporalwelfareObj = [];
-    fellowshipitemsObj = [];
     missionaryitemsObj = [];
+    retentionObj = [];
+    activationObj = [];
+    historyObj = [];
+    gospellearningObj = [];
     eventObj = [];
     spiritualwelfare;
     temporalwelfare;
-    fellowshipitems;
     missionaryitems;
+    retention;
+    activation;
+    history;
+    gospellearning;
     event;
     isModalDismissed = true;
     showlist = false;
@@ -73,8 +79,11 @@ export class AgendaEditPage {
 
         this.spiritualwelfareObj = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.split('\n') : '';
         this.temporalwelfareObj = (agenda.temporalwelfare != undefined && agenda.temporalwelfare.length > 0) ? agenda.temporalwelfare.split('\n') : '';
-        this.fellowshipitemsObj = (agenda.fellowshipitems != undefined && agenda.fellowshipitems.length > 0) ? agenda.fellowshipitems.split('\n') : '';
         this.missionaryitemsObj = (agenda.missionaryitems != undefined && agenda.missionaryitems.length > 0) ? agenda.missionaryitems.split('\n') : '';
+        this.retentionObj = (agenda.retention != undefined && agenda.retention.length > 0) ? agenda.retention.split('\n') : '';
+        this.activationObj = (agenda.activation != undefined && agenda.activation.length > 0) ? agenda.activation.split('\n') : '';
+        this.historyObj = (agenda.history != undefined && agenda.history.length > 0) ? agenda.history.split('\n') : '';
+        this.gospellearningObj = (agenda.gospellearning != undefined && agenda.gospellearning.length > 0) ? agenda.gospellearning.split('\n') : '';
         this.eventObj = (agenda.event != undefined && agenda.event.length > 0) ? agenda.event.split('\n') : '';
 
         this.usercouncils = localStorage.getItem('userCouncils').split(',');
@@ -150,8 +159,11 @@ export class AgendaEditPage {
             completedassignments: [agenda.completedassignments],
             spiritualwelfare: [agenda.spiritualwelfare],
             temporalwelfare: [agenda.temporalwelfare],
-            fellowshipitems: [agenda.fellowshipitems],
             missionaryitems: [agenda.missionaryitems],
+            retention: [agenda.retention],
+            activation: [agenda.activation],
+            history: [agenda.history],
+            gospellearning: [agenda.gospellearning],
             event: [agenda.event],
             closingprayer: [agenda.closingprayer],
             createdby: agenda.createdby,
@@ -250,8 +262,11 @@ export class AgendaEditPage {
             completedassignments: (value.completedassignments === undefined || value.completedassignments === '') ? '' : value.completedassignments.$key,
             spiritualwelfare: value.spiritualwelfare,
             temporalwelfare: value.temporalwelfare,
-            fellowshipitems: value.fellowshipitems,
             missionaryitems: value.missionaryitems,
+            retention: value.retention,
+            activation: value.activation,
+            history: value.history,
+            gospellearning: value.gospellearning,
             event: value.event,
             closingprayer: this.closingprayer ? this.closingprayer.firstname + ' ' + this.closingprayer.lastname : '',
             closingprayeruserid: this.closingprayer ? this.closingprayer.$key : '',
@@ -280,18 +295,39 @@ export class AgendaEditPage {
             value.temporalwelfare = this.temporalwelfareObj.join('\n');
         }
 
-        if (value.fellowshipitems !== '' && this.fellowshipitemsObj.length === 0) {
-            value.fellowshipitems = value.fellowshipitems.replace(/- /gi, '').trim();
-        }
-        else if (this.fellowshipitemsObj.length > 0) {
-            value.fellowshipitems = this.fellowshipitemsObj.join('\n');
-        }
-
         if (value.missionaryitems !== '' && this.missionaryitemsObj.length === 0) {
             value.missionaryitems = value.missionaryitems.replace(/- /gi, '').trim();
         }
         else if (this.missionaryitemsObj.length > 0) {
             value.missionaryitems = this.missionaryitemsObj.join('\n');
+        }
+
+        if (value.retention !== '' && this.retentionObj.length === 0) {
+            value.retention = value.retention.replace(/- /gi, '').trim();
+        }
+        else if (this.retentionObj.length > 0) {
+            value.retention = this.retention.join('\n');
+        }
+
+        if (value.activation !== '' && this.activationObj.length === 0) {
+            value.activation = value.activation.replace(/- /gi, '').trim();
+        }
+        else if (this.activationObj.length > 0) {
+            value.activation = this.activationObj.join('\n');
+        }
+
+        if (value.history !== '' && this.historyObj.length === 0) {
+            value.history = value.history.replace(/- /gi, '').trim();
+        }
+        else if (this.historyObj.length > 0) {
+            value.history = this.historyObj.join('\n');
+        }
+
+        if (value.gospellearning !== '' && this.gospellearningObj.length === 0) {
+            value.gospellearning = value.gospellearning.replace(/- /gi, '').trim();
+        }
+        else if (this.gospellearningObj.length > 0) {
+            value.gospellearning = this.gospellearningObj.join('\n');
         }
 
         if (value.event !== '' && this.eventObj.length === 0) {
@@ -317,8 +353,11 @@ export class AgendaEditPage {
         if (!this.invalidOpeningPrayerUsr && !this.invalidSpiritualThoughtUsr && !this.invalidClosingPrayerUsr) {
             value.spiritualwelfare = (value.spiritualwelfare != undefined && value.spiritualwelfare.length > 0) ? value.spiritualwelfare.replace(/- /gi, '').trim() : '';
             value.temporalwelfare = (value.temporalwelfare != undefined && value.temporalwelfare.length > 0) ? value.temporalwelfare.replace(/- /gi, '').trim() : '';
-            value.fellowshipitems = (value.fellowshipitems != undefined && value.fellowshipitems.length > 0) ? value.fellowshipitems.replace(/- /gi, '').trim() : '';
             value.missionaryitems = (value.missionaryitems != undefined && value.missionaryitems.length > 0) ? value.missionaryitems.replace(/- /gi, '').trim() : '';
+            value.retention = (value.retention != undefined && value.retention.length > 0) ? value.retention.replace(/-/gi, '').trim() : '';
+            value.activation = (value.activation != undefined && value.activation.length > 0) ? value.activation.replace(/-/gi, '').trim() : '';
+            value.history = (value.history != undefined && value.history.length > 0) ? value.history.replace(/-/gi, '').trim() : '';
+            value.gospellearning = (value.gospellearning != undefined && value.gospellearning.length > 0) ? value.gospellearning.replace(/-/gi, '').trim() : '';
             value.event = (value.event != undefined && value.event.length > 0) ? value.event.replace(/-/gi, '').trim() : '';
             let formattedAgendaObj = this.formatAgendaObj(value);
             if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
@@ -461,33 +500,7 @@ export class AgendaEditPage {
         if (tw == undefined || tw.length == 0) {
             (<FormControl>this.agendaeditForm.controls['temporalwelfare']).setValue("- ");
         }
-    }
-    fellowshipkey($event) {
-        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
-        let v = $event.target.value.split('\n');
-        let newValue = v.map(e => {
-            if (e.length > 27) {
-                e = e.substr(0, 27);
-            }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
-            return e;
-        });
-        $event.target.value = newValue.join('\n');
-
-        if (keycode == '13') {
-            let fs = this.agendaeditForm.value.fellowshipitems;
-            if (fs) {
-                (<FormControl>this.agendaeditForm.controls['fellowshipitems']).setValue(fs + '- ');
-            }
-        }
-    }
-
-    fellowshipfocus($event) {
-        let fs = this.agendaeditForm.value.fellowshipitems;
-        if (fs == undefined || fs.length == 0) {
-            (<FormControl>this.agendaeditForm.controls['fellowshipitems']).setValue("- ");
-        }
-    }
+    }    
 
     missionarykey($event) {
         var keycode = ($event.keyCode ? $event.keyCode : $event.which);
@@ -513,6 +526,114 @@ export class AgendaEditPage {
         let mi = this.agendaeditForm.value.missionaryitems;
         if (mi == undefined || mi.length == 0) {
             (<FormControl>this.agendaeditForm.controls['missionaryitems']).setValue("- ");
+        }
+    }
+
+    retentionkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            let rk = this.agendaeditForm.value.retention;
+            if (rk) {
+                (<FormControl>this.agendaeditForm.controls['retention']).setValue(rk + '- ');
+            }
+        }
+    }
+
+    retentionfocus($event) {
+        let rk = this.agendaeditForm.value.retention;
+        if (rk == undefined || rk.length == 0) {
+            (<FormControl>this.agendaeditForm.controls['retention']).setValue("- ");
+        }
+    }
+
+    activationkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            let ak = this.agendaeditForm.value.activation;
+            if (ak) {
+                (<FormControl>this.agendaeditForm.controls['activation']).setValue(ak + '- ');
+            }
+        }
+    }
+
+    activationfocus($event) {
+        let ak = this.agendaeditForm.value.activation;
+        if (ak == undefined || ak.length == 0) {
+            (<FormControl>this.agendaeditForm.controls['activation']).setValue("- ");
+        }
+    }
+
+    historykey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            let hk = this.agendaeditForm.value.history;
+            if (hk) {
+                (<FormControl>this.agendaeditForm.controls['history']).setValue(hk + '- ');
+            }
+        }
+    }
+
+    historyfocus($event) {
+        let hk = this.agendaeditForm.value.history;
+        if (hk == undefined || hk.length == 0) {
+            (<FormControl>this.agendaeditForm.controls['history']).setValue("- ");
+        }
+    }
+
+    gospellearningkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            let gk = this.agendaeditForm.value.gospellearning;
+            if (gk) {
+                (<FormControl>this.agendaeditForm.controls['gospellearning']).setValue(gk + '- ');
+            }
+        }
+    }
+
+    gospellearningfocus($event) {
+        let gk = this.agendaeditForm.value.gospellearning;
+        if (gk == undefined || gk.length == 0) {
+            (<FormControl>this.agendaeditForm.controls['gospellearning']).setValue("- ");
         }
     }
 
