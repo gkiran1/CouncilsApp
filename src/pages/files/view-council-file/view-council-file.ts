@@ -238,6 +238,7 @@ export class ViewCouncilFilePage {
                 },
                 {
                     text: 'Cancel',
+                    role: 'cancel',
                     cssClass: "actionsheet-cancel",
                     handler: () => {
                     }
@@ -416,131 +417,134 @@ export class ViewCouncilFilePage {
         }
     }
 
+
     uploadFile(uri, value, loader) {
         this.importedFilePath = uri.toString();
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-            success => {
-                console.log('Camera granted');
-            },
-            err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
-        );
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
-            success => {
-                console.log('External Storage granted');
-            },
-            err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE)
-        );
+        // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+        //     success => {
+        //         console.log('Camera granted');
+        //     },
+        //     err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
+        // );
+        // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
+        //     success => {
+        //         console.log('External Storage granted');
+        //     },
+        //     err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE)
+        // );
         //alert(this.importedFilePath);
-        (<any>window).FilePath.resolveNativePath(uri, (filePath) => {
-            //let filePath = 'file:///' + this.importedFilePath;
-            //alert('1:'+ filePath);
-            (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
-                //alert('2:'+ JSON.stringify(res));
-                res.file((resFile) => {
-                    //alert('3:'+ JSON.stringify(resFile));
-                    var reader = new FileReader();
-                    let newfile = new File();
-                    // File.readAsArrayBuffer(resFile, 'newimage')
-                    //     .then(res => {
-                    //         //alert('res'+JSON.stringify(res));
-                    //     })
-                    //     .catch(err => {
-                    //          //alert(err);
-                    //     })
-                    reader.readAsArrayBuffer(resFile);
-                    reader.onloadend = (evt: any) => {
-                        var imgBlob = new Blob([evt.target.result]);
-                        //alert(imgBlob);
-                        //alert(imgBlob.size);
-                        var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
-                        var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
-                        //alert(filetype)
-                        var mimeType;
-                        switch (filetype) {
-                            case 'PNG':
-                                mimeType = 'image/png';
-                                break;
-                            case 'JPG':
-                                mimeType = 'image/jpeg';
-                                break;
-                            case 'DOC':
-                                mimeType = 'application/msword';
-                                break;
-                            case 'DOCX':
-                                mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-                                break;
-                            case 'PDF':
-                                mimeType = 'application/pdf';
-                                break;
-                            case 'XLS':
-                                mimeType = 'application/vnd.ms-excel';
-                                break;
-                            case 'XLSX':
-                                mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-                                break;
-                            default:
-                                break;
-                        }
-                        //alert(this.createdUser);
-                        //alert(this.councilId);
-                        //alert(this.councilName);
-                        //alert(this.createdBy);
-                        this.newFile.createdUser = this.createdUser;
-                        this.newFile.createdDate = moment().toISOString();
-                        this.newFile.councilid = this.councilId;
-                        this.newFile.councilname = this.councilName;
-                        this.newFile.filename = filename;
-                        this.newFile.filetype = filetype;
-                        this.newFile.filesize = imgBlob.size;
-                        this.newFile.createdBy = this.createdBy;
-                        this.newFile.isActive = true;
-                        //alert(JSON.stringify(this.newFile));
-                        this.firebaseservice.saveFile(this.newFile).then(fileId => {
-                            //alert('meta data saved'+fileId);
-                            this.profilePictureRef.child(this.councilId + '//' + fileId + '//' + filename)
-                                .put(imgBlob, { contentType: mimeType })
-                                .then((savedPicture) => {
-                                    //alert('file saved');
-                                    // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
-                                    // this.pictureRef.then((metadata) => {
-                                    this.bindFilesList();
-                                    loader.dismiss();
-                                    //isNewCouncilFileflag=false
-                                    // Metadata now contains the metadata like filesize and type for 'images/...'
-                                    // this.nav.push(ViewCouncilFilePage, {
-                                    //     councilid: value.councilid, councilname: value.councilname
-                                    // }, {
-                                    //         animate: true, animation: 'transition', direction: 'forward'
-                                    //     });
-                                    // }).catch((error) => {
-                                    //     loader.dismiss();
-                                    //      alert(error);
-                                    //     console.log(error);
-                                    // });
-                                }).catch(error => {
-                                    loader.dismiss();
-                                    //alert(error);
-                                    console.log(error);
-                                })
-                        }).catch(error => {
-                            loader.dismiss();
-                            //alert(error);
-                            console.log(error);
-                        })
+        //(<any>window).FilePath.resolveNativePath(uri, (filePath) => {
+        let filePath = 'file://' + this.importedFilePath;
+        //alert('1:'+ filePath);
+        (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
+            //alert('2:'+ JSON.stringify(res));
+            res.file((resFile) => {
+                //alert('3:'+ JSON.stringify(resFile));
+                var reader = new FileReader();
+                let newfile = new File();
+                // File.readAsArrayBuffer(resFile, 'newimage')
+                //     .then(res => {
+                //         //alert('res'+JSON.stringify(res));
+                //     })
+                //     .catch(err => {
+                //          //alert(err);
+                //     })
+                reader.readAsArrayBuffer(resFile);
+                reader.onloadend = (evt: any) => {
+                    var imgBlob = new Blob([evt.target.result]);
+                    //alert(imgBlob);
+                    //alert(imgBlob.size);
+                    var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
+                    var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
+                    //alert(filetype)
+                    var mimeType;
+                    switch (filetype) {
+                        case 'PNG':
+                            mimeType = 'image/png';
+                            break;
+                        case 'JPG':
+                            mimeType = 'image/jpeg';
+                            break;
+                        case 'DOC':
+                            mimeType = 'application/msword';
+                            break;
+                        case 'DOCX':
+                            mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+                            break;
+                        case 'PDF':
+                            mimeType = 'application/pdf';
+                            break;
+                        case 'XLS':
+                            mimeType = 'application/vnd.ms-excel';
+                            break;
+                        case 'XLSX':
+                            mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+                            break;
+                        default:
+                            break;
                     }
-                })
+                    //alert(this.createdUser);
+                    //alert(this.councilId);
+                    //alert(this.councilName);
+                    //alert(this.createdBy);
+                    this.newFile.createdUser = this.createdUser;
+                    this.newFile.createdDate = moment().toISOString();
+                    this.newFile.councilid = this.councilId;
+                    this.newFile.councilname = this.councilName;
+                    this.newFile.filename = filename;
+                    this.newFile.filetype = filetype;
+                    this.newFile.filesize = imgBlob.size;
+                    this.newFile.createdBy = this.createdBy;
+                    this.newFile.isActive = true;
+                    //alert(JSON.stringify(this.newFile));
+                    this.firebaseservice.saveFile(this.newFile).then(fileId => {
+                        //alert('meta data saved'+fileId);
+                        this.profilePictureRef.child(this.councilId + '//' + fileId + '//' + filename)
+                            .put(imgBlob, { contentType: mimeType })
+                            .then((savedPicture) => {
+                                //alert('file saved');
+                                // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
+                                // this.pictureRef.then((metadata) => {
+                                this.bindFilesList();
+                                loader.dismiss();
+                                //isNewCouncilFileflag=false
+                                // Metadata now contains the metadata like filesize and type for 'images/...'
+                                // this.nav.push(ViewCouncilFilePage, {
+                                //     councilid: value.councilid, councilname: value.councilname
+                                // }, {
+                                //         animate: true, animation: 'transition', direction: 'forward'
+                                //     });
+                                // }).catch((error) => {
+                                //     loader.dismiss();
+                                //      alert(error);
+                                //     console.log(error);
+                                // });
+                            }).catch(error => {
+                                loader.dismiss();
+                                //alert(error);
+                                console.log(error);
+                            })
+                    }).catch(error => {
+                        loader.dismiss();
+                        //alert(error);
+                        console.log(error);
+                    })
+                }
             })
-            // .catch(err => {
-            //   alert(err);
-            //   loader.dismiss();
-            //   console.log(err);
-            // })
-        }, (error) => {
-            //loader.dismiss();
-            //alert(error)
-            console.log(error);
-        });
+        })
+        // .catch(err => {
+        //   alert(err);
+        //   loader.dismiss();
+        //   console.log(err);
+        // })
+        // }, (error) => {
+        //     //loader.dismiss();
+        //     //alert(error)
+        //     console.log(error);
+        // });
     }
+
+
     // to convert bytes to KB/MB/GB/TB formats
     formatBytes(bytes) {
         // this.isNewCouncilFileflag = true;
