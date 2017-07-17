@@ -45,8 +45,8 @@
         </ion-item>
         <ion-item class="input-item">
             <ion-label floating>Phone</ion-label>
-            <ion-input type="text" name="phone" *ngIf="!profile.phone" formControlName="phone1" (keyup)="phonekeypresssed($event)"></ion-input>
-            <ion-input type="text" name="phone" *ngIf="profile.phone" [(ngModel)]="profile.phone" formControlName="phone" (keyup)="keypresssed($event)"></ion-input>
+            <!--<ion-input type="text" name="phone" *ngIf="!profile.phone" formControlName="phone1" (keyup)="phonekeypresssed($event)"></ion-input>-->
+            <ion-input type="text" name="phone" [(ngModel)]="profile.phone" formControlName="phone" (keyup)="keypresssed($event)"></ion-input>
         </ion-item>
         <ion-item class="input-item">
             <ion-label floating>LDS.org username</ion-label>
