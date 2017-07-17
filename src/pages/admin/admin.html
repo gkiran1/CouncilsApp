@@ -12,50 +12,59 @@
          <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
       </ion-icon> 
       </button>
-       </ion-buttons>
+		</ion-buttons>
 	</ion-navbar>
 </ion-header>
 
-<ion-content>
-	<ion-item class="divider">MANAGE</ion-item>
+<ion-content class="ionlist">
+	<ion-item class="unittype">Members</ion-item>
+
+	<ion-item class="ion-item-first" (click)="inviteMembers()">
+		<ion-label class="label-styles"> Invite Member</ion-label>
+		<button class="button button-clik" ion-button item-right clear>   
+           <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
+        </button>
+	</ion-item>
+
+	<ion-item class="ion-item-middle" (click)="editMembers()">
+		<ion-label class="label-styles">Edit Member</ion-label>
+		<button class="button button-clik" ion-button item-right clear>   
+           <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
+        </button>
+	</ion-item>
+
+	<ion-item class="ion-item-middle" (click)="getActiveUsers()">
+		<ion-label class="label-styles">Inactivate Member</ion-label>
+		<button class="button button-clik" ion-button item-right clear>   
+           <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
+        </button>
+	</ion-item>
+
+	<ion-item class="ion-item-last" (click)="getInactiveUsers()">
+		<ion-label class="label-styles">Reactivate Member</ion-label>
+		<button class="button button-clik" ion-button item-right clear>   
+           <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
+        </button>
+	</ion-item>
+
+	<ion-item class="unittype1">Councils</ion-item>
+
 	<ion-item class="ion-item-first" (click)="activeCouncils()">
 		<ion-label class="label-styles">Active Councils</ion-label>
 		<button class="button button-clik" ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
 	</ion-item>
-	<ion-item class="ion-item-middle" (click)="createCouncils()">
+	<ion-item class="ion-item-last" (click)="createCouncils()">
 		<ion-label class="label-styles">Create Council</ion-label>
 		<button class="button button-clik" ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
 	</ion-item>
 
-	<ion-item class="ion-item-middle" (click)="inviteMembers()">
-		<ion-label class="label-styles"> Invite Member</ion-label>
-		<button class="button button-clik" ion-button item-right clear>   
-           <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
-        </button>
-	</ion-item>
-	<ion-item class="ion-item-middle" (click)="getActiveUsers()">
-		<ion-label class="label-styles">Inactivate Members</ion-label>
-		<button class="button button-clik" ion-button item-right clear>   
-           <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
-        </button>
-	</ion-item>
-	<ion-item class="ion-item-middle" (click)="editMembers()">
-		<ion-label class="label-styles">Edit Members</ion-label>
-		<button class="button button-clik" ion-button item-right clear>   
-           <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
-        </button>
-	</ion-item>
-	<ion-item class="ion-item-middle" (click)="getInactiveUsers()">
-		<ion-label class="label-styles">Reactivate Members</ion-label>
-		<button class="button button-clik" ion-button item-right clear>   
-           <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
-        </button>
-	</ion-item>
-	<ion-item class="ion-item-last" (click)="transferAdminRights()">
+	<ion-item class="unittype1">Controls</ion-item>
+
+	<ion-item class="ion-idv-item" (click)="transferAdminRights()">
 		<ion-label class="label-styles">Transfer Admin Rights</ion-label>
 		<button class="button button-clik" ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
