@@ -84,7 +84,7 @@ export class slide2Page {
       title: 'Council',
       buttons: [
         {
-          text: 'Add Agenda',
+          text: 'Post Agenda',
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
@@ -93,7 +93,7 @@ export class slide2Page {
           }
         },
         {
-          text: 'Add Discussion',
+          text: 'Start Discussion',
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
@@ -101,7 +101,7 @@ export class slide2Page {
           }
         },
         {
-          text: 'Add Assignment',
+          text: 'Create Assignment',
           cssClass: "actionsheet-items",
 
           handler: () => {
@@ -136,7 +136,7 @@ export class slide2Page {
       title: 'Private',
       buttons: [
         {
-          text: 'Add Discussion',
+          text: 'Start Discussion',
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
@@ -144,7 +144,7 @@ export class slide2Page {
           }
         },
         {
-          text: 'Add Prompting',
+          text: 'Record Prompting',
           cssClass: "actionsheet-items",
           handler: () => {
             this.menuctrl.close();
