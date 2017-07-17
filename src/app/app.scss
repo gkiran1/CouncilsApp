@@ -589,7 +589,7 @@
      min-height: 4.1rem !important;
      font-size: 1.7rem !important;
    
- }
+    }
  .action-sheet-ios .action-sheet-button,
  .action-sheet-md .action-sheet-button {
      height: 4.1rem !important;
@@ -599,13 +599,15 @@
     
      text-align: center;
      border-bottom: 1px solid #d6d6da;
+
      background: rgba(256, 256, 256, .9);
- }
+}
  
  .action-sheet-ios .action-sheet-button:last-child,
  .action-sheet-md .action-sheet-button:last-child {
      border-bottom: none !important;
  }
+
  
  .action-sheet-ios .action-sheet-title,
  .action-sheet-md .action-sheet-title {
