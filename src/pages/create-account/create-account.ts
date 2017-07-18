@@ -28,6 +28,7 @@ export class CreateAccountPage {
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService, public toast: ToastController) { }
   createAccount() {
+
     // this.passwordErr = false;
     // password validation
     if (this.newUser.password.length < 6) {
@@ -52,6 +53,7 @@ export class CreateAccountPage {
         else {
           this.invitee$ = this.firebaseService.findInviteeByEmail(this.newUser.email);
           this.invitee$.subscribe(invitee => {
+            localStorage.setItem('Firsttimeinstall', 'false');
 
             if (invitee) {
               this.newUser.firstname = invitee.firstname;

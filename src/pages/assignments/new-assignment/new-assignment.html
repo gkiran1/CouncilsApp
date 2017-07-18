@@ -32,8 +32,7 @@
 
     <ion-item [class.invalid]="invalidUser" class="input-item">
       <ion-label floating>Assign to</ion-label>
-      <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="assigneduser" #assignmentuser
-        closekeyboard></ion-input>
+      <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="assigneduser" #assignmentuser></ion-input>
     </ion-item>
 
     <ion-label class="error-msg" *ngIf="invalidUser">Invalid user</ion-label>
@@ -86,7 +85,8 @@
         <button ion-button clear block class="button button-clik" color="secondary" [disabled]="!assignmentForm.valid" (click)="complete(assignmentForm.value)">Complete</button>
       </ion-buttons>
       <ion-buttons end>
-        <button ion-button color="secondary" [disabled]="!assignmentForm.valid || (!assignmentForm.dirty && !isAssigntoTouched)" (click)="edit(assignmentForm.value)">Save</button>
+        <button ion-button color="secondary" [disabled]="!assignmentForm.valid || (!assignmentForm.dirty && !isAssigntoTouched)"
+          (click)="edit(assignmentForm.value)">Save</button>
       </ion-buttons>
     </ion-toolbar>
     <ion-toolbar *ngIf="assignmentForm.value.isCompleted">
