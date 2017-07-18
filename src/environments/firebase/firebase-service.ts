@@ -52,13 +52,16 @@ export class FirebaseService {
                 return this.fireAuth.signInWithEmailAndPassword(user.email, user.password)
                     .then((authenticatedUser) => {
                         var usr = firebase.auth().currentUser;
-                        usr.updateProfile({
+                        return usr.updateProfile({
                             displayName: user.firstname + ' ' + user.lastname,
                             photoURL: userAvatar.url
                         }).then(res => {
                             // Successful login in firebase, create user profile.
-                            this.createAuthUser(user, authenticatedUser.uid).then(res => {
+                            return this.createAuthUser(user, authenticatedUser.uid).then(res => {
                                 this.saveIdenticon(authenticatedUser.uid, userAvatar);
+                                return usr.getToken(true).then((idToken) => {
+                                    return idToken;
+                                });
                             });
                         }).catch(function (error) {
                             throw error;
@@ -121,7 +124,12 @@ export class FirebaseService {
     validateUser(email: string, password: string) {
         return this.fireAuth.signInWithEmailAndPassword(email, password)
             .then((authenticatedUser) => {
-                return authenticatedUser.uid;
+                return firebase.auth().currentUser.getToken(true).then((idToken) => {
+                    localStorage.setItem('fbAuthToken', idToken);
+                    return authenticatedUser.uid;
+                }).catch(err => {
+                    throw err;
+                });
             })
             .catch(err => {
                 throw err;

@@ -74,9 +74,10 @@ export class CreateAccountPage {
               // let flag = false;
               let userAvatar = this.generateIdenticon();
               this.firebaseService.signupNewUser(this.newUser, userAvatar)
-                .then(res => {
+                .then(fbAuthToken => {
+                  console.log('fbAuthToken --- ' + fbAuthToken);
                   //onSuccess redirect to Menu page                
-                  this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email);
+                  this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email, fbAuthToken);
                   //this.navCtrl.push(LoginPage);
                   this.navCtrl.push(WelcomePage);
                   loader.dismiss();
