@@ -59,8 +59,7 @@ export class EditProfilePage {
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
             email: ['', Validators.compose([Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])],
-            phone: ['', Validators.compose([Validators.required, Validators.pattern(/^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/)])],
-            phone1: [''],
+            phone: ['', Validators.compose([Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)])],
             ldsusername: ['', Validators.required]
         });
 
@@ -74,6 +73,10 @@ export class EditProfilePage {
         });
 
         loader.present();
+
+        if (this.profile.phone === undefined) {
+            this.profile.phone = '';
+        }
 
         if (this.isPicNotChanged) {
             this.firebaseService.updateProfileInfo(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername).then((res) => {
@@ -240,7 +243,7 @@ export class EditProfilePage {
     }
 
     keypresssed($event) {
-        if ($event.target.value !== '' && this.editProfileForm.valid) {
+        if (this.editProfileForm.valid) {
             this.isChangeflag = true;
         }
         else {
@@ -248,9 +251,11 @@ export class EditProfilePage {
         }
     }
 
-    phonekeypresssed($event) {
-        this.profile.phone = $event.target.value;
-        this.isChangeflag = false;
-    }
+    // phonekeypresssed($event) {
+    //     this.profile.phone = $event.target.value;
+    //     if (this.editProfileForm.valid) {
+    //         this.isChangeflag = true;
+    //     }
+    // }
 
 }

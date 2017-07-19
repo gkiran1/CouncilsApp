@@ -28,6 +28,7 @@ export class CreateAccountPage {
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService, public toast: ToastController) { }
   createAccount() {
+
     // this.passwordErr = false;
     // password validation
     if (this.newUser.password.length < 6) {
@@ -52,6 +53,7 @@ export class CreateAccountPage {
         else {
           this.invitee$ = this.firebaseService.findInviteeByEmail(this.newUser.email);
           this.invitee$.subscribe(invitee => {
+            localStorage.setItem('Firsttimeinstall', 'false');
 
             if (invitee) {
               this.newUser.firstname = invitee.firstname;
@@ -74,9 +76,10 @@ export class CreateAccountPage {
               // let flag = false;
               let userAvatar = this.generateIdenticon();
               this.firebaseService.signupNewUser(this.newUser, userAvatar)
-                .then(res => {
+                .then(fbAuthToken => {
+                  console.log('fbAuthToken --- ' + fbAuthToken);
                   //onSuccess redirect to Menu page                
-                  this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email);
+                  this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email, fbAuthToken);
                   //this.navCtrl.push(LoginPage);
                   this.navCtrl.push(WelcomePage);
                   loader.dismiss();

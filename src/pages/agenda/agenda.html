@@ -7,7 +7,7 @@
                 				</button>
             </ion-col>
             <ion-col width-80 class="header-col2">
-                <ion-title text-center>Handbook 2 Template</ion-title>
+                <ion-title text-center>Council Meeting</ion-title>
             </ion-col>
         </ion-row>
     </ion-navbar>
@@ -140,16 +140,37 @@
         </ion-item>
 
         <ion-item class="input-item flex-direction">
-            <ion-label floating>Fellowship Items</ion-label>
-            <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="fellowshipfocus()" elastic id="fellowshipitems" name="fellowshipitems"
-                formControlName="fellowshipitems" maxlength="500" (keyup)="fellowshipkey($event)">
+            <ion-label floating>Missionary</ion-label>
+            <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems"
+                formControlName="missionaryitems" maxlength="500" (keyup)="missionarykey($event)">
+            </ion-textarea>
+        </ion-item>
+
+         <ion-item class="input-item flex-direction">
+            <ion-label floating>Retention </ion-label>
+            <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="retentionfocus()" elastic id="retention" name="retention"
+                formControlName="retention" maxlength="500" (keyup)="retentionkey($event)">
+            </ion-textarea>
+        </ion-item>
+
+         <ion-item class="input-item flex-direction">
+            <ion-label floating>Activation </ion-label>
+            <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="activationfocus()" elastic id="activation" name="activation"
+                formControlName="activation" maxlength="500" (keyup)="activationkey($event)">
+            </ion-textarea>
+        </ion-item>
+
+         <ion-item class="input-item flex-direction">
+            <ion-label floating>Temple & Family History</ion-label>
+            <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="historyfocus()" elastic id="history" name="history"
+                formControlName="history" maxlength="500" (keyup)="historykey($event)">
             </ion-textarea>
         </ion-item>
 
         <ion-item class="input-item flex-direction">
-            <ion-label floating>Missionary Items</ion-label>
-            <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems"
-                formControlName="missionaryitems" maxlength="500" (keyup)="missionarykey($event)">
+            <ion-label floating>Gospel Learning</ion-label>
+            <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="gospellearningfocus()" elastic id="gospellearning" name="gospellearning"
+                formControlName="gospellearning" maxlength="500" (keyup)="gospellearningkey($event)">
             </ion-textarea>
         </ion-item>
 

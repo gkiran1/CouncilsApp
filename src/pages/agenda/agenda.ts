@@ -29,8 +29,11 @@ export class AgendaPage {
     closingprayer;
     spiritualwelfare;
     temporalwelfare;
-    fellowshipitems;
     missionaryitems;
+    retention;
+    activation;
+    history;
+    gospellearning;
     event;
     isModalDismissed = true;
     showlist = false;
@@ -76,8 +79,11 @@ export class AgendaPage {
             completedassignments: [''],
             spiritualwelfare: [''],
             temporalwelfare: [''],
-            fellowshipitems: [''],
             missionaryitems: [''],
+            retention: [''],
+            activation: [''],
+            history: [''],
+            gospellearning: [''],
             event: [''],
             closingprayer: [''],
             createdby: localStorage.getItem('securityToken'),
@@ -124,8 +130,11 @@ export class AgendaPage {
             agenda.assigneddate = moment(assigneddate).toISOString();
             agenda.spiritualwelfare = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.replace(/- /gi, '').trim() : '';
             agenda.temporalwelfare = (agenda.temporalwelfare != undefined && agenda.temporalwelfare.length > 0) ? agenda.temporalwelfare.replace(/- /gi, '').trim() : '';
-            agenda.fellowshipitems = (agenda.fellowshipitems != undefined && agenda.fellowshipitems.length > 0) ? agenda.fellowshipitems.replace(/- /gi, '').trim() : '';
             agenda.missionaryitems = (agenda.missionaryitems != undefined && agenda.missionaryitems.length > 0) ? agenda.missionaryitems.replace(/- /gi, '').trim() : '';
+            agenda.retention = (agenda.retention != undefined && agenda.retention.length > 0) ? agenda.retention.replace(/-/gi, '').trim() : '';
+            agenda.activation = (agenda.activation != undefined && agenda.activation.length > 0) ? agenda.activation.replace(/-/gi, '').trim() : '';
+            agenda.history = (agenda.history != undefined && agenda.history.length > 0) ? agenda.history.replace(/-/gi, '').trim() : '';
+            agenda.gospellearning = (agenda.gospellearning != undefined && agenda.gospellearning.length > 0) ? agenda.gospellearning.replace(/-/gi, '').trim() : '';
             agenda.event = (agenda.event != undefined && agenda.event.length > 0) ? agenda.event.replace(/-/gi, '').trim() : '';
             agenda.councilid = this.assignedcouncil.$key;
             agenda.openingprayeruserid = (this.openingprayer !== undefined) ? this.openingprayer.$key : '';
@@ -279,32 +288,7 @@ export class AgendaPage {
             (<FormControl>this.newagendaForm.controls['temporalwelfare']).setValue("- ");
         }
     }
-    fellowshipkey($event) {
-        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
-        let v = $event.target.value.split('\n');
-        let newValue = v.map(e => {
-            if (e.length > 27) {
-                e = e.substr(0, 27);
-            }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
-            return e;
-        });
-        $event.target.value = newValue.join('\n');
 
-        if (keycode == '13') {
-            let fs = this.newagendaForm.value.fellowshipitems;
-            if (fs) {
-                (<FormControl>this.newagendaForm.controls['fellowshipitems']).setValue(fs + '- ');
-            }
-        }
-    }
-
-    fellowshipfocus($event) {
-        let fs = this.newagendaForm.value.fellowshipitems;
-        if (fs == undefined || fs.length == 0) {
-            (<FormControl>this.newagendaForm.controls['fellowshipitems']).setValue("- ");
-        }
-    }
 
     missionarykey($event) {
         var keycode = ($event.keyCode ? $event.keyCode : $event.which);
@@ -330,6 +314,114 @@ export class AgendaPage {
         let mi = this.newagendaForm.value.missionaryitems;
         if (mi == undefined || mi.length == 0) {
             (<FormControl>this.newagendaForm.controls['missionaryitems']).setValue("- ");
+        }
+    }
+
+    retentionkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            let rk = this.newagendaForm.value.retention;
+            if (rk) {
+                (<FormControl>this.newagendaForm.controls['retention']).setValue(rk + '- ');
+            }
+        }
+    }
+
+    retentionfocus($event) {
+        let rk = this.newagendaForm.value.retention;
+        if (rk == undefined || rk.length == 0) {
+            (<FormControl>this.newagendaForm.controls['retention']).setValue("- ");
+        }
+    }
+
+    activationkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            let ak = this.newagendaForm.value.activation;
+            if (ak) {
+                (<FormControl>this.newagendaForm.controls['activation']).setValue(ak + '- ');
+            }
+        }
+    }
+
+    activationfocus($event) {
+        let ak = this.newagendaForm.value.activation;
+        if (ak == undefined || ak.length == 0) {
+            (<FormControl>this.newagendaForm.controls['activation']).setValue("- ");
+        }
+    }
+
+    historykey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            let hk = this.newagendaForm.value.history;
+            if (hk) {
+                (<FormControl>this.newagendaForm.controls['history']).setValue(hk + '- ');
+            }
+        }
+    }
+
+    historyfocus($event) {
+        let hk = this.newagendaForm.value.history;
+        if (hk == undefined || hk.length == 0) {
+            (<FormControl>this.newagendaForm.controls['history']).setValue("- ");
+        }
+    }
+
+    gospellearningkey($event) {
+        var keycode = ($event.keyCode ? $event.keyCode : $event.which);
+        let v = $event.target.value.split('\n');
+        let newValue = v.map(e => {
+            if (e.length > 27) {
+                e = e.substr(0, 27);
+            }
+            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            return e;
+        });
+        $event.target.value = newValue.join('\n');
+
+        if (keycode == '13') {
+            let gk = this.newagendaForm.value.gospellearning;
+            if (gk) {
+                (<FormControl>this.newagendaForm.controls['gospellearning']).setValue(gk + '- ');
+            }
+        }
+    }
+
+    gospellearningfocus($event) {
+        let gk = this.newagendaForm.value.gospellearning;
+        if (gk == undefined || gk.length == 0) {
+            (<FormControl>this.newagendaForm.controls['gospellearning']).setValue("- ");
         }
     }
 

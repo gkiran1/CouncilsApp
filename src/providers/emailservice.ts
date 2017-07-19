@@ -19,9 +19,9 @@ export class EmailService {
     }
 
     //Email to create account
-    emailCreateAccount(firstname, lastname, unitnum, email) {
+    emailCreateAccount(firstname, lastname, unitnum, email, fbAuthToken) {
         return this.http.post(this.mailApiUrl, {
-            "event": "accountcreated", "email": email, "firstname": firstname, "unitnum": unitnum, "lastname": lastname
+            "event": "accountcreated", "email": email, "firstname": firstname, "unitnum": unitnum, "lastname": lastname, "token": fbAuthToken
         });
     }
 
