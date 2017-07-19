@@ -11,18 +11,18 @@ export class EmailService {
 
     //Email to invite member
     inviteMemberEmail(name, unitnum, email, adminname) {
-
         return this.http.post(this.mailApiUrl, {
             "event": "invite", "email": email, "name": name, "unitnum": unitnum, "adminname": adminname
         });
-
     }
 
     //Email to create account
-    emailCreateAccount(firstname, lastname, unitnum, email, fbAuthToken) {
+    emailCreateAccount(firstname, lastname, unitnum, email, fbAuthToken, uid) {
         return this.http.post(this.mailApiUrl, {
-            "event": "accountcreated", "email": email, "firstname": firstname, "unitnum": unitnum, "lastname": lastname, "token": fbAuthToken
-        });
+            "event": "accountcreated", "email": email, "firstname": firstname, "unitnum": unitnum, "lastname": lastname, "x-access-token": fbAuthToken, "x-key": uid
+        }).subscribe((res) => {
+            console.log('res---->' + res);
+        })
     }
 
 
