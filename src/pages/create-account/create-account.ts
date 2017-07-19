@@ -78,8 +78,9 @@ export class CreateAccountPage {
               this.firebaseService.signupNewUser(this.newUser, userAvatar)
                 .then(fbAuthToken => {
                   console.log('fbAuthToken --- ' + fbAuthToken);
+                  var uid = localStorage.getItem('createdUsrId');
                   //onSuccess redirect to Menu page                
-                  this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email, fbAuthToken);
+                  this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email, fbAuthToken, uid);
                   //this.navCtrl.push(LoginPage);
                   this.navCtrl.push(WelcomePage);
                   loader.dismiss();
