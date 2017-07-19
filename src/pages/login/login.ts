@@ -101,7 +101,7 @@ export class LoginPage {
                 this.firebaseService.getUsersByKey(uid).subscribe(usrs => {
                     if (usrs[0].isactive) {
                         flag = true;
-                        localStorage.setItem('Firsttimeinstall', 'false');
+                        // localStorage.setItem('Firsttimeinstall', 'false');
                         localStorage.setItem('securityToken', uid);
                         localStorage.setItem('isUserLoggedIn', 'true');
                         localStorage.setItem('isMenuCentered', '0');

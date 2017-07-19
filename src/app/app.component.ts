@@ -62,16 +62,16 @@ export class MyApp {
       this.securityToken = localStorage.getItem('securityToken');
       this.isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
 
-      if (localStorage.getItem('Firsttimeinstall') === 'true' ||
-        localStorage.getItem('Firsttimeinstall') === null ||
-        localStorage.getItem('Firsttimeinstall') === undefined) {
-        this.rootPage = MainScreenPage;
-      }
-      else if ((this.securityToken == null || this.securityToken == 'null') &&
+      // if (localStorage.getItem('Firsttimeinstall') === 'true' ||
+      //   localStorage.getItem('Firsttimeinstall') === null ||
+      //   localStorage.getItem('Firsttimeinstall') === undefined) {
+      //   this.rootPage = MainScreenPage;
+      // }
+      if ((this.securityToken == null || this.securityToken == 'null') &&
         (this.isUserLoggedIn == 'null' || this.isUserLoggedIn == null || this.isUserLoggedIn == 'false')) {
         localStorage.setItem('childAdded', 'false');
         localStorage.setItem('gcToken', 'null');
-        this.rootPage = LoginPage;
+        this.rootPage = MainScreenPage;
       }
       else {
         this.rootPage = MenuPage;
