@@ -51,6 +51,7 @@ export class FirebaseService {
                 // Sign in the user.             
                 return this.fireAuth.signInWithEmailAndPassword(user.email, user.password)
                     .then((authenticatedUser) => {
+                        localStorage.setItem('createdUsrId', authenticatedUser.uid);
                         var usr = firebase.auth().currentUser;
                         return usr.updateProfile({
                             displayName: user.firstname + ' ' + user.lastname,
@@ -124,12 +125,7 @@ export class FirebaseService {
     validateUser(email: string, password: string) {
         return this.fireAuth.signInWithEmailAndPassword(email, password)
             .then((authenticatedUser) => {
-                return firebase.auth().currentUser.getToken(true).then((idToken) => {
-                    localStorage.setItem('fbAuthToken', idToken);
-                    return authenticatedUser.uid;
-                }).catch(err => {
-                    throw err;
-                });
+                return authenticatedUser.uid;
             })
             .catch(err => {
                 throw err;
@@ -1111,7 +1107,7 @@ export class FirebaseService {
             throw err;
         });
     }
-
+        
     // -----------------------------------------Start Notifications --------------------------------------------------- //
 
     // Agendas Create Trigger ------------------------
