@@ -21,8 +21,7 @@
   <form [formGroup]="assignmentForm" (ngSubmit)="assignmentForm.value" #assignment>
     <ion-item class="input-item">
       <ion-label floating>Description</ion-label>
-      <ion-input type="text" spellautocomplete name="description" formControlName="description" maxlength="500" #assignmentdesc
-        closekeyboard></ion-input>
+      <ion-input type="text" spellautocomplete name="description" formControlName="description" maxlength="500" #assignmentdesc></ion-input>
     </ion-item>
     <ion-item class="input-item">
       <ion-label floating>Council</ion-label>
@@ -59,7 +58,7 @@
     <ion-label class="error-msg" *ngIf="dateErr">Invalid date</ion-label>
     <ion-item class="input-item">
       <ion-label floating>Notes</ion-label>
-      <ion-textarea name="notes" spellautocomplete elastic formControlName="notes" closekeyboard></ion-textarea>
+      <ion-textarea name="notes" spellautocomplete elastic formControlName="notes"></ion-textarea>
     </ion-item>
   </form>
 </ion-content>

@@ -53,7 +53,7 @@ export class CreateAccountPage {
         else {
           this.invitee$ = this.firebaseService.findInviteeByEmail(this.newUser.email);
           this.invitee$.subscribe(invitee => {
-            localStorage.setItem('Firsttimeinstall', 'false');
+            // localStorage.setItem('Firsttimeinstall', 'false');
 
             if (invitee) {
               this.newUser.firstname = invitee.firstname;

@@ -19,7 +19,7 @@ export class EmailService {
     //Email to create account
     emailCreateAccount(firstname, lastname, unitnum, email, fbAuthToken, uid) {
         return this.http.post(this.mailApiUrl, {
-            "event": "accountcreated", "email": email, "firstname": firstname, "unitnum": unitnum, "lastname": lastname, "x-access-token": fbAuthToken, "x-key": uid
+            "event": "accountcreated", "email": email, "firstname": firstname, "unitnum": unitnum, "lastname": lastname
         }).subscribe((res) => {
             console.log('res---->' + res);
         })

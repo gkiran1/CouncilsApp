@@ -23,7 +23,7 @@ export class MainScreenPage {
         // public toast: ToastController,
         // fb: FormBuilder
     ) {
-        localStorage.setItem('Firsttimeinstall', 'true');
+        // localStorage.setItem('Firsttimeinstall', 'true');
     }
 
 
