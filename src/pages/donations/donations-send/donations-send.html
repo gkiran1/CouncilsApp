@@ -7,7 +7,7 @@
         				</button>
       </ion-col>
       <ion-col width-80 class="header-col2">
-        <ion-title text-center>Send Donation</ion-title>
+        <ion-title text-center>Subscription</ion-title>
       </ion-col>
     </ion-row>
   </ion-navbar>
@@ -15,10 +15,11 @@
 
 <ion-content>
   <form [formGroup]="donationForm">
-    <ion-item class="top-border input-item">
+    <!--<ion-item class="top-border input-item">
       <ion-label floating>Amount</ion-label>
       <ion-input type="text" name="amount" maxLength='8' formControlName="amount" (input)="addCurrencySysmbol($event)"></ion-input>
-    </ion-item>
+    </ion-item>-->
+    <ion-label class="amount-label">$29 / mo<span>(cancel anytime)</span></ion-label>
     <ion-item class="input-item">
       <ion-label floating>Full Name</ion-label>
       <ion-input type="text" name="fullname" formControlName="fullname"></ion-input>
@@ -28,7 +29,7 @@
       <ion-input type="email" name="email" formControlName="email" validate-onblur></ion-input>
     </ion-item>
     <ion-label class="error-msg" *ngIf="!donationForm.controls.email.valid && donationForm.controls.email.dirty">Invalid email</ion-label>
-    <ion-list class="period-list" no-lines>
+    <!--<ion-list class="period-list" no-lines>
       <ion-item (click)="selectDonationtype('onetime')" class="top-border input-item topborderpadding">
         <ion-icon class="councils-icon__radio_1 menu-icon" item-left [ngClass]="{'active': donationtype === 'onetime'}"></ion-icon>
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': donationtype !== 'onetime'}"></ion-icon>
@@ -39,7 +40,7 @@
         <ion-icon class="councils-icon__radio_2 menu-icon" item-left [ngClass]="{'active': donationtype !== 'monthly'}"></ion-icon>
         <h3>Monthly donation</h3>
       </ion-item>
-    </ion-list>
+    </ion-list>-->
     <ion-label class="sub-heading">
       CREDIT CARD INFO
     </ion-label>
@@ -52,8 +53,11 @@
       <ion-label floating>Valid Thru</ion-label>
       <ion-input type="text" name="creditValidthru" (input)="formatToValidThru($event)" maxLength="5" formControlName="creditValidthru"></ion-input>
     </ion-item>
-
     <ion-label class="error-msg" *ngIf="showExpDateErr">Invalid expiration number</ion-label>
+    <ion-item >
+      <ion-label floating>CVV / CVC</ion-label>
+      <ion-input type="text" name="cvv" (input)="formatCVV($event)" maxLength="3" minLength="3" formControlName="creditCVV"></ion-input>
+    </ion-item>
 
   </form>
 </ion-content>

@@ -5,7 +5,7 @@
       <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" ></ion-icon>
     </button>
     </ion-buttons>
-    <ion-title>Donations</ion-title>
+    <ion-title>Subscription</ion-title>
     <ion-buttons class="menu-button" end>
       <button ion-button (click)="notificationsPage()">
      <ion-icon class="icon councils-icon__notifications menu-icon">
@@ -17,9 +17,14 @@
 </ion-header>
 
 <ion-content>
-  <div class="donations-container">
-    <ion-label class="main-text">Join our Monthly Giving Program</ion-label>
-    <ion-label class="sub-text">100% of your donation supports development of this platform</ion-label>
-    <button class="donation-btn button button-clik" ion-button clear block color="secondary" (click)="sendDonationsPage()">Send Donation</button>
+  <div class="donations-container" *ngIf="!user.isactivesubscriber">
+    <ion-label class="main-text">Join our Monthly Subscription Program</ion-label>
+    <ion-label class="sub-text">$29 a month for unlimited users in your unit #{{unitnumber}}</ion-label>
+    <button class="donation-btn button button-clik" ion-button clear block color="secondary" (click)="sendDonationsPage()">Suscribe Now</button>
+  </div>
+  <div class="donations-container" *ngIf="user.isactivesubscriber">
+    <ion-label class="main-text">Your Subscription is Active</ion-label>
+    <ion-label class="sub-text">Next payment will be charged on {{nextPaymentDate | date:'MMMM, dd yyyy'}}.</ion-label>
+    <button class="donation-btn button button-clik" ion-button clear block color="secondary" (click)="cancelSubscription()">Cancel Subscription</button>
   </div>
 </ion-content>

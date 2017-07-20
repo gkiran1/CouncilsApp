@@ -1107,7 +1107,14 @@ export class FirebaseService {
             throw err;
         });
     }
-        
+    updateSubscriptionInfo(userUid, isactivesubscriber, subscriptionid) {
+        return this.rootRef.child('users/' + userUid).update({ isactivesubscriber: isactivesubscriber, subscriptionid: subscriptionid }).then(() => {
+            console.log('updated ');
+        }).catch(err => {
+            throw err;
+        });
+    }
+
     // -----------------------------------------Start Notifications --------------------------------------------------- //
 
     // Agendas Create Trigger ------------------------
