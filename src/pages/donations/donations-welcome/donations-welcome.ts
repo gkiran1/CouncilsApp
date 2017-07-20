@@ -52,6 +52,11 @@ export class DonationsWelcomePage {
   }
 
   cancelSubscription() {
-
+    this.http.post('https://councilsapi-165009.appspot.com/cancel-subscription', { subscriptionid: this.user.subscriptionid }).subscribe(response => {
+      console.log('Unsubscribed!');
+      this.nav.setRoot(this.nav.getActive().component);
+    }, error => {
+      throw error;
+    });
   }
 }
