@@ -19,8 +19,8 @@ page-donations-send {
         font-size: 13px !important;
         color: #35373a !important;
         margin: 0;
-        padding: 14px 8px 11px 16px;
-        // background-color:#FAFAFA !important;
+        padding: 32px 8px 11px 16px;
+         // background-color:#FAFAFA !important;
     }
      ion-icon.active{
         display: none;
@@ -29,7 +29,7 @@ page-donations-send {
         margin-left: 10px !important;
     }
     .top-border{
-         border-top: 1px solid #E8E9EB !important;
+        //  border-top: 1px solid #E8E9EB !important;
              padding-right: 16px !important;
 
     }
@@ -39,6 +39,19 @@ page-donations-send {
     }
     .border-gap{
         margin-top: -5px !important; 
+    }
+
+    .amount-label{
+        padding-left: 16px;
+        margin-bottom: 0;
+        font-family:Bernina-Bold, sans-serif;
+        font-size: 24px !important;
+    }
+    .amount-label span{
+        padding-left: 10px;
+        font-family: 'Bernina-Regular', sans-serif;
+        font-size: 17px;
+        color: #a9aaac;
     }
 
 }

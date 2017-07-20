@@ -7,7 +7,7 @@
                 </button>
       </ion-col>
       <ion-col width-80 class="header-col2">
-        <ion-title text-center>Send Donation</ion-title>
+        <ion-title text-center>Subscription</ion-title>
       </ion-col>
     </ion-row>
   </ion-navbar>
@@ -15,11 +15,12 @@
 
 <ion-content>
   <div class="donations-container">
-    <ion-label class="main-text">Thank You!</ion-label>
-    <ion-label class="sub-text">Your donation was successfully sent.</ion-label>
+    <ion-label class="main-text">Subscription Activated</ion-label>
+    <ion-label class="sub-text">Your card will be charged $29/mo untill you cancel.</ion-label>
 
-    <ion-label class="margintop sub-text">Council Foundation is a 501(c)(3)</ion-label>
+    <button class="margintop button button-clik" ion-button clear block color="secondary" (click)="cancel()">Home</button>
+    <!--<ion-label class="margintop sub-text">Council Foundation is a 501(c)(3)</ion-label>
     <ion-label class="marginnone sub-text">Tax ID 81-2814823</ion-label>
-    <ion-label class="marginnone" color="secondary">donate@councils.io</ion-label>
+    <ion-label class="marginnone" color="secondary">donate@councils.io</ion-label>-->
   </div>
 </ion-content>

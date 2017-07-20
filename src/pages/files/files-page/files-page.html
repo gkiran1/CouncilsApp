@@ -26,15 +26,13 @@
                 <p><span class="name-styles">{{item.filename}}</span></p>
                 <p class="name-styles">by <span ion-text color="secondary">{{item.createdUser}}</span>
                     <span class="date-styles">{{item.createdDate | customtimeformat}}</span></p>
-            </ion-item>
+                </ion-item>
         </ion-list>
     </ng-container>
     <ng-container *ngIf="!filesArray.length">
-        <div class="nocontent-message">
-            <p>There are no files</p>
-        </div>
+        <ion-label text-center class="text-content font1">There are no files</ion-label>
     </ng-container>
 </ion-content>
 <ion-footer>
-        <button ion-button color="secondary" class="button button-clik"  clear block (click)="addFile()">Add File</button>
+    <button ion-button color="secondary" class="button button-clik" clear block (click)="addFile()">Add File</button>
 </ion-footer>

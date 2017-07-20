@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { validateEmail } from '../../../custom-validators/custom-validator';
 import { Http } from '@angular/http';
 import { NgZone } from '@angular/core';
+import { FirebaseService } from '../../../environments/firebase/firebase-service';
 
 declare var Stripe: any;
 
@@ -18,14 +19,15 @@ export class DonationsSendPage {
   donationtype = 'onetime';
   showCardErr = false;
   showExpDateErr = false;
-  constructor(public zone: NgZone, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public http: Http, fb: FormBuilder, public nav: NavController, public navParams: NavParams, public toast: ToastController,
+  constructor(public fs: FirebaseService, public zone: NgZone, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public http: Http, fb: FormBuilder, public nav: NavController, public navParams: NavParams, public toast: ToastController,
   ) {
     this.donationForm = fb.group({
-      amount: ['', Validators.required],
+      amount: ['2900', Validators.required],
       fullname: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, validateEmail])],
       creditcardNo: ['', Validators.compose([Validators.required, Validators.minLength(18), Validators.maxLength(18)])],
       creditValidthru: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5)])],
+      creditCVV: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(3)])]
     });
     Stripe.setPublishableKey('pk_test_s1UhNXOG0r73kmqPi3fQV2BE');
   }
@@ -75,6 +77,10 @@ export class DonationsSendPage {
     event.target.setSelectionRange(start, start);
   }
 
+  formatCVV($event) {
+    $event.target.value = $event.target.value.replace(/[^0-9]/g, '');
+  }
+
   selectDonationtype(type) {
     this.donationtype = type;
   }
@@ -90,7 +96,9 @@ export class DonationsSendPage {
     Stripe.card.createToken({
       number: value.creditcardNo.split('-').join(''),//'4242424242424242',378282246310005
       exp_month: value.creditValidthru.split('/')[0],
-      exp_year: value.creditValidthru.split('/')[1]
+      exp_year: value.creditValidthru.split('/')[1],
+      cvc: value.creditCVV,
+      name: value.fullname
     }, (status, response) => {
       if (response.error) {
         // Show the errors on the form
@@ -111,10 +119,10 @@ export class DonationsSendPage {
         // Insert the token into the form so it gets submitted to the server
         let data = {
           stripeToken: this.token,
-          amount: Number.parseInt(value.amount.substr(2)) * 100, // adding decimals
+          amount: 2900,// amount: Number.parseInt(value.amount.substr(2)) * 100, // adding decimals
           fullname: value.fullname,
           email: value.email,
-          donationtype: this.donationtype,
+          donationtype: "monthly", //donationtype: this.donationtype,
           cardNo: value.creditcardNo.split('-').join(''),
           userid: localStorage.getItem('securityToken')
         }
@@ -130,6 +138,7 @@ export class DonationsSendPage {
         this.http.post(url, data)
           .subscribe(response => {
             loader.dismiss();
+            this.fs.updateSubscriptionInfo(localStorage.getItem('securityToken'), true, response.json().id);
             this.zone.run(() => {
               this.nav.push(DonationsThankyouPage);
             });

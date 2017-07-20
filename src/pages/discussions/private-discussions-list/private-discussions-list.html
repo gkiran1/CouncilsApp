@@ -23,12 +23,14 @@
             <ion-item class="ion-item-middle" (click)="openDiscussion(item.$key)" *ngFor="let item of discussions">
                 <ion-avatar item-left *ngIf="uid === item.createdUserId">
                     <img [src]="item.otherUserAvatar" *ngIf="item.otherUserAvatar && item.otherUserAvatar !== 'avatar'">
-                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!item.otherUserAvatar || item.otherUserAvatar === 'avatar'" />
+                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!item.otherUserAvatar || item.otherUserAvatar === 'avatar'"
+                    />
                 </ion-avatar>
                 <h3 class="topic" *ngIf="uid === item.createdUserId">{{item.otherUserName}}</h3>
                 <ion-avatar item-left *ngIf="uid !== item.createdUserId">
                     <img [src]="item.createdUserAvatar" *ngIf="item.createdUserAvatar && item.createdUserAvatar !== 'avatar'">
-                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!item.createdUserAvatar && item.createdUserAvatar === 'avatar'" />
+                    <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!item.createdUserAvatar && item.createdUserAvatar === 'avatar'"
+                    />
                 </ion-avatar>
                 <h3 class="topic" *ngIf="uid !== item.createdUserId">{{item.createdUserName}}</h3>
                 <span class="right-align"><ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon></span>
@@ -37,7 +39,7 @@
             </ion-item>
         </ng-container>
         <ng-container *ngIf="isListEmpty">
-            <p class="text-content">There are no discussions</p>
+            <ion-label text-center class="text-content font1">There are no discussions</ion-label>
         </ng-container>
     </ion-item-group>
 </ion-content>

@@ -1,5 +1,5 @@
 <ion-header>
-   <ion-navbar>
+  <ion-navbar>
     <ion-buttons class="menu-button" left>
       <button ion-button menuToggle>
       <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" ></ion-icon>
@@ -7,7 +7,7 @@
     </ion-buttons>
     <ion-title>Promptings</ion-title>
     <ion-buttons class="menu-button" end>
-      <button ion-button (click)="notificationsPage()"  >
+      <button ion-button (click)="notificationsPage()">
      <ion-icon class="icon councils-icon__notifications menu-icon">
          <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
       </ion-icon> 
@@ -19,21 +19,18 @@
 <ion-content class="list-page">
   <ion-item-group>
     <ng-container *ngIf="notesArray.length">
-      <ion-item (click)="notesSelected(item)" 
-      [ngClass]="notesArray.length == 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i=== notesArray.length - 1 ? 'ion-item-last' : 'ion-item-middle'))" 
-      *ngFor="let item of notesArray; let i = index">
+      <ion-item (click)="notesSelected(item)" [ngClass]="notesArray.length == 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i=== notesArray.length - 1 ? 'ion-item-last' : 'ion-item-middle'))"
+        *ngFor="let item of notesArray; let i = index">
         <h3 class="title">{{item.title}}</h3><span class="right-align"></span>
         <button class="button button-clik" ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
         <p>{{item.note}}</p>
         <span>{{item.createddate | customdateformat}}</span>
-      </ion-item>
+        </ion-item>
     </ng-container>
     <ng-container *ngIf="!notesArray.length">
-      <div class="nocontent-message">
-        <p>There are no promptings</p>
-      </div>
+      <ion-label text-center class="text-content font1">There are no promptings</ion-label>
     </ng-container>
   </ion-item-group>
 </ion-content>
