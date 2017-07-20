@@ -18,20 +18,19 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <form [formGroup]="assignmentForm" (ngSubmit)="assignmentForm.value" #assignment>
+  <form [formGroup]="assignmentForm" (ngSubmit)="assignmentForm.value">
     <ion-item class="input-item">
       <ion-label floating>Description</ion-label>
-      <ion-input type="text" spellautocomplete name="description" formControlName="description" maxlength="500" #assignmentdesc></ion-input>
+      <ion-input type="text" spellautocomplete name="description" formControlName="description" maxlength="500"></ion-input>
     </ion-item>
     <ion-item class="input-item">
       <ion-label floating>Council</ion-label>
-      <ion-input type="text" id="councilsSelection" readonly (click)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil"
-        #assignmentcouncil></ion-input>
+      <ion-input type="text" id="councilsSelection" readonly (click)="showCouncilsModal($event, assignmentForm.value)" formControlName="assignedcouncil"></ion-input>
     </ion-item>
 
     <ion-item [class.invalid]="invalidUser" class="input-item">
       <ion-label floating>Assign to</ion-label>
-      <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="assigneduser" #assignmentuser></ion-input>
+      <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="assigneduser"></ion-input>
     </ion-item>
 
     <ion-label class="error-msg" *ngIf="invalidUser">Invalid user</ion-label>
