@@ -52,7 +52,7 @@ export class TransferAdminRightsPage {
             }
         });
 
-        // this.currentAdminId = localStorage.getItem('securityToken');
+        this.currentAdminId = localStorage.getItem('securityToken');
         // const unitNumber = Number(localStorage.getItem('unitNumber'));
 
     }
