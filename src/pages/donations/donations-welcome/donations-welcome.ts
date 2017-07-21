@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { DonationsSendPage } from '../donations-send/donations-send';
 import { NotificationsPage } from '../../notifications/notifications-page/notifications.component';
@@ -19,7 +19,7 @@ export class DonationsWelcomePage {
   unitnumber;
   nextPaymentDate;
 
-  constructor(public http: Http, public nav: NavController, public navParams: NavParams, public firebaseservice: FirebaseService, public af: AngularFire) {
+  constructor(public loadingCtrl: LoadingController, public http: Http, public nav: NavController, public navParams: NavParams, public firebaseservice: FirebaseService, public af: AngularFire) {
     firebaseservice.getNotCnt().subscribe(count => {
       this.notificationsCount = count;
     });
@@ -52,11 +52,19 @@ export class DonationsWelcomePage {
   }
 
   cancelSubscription() {
+    let loader = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+    });
+    loader.present();
     this.http.post('https://councilsapi-165009.appspot.com/cancel-subscription', { subscriptionid: this.user.subscriptionid }).subscribe(response => {
       console.log('Unsubscribed!');
+      this.firebaseservice.updateSubscriptionInfo(localStorage.getItem('securityToken'), false, this.user.subscriptionid).then(res => {
+        loader.dismiss();
+      });
       this.nav.setRoot(this.nav.getActive().component);
     }, error => {
-      throw error;
+      console.log('error', error);
     });
   }
 }

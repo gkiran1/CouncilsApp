@@ -60,7 +60,7 @@ export class DonationsSendPage {
     } else if (start === 15) {
       start = 16;
     }
-    event.target.setSelectionRange(start, start); // to set cursor position for inline editing - JS method 
+    // event.target.setSelectionRange(start, start); // to set cursor position for inline editing - JS method 
   }
   formatToValidThru(event) {
     this.showExpDateErr = false;
@@ -74,7 +74,7 @@ export class DonationsSendPage {
     if (start === 3) {
       start = 4;
     }
-    event.target.setSelectionRange(start, start);
+    // event.target.setSelectionRange(start, start);
   }
 
   formatCVV($event) {
