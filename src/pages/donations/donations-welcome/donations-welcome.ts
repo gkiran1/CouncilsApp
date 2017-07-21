@@ -6,7 +6,7 @@ import { NotificationsPage } from '../../notifications/notifications-page/notifi
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { NewMenuPage } from '../../newmenu/newmenu';
 import { AngularFire } from 'angularfire2';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'page-donations-welcome',
@@ -29,10 +29,16 @@ export class DonationsWelcomePage {
       this.af.database.object('/users/' + uid).subscribe(user => {
         this.user = user;
         if (user.isactivesubscriber) {
-          this.http.post('https://councilsapi-165009.appspot.com/nextpayment-date', { subscriptionid: user.subscriptionid }).subscribe(response => {
-            this.nextPaymentDate = response.json().nextPaymentDate * 1000; // converting from seconds to milliseconds
-          }, error => {
-            throw error;
+          this.firebaseservice.getFirebaseAuthTkn().then(tkn => {
+            let headers = new Headers({ 'Content-Type': 'application/json', 'x-access-token': tkn, 'x-key': localStorage.getItem('securityToken') });
+            let options = new RequestOptions({ headers: headers });
+
+            this.http.post('https://councilsapi-165009.appspot.com/v1/nextpayment-date', { subscriptionid: user.subscriptionid }, options)
+              .subscribe(response => {
+                this.nextPaymentDate = response.json().nextPaymentDate * 1000; // converting from seconds to milliseconds
+              }, err => {
+                console.log(err);
+              })
           });
         }
       });
@@ -57,14 +63,22 @@ export class DonationsWelcomePage {
       content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
     });
     loader.present();
-    this.http.post('https://councilsapi-165009.appspot.com/cancel-subscription', { subscriptionid: this.user.subscriptionid }).subscribe(response => {
-      console.log('Unsubscribed!');
-      this.firebaseservice.updateSubscriptionInfo(localStorage.getItem('securityToken'), false, this.user.subscriptionid).then(res => {
-        loader.dismiss();
-      });
-      this.nav.setRoot(this.nav.getActive().component);
-    }, error => {
-      console.log('error', error);
+
+    this.firebaseservice.getFirebaseAuthTkn().then(tkn => {
+      let headers = new Headers({ 'Content-Type': 'application/json', 'x-access-token': tkn, 'x-key': localStorage.getItem('securityToken') });
+      let options = new RequestOptions({ headers: headers });
+
+      this.http.post('https://councilsapi-165009.appspot.com/v1/cancel-subscription', { subscriptionid: this.user.subscriptionid }, options)
+        .subscribe(response => {
+          console.log('Unsubscribed!');
+          this.firebaseservice.updateSubscriptionInfo(localStorage.getItem('securityToken'), false, this.user.subscriptionid).then(res => {
+            loader.dismiss();
+          });
+          this.nav.setRoot(this.nav.getActive().component);
+        }, err => {
+          loader.dismiss();
+          console.log(err);
+        })
     });
   }
 }

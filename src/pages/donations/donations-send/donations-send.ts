@@ -3,7 +3,7 @@ import { NavController, NavParams, ToastController, LoadingController, AlertCont
 import { DonationsThankyouPage } from '../donations-thankyou/donations-thankyou';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { validateEmail } from '../../../custom-validators/custom-validator';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { NgZone } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 
@@ -127,7 +127,7 @@ export class DonationsSendPage {
           userid: localStorage.getItem('securityToken')
         }
 
-        let baseURL = 'https://councilsapi-165009.appspot.com/';
+        let baseURL = 'https://councilsapi-165009.appspot.com/v1/';
         let url = '';
         if (data.donationtype === 'monthly') {
           url = baseURL + 'donate-monthly';
@@ -135,17 +135,22 @@ export class DonationsSendPage {
           url = baseURL + 'donate';
         }
 
-        this.http.post(url, data)
-          .subscribe(response => {
-            loader.dismiss();
-            this.fs.updateSubscriptionInfo(localStorage.getItem('securityToken'), true, response.json().id);
-            this.zone.run(() => {
-              this.nav.push(DonationsThankyouPage);
-            });
-          }, err => {
-            loader.dismiss();
-            this.showAlert('Connection error.');
-          })
+        this.fs.getFirebaseAuthTkn().then(tkn => {
+          let headers = new Headers({ 'Content-Type': 'application/json', 'x-access-token': tkn, 'x-key': localStorage.getItem('securityToken') });
+          let options = new RequestOptions({ headers: headers });
+
+          this.http.post(url, data, options)
+            .subscribe(response => {
+              loader.dismiss();
+              this.fs.updateSubscriptionInfo(localStorage.getItem('securityToken'), true, response.json().id);
+              this.zone.run(() => {
+                this.nav.push(DonationsThankyouPage);
+              });
+            }, err => {
+              loader.dismiss();
+              this.showAlert('Connection error.');
+            })
+        });
 
       }
     });
