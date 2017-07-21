@@ -44,9 +44,11 @@ export class slide1Page {
         if (document.getElementById('adminPage')) {
             (document.getElementById('adminPage')).classList.remove("menu-selected");
         }
+        if (document.getElementById('donationsPage')) {
+            (document.getElementById('donationsPage')).classList.remove("menu-selected");
+        }
 
         (document.getElementById('settingsPage')).classList.remove("menu-selected");
-        (document.getElementById('donationsPage')).classList.remove("menu-selected");
         (document.getElementById('directoryPage')).classList.remove("menu-selected");
 
         (document.getElementById(button)).classList.add("menu-selected");
