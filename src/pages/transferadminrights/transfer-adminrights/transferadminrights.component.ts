@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
 import { User } from '../../../user/user';
-import { AlertController, NavController, ActionSheetController, MenuController, ToastController} from 'ionic-angular';
+import { AlertController, NavController, ActionSheetController, MenuController, ToastController } from 'ionic-angular';
 import { TransferCompletePage } from '../transfer-complete/transfercomplete.component';
 import { AngularFire } from 'angularfire2';
 import { EmailService } from '../../../providers/emailservice';
@@ -84,10 +84,13 @@ export class TransferAdminRightsPage {
 
                                 this.emailservice.emailTrasferAdmin(this.currentUser.firstname,
                                     this.currentUser.lastname,
-                                    this.currentUser.unitnumber, user.email, user.firstname, user.lastname).subscribe(res => {
-                                        if (res.status === 200) {
-                                        } else {
-                                        }
+                                    this.currentUser.unitnumber, user.email, user.firstname, user.lastname).then(res => {
+                                        res.subscribe(result => {
+                                            if (result.status === 200) {
+                                                console.log(result);
+                                            } else {
+                                            }
+                                        });
                                     });
 
                             }).then(() => {
@@ -116,11 +119,11 @@ export class TransferAdminRightsPage {
         // alert.present();
 
         let toast = this.toast.create({
-      message: errText,
-      duration: 3000
-    })
+            message: errText,
+            duration: 3000
+        })
 
-    toast.present();
+        toast.present();
     }
 
     back() {

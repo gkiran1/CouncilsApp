@@ -59,10 +59,13 @@ export class InactivateMembersPage {
                         this.menuctrl.close();
                         this.firebaseService.inactivateUser(user.$key, false, user.pushtoken)
                             .then(() => {
-                                this.emailservice.emailAccountInactive(user.firstname + " " + user.lastname, user.email, this.adminname).subscribe(res => {
-                                    if (res.status === 200) {
-                                    } else {
-                                    }
+                                this.emailservice.emailAccountInactive(user.firstname + " " + user.lastname, user.email, this.adminname).then(res => {
+                                    res.subscribe(result => {
+                                        if (result.status === 200) {
+                                            console.log(result);
+                                        } else {
+                                        }
+                                    });
                                 });
                                 this.nav.push(MemberInactivatedPage);
                             })
