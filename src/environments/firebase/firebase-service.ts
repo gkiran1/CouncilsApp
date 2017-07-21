@@ -1114,6 +1114,12 @@ export class FirebaseService {
             throw err;
         });
     }
+    getFirebaseAuthTkn() {
+        return firebase.auth().currentUser.getToken(true).then((tkn) => {
+            console.log('fbAuthToken-----> ', tkn)
+            return tkn;
+        });
+    }
 
     // -----------------------------------------Start Notifications --------------------------------------------------- //
 

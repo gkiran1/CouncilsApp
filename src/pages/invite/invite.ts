@@ -145,24 +145,26 @@ export class InviteMemberPage {
         this.addedCouncils.forEach(e => e.selected ? this.invite.councils.push(e.$key) : '');
 
         this.emailService.inviteMemberEmail(this.invite.firstname + " " + this.invite.lastname, this.invite.unitnumber, this.invite.email, this.adminname)
-            .subscribe(res => {
-                if (res.status === 200) {
-                    this.fs.createInvitee(this.invite)
-                        .then(res => {
-                            loader.dismiss();
-                            this.navctrl.push(InvitationSuccessPage)
-                        })
-                        .catch(err => this.emailErr = true
-                        // this.showAlert('Email taken')
-                        )
-                } else {
-                    loader.dismiss();
-                    this.showAlert('Connection error.');
-                }
+            .then(res => {
+                res.subscribe(result => {
+                    if (result.status === 200) {
+                        this.fs.createInvitee(this.invite)
+                            .then(res => {
+                                loader.dismiss();
+                                this.navctrl.push(InvitationSuccessPage)
+                            })
+                            .catch(err => this.emailErr = true
+                            // this.showAlert('Email taken')
+                            )
+                    } else {
+                        loader.dismiss();
+                        this.showAlert('Connection error.');
+                    }
+                });
             }, err => {
                 loader.dismiss();
                 this.showAlert('Connection error.');
-            })
+            });
     }
 
     itemChanged() {
