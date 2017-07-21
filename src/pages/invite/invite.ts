@@ -153,9 +153,10 @@ export class InviteMemberPage {
                                 loader.dismiss();
                                 this.navctrl.push(InvitationSuccessPage)
                             })
-                            .catch(err => this.emailErr = true
-                            // this.showAlert('Email taken')
-                            )
+                            .catch(err => {
+                                loader.dismiss();
+                                this.emailErr = true;
+                            });
                     } else {
                         loader.dismiss();
                         this.showAlert('Connection error.');

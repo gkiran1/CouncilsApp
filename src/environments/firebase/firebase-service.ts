@@ -155,37 +155,44 @@ export class FirebaseService {
     }
 
     createInvitee(invitee: Invitee) {
+        var dis = this;
         var inviteee = this.rootRef.child('invitees').orderByChild('email').equalTo(invitee.email);
         return inviteee.once("value", function (snap) {
             if (!snap.exists()) {
-                firebase.database().ref().child('invitees').push(
-                    {
-                        email: invitee.email,
-                        firstname: invitee.firstname,
-                        lastname: invitee.lastname,
-                        // calling: invitee.calling,
-                        unittype: invitee.unittype,
-                        unitnumber: invitee.unitnumber,
-                        councils: invitee.councils,
-                        createdby: invitee.createdby,
-                        createddate: invitee.createddate,
-                        lastupdateddate: invitee.lastupdateddate,
-                        isactive: true
-                    })
-                    .then(() => {
-                        return "User is successfully invited..."
-                    })
-                    .catch(err => { throw err });
-            }
-        }).then((res) => {
-            if (res.val()) {
-                throw "User has already invited..."
+                dis.insertInvitee(invitee);
             }
             else {
-                return "User is successfully invited..."
+                snap.forEach(function (childSnapshot) {
+                    firebase.database().ref().child('invitees/' + childSnapshot.key).remove().then(() => {
+                        dis.insertInvitee(invitee);
+                        return;
+                    });
+                });
             }
-
+        }).then((res) => {
+            return "User is successfully invited...";
         }).catch(err => { throw err });
+    }
+
+    insertInvitee(invitee) {
+        firebase.database().ref().child('invitees').push(
+            {
+                email: invitee.email,
+                firstname: invitee.firstname,
+                lastname: invitee.lastname,
+                // calling: invitee.calling,
+                unittype: invitee.unittype,
+                unitnumber: invitee.unitnumber,
+                councils: invitee.councils,
+                createdby: invitee.createdby,
+                createddate: invitee.createddate,
+                lastupdateddate: invitee.lastupdateddate,
+                isactive: true
+            })
+            .then(() => {
+                return "User is successfully invited..."
+            })
+            .catch(err => { throw err });
     }
 
     getCouncilsByType(unitNumber: string): Observable<Council[]> {
