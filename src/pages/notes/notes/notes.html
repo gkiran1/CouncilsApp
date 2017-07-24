@@ -19,18 +19,22 @@
 <ion-content class="list-page">
   <ion-item-group>
     <ng-container *ngIf="notesArray.length">
-      <ion-item (click)="notesSelected(item)" [ngClass]="notesArray.length == 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i=== notesArray.length - 1 ? 'ion-item-last' : 'ion-item-middle'))"
-        *ngFor="let item of notesArray; let i = index">
-        <h3 class="title">{{item.title}}</h3><span class="right-align"></span>
-        <button class="button button-clik" ion-button item-right clear>   
+      <ion-list>
+        <ion-item (click)="notesSelected(item)" [ngClass]="notesArray.length == 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i=== notesArray.length - 1 ? 'ion-item-last' : 'ion-item-middle'))"
+          *ngFor="let item of notesArray; let i = index">
+          <h3 class="title">{{item.title}}</h3><span class="right-align"></span>
+          <button class="button button-clik" ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
-        <p>{{item.note}}</p>
-        <span>{{item.createddate | customdateformat}}</span>
+          <p>{{item.note}}</p>
+          <span>{{item.createddate | customdateformat}}</span>
         </ion-item>
-    </ng-container>
-    <ng-container *ngIf="!notesArray.length">
-      <ion-label text-center class="text-content font1">There are no promptings</ion-label>
+      </ion-list>
     </ng-container>
   </ion-item-group>
+  <ng-container *ngIf="!notesArray.length">
+    <div class="no-content">
+      <ion-label text-center class="nocontent">There are no promptings</ion-label>
+    </div>
+  </ng-container>
 </ion-content>

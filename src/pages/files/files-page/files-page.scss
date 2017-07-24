@@ -1,77 +1,80 @@
-files-page{
-    .date-styles{
+files-page {
+    .list-page .scroll-content {
+        padding-top: 0px !important;
+    }
+    ion-list {
+        margin-top: 28px !important;
+    }
+    .date-styles {
         font-family: Bernina-Regular !important;
-        color:#a9aaac !important;
+        color: #a9aaac !important;
         text-align: right !important;
         position: absolute;
-        right: 16px;        
+        right: 16px;
     }
-    .council-styles{
-        font-family:Bernina-SemiBold !important;
+    .council-styles {
+        font-family: Bernina-SemiBold !important;
         font-size: 17px !important;
-        color:#35373A !important;
+        color: #35373A !important;
         display: inline-block;
     }
     .list-page ion-item {
         height: auto;
-        
     }
-    .text-content{
+    .text-content {
         position: absolute;
         top: 45%;
         width: 100%;
         margin: auto;
     }
-    .font1{
+    .font1 {
         font-family: Bernina-Regular, sans-serif;
         font-size: 17px !important;
         color: #a9aaac !important;
     }
-    .name-styles{
-        font-family:Bernina-SemiBold !important;
+    .name-styles {
+        font-family: Bernina-SemiBold !important;
         font-size: 13px !important;
-        color:#a9aaac !important;
+        color: #a9aaac !important;
     }
-    .icon-style{
-    color:#A9AAAC;
-    width: 0.66em;
-    height: 1.08em;
+    .icon-style {
+        color: #A9AAAC;
+        width: 0.66em;
+        height: 1.08em;
     }
-     .text-content{
-       position:absolute;
-       top:50%;
-       width: 100%;
-       margin:auto;
-       color:map-get($colors, light-gray);
-    }    
-    .toolbar-background-md,.toolbar-background-ios{
-    background: none !important;
-}
-.empty{    
-    height: 20px;
-    border-bottom:1px solid #e8e9eb !important;   
-}
-.btnFwd{
-    text-align: right;
-}
-.row{
-    border-bottom:1px solid #DEDEDE !important;
+    .text-content {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        margin: auto;
+        color: map-get($colors, light-gray);
     }
-.h3{
-    font-size: 1.42em !important;
-}    
-    .forwardBtn{
-// background-color: white;
-color: #e8e9eb;
-font-size: 1.42em !important;
-margin-right: 2%;
-}
-
-    .right-align{
+    .toolbar-background-md,
+    .toolbar-background-ios {
+        background: none !important;
+    }
+    .empty {
+        height: 20px;
+        border-bottom: 1px solid #e8e9eb !important;
+    }
+    .btnFwd {
+        text-align: right;
+    }
+    .row {
+        border-bottom: 1px solid #DEDEDE !important;
+    }
+    .h3 {
+        font-size: 1.42em !important;
+    }
+    .forwardBtn {
+        // background-color: white;
+        color: #e8e9eb;
+        font-size: 1.42em !important;
+        margin-right: 2%;
+    }
+    .right-align {
         position: absolute;
         right: 0;
-        margin-right:10px;
+        margin-right: 10px;
     }
-
-
-}//page
+} //page

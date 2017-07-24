@@ -17,7 +17,7 @@
 
 <ion-content>
 
-  <ng-container *ngIf="user.councils.length">    
+  <ng-container *ngIf="user.councils.length">
     <ion-list class='ionlist'>
       <!--<ion-item [ngClass]="i===0?'ion-item-first':(i===myCouncils.length - 1? 'ion-item-last': 'ion-item-middle')" (click)="usersincouncils(item.$key,item.council)"
         *ngFor="let item of myCouncils; let i = index" [attr.data-index]="i">
@@ -28,8 +28,8 @@
         </ion-item>-->
 
       <ion-item *ngIf="(areaCouncils.length)" [ngClass]="firstShown === 'Area' ? 'unittype' : 'unittype1'">Area</ion-item>
-      <ion-item [ngClass]="areaCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === areaCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))" (click)="usersincouncils(item.$key,item.council)"
-        *ngFor="let item of areaCouncils; let i = index" [attr.data-index]="i">
+      <ion-item [ngClass]="areaCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === areaCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))"
+        (click)="usersincouncils(item.$key,item.council)" *ngFor="let item of areaCouncils; let i = index" [attr.data-index]="i">
         <ion-label class="council-styles">{{item.council}}</ion-label>
         <button class="button button-clik" ion-button item-right clear>
       <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
@@ -37,8 +37,8 @@
       </ion-item>
 
       <ion-item *ngIf="(stakeCouncils.length)" [ngClass]="firstShown === 'Stake' ? 'unittype' : 'unittype1'">Stake</ion-item>
-      <ion-item [ngClass]="stakeCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === stakeCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))" (click)="usersincouncils(item.$key,item.council)"
-        *ngFor="let item of stakeCouncils; let i = index" [attr.data-index]="i">
+      <ion-item [ngClass]="stakeCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === stakeCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))"
+        (click)="usersincouncils(item.$key,item.council)" *ngFor="let item of stakeCouncils; let i = index" [attr.data-index]="i">
         <ion-label class="council-styles">{{item.council}}</ion-label>
         <button class="button button-clik" ion-button item-right clear>
       <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
@@ -67,8 +67,8 @@
   </ng-container>
 
   <ng-container *ngIf="!user.councils.length">
-    <div class="nocontent-message">
-      <p>There are no active councils</p>
+    <div class="no-content">
+      <ion-label text-center class="nocontent">There are no active councils</ion-label>
     </div>
   </ng-container>
 </ion-content>

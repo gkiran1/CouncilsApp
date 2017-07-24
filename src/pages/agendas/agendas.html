@@ -15,18 +15,13 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
 <ion-content class="list-page">
-
   <ng-container *ngIf="agendasArray.length">
-
     <ion-list>
       <ion-item class="ion-item-middle" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
         <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
         <ion-row>
-
           <ion-icon class="councils-icon__agenda menu-icon menu-style" color="primary"></ion-icon>
-
           <ion-col>
             <p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
             <p><span class="agendacouncil-styles">{{item.agendacouncil}}</span>
@@ -42,7 +37,9 @@
     </ion-list>
   </ng-container>
   <ng-container *ngIf="!agendasArray.length">
-    <ion-label text-center class="text-content font1">There are no agendas</ion-label>
+    <div class="no-content">
+      <ion-label text-center class="nocontent">There are no agendas</ion-label>
+    </div>
   </ng-container>
 
 </ion-content>

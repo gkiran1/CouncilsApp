@@ -1,15 +1,16 @@
 notifications-page {
-
+    // .list-page .scroll-content {
+    //     padding-top: 20px !important;
+    // }
     .list-page .scroll-content {
-        padding-top: 20px !important;
-        
+        padding-top: 0px !important;
     }
-
-.list-page ion-item {
+    ion-list {
+        margin-top: 28px !important;
+    }
+    .list-page ion-item {
         height: auto;
-        
     }
-
     .notification-txt-lbl {
         display: inline;
         font-family: Bernina-Regular, sans-serif !important;
@@ -24,13 +25,13 @@ notifications-page {
     .nottxt-lbl {
         color: #3CB18A !important
     }
-      .toolbar-title {
-       padding:  0px !important;     
-   }
-   .toolbar-title-ios {
-       margin:0px 0px 23px 0px !important;     
-   }
-   .toolbar-title-md {
-       margin:0px 20px 3px 0px !important;     
-   }
+    .toolbar-title {
+        padding: 0px !important;
+    }
+    .toolbar-title-ios {
+        margin: 0px 0px 23px 0px !important;
+    }
+    .toolbar-title-md {
+        margin: 0px 20px 3px 0px !important;
+    }
 }

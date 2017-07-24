@@ -55,7 +55,9 @@
     </ion-list>
   </ng-container>
   <ng-container *ngIf="!(personalAssignmentsArray.length || councilAssignmentsArray.length || completedAssignmentsArray.length)">
-    <ion-label text-center class="text-content font1">There are no assignments</ion-label>
+    <div class="no-content">
+      <ion-label text-center class="nocontent">There are no assignments</ion-label>
+    </div>   
   </ng-container>
 
 </ion-content>

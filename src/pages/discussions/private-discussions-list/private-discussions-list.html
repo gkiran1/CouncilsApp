@@ -38,8 +38,10 @@
                 <p class="font2">{{item.lastMsg.timestamp | customdateformat}}</p>
             </ion-item>
         </ng-container>
-        <ng-container *ngIf="isListEmpty">
-            <ion-label text-center class="text-content font1">There are no discussions</ion-label>
-        </ng-container>
     </ion-item-group>
+    <ng-container *ngIf="isListEmpty">
+        <div class="no-content">
+            <ion-label text-center class="nocontent">There are no discussions</ion-label>
+        </div>
+    </ng-container>
 </ion-content>
