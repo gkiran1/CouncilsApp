@@ -26,7 +26,7 @@ create-account {
         color: #a9aaad !important;
         padding-left: 16px !important;
         font-size: 13px !important;
-        margin: 0px !important;
+        margin: 10px 0 0 0 !important;
     }
     ion-list ion-item {
         border-bottom-color: #f4f4f4;
@@ -41,7 +41,7 @@ create-account {
     }
     .create-header {
         display: block;
-        margin-top: 74px;
+        margin-top: 54px;
         text-align: center;
     }
     .create-subheader {
@@ -51,6 +51,7 @@ create-account {
         margin-top: 14px;
         text-align: center;
         font-size: 17px;
+        padding-bottom: 30px;
     }
     .error-msg {
         padding-left: 16px;
