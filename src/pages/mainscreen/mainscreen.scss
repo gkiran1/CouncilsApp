@@ -1,25 +1,36 @@
-page-mainscreen{
-.buttonstyles{
-  // display: flex;
-// position: absolute;
-// top:50%;
-}
-.svgstyles{
-  width: 60%;
-  // margin: auto;
- position: absolute;
- top:40%;
-left: 20%;
-}
-ion-buttons{
-  position: absolute;
-  bottom: 10%;
-  display: flex;
-  width: 70%;
-  left:15%;
-}
+page-mainscreen {
+  .buttonstyles {
+    // display: flex;
+    // position: absolute;
+    // top:50%;
+  }
 
-.loginbtnstyle{
-  color: #ffffff !important;
-}
+  .svgstyles {
+    width: 60%;
+    // margin: auto;
+    position: absolute;
+    top: 40%;
+    left: 20%;
+  }
+
+  ion-buttons {
+    position: absolute;
+    bottom: 10%;
+    display: flex;
+    width: 70%;
+    left: 15%;
+  }
+
+  .loginbtnstyle {
+    color: #ffffff !important;
+  }
+  @media screen and (orientation:landscape) {
+    .svgstyles {
+      width: 50%;
+      // margin: auto;
+      position: absolute;
+      top: 10%;
+      left: 28%;
+    }
+  }
 }
