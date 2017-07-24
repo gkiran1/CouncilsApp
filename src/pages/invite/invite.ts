@@ -42,6 +42,8 @@ export class InviteMemberPage {
 
         var unitType = localStorage.getItem('unitType');
 
+        this.invite.councils = [];
+
         this.af.auth.subscribe(auth => {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(res => {
@@ -98,7 +100,7 @@ export class InviteMemberPage {
                         });
 
                     });
-                    this.invite.councils = [];
+                    // this.invite.councils = [];
                 });
             }
         });
