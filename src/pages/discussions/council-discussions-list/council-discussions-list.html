@@ -1,20 +1,19 @@
 <ion-header>
-     <ion-navbar>
-    <ion-buttons class="menu-button" left>
-      <button ion-button menuToggle >
+    <ion-navbar>
+        <ion-buttons class="menu-button" left>
+            <button ion-button menuToggle>
       <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" ></ion-icon>
     </button>
-    </ion-buttons>
-    <ion-title>Council Discussions</ion-title>
-    <ion-buttons class="menu-button" end>
-      <button ion-button (click)="notificationsPage()"  >
+        </ion-buttons>
+        <ion-title>Council Discussions</ion-title>
+        <ion-buttons class="menu-button" end>
+            <button ion-button (click)="notificationsPage()">
      <ion-icon class="icon councils-icon__notifications menu-icon">
          <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
       </ion-icon> 
       </button>
-    </ion-buttons>
-  </ion-navbar>
-
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 <ion-content>
     <ion-item-group>
@@ -26,8 +25,10 @@
                 <span> {{item.councilname}}</span><span class="right-align">{{item.createdDate | customdateformat}}</span>
             </ion-item>
         </ng-container>
-        <ng-container *ngIf="isListEmpty">
-             <ion-label text-center class="text-content font1">There are no discussions</ion-label>
-        </ng-container>
     </ion-item-group>
+    <ng-container *ngIf="isListEmpty">
+        <div class="no-content">
+            <ion-label text-center class="nocontent">There are no discussions</ion-label>
+        </div>
+    </ng-container>
 </ion-content>

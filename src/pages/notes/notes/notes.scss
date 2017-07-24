@@ -1,50 +1,50 @@
-notes-page{
-    .title{
+notes-page {
+    .list-page .scroll-content {
+        padding-top: 0px !important;
+    }
+    ion-list {
+        margin-top: 28px !important;
+    }
+    .title {
         display: inline;
-         font-family: Bernina-Regular, sans-serif !important;
+        font-family: Bernina-Regular, sans-serif !important;
         font-size: 17px !important;
         color: #35373a !important;
-
     }
-     p{
+    p {
         font-family: Bernina-Regular, sans-serif !important;
         font-size: 15px !important;
         color: #a9aaac !important;
     }
-    span{
+    span {
         font-family: 'Bernina-Regular', sans-serif !important;
         font-size: 13px;
         color: #a9aaac;
-    }    
-    .text-content{
+    }
+    .text-content {
         position: absolute;
         top: 45%;
         width: 100%;
         margin: auto;
     }
-    .font1{
+    .font1 {
         font-family: Bernina-Regular, sans-serif;
         font-size: 17px !important;
         color: #a9aaac !important;
     }
-     .right-align{
+    .right-align {
         position: absolute;
         right: 0;
-        margin-right:10px;
+        margin-right: 10px;
     }
-
-    .list-page .scroll-content {
-        padding-top: 20px !important;
-    }
-
+    // .list-page .scroll-content {
+    //     padding-top: 20px !important;
+    // }
     .list-page ion-item {
         height: auto;
     }
-
     .single-item {
         border-top: 1px solid #e8e9eb;
         border-bottom: 1px solid #e8e9eb;
     }
-
-    
 }

@@ -1,25 +1,25 @@
 agendas-page {
-
-    .scroll-content {
-        padding-top: 20px !important;
+    // .scroll-content {
+    //     padding-top: 20px !important;
+    // }
+    .list-page .scroll-content {
+        padding-top: 0px !important;
     }
-
     .list-page ion-item {
         height: 64px !important;
     }
-
+    ion-list {
+        margin-top: 28px !important;
+    }
     ion-list:first-child {
         border-top: 1px solid #e8e9eb;
     }
-
     ion-list:last-child {
         border-bottom: 1px solid #e8e9eb;
     }
-
     ion-list:last-child.item-ios.item-block .item-inner {
         border: none !important;
     }
-
     .agendadate-styles {
         font-family: Bernina-Regular !important;
         font-size: 17px !important;
@@ -32,23 +32,21 @@ agendas-page {
         color: #a9aaac !important;
         // margin-left: -55px !important;
     }
-
-    .background-color{
+    .background-color {
         background: #ffffff;
     }
-   
-   .text-content{
-       position:absolute;
-       top:45%;
-       width: 100%;
-       margin:auto;
+    .text-content {
+        position: absolute;
+        top: 45%;
+        width: 100%;
+        margin: auto;
     }
-    .font1{
+    .font1 {
         font-family: Bernina-Regular, sans-serif;
         font-size: 17px !important;
         color: #a9aaac !important;
     }
-    .menu-style{
+    .menu-style {
         padding-top: 15px;
     }
     .item-ios [item-right] {
@@ -56,18 +54,16 @@ agendas-page {
         right: 0;
         padding-bottom: 15px;
     }
-    .item-md [item-right]{
+    .item-md [item-right] {
         position: absolute;
         right: 0;
         padding-bottom: 15px;
-    
     }
- .ion-item-middle.item-ios.item-block:last-child .item-inner,
-    .ion-item-middle.item-md.item-block:last-child .item-inner{
+    .ion-item-middle.item-ios.item-block:last-child .item-inner,
+    .ion-item-middle.item-md.item-block:last-child .item-inner {
         border-bottom: none !important;
     }
- 
-    ion-row > ion-icon{
-        padding-right:10px;
+    ion-row>ion-icon {
+        padding-right: 10px;
     }
 }

@@ -266,6 +266,24 @@
      width: 100%;
  }
  
+ .no-content {
+     display: flex !important;
+     height: 100% !important;
+     width: 100% !important;
+     background: #fafafa !important;
+     justify-content: center !important;
+     flex-direction: column !important;
+ }
+ 
+ .nocontent {
+     font-family: Bernina-Regular, sans-serif !important;
+     font-size: 17px !important;
+     color: #a9aaac !important;
+     width: 100% !important;
+     position: absolute !important;
+    
+ }
+ 
  .header-md,
  .header-ios {
      display: block;
@@ -566,48 +584,43 @@
      padding-left: 10px !important;
  }
  /****************************** Action Sheet Styles **********************************/
-
+ 
  .action-sheet-md .action-sheet-container,
  .action-sheet-ios .action-sheet-container,
  .action-sheet-container {
-    padding: 0 10px !important;
-    background: transparent !important;
-}
-
-.action-sheet-md .action-sheet-group,
-.action-sheet-ios .action-sheet-group,
- .action-sheet-group
- {
-    overflow: hidden;
-    margin-bottom: 8px !important;
-    border-radius: 13px !important;
-    
-}
+     padding: 0 10px !important;
+     background: transparent !important;
+ }
+ 
+ .action-sheet-md .action-sheet-group,
+ .action-sheet-ios .action-sheet-group,
+ .action-sheet-group {
+     overflow: hidden;
+     margin-bottom: 8px !important;
+     border-radius: 13px !important;
+ }
  
  .action-sheet-ios .action-sheet-button {
      height: 4.1rem !important;
      min-height: 4.1rem !important;
      font-size: 1.7rem !important;
-   
-    }
+ }
+ 
  .action-sheet-ios .action-sheet-button,
  .action-sheet-md .action-sheet-button {
      height: 4.1rem !important;
      min-height: 4.1rem !important;
      font-family: Bernina-Regular;
      font-size: 1.7rem !important;
-    
      text-align: center;
      border-bottom: 1px solid #d6d6da;
-
      background: rgba(256, 256, 256, .9);
-}
+ }
  
  .action-sheet-ios .action-sheet-button:last-child,
  .action-sheet-md .action-sheet-button:last-child {
      border-bottom: none !important;
  }
-
  
  .action-sheet-ios .action-sheet-title,
  .action-sheet-md .action-sheet-title {
@@ -627,16 +640,10 @@
      background: rgba(256, 256, 256, .9);
  }
  
- 
- 
-
-
  .action-sheet-md .action-sheet-group:last-child,
  .action-sheet-ios .action-sheet-group:last-child {
      margin-bottom: 10px !important;
  }
- 
- 
  
  .action-sheet-md .action-sheet-group .button-inner {
      -webkit-justify-content: flex-start;
@@ -655,7 +662,6 @@
      font-family: Bernina-Regular !important;
      font-size: 17px !important;
      background: rgba(256, 256, 256, .9);
-     
  }
  
  .actionsheet-cancel {
@@ -681,7 +687,7 @@
      position: absolute;
      width: 100%;
      height: 40%;
-    //  top: 50%;
+     //  top: 50%;
      bottom: 11%;
  }
  

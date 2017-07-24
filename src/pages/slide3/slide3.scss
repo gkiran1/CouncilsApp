@@ -1,74 +1,80 @@
-slide3{
-    ion-content{
-         background-color: #fafafa !important;
-    }  
-    .header-ios{
+slide3 {
+    ion-content {
+        background-color: #fafafa !important;
+    }
+    .scroll-content {
+        padding-top: 0px !important;
+        margin-top: 52px !important;
+    }
+    ion-list {
+        margin-top: 28px !important;
+    }
+    .header-ios {
         // height: 72px;
     }
-    .content-ios{
-        margin-top:72px;
+    .content-ios {
+        margin-top: 72px;
     }
-    .heading{
+    .heading {
         height: 64px;
         background: #FFF;
         display: flex;
         justify-content: center;
         align-content: center;
-     }
-     .toolbar-title {
-        text-align: center;
-        padding:16px;
     }
-    .name{
+    .toolbar-title {
+        text-align: center;
+        padding: 16px;
+    }
+    .name {
         font-family: Bernina-semibold, sans-serif;
         font-size: 17px !important;
         color: #35373a !important;
     }
-    .item{
+    .item {
         // margin-top:10px;
         padding-top: 10px;
     }
-    .input-wrapper{
+    .input-wrapper {
         // padding-left: 12px;
         margin-bottom: 10px;
     }
-    .item-block{
+    .item-block {
         align-items: flex-start;
     }
-    .input-wrapper ion-label{
-        margin:0
+    .input-wrapper ion-label {
+        margin: 0
     }
-    img{
+    img {
         width: 46px !important;
         height: 46px !important;
     }
-    ion-content{
+    ion-content {
         margin-top: 57px;
-        margin-bottom:40px;
+        margin-bottom: 40px;
     }
-    .text-content{
+    .text-content {
         font-family: Bernina-Regular, sans-serif;
         font-size: 15px !important;
         color: #35373a !important;
         line-height: 20px;
         margin-bottom: 8px;
     }
-    .timestamp{
+    .timestamp {
         font-family: Bernina-Regular, sans-serif;
         font-size: 13px !important;
         color: #a9aaac !important;
         line-height: 17px
     }
-    ion-item:first-child{
+    ion-item:first-child {
         margin-top: 34px;
     }
-    .item-ios:first-child{
+    .item-ios:first-child {
         margin-top: 12px;
     }
-    ion-item:last-child{
+    ion-item:last-child {
         margin-bottom: 100px;
     }
-
     .item-md ion-avatar[item-left],
     .item-md ion-thumbnail[item-left] {
         margin: 0;
@@ -77,53 +83,46 @@ slide3{
     .item-ios ion-thumbnail[item-left] {
         margin: 0;
     }
-  
-    ion-item{
+    ion-item {
         border-bottom: none !important;
     }
-    .username{
-        color:#32b38a;
+    .username {
+        color: #32b38a;
     }
-//  .toolbar-title-md{
-//     padding-bottom: -4px !important;
-
-//     }
-    .toolbar-title-ios{
+    //  .toolbar-title-md{
+    //     padding-bottom: -4px !important;
+    //     }
+    .toolbar-title-ios {
         padding: 0px 16px 4px !important;
-
     }
-     .content-ios{
-    margin-top: 0px !important;
-}
- .content-md{
-    margin-top: 0px !important;
-}
-   .scroll-content{
-       margin-top: 45px !important;
-   }
-   .fixed-content{
-       margin-top: 45px !important;
-       
-   }
-   .toolbar-title {
-       padding:  0px !important;     
-   }
-   .toolbar-title-ios {
-       margin:0px 0px 23px 0px !important;     
-   }
-   .toolbar-title-md {
-       margin:0px 20px 3px 0px !important;     
-   }
-    .tag-color{
-        color:#32b38a !important;
+    .content-ios {
+        margin-top: 0px !important;
     }
-    .center-align{
-       position:absolute;
-       top:45%;
-       width: 100%;
-       margin:auto;
+    .content-md {
+        margin-top: 0px !important;
     }
-     .font1{
+    .fixed-content {
+        margin-top: 45px !important;
+    }
+    .toolbar-title {
+        padding: 0px !important;
+    }
+    .toolbar-title-ios {
+        margin: 0px 0px 23px 0px !important;
+    }
+    .toolbar-title-md {
+        margin: 0px 20px 3px 0px !important;
+    }
+    .tag-color {
+        color: #32b38a !important;
+    }
+    .center-align {
+        position: absolute;
+        top: 45%;
+        width: 100%;
+        margin: auto;
+    }
+    .font1 {
         font-family: Bernina-Regular, sans-serif;
         font-size: 17px !important;
         color: #a9aaac !important;

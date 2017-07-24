@@ -15,24 +15,28 @@
 
 <ion-content>
     <ng-container *ngIf="activities && activities.length">
-        <ion-item *ngFor="let activity of activities" text-wrap (click)="showActivity(activity)">
-            <!--<ion-avatar item-left>
+        <ion-list>
+            <ion-item *ngFor="let activity of activities" text-wrap (click)="showActivity(activity)">
+                <!--<ion-avatar item-left>
             <img [src]="activity.createdUserAvatar" class="avatarImage" *ngIf="activity.createdUserAvatar && activity.createdUserAvatar !== 'avatar'"
             />
             <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!activity.createdUserAvatar || activity.createdUserAvatar === 'avatar'"
             />
         </ion-avatar>-->
-            <!--<h3 class="name">{{activity.createdUserName}}</h3>-->
-            <p class="text-content" *ngIf="activity.entity === 'Agenda'"><span class="username">@{{user.firstname + user.lastname}}</span> you’ve been invited to give the {{activity.action}}</p>
-            <p class="text-content" *ngIf="activity.entity === 'Assignment'"><span class="username">@{{user.firstname + user.lastname}}</span> has been asked to "{{activity.entityDescription}}"</p>
-            <p class="text-content" *ngIf="activity.entity === 'Discussion'" [innerHTML]="activity.entityDescription | addtagcolor"></p>
-            <p class="timestamp">{{activity.timestamp | customdateformat}}</p>
-            <p class="timestamp" *ngIf="activity.entity !== 'Discussion'">{{activity.councilname}} {{activity.entity}}</p>
-            <p class="timestamp" *ngIf="activity.entity === 'Discussion'">{{activity.createdUserName}} {{activity.entity}}</p>
-        </ion-item>
+                <!--<h3 class="name">{{activity.createdUserName}}</h3>-->
+                <p class="text-content" *ngIf="activity.entity === 'Agenda'"><span class="username">@{{user.firstname + user.lastname}}</span> you’ve been invited to give the {{activity.action}}</p>
+                <p class="text-content" *ngIf="activity.entity === 'Assignment'"><span class="username">@{{user.firstname + user.lastname}}</span> has been asked to "{{activity.entityDescription}}"</p>
+                <p class="text-content" *ngIf="activity.entity === 'Discussion'" [innerHTML]="activity.entityDescription | addtagcolor"></p>
+                <p class="timestamp">{{activity.timestamp | customdateformat}}</p>
+                <p class="timestamp" *ngIf="activity.entity !== 'Discussion'">{{activity.councilname}} {{activity.entity}}</p>
+                <p class="timestamp" *ngIf="activity.entity === 'Discussion'">{{activity.createdUserName}} {{activity.entity}}</p>
+            </ion-item>
+        </ion-list>
     </ng-container>
     <ng-container *ngIf="!activities || !activities.length">
-        <ion-label text-center class="center-align font1">There are no <b>@mentions</b></ion-label>
+        <div class="no-content">
+            <ion-label text-center class="nocontent">There are no <b>@mentions</b></ion-label>
+        </div>
     </ng-container>
 </ion-content>
 <ion-footer>
