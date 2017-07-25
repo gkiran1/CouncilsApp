@@ -1,4 +1,7 @@
 view-council-file-page {
+    ion-content{
+         background-color: #FAFAFA !important;
+    }
     .ion-ios-arrow-round-back {
         font-size: 300% !important;
     }
@@ -103,5 +106,9 @@ view-council-file-page {
     ion-list{
          border-top: 1px solid #e8e9eb !important;
          border-bottom: 1px solid #e8e9eb !important;
+         background-color: #FFFFFF;
+    }
+    .no-border{
+        border: none !important;
     }
 }
