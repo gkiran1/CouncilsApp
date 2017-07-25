@@ -1,13 +1,10 @@
 files-page {
-    ion-content{
-         background-color: #FAFAFA !important;
+    .list-page .scroll-content {
+        padding-top: 0px !important;
     }
-    // .list-page .scroll-content {
-    //     padding-top: 0px !important;
-    // }
-    // ion-list {
-    //     margin-top: 28px !important;
-    // }
+    ion-list {
+        margin-top: 28px !important;
+    }
     .date-styles {
         font-family: Bernina-Regular !important;
         color: #a9aaac !important;
@@ -79,19 +76,5 @@ files-page {
         position: absolute;
         right: 0;
         margin-right: 10px;
-    }
-     ion-list{
-         border-top: 1px solid #e8e9eb !important;
-         border-bottom: 1px solid #e8e9eb !important;
-         background-color: #FFFFFF;
-    }
-     .no-border{
-        border: none !important;
-    }
-    .ion-item-first{
-        border-top:none !important;
-    }
-    .ion-item-last{
-        border-bottom:none !important;
     }
 } //page

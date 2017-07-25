@@ -16,10 +16,10 @@
     </ion-navbar>
 </ion-header>
 <!--<ion-item-divider class="empty"></ion-item-divider>-->
-<ion-content  [ngClass]="filesArray.length? 'list-page':'' ">
+<ion-content class="list-page">
     <ng-container *ngIf="filesArray.length">
         <ion-list>
-            <ion-item  [ngClass]="filesArray.length === 1 ? 'no-border' : (i === 0 ? 'ion-item-first': (i === filesArray.length-1 ? 'ion-item-last' : 'ion-item-middle'))" *ngFor="let item of filesArray; let i = index"
+            <ion-item [ngClass]="i === 0 ? 'ion-item-first': (i === filesArray.length-1 ? 'ion-item-last' : 'ion-item-middle')" *ngFor="let item of filesArray; let i = index"
                 text-wrap (click)="viewCouncilFile(item)">
                 <span class="council-styles">{{item.councilname}}</span>
                 <span class="right-align"><ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon></span>

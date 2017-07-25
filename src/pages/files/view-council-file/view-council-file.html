@@ -13,20 +13,20 @@
                 <ng-container *ngIf="!deleteflag && filesArray.length">
                     <button color="secondary" class="editbtn" clear block (click)="edit()">Edit</button>
                 </ng-container>
-                <ng-container *ngIf="deleteflag && filesArray.length">
+                <ng-container *ngIf="deleteflag">
                     <button color="secondary" class="editbtn" clear block (click)="done()">Done</button>
                 </ng-container>
             </ion-col>
         </ion-row>
     </ion-navbar>
 </ion-header>
-<ion-content id="content1" [ngClass]="filesArray.length? 'list-page':'' ">
-    <ng-container *ngIf="filesArray.length">
-        <form [formGroup]="newCouncilFileForm" (ngSubmit)="newCouncilFileForm.value">
+<ion-content id="content1" class="list-page">
+    <form [formGroup]="newCouncilFileForm" (ngSubmit)="newCouncilFileForm.value">
+        <ng-container *ngIf="!listdisplayflag">
             <ion-list>
                 <!--<ion-item text-wrap>-->
 
-                <ion-row [ngClass]="filesArray.length === 1 ? 'no-border' : (i === 0 ? 'ion-item-first': (i === filesArray.length-1 ? 'ion-item-last' : 'ion-item-middle'))"
+                <ion-row [ngClass]="filesArray.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first': (i === filesArray.length-1 ? 'ion-item-last' : 'ion-item-middle'))"
                     *ngFor="let file of filesArray; let i = index">
                     <ion-col class="icon-col">
                         <ion-icon class="councils-icon__file menu-icon" name="document" color="secondary" (click)="downloadFile(file)"></ion-icon>
@@ -46,19 +46,14 @@
                 </ion-row>
                 <!--</ion-item>-->
             </ion-list>
-        </form>
-    </ng-container>
-    <ng-container *ngIf="!filesArray.length">
-        <div class="no-content">
-            <ion-label text-center class="nocontent">There are no files</ion-label>
-        </div>
-    </ng-container>
+        </ng-container>
+    </form>
 </ion-content>
 <ion-footer>
     <ng-container *ngIf="!deleteflag">
         <button ion-button color="secondary" class="button button-clik" clear block (click)="addFileActionsPage(newCouncilFileForm.value)">Add File</button>
     </ng-container>
     <ng-container *ngIf="deleteflag">
-        <button ion-button color="danger" class="button button-clik" clear block [disabled]="!filesArray.length" (click)="deleteFiles(filesArray)">Delete All</button>
+        <button ion-button color="danger" class="button button-clik" clear block (click)="deleteFiles(filesArray)">Delete All</button>
     </ng-container>
 </ion-footer>
