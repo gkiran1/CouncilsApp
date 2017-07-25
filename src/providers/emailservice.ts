@@ -32,9 +32,7 @@ export class EmailService {
 
         return this.http.post(this.mailApiUrl, {
             "event": "accountcreated", "email": email, "firstname": firstname, "unitnum": unitnum, "lastname": lastname
-        }, options).subscribe((res) => {
-            console.log('res---->' + res);
-        });
+        }, options);
     }
 
     //Email to create account

@@ -145,6 +145,18 @@ export class FirebaseService {
         }).map(results => results[0]);
     }
 
+    findUsrByEmail(email: string) {
+        var usersRef = this.rootRef.child('users').orderByChild('email').equalTo(email);
+        return usersRef.once('value').then(function (snapshot) {
+            if (snapshot.val()) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+    }
+
     findInviteeByEmail(email: string): Observable<Invitee> {
         return this.af.database.list('invitees', {
             query: {
@@ -152,6 +164,18 @@ export class FirebaseService {
                 equalTo: email
             }
         }).map(results => results[0]);
+    }
+
+    findInviteeeByEmail(email: string) {
+        var inviteeRef = this.rootRef.child('invitees').orderByChild('email').equalTo(email);
+        return inviteeRef.once('value').then(function (snapshot) {
+            if (snapshot.val()) {
+                return snapshot;
+            }
+            else {
+                return false;
+            }
+        });
     }
 
     createInvitee(invitee: Invitee) {

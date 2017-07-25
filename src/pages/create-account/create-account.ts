@@ -19,73 +19,72 @@ import { WelcomePage } from '../welcome/welcome.component';
 export class CreateAccountPage {
   loading: Loading;
   invitee$: Observable<Invitee>;
-  //user$: Observable<User> todo: R & D
   newUser: User = new User;
   createAccountForm;
-  emailErr = false;
+  emailTaken = false;
   isValidEmail = true;
   isInvitedEmail = true;
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService, public toast: ToastController) { }
-  createAccount() {
 
+  createAccount() {
     // this.passwordErr = false;
     // password validation
     if (this.newUser.password.length < 6) {
       // this.passwordErr = true;
       // this.showAlert('6 characters required');
     }
-    // username@domain.com
     else {
-      this.emailErr = false;
+      this.emailTaken = false;
       let loader = this.loadingCtrl.create({
         spinner: 'hide',
         content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
       });
       loader.present();
 
-      this.firebaseService.findUserByEmail(this.newUser.email).subscribe((usr) => {
-        if (usr) {
+      this.firebaseService.findUsrByEmail(this.newUser.email).then((res) => {
+        if (res === true) {
           loader.dismiss();
-          this.emailErr = true;
+          this.emailTaken = true;
           // this.showAlert('Email taken');
         }
         else {
-          this.invitee$ = this.firebaseService.findInviteeByEmail(this.newUser.email);
-          this.invitee$.subscribe(invitee => {
-            // localStorage.setItem('Firsttimeinstall', 'false');
+          this.firebaseService.findInviteeeByEmail(this.newUser.email).then(res => {
+            if (res !== false) {
+              res.forEach(invitee => {
+                this.newUser.firstname = invitee.val().firstname;
+                this.newUser.lastname = invitee.val().lastname;
+                //email is already der in user   
+                //password is already der in user
+                //lds org name is already der in user
+                this.newUser.unittype = invitee.val().unittype;
+                this.newUser.unitnumber = invitee.val().unitnumber;
+                this.newUser.avatar = "avatar"; // time being hard coded..later need to work..
+                this.newUser.councils = invitee.val().councils;
+                this.newUser.calling = "";
+                this.newUser.isadmin = false;
+                this.newUser.createdby = invitee.val().createdby;
+                this.newUser.createddate = '';
+                this.newUser.lastupdateddate = invitee.val().lastupdateddate;
+                this.newUser.isactive = true;
 
-            if (invitee) {
-              this.newUser.firstname = invitee.firstname;
-              this.newUser.lastname = invitee.lastname;
-              //email is already der in user   
-              //password is already der in user
-              //lds org name is already der in user
-              this.newUser.unittype = invitee.unittype;
-              this.newUser.unitnumber = invitee.unitnumber;
-              this.newUser.avatar = "avatar"; // time being hard coded..later need to work..
-              this.newUser.councils = invitee.councils;
-              this.newUser.calling = "";
-              this.newUser.isadmin = false;
-              this.newUser.createdby = invitee.createdby;
-              this.newUser.createddate = '';
-              this.newUser.lastupdateddate = invitee.lastupdateddate;
-              this.newUser.isactive = true;
-
-              // after verifying and filling properties create new user.
-              // let flag = false;
-              let userAvatar = this.generateIdenticon();
-              this.firebaseService.signupNewUser(this.newUser, userAvatar)
-                .then(fbAuthToken => {
-                  console.log('fbAuthToken --- ' + fbAuthToken);
-                  var uid = localStorage.getItem('createdUsrId');
-                  //onSuccess redirect to Menu page                
-                  this.emailService.emailCreateAccount(invitee.firstname, invitee.lastname, invitee.unitnumber, invitee.email, fbAuthToken, uid);
-                  //this.navCtrl.push(LoginPage);
-                  this.navCtrl.push(WelcomePage);
-                  loader.dismiss();
-                }).catch(err => this.showAlert('Connection error.'));
-            } else {
+                // after verifying and filling properties create new user.
+                // let flag = false;
+                let userAvatar = this.generateIdenticon();
+                this.firebaseService.signupNewUser(this.newUser, userAvatar)
+                  .then(fbAuthToken => {
+                    console.log('fbAuthToken --- ' + fbAuthToken);
+                    var uid = localStorage.getItem('createdUsrId');
+                    //onSuccess redirect to Menu page                
+                    this.emailService.emailCreateAccount(invitee.val().firstname, invitee.val().lastname, invitee.val().unitnumber, invitee.val().email, fbAuthToken, uid).subscribe(res => {
+                      //this.navCtrl.push(LoginPage);
+                      this.navCtrl.push(WelcomePage);
+                      loader.dismiss();
+                    });
+                  }).catch(err => this.showAlert('Connection error.'));
+              });
+            }
+            else {
               loader.dismiss();
               this.isInvitedEmail = false;
               //this.showAlert('Not invited!');
@@ -123,26 +122,15 @@ export class CreateAccountPage {
     //  context.drawImage(img, 0, 0);
     return base64;
     //this.firebaseService.saveIdenticon(uid, base64 );
-
-
   }
 
   showAlert(text) {
-    // let alert = this.alertCtrl.create({
-    //   title: '',
-    //   subTitle: text,
-    //   buttons: ['OK']
-    // });
-    // alert.present();
-
     let toast = this.toast.create({
       message: text,
       duration: 3000
-    })
-
+    });
     toast.present();
   }
-
 
   cancel() {
     this.navCtrl.pop();
@@ -150,7 +138,7 @@ export class CreateAccountPage {
 
   keypresssed($event) {
     this.isValidEmail = true;
-    this.emailErr = false;
+    this.emailTaken = false;
     this.isInvitedEmail = true;
   }
 
