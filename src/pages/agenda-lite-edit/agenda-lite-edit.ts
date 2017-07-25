@@ -130,7 +130,7 @@ export class AgendaLiteEditPage {
 
     });
 
-    let localdate = new Date(agenda.agendadate).toLocaleString();
+    let localdate = new Date(agenda.agendadate).toLocaleString("en-US", {timeZone: "UTC"});
     let localISOformat = this.localISOformat(localdate);
     this.agendaliteeditForm = fb.group({
       assigneddate: [localISOformat, Validators.required],
