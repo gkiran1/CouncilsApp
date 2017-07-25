@@ -147,7 +147,8 @@ export class AgendaEditPage {
 
         });
 
-        let localdate = new Date(agenda.agendadate).toLocaleString();
+        let localdate = new Date(agenda.agendadate).toLocaleString("en-US",{timeZone: "UTC"});
+        
         let localISOformat = this.localISOformat(localdate);
         this.agendaeditForm = fb.group({
             assignedcouncil: ['', Validators.required],
