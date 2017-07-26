@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { MenuPage } from '../menu/menu';
 import { AdminPage } from '../admin/admin.component';
 import { SettingsPage } from '../settings/settings';
-import { DonationsWelcomePage } from '../donations/donations-welcome/donations-welcome';
+// import { DonationsWelcomePage } from '../donations/donations-welcome/donations-welcome';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Subscription } from "rxjs";
 import { FirebaseService } from '../../environments/firebase/firebase-service';
@@ -12,7 +12,8 @@ import { DirectoryPage } from '../directory/directory.component';
 @Component({
     templateUrl: 'slide1.html',
     selector: 'slide1',
-    providers: [AdminPage, SettingsPage, DonationsWelcomePage, DirectoryPage]
+    // providers: [AdminPage, SettingsPage, DonationsWelcomePage, DirectoryPage]
+    providers: [AdminPage, SettingsPage, DirectoryPage]
 })
 
 export class slide1Page {
@@ -44,9 +45,9 @@ export class slide1Page {
         if (document.getElementById('adminPage')) {
             (document.getElementById('adminPage')).classList.remove("menu-selected");
         }
-        if (document.getElementById('donationsPage')) {
-            (document.getElementById('donationsPage')).classList.remove("menu-selected");
-        }
+        // if (document.getElementById('donationsPage')) {
+        //     (document.getElementById('donationsPage')).classList.remove("menu-selected");
+        // }
 
         (document.getElementById('settingsPage')).classList.remove("menu-selected");
         (document.getElementById('directoryPage')).classList.remove("menu-selected");
@@ -62,10 +63,10 @@ export class slide1Page {
         this.setSelectedClass(button);
         this.menuPage.nav.setRoot(SettingsPage);
     }
-    donationsPage(button) {
-        this.setSelectedClass(button);
-        this.menuPage.nav.setRoot(DonationsWelcomePage);
-    }
+    // donationsPage(button) {
+    //     this.setSelectedClass(button);
+    //     this.menuPage.nav.setRoot(DonationsWelcomePage);
+    // }
     directoryPage(button) {
         this.setSelectedClass(button);
         this.menuPage.nav.setRoot(DirectoryPage);

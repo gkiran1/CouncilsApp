@@ -70,9 +70,9 @@ import { CouncilUsersModalPage } from '../modals/council-users/council-users';
 import { NotificationsPage } from '../pages/notifications/notifications-page/notifications.component';
 import { NotificationSettingsPage } from '../pages/notifications/notifications-settings/notificationsettings.component';
 import { UserCouncilsModalPage } from '../modals/user-councils/user-councils';
-import { DonationsWelcomePage } from '../pages/donations/donations-welcome/donations-welcome';
-import { DonationsSendPage } from '../pages/donations/donations-send/donations-send';
-import { DonationsThankyouPage } from '../pages/donations/donations-thankyou/donations-thankyou';
+// import { DonationsWelcomePage } from '../pages/donations/donations-welcome/donations-welcome';
+// import { DonationsSendPage } from '../pages/donations/donations-send/donations-send';
+// import { DonationsThankyouPage } from '../pages/donations/donations-thankyou/donations-thankyou';
 import { MembersListPage } from '../pages/editmembers/members-list/memberslist.component';
 import { EditMemberPage } from '../pages/editmembers/edit-member/editmember.component';
 import { EditCompletePage } from '../pages/editmembers/edit-complete/editcomplete.component';
@@ -93,7 +93,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { DisplayFirstPage } from '../pages/display-first/display-first';
 import { DirectoryPage } from '../pages/directory/directory.component';
-import {MainScreenPage} from '../pages/mainscreen/mainscreen';
+import { MainScreenPage } from '../pages/mainscreen/mainscreen';
 
 //Directives
 import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
@@ -178,9 +178,9 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     NotificationsPage,
     NotificationSettingsPage,
     UserCouncilsModalPage,
-    DonationsWelcomePage,
-    DonationsSendPage,
-    DonationsThankyouPage,
+    // DonationsWelcomePage,
+    // DonationsSendPage,
+    // DonationsThankyouPage,
     MembersListPage,
     EditMemberPage,
     EditCompletePage,
@@ -200,7 +200,6 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     DisplayFirstPage,
     DirectoryPage,
     MainScreenPage
-
   ],
 
   imports: [
@@ -265,9 +264,9 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     NotificationsPage,
     NotificationSettingsPage,
     UserCouncilsModalPage,
-    DonationsWelcomePage,
-    DonationsSendPage,
-    DonationsThankyouPage,
+    // DonationsWelcomePage,
+    // DonationsSendPage,
+    // DonationsThankyouPage,
     MembersListPage,
     EditMemberPage,
     EditCompletePage,
@@ -282,7 +281,6 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     DisplayFirstPage,
     DirectoryPage,
     MainScreenPage
-
   ],
 
   providers: [AuthService, AppService, FirebaseService, NativeAudio, Badge, FileChooser, AndroidPermissions, FilePath]
