@@ -288,6 +288,7 @@ export class ViewCouncilFilePage {
                     .then((savedPicture) => {
                         // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
                         // this.pictureRef.then((metadata) => {
+                        this.bindFilesList();
                         loader.dismiss();
                         // Metadata now contains the metadata like filesize and type for 'images/...'
                         //     this.file = metadata;
@@ -353,6 +354,7 @@ export class ViewCouncilFilePage {
                     .then((savedPicture) => {
                         // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
                         // this.pictureRef.then((metadata) => {
+                        this.bindFilesList();
                         loader.dismiss();
                         // Metadata now contains the metadata like filesize and type for 'images/...'
                         // this.file = metadata;
@@ -603,7 +605,6 @@ export class ViewCouncilFilePage {
             this.firebaseservice.deleteFilesByKey(filesArray[i].$key).then(res => {
                 this.profilePictureRef.child(this.councilId + '//' + filesArray[i].$key + '//' + (this.filesArray[i].name || this.filesArray[i].filename)).delete().then(res => {
                     loader.dismiss();
-                    this.filesArray.splice(0, this.filesArray.length);
                 }).catch(err => {
                     loader.dismiss();
                     console.log(err);
@@ -614,5 +615,6 @@ export class ViewCouncilFilePage {
             })
 
         })
+        this.filesArray = [];
     }
 }
