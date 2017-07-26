@@ -104,6 +104,7 @@ export class ViewCouncilFilePage {
 
         this.newCouncilFileForm = fb.group({
             council: ['', Validators.required],
+            councilId: this.councilId,
             createdDate: '',
             createdBy: appservice.uid,
             createdUser: this.createdUser,
