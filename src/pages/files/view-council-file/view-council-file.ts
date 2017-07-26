@@ -84,7 +84,7 @@ export class ViewCouncilFilePage {
 
         this.filesArray = [];
         this.profilePictureRef = firebase.storage().ref('/files/');
-        this.councilId = navparams.get('councilid')
+        this.councilId = navparams.get('councilid');
         this.councilName = navparams.get('councilname');
         platform.ready().then(() => {
             if (this.platform.is('ios')) {
@@ -104,7 +104,7 @@ export class ViewCouncilFilePage {
 
         this.newCouncilFileForm = fb.group({
             council: ['', Validators.required],
-            councilId: this.councilId,
+            councilid: this.councilId,
             createdDate: '',
             createdBy: appservice.uid,
             createdUser: this.createdUser,
@@ -284,7 +284,7 @@ export class ViewCouncilFilePage {
             this.newFile.filename = 'IMG' + moment().valueOf() + '.png';
             this.newFile.filetype = (this.newFile.filename.substr(this.newFile.filename.lastIndexOf('.') + 1)).toUpperCase();
             this.firebaseservice.saveFile(this.newFile).then(fileId => {
-                this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
+                this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + this.newFile.filename)
                     .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
                     .then((savedPicture) => {
                         // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
@@ -350,7 +350,7 @@ export class ViewCouncilFilePage {
             this.newFile.filename = 'IMG' + moment().valueOf() + '.png';
             this.newFile.filetype = (this.newFile.filename.substr(this.newFile.filename.lastIndexOf('.') + 1)).toUpperCase();
             this.firebaseservice.saveFile(this.newFile).then(fileId => {
-                this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
+                this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + this.newFile.filename)
                     .putString(this.guestPicture, 'base64', { contentType: 'PNG' })
                     .then((savedPicture) => {
                         // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename).getMetadata();
