@@ -69,6 +69,7 @@ export class EditProfilePage {
     }
 
     editProfile(value) {
+        this.isChangeflag = false;
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
@@ -82,7 +83,7 @@ export class EditProfilePage {
             }
             this.firebaseService.updateProfileInfo(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername).then((res) => {
                 loader.dismiss();
-                this.isChangeflag = false;
+                //this.isChangeflag = false;
                 this.isPicNotChanged = true;
             }).catch(err => {
                 loader.dismiss();
@@ -99,7 +100,7 @@ export class EditProfilePage {
                     }
                     this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, avatar).then(res => {
                         loader.dismiss();
-                        this.isChangeflag = false;
+                        //this.isChangeflag = false;
                         this.isPicNotChanged = true;
                     }).catch(err => {
                         loader.dismiss();
