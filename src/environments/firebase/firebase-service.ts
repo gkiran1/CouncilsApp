@@ -96,7 +96,8 @@ export class FirebaseService {
                 guestpicture: user.avatar,
                 isnotificationreq: false,
                 googlecalendaradded: false,
-                isfirstlogin: true
+                isfirstlogin: true,
+                phone: ''
             }).then(() => user.councils.forEach(counc => {
                 this.createUserCouncils(uid, counc);
             }));

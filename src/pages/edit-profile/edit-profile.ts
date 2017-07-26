@@ -51,6 +51,9 @@ export class EditProfilePage {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(user => {
                     this.profile = user;
+                    if (this.profile.phone === '') {
+                        this.profile.phone = undefined;
+                    }
                 });
             }
         });
@@ -59,14 +62,13 @@ export class EditProfilePage {
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
             email: ['', Validators.compose([Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])],
-            phone: ['', Validators.compose([Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)])],
+            phone: [this.profile.phone, Validators.compose([Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)])],
             ldsusername: ['', Validators.required]
         });
 
     }
 
     editProfile(value) {
-
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
             content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
@@ -74,11 +76,10 @@ export class EditProfilePage {
 
         loader.present();
 
-        if (this.profile.phone === undefined) {
-            this.profile.phone = '';
-        }
-
         if (this.isPicNotChanged) {
+            if (this.profile.phone === undefined) {
+                this.profile.phone = '';
+            }
             this.firebaseService.updateProfileInfo(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername).then((res) => {
                 loader.dismiss();
                 this.isChangeflag = false;
@@ -93,6 +94,9 @@ export class EditProfilePage {
                 .putString(this.guestPicture, 'base64', { contentType: 'image/png' })
                 .then((savedPicture) => {
                     let avatar = this.guestPicture ? savedPicture.downloadURL : this.profile.avatar;
+                    if (this.profile.phone === undefined) {
+                        this.profile.phone = '';
+                    }
                     this.firebaseService.updateProfile(this.profile.$key, this.profile.firstname, this.profile.lastname, this.profile.email, this.profile.phone, this.profile.ldsusername, avatar).then(res => {
                         loader.dismiss();
                         this.isChangeflag = false;
@@ -102,7 +106,6 @@ export class EditProfilePage {
                     });
                 });
         }
-
     }
 
     viewChangePasswordPage() {
@@ -243,6 +246,10 @@ export class EditProfilePage {
     }
 
     keypresssed($event) {
+        if ($event.target.name === 'phone') {
+            this.profile.phone = $event.target.value;
+        }
+
         if (this.editProfileForm.valid) {
             this.isChangeflag = true;
         }
