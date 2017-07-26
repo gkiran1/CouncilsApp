@@ -280,7 +280,7 @@ export class ViewCouncilFilePage {
             this.newFile.councilname = this.councilName;
             this.newFile.createdUser = this.createdUser;
             this.newFile.filesize = this.fileSize(imageData);
-            this.newFile.filename = 'IMG' + this.now + '.png';
+            this.newFile.filename = 'IMG' + moment().valueOf() + '.png';
             this.newFile.filetype = (this.newFile.filename.substr(this.newFile.filename.lastIndexOf('.') + 1)).toUpperCase();
             this.firebaseservice.saveFile(this.newFile).then(fileId => {
                 this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
@@ -346,7 +346,7 @@ export class ViewCouncilFilePage {
             this.newFile.createdUser = this.createdUser;
             this.newFile.createdBy = this.createdBy;
             this.newFile.filesize = this.fileSize(imageData);
-            this.newFile.filename = 'IMG' + this.now + '.png';
+            this.newFile.filename = 'IMG' + moment().valueOf() + '.png';
             this.newFile.filetype = (this.newFile.filename.substr(this.newFile.filename.lastIndexOf('.') + 1)).toUpperCase();
             this.firebaseservice.saveFile(this.newFile).then(fileId => {
                 this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)

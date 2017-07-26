@@ -210,7 +210,7 @@ export class NewCouncilFilePage {
       value.createdUser = this.createdUser;
       value.councilid = value.council.$key;
       value.councilname = value.council.council;
-      value.filename = 'IMG' + this.now + '.png';
+      value.filename = 'IMG' + moment().valueOf() + '.png';
       value.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
       this.firebaseservice.saveFile(value).then(fileId => {
         this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
@@ -268,7 +268,7 @@ export class NewCouncilFilePage {
           value.filesize = this.fileSize(imageData);
           value.councilid = value.council.$key;
           value.councilname = value.council.council;
-          value.filename = 'IMG' + this.now + '.png';
+          value.filename = 'IMG' + moment().valueOf() + '.png';
           value.filetype = (value.filename.substr(value.filename.lastIndexOf('.') + 1)).toUpperCase();
           this.firebaseservice.saveFile(value).then(fileId => {
             this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + value.filename)
