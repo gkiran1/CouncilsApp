@@ -22,6 +22,9 @@ export class ChangePasswordPage {
         newpassword: '',
         confirmnewpassword: ''
     };
+    oldPwdError = false;
+    newPwdError = false;
+    confirmPwdError = false;
 
     constructor(fb: FormBuilder, public navCtrl: NavController, private firebaseService: FirebaseService, public appService: AppService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public toast: ToastController) {
         this.profile = new User;
@@ -58,6 +61,20 @@ export class ChangePasswordPage {
     cancel() {
         this.navCtrl.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
+    newPwdKeypress($event) {
+        if (this.password.newpassword.includes(' ')) {
+            this.newPwdError = true;
+        } else {
+            this.newPwdError = false;
+        }
+    }
+    confirmPwdKeypress($event) {
+        if (this.password.newpassword === this.password.confirmnewpassword || this.password.newpassword.includes(this.password.confirmnewpassword)) {
+            this.confirmPwdError = false;
+        } else {
+            this.confirmPwdError = true;
+        }
+    }
     changePassword() {
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
@@ -66,16 +83,17 @@ export class ChangePasswordPage {
         loader.present();
         //validate the user..to check password is correct or not.
         this.firebaseService.validateUser(this.profile.email, this.password.oldpassword).then(res => {
+            this.oldPwdError = false;
             // to know the user is signed in or not.           
             //   firebase.auth().onAuthStateChanged((user) => {
             var user = firebase.auth().currentUser;
             if (user) {
-                if ((new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/).test(this.password.newpassword))) {
+                if ((new RegExp(/[^\s.]{6}$/).test(this.password.newpassword))) {
                     if (this.password.newpassword == this.password.confirmnewpassword) {
                         return user.updatePassword(this.password.newpassword).then(res => {
                             loader.dismiss();
                             // this.showAlert('success', 'Your password updated successfully.');
-                            this.navCtrl.push(EditProfilePage);
+                            this.navCtrl.pop({ animate: true, animation: 'transition', direction: 'back' });
                         })
                             .catch(err => {
                                 loader.dismiss();
@@ -84,22 +102,23 @@ export class ChangePasswordPage {
                     }
                     else {
                         loader.dismiss();
-                        this.showAlert('Your password is not matching');
+                        // this.showAlert('confirm password does not match');
                     }
                 }
                 else {
                     loader.dismiss();
-                    // this.showAlert('6 characters required')
+                    // this.showAlert('no space allowed')
                 }
             }
             else {
                 loader.dismiss();
-                this.showAlert('user not exist');
+                // this.showAlert('user not exist');
             }
             //  });           
         }).catch(err => {
             loader.dismiss();
-            this.showAlert('your old password is wrong')
+            this.oldPwdError = true;
+            // this.showAlert('invalid password')
         })
 
     }
