@@ -89,7 +89,8 @@ export class ChangePasswordPage {
             var user = firebase.auth().currentUser;
             if (user) {
                 if ((new RegExp(/[^\s.]{6}$/).test(this.password.newpassword))) {
-                    if (this.password.newpassword == this.password.confirmnewpassword) {
+                    if (this.password.newpassword === this.password.confirmnewpassword) {
+                        this.confirmPwdError = false;
                         return user.updatePassword(this.password.newpassword).then(res => {
                             loader.dismiss();
                             // this.showAlert('success', 'Your password updated successfully.');
@@ -102,6 +103,7 @@ export class ChangePasswordPage {
                     }
                     else {
                         loader.dismiss();
+                        this.confirmPwdError = true;
                         // this.showAlert('confirm password does not match');
                     }
                 }
