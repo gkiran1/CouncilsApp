@@ -13,6 +13,7 @@ import { Content } from 'ionic-angular';
   templateUrl: 'agenda-lite.html',
   selector: 'agenda-lite'
 })
+
 export class AgendaLitePage {
   @ViewChild(Content) content: Content;
   minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
@@ -54,13 +55,15 @@ export class AgendaLitePage {
 
     this.usercouncils = localStorage.getItem('userCouncils').split(',');
     var councilsIds = localStorage.getItem('userCouncils').split(',');
+
     councilsIds.forEach(councilId => {
       this.firebaseservice.getCouncilByKey(councilId).subscribe(councilObj => {
         this.councils.push(...councilObj);
-      })
-    })
+      });
+    });
 
     let date = this.localISOformat(new Date());
+
     this.newagendaliteForm = fb.group({
       assignedcouncil: ['', Validators.required],
       assigneddate: [date, Validators.required],
@@ -85,9 +88,9 @@ export class AgendaLitePage {
   getAssignmentsByCouncilId(councilId: string) {
     return this.firebaseservice.getAssignmentsByCouncil(councilId);
   }
+
   onChange($event) {
     var newDate = new Date($event.year.value, $event.month.value - 1, $event.day.value, $event.hour.value, $event.minute.value);
-    //alert(newDate);
     if (moment(newDate).isBefore(moment().set({ second: 0 }))) {
       this.dateErr = true;
     }
@@ -97,22 +100,46 @@ export class AgendaLitePage {
   }
 
   agendasArray = [];
+
   createagenda(agenda) {
     this.dateErr = false;
+    var isFirstError = false;
+    let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
+
+    if (moment(assigneddate).isBefore(moment().set({ second: 0 }))) {
+      this.dateErr = true;
+      if (!isFirstError) {
+        isFirstError = true;
+        var ele = document.getElementById('dateError');
+        ele.scrollIntoView();
+      }
+    }
     if (agenda.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== agenda.openingprayer)) {
-      //this.showAlert('Invalid user');
       this.invalidOpeningPrayerUsr = true;
+      if (!isFirstError) {
+        isFirstError = true;
+        var ele = document.getElementById('ionItemOpeningPrayer');
+        ele.scrollIntoView();
+      }
     }
     if (agenda.spiritualthought && (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== agenda.spiritualthought)) {
-      //this.showAlert('Invalid user');
       this.invalidSpiritualThoughtUsr = true;
+      if (!isFirstError) {
+        isFirstError = true;
+        var ele = document.getElementById('ionItemSpiritualThought');
+        ele.scrollIntoView();
+      }
     }
     if (agenda.closingprayer && (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== agenda.closingprayer)) {
-      //this.showAlert('Invalid user');
       this.invalidClosingPrayerUsr = true;
+      if (!isFirstError) {
+        isFirstError = true;
+        var ele = document.getElementById('ionItemClosingPrayer');
+        ele.scrollIntoView();
+      }
     }
-    if (!this.invalidOpeningPrayerUsr && !this.invalidSpiritualThoughtUsr && !this.invalidClosingPrayerUsr) {
-      let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
+
+    if (!this.invalidOpeningPrayerUsr && !this.invalidSpiritualThoughtUsr && !this.invalidClosingPrayerUsr && !this.dateErr) {
       agenda.assigneddate = moment(assigneddate).toISOString();
       agenda.discussionitems = (agenda.discussionitems != undefined && agenda.discussionitems.length > 0) ? agenda.discussionitems.replace(/- /gi, '').trim() : '';
       agenda.councilid = this.assignedcouncil.$key;
@@ -120,41 +147,27 @@ export class AgendaLitePage {
       agenda.spiritualthoughtuserid = (this.spiritualthought !== undefined) ? this.spiritualthought.$key : '';
       agenda.closingprayeruserid = (this.closingprayer !== undefined) ? this.closingprayer.$key : '';
 
-      if (moment(assigneddate).isBefore(moment().set({ second: 0 }))) {
-        this.dateErr = true;
-        // this.showAlert('Invalid date');
-      } else {
-        this.firebaseservice.createAgendaLite(agenda)
-          .then(key => {
-            if (agenda.openingprayeruserid) {
-              this.createActivity(key, agenda.openingprayeruserid, 'opening prayer');
-            }
-            if (agenda.spiritualthoughtuserid) {
-              this.createActivity(key, agenda.spiritualthoughtuserid, 'spiritual thought');
-            }
-            if (agenda.closingprayeruserid) {
-              this.createActivity(key, agenda.closingprayeruserid, 'closing prayer');
-            }
-            this.nav.setRoot(AgendasPage);
-
-          })
-          .catch(err => { this.showAlert('Connection error.') })
-      }
+      this.firebaseservice.createAgendaLite(agenda)
+        .then(key => {
+          if (agenda.openingprayeruserid) {
+            this.createActivity(key, agenda.openingprayeruserid, 'opening prayer');
+          }
+          if (agenda.spiritualthoughtuserid) {
+            this.createActivity(key, agenda.spiritualthoughtuserid, 'spiritual thought');
+          }
+          if (agenda.closingprayeruserid) {
+            this.createActivity(key, agenda.closingprayeruserid, 'closing prayer');
+          }
+          this.nav.setRoot(AgendasPage);
+        }).catch(err => { this.showAlert('Connection error.') });
     }
   }
-  showAlert(errText) {
-    // let alert = this.alertCtrl.create({
-    //   title: '',
-    //   subTitle: errText,
-    //   buttons: ['OK']
-    // });
-    // alert.present();
 
+  showAlert(errText) {
     let toast = this.toast.create({
       message: errText,
       duration: 3000
-    })
-
+    });
     toast.present();
   }
 
@@ -188,10 +201,9 @@ export class AgendaLitePage {
             this.assignmentslist.push(assignObj);
           }
         });
-
       });
-    });
 
+    });
   }
 
   updateUsers(councilid) {
@@ -213,6 +225,7 @@ export class AgendaLitePage {
   cancel() {
     this.nav.pop({ animate: true, animation: 'transition', direction: 'back' })
   }
+
   searchFn(event) {
     this.term = event.target.value;
   }
@@ -228,8 +241,6 @@ export class AgendaLitePage {
       return e;
     });
     $event.target.value = newValue.join('\n');
-
-
     if (keycode == '13') {
       let di = this.newagendaliteForm.value.discussionitems;
       if (di) {
@@ -279,25 +290,24 @@ export class AgendaLitePage {
     this.showlist2 = true;
     setTimeout(() => {
       this.content.scrollToBottom();
-    })
+    });
   }
 
   bindAssignto(user) {
     this.showlist = false;
     (<FormControl>this.newagendaliteForm.controls['openingprayer']).setValue(user.firstname + ' ' + user.lastname);
-
     this.openingprayer = user;
   }
+
   bindAssignto1(user) {
     this.showlist1 = false;
     (<FormControl>this.newagendaliteForm.controls['spiritualthought']).setValue(user.firstname + ' ' + user.lastname);
-
     this.spiritualthought = user;
   }
+
   bindAssignto2(user) {
     this.showlist2 = false;
     (<FormControl>this.newagendaliteForm.controls['closingprayer']).setValue(user.firstname + ' ' + user.lastname);
-
     this.closingprayer = user;
   }
 

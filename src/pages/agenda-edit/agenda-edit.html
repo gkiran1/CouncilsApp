@@ -20,7 +20,7 @@
             <ion-input type="text" readonly (click)="showCouncilsModal($event, agendaeditForm.value)" formControlName="assignedcouncil"></ion-input>
         </ion-item>
 
-        <ion-item [class.invalid]="dateErr" class="input-item">
+        <ion-item id="dateError" [class.invalid]="dateErr" class="input-item">
             <ion-label floating>Date & Time</ion-label>
             <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDDD, MMM, D, YYYY, h, mm, A" ng-model="datetime" name="assigneddate"
                 formControlName="assigneddate" validate-onblur [max]="2500" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"
@@ -35,7 +35,7 @@
             <ion-input type="text" spellautocomplete name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>
         </ion-item>
 
-        <ion-item [class.invalid]="invalidOpeningPrayerUsr" class="input-item">
+        <ion-item id="ionItemOpeningPrayer" [class.invalid]="invalidOpeningPrayerUsr" class="input-item">
             <ion-label floating>Opening Prayer</ion-label>
             <ion-input type="text" (focus)="showList($event)" (input)="showList($event)" formControlName="openingprayer"></ion-input>
         </ion-item>
@@ -57,7 +57,7 @@
             </ng-container>
         </div>
 
-        <ion-item [class.invalid]="invalidSpiritualThoughtUsr" class="input-item">
+        <ion-item id="ionItemSpiritualThought" [class.invalid]="invalidSpiritualThoughtUsr" class="input-item">
             <ion-label floating>Spiritual Thought</ion-label>
             <ion-input type="text" (focus)="showList1($event)" (input)="showList1($event)" formControlName="spiritualthought"></ion-input>
         </ion-item>
@@ -148,7 +148,7 @@
                 <ion-label floating>Temporal Welfare</ion-label>
                 <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="temporalfocus()" elastic id="temporalwelfare" name="temporalwelfare"
                     formControlName="temporalwelfare" maxlength="500" (keyup)="temporalkey($event)">
-                    </ion-textarea>
+                </ion-textarea>
             </ion-item>
         </ng-container>
         <ng-container *ngIf="temporalwelfareObj.length">
@@ -167,7 +167,7 @@
                 <ion-label floating>Missionary Items</ion-label>
                 <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="missionaryfocus()" elastic id="missionaryitems" name="missionaryitems"
                     formControlName="missionaryitems" maxlength="500" (keyup)="missionarykey($event)">
-                    </ion-textarea>
+                </ion-textarea>
             </ion-item>
         </ng-container>
         <ng-container *ngIf="missionaryitemsObj.length">
@@ -186,7 +186,7 @@
                 <ion-label floating>Retention </ion-label>
                 <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="retentionfocus()" elastic id="retention" name="retention" formControlName="retention"
                     maxlength="500" (keyup)="retentionkey($event)">
-                    </ion-textarea>
+                </ion-textarea>
             </ion-item>
         </ng-container>
         <ng-container *ngIf="retentionObj.length">
@@ -205,7 +205,7 @@
                 <ion-label floating>Activation </ion-label>
                 <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="activationfocus()" elastic id="activation" name="activation"
                     formControlName="activation" maxlength="500" (keyup)="activationkey($event)">
-                    </ion-textarea>
+                </ion-textarea>
             </ion-item>
         </ng-container>
         <ng-container *ngIf="activationObj.length">
@@ -224,7 +224,7 @@
                 <ion-label floating>Temple & Family History</ion-label>
                 <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="historyfocus()" elastic id="history" name="history" formControlName="history"
                     maxlength="500" (keyup)="historykey($event)">
-                    </ion-textarea>
+                </ion-textarea>
             </ion-item>
         </ng-container>
         <ng-container *ngIf="historyObj.length">
@@ -243,7 +243,7 @@
                 <ion-label floating>Gospel Learning</ion-label>
                 <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="gospellearningfocus()" elastic id="gospellearning" name="gospellearning"
                     formControlName="gospellearning" maxlength="500" (keyup)="gospellearningkey($event)">
-                    </ion-textarea>
+                </ion-textarea>
             </ion-item>
         </ng-container>
         <ng-container *ngIf="gospellearningObj.length">
@@ -262,7 +262,7 @@
                 <ion-label floating>Events</ion-label>
                 <ion-textarea rows="1" wrap="off" spellautocomplete (focus)="eventfocus()" elastic id="event" name="event" formControlName="event"
                     maxlength="500" (keyup)="eventkey($event)">
-                    </ion-textarea>
+                </ion-textarea>
             </ion-item>
         </ng-container>
         <ng-container *ngIf="eventObj.length">
@@ -290,7 +290,7 @@
                 </ion-item>
             </ng-container>
         </div>
-        <ion-item [class.invalid]="invalidClosingPrayerUsr" class="input-item">
+        <ion-item id="ionItemClosingPrayer" [class.invalid]="invalidClosingPrayerUsr" class="input-item">
             <ion-label floating>Closing Prayer</ion-label>
             <ion-input type="text" (focus)="showList2($event)" (input)="showList2($event)" formControlName="closingprayer"></ion-input>
         </ion-item>

@@ -13,6 +13,7 @@ import { Content } from 'ionic-angular';
     templateUrl: 'agenda.html',
     selector: 'agenda-page'
 })
+
 export class AgendaPage {
     @ViewChild(Content) content: Content;
     minDate = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
@@ -52,7 +53,6 @@ export class AgendaPage {
         public firebaseservice: FirebaseService, public alertCtrl: AlertController,
         public nav: NavController, public toast: ToastController) {
 
-
         this.af.auth.subscribe(auth => {
             if (!auth) return;
             this.af.database.object('/users/' + auth.uid).subscribe(user => {
@@ -62,11 +62,12 @@ export class AgendaPage {
 
         this.usercouncils = localStorage.getItem('userCouncils').split(',');
         var councilsIds = localStorage.getItem('userCouncils').split(',');
+
         councilsIds.forEach(councilId => {
             this.firebaseservice.getCouncilByKey(councilId).subscribe(councilObj => {
                 this.councils.push(...councilObj);
             })
-        })
+        });
 
         let date = this.localISOformat(new Date());
         this.newagendaForm = fb.group({
@@ -100,9 +101,9 @@ export class AgendaPage {
     getAssignmentsByCouncilId(councilId: string) {
         return this.firebaseservice.getAssignmentsByCouncil(councilId);
     }
+
     onChange($event) {
         var newDate = new Date($event.year.value, $event.month.value - 1, $event.day.value, $event.hour.value, $event.minute.value);
-        //alert(newDate);
         if (moment(newDate).isBefore(moment().set({ second: 0 }))) {
             this.dateErr = true;
         }
@@ -110,24 +111,49 @@ export class AgendaPage {
             this.dateErr = false;
         }
     }
+
     agendasArray = [];
+
     createagenda(agenda) {
         this.dateErr = false;
+        var isFirstError = false;
+        let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
+        agenda.assigneddate = moment(assigneddate).toISOString();
+
+        if (moment(assigneddate).isBefore(moment().set({ second: 0 }))) {
+            this.dateErr = true;
+            if (!isFirstError) {
+                isFirstError = true;
+                var ele = document.getElementById('dateError');
+                ele.scrollIntoView();
+            }
+        }
         if (agenda.openingprayer && (!this.openingprayer || (this.openingprayer.firstname + ' ' + this.openingprayer.lastname) !== agenda.openingprayer)) {
-            //this.showAlert('Invalid user');
             this.invalidOpeningPrayerUsr = true;
+            if (!isFirstError) {
+                isFirstError = true;
+                var ele = document.getElementById('ionItemOpeningPrayer');
+                ele.scrollIntoView();
+            }
         }
         if (agenda.spiritualthought && (!this.spiritualthought || (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname) !== agenda.spiritualthought)) {
-            //this.showAlert('Invalid user');
             this.invalidSpiritualThoughtUsr = true;
+            if (!isFirstError) {
+                isFirstError = true;
+                var ele = document.getElementById('ionItemSpiritualThought');
+                ele.scrollIntoView();
+            }
         }
         if (agenda.closingprayer && (!this.closingprayer || (this.closingprayer.firstname + ' ' + this.closingprayer.lastname) !== agenda.closingprayer)) {
-            //this.showAlert('Invalid user');
             this.invalidClosingPrayerUsr = true;
+            if (!isFirstError) {
+                isFirstError = true;
+                var ele = document.getElementById('ionItemClosingPrayer');
+                ele.scrollIntoView();
+            }
         }
-        if (!this.invalidOpeningPrayerUsr && !this.invalidSpiritualThoughtUsr && !this.invalidClosingPrayerUsr) {
-            let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
-            agenda.assigneddate = moment(assigneddate).toISOString();
+
+        if (!this.invalidOpeningPrayerUsr && !this.invalidSpiritualThoughtUsr && !this.invalidClosingPrayerUsr && !this.dateErr) {
             agenda.spiritualwelfare = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.replace(/- /gi, '').trim() : '';
             agenda.temporalwelfare = (agenda.temporalwelfare != undefined && agenda.temporalwelfare.length > 0) ? agenda.temporalwelfare.replace(/- /gi, '').trim() : '';
             agenda.missionaryitems = (agenda.missionaryitems != undefined && agenda.missionaryitems.length > 0) ? agenda.missionaryitems.replace(/- /gi, '').trim() : '';
@@ -140,42 +166,29 @@ export class AgendaPage {
             agenda.openingprayeruserid = (this.openingprayer !== undefined) ? this.openingprayer.$key : '';
             agenda.spiritualthoughtuserid = (this.spiritualthought !== undefined) ? this.spiritualthought.$key : '';
             agenda.closingprayeruserid = (this.closingprayer !== undefined) ? this.closingprayer.$key : '';
-            if (moment(assigneddate).isBefore(moment().set({ second: 0 }))) {
-                this.dateErr = true;
-                // this.showAlert('Invalid date');
-            } else {
-                this.firebaseservice.createAgenda(agenda)
-                    .then(key => {
-                        if (agenda.openingprayeruserid) {
-                            this.createActivity(key, agenda.openingprayeruserid, 'opening prayer');
-                        }
-                        if (agenda.spiritualthoughtuserid) {
-                            this.createActivity(key, agenda.spiritualthoughtuserid, 'spiritual thought');
-                        }
-                        if (agenda.closingprayeruserid) {
-                            this.createActivity(key, agenda.closingprayeruserid, 'closing prayer');
-                        }
 
-                        this.nav.setRoot(AgendasPage);
-                    })
-                    .catch(err => this.showAlert('Connection error.'))
-            }
+            this.firebaseservice.createAgenda(agenda)
+                .then(key => {
+                    if (agenda.openingprayeruserid) {
+                        this.createActivity(key, agenda.openingprayeruserid, 'opening prayer');
+                    }
+                    if (agenda.spiritualthoughtuserid) {
+                        this.createActivity(key, agenda.spiritualthoughtuserid, 'spiritual thought');
+                    }
+                    if (agenda.closingprayeruserid) {
+                        this.createActivity(key, agenda.closingprayeruserid, 'closing prayer');
+                    }
+
+                    this.nav.setRoot(AgendasPage);
+                }).catch(err => this.showAlert('Connection error.'));
         }
     }
 
     showAlert(errText) {
-        // let alert = this.alertCtrl.create({
-        //     title: '',
-        //     subTitle: errText,
-        //     buttons: ['OK']
-        // });
-        // alert.present();
-
         let toast = this.toast.create({
             message: errText,
             duration: 3000
-        })
-
+        });
         toast.present();
     }
 
@@ -204,13 +217,10 @@ export class AgendaPage {
                     }
                     else {
                         this.assignmentslist.push(assignObj);
-
                     }
                 });
-
             });
         });
-
     }
 
     updateUsers(councilid) {
@@ -228,12 +238,15 @@ export class AgendaPage {
             });
         });
     }
+
     cancel() {
         this.nav.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
+
     searchFn(event) {
         this.term = event.target.value;
     }
+
     spiritualkey($event) {
         var keycode = ($event.keyCode ? $event.keyCode : $event.which);
         let v = $event.target.value.split('\n');
@@ -245,7 +258,6 @@ export class AgendaPage {
             return e;
         });
         $event.target.value = newValue.join('\n');
-
         if (keycode == '13') {
             let sw = this.newagendaForm.value.spiritualwelfare;
             if (sw) {
@@ -272,9 +284,7 @@ export class AgendaPage {
             return e;
         });
         $event.target.value = newValue.join('\n');
-
         if (keycode == '13') {
-
             let tw = this.newagendaForm.value.temporalwelfare;
             if (tw) {
                 (<FormControl>this.newagendaForm.controls['temporalwelfare']).setValue(tw + '- ');
@@ -288,7 +298,6 @@ export class AgendaPage {
             (<FormControl>this.newagendaForm.controls['temporalwelfare']).setValue("- ");
         }
     }
-
 
     missionarykey($event) {
         var keycode = ($event.keyCode ? $event.keyCode : $event.which);
@@ -328,7 +337,6 @@ export class AgendaPage {
             return e;
         });
         $event.target.value = newValue.join('\n');
-
         if (keycode == '13') {
             let rk = this.newagendaForm.value.retention;
             if (rk) {
@@ -355,7 +363,6 @@ export class AgendaPage {
             return e;
         });
         $event.target.value = newValue.join('\n');
-
         if (keycode == '13') {
             let ak = this.newagendaForm.value.activation;
             if (ak) {
@@ -409,7 +416,6 @@ export class AgendaPage {
             return e;
         });
         $event.target.value = newValue.join('\n');
-
         if (keycode == '13') {
             let gk = this.newagendaForm.value.gospellearning;
             if (gk) {
@@ -436,7 +442,6 @@ export class AgendaPage {
             return e;
         });
         $event.target.value = newValue.join('\n');
-
         if (keycode == '13') {
             let ev = this.newagendaForm.value.event;
             if (ev) {
@@ -495,25 +500,24 @@ export class AgendaPage {
         })
     }
 
-
     bindAssignto(user) {
         this.showlist = false;
         (<FormControl>this.newagendaForm.controls['openingprayer']).setValue(user.firstname + ' ' + user.lastname);
-
         this.openingprayer = user;
     }
+
     bindAssignto1(user) {
         this.showlist1 = false;
         (<FormControl>this.newagendaForm.controls['spiritualthought']).setValue(user.firstname + ' ' + user.lastname);
-
         this.spiritualthought = user;
     }
+
     bindAssignto2(user) {
         this.showlist2 = false;
         (<FormControl>this.newagendaForm.controls['closingprayer']).setValue(user.firstname + ' ' + user.lastname);
-
         this.closingprayer = user;
     }
+
     localISOformat(date) {
         date = new Date(date);
         return date.getFullYear() +
