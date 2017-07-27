@@ -51,7 +51,7 @@ export class DirectoryPage {
                 this.getUsersByCouncilId(councilId).subscribe(councilUsers => {
                     councilUsers.forEach(councilUser => {
                         this.firebaseService.getUsersByKey(councilUser.userid).subscribe(usrs => {
-                            if (usrs[0].isactive) {
+                            if (usrs[0] && usrs[0].isactive) {
                                 userKeys.push(usrs[0].$key);
                                 if (userKeys.indexOf(usrs[0].$key) === userKeys.lastIndexOf(usrs[0].$key)) {
                                     this.firebaseService.checkNetworkStatus(usrs[0].$key, function (status) {

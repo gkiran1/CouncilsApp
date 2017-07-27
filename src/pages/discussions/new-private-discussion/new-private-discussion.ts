@@ -25,7 +25,7 @@ export class NewPrivateDiscussionPage {
             this.firebaseservice.getUsersByCouncil(councilid).subscribe(uc => {
               uc.forEach(e => {
                 this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
-                  if (u[0].isactive) {
+                  if (u[0] && u[0].isactive) {
                     let v = this.users.some(i => {
                       return i.$key === u[0].$key;
                     });

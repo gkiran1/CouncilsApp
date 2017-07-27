@@ -23,7 +23,7 @@ export class CouncilUsersPage {
             this.usersArray = [];
             uc.forEach(e => {
                 this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
-                    if (u[0].isactive) {
+                    if (u[0] && u[0].isactive) {
                         this.usersArray.push(u[0]);
                     }
                 });

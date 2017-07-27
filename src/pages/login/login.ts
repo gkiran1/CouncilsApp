@@ -99,7 +99,7 @@ export class LoginPage {
             .then(uid => {
                 this.FCMSetup();
                 this.firebaseService.getUsersByKey(uid).subscribe(usrs => {
-                    if (usrs[0].isactive) {
+                    if (usrs[0] && usrs[0].isactive) {
                         flag = true;
                         // localStorage.setItem('Firsttimeinstall', 'false');
                         localStorage.setItem('securityToken', uid);

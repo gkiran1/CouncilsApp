@@ -21,7 +21,7 @@ export class CouncilUsersModalPage {
             this.usersArray = [];
             uc.forEach(e => {
                 this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
-                    if (u[0].isactive) {
+                    if (u[0] && u[0].isactive) {
                         this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
                             u[0].status = status ? '#3cb18a' : '#a9aaac';
                         });

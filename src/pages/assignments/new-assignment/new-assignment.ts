@@ -45,7 +45,7 @@ export class NewAssignmentPage {
       this.isNewAssignment = false;
       this.isPersonalAssignment = assignment.assignedto === this.uid;
       this.assignmentKey = assignment.$key;
-      let localdate = new Date(assignment.assigneddate).toLocaleString("en-US", {timeZone: "UTC"});
+      let localdate = new Date(assignment.assigneddate).toLocaleString("en-US", { timeZone: "UTC" });
       let localISOformat = this.localISOformat(localdate);
       this.assignmentForm = fb.group({
         description: [assignment.description, Validators.required],
@@ -130,7 +130,7 @@ export class NewAssignmentPage {
       this.users = [];
       uc.forEach(e => {
         this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
-          if (u[0].isactive) {
+          if (u[0] && u[0].isactive) {
             this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
               u[0].status = status ? '#3cb18a' : '#a9aaac';
             });
