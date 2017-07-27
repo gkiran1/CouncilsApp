@@ -222,7 +222,7 @@ export class NewCouncilFilePage {
             // Metadata now contains the metadata like filesize and type for 'images/...'
             //isNewCouncilFileflag=false
             this.nav.push(ViewCouncilFilePage, {
-              councilid: value.councilid
+              councilid: value.councilid, councilname: value.councilname
             }, { animate: true, animation: 'transition', direction: 'forward' });
             // }).catch((error) => {
             //   loader.dismiss();
