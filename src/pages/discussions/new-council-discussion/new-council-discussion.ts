@@ -20,6 +20,7 @@ export class NewCouncilDiscussionPage {
   addedCouncils = [];
 
   firstShown;
+  isValidTopic = false;
 
   constructor(navParams: NavParams, public af: AngularFire, fb: FormBuilder, public appservice: AppService, public firebaseservice: FirebaseService, public nav: NavController) {
     let topicitem = navParams.get('item');
@@ -123,6 +124,7 @@ export class NewCouncilDiscussionPage {
   }
 
   keypressed($event) {
+    $event.target.value.trim() === '' ? this.isValidTopic = false : this.isValidTopic = true;
     if ($event.target.value.length > 25) {
       return false;
     }

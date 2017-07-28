@@ -10,9 +10,11 @@ import { NotesPage } from '../notes/notes'
     templateUrl: 'newnote.html',
     selector: 'newnote-page'
 })
+
 export class NewNotePage {
 
     newnoteForm: FormGroup;
+    isValidTitle = false;
 
     constructor(navParams: NavParams, fb: FormBuilder,
         public firebaseservice: FirebaseService,
@@ -35,25 +37,17 @@ export class NewNotePage {
         this.firebaseservice.createNote(note)
             .then(res => {
                 this.nav.setRoot(NotesPage);
-            })
-            .catch(err => this.showAlert('Connection error.'))
+            }).catch(err => this.showAlert('Connection error.'))
     }
 
     showAlert(errText) {
-        // let alert = this.alertCtrl.create({
-        //     title: '',
-        //     subTitle: errText,
-        //     buttons: ['OK']
-        // });
-        // alert.present();
-
         let toast = this.toast.create({
             message: errText,
             duration: 3000
-        })
-
+        });
         toast.present();
     }
+
     pad(number) {
         if (number < 10) {
             return '0' + number;
@@ -66,9 +60,14 @@ export class NewNotePage {
     }
 
     keypressed($event) {
+        $event.target.value.trim() === '' ? this.isValidTitle = false : this.isValidTitle = true;
         if ($event.target.value.length > 25) {
             return false;
         }
+    }
+
+    titleChange($event) {
+        $event.target.value.trim() === '' ? this.isValidTitle = false : this.isValidTitle = true;
     }
 
 }

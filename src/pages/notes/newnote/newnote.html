@@ -31,6 +31,6 @@
 <ion-footer>
     <ion-toolbar>
         <button ion-button clear block color="secondary" class="button button-clik" (click)="createNote(newnoteForm.value)" text-capitalize
-            [disabled]="!newnoteForm.valid">Save</button>
+            [disabled]="!newnoteForm.valid || !isValidTitle">Save</button>
     </ion-toolbar>
 </ion-footer>

@@ -34,6 +34,7 @@ export class NewAssignmentPage {
   assignment;
   invalidUser = false;
   isAssigntoTouched = false;
+  isValidDesc = false;
 
   constructor(public modalCtrl: ModalController, public menuctrl: MenuController, public actionSheetCtrl: ActionSheetController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController, public toast: ToastController) {
     let assignment = navParams.get('assignment');
@@ -340,5 +341,10 @@ export class NewAssignmentPage {
     }
     this.firebaseservice.createActivity(activity);
   }
+
+  keypressed($event) {
+    $event.target.value.trim() === '' ? this.isValidDesc = false : this.isValidDesc = true;
+  }
+
 
 }
