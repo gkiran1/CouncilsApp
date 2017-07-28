@@ -15,7 +15,7 @@ export class NotePage {
     // createddate='';
     noteForm: FormGroup;
     createddate: '';
-    isValidTitle = false;
+    isValidTitle = true;
     constructor(navParams: NavParams, fb: FormBuilder,
         public firebaseservice: FirebaseService,
         public actionSheetCtrl: ActionSheetController,
