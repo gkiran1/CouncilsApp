@@ -14,7 +14,7 @@ import { NotesPage } from '../notes/notes'
 export class NewNotePage {
 
     newnoteForm: FormGroup;
-    isValidTitle = false;
+    isValidTitle = true;
 
     constructor(navParams: NavParams, fb: FormBuilder,
         public firebaseservice: FirebaseService,
@@ -64,10 +64,5 @@ export class NewNotePage {
         if ($event.target.value.length > 25) {
             return false;
         }
-    }
-
-    titleChange($event) {
-        $event.target.value.trim() === '' ? this.isValidTitle = false : this.isValidTitle = true;
-    }
-
+    }    
 }

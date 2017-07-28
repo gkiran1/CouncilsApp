@@ -15,7 +15,7 @@ export class NotePage {
     // createddate='';
     noteForm: FormGroup;
     createddate: '';
-
+    isValidTitle = false;
     constructor(navParams: NavParams, fb: FormBuilder,
         public firebaseservice: FirebaseService,
         public actionSheetCtrl: ActionSheetController,
@@ -123,6 +123,7 @@ export class NotePage {
     }
 
     keypressed($event) {
+        $event.target.value.trim() === '' ? this.isValidTitle = false : this.isValidTitle = true;
         if ($event.target.value.length > 25) {
             return false;
         }

@@ -34,7 +34,7 @@ export class NewAssignmentPage {
   assignment;
   invalidUser = false;
   isAssigntoTouched = false;
-  isValidDesc = false;
+  isValidDesc = true;
 
   constructor(public modalCtrl: ModalController, public menuctrl: MenuController, public actionSheetCtrl: ActionSheetController, public af: AngularFire, navParams: NavParams, fb: FormBuilder, public firebaseservice: FirebaseService, public alertCtrl: AlertController, public nav: NavController, public toast: ToastController) {
     let assignment = navParams.get('assignment');
