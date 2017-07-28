@@ -17,6 +17,7 @@ export class SubmitFeedbackPage {
     // public feedback: string;
 
     newFeedbackForm: FormGroup;
+    isValidTopic = true;
 
     constructor(public navCtrl: NavController, fb: FormBuilder, private ser: FirebaseService, private appSer: AppService) {
 
@@ -40,6 +41,7 @@ export class SubmitFeedbackPage {
     }
 
     keypressed($event) {
+        $event.target.value.trim() === '' ? this.isValidTopic = false : this.isValidTopic = true;
         if ($event.target.value.length > 25) {
             return false;
         }

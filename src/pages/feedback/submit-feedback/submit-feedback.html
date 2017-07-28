@@ -37,14 +37,13 @@
 
         <ion-item class="input-item">
             <ion-label floating>Feedback Comments</ion-label>
-        <ion-textarea type="text" elastic name="describe" spellautocomplete formControlName="describe" maxlength="500"></ion-textarea>
+            <ion-textarea type="text" elastic name="describe" spellautocomplete formControlName="describe" maxlength="500"></ion-textarea>
         </ion-item>
     </form>
 </ion-content>
-
 <ion-footer>
     <ion-toolbar class="createbtn" text-center>
         <button ion-button clear color="secondary" class="button button-clik" (click)="submitFeedback(newFeedbackForm.value)" text-capitalize
-            [disabled]="!newFeedbackForm.valid">Submit Feedback</button>
+            [disabled]="!newFeedbackForm.valid || !isValidTopic">Submit Feedback</button>
     </ion-toolbar>
 </ion-footer>
