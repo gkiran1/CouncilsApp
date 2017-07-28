@@ -24,7 +24,7 @@
 
 			<ion-item>
 				<ion-input type="text" id="council" name="council" spellautocomplete maxlength="25" [(ngModel)]="newCouncil.council" placeholder="Council Name"
-					clearInput required></ion-input>
+				    clearInput required (keyup)="keypressed($event)"></ion-input>
 			</ion-item>
 			<ion-item-divider class="empty">
 				<ion-label class="font2">
@@ -38,7 +38,7 @@
 			<ion-list>
 				<ng-container *ngFor="let user of users; let i = index">
 					<ion-item *ngIf="!(user.isadmin)" [ngClass]="i===0?'ion-item-first':(i===users.length - 1? 'ion-item-last': 'ion-item-middle')"
-						[attr.data-index]="i">
+					    [attr.data-index]="i">
 						<ion-avatar item-left>
 							<img [src]="(user)?.avatar " class="avatarImage " *ngIf="(user)?.avatar && (user)?.avatar !=='avatar' " />
 							<img src="assets/icon/noavatar.png " class="avatarImage " *ngIf="!(user)?.avatar || (user)?.avatar==='avatar' " />
@@ -49,7 +49,7 @@
 						</ion-label>
 
 						<ion-checkbox [(ngModel)]="user.selected" (ionChange)="userToggle($event, user)" color="secondary" item-right [name]="user.$key"></ion-checkbox>
-						</ion-item>
+					</ion-item>
 				</ng-container>
 			</ion-list>
 		</ion-item-group>
@@ -59,6 +59,6 @@
 <ion-footer>
 	<ion-toolbar class="createbtn" text-center>
 		<button ion-button clear class="button button-clik" color="secondary" name="Create" type="submit" (click)="createCouncil()"
-			[disabled]="!newCouncilForm.form.valid">Create</button>
+		    [disabled]="!newCouncilForm.form.valid || !isValidCouncil">Create</button>
 	</ion-toolbar>
 </ion-footer>

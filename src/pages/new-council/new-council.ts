@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AngularFire } from 'angularfire2';
 import { Council } from './council'
-import { AlertController, NavController, ToastController} from 'ionic-angular';
+import { AlertController, NavController, ToastController } from 'ionic-angular';
 import { Subscription } from "rxjs";
 
 @Component({
@@ -16,7 +16,8 @@ export class NewCouncilPage {
   newCouncil: Council = new Council();
   userCouncils: any;
   userSubscription: Subscription;
-
+  isValidCouncil = true;
+  
   constructor(public af: AngularFire, public firebaseservice: FirebaseService, public nav: NavController, public alertCtrl: AlertController, public toast: ToastController) {
     // this.appservice.getUser().subscribe(user => {
     this.userSubscription = this.af.auth.subscribe(auth => {
@@ -101,6 +102,9 @@ export class NewCouncilPage {
     toast.present();
   }
 
+  keypressed($event) {
+    $event.target.value.trim() === '' ? this.isValidCouncil = false : this.isValidCouncil = true;
+  }
 
 }
 
