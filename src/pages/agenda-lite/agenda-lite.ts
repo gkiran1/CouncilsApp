@@ -166,7 +166,8 @@ export class AgendaLitePage {
   showAlert(errText) {
     let toast = this.toast.create({
       message: errText,
-      duration: 3000
+      duration: 3000,
+      position: 'top'
     });
     toast.present();
   }

@@ -24,7 +24,7 @@ export class NotificationsPage {
         public firebaseService: FirebaseService,
         public toast: ToastController,
         public alertCtrl: AlertController,
-        public badge:Badge) {
+        public badge: Badge) {
         var userId = localStorage.getItem('securityToken');
         if (userId !== null) {
             this.notifications = [];
@@ -83,7 +83,8 @@ export class NotificationsPage {
 
         let toast = this.toast.create({
             message: errText,
-            duration: 3000
+            duration: 3000,
+            position: 'top'
         })
 
         toast.present();

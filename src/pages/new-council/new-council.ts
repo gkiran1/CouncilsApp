@@ -17,7 +17,7 @@ export class NewCouncilPage {
   userCouncils: any;
   userSubscription: Subscription;
   isValidCouncil = true;
-  
+
   constructor(public af: AngularFire, public firebaseservice: FirebaseService, public nav: NavController, public alertCtrl: AlertController, public toast: ToastController) {
     // this.appservice.getUser().subscribe(user => {
     this.userSubscription = this.af.auth.subscribe(auth => {
@@ -96,7 +96,8 @@ export class NewCouncilPage {
 
     let toast = this.toast.create({
       message: errText,
-      duration: 3000
+      duration: 3000,
+      position: 'top'
     })
 
     toast.present();

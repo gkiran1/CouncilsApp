@@ -72,7 +72,8 @@ export class slide3Page {
 
     let toast = this.toast.create({
       message: errText,
-      duration: 3000
+      duration: 3000,
+      position: 'top'
     })
 
     toast.present();

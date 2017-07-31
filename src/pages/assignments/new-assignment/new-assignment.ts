@@ -212,7 +212,8 @@ export class NewAssignmentPage {
     // alert.present();
     let toast = this.toast.create({
       message: errText,
-      duration: 3000
+      duration: 3000,
+      position: 'top'
     })
 
     toast.present();
