@@ -149,7 +149,8 @@ export class MyApp {
     //if(state = 'offline')
     return this.toast.create({
       message: "Offline",
-      duration: 3000
+      duration: 3000,
+      position: 'top'
     });
   }
 
@@ -157,7 +158,8 @@ export class MyApp {
     //if(state = 'offline')
     return this.toast.create({
       message: "Online",
-      duration: 3000
+      duration: 3000,
+      position: 'top'
     });
   }
 
