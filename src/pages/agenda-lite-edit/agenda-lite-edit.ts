@@ -356,6 +356,7 @@ export class AgendaLiteEditPage {
         },
         {
           text: 'Cancel',
+          role: 'cancel',
           cssClass: "actionsheet-cancel",
           handler: () => {
           }
