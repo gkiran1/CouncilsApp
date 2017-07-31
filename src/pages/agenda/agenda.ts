@@ -212,31 +212,43 @@ export class AgendaPage {
             this.assignedcouncil = council;
 
             this.getAssignmentsByCouncilId(council.$key).subscribe(assignments => {
-                assignments.forEach(assignObj => {
-                    if (assignObj.isCompleted) {
-                        this.completedassignmentslist.push(assignObj);
-                    }
-                    else {
-                        this.assignmentslist.push(assignObj);
-                    }
-                });
+                if (assignments) {
+                    assignments.forEach(assignObj => {
+                        if (assignObj) {
+                            if (assignObj.isCompleted) {
+                                this.completedassignmentslist.push(assignObj);
+                            }
+                            else {
+                                this.assignmentslist.push(assignObj);
+                            }
+                        }
+                    });
+                }
+            }, err => {
+                console.log('err =======> ' + err);
             });
         });
     }
 
     updateUsers(councilid) {
         this.firebaseservice.getUsersByCouncil(councilid).subscribe(uc => {
-            this.users = [];
-            uc.forEach(e => {
-                this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
-                    if (u[0] && u[0].isactive) {
-                        this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
-                            u[0].status = status ? '#3cb18a' : '#a9aaac';
-                        });
-                        this.users.push(u[0]);
-                    }
+            if (uc) {
+                this.users = [];
+                uc.forEach(e => {
+                    this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
+                        if (u[0] && u[0].isactive) {
+                            this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
+                                u[0].status = status ? '#3cb18a' : '#a9aaac';
+                            });
+                            this.users.push(u[0]);
+                        }
+                    }, err => {
+                        console.log('err =======> ' + err);
+                    });
                 });
-            });
+            }
+        }, err => {
+            console.log('err =======> ' + err);
         });
     }
 

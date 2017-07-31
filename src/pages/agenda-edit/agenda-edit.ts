@@ -131,20 +131,21 @@ export class AgendaEditPage {
         this.assignmentslist = [];
 
         this.getAssignmentsByCouncilId(agenda.councilid).subscribe(assignments => {
+            if (assignments) {
+                assignments.forEach(assignment => {
+                    if (!assignment.isCompleted) this.assignmentslist.push(assignment);
+                    if (assignment.isCompleted) this.completedassignmentslist.push(assignment);
 
-            assignments.forEach(assignment => {
-                if (!assignment.isCompleted) this.assignmentslist.push(assignment);
-                if (assignment.isCompleted) this.completedassignmentslist.push(assignment);
-
-                if (assignment.$key === agenda.assignments) {
-                    (<FormControl>this.agendaeditForm.controls['assignments']).setValue(assignment);
-                }
-                if (assignment.$key === agenda.completedassignments) {
-                    (<FormControl>this.agendaeditForm.controls['completedassignments']).setValue(assignment);
-                }
-
-            });
-
+                    if (assignment.$key === agenda.assignments) {
+                        (<FormControl>this.agendaeditForm.controls['assignments']).setValue(assignment);
+                    }
+                    if (assignment.$key === agenda.completedassignments) {
+                        (<FormControl>this.agendaeditForm.controls['completedassignments']).setValue(assignment);
+                    }
+                });
+            }
+        }, err => {
+            console.log('err ----> ' + err);
         });
 
         let localdate = new Date(agenda.agendadate).toLocaleString("en-US", { timeZone: "UTC" });
@@ -213,33 +214,41 @@ export class AgendaEditPage {
             (<FormControl>this.agendaeditForm.controls['assignedcouncil']).setValue(council.council);
             this.assignedcouncil = council;
             this.getAssignmentsByCouncilId(council.$key).subscribe(assignments => {
-                assignments.forEach(assignObj => {
-                    if (assignObj.isCompleted) {
-                        this.completedassignmentslist.push(assignObj);
-                    }
-                    else {
-                        this.assignmentslist.push(assignObj);
-
-                    }
-                });
-
+                if (assignments) {
+                    assignments.forEach(assignObj => {
+                        if (assignObj.isCompleted) {
+                            this.completedassignmentslist.push(assignObj);
+                        }
+                        else {
+                            this.assignmentslist.push(assignObj);
+                        }
+                    });
+                }
+            }, err => {
+                console.log('err ----> ' + err);
             });
         });
     }
 
     updateUsers(councilid) {
         this.firebaseservice.getUsersByCouncil(councilid).subscribe(uc => {
-            this.users = [];
-            uc.forEach(e => {
-                this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
-                    if (u[0] && u[0].isactive) {
-                        this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
-                            u[0].status = status ? '#3cb18a' : '#a9aaac';
-                        });
-                        this.users.push(u[0]);
-                    }
+            if (uc) {
+                this.users = [];
+                uc.forEach(e => {
+                    this.firebaseservice.getUsersByKey(e.userid).subscribe(u => {
+                        if (u[0] && u[0].isactive) {
+                            this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
+                                u[0].status = status ? '#3cb18a' : '#a9aaac';
+                            });
+                            this.users.push(u[0]);
+                        }
+                    }, err => {
+                        console.log('err =======> ' + err);
+                    });
                 });
-            });
+            }
+        }, err => {
+            console.log('err =======> ' + err);
         });
     }
 
