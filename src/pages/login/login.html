@@ -21,8 +21,8 @@
 		</ion-item>
 		<ion-label class="error-msg" *ngIf="showInValidPwd">Invalid password</ion-label>
 
-		<div class="login-button-container">
-			<ion-spinner name="dots" *ngIf="show" color="primary"></ion-spinner>
+		<div class="login-button-container">			
+			<council-spinner *ngIf="show"></council-spinner>
 			<button color="secondary" ion-button clear class="button button-clik" name="loginbtn" *ngIf="!show" id="loginbtn" type="submit"
 			    [disabled]="!isValidEmail || !isValidPwd" text-capitalize (click)="validateUser(loginForm.value)">Log In</button>
 		</div>

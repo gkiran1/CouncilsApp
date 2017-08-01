@@ -88,12 +88,12 @@ export class LoginPage {
     }
 
     private validateUser(loginCredentials) {
-        //this.show = true;
-        let loader = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        });
-        loader.present();
+        this.show = true;
+        // let loader = this.loadingCtrl.create({
+        //     spinner: 'hide',
+        //     content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+        // });
+        // loader.present();
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
             .then(uid => {
@@ -112,12 +112,14 @@ export class LoginPage {
                             this.nav.setRoot(NoAccessPage);
                         });
                     }
-                    loader.dismiss();
+                    // loader.dismiss();
+                    this.show = false;
                 });
             })
             .catch(err => {
                 this.firebaseService.findUserByEmail(loginCredentials.email).subscribe((usr) => {
-                    loader.dismiss();
+                    //loader.dismiss();
+                    this.show = false;
                     if (usr) {
                         this.showInValidEml = false;
                         this.showInValidPwd = true;

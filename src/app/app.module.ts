@@ -97,6 +97,7 @@ import { MainScreenPage } from '../pages/mainscreen/mainscreen';
 
 //Directives
 import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
+import { CouncilSpinnerComponent } from '../components/council-spinner/council-spinner';
 
 
 // //Cloud Settings - Push Messaging
@@ -199,7 +200,8 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
     WelcomePage,
     DisplayFirstPage,
     DirectoryPage,
-    MainScreenPage
+    MainScreenPage,
+    CouncilSpinnerComponent
   ],
 
   imports: [
