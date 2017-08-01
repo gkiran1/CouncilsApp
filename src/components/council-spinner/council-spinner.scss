@@ -3,5 +3,14 @@ council-spinner {
         position: absolute;
         top: 40%;
         width: 100%;
-    }    
+    }
+    .div-spinner {
+        display: flex !important;
+        justify-content: center !important;
+        flex-direction: column !important;
+    }
+    .divspinner {
+        width: 100% !important;
+        position: absolute !important;
+    }
 }
