@@ -418,18 +418,22 @@
  .label-ios[floating],
  .label-md[floating] {
      transform: translate3d(0, 12px, 0) !important;
+     -webkit-transform: translate3d(0, 12px, 0) !important;
  }
  
  .input-has-focus .label-md[floating],
  .input-has-value .label-md[floating] {
      color: #3CB18A;
      transform: translate3d(0, 3px, 0) scale(0.8) !important;
+     -webkit-transform: translate3d(0, 3px, 0) scale(0.8) !important;
+
  }
  
  .input-has-focus .label-ios[floating],
  .input-has-value .label-ios[floating] {
      color: #3CB18A;
      transform: translate3d(0, 3px, 0) scale(0.8) !important;
+     -webkit-transform: translate3d(0, 3px, 0) scale(0.8) !important;
  }
  
  .text-input-md,
