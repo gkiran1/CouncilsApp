@@ -99,6 +99,8 @@ import { MainScreenPage } from '../pages/mainscreen/mainscreen';
 import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
 import { CouncilSpinnerComponent } from '../components/council-spinner/council-spinner';
 
+import { LoadingControllerService } from '../services/LoadingControllerService';
+
 
 // //Cloud Settings - Push Messaging
 // const cloudSettings: CloudSettings = {
@@ -201,7 +203,8 @@ import { CouncilSpinnerComponent } from '../components/council-spinner/council-s
     DisplayFirstPage,
     DirectoryPage,
     MainScreenPage,
-    CouncilSpinnerComponent
+    CouncilSpinnerComponent,
+    //LoadingControllerService
   ],
 
   imports: [
@@ -285,6 +288,6 @@ import { CouncilSpinnerComponent } from '../components/council-spinner/council-s
     MainScreenPage
   ],
 
-  providers: [AuthService, AppService, FirebaseService, NativeAudio, Badge, FileChooser, AndroidPermissions, FilePath]
+  providers: [AuthService, AppService, FirebaseService, NativeAudio, Badge, FileChooser, AndroidPermissions, FilePath, LoadingControllerService]
 })
 export class AppModule { }

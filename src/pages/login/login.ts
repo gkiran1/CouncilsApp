@@ -12,6 +12,7 @@ import { NoAccessPage } from '../noaccess/noaccess.component';
 import { ForgotPwd } from '../forgotpwd/forgotpwd';
 
 import { validateEmail } from '../../custom-validators/custom-validator';
+import { LoadingControllerService } from '../../services/LoadingControllerService';
 
 declare var FCMPlugin: any;
 
@@ -43,7 +44,8 @@ export class LoginPage {
         private navParams: NavParams,
         private zone: NgZone,
         public toast: ToastController,
-        fb: FormBuilder
+        fb: FormBuilder,
+        public loaderService: LoadingControllerService
     ) {
 
         // this.loginForm = fb.group({
@@ -88,12 +90,9 @@ export class LoginPage {
     }
 
     private validateUser(loginCredentials) {
-        this.show = true;
-        // let loader = this.loadingCtrl.create({
-        //     spinner: 'hide',
-        //     content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        // });
-        // loader.present();
+        //this.show = true;
+        let loader = this.loaderService.loadingController;
+         loader.present();
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
             .then(uid => {
@@ -112,8 +111,8 @@ export class LoginPage {
                             this.nav.setRoot(NoAccessPage);
                         });
                     }
-                    // loader.dismiss();
-                    this.show = false;
+                     loader.dismiss();
+                    //this.show = false;
                 });
             })
             .catch(err => {
