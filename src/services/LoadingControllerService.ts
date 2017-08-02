@@ -4,11 +4,10 @@ import { LoadingController } from 'ionic-angular';
 
 @Injectable()
 export class LoadingControllerService {
-    loadingController:any;
+    loadingController: any;
 
-    constructor(private loadingCtrl:LoadingController) {
-        this.loadingController = this.loadingCtrl.create({
-            spinner: 'ios'
+    constructor(private loadingCtrl: LoadingController) {
+        this.loadingController = this.loadingCtrl.create({           
         });
     }
 }
