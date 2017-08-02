@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { LoadingControllerService } from '../../services/LoadingControllerService';
 
 @Component({
     selector: 'page-about',
@@ -17,8 +16,11 @@ export class AboutPage {
     public Phone: string;
     objAbout: any;
 
-    constructor(public navCtrl: NavController, private service: FirebaseService, public loaderService: LoadingControllerService) {
-        let loader = this.loaderService.loadingController;
+    constructor(public navCtrl: NavController, private service: FirebaseService, private loadingCtrl: LoadingController) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+        });
         loader.present();
         service.getAboutus()
             .then(about => {
@@ -33,10 +35,14 @@ export class AboutPage {
                 loader.dismiss();
             }).catch(err => {
                 loader.dismiss();
+
             });
+
     }
 
     cancel() {
         this.navCtrl.pop({ animate: true, animation: 'transition', direction: 'back' });
     }
+
+
 }

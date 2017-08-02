@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ActionSheetController, MenuController, ToastController } from 'ionic-angular';
+import { NavController, AlertController, ActionSheetController, MenuController, LoadingController, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChangePasswordPage } from '../edit-profile/change-password';
 import { AppService } from '../../providers/app-service';
@@ -9,7 +9,6 @@ import { Camera } from 'ionic-native';
 import * as firebase from 'firebase';
 import { AngularFire } from 'angularfire2';
 import { Subscription } from "rxjs";
-import { LoadingControllerService } from '../../services/LoadingControllerService';
 
 @Component({
     selector: 'edit-profile',
@@ -35,11 +34,12 @@ export class EditProfilePage {
     userSubscription: Subscription
     isPicNotChanged = true;
 
-    constructor(fb: FormBuilder, public af: AngularFire, public nav: NavController, public loaderService: LoadingControllerService,
+    constructor(fb: FormBuilder, public af: AngularFire, public nav: NavController,
         public appService: AppService,
         private firebaseService: FirebaseService,
         public actionSheetCtrl: ActionSheetController,
         public menuctrl: MenuController,
+        public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
         public toast: ToastController) {
 
@@ -70,8 +70,11 @@ export class EditProfilePage {
 
     editProfile(value) {
         this.isChangeflag = false;
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+        });
 
-        let loader = this.loaderService.loadingController;
         loader.present();
 
         if (this.isPicNotChanged) {

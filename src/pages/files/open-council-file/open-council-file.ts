@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ActionSheetController, MenuController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
 // import { FormBuilder,  Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FormGroup } from '@angular/forms';
@@ -9,8 +9,6 @@ import * as firebase from 'firebase';
 import { Subscription } from 'rxjs';
 import { AngularFire } from 'angularfire2';
 import * as moment from 'moment';
-import { LoadingControllerService } from '../../../services/LoadingControllerService';
-
 declare var FileTransfer;
 
 @Component({
@@ -59,7 +57,7 @@ export class OpenCouncilFilePage {
         public actionSheetCtrl: ActionSheetController,
         public menuctrl: MenuController,
         public alertCtrl: AlertController,
-        public loaderService: LoadingControllerService) {
+        public loadingCtrl: LoadingController) {
         this.profilePictureRef = firebase.storage().ref('/files/');
         appservice.getUser().subscribe(user => this.user = user);
         this.isNewCouncilFileflag = navparams.get('flag');
@@ -122,7 +120,10 @@ export class OpenCouncilFilePage {
     }
     delete(file) {
         // this.isNewCouncilFileflag = true;
-        let loader = this.loaderService.loadingController;
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+        });
         loader.present();
         //to delete files form the database using key
         this.firebaseservice.deleteFilesByKey(file.$key).then((res) => {
@@ -148,7 +149,10 @@ export class OpenCouncilFilePage {
     deleteFiles(filesArray) {
         console.log('filesArray:' + filesArray);
         // this.isNewCouncilFileflag = true;
-        let loader = this.loaderService.loadingController;
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+        });
         loader.present();
         this.filesArray.forEach((f, i) => {
             //to delete all the files in the array
@@ -168,7 +172,10 @@ export class OpenCouncilFilePage {
         })
     }
     downloadFile(item) {
-        let loader = this.loaderService.loadingController;
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+        });
         loader.present();
         // path to download a file to mobile.
         var targetPath = cordova.file.cacheDirectory + '/CouncilDownloads/' + item.filename;
@@ -280,7 +287,10 @@ export class OpenCouncilFilePage {
     // to upload a picture to the firebase.
     takePicture(value) {
         // this.isNewCouncilFileflag = true;
-        let loader = this.loaderService.loadingController;
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+        });
         Camera.getPicture({
             quality: 95,
             destinationType: Camera.DestinationType.DATA_URL,
@@ -339,7 +349,10 @@ export class OpenCouncilFilePage {
     // to upload a picture from gallery to the firebase.
     uploadPicture(value) {
         // this.isNewCouncilFileflag = true;
-        let loader = this.loaderService.loadingController;
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+        });
         Camera.getPicture({
             quality: 95,
             destinationType: Camera.DestinationType.DATA_URL,
@@ -399,7 +412,10 @@ export class OpenCouncilFilePage {
     // to upload files from the device.
     importFile(value) {
         // this.isNewCouncilFileflag = true;
-        let loader = this.loaderService.loadingController;
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
+        });
         FileChooser.open()
             .then(uri => {
                 loader.present();

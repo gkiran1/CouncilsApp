@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, NavParams, Loading, ToastController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController, NavParams, Loading, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { Http } from "@angular/http";
@@ -37,6 +37,7 @@ export class LoginPage {
 
     constructor(
         public nav: NavController,
+        public loadingCtrl: LoadingController,
         public firebaseService: FirebaseService,
         public alertCtrl: AlertController,
         public http: Http,
@@ -91,7 +92,7 @@ export class LoginPage {
     private validateUser(loginCredentials) {
         //this.show = true;
         let loader = this.loaderService.loadingController;
-        loader.present();
+         loader.present();
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
             .then(uid => {
@@ -110,7 +111,7 @@ export class LoginPage {
                             this.nav.setRoot(NoAccessPage);
                         });
                     }
-                    loader.dismiss();
+                     loader.dismiss();
                     //this.show = false;
                 });
             })
