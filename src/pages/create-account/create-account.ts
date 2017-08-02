@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, Loading, ToastController } from 'ionic-angular';
+import { NavController, Loading, ToastController } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { User } from '../../user/user';
 import { Invitee } from '../invite/invitee.model';
@@ -9,6 +9,7 @@ import { LoginPage } from '../login/login';
 import { EmailService } from '../../providers/emailservice';
 import * as jazzicon from 'jazzicon';
 import { WelcomePage } from '../welcome/welcome.component';
+import { LoadingControllerService } from '../../services/LoadingControllerService';
 
 @Component({
   selector: 'create-account',
@@ -25,7 +26,7 @@ export class CreateAccountPage {
   isValidEmail = true;
   isInvitedEmail = true;
 
-  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService, public toast: ToastController) { }
+  constructor(public navCtrl: NavController, public loaderService: LoadingControllerService, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService, public toast: ToastController) { }
 
   createAccount() {
     // this.passwordErr = false;
@@ -36,10 +37,8 @@ export class CreateAccountPage {
     }
     else {
       this.emailTaken = false;
-      let loader = this.loadingCtrl.create({
-        spinner: 'hide',
-        content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-      });
+      
+      let loader = this.loaderService.loadingController;
       loader.present();
 
       this.firebaseService.findUsrByEmail(this.newUser.email).then((res) => {

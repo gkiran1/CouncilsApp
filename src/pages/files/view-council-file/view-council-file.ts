@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { NavController, NavParams, Platform, LoadingController, ActionSheetController, MenuController } from 'ionic-angular';
+import { NavController, NavParams, Platform, ActionSheetController, MenuController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { Transfer, File, Camera, ImagePicker } from 'ionic-native';
 import * as firebase from 'firebase';
@@ -12,6 +12,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { LoadingControllerService } from '../../../services/LoadingControllerService';
 
 declare var FileTransfer;
 declare var FilePicker;
@@ -73,14 +74,13 @@ export class ViewCouncilFilePage {
         public appservice: AppService,
         public nav: NavController,
         public navparams: NavParams,
-        public loadingCtrl: LoadingController,
         public menuctrl: MenuController,
         public firebaseservice: FirebaseService,
         public actionSheetCtrl: ActionSheetController,
         public platform: Platform,
         public filechooser: FileChooser,
         public filePath: FilePath,
-        public androidPermissions: AndroidPermissions) {
+        public androidPermissions: AndroidPermissions, public loaderService: LoadingControllerService) {
 
         this.filesArray = [];
         this.profilePictureRef = firebase.storage().ref('/files/');
@@ -130,10 +130,7 @@ export class ViewCouncilFilePage {
         });
     }
     downloadFile(item) {
-        let loader = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        });
+        let loader = this.loaderService.loadingController;
         loader.present();
         if (this.device !== undefined && this.device !== 'android') {
 
@@ -257,10 +254,7 @@ export class ViewCouncilFilePage {
 
     takePicture(value) {
         // this.isNewCouncilFileflag = true;
-        let loader = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        });
+        let loader = this.loaderService.loadingController;
         Camera.getPicture({
             quality: 95,
             destinationType: Camera.DestinationType.DATA_URL,
@@ -323,10 +317,7 @@ export class ViewCouncilFilePage {
     // to upload a picture from gallery to the firebase.
     uploadPicture(value) {
         // this.isNewCouncilFileflag = true;
-        let loader = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        });
+        let loader = this.loaderService.loadingController;
         Camera.getPicture({
             quality: 95,
             destinationType: Camera.DestinationType.DATA_URL,
@@ -390,10 +381,7 @@ export class ViewCouncilFilePage {
     // to upload files from the device.
 
     importFile(value) {
-        let loader = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        });
+        let loader = this.loaderService.loadingController;
         if (this.platform.is('ios')) {
             // var options = ["public.data", "public.audio"];
             FilePicker.pickFile(
@@ -437,109 +425,109 @@ export class ViewCouncilFilePage {
         );
         //alert(this.importedFilePath);
         (<any>window).FilePath.resolveNativePath(uri, (filePath) => {
-        //let filePath = 'file://' + this.importedFilePath;
-        //alert('1:'+ filePath);
-        (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
-            //alert('2:'+ JSON.stringify(res));
-            res.file((resFile) => {
-                //alert('3:'+ JSON.stringify(resFile));
-                var reader = new FileReader();
-                let newfile = new File();
-                // File.readAsArrayBuffer(resFile, 'newimage')
-                //     .then(res => {
-                //         //alert('res'+JSON.stringify(res));
-                //     })
-                //     .catch(err => {
-                //          //alert(err);
-                //     })
-                reader.readAsArrayBuffer(resFile);
-                reader.onloadend = (evt: any) => {
-                    var imgBlob = new Blob([evt.target.result]);
-                    //alert(imgBlob);
-                    //alert(imgBlob.size);
-                    var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
-                    var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
-                    //alert(filetype)
-                    var mimeType;
-                    switch (filetype) {
-                        case 'PNG':
-                            mimeType = 'image/png';
-                            break;
-                        case 'JPG':
-                            mimeType = 'image/jpeg';
-                            break;
-                        case 'DOC':
-                            mimeType = 'application/msword';
-                            break;
-                        case 'DOCX':
-                            mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-                            break;
-                        case 'PDF':
-                            mimeType = 'application/pdf';
-                            break;
-                        case 'XLS':
-                            mimeType = 'application/vnd.ms-excel';
-                            break;
-                        case 'XLSX':
-                            mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-                            break;
-                        default:
-                            break;
+            //let filePath = 'file://' + this.importedFilePath;
+            //alert('1:'+ filePath);
+            (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
+                //alert('2:'+ JSON.stringify(res));
+                res.file((resFile) => {
+                    //alert('3:'+ JSON.stringify(resFile));
+                    var reader = new FileReader();
+                    let newfile = new File();
+                    // File.readAsArrayBuffer(resFile, 'newimage')
+                    //     .then(res => {
+                    //         //alert('res'+JSON.stringify(res));
+                    //     })
+                    //     .catch(err => {
+                    //          //alert(err);
+                    //     })
+                    reader.readAsArrayBuffer(resFile);
+                    reader.onloadend = (evt: any) => {
+                        var imgBlob = new Blob([evt.target.result]);
+                        //alert(imgBlob);
+                        //alert(imgBlob.size);
+                        var filename = filePath.substring(filePath.lastIndexOf('/') + 1);
+                        var filetype = (filename.substr(filename.lastIndexOf('.') + 1)).toUpperCase();
+                        //alert(filetype)
+                        var mimeType;
+                        switch (filetype) {
+                            case 'PNG':
+                                mimeType = 'image/png';
+                                break;
+                            case 'JPG':
+                                mimeType = 'image/jpeg';
+                                break;
+                            case 'DOC':
+                                mimeType = 'application/msword';
+                                break;
+                            case 'DOCX':
+                                mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+                                break;
+                            case 'PDF':
+                                mimeType = 'application/pdf';
+                                break;
+                            case 'XLS':
+                                mimeType = 'application/vnd.ms-excel';
+                                break;
+                            case 'XLSX':
+                                mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+                                break;
+                            default:
+                                break;
+                        }
+                        //alert(this.createdUser);
+                        //alert(this.councilId);
+                        //alert(this.councilName);
+                        //alert(this.createdBy);
+                        this.newFile.createdUser = this.createdUser;
+                        this.newFile.createdDate = moment().toISOString();
+                        this.newFile.councilid = this.councilId;
+                        this.newFile.councilname = this.councilName;
+                        this.newFile.filename = filename;
+                        this.newFile.filetype = filetype;
+                        this.newFile.filesize = imgBlob.size;
+                        this.newFile.createdBy = this.createdBy;
+                        this.newFile.isActive = true;
+                        //alert(JSON.stringify(this.newFile));
+                        this.firebaseservice.saveFile(this.newFile).then(fileId => {
+                            //alert('meta data saved'+fileId);
+                            this.profilePictureRef.child(this.councilId + '//' + fileId + '//' + filename)
+                                .put(imgBlob, { contentType: mimeType })
+                                .then((savedPicture) => {
+                                    //alert('file saved');
+                                    // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
+                                    // this.pictureRef.then((metadata) => {
+                                    this.bindFilesList();
+                                    loader.dismiss();
+                                    //isNewCouncilFileflag=false
+                                    // Metadata now contains the metadata like filesize and type for 'images/...'
+                                    // this.nav.push(ViewCouncilFilePage, {
+                                    //     councilid: value.councilid, councilname: value.councilname
+                                    // }, {
+                                    //         animate: true, animation: 'transition', direction: 'forward'
+                                    //     });
+                                    // }).catch((error) => {
+                                    //     loader.dismiss();
+                                    //      alert(error);
+                                    //     console.log(error);
+                                    // });
+                                }).catch(error => {
+                                    loader.dismiss();
+                                    //alert(error);
+                                    console.log(error);
+                                })
+                        }).catch(error => {
+                            loader.dismiss();
+                            //alert(error);
+                            console.log(error);
+                        })
                     }
-                    //alert(this.createdUser);
-                    //alert(this.councilId);
-                    //alert(this.councilName);
-                    //alert(this.createdBy);
-                    this.newFile.createdUser = this.createdUser;
-                    this.newFile.createdDate = moment().toISOString();
-                    this.newFile.councilid = this.councilId;
-                    this.newFile.councilname = this.councilName;
-                    this.newFile.filename = filename;
-                    this.newFile.filetype = filetype;
-                    this.newFile.filesize = imgBlob.size;
-                    this.newFile.createdBy = this.createdBy;
-                    this.newFile.isActive = true;
-                    //alert(JSON.stringify(this.newFile));
-                    this.firebaseservice.saveFile(this.newFile).then(fileId => {
-                        //alert('meta data saved'+fileId);
-                        this.profilePictureRef.child(this.councilId + '//' + fileId + '//' + filename)
-                            .put(imgBlob, { contentType: mimeType })
-                            .then((savedPicture) => {
-                                //alert('file saved');
-                                // this.pictureRef = this.profilePictureRef.child(value.councilid + '//' + fileId + '//' + filename).getMetadata();
-                                // this.pictureRef.then((metadata) => {
-                                this.bindFilesList();
-                                loader.dismiss();
-                                //isNewCouncilFileflag=false
-                                // Metadata now contains the metadata like filesize and type for 'images/...'
-                                // this.nav.push(ViewCouncilFilePage, {
-                                //     councilid: value.councilid, councilname: value.councilname
-                                // }, {
-                                //         animate: true, animation: 'transition', direction: 'forward'
-                                //     });
-                                // }).catch((error) => {
-                                //     loader.dismiss();
-                                //      alert(error);
-                                //     console.log(error);
-                                // });
-                            }).catch(error => {
-                                loader.dismiss();
-                                //alert(error);
-                                console.log(error);
-                            })
-                    }).catch(error => {
-                        loader.dismiss();
-                        //alert(error);
-                        console.log(error);
-                    })
-                }
+                })
             })
-        })
-        // .catch(err => {
-        //   alert(err);
-        //   loader.dismiss();
-        //   console.log(err);
-        // })
+            // .catch(err => {
+            //   alert(err);
+            //   loader.dismiss();
+            //   console.log(err);
+            // })
         }, (error) => {
             loader.dismiss();
             //alert(error)
@@ -567,10 +555,7 @@ export class ViewCouncilFilePage {
 
     delete(file) {
         // this.isNewCouncilFileflag = true;
-        let loader = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        });
+        let loader = this.loaderService.loadingController;
         loader.present();
         //to delete files form the database using key
         this.firebaseservice.deleteFilesByKey(file.$key).then((res) => {
@@ -596,10 +581,7 @@ export class ViewCouncilFilePage {
     deleteFiles(filesArray) {
         console.log('filesArray:' + filesArray);
         // this.isNewCouncilFileflag = true;
-        let loader = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        });
+        let loader = this.loaderService.loadingController;
         loader.present();
         this.filesArray.forEach((f, i) => {
             //to delete all the files in the array

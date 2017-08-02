@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ActionSheetController, MenuController, LoadingController, Platform } from 'ionic-angular';
+import { NavController, AlertController, ActionSheetController, MenuController, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
@@ -10,13 +10,12 @@ import { Camera, Toast, File, ImagePicker } from 'ionic-native';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import * as firebase from 'firebase';
-
 import { AngularFire } from 'angularfire2';
 import { Subscription } from 'rxjs';
-
 import * as moment from 'moment';
-
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { LoadingControllerService } from '../../../services/LoadingControllerService';
+
 declare var FilePicker;
 
 @Component({
@@ -60,7 +59,7 @@ export class NewCouncilFilePage {
     public actionSheetCtrl: ActionSheetController,
     public menuctrl: MenuController,
     public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,
+    public loaderService: LoadingControllerService,
     public af: AngularFire,
     public platform: Platform,
     public filechooser: FileChooser,
@@ -187,10 +186,7 @@ export class NewCouncilFilePage {
   }
   // to upload a picture to the firebase.
   takePicture(value) {
-    let loader = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-    });
+    let loader = this.loaderService.loadingController;
     Camera.getPicture({
       quality: 95,
       destinationType: Camera.DestinationType.DATA_URL,
@@ -243,10 +239,7 @@ export class NewCouncilFilePage {
   }
   // to upload a picture from gallery to the firebase.
   uploadPicture(value) {
-    let loader = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-    });
+    let loader = this.loaderService.loadingController;
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
         Camera.getPicture({
@@ -314,10 +307,7 @@ export class NewCouncilFilePage {
 
   // to upload files from the device.
   importFile(value) {
-    let loader = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-    });
+    let loader = this.loaderService.loadingController;
     if (this.platform.is('ios')) {
       //alert('if');
       // var options = ["public.data", "public.audio"];
@@ -376,7 +366,7 @@ export class NewCouncilFilePage {
     });
   }
 
-    uploadFile(uri, value, loader) {
+  uploadFile(uri, value, loader) {
     //loader.dismiss();
     this.file = uri.toString();
 
@@ -473,7 +463,7 @@ export class NewCouncilFilePage {
                   this.nav.push(ViewCouncilFilePage, {
                     councilid: value.councilid, councilname: value.councilname
                   }, {
-                    animate: true, animation: 'transition', direction: 'forward'
+                      animate: true, animation: 'transition', direction: 'forward'
                     });
 
                 }).catch(error => {

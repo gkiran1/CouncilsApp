@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Invitee } from './invitee.model';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
-import { AlertController, NavController, LoadingController, ToastController } from 'ionic-angular';
+import { AlertController, NavController, ToastController } from 'ionic-angular';
 import { AppService } from '../../providers/app-service';
 import { InvitationSuccessPage } from './success';
 import { Http } from '@angular/http';
 import { EmailService } from '../../providers/emailservice'
+import { LoadingControllerService } from '../../services/LoadingControllerService';
 
 @Component({
     templateUrl: 'invite.html',
@@ -37,7 +38,7 @@ export class InviteMemberPage {
         public alertCtrl: AlertController,
         public appService: AppService,
         public toast: ToastController,
-        public emailService: EmailService, public loadingCtrl: LoadingController, ) {
+        public emailService: EmailService, public loaderService: LoadingControllerService) {
         this.invite = new Invitee;
 
         var unitType = localStorage.getItem('unitType');
@@ -132,11 +133,7 @@ export class InviteMemberPage {
     }
 
     inviteMember() {
-        let loader = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        });
-
+        let loader = this.loaderService.loadingController;
         loader.present();
 
         this.emailErr = false;

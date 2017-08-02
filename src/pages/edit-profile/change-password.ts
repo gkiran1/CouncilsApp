@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppService } from '../../providers/app-service';
 import { User } from '../../user/user';
 import * as firebase from 'firebase';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { LoadingControllerService } from '../../services/LoadingControllerService';
 
 @Component({
     selector: 'change-password',
@@ -26,7 +27,7 @@ export class ChangePasswordPage {
     newPwdError = false;
     confirmPwdError = false;
 
-    constructor(fb: FormBuilder, public navCtrl: NavController, private firebaseService: FirebaseService, public appService: AppService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public toast: ToastController) {
+    constructor(fb: FormBuilder, public navCtrl: NavController, private firebaseService: FirebaseService, public appService: AppService, public alertCtrl: AlertController, public toast: ToastController, public loaderService: LoadingControllerService) {
         this.profile = new User;
         appService.getUser().subscribe(user => {
             this.profile.firstname = user.firstname;
@@ -77,11 +78,9 @@ export class ChangePasswordPage {
         }
     }
     changePassword() {
-        let loader = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        });
+        let loader = this.loaderService.loadingController;
         loader.present();
+
         //validate the user..to check password is correct or not.
         this.firebaseService.validateUser(this.profile.email, this.password.oldpassword).then(res => {
             this.oldPwdError = false;
