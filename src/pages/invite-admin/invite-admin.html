@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-row>
+            <ion-col class="header-col">
+                <button ion-button item-right clear class="button button-clik" (click)="close()">   
+                <ion-icon name="cancel" class="councils-icon__back menu-icon" item-left color="secondary"></ion-icon>
+                                </button>
+            </ion-col>
+            <ion-col width-80 class="header-col2">
+                <ion-title text-center>
+                    Invite Admin
+                </ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form (ngSubmit)="inviteMember()" #InviteMemberForm="ngForm">
+        <ion-item-group class="ionlist">
+            <ion-item class="input-item" [class.invalid]="!isValidEmail || emailErr">
+                <ion-label floating>Email</ion-label>
+                <ion-input class="council-styles" type="email" name="email" validate-onblur [(ngModel)]="invite.email" (keyup)="keypresssed($event)"
+                    required></ion-input>
+            </ion-item>
+            <ion-label class="error-msg" *ngIf="emailErr">Email taken</ion-label>
+            <ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label>
+
+            <ion-item class="input-item">
+                <ion-label floating>First Name</ion-label>
+                <ion-input class="council-styles" type="text" id="firstnamefield" name="firstname" [(ngModel)]="invite.firstname" required></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+                <ion-label floating>Last Name</ion-label>
+                <ion-input class="council-styles" type="text" id="lastnamefield" name="lastname" [(ngModel)]="invite.lastname" required></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+                <ion-label floating>Notes</ion-label>
+                <ion-input class="council-styles" type="text" id="notesfield" name="notes" [(ngModel)]="invite.notes" required></ion-input>
+            </ion-item>
+        </ion-item-group>
+    </form>
+</ion-content>
+<ion-footer>
+    <button ion-button type="submit" class="button button-clik" (click)="inviteMember()" name="Invitebtn" clear block color="secondary"
+        text-capitalize [disabled]="!isValidEmail || !InviteMemberForm.form.valid" text-capitalize>Invite</button>
+</ion-footer>

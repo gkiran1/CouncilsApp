@@ -100,8 +100,8 @@ import { CloseKeyboardDirective } from '../directives/closekeyboard.directive';
 import { CouncilSpinnerComponent } from '../components/council-spinner/council-spinner';
 
 import { LoadingControllerService } from '../services/LoadingControllerService';
-
-
+import { InviteAdminPage } from '../pages/invite-admin/invite-admin.component';
+import { InviteAdminSuccessPage } from '../pages/invite-admin/success.component';
 // //Cloud Settings - Push Messaging
 // const cloudSettings: CloudSettings = {
 //   'core': {
@@ -204,7 +204,9 @@ import { LoadingControllerService } from '../services/LoadingControllerService';
     DirectoryPage,
     MainScreenPage,
     CouncilSpinnerComponent,
-    //LoadingControllerService
+    //LoadingControllerService,
+    InviteAdminPage,
+    InviteAdminSuccessPage
   ],
 
   imports: [
@@ -285,7 +287,9 @@ import { LoadingControllerService } from '../services/LoadingControllerService';
     WelcomePage,
     DisplayFirstPage,
     DirectoryPage,
-    MainScreenPage
+    MainScreenPage,
+    InviteAdminPage,
+    InviteAdminSuccessPage
   ],
 
   providers: [AuthService, AppService, FirebaseService, NativeAudio, Badge, FileChooser, AndroidPermissions, FilePath, LoadingControllerService]

@@ -60,6 +60,7 @@ export class MenuPage {
           localStorage.setItem('userCouncils', usrs[0].councils.toString());
           localStorage.setItem('isAdmin', usrs[0].isadmin.toString());
           localStorage.setItem('googlecalendaradded', usrs[0].googlecalendaradded.toString());
+          localStorage.setItem('name', usrs[0].firstname + ' ' + usrs[0].lastname);
         });
 
         if (localStorage.getItem('googlecalendaradded') === 'true' &&
