@@ -19,15 +19,15 @@
 <ion-content class="ionlist">
 	<ion-item class="unittype">Members</ion-item>
 
-	<ion-item class="ion-item-first" (click)="inviteMembers()">
-		<ion-label class="label-styles"> Invite Member</ion-label>
+	<ion-item *ngIf="unitType !== 'Ward'" class="ion-item-middle" (click)="inviteAdmin()">
+		<ion-label class="label-styles">Invite Admin</ion-label>
 		<button class="button button-clik" ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>
 	</ion-item>
 
-	<ion-item class="ion-item-middle" (click)="inviteAdmin()">
-		<ion-label class="label-styles">Invite Admin</ion-label>
+	<ion-item class="ion-item-first" (click)="inviteMembers()">
+		<ion-label class="label-styles"> Invite Member</ion-label>
 		<button class="button button-clik" ion-button item-right clear>   
            <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
         </button>

@@ -7,6 +7,7 @@ import { AppService } from '../../providers/app-service';
 import { InviteAdminSuccessPage } from './success.component';
 import { Http } from '@angular/http';
 import { EmailService } from '../../providers/emailservice'
+import { LoadingControllerService } from '../../services/LoadingControllerService';
 
 @Component({
     templateUrl: 'invite-admin.html',
@@ -15,26 +16,22 @@ import { EmailService } from '../../providers/emailservice'
 })
 
 export class InviteAdminPage {
-    invite = { email: '', firstname: '', lastname: '', notes: '' };
-    InviteMemberForm;
-    council;
-    councilsLength = false;
-    result: FirebaseObjectObservable<any>;
+    invite = { email: '', firstname: '', lastname: '' };
     isValidEmail = true;
     emailErr = false;
-
     adminname;
-
-    firstShown;
+    unitType;
+    areaType = false;
+    stkType = false;
 
     constructor(public http: Http,
         public navctrl: NavController,
         public fs: FirebaseService,
-        public af: AngularFire,
-        public alertCtrl: AlertController,
-        public appService: AppService,
         public toast: ToastController,
-        public emailService: EmailService, public loadingCtrl: LoadingController) {
+        public emailService: EmailService,
+        public loaderService: LoadingControllerService) {
+        this.adminname = localStorage.getItem('name');
+        this.unitType = localStorage.getItem('unitType');
     }
 
     keypresssed($event) {
@@ -48,35 +45,30 @@ export class InviteAdminPage {
     }
 
     inviteMember() {
-        // let loader = this.loadingCtrl.create({
-        //     spinner: 'hide',
-        //     content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        // });
-        // loader.present();
+        let loader = this.loaderService.getLoadingController();
+        loader.present();
 
         this.emailErr = false;
 
-        this.navctrl.push(InviteAdminSuccessPage);
-
-        // this.emailService.inviteAdminEmail(this.invite.firstname + " " + this.invite.lastname, this.invite.email, this.adminname)
-        //     .then(res => {
-        //         res.subscribe(result => {
-        //             if (result.status === 200) {
-        //                 loader.dismiss();
-        //                 this.navctrl.push(InviteAdminSuccessPage)
-        //             } else {
-        //                 loader.dismiss();
-        //                 this.showAlert('Connection error.');
-        //             }
-        //         });
-        //     }, err => {
-        //         loader.dismiss();
-        //         this.showAlert('Connection error.');
-        //     }).catch(err => {
-        //         console.log('err ---> ', err);
-        //         loader.dismiss();
-        //         this.showAlert('Connection error.');
-        //     });
+        this.emailService.inviteAdminEmail(this.invite.firstname + " " + this.invite.lastname, this.invite.email, this.adminname)
+            .then(res => {
+                res.subscribe(result => {
+                    if (result.status === 200) {
+                        loader.dismiss();
+                        this.navctrl.push(InviteAdminSuccessPage)
+                    } else {
+                        loader.dismiss();
+                        this.showAlert('Connection error.');
+                    }
+                });
+            }, err => {
+                loader.dismiss();
+                this.showAlert('Connection error.');
+            }).catch(err => {
+                console.log('err ---> ', err);
+                loader.dismiss();
+                this.showAlert('Connection error.');
+            });
     }
 
     showAlert(errText) {

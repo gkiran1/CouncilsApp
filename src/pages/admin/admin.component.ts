@@ -20,10 +20,12 @@ import { InviteAdminPage } from '../invite-admin/invite-admin.component';
 export class AdminPage {
 
     notificationsCount;
+    unitType;
     constructor(private navCtrl: NavController, public firebaseservice: FirebaseService) {
         firebaseservice.getNotCnt().subscribe(count => {
             this.notificationsCount = count;
         });
+        this.unitType = localStorage.getItem('unitType');
     }
 
     activeCouncils() {
