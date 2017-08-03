@@ -3,6 +3,7 @@ import { NavController, LoadingController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ForgotPwdSuccess } from './forgotpwd-success';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
+import { LoadingControllerService } from '../../services/LoadingControllerService';
 
 @Component({
     selector: 'forgot-pwd',
@@ -17,7 +18,7 @@ export class ForgotPwd {
     showInValidEml = false;
 
     constructor(public navCtrl: NavController,
-        public loadingCtrl: LoadingController,
+        public loaderService: LoadingControllerService,
         public alertCtrl: AlertController,
         public firebaseService: FirebaseService) { }
 
@@ -34,11 +35,7 @@ export class ForgotPwd {
 
     sendEmail() {
         if (this.email !== '') {
-            let loader = this.loadingCtrl.create({
-                spinner: 'hide',
-                content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-            });
-
+            let loader = this.loaderService.getLoadingController();
             loader.present();
 
             this.firebaseService.sendForgotEmailLink(this.email).then(() => {

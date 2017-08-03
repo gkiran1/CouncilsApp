@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppService } from '../../providers/app-service';
 import { User } from '../../user/user';
 import * as firebase from 'firebase';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { LoadingControllerService } from '../../services/LoadingControllerService';
 
 @Component({
     selector: 'change-password',
