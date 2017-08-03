@@ -32,7 +32,7 @@ export class EmailService {
             let options = new RequestOptions({ headers: headers });
 
             return this.http.post(this.mailApiUrl, {
-                "event": "invite", "email": email, "name": name, "adminname": adminname
+                "event": "inviteadmin", "email": email, "name": name, "adminname": adminname
             }, options);
         });
     }
