@@ -7,6 +7,8 @@ export class LoadingControllerService {
     constructor(private loadingCtrl: LoadingController) { }
 
     getLoadingController() {
-        return this.loadingCtrl.create({});
+        return this.loadingCtrl.create({
+            spinner: 'ios'
+        });
     }
 }
