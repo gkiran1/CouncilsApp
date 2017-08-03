@@ -25,6 +25,18 @@ export class EmailService {
         });
     }
 
+    //Email to invite admin
+    inviteAdminEmail(name, email, adminname) {
+        return this.firebaseService.getFirebaseAuthTkn().then(tkn => {
+            let headers = new Headers({ 'Content-Type': 'application/json', 'x-access-token': tkn, 'x-key': this.userId });
+            let options = new RequestOptions({ headers: headers });
+
+            return this.http.post(this.mailApiUrl, {
+                "event": "invite", "email": email, "name": name, "adminname": adminname
+            }, options);
+        });
+    }
+
     //Email to create account
     emailCreateAccount(firstname, lastname, unitnum, email, fbAuthToken, uid) {
         let headers = new Headers({ 'Content-Type': 'application/json', 'x-access-token': fbAuthToken, 'x-key': uid });

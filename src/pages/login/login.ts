@@ -91,8 +91,8 @@ export class LoginPage {
 
     private validateUser(loginCredentials) {
         //this.show = true;
-        let loader = this.loaderService.loadingController;
-         loader.present();
+        let loader = this.loaderService.getLoadingController();
+        loader.present();
         let flag = false;
         this.firebaseService.validateUser(loginCredentials.email, loginCredentials.password)
             .then(uid => {
@@ -111,7 +111,7 @@ export class LoginPage {
                             this.nav.setRoot(NoAccessPage);
                         });
                     }
-                     loader.dismiss();
+                    loader.dismiss();
                     //this.show = false;
                 });
             })

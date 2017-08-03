@@ -10,6 +10,7 @@ import { MembersListPage } from '../editmembers/members-list/memberslist.compone
 import { NotificationsPage } from '../notifications/notifications-page/notifications.component';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
 import { NewMenuPage } from '../newmenu/newmenu';
+import { InviteAdminPage } from '../invite-admin/invite-admin.component';
 
 @Component({
     selector: 'admin-page',
@@ -20,7 +21,7 @@ export class AdminPage {
 
     notificationsCount;
     constructor(private navCtrl: NavController, public firebaseservice: FirebaseService) {
-        firebaseservice.getNotCnt().subscribe(count => {           
+        firebaseservice.getNotCnt().subscribe(count => {
             this.notificationsCount = count;
         });
     }
@@ -35,6 +36,10 @@ export class AdminPage {
 
     inviteMembers() {
         this.navCtrl.push(InviteMemberPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
+    }
+
+    inviteAdmin() {
+        this.navCtrl.push(InviteAdminPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     getActiveUsers() {
