@@ -1307,3 +1307,15 @@
      margin: 0;
      height: 20px !important;
  }
+
+ ion-spinner {
+* {
+stroke: #808080 !important;
+}
+
+&.spinner-circles circle,
+&.spinner-bubbles circle,
+&.spinner-dots circle {
+  fill: #808080 !important;
+}
+}

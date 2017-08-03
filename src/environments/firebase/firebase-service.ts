@@ -467,14 +467,14 @@ export class FirebaseService {
     updateProfileInfo(userUid: string, firstname, lastname, email, phone, ldsusername) {
         return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername }).then(() => {
             // user profile needs to be updated in discussions node as well.
-            this.af.database.list('discussions').subscribe(discussions => {
+            this.af.database.list('discussions').take(1).subscribe(discussions => {
                 discussions.forEach(discussion => {
                     if (userUid === discussion.createdBy) {
                         this.af.database.object(`discussions/${discussion.$key}`).update({
                             createdUser: firstname + ' ' + lastname
                         });
                     }
-                    this.af.database.list(`discussions/${discussion.$key}/messages`).subscribe(messages => {
+                    this.af.database.list(`discussions/${discussion.$key}/messages`).take(1).subscribe(messages => {
                         messages.forEach(message => {
                             if (userUid === message.userId) {
                                 this.af.database.object(`discussions/${discussion.$key}/messages/${message.$key}`).update({
@@ -487,7 +487,7 @@ export class FirebaseService {
                 });
             });
             //updating privatediscussions
-            this.af.database.list('privatediscussions').subscribe(discussions => {
+            this.af.database.list('privatediscussions').take(1).subscribe(discussions => {
                 discussions.forEach(discussion => {
                     if (userUid === discussion.createdUserId) {
                         this.af.database.object(`privatediscussions/${discussion.$key}`).update({
@@ -507,7 +507,7 @@ export class FirebaseService {
 
                         });
                     }
-                    this.af.database.list(`privatediscussions/${discussion.$key}/messages`).subscribe(messages => {
+                    this.af.database.list(`privatediscussions/${discussion.$key}/messages`).take(1).subscribe(messages => {
                         messages.forEach(message => {
                             if (userUid === message.userId) {
                                 this.af.database.object(`privatediscussions/${discussion.$key}/messages/${message.$key}`).update({
@@ -541,14 +541,14 @@ export class FirebaseService {
     updateProfile(userUid: string, firstname, lastname, email, phone, ldsusername, avatar) {
         return this.rootRef.child('users/' + userUid).update({ firstname, lastname, email, phone, ldsusername, avatar }).then(() => {
             // user profile needs to be updated in discussions node as well.
-            this.af.database.list('discussions').subscribe(discussions => {
+            this.af.database.list('discussions').take(1).subscribe(discussions => {
                 discussions.forEach(discussion => {
                     if (userUid === discussion.createdBy) {
                         this.af.database.object(`discussions/${discussion.$key}`).update({
                             createdUser: firstname + ' ' + lastname
                         });
                     }
-                    this.af.database.list(`discussions/${discussion.$key}/messages`).subscribe(messages => {
+                    this.af.database.list(`discussions/${discussion.$key}/messages`).take(1).subscribe(messages => {
                         messages.forEach(message => {
                             if (userUid === message.userId) {
                                 this.af.database.object(`discussions/${discussion.$key}/messages/${message.$key}`).update({
@@ -562,7 +562,7 @@ export class FirebaseService {
                 });
             });
             //updating privatediscussions
-            this.af.database.list('privatediscussions').subscribe(discussions => {
+            this.af.database.list('privatediscussions').take(1).subscribe(discussions => {
                 discussions.forEach(discussion => {
                     if (userUid === discussion.createdUserId) {
                         this.af.database.object(`privatediscussions/${discussion.$key}`).update({
@@ -584,7 +584,7 @@ export class FirebaseService {
                             user_avatar: avatar
                         });
                     }
-                    this.af.database.list(`privatediscussions/${discussion.$key}/messages`).subscribe(messages => {
+                    this.af.database.list(`privatediscussions/${discussion.$key}/messages`).take(1).subscribe(messages => {
                         messages.forEach(message => {
                             if (userUid === message.userId) {
                                 this.af.database.object(`privatediscussions/${discussion.$key}/messages/${message.$key}`).update({
