@@ -18,7 +18,7 @@ import { LoadingControllerService } from '../../services/LoadingControllerServic
 export class InviteAdminPage {
     invite = { email: '', firstname: '', lastname: '' };
     isValidEmail = true;
-    emailErr = false;
+    emailErr = true;
     adminname;
     unitType;
     areaType = false;
@@ -34,13 +34,23 @@ export class InviteAdminPage {
         this.unitType = localStorage.getItem('unitType');
     }
 
-    keypresssed($event) {
+    blur($event) {
         this.emailErr = false;
         if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
             this.isValidEmail = true;
         }
         else {
             this.isValidEmail = false;
+        }
+    }
+
+    keyup($event) {     
+        this.isValidEmail = true; 
+        if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+            this.emailErr = false;
+        }
+        else {
+            this.emailErr = true;
         }
     }
 

@@ -19,12 +19,11 @@
     <form (ngSubmit)="inviteMember()" #InviteMemberForm="ngForm">
         <ion-item-group class="ionlist">
             <!--<ion-item-divider class="empty-light"></ion-item-divider>-->
-            <ion-item class="input-item" [class.invalid]="!isValidEmail || emailErr">
+            <ion-item class="input-item" [class.invalid]="!isValidEmail">
                 <ion-label floating>Email</ion-label>
-                <ion-input class="council-styles" type="email" name="email" validate-onblur [(ngModel)]="invite.email" (blur)="keypresssed($event)"
-                    required></ion-input>
+                <ion-input class="council-styles" type="email" name="email" validate-onblur [(ngModel)]="invite.email" (keyup)="keyup($event)"
+                    (blur)="blur($event)" required></ion-input>
             </ion-item>
-            <ion-label class="error-msg" *ngIf="emailErr">Email taken</ion-label>
             <ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label>
 
             <ion-item class="input-item">
@@ -50,25 +49,29 @@
             <ion-item *ngIf="(areaCouncils.length)" [ngClass]="firstShown === 'Area' ? 'unittype' : 'unittype1'">Area</ion-item>
             <ion-item *ngFor="let c of areaCouncils; let i = index" [ngClass]="areaCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === areaCouncils.length - 1 ? 'ion-item-last' : 'ion-item-middle'))">
                 <ion-label color="dark">{{c.council}}</ion-label>
-                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council" [id]="'areaChkBox' + i"></ion-checkbox>
+                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council"
+                    [id]="'areaChkBox' + i"></ion-checkbox>
             </ion-item>
 
             <ion-item *ngIf="(stakeCouncils.length)" [ngClass]="firstShown === 'Stake' ? 'unittype' : 'unittype1'">Stake</ion-item>
             <ion-item *ngFor="let c of stakeCouncils; let i = index" [ngClass]="stakeCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === stakeCouncils.length - 1 ? 'ion-item-last' : 'ion-item-middle'))">
                 <ion-label color="dark">{{c.council}}</ion-label>
-                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council" [id]="'stakeChkBox' + i"></ion-checkbox>
+                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council"
+                    [id]="'stakeChkBox' + i"></ion-checkbox>
             </ion-item>
 
             <ion-item *ngIf="(wardCouncils.length)" [ngClass]="firstShown === 'Ward' ? 'unittype' : 'unittype1'">Ward</ion-item>
             <ion-item *ngFor="let c of wardCouncils; let i = index" [ngClass]="wardCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === wardCouncils.length - 1 ? 'ion-item-last' : 'ion-item-middle'))">
                 <ion-label color="dark">{{c.council}}</ion-label>
-                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council" [id]="'wardChkBox' + i"></ion-checkbox> 
+                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council"
+                    [id]="'wardChkBox' + i"></ion-checkbox>
             </ion-item>
 
             <ion-item *ngIf="(addedCouncils.length)" [ngClass]="firstShown === 'Added' ? 'unittype' : 'unittype1'">Added</ion-item>
             <ion-item *ngFor="let c of addedCouncils; let i = index" [ngClass]="addedCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === addedCouncils.length - 1 ? 'ion-item-last' : 'ion-item-middle'))">
                 <ion-label color="dark">{{c.council}}</ion-label>
-                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council" [id]="'addedChkBox' + i"></ion-checkbox>
+                <ion-checkbox [(ngModel)]="c.selected" (ionChange)="itemChanged()" color="secondary" name="checkbox" item-right [name]="c.council"
+                    [id]="'addedChkBox' + i"></ion-checkbox>
             </ion-item>
 
         </ion-item-group>
@@ -76,5 +79,5 @@
 </ion-content>
 <ion-footer>
     <button ion-button type="submit" class="button button-clik" (click)="inviteMember()" name="Invitebtn" clear block color="secondary"
-        text-capitalize [disabled]="!isValidEmail || !councilsLength || !InviteMemberForm.form.valid" text-capitalize>Invite</button>
+        text-capitalize [disabled]="emailErr || !isValidEmail || !councilsLength || !InviteMemberForm.form.valid" text-capitalize>Invite</button>
 </ion-footer>
