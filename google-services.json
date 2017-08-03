@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:92555477583:android:9154556522d3253c",
+        "mobilesdk_app_id": "1:92555477583:android:861b97757902fa13",
         "android_client_info": {
-          "package_name": "com.councilsapp.io"
+          "package_name": "com.ldscouncils.io"
         }
       },
       "oauth_client": [
