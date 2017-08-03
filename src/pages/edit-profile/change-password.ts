@@ -27,7 +27,8 @@ export class ChangePasswordPage {
     newPwdError = false;
     confirmPwdError = false;
 
-    constructor(fb: FormBuilder, public navCtrl: NavController, private firebaseService: FirebaseService, public appService: AppService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public toast: ToastController) {
+    constructor(fb: FormBuilder, public navCtrl: NavController, private firebaseService: FirebaseService, public appService: AppService, public alertCtrl: AlertController,
+        public loaderService: LoadingControllerService, public toast: ToastController) {
         this.profile = new User;
         appService.getUser().subscribe(user => {
             this.profile.firstname = user.firstname;
@@ -78,10 +79,7 @@ export class ChangePasswordPage {
         }
     }
     changePassword() {
-        let loader = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: '<div class="circle-container"><div class="circleG_1"></div><div class="circleG_2"></div><div class="circleG_3"></div></div>',
-        });
+        let loader = this.loaderService.getLoadingController();
         loader.present();
         //validate the user..to check password is correct or not.
         this.firebaseService.validateUser(this.profile.email, this.password.oldpassword).then(res => {
