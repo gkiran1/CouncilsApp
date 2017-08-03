@@ -75,7 +75,7 @@
       </ion-buttons>
       <button ion-button clear block color="secondary" class="button button-clik" [disabled]="!assignmentForm.valid || !isValidDesc" (click)="complete(assignmentForm.value)">Complete</button>
       <ion-buttons end>
-        <button ion-button color="secondary" [disabled]="!assignmentForm.valid || !assignmentForm.dirty || !isValidDesc" (click)="edit(assignmentForm.value)">Save</button>
+        <button ion-button color="secondary" [disabled]="!assignmentForm.valid || (!assignmentForm.dirty && !isAssigntoTouched) || !isValidDesc" (click)="edit(assignmentForm.value)">Save</button>
       </ion-buttons>
     </ion-toolbar>
     <ion-toolbar *ngIf="!assignmentForm.value.isCompleted && !isPersonalAssignment">
