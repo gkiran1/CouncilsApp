@@ -34,7 +34,7 @@ export class TransferAdminRightsPage {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(usr => {
                     this.currentUser = usr;
-                    this.firebaseService.getUsersByUnitNumber(this.currentUser.unitNumber).subscribe(usersObj => {
+                    this.firebaseService.getUsersByUnitNumber(this.currentUser.unitnumber).subscribe(usersObj => {
                         this.users = usersObj.filter(userObj => {
                             if (userObj.$key !== this.currentUser.$key && userObj.isactive === true) {
                                 var userCouncilNames: string[] = [];
