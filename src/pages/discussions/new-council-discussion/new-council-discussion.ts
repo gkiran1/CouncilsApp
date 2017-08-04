@@ -85,7 +85,7 @@ export class NewCouncilDiscussionPage {
 
             });
           });
-
+          topicitem.trim() === '' ? this.isValidTopic = false : this.isValidTopic = true;
           this.newCouncilDiscussionForm = fb.group({
             topic: [topicitem ? topicitem : '', Validators.compose([Validators.required, Validators.maxLength(25)])],
             council: ['', Validators.required],

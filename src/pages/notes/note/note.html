@@ -33,7 +33,7 @@
             <button ion-button color="danger" (click)="showConfirm()">Delete</button>
         </ion-buttons>
         <ion-buttons end>
-            <button ion-button color="secondary" (click)="save(noteForm.value)" [disabled]="!noteForm.valid">Save</button>
+            <button ion-button color="secondary" (click)="save(noteForm.value)" [disabled]="!noteForm.valid || !noteForm.dirty">Save</button>
         </ion-buttons>
     </ion-toolbar>
 </ion-footer>
