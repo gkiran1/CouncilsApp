@@ -10,6 +10,7 @@ import { EmailService } from '../../providers/emailservice';
 import * as jazzicon from 'jazzicon';
 import { WelcomePage } from '../welcome/welcome.component';
 import { LoadingControllerService } from '../../services/LoadingControllerService';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'create-account',
@@ -28,7 +29,13 @@ export class CreateAccountPage {
   isValidEmailFormat = false;
   isValidPwd = false;
 
-  constructor(public navCtrl: NavController, public loaderService: LoadingControllerService, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService, public toast: ToastController) { }
+  constructor(public navCtrl: NavController,
+    public loaderService: LoadingControllerService,
+    public firebaseService: FirebaseService,
+    public alertCtrl: AlertController,
+    public emailService: EmailService,
+    public toast: ToastController,
+    private zone: NgZone) { }
 
   createAccount() {
     // this.passwordErr = false;
@@ -101,12 +108,14 @@ export class CreateAccountPage {
   }
 
   emailChange($event) {
-    if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
-      this.isValidEmail = true;
-    }
-    else {
-      this.isValidEmail = false;
-    }
+    this.zone.run(() => {
+      if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+        this.isValidEmail = true;
+      }
+      else {
+        this.isValidEmail = false;
+      }
+    });
   }
 
   generateIdenticon() {
@@ -139,24 +148,34 @@ export class CreateAccountPage {
   }
 
   keypresssed($event) {
-    this.isValidEmail = true;
-    this.emailTaken = false;
-    this.isInvitedEmail = true;
-    if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
-      this.isValidEmailFormat = true;
-    }
-    else {
-      this.isValidEmailFormat = false;
-    }
+    this.zone.run(() => {
+      this.isValidEmail = true;
+      this.emailTaken = false;
+      this.isInvitedEmail = true;
+      if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+        this.isValidEmailFormat = true;
+      }
+      else {
+        this.isValidEmailFormat = false;
+      }
+    });
   }
 
   pswrdkeypresssed($event) {
-    if ($event.target.value.length < 6 || $event.target.value.trim() === '') {
-      this.isValidPwd = false;
-    }
-    else {
-      this.isValidPwd = true;
-    }
+    this.zone.run(() => {
+      if ($event.target.value.length < 6 || $event.target.value.trim() === '') {
+        this.isValidPwd = false;
+      }
+      else {
+        this.isValidPwd = true;
+      }
+    });
+  }
+
+  usrnamekeypresssed($event) {
+    this.zone.run(() => {
+
+    });
   }
 
 }
