@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ActionSheetController, MenuController, Platform } from 'ionic-angular';
+import { NavController, AlertController, ActionSheetController, MenuController, Platform, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppService } from '../../../providers/app-service';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
@@ -17,7 +17,6 @@ import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { LoadingControllerService } from '../../../services/LoadingControllerService';
 
 declare var FilePicker;
 
@@ -62,12 +61,11 @@ export class NewCouncilFilePage {
     public actionSheetCtrl: ActionSheetController,
     public menuctrl: MenuController,
     public alertCtrl: AlertController,
-    public loaderService: LoadingControllerService,
     public af: AngularFire,
     public platform: Platform,
     public filechooser: FileChooser,
     public filePath: FilePath,
-    public androidPermissions: AndroidPermissions) {
+    public androidPermissions: AndroidPermissions, public loadingCtrl: LoadingController) {
 
     // this.platform.ready().then(() => {
     //   alert(this.platform.platforms());
@@ -189,7 +187,11 @@ export class NewCouncilFilePage {
   }
   // to upload a picture to the firebase.
   takePicture(value) {
-    let loader = this.loaderService.getLoadingController();
+
+    let loader = this.loadingCtrl.create({
+      spinner: 'ios'
+    });
+
     Camera.getPicture({
       quality: 95,
       destinationType: Camera.DestinationType.DATA_URL,
@@ -242,7 +244,9 @@ export class NewCouncilFilePage {
   }
   // to upload a picture from gallery to the firebase.
   uploadPicture(value) {
-    let loader = this.loaderService.getLoadingController();
+    let loader = this.loadingCtrl.create({
+      spinner: 'ios'
+    });
 
     this.userSubscription = this.af.auth.subscribe(auth => {
       if (auth !== null) {
@@ -311,7 +315,10 @@ export class NewCouncilFilePage {
 
   // to upload files from the device.
   importFile(value) {
-    let loader = this.loaderService.getLoadingController();
+    let loader = this.loadingCtrl.create({
+      spinner: 'ios'
+    });
+
     if (this.platform.is('ios')) {
       //alert('if');
       // var options = ["public.data", "public.audio"];

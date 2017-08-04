@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { Invitee } from './invitee.model';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
-import { AlertController, NavController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { AppService } from '../../providers/app-service';
 import { InviteAdminSuccessPage } from './success.component';
 import { Http } from '@angular/http';

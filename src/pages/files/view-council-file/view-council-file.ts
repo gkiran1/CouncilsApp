@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from '../../../environments/firebase/firebase-service';
-import { NavController, NavParams, Platform, ActionSheetController, MenuController } from 'ionic-angular';
+import { NavController, NavParams, Platform, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
 import { Subject, Subscription } from 'rxjs';
 import { Transfer, File, Camera, ImagePicker } from 'ionic-native';
 import * as firebase from 'firebase';
@@ -12,8 +12,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-
-import { LoadingControllerService } from '../../../services/LoadingControllerService';
+import { NgZone } from '@angular/core';
 
 declare var FileTransfer;
 declare var FilePicker;
@@ -75,14 +74,15 @@ export class ViewCouncilFilePage {
         public appservice: AppService,
         public nav: NavController,
         public navparams: NavParams,
-        public loaderService: LoadingControllerService,
         public menuctrl: MenuController,
         public firebaseservice: FirebaseService,
         public actionSheetCtrl: ActionSheetController,
         public platform: Platform,
         public filechooser: FileChooser,
         public filePath: FilePath,
-        public androidPermissions: AndroidPermissions) {
+        public androidPermissions: AndroidPermissions,
+        public loadingCtrl: LoadingController,
+        private zone: NgZone) {
 
         this.filesArray = [];
         this.profilePictureRef = firebase.storage().ref('/files/');
@@ -132,7 +132,9 @@ export class ViewCouncilFilePage {
         });
     }
     downloadFile(item) {
-        let loader = this.loaderService.getLoadingController();
+        let loader = this.loadingCtrl.create({
+            spinner: 'ios'
+        });
         loader.present();
         if (this.device !== undefined && this.device !== 'android') {
 
@@ -256,7 +258,9 @@ export class ViewCouncilFilePage {
 
     takePicture(value) {
         // this.isNewCouncilFileflag = true;
-        let loader = this.loaderService.getLoadingController();
+        let loader = this.loadingCtrl.create({
+            spinner: 'ios'
+        });
         loader.present();
         Camera.getPicture({
             quality: 95,
@@ -320,7 +324,9 @@ export class ViewCouncilFilePage {
     // to upload a picture from gallery to the firebase.
     uploadPicture(value) {
         // this.isNewCouncilFileflag = true;
-        let loader = this.loaderService.getLoadingController();
+        let loader = this.loadingCtrl.create({
+            spinner: 'ios'
+        });
         loader.present();
         Camera.getPicture({
             quality: 95,
@@ -385,7 +391,9 @@ export class ViewCouncilFilePage {
     // to upload files from the device.
 
     importFile(value) {
-        let loader = this.loaderService.getLoadingController();
+        let loader = this.loadingCtrl.create({
+            spinner: 'ios'
+        });
         loader.present();
         if (this.platform.is('ios')) {
             // var options = ["public.data", "public.audio"];
@@ -560,8 +568,12 @@ export class ViewCouncilFilePage {
 
     delete(file) {
         // this.isNewCouncilFileflag = true;
-        let loader = this.loaderService.getLoadingController();
+        let loader = this.loadingCtrl.create({
+            spinner: 'ios'
+        });
         loader.present();
+
+
         //to delete files form the database using key
         this.firebaseservice.deleteFilesByKey(file.$key).then((res) => {
             //to delete files from the storage using file name
@@ -569,7 +581,9 @@ export class ViewCouncilFilePage {
                 this.filesArray.forEach((f, i) => {
                     if (f.$key == file.$key) {
                         loader.dismiss();
-                        this.filesArray.splice(i, 1);
+                        this.zone.run(() => {
+                            this.filesArray.splice(i, 1);
+                        });
                         console.log(this.filesArray);
                     }
                 })
@@ -582,11 +596,14 @@ export class ViewCouncilFilePage {
             loader.dismiss();
             console.log(err);
         });
+
     }
     deleteFiles(filesArray) {
         console.log('filesArray:' + filesArray);
         // this.isNewCouncilFileflag = true;
-        let loader = this.loaderService.getLoadingController();
+        let loader = this.loadingCtrl.create({
+            spinner: 'ios'
+        });
         loader.present();
         this.filesArray.forEach((f, i) => {
             //to delete all the files in the array
