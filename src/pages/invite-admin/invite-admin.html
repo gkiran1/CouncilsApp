@@ -21,7 +21,7 @@
                 <ion-label floating>Email</ion-label>
                 <ion-input class="council-styles" type="email" name="email" validate-onblur [(ngModel)]="invite.email" (keyup)="keyup($event)"
                     (blur)="blur($event)" required></ion-input>
-            </ion-item>           
+            </ion-item>
             <ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label>
 
             <ion-item class="input-item">
@@ -36,20 +36,33 @@
 
             <ion-item-divider class="list-title-divider">Which councils can they access</ion-item-divider>
 
-            <ion-item *ngIf="unitType === 'Area'" [ngClass]='ion-idv-item'>
-                <ion-label color="dark">Stake Presidents</ion-label>
-                <ion-checkbox [(ngModel)]="areaType" color="secondary" name="checkbox" item-right></ion-checkbox>
-            </ion-item>
+            <ion-list radio-group id="council" name="council" [(ngModel)]="radioSelected">
 
-            <ion-item *ngIf="unitType === 'Stake'" [ngClass]='ion-idv-item'>
-                <ion-label color="dark">Bishops</ion-label>
-                <ion-checkbox [(ngModel)]="stkType" color="secondary" name="checkbox" item-right></ion-checkbox>
-            </ion-item>
+                <ion-item *ngIf="unitType === 'Area'" [ngClass]='ion-idv-item'>
+                    <ion-label color="dark">Stake Presidents</ion-label>
+                    <ion-radio value="areastakepresidents" color="secondary" item-right></ion-radio>
+                </ion-item>
 
+                <ion-item *ngIf="unitType === 'Stake'" [ngClass]='ion-idv-item'>
+                    <ion-label color="dark">Stake Presidents</ion-label>
+                    <ion-radio value="stakestakepresidents" color="secondary" item-right></ion-radio>
+                </ion-item>
+
+                <ion-item *ngIf="unitType === 'Stake'" [ngClass]='ion-idv-item'>
+                    <ion-label color="dark">Bishops</ion-label>
+                    <ion-radio value="stakebishops" color="secondary" item-right></ion-radio>
+                </ion-item>
+
+                <ion-item *ngIf="unitType === 'Ward'" [ngClass]='ion-idv-item'>
+                    <ion-label color="dark">Bishops</ion-label>
+                    <ion-radio value="wardbishops" color="secondary" item-right></ion-radio>
+                </ion-item>
+
+            </ion-list>
         </ion-item-group>
     </form>
 </ion-content>
 <ion-footer>
     <button ion-button type="submit" class="button button-clik" (click)="inviteMember()" name="Invitebtn" clear block color="secondary"
-        text-capitalize [disabled]="emailErr || !isValidEmail || !InviteMemberForm.form.valid || (!areaType && !stkType)" text-capitalize>Invite</button>
+        text-capitalize [disabled]="(radioSelected === '') || emailErr || !isValidEmail || !InviteMemberForm.form.valid" text-capitalize>Invite</button>
 </ion-footer>

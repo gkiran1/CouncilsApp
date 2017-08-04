@@ -21,8 +21,7 @@ export class InviteAdminPage {
     emailErr = true;
     adminname;
     unitType;
-    areaType = false;
-    stkType = false;
+    radioSelected = '';
 
     constructor(public http: Http,
         public navctrl: NavController,
@@ -44,8 +43,8 @@ export class InviteAdminPage {
         }
     }
 
-    keyup($event) {     
-        this.isValidEmail = true; 
+    keyup($event) {
+        this.isValidEmail = true;
         if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
             this.emailErr = false;
         }
