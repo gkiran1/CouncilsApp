@@ -25,6 +25,8 @@ export class CreateAccountPage {
   emailTaken = false;
   isValidEmail = true;
   isInvitedEmail = true;
+  isValidEmailFormat = false;
+  isValidPwd = false;
 
   constructor(public navCtrl: NavController, public loaderService: LoadingControllerService, public firebaseService: FirebaseService, public alertCtrl: AlertController, public emailService: EmailService, public toast: ToastController) { }
 
@@ -140,6 +142,21 @@ export class CreateAccountPage {
     this.isValidEmail = true;
     this.emailTaken = false;
     this.isInvitedEmail = true;
+    if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+      this.isValidEmailFormat = true;
+    }
+    else {
+      this.isValidEmailFormat = false;
+    }
+  }
+
+  pswrdkeypresssed($event) {
+    if ($event.target.value.length < 6 || $event.target.value.trim() === '') {
+      this.isValidPwd = false;
+    }
+    else {
+      this.isValidPwd = true;
+    }
   }
 
 }

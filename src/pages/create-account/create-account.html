@@ -20,7 +20,7 @@
     <ion-item [class.invalid]="(password.errors && password.dirty)" class="input-item">
       <ion-label class="inputtype" floating>Password</ion-label>
       <ion-input type="password" name="password" validate-onblur class="form-control" #password="ngModel" minlength='6' [(ngModel)]="newUser.password"
-        id="email" required></ion-input>
+        id="email" required (keyup)="pswrdkeypresssed($event)"></ion-input>
     </ion-item>
     <ion-label class="lbl-note" *ngIf="!(password.errors && password.dirty)">Minimum 6 characters</ion-label>
     <ion-label class="error-msg" *ngIf="(password.errors && password.dirty)">Minimum 6 characters</ion-label>
@@ -31,7 +31,7 @@
     </ion-item>
     <div class="createBtn">
       <button ion-button block clear class="button button-clik" color="secondary" name="CreateAccount" type="submit" text-capitalize
-        [disabled]="!createAccountForm.form.valid" text-capitalize>Create Account</button>
+        [disabled]="!isValidEmailFormat || !isValidPwd || !createAccountForm.form.valid" text-capitalize>Create Account</button>
     </div>
   </form>
 </ion-content>
