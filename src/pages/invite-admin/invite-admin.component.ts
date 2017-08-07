@@ -34,15 +34,13 @@ export class InviteAdminPage {
     }
 
     blur($event) {
-        this.zone.run(() => {
-            this.emailErr = false;
-            if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
-                this.isValidEmail = true;
-            }
-            else {
-                this.isValidEmail = false;
-            }
-        });
+        this.emailErr = false;
+        if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+            this.isValidEmail = true;
+        }
+        else {
+            this.isValidEmail = false;
+        }
     }
 
     keyup($event) {
