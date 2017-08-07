@@ -6,6 +6,7 @@ import { InviteAdminSuccessPage } from './success.component';
 import { Http } from '@angular/http';
 import { EmailService } from '../../providers/emailservice'
 import { LoadingControllerService } from '../../services/LoadingControllerService';
+import { NgZone } from '@angular/core';
 
 @Component({
     templateUrl: 'invite-admin.html',
@@ -26,29 +27,34 @@ export class InviteAdminPage {
         public fs: FirebaseService,
         public toast: ToastController,
         public emailService: EmailService,
-        public loaderService: LoadingControllerService) {
+        public loaderService: LoadingControllerService,
+        private zone: NgZone) {
         this.adminname = localStorage.getItem('name');
         this.unitType = localStorage.getItem('unitType');
     }
 
     blur($event) {
-        this.emailErr = false;
-        if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
-            this.isValidEmail = true;
-        }
-        else {
-            this.isValidEmail = false;
-        }
+        this.zone.run(() => {
+            this.emailErr = false;
+            if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+                this.isValidEmail = true;
+            }
+            else {
+                this.isValidEmail = false;
+            }
+        });
     }
 
     keyup($event) {
-        this.isValidEmail = true;
-        if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
-            this.emailErr = false;
-        }
-        else {
-            this.emailErr = true;
-        }
+        this.zone.run(() => {
+            this.isValidEmail = true;
+            if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
+                this.emailErr = false;
+            }
+            else {
+                this.emailErr = true;
+            }
+        });
     }
 
     inviteMember() {
