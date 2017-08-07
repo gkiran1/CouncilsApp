@@ -70,4 +70,33 @@ invite-admin-page {
         color: #35373a !important;
         padding-top: 22px !important;
     }
+
+    .label-ios[floating],
+    .label-md[floating] {
+        transform: none !important;
+        -webkit-transform: none !important;
+        position: relative;
+        top: 15px !important;
+    }
+    
+    .input-has-focus .label-md[floating],
+    .input-has-value .label-md[floating] {
+        color: #3CB18A;
+        transform: none !important;
+        -webkit-transform: none !important;
+        font-size: 1.36rem;
+        transition: top .25s ease-in-out;
+        top: 3px !important;
+
+    }
+    
+    .input-has-focus .label-ios[floating],
+    .input-has-value .label-ios[floating] {
+        color: #3CB18A;
+        transform: none !important;
+        -webkit-transform: none !important;
+        font-size: 1.36rem;
+        transition: top .25s ease-in-out;
+        top: 3px !important;
+    }
 }
