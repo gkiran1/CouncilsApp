@@ -261,7 +261,7 @@ export class ViewCouncilFilePage {
         let loader = this.loadingCtrl.create({
             spinner: 'ios'
         });
-        loader.present();
+       
         Camera.getPicture({
             quality: 95,
             destinationType: Camera.DestinationType.DATA_URL,
@@ -327,7 +327,7 @@ export class ViewCouncilFilePage {
         let loader = this.loadingCtrl.create({
             spinner: 'ios'
         });
-        loader.present();
+        
         Camera.getPicture({
             quality: 95,
             destinationType: Camera.DestinationType.DATA_URL,
@@ -394,7 +394,7 @@ export class ViewCouncilFilePage {
         let loader = this.loadingCtrl.create({
             spinner: 'ios'
         });
-        loader.present();
+      
         if (this.platform.is('ios')) {
             // var options = ["public.data", "public.audio"];
             FilePicker.pickFile(
