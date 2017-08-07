@@ -83,6 +83,9 @@ export class CreateAccountPage {
                   .then(fbAuthToken => {
                     console.log('fbAuthToken --- ' + fbAuthToken);
                     var uid = localStorage.getItem('createdUsrId');
+
+                    this.firebaseService.setDefaultNotificationSettings(uid).then(() => { console.log('Default settings for push notifications is done.') });
+
                     //onSuccess redirect to Menu page                
                     this.emailService.emailCreateAccount(invitee.val().firstname, invitee.val().lastname, invitee.val().unitnumber, invitee.val().email, fbAuthToken, uid).subscribe(res => {
                       //this.navCtrl.push(LoginPage);

@@ -951,7 +951,7 @@ export class FirebaseService {
             if (!snap.exists()) {
                 return firebase.database().ref().child('notificationsettings').push({
                     userid: userId,
-                    allactivity: false,
+                    allactivity: true,
                     agendas: false,
                     discussions: false,
                     pvtdiscussions: false,
