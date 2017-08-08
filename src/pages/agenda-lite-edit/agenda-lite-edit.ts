@@ -227,11 +227,11 @@ export class AgendaLiteEditPage {
   }
 
   formatAgendaObj(value) {
-    let assigneddate = value.assigneddate.replace(/T/, ' ').replace(/Z/, '');
+    // let assigneddate = value.assigneddate.replace(/T/, ' ').replace(/Z/, '');
     return {
       assignedcouncil: this.assignedcouncil.council,
       councilid: this.assignedcouncil.$key,
-      assigneddate: moment(assigneddate).toISOString(),
+      assigneddate: value.assigneddate,
       openinghymn: value.openinghymn,
       openingprayer: this.openingprayer ? this.openingprayer.firstname + ' ' + this.openingprayer.lastname : '',
       openingprayeruserid: this.openingprayer ? this.openingprayer.$key : '',
@@ -251,11 +251,24 @@ export class AgendaLiteEditPage {
   }
 
   edit(value) {
-    this.dateErr = false;
-    let formattedAgendaObj = this.formatAgendaObj(value);
-    var isFirstError = false;
+    // this.dateErr = false;
+    // let formattedAgendaObj = this.formatAgendaObj(value);
+    // var isFirstError = false;
 
-    if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
+    // if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
+    //   this.dateErr = true;
+    //   if (!isFirstError) {
+    //     isFirstError = true;
+    //     var ele = document.getElementById('dateError');
+    //     ele.scrollIntoView();
+    //   }
+    // }
+    this.dateErr = false;
+    var isFirstError = false;
+    let assigneddate = value.assigneddate.replace(/T/, ' ').replace(/Z/, '');
+    value.assigneddate = moment(assigneddate).toISOString();
+
+    if (moment(assigneddate).isBefore(moment().set({ second: 0 }))) {
       this.dateErr = true;
       if (!isFirstError) {
         isFirstError = true;
@@ -295,6 +308,8 @@ export class AgendaLiteEditPage {
         value.discussionitems = this.discussionitemsObj.join('\n');
       }
       value.discussionitems = (value.discussionitems != undefined && value.discussionitems.length > 0) ? value.discussionitems.replace(/- /gi, '').trim() : '';
+
+      let formattedAgendaObj = this.formatAgendaObj(value);
 
       this.firebaseservice.updateAgendaLite(formattedAgendaObj, this.agendaKey)
         .then(res => {

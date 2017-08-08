@@ -257,11 +257,11 @@ export class AgendaEditPage {
     }
 
     formatAgendaObj(value) {
-        let assigneddate = value.assigneddate.replace(/T/, ' ').replace(/Z/, '');
+        //let assigneddate = value.assigneddate.replace(/T/, ' ').replace(/Z/, '');
         return {
             assignedcouncil: this.assignedcouncil.council,
             councilid: this.assignedcouncil.$key,
-            assigneddate: moment(assigneddate).toISOString(),
+            assigneddate: value.assigneddate,
             openinghymn: value.openinghymn,
             openingprayer: this.openingprayer ? this.openingprayer.firstname + ' ' + this.openingprayer.lastname : '',
             openingprayeruserid: this.openingprayer ? this.openingprayer.$key : '',
@@ -288,11 +288,25 @@ export class AgendaEditPage {
     }
 
     edit(value) {
-        let formattedAgendaObj = this.formatAgendaObj(value);
+        // let formattedAgendaObj = this.formatAgendaObj(value);
+        // this.dateErr = false;
+        // var isFirstError = false;
+
+        // if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
+        //     this.dateErr = true;
+        //     if (!isFirstError) {
+        //         isFirstError = true;
+        //         var ele = document.getElementById('dateError');
+        //         ele.scrollIntoView();
+        //     }
+        // }
+
         this.dateErr = false;
         var isFirstError = false;
+        let assigneddate = value.assigneddate.replace(/T/, ' ').replace(/Z/, '');
+        value.assigneddate = moment(assigneddate).toISOString();
 
-        if (moment(formattedAgendaObj.assigneddate).isBefore(moment().set({ second: 0 }))) {
+        if (moment(assigneddate).isBefore(moment().set({ second: 0 }))) {
             this.dateErr = true;
             if (!isFirstError) {
                 isFirstError = true;
@@ -390,6 +404,8 @@ export class AgendaEditPage {
             value.history = (value.history != undefined && value.history.length > 0) ? value.history.replace(/- /gi, '').trim() : '';
             value.gospellearning = (value.gospellearning != undefined && value.gospellearning.length > 0) ? value.gospellearning.replace(/- /gi, '').trim() : '';
             value.event = (value.event != undefined && value.event.length > 0) ? value.event.replace(/- /gi, '').trim() : '';
+
+           let formattedAgendaObj = this.formatAgendaObj(value);
 
             this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
                 .then(res => {
