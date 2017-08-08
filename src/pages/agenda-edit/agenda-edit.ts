@@ -351,7 +351,7 @@ export class AgendaEditPage {
                 value.retention = value.retention.replace(/- /gi, '').trim();
             }
             else if (this.retentionObj.length > 0) {
-                value.retention = this.retention.join('\n');
+                value.retention = this.retentionObj.join('\n');
             }
 
             if (value.activation !== '' && this.activationObj.length === 0) {
