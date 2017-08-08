@@ -48,6 +48,8 @@ invite-admin-page {
         background: #fff !important;
         height: 60px;
         border-bottom: 1px solid #e8e9eb !important;
+         transform: none !important;
+        -webkit-transform: none !important;
     }
     .unittype {
         background: #FAFAFA !important;
@@ -98,5 +100,8 @@ invite-admin-page {
         font-size: 1.36rem;
         transition: top .25s ease-in-out;
         top: 3px !important;
+    }
+    .councils-list{
+        margin-bottom: 500px !important;
     }
 }

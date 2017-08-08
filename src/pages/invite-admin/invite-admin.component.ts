@@ -7,6 +7,8 @@ import { Http } from '@angular/http';
 import { EmailService } from '../../providers/emailservice'
 import { LoadingControllerService } from '../../services/LoadingControllerService';
 import { NgZone } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { validateEmail } from '../../custom-validators/custom-validator';
 
 @Component({
     templateUrl: 'invite-admin.html',
@@ -18,11 +20,13 @@ export class InviteAdminPage {
     invite = { email: '', firstname: '', lastname: '' };
     isValidEmail = true;
     emailErr = true;
+    radioSelected;
     adminname;
     unitType;
-    radioSelected = '';
+    inviteadminForm: FormGroup;
 
-    constructor(public http: Http,
+    constructor(fb: FormBuilder,
+        public http: Http,
         public navctrl: NavController,
         public fs: FirebaseService,
         public toast: ToastController,
@@ -31,37 +35,30 @@ export class InviteAdminPage {
         private zone: NgZone) {
         this.adminname = localStorage.getItem('name');
         this.unitType = localStorage.getItem('unitType');
-    }
 
-    blur($event) {
-        this.emailErr = false;
-        if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
-            this.isValidEmail = true;
-        }
-        else {
-            this.isValidEmail = false;
-        }
-    }
-
-    keyup($event) {
-        this.zone.run(() => {
-            this.isValidEmail = true;
-            if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
-                this.emailErr = false;
-            }
-            else {
-                this.emailErr = true;
-            }
+        this.inviteadminForm = fb.group({
+            email: ['', Validators.compose([Validators.required, validateEmail])],
+            firstname: ['', Validators.required],
+            lastname: ['', Validators.required],
+            radioSelected: ['', Validators.required],
         });
+
+        this.inviteadminForm.valueChanges.subscribe(data => {
+            this.zone.run(() => {
+                this.radioSelected = data.radioSelected;
+            });
+
+        })
+
     }
 
-    inviteMember() {
+    inviteMember(value) {
         let loader = this.loaderService.getLoadingController();
         loader.present();
 
         this.emailErr = false;
 
-        this.emailService.inviteAdminEmail(this.invite.firstname + " " + this.invite.lastname, this.invite.email, this.adminname)
+        this.emailService.inviteAdminEmail(value.firstname + " " + value.lastname, value.email, this.adminname)
             .then(res => {
                 res.subscribe(result => {
                     if (result.status === 200) {
