@@ -385,11 +385,11 @@ export class AgendaEditPage {
             value.spiritualwelfare = (value.spiritualwelfare != undefined && value.spiritualwelfare.length > 0) ? value.spiritualwelfare.replace(/- /gi, '').trim() : '';
             value.temporalwelfare = (value.temporalwelfare != undefined && value.temporalwelfare.length > 0) ? value.temporalwelfare.replace(/- /gi, '').trim() : '';
             value.missionaryitems = (value.missionaryitems != undefined && value.missionaryitems.length > 0) ? value.missionaryitems.replace(/- /gi, '').trim() : '';
-            value.retention = (value.retention != undefined && value.retention.length > 0) ? value.retention.replace(/-/gi, '').trim() : '';
-            value.activation = (value.activation != undefined && value.activation.length > 0) ? value.activation.replace(/-/gi, '').trim() : '';
-            value.history = (value.history != undefined && value.history.length > 0) ? value.history.replace(/-/gi, '').trim() : '';
-            value.gospellearning = (value.gospellearning != undefined && value.gospellearning.length > 0) ? value.gospellearning.replace(/-/gi, '').trim() : '';
-            value.event = (value.event != undefined && value.event.length > 0) ? value.event.replace(/-/gi, '').trim() : '';
+            value.retention = (value.retention != undefined && value.retention.length > 0) ? value.retention.replace(/- /gi, '').trim() : '';
+            value.activation = (value.activation != undefined && value.activation.length > 0) ? value.activation.replace(/- /gi, '').trim() : '';
+            value.history = (value.history != undefined && value.history.length > 0) ? value.history.replace(/- /gi, '').trim() : '';
+            value.gospellearning = (value.gospellearning != undefined && value.gospellearning.length > 0) ? value.gospellearning.replace(/- /gi, '').trim() : '';
+            value.event = (value.event != undefined && value.event.length > 0) ? value.event.replace(/- /gi, '').trim() : '';
 
             this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
                 .then(res => {
