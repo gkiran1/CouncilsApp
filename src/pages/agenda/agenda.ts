@@ -157,11 +157,11 @@ export class AgendaPage {
             agenda.spiritualwelfare = (agenda.spiritualwelfare != undefined && agenda.spiritualwelfare.length > 0) ? agenda.spiritualwelfare.replace(/- /gi, '').trim() : '';
             agenda.temporalwelfare = (agenda.temporalwelfare != undefined && agenda.temporalwelfare.length > 0) ? agenda.temporalwelfare.replace(/- /gi, '').trim() : '';
             agenda.missionaryitems = (agenda.missionaryitems != undefined && agenda.missionaryitems.length > 0) ? agenda.missionaryitems.replace(/- /gi, '').trim() : '';
-            agenda.retention = (agenda.retention != undefined && agenda.retention.length > 0) ? agenda.retention.replace(/-/gi, '').trim() : '';
-            agenda.activation = (agenda.activation != undefined && agenda.activation.length > 0) ? agenda.activation.replace(/-/gi, '').trim() : '';
-            agenda.history = (agenda.history != undefined && agenda.history.length > 0) ? agenda.history.replace(/-/gi, '').trim() : '';
-            agenda.gospellearning = (agenda.gospellearning != undefined && agenda.gospellearning.length > 0) ? agenda.gospellearning.replace(/-/gi, '').trim() : '';
-            agenda.event = (agenda.event != undefined && agenda.event.length > 0) ? agenda.event.replace(/-/gi, '').trim() : '';
+            agenda.retention = (agenda.retention != undefined && agenda.retention.length > 0) ? agenda.retention.replace(/- /gi, '').trim() : '';
+            agenda.activation = (agenda.activation != undefined && agenda.activation.length > 0) ? agenda.activation.replace(/- /gi, '').trim() : '';
+            agenda.history = (agenda.history != undefined && agenda.history.length > 0) ? agenda.history.replace(/- /gi, '').trim() : '';
+            agenda.gospellearning = (agenda.gospellearning != undefined && agenda.gospellearning.length > 0) ? agenda.gospellearning.replace(/- /gi, '').trim() : '';
+            agenda.event = (agenda.event != undefined && agenda.event.length > 0) ? agenda.event.replace(/- /gi, '').trim() : '';
             agenda.councilid = this.assignedcouncil.$key;
             agenda.openingprayeruserid = (this.openingprayer !== undefined) ? this.openingprayer.$key : '';
             agenda.spiritualthoughtuserid = (this.spiritualthought !== undefined) ? this.spiritualthought.$key : '';
