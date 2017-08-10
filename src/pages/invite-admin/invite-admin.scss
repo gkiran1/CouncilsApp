@@ -104,4 +104,16 @@ invite-admin-page {
     .councils-list{
         margin-bottom: 500px !important;
     }
+    .unittype {
+        background: #FAFAFA !important;
+        // border-bottom: none !important;
+        border-bottom: 1px solid #e8e9eb !important;
+        border-top:none !important;
+        text-transform: uppercase;
+    }
+    .unittype ion-label {
+        font-family: Bernina-semibold, sans-serif;
+        font-size: 13px !important;
+        color: #35373a !important;
+    }
 }
