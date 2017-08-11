@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../environments/firebase/firebase-service';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController, NavParams } from 'ionic-angular';
 import { AppService } from '../../providers/app-service';
 import { InviteAdminSuccessPage } from './success.component';
 import { Http } from '@angular/http';
@@ -24,7 +24,7 @@ export class InviteAdminPage {
     adminname;
     unitType;
     inviteadminForm: FormGroup;
-
+    heading;
     constructor(fb: FormBuilder,
         public http: Http,
         public navctrl: NavController,
@@ -32,9 +32,11 @@ export class InviteAdminPage {
         public toast: ToastController,
         public emailService: EmailService,
         public loaderService: LoadingControllerService,
-        private zone: NgZone) {
+        private zone: NgZone, public navParams: NavParams) {
         this.adminname = localStorage.getItem('name');
         this.unitType = localStorage.getItem('unitType');
+
+        this.heading = navParams.get('heading');
 
         this.inviteadminForm = fb.group({
             email: ['', Validators.compose([Validators.required, validateEmail])],
@@ -47,8 +49,7 @@ export class InviteAdminPage {
             this.zone.run(() => {
                 this.radioSelected = data.radioSelected;
             });
-
-        })
+        });
 
     }
 

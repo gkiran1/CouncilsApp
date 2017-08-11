@@ -8,7 +8,7 @@
 			</ion-col>
 			<ion-col width-80 class="header-col2">
 				<ion-title text-center>
-					Invite Admin
+					{{heading}}
 				</ion-title>
 			</ion-col>
 		</ion-row>
@@ -20,20 +20,20 @@
 			<ion-item class="input-item" [class.invalid]="!inviteadminForm.controls.email.valid && inviteadminForm.controls.email.dirty">
 				<ion-label floating>Email</ion-label>
 				<ion-input class="council-styles" type="email" name="email" validate-onblur [(ngModel)]="invite.email" formControlName="email"
-				 required></ion-input>
+				    required></ion-input>
 			</ion-item>
 			<ion-label class="error-msg" *ngIf="!inviteadminForm.controls.email.valid && inviteadminForm.controls.email.dirty">Invalid email</ion-label>
 
 			<ion-item class="input-item">
 				<ion-label floating>First Name</ion-label>
 				<ion-input class="council-styles" type="text" id="firstnamefield" name="firstname" [(ngModel)]="invite.firstname" formControlName="firstname"
-				 required></ion-input>
+				    required></ion-input>
 			</ion-item>
 
 			<ion-item class="input-item">
 				<ion-label floating>Last Name</ion-label>
 				<ion-input class="council-styles" type="text" id="lastnamefield" name="lastname" [(ngModel)]="invite.lastname" formControlName="lastname"
-				 required></ion-input>
+				    required></ion-input>
 			</ion-item>
 
 			<ion-item-divider class="list-title-divider">Which councils can they access</ion-item-divider>
@@ -75,5 +75,5 @@
 </ion-content>
 <ion-footer>
 	<button ion-button type="submit" class="button button-clik" (click)="inviteMember(inviteadminForm.value)" name="Invitebtn"
-	 clear block color="secondary" text-capitalize [disabled]="!inviteadminForm.valid" text-capitalize>Invite</button>
+	    clear block color="secondary" text-capitalize [disabled]="!inviteadminForm.valid" text-capitalize>Invite</button>
 </ion-footer>

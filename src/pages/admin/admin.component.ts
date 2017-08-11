@@ -21,11 +21,23 @@ export class AdminPage {
 
     notificationsCount;
     unitType;
+    heading;
     constructor(private navCtrl: NavController, public firebaseservice: FirebaseService) {
         firebaseservice.getNotCnt().subscribe(count => {
             this.notificationsCount = count;
         });
+
         this.unitType = localStorage.getItem('unitType');
+
+        if (this.unitType === 'Area') {
+            this.heading = 'Invite Stake Presidents';
+        }
+        else if (this.unitType === 'Stake') {
+            this.heading = 'Invite Area Authority & Bishops';
+        }
+        else if (this.unitType === 'Ward') {
+            this.heading = 'Invite Stake President';
+        }
     }
 
     activeCouncils() {
@@ -41,7 +53,7 @@ export class AdminPage {
     }
 
     inviteAdmin() {
-        this.navCtrl.push(InviteAdminPage, {}, { animate: true, animation: 'transition', direction: 'forward' });
+        this.navCtrl.push(InviteAdminPage, { heading: this.heading }, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     getActiveUsers() {
