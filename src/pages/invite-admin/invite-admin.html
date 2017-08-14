@@ -24,17 +24,19 @@
 			</ion-item>
 			<ion-label class="error-msg" *ngIf="!inviteadminForm.controls.email.valid && inviteadminForm.controls.email.dirty">Invalid email</ion-label>
 
-			<ion-item class="input-item">
+			<ion-item class="input-item" [class.invalid]="!inviteadminForm.controls.firstname.valid && (inviteadminForm.controls.firstname.dirty || inviteadminForm.controls.firstname.touched)">
 				<ion-label floating>First Name</ion-label>
 				<ion-input class="council-styles" type="text" id="firstnamefield" name="firstname" [(ngModel)]="invite.firstname" formControlName="firstname"
 				    required></ion-input>
 			</ion-item>
+			<ion-label class="error-msg" *ngIf="!inviteadminForm.controls.firstname.valid && (inviteadminForm.controls.firstname.dirty || inviteadminForm.controls.firstname.touched)">First Name required</ion-label>
 
-			<ion-item class="input-item">
+			<ion-item class="input-item" [class.invalid]="!inviteadminForm.controls.lastname.valid && (inviteadminForm.controls.lastname.dirty || inviteadminForm.controls.lastname.touched)">
 				<ion-label floating>Last Name</ion-label>
 				<ion-input class="council-styles" type="text" id="lastnamefield" name="lastname" [(ngModel)]="invite.lastname" formControlName="lastname"
 				    required></ion-input>
 			</ion-item>
+			<ion-label class="error-msg" *ngIf="!inviteadminForm.controls.lastname.valid && (inviteadminForm.controls.lastname.dirty || inviteadminForm.controls.lastname.touched)">Last Name required</ion-label>
 
 			<ion-item-divider class="list-title-divider">Which councils can they access</ion-item-divider>
 

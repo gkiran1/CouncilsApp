@@ -26,14 +26,20 @@
             </ion-item>
             <ion-label class="error-msg" *ngIf="!isValidEmail">Invalid email</ion-label>
 
-            <ion-item class="input-item">
+            <ion-item class="input-item" [class.invalid]="firstname.invalid && (firstname.dirty || firstname.touched)">
                 <ion-label floating>First Name</ion-label>
-                <ion-input class="council-styles" type="text" id="firstnamefield" name="firstname" [(ngModel)]="invite.firstname" required></ion-input>
+                <ion-input class="council-styles" type="text" id="firstnamefield" class="form-control" #firstname="ngModel" name="firstname"
+                    [(ngModel)]="invite.firstname" required></ion-input>
             </ion-item>
-            <ion-item class="input-item">
+            <ion-label class="error-msg" *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)">First Name required</ion-label>
+
+            <ion-item class="input-item" [class.invalid]="lastname.invalid && (lastname.dirty || lastname.touched)">
                 <ion-label floating>Last Name</ion-label>
-                <ion-input class="council-styles" type="text" id="lastnamefield" name="lastname" [(ngModel)]="invite.lastname" required></ion-input>
+                <ion-input class="council-styles" type="text" id="lastnamefield" class="form-control" #lastname="ngModel" name="lastname"
+                    [(ngModel)]="invite.lastname" required></ion-input>
             </ion-item>
+            <ion-label class="error-msg" *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">Last Name required</ion-label>
+
             <!--<ion-item class="input-item">
                 <ion-label floating>Calling</ion-label>
                 <ion-input class="council-styles" type="text" spellautocomplete name="calling" [(ngModel)]="invite.calling" required></ion-input>
