@@ -25,19 +25,18 @@ export class NewCouncilPage {
         this.af.database.object('/users/' + auth.uid).subscribe(user => {
           this.currentUser = user;
           this.firebaseservice.getUsersByUnitNumber(user.unitnumber).subscribe(users => {
-            users.forEach(usr => {
-              var userCouncilNames: string[] = [];
-              usr.councils.forEach(e => {
-                this.firebaseservice.getCouncilByKey(e).subscribe((councilObj) => {
-                  councilObj.forEach(counObj => {
+            this.users = users.filter(userObj => {
+              if (userObj && userObj.isactive === true) {
+                var userCouncilNames: string[] = [];
+                userObj.councils.forEach(councilId => {
+                  this.firebaseservice.getCouncilByKey(councilId).subscribe((councilObj) => {
                     userCouncilNames.push(councilObj[0].council);
-                    usr.councilnames = userCouncilNames.join(', ');
+                    userObj.councilnames = userCouncilNames.join(', ');
                   });
                 });
-              });
+                return userObj;
+              }
             });
-            this.users = users;
-            //subscribe.unsubscribe();
           });
         });
       }
