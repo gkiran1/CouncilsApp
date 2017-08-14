@@ -267,7 +267,7 @@ export class AgendaPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            // e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -293,7 +293,7 @@ export class AgendaPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            // e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -319,7 +319,7 @@ export class AgendaPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            // e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -346,7 +346,7 @@ export class AgendaPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            // e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -372,7 +372,7 @@ export class AgendaPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            // e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -398,7 +398,7 @@ export class AgendaPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            // e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -425,7 +425,7 @@ export class AgendaPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            // e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
@@ -451,7 +451,7 @@ export class AgendaPage {
             if (e.length > 27) {
                 e = e.substr(0, 27);
             }
-            e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
+            // e = e.charAt(2) ? e.substr(0, 2) + e.charAt(2).toUpperCase() + e.substr(3) : e;
             return e;
         });
         $event.target.value = newValue.join('\n');
