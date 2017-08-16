@@ -117,7 +117,7 @@ export class LoginPage {
             })
             .catch(err => {
                 this.firebaseService.findUserByEmail(loginCredentials.email).subscribe((usr) => {
-                    //loader.dismiss();
+                    loader.dismiss();
                     this.show = false;
                     if (usr) {
                         this.showInValidEml = false;
