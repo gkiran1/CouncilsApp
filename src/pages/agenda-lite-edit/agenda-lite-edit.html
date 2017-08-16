@@ -25,7 +25,7 @@
         <ion-item id="dateError" [class.invalid]="dateErr" class="input-item">
             <ion-label floating>Date & Time</ion-label>
             <ion-datetime displayFormat="DDDD, MMM D, YYYY, h:mm a" pickerFormat="DDD MMM D YYYY, h, mm, A" ng-model="datetime" name="assigneddate"
-                formControlName="assigneddate" validate-onblur [max]="2500" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"
+                formControlName="assigneddate" validate-onblur [max]="2500" (click)="hideList()" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"
                 (ionChange)="onChange($event)">
             </ion-datetime>
         </ion-item>
@@ -34,7 +34,7 @@
 
         <ion-item class="input-item">
             <ion-label floating>Opening Hymn</ion-label>
-            <ion-input type="text" spellautocomplete name="openinghymn" formControlName="openinghymn" maxlength="500"></ion-input>
+            <ion-input type="text" spellautocomplete name="openinghymn" formControlName="openinghymn" (focus)="hideList()" maxlength="500"></ion-input>
         </ion-item>
 
         <ion-item id="ionItemOpeningPrayer" [class.invalid]="invalidOpeningPrayerUsr" class="input-item">
@@ -138,7 +138,7 @@
         <ng-container *ngIf="discussionitemsObj.length">
             <ion-label class="label-styles">Discussion Items</ion-label>
             <ion-item *ngFor="let item of discussionitemsObj; let i = index; trackBy: trackByIndex" class="item-styles input-item icon-line">
-                <ion-input type="text" [(ngModel)]="discussionitemsObj[i]" [ngModelOptions]="{standalone: true}"></ion-input>
+                <ion-input type="text" [(ngModel)]="discussionitemsObj[i]" (focus)="hideList()" [ngModelOptions]="{standalone: true}"></ion-input>
                 <button color="secondary"  class="button button-clik" id="councilsPage" name="councilsPage" ion-button icon-only clear item-right
                     (click)="plusBtn(item)">
                     <ion-icon name="councilscircle" class="councils-icon__add menu-icon" item-right></ion-icon>

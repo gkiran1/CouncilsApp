@@ -300,7 +300,11 @@ export class NewAssignmentPage {
     this.term = v.substr(1);
     this.showlist = true;
   }
-  bindAssignto(user) {
+
+  hideList() {
+    this.showlist = false;
+  }
+  bindAssignto( user) {
     this.isAssigntoTouched = true;
     this.showlist = false;
     (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(user.firstname + ' ' + user.lastname);

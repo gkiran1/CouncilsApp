@@ -248,7 +248,7 @@ export class NewCouncilFilePage {
       spinner: 'ios'
     });
 
-    this.userSubscription = this.af.auth.subscribe(auth => {
+    this.userSubscription = this.af.auth.take(1).subscribe(auth => {
       if (auth !== null) {
         Camera.getPicture({
           quality: 95,

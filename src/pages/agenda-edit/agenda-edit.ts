@@ -487,6 +487,7 @@ export class AgendaEditPage {
     }
 
     spiritualfocus($event) {
+        this.hideList();
         let sw = this.agendaeditForm.value.spiritualwelfare;
         if (sw == undefined || sw.length == 0) {
             (<FormControl>this.agendaeditForm.controls['spiritualwelfare']).setValue("- ");
@@ -513,6 +514,7 @@ export class AgendaEditPage {
     }
 
     temporalfocus($event) {
+        this.hideList();
         let tw = this.agendaeditForm.value.temporalwelfare;
         if (tw == undefined || tw.length == 0) {
             (<FormControl>this.agendaeditForm.controls['temporalwelfare']).setValue("- ");
@@ -539,6 +541,7 @@ export class AgendaEditPage {
     }
 
     missionaryfocus($event) {
+        this.hideList();
         let mi = this.agendaeditForm.value.missionaryitems;
         if (mi == undefined || mi.length == 0) {
             (<FormControl>this.agendaeditForm.controls['missionaryitems']).setValue("- ");
@@ -565,6 +568,7 @@ export class AgendaEditPage {
     }
 
     retentionfocus($event) {
+        this.hideList();
         let rk = this.agendaeditForm.value.retention;
         if (rk == undefined || rk.length == 0) {
             (<FormControl>this.agendaeditForm.controls['retention']).setValue("- ");
@@ -591,6 +595,7 @@ export class AgendaEditPage {
     }
 
     activationfocus($event) {
+        this.hideList();
         let ak = this.agendaeditForm.value.activation;
         if (ak == undefined || ak.length == 0) {
             (<FormControl>this.agendaeditForm.controls['activation']).setValue("- ");
@@ -617,6 +622,7 @@ export class AgendaEditPage {
     }
 
     historyfocus($event) {
+        this.hideList();
         let hk = this.agendaeditForm.value.history;
         if (hk == undefined || hk.length == 0) {
             (<FormControl>this.agendaeditForm.controls['history']).setValue("- ");
@@ -643,6 +649,7 @@ export class AgendaEditPage {
     }
 
     gospellearningfocus($event) {
+        this.hideList();
         let gk = this.agendaeditForm.value.gospellearning;
         if (gk == undefined || gk.length == 0) {
             (<FormControl>this.agendaeditForm.controls['gospellearning']).setValue("- ");
@@ -669,6 +676,7 @@ export class AgendaEditPage {
     }
 
     eventfocus($event) {
+        this.hideList();
         let ev = this.agendaeditForm.value.event;
         if (ev == undefined || ev.length == 0) {
             (<FormControl>this.agendaeditForm.controls['event']).setValue("- ");
@@ -684,6 +692,8 @@ export class AgendaEditPage {
         }
         this.term = v.substr(1);
         this.showlist = true;
+        this.showlist1 = false;
+        this.showlist2 = false;
     }
 
     showList1(event) {
@@ -695,6 +705,8 @@ export class AgendaEditPage {
         }
         this.term = v1.substr(1);
         this.showlist1 = true;
+        this.showlist = false;
+        this.showlist2 = false;
     }
 
     showList2(event) {
@@ -706,9 +718,17 @@ export class AgendaEditPage {
         }
         this.term = v2.substr(1);
         this.showlist2 = true;
+        this.showlist = false;
+        this.showlist1 = false;
         setTimeout(() => {
             this.content.scrollToBottom();
         })
+    }
+
+    hideList() {
+        this.showlist = false;
+        this.showlist1 = false;
+        this.showlist2 = false;
     }
 
     bindAssignto(user) {
@@ -797,10 +817,12 @@ export class AgendaEditPage {
     }
 
     toggleGroup() {
+        this.hideList();
         this.shownGroup = !this.shownGroup;
     };
 
     toggleGroup1() {
+        this.hideList();
         this.shownGroup1 = !this.shownGroup1;
     };
 }

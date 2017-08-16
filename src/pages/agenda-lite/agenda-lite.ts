@@ -261,6 +261,7 @@ export class AgendaLitePage {
   }
 
   discussionfocus($event) {
+    this.hideList();
     let di = this.newagendaliteForm.value.discussionitems;
     if (di == undefined || di.length == 0) {
       (<FormControl>this.newagendaliteForm.controls['discussionitems']).setValue("- ");
@@ -276,6 +277,8 @@ export class AgendaLitePage {
     }
     this.term = v.substr(1);
     this.showlist = true;
+    this.showlist1 = false;
+    this.showlist2 = false;
   }
 
   showList1(event) {
@@ -287,6 +290,8 @@ export class AgendaLitePage {
     }
     this.term = v1.substr(1);
     this.showlist1 = true;
+    this.showlist = false;
+    this.showlist2 = false;
   }
 
   showList2(event) {
@@ -298,9 +303,17 @@ export class AgendaLitePage {
     }
     this.term = v2.substr(1);
     this.showlist2 = true;
+    this.showlist = false;
+    this.showlist1 = false;
     setTimeout(() => {
       this.content.scrollToBottom();
     });
+  }
+
+  hideList() {
+    this.showlist = false;
+    this.showlist1 = false;
+    this.showlist2 = false;
   }
 
   bindAssignto(user) {
@@ -357,10 +370,12 @@ export class AgendaLitePage {
   }
 
   toggleGroup() {
+    this.hideList();
     this.shownGroup = !this.shownGroup;
   };
 
   toggleGroup1() {
+    this.hideList();
     this.shownGroup1 = !this.shownGroup1;
   };
 
