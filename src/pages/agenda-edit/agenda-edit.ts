@@ -405,7 +405,7 @@ export class AgendaEditPage {
             value.gospellearning = (value.gospellearning != undefined && value.gospellearning.length > 0) ? value.gospellearning.replace(/- /gi, '').trim() : '';
             value.event = (value.event != undefined && value.event.length > 0) ? value.event.replace(/- /gi, '').trim() : '';
 
-           let formattedAgendaObj = this.formatAgendaObj(value);
+            let formattedAgendaObj = this.formatAgendaObj(value);
 
             this.firebaseservice.updateAgenda(formattedAgendaObj, this.agendaKey)
                 .then(res => {
@@ -694,6 +694,31 @@ export class AgendaEditPage {
         this.showlist = true;
         this.showlist1 = false;
         this.showlist2 = false;
+
+        /*
+        *  To clear @ input
+        */
+        let assignedSTN = this.spiritualthought && (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname);
+        let enteredSTN = '' + (<FormControl>this.agendaeditForm.get('spiritualthought').value);
+
+        if (assignedSTN === enteredSTN) {
+            //do nothnig
+        } else if ('@' + assignedSTN === enteredSTN) {
+            (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue(assignedSTN);
+        } else {
+            (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue('');
+        }
+
+        let assignedCPN = this.closingprayer && (this.closingprayer.firstname + ' ' + this.closingprayer.lastname);
+        let enteredCPN = '' + (<FormControl>this.agendaeditForm.get('closingprayer').value);
+
+        if (assignedCPN === enteredCPN) {
+            //do nothnig
+        } else if ('@' + assignedCPN === enteredCPN) {
+            (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue(assignedCPN);
+        } else {
+            (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue('');
+        }
     }
 
     showList1(event) {
@@ -707,6 +732,31 @@ export class AgendaEditPage {
         this.showlist1 = true;
         this.showlist = false;
         this.showlist2 = false;
+
+        /*
+        *  To clear @ input
+        */
+        let assignedOPN = this.openingprayer && (this.openingprayer.firstname + ' ' + this.openingprayer.lastname);
+        let enteredOPN = '' + (<FormControl>this.agendaeditForm.get('openingprayer').value);
+
+        if (assignedOPN === enteredOPN) {
+            //do nothnig
+        } else if ('@' + assignedOPN === enteredOPN) {
+            (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue(assignedOPN);
+        } else {
+            (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue('');
+        }
+
+        let assignedCPN = this.closingprayer && (this.closingprayer.firstname + ' ' + this.closingprayer.lastname);
+        let enteredCPN = '' + (<FormControl>this.agendaeditForm.get('closingprayer').value);
+
+        if (assignedCPN === enteredCPN) {
+            //do nothnig
+        } else if ('@' + assignedCPN === enteredCPN) {
+            (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue(assignedCPN);
+        } else {
+            (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue('');
+        }
     }
 
     showList2(event) {
@@ -723,12 +773,73 @@ export class AgendaEditPage {
         setTimeout(() => {
             this.content.scrollToBottom();
         })
+
+        /*
+        *  To clear @ input
+        */
+        let assignedOPN = this.openingprayer && (this.openingprayer.firstname + ' ' + this.openingprayer.lastname);
+        let enteredOPN = '' + (<FormControl>this.agendaeditForm.get('openingprayer').value);
+
+        if (assignedOPN === enteredOPN) {
+            //do nothnig
+        } else if ('@' + assignedOPN === enteredOPN) {
+            (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue(assignedOPN);
+        } else {
+            (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue('');
+        }
+
+        let assignedSTN = this.spiritualthought && (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname);
+        let enteredSTN = '' + (<FormControl>this.agendaeditForm.get('spiritualthought').value);
+
+        if (assignedSTN === enteredSTN) {
+            //do nothnig
+        } else if ('@' + assignedSTN === enteredSTN) {
+            (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue(assignedSTN);
+        } else {
+            (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue('');
+        }
     }
 
     hideList() {
         this.showlist = false;
         this.showlist1 = false;
         this.showlist2 = false;
+
+        /*
+        *  To clear @ input
+        */
+        let assignedOPN = this.openingprayer && (this.openingprayer.firstname + ' ' + this.openingprayer.lastname);
+        let enteredOPN = '' + (<FormControl>this.agendaeditForm.get('openingprayer').value);
+
+        if (assignedOPN === enteredOPN) {
+            //do nothnig
+        } else if ('@' + assignedOPN === enteredOPN) {
+            (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue(assignedOPN);
+        } else {
+            (<FormControl>this.agendaeditForm.controls['openingprayer']).setValue('');
+        }
+
+        let assignedSTN = this.spiritualthought && (this.spiritualthought.firstname + ' ' + this.spiritualthought.lastname);
+        let enteredSTN = '' + (<FormControl>this.agendaeditForm.get('spiritualthought').value);
+
+        if (assignedSTN === enteredSTN) {
+            //do nothnig
+        } else if ('@' + assignedSTN === enteredSTN) {
+            (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue(assignedSTN);
+        } else {
+            (<FormControl>this.agendaeditForm.controls['spiritualthought']).setValue('');
+        }
+
+        let assignedCPN = this.closingprayer && (this.closingprayer.firstname + ' ' + this.closingprayer.lastname);
+        let enteredCPN = '' + (<FormControl>this.agendaeditForm.get('closingprayer').value);
+
+        if (assignedCPN === enteredCPN) {
+            //do nothnig
+        } else if ('@' + assignedCPN === enteredCPN) {
+            (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue(assignedCPN);
+        } else {
+            (<FormControl>this.agendaeditForm.controls['closingprayer']).setValue('');
+        }
     }
 
     bindAssignto(user) {

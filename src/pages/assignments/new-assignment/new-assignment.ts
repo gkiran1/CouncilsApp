@@ -302,9 +302,19 @@ export class NewAssignmentPage {
   }
 
   hideList() {
+    let assignmedusername = this.assigneduser && (this.assigneduser.firstname + ' ' + this.assigneduser.lastname);
+    let userinputname = '' + (<FormControl>this.assignmentForm.get('assigneduser').value);
     this.showlist = false;
+    if ((assignmedusername === userinputname)) {
+      return;
+    } else if (('@' + assignmedusername === userinputname)) {
+      (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(assignmedusername);
+      return;
+    }
+    (<FormControl>this.assignmentForm.controls['assigneduser']).setValue('');
+
   }
-  bindAssignto( user) {
+  bindAssignto(user) {
     this.isAssigntoTouched = true;
     this.showlist = false;
     (<FormControl>this.assignmentForm.controls['assigneduser']).setValue(user.firstname + ' ' + user.lastname);
