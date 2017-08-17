@@ -26,6 +26,9 @@ export class CouncilUsersModalPage {
                             u[0].status = status ? '#3cb18a' : '#a9aaac';
                         });
                         this.usersArray.push(u[0]);
+                        this.usersArray.sort(function (a, b) {
+                            return (a.status === '#3cb18a' && b.status === '#a9aaac') ? -1 : ((a.status === '#a9aaac' && b.status === '#3cb18a') ? 1 : 0);
+                        });
                     }
                 });
             });

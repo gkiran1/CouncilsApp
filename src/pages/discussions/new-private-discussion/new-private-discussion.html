@@ -25,7 +25,12 @@
                             <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
                         </ion-avatar>
                         <ion-label class="font5">{{user.firstname}} {{user.lastname}}</ion-label>
-                        <ion-label class="font1">{{user.councilsString}}</ion-label>
+                        <!--<ion-label class="font1">{{user.councilsString}}</ion-label>-->
+                        <ion-label class="status">
+                        <svg height="8" width="8">
+                            <circle cx="4" cy="4" r="4" [attr.fill]='user.status' />
+                        </svg>
+                        </ion-label>
                         <ion-radio [value]="user" color="secondary"></ion-radio>
                     </ion-item>
                 </ng-container>

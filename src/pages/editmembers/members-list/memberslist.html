@@ -22,12 +22,14 @@
                 <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
             </ion-avatar>
             <h3 class="font1">{{user.firstname}} {{user.lastname}}</h3>
-            <p><span class="font2">{{user.councilnames}}</span></p>
-
+            <!--<p><span class="font2">{{user.councilnames}}</span></p>-->
+            <svg height="8" width="8">
+                <circle cx="4" cy="4" r="4" [attr.fill]='user.status' />
+            </svg>
             <button class="button button-clik" ion-button item-right clear>   
              <ion-icon class="councils-icon__chevron_right fwd-arrow-grey" ></ion-icon>
 
             </button>
-            </ion-item>
+        </ion-item>
     </ion-list>
 </ion-content>

@@ -29,16 +29,22 @@ export class NewPrivateDiscussionPage {
                     let v = this.users.some(i => {
                       return i.$key === u[0].$key;
                     });
-                    u[0].councilsString = '';
-                    u[0].councils.forEach(c => {
-                      this.firebaseservice.getCouncilByCouncilKey(c).subscribe(council => {
-                        u[0].councilsString = `${u[0].councilsString}${u[0].councilsString ? ',' : ''} ${council.council}`;
-                      });
+                    this.firebaseservice.checkNetworkStatus(u[0].$key, function (status) {
+                      u[0].status = status ? '#3cb18a' : '#a9aaac';
                     });
+                    // u[0].councilsString = '';
+                    // u[0].councils.forEach(c => {
+                    //   this.firebaseservice.getCouncilByCouncilKey(c).subscribe(council => {
+                    //     u[0].councilsString = `${u[0].councilsString}${u[0].councilsString ? ',' : ''} ${council.council}`;
+                    //   });
+                    // });
                     if (!v) {
                       this.users.push(u[0]);
                       this.isLoading = false;
                     }
+                    this.users.sort(function (a, b) {
+                      return (a.status === '#3cb18a' && b.status === '#a9aaac') ? -1 : ((a.status === '#a9aaac' && b.status === '#3cb18a') ? 1 : 0);
+                    });
                   }
                 });
               });

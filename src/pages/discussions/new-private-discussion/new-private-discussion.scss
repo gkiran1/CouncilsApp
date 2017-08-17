@@ -1,84 +1,125 @@
 new-private-discussion-page {
-    .ion-ios-close {
-        font-size: 300% !important;
-    }
-    .text-input-md {
-        margin: 13px 8px 13px 0 !important;
-    }
-    .center {
-        position: absolute;
-        top: 40%;
-        width: 100%;
-    }
-    ion-content ion-item ion-label {
-        white-space: normal !important;
-    }
-    .flex-change {
-        padding-top: 10pt;
-        // padding-bottom: 10pt;
-    }
-    .flex-change .input-wrapper {
-        flex-direction: column;
-        align-items: flex-start
-    }
-    .flex-change .label-md,
-    .flex-change .label-ios,
-    .flex-change .label-wp {
-        margin: 0;
-        overflow: visible;
-    }
-    .flex-change .item-inner {
-        padding-bottom: 6pt;
-    }
-    .font5{
-        font-family: Bernina-Regular, sans-serif;
-        font-size: 17px !important;
-        color: #35373a !important;
-    }
-    .font1{
-        font-family: Bernina-Regular, sans-serif;
-        font-size: 17px !important;
-        color: #a9aaac !important;
-    }
-    .searchbar-ios .searchbar-input{
-        padding: 6px 20px 6px 25px !important;
-        background: #FAFAFA !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-     .searchbar-md .searchbar-input{
-        padding: 6px 20px 6px 30px !important;
-        background: #FAFAFA !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-    .searchbar-search-icon {
-        left:8px !important;
-    }
-    .searchbar-clear-icon{
-        right:0 !important;
-        padding-right: 0 !important;
-    }
-    ion-searchbar{
-        background: #FAFAFA !important;
-    }
-    ion-item{
-        align-items: flex-start !important;
-    }
-    ion-avatar{
-        margin-top: 0 !important;
-    }
-    ion-list{
-        border-top:1px solid #E8E9EB !important;
-        border-bottom:1px solid #E8E9EB !important;
-    }
-    .list-md {
-        border-top:2px solid #E8E9EB !important;
-    }
+  .ion-ios-close {
+    font-size: 300% !important;
+  }
 
-    .ion-item-middle.item-ios.item-block:last-child .item-inner,
-    .ion-item-middle.item-md.item-block:last-child .item-inner{
-        border-bottom: none !important;
-    }
+  .text-input-md {
+    margin: 13px 8px 13px 0 !important;
+  }
+
+  .center {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+  }
+
+  ion-content ion-item ion-label {
+    white-space: normal !important;
+  }
+
+  .flex-change {
+    padding-top: 5pt;
+    // padding-bottom: 10pt;
+  }
+
+  .flex-change .input-wrapper {
+    // flex-direction: column;
+    // align-items: flex-start;
+  }
+
+  .flex-change .label-ios,
+  .flex-change .label-md,
+  .flex-change .label-wp {
+    margin: 0;
+    overflow: visible;
+  }
+
+  .flex-change .item-inner {
+    padding-bottom: 6pt;
+  }
+
+  .font5 {
+    font-family: Bernina-Regular, sans-serif;
+    font-size: 17px !important;
+    color: #35373a !important;
+  }
+
+  .font1 {
+    font-family: Bernina-Regular, sans-serif;
+    font-size: 17px !important;
+    color: #a9aaac !important;
+  }
+
+  .searchbar-ios .searchbar-input {
+    padding: 6px 20px 6px 25px !important;
+    background: #FAFAFA !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .searchbar-md .searchbar-input {
+    padding: 6px 20px 6px 30px !important;
+    background: #FAFAFA !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .searchbar-search-icon {
+    left: 8px !important;
+  }
+
+  .searchbar-clear-icon {
+    right: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  ion-searchbar {
+    background: #FAFAFA !important;
+  }
+
+  ion-item {
+    align-items: center !important;
+  }
+
+  ion-avatar {
+    margin-top: 0 !important;
+    margin-right: 8px !important;
+  }
+
+  ion-list {
+    border-top: 1px solid #E8E9EB !important;
+    border-bottom: 1px solid #E8E9EB !important;
+  }
+
+  .list-md {
+    border-top: 2px solid #E8E9EB !important;
+  }
+
+  .ion-item-middle.item-ios.item-block:last-child .item-inner,
+  .ion-item-middle.item-md.item-block:last-child .item-inner {
+    border-bottom: none !important;
+  }
+
+  ion-avatar,
+  ion-avatar img {
+    height: 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+  .input-wrapper{
+      position:relative !important;
+  }
+  .status, svg{
+      position: absolute;
+      right:0px;
+  }
+  ion-radio{
+      margin-top:14px !important;
+  }
+  .radio-md{
+      margin-top:5px !important;
+  }
+  
 
 }

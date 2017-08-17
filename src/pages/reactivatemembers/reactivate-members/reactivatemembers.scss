@@ -17,4 +17,19 @@ reactivatemembers-page{
         background: #ffffff;
         
     }
+     ion-avatar,
+    ion-avatar img {
+        height: 36px !important;
+        width: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+    }
+    .input-wrapper{
+        position:relative !important;
+    }
+    .status, svg{
+        position: absolute;
+        right:0px;
+        top:22px;
+    }
 }
