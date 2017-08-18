@@ -27,15 +27,21 @@ export class NewCouncilPage {
           this.firebaseservice.getUsersByUnitNumber(user.unitnumber).subscribe(users => {
             this.users = users.filter(userObj => {
               if (userObj && userObj.isactive === true) {
-                var userCouncilNames: string[] = [];
-                userObj.councils.forEach(councilId => {
-                  this.firebaseservice.getCouncilByKey(councilId).subscribe((councilObj) => {
-                    userCouncilNames.push(councilObj[0].council);
-                    userObj.councilnames = userCouncilNames.join(', ');
-                  });
+                // var userCouncilNames: string[] = [];
+                // userObj.councils.forEach(councilId => {
+                //   this.firebaseservice.getCouncilByKey(councilId).subscribe((councilObj) => {
+                //     userCouncilNames.push(councilObj[0].council);
+                //     userObj.councilnames = userCouncilNames.join(', ');
+                //   });
+                // });
+                this.firebaseservice.checkNetworkStatus(userObj.$key, function (status) {
+                  userObj.status = status ? '#3cb18a' : '#a9aaac';
                 });
                 return userObj;
               }
+            });
+            this.users.sort(function (a, b) {
+              return (a.status === '#3cb18a' && b.status === '#a9aaac') ? -1 : ((a.status === '#a9aaac' && b.status === '#3cb18a') ? 1 : 0);
             });
           });
         });
