@@ -18,7 +18,7 @@ new-private-discussion-page {
   }
 
   .flex-change {
-    padding-top: 5pt;
+    padding-top: 10pt;
     // padding-bottom: 10pt;
   }
 
@@ -112,8 +112,13 @@ new-private-discussion-page {
   }
   .status, svg{
       position: absolute;
-      right:0px;
+      right:0;
   }
+    .status{
+        right:6px;
+      top:18px;
+    }
+  
   ion-radio{
       margin-top:14px !important;
   }

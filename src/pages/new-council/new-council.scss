@@ -43,7 +43,10 @@ new-createcouncil{
     .status, svg{
         position: absolute;
         right:0px;
-        top:22px;
+        top:18px;
+    }
+    ion-checkbox{
+        margin-top:18px !important;
     }
    
 }
