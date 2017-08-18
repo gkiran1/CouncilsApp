@@ -68,6 +68,8 @@ agenda-page {
         background: #F4F6FA;
         width: 36px !important;
         height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
         border-radius: 50% !important;
     }
     .invalid ion-datetime {
