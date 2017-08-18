@@ -18,7 +18,8 @@
                 <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="!(user)?.avatar || (user)?.avatar === 'avatar'" />
             </ion-avatar>
             <h3 class="font1">{{user.firstname}} {{user.lastname}}</h3>
-            <svg height="8" width="8">
+            <p class="font2">{{user.councilnames}}</p>
+            <svg height="8" width="8" item-right>
                 <circle cx="4" cy="4" r="4" [attr.fill]='user.status' />
             </svg>
         </ion-item>

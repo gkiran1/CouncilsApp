@@ -51,4 +51,15 @@ directory-page {
     ion-searchbar {
         background: #FAFAFA !important;
     }
+
+    ion-content ion-item ion-label {
+        display: block !important;
+        white-space: normal !important;
+    }
+    ion-item{
+        align-items: flex-start !important;
+    }
+    svg{
+        margin-top:18px !important;
+    }
 }

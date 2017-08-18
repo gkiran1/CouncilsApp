@@ -32,6 +32,13 @@ export class DirectoryPage {
                 this.users = [];
                 usersObj.forEach(userObj => {
                     if (userObj.isactive) {
+                        var userCouncilNames: string[] = [];
+                        userObj.councils.forEach(councilId => {
+                            this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
+                                userCouncilNames.push(councilObj[0].council);
+                                userObj.councilnames = userCouncilNames.join(', ');
+                            });
+                        });
                         this.firebaseService.checkNetworkStatus(userObj.$key, function (status) {
                             userObj.status = status ? '#3cb18a' : '#a9aaac';
                         });
@@ -42,6 +49,7 @@ export class DirectoryPage {
                         });
                     }
                 });
+
             });
         }
         else {
@@ -54,6 +62,15 @@ export class DirectoryPage {
                             if (usrs[0] && usrs[0].isactive) {
                                 userKeys.push(usrs[0].$key);
                                 if (userKeys.indexOf(usrs[0].$key) === userKeys.lastIndexOf(usrs[0].$key)) {
+
+                                    var userCouncilNames: string[] = [];
+                                    usrs[0].councils.forEach(councilId => {
+                                        this.firebaseService.getCouncilByKey(councilId).subscribe((councilObj) => {
+                                            userCouncilNames.push(councilObj[0].council);
+                                            usrs[0].councilnames = userCouncilNames.join(', ');
+                                        });
+                                    });
+
                                     this.firebaseService.checkNetworkStatus(usrs[0].$key, function (status) {
                                         usrs[0].status = status ? '#3cb18a' : '#a9aaac';
                                     });
