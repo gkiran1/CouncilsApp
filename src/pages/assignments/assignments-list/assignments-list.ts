@@ -48,7 +48,7 @@ export class AssignmentsListPage {
             .subscribe(assignments => {
 
               assignments.sort(function (a, b) {
-                return (a.createddate > b.createddate) ? -1 : ((a.createddate < b.createddate) ? 1 : 0);
+                return (a.lastupdateddate > b.lastupdateddate) ? -1 : ((a.lastupdateddate < b.lastupdateddate) ? 1 : 0);
               });
 
               this.councilAssignmentsArray = [];
