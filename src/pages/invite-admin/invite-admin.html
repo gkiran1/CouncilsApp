@@ -42,7 +42,7 @@
 
 			<ion-list class="councils-list" radio-group id="council" name="council" (change)="radioSelected=$event.target.value" formControlName="radioSelected">
 				<ng-container *ngIf="unitType === 'Area'">
-					<ion-item class="unittype">Stake</ion-item>
+					<ion-item class="unittype paddingtop">Stake</ion-item>
 					<ion-item [ngClass]='ion-idv-item'>
 						<ion-label color="dark">Stake President</ion-label>
 						<ion-radio value="areastakepresidents" [checked]="radioSelected=='areastakepresidents'" color="secondary" item-right></ion-radio>
@@ -50,7 +50,7 @@
 				</ng-container>
 
 				<ng-container *ngIf="unitType === 'Stake'">
-					<ion-item class="unittype">Area</ion-item>
+					<ion-item class="unittype paddingtop">Area</ion-item>
 					<ion-item [ngClass]='ion-idv-item'>
 						<ion-label color="dark">Area President</ion-label>
 						<ion-radio value="stakestakepresidents" [checked]="radioSelected=='stakestakepresidents'" color="secondary" item-right></ion-radio>
@@ -64,7 +64,7 @@
 				</ng-container>
 
 				<ng-container *ngIf="unitType === 'Ward'">
-					<ion-item class="unittype">Stake</ion-item>
+					<ion-item class="unittype paddingtop">Stake</ion-item>
 					<ion-item [ngClass]='ion-idv-item'>
 						<ion-label color="dark">Stake President</ion-label>
 						<ion-radio value="wardbishops" [checked]="radioSelected=='wardbishops'" color="secondary" item-right></ion-radio>
