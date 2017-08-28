@@ -142,7 +142,7 @@ export class ViewCouncilFilePage {
             //alert(targetPath);
 
         } else {
-            var targetPath = cordova.file.cacheDirectory + '/CouncilDownloads/' + item.filename;
+            var targetPath = cordova.file.externalDataDirectory + '/CouncilDownloads/' + item.filename;
         }
         let ProfileRef = this.profilePictureRef.child(item.councilid + '//' + item.$key + '//' + item.filename)
         var filetype = (item.filename.substr(item.filename.lastIndexOf('.') + 1)).toUpperCase();
