@@ -107,7 +107,7 @@ export class NewCouncilDiscussionPage {
     value.councilid = value.council.$key;
     value.councilname = value.council.council;
     value.lastMsg = '';
-    value.typings = '';
+    value.typings = [];
     this.firebaseservice.createDiscussion(value)
       .then(discussionId => {
         this.nav.push(OpenCouncilDiscussionPage, {

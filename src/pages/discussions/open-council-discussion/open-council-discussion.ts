@@ -18,7 +18,7 @@ export class OpenCouncilDiscussionPage {
         $key: '',
         messages: [],
         councilid: '',
-        typings: '',
+        typings: [],
         councilname: ''
     }
     msg = '';
@@ -40,7 +40,7 @@ export class OpenCouncilDiscussionPage {
                         this.discussion = discussion;
                         this.discussion.messages = this.discussion.messages || [];
                         this.discussion.messages = Object.keys(this.discussion.messages).map(e => this.discussion.messages[e]);
-                        this.discussion.typings = this.discussion.typings || '';
+                        this.discussion.typings = this.discussion.typings || [];
                         if (this.buttonClicked === false && discussion.lastMsgSentUser !== this.user.firstname + ' ' + this.user.lastname && discussion.isNotificationReq) {
                             this.nativeAudio.play('chime');
                         }
@@ -58,7 +58,7 @@ export class OpenCouncilDiscussionPage {
     }
 
     ionViewDidEnter() {
-        if (this.discussion.typings) {
+        if (this.discussion.typings.length) {
             let style = window.getComputedStyle(this.ele.nativeElement.querySelector('.scroll-content'))
             let newBottom = (Number.parseFloat(style.getPropertyValue('margin-bottom').replace(/px/, '')) + 10) + 'px';
             this.ele.nativeElement.querySelector('.scroll-content').style.marginBottom = newBottom;
@@ -66,7 +66,14 @@ export class OpenCouncilDiscussionPage {
         this.content.scrollToBottom();
         this.tbottom = this.ele.nativeElement.querySelector('ion-footer').offsetHeight + 'px';
         this.platform.pause.subscribe(() => {
-            this.discussion.typings = this.discussion.typings.replace(', ' + this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '');
+
+            let typingsArr = this.discussion.typings;
+            typingsArr.forEach((t, i) => {
+                if (t.userid === this.user.$key) {
+                    this.discussion.typings.splice(i, 1)
+                }
+            })
+
             this.fs.updateDiscussion(this.discussion.$key, this.discussion.typings)
                 .then(res => {
                     //
@@ -133,8 +140,21 @@ export class OpenCouncilDiscussionPage {
 
     focusIn() {
         //check whether username is already added to typings string. if so, dont add it again.
-        if (this.discussion.typings.includes(this.user.firstname)) return;
-        this.discussion.typings = `${this.discussion.typings}${this.discussion.typings ? ', ' : ''}${this.user.firstname} is typing..`;
+        let isincluded = false;
+        this.discussion.typings.forEach(t => {
+            if (t.userid === this.user.$key) {
+                isincluded = true;
+            }
+        })
+        if (isincluded) return;
+
+        let typingObj = {
+            userid: this.user.$key,
+            firstname: this.user.firstname,
+            lastname: this.user.lastname,
+            avatar: this.user.avatar
+        }
+        this.discussion.typings.push(typingObj);
         this.fs.updateDiscussion(this.discussion.$key, this.discussion.typings)
             .then(res => {
                 //
@@ -144,7 +164,13 @@ export class OpenCouncilDiscussionPage {
     }
     focusOut() {
         //username must have been added already in onfoucs event.So, removing it from the typings string
-        this.discussion.typings = this.discussion.typings.replace(', ' + this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '');
+        let typingsArr = this.discussion.typings;
+        typingsArr.forEach((t, i) => {
+            if (t.userid === this.user.$key) {
+                console.log('removed', this.discussion.typings, i);
+                this.discussion.typings.splice(i, 1)
+            }
+        })
         this.fs.updateDiscussion(this.discussion.$key, this.discussion.typings)
             .then(res => {
                 //

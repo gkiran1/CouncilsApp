@@ -44,11 +44,19 @@
     <!--</ion-scroll>-->
 
 </ion-content>
-<ion-label class="typings-label" [ngStyle]="{'bottom':tbottom}" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
-        '')">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
-    '')}}
-</ion-label>
+
 <ion-footer>
+    <ng-container *ngFor="let t of discussion.typings">
+        <ion-item *ngIf="t.userid !== user.$key">
+            <ion-avatar item-left>
+                <img [src]="t.avatar" class="avatarImage" *ngIf="t.avatar && t.avatar !== 'avatar'" />
+                <img src="assets/icon/noavatar.png" class="avatarImage" *ngIf="t.avatar || t.avatar === 'avatar'" />
+            </ion-avatar>
+            <ion-label class="typings-label1">
+                <span style="color:#3CB18A">{{t.firstname}}</span><span style="color: #a9aaac;"> is typing..</span>
+            </ion-label>
+        </ion-item>
+    </ng-container>
 
     <!--<ion-row>
             <ion-col width-80 class="msg-col">

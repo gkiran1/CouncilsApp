@@ -35,23 +35,29 @@
                 <h2 class="font4">{{msg.user_firstname}} {{msg.user_lastname}}</h2>
                 <!--<ion-icon class="councils-icon__checkmark" *ngIf="msg.userId === user.$key && msg.status === 'sent'" ios="ios-checkmark"
                     md="ios-checkmark"></ion-icon>-->
-                    <p class="font2">{{msg.timestamp | customdateformat}}
-                        <span class="right-align" *ngIf="msg.userId === user.$key && msg.status === 'sent'">sent <ion-icon class="councils-icon__checkmark"></ion-icon></span>
-                    </p>
-                    <p class="font5 line-height" [innerHTML]="msg.text | addtagcolor"></p>
+                <p class="font2">{{msg.timestamp | customdateformat}}
+                    <span class="right-align" *ngIf="msg.userId === user.$key && msg.status === 'sent'">sent <ion-icon class="councils-icon__checkmark"></ion-icon></span>
+                </p>
+                <p class="font5 line-height" [innerHTML]="msg.text | addtagcolor"></p>
             </ion-item>
         </ion-list>
     </div>
     <!--</ion-scroll>-->
-    
+
 </ion-content>
 
 <ion-footer>
-    <ion-label class="typings-label" [ngStyle]="{'bottom':tbottom}" *ngIf="discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
-        '')">{{discussion.typings.replace(', '+ this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..',
-        '')}}
-        </ion-label>
-        <!--<ion-row>
+    <ion-label class="typings-label" [ngStyle]="{'bottom':tbottom}" *ngIf="t.userid !== user.$key">
+        <span *ngFor="let t of discussion.typings; let isLast=last" style="color:#3CB18A">
+                {{t.firstname}}{{isLast ? '' : ', '}}
+        </span>
+        <span style="color: #a9aaac;">
+            is typing..
+        </span>
+
+    </ion-label>
+
+    <!--<ion-row>
             <ion-col width-80 class="msg-col">
                 <ion-textarea type="text" rows="1" elastic id="msgFld" spellcheck="true" placeholder="Write a message..." [(ngModel)]="msg" (focus)="focusIn()" (focusout)="focusOut()"
                     (keyup)="keypresssed($event)"></ion-textarea>
@@ -60,13 +66,13 @@
                 <button ion-button color="secondary" clear (click)="send()" [disabled]="!msg">Send</button>
             </ion-col>
         </ion-row>-->
-        <ion-textarea type="text" rows="1" elastic id="msgFld" spellautocomplete placeholder="Write a message..." [(ngModel)]="msg"
-            (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)" autocomplete="true"></ion-textarea>
-            <ion-row>
-                <ion-col width-80>
-                </ion-col>
-                <ion-col width-20>
-                    <button ion-button color="secondary" class="button button-clik" clear (click)="send()" [disabled]="!msg">Send</button>
-                </ion-col>
-            </ion-row>
+    <ion-textarea type="text" rows="1" elastic id="msgFld" spellautocomplete placeholder="Write a message..." [(ngModel)]="msg"
+        (focus)="focusIn()" (focusout)="focusOut()" (keyup)="keypresssed($event)" autocomplete="true"></ion-textarea>
+    <ion-row>
+        <ion-col width-80>
+        </ion-col>
+        <ion-col width-20>
+            <button ion-button color="secondary" class="button button-clik" clear (click)="send()" [disabled]="!msg">Send</button>
+        </ion-col>
+    </ion-row>
 </ion-footer>

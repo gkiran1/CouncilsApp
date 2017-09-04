@@ -16,7 +16,7 @@ export class OpenPrivateDiscussionPage {
     discussion = {
         $key: '',
         messages: [],
-        typings: ''
+        typings: []
     }
     msg = '';
     user;
@@ -39,7 +39,7 @@ export class OpenPrivateDiscussionPage {
                         this.chatWith = discussion.createdUserId === this.user.$key ? discussion.otherUserName : discussion.createdUserName;
                         this.createdBy = discussion.createdUserId === this.user.$key ? 'You' : discussion.createdUserName;
                         this.discussion.messages = this.discussion.messages || [];
-                        this.discussion.typings = this.discussion.typings || '';
+                        this.discussion.typings = this.discussion.typings || [];
                         this.discussion.messages = Object.keys(this.discussion.messages).map(e => this.discussion.messages[e]);
                         this.buttonClicked = false;
                     });
@@ -71,7 +71,12 @@ export class OpenPrivateDiscussionPage {
             });
         });
         this.platform.pause.subscribe(() => {
-            this.discussion.typings = this.discussion.typings.replace(', ' + this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '');
+            let typingsArr = this.discussion.typings;
+            typingsArr.forEach((t, i) => {
+                if (t.userid === this.user.$key) {
+                    this.discussion.typings.splice(i, 1)
+                }
+            })
             this.fs.updatePrivateDiscussion(this.discussion.$key, this.discussion.typings)
                 .then(res => {
                     //
@@ -110,8 +115,21 @@ export class OpenPrivateDiscussionPage {
     }
     focusIn() {
         //check whether username is already added to typings string. if so, dont add it again.
-        if (this.discussion.typings.includes(this.user.firstname)) return;
-        this.discussion.typings = `${this.discussion.typings}${this.discussion.typings ? ', ' : ''}${this.user.firstname} is typing..`;
+        let isincluded = false;
+        this.discussion.typings.forEach(t => {
+            if (t.userid === this.user.$key) {
+                isincluded = true;
+            }
+        })
+        if (isincluded) return;
+
+        let typingObj = {
+            userid: this.user.$key,
+            firstname: this.user.firstname,
+            lastname: this.user.lastname,
+            avatar: this.user.avatar
+        }
+        this.discussion.typings.push(typingObj);
         this.fs.updatePrivateDiscussion(this.discussion.$key, this.discussion.typings)
             .then(res => {
                 //
@@ -121,7 +139,13 @@ export class OpenPrivateDiscussionPage {
     }
     focusOut() {
         //username must have been added already in onfoucs event.So, removing it from the typings string
-        this.discussion.typings = this.discussion.typings.replace(', ' + this.user.firstname + ' is typing..', '').replace(this.user.firstname + ' is typing..', '');
+        let typingsArr = this.discussion.typings;
+        typingsArr.forEach((t, i) => {
+            if (t.userid === this.user.$key) {
+                console.log('removed', this.discussion.typings, i);
+                this.discussion.typings.splice(i, 1)
+            }
+        })
         this.fs.updatePrivateDiscussion(this.discussion.$key, this.discussion.typings)
             .then(res => {
                 //
