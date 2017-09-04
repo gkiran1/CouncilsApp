@@ -47,14 +47,12 @@
 </ion-content>
 
 <ion-footer>
-    <ion-label class="typings-label" [ngStyle]="{'bottom':tbottom}" *ngIf="t.userid !== user.$key">
-        <span *ngFor="let t of discussion.typings; let isLast=last" style="color:#3CB18A">
-                {{t.firstname}}{{isLast ? '' : ', '}}
-        </span>
-        <span style="color: #a9aaac;">
-            is typing..
-        </span>
-
+    <ion-label class="typings-label" [ngStyle]="{'bottom':tbottom}">
+        <ng-container *ngFor="let t of discussion.typings; let isLast=last">
+            <span style="color:#3CB18A" *ngIf="t.userid !== user.$key">
+                {{t.firstname}} <span style="color: #a9aaac;"> {{isLast ? ' is typing..' : ', '}}</span>
+            </span>
+        </ng-container>
     </ion-label>
 
     <!--<ion-row>
