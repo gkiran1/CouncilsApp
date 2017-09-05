@@ -929,12 +929,21 @@ export class FirebaseService {
         });
     }
 
+    getAgendasNotifications(userId) {
+        return this.af.database.list('notifications', {
+            query: {
+                orderByChild: 'userid',
+                equalTo: userId
+            }
+        });
+    }
+
     count$ = new Subject();
+    agendasCount$ = new Subject();
 
     getNotCnt() {
         var userId = localStorage.getItem('securityToken');
-        if (userId !== null) {
-            var notifications = [];
+        if (userId) {
             this.getNotifications(userId).subscribe(notifications => {
                 notifications = notifications.filter(notification => {
                     return notification.isread === false;
@@ -943,6 +952,19 @@ export class FirebaseService {
             });
         }
         return this.count$;
+    }
+
+    getAgendasNotCnt() {
+        var userId = localStorage.getItem('securityToken');
+        if (userId) {
+            this.getNotifications(userId).subscribe(notifications => {
+                notifications = notifications.filter(notification => {
+                    return (notification.isread === false && notification.nodename === 'agendas' && notification.action === 'create');
+                });
+                this.agendasCount$.next(notifications.length);
+            });
+        }
+        return this.agendasCount$;
     }
 
     setDefaultNotificationSettings(userId) {

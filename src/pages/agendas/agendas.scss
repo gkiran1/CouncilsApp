@@ -26,11 +26,25 @@ agendas-page {
         color: #3cb18a !important;
         margin: 0px !important;
     }
+    .agendadate-styles-bold {
+        font-family: Bernina-Regular !important;
+        font-size: 17px !important;
+        color: #3cb18a !important;
+        margin: 0px !important;
+        font-weight: bolder;
+    }
     .agendacouncil-styles {
         font-family: Bernina-Regular !important;
         font-size: 13px !important;
         color: #a9aaac !important;
         // margin-left: -55px !important;
+    }
+    .agendacouncil-styles-bold {
+        font-family: Bernina-Regular !important;
+        font-size: 13px !important;
+        color: #000000 !important;
+        // margin-left: -55px !important;
+        font-weight: bolder;
     }
     .background-color {
         background: #ffffff;

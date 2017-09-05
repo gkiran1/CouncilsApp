@@ -23,6 +23,8 @@ export class AgendasPage {
     count$ = new Subject();
     userSubscription: Subscription;
     notificationsCount;
+    agendasCount;
+    unreadAgendas = [];
 
     constructor(public nav: NavController, public af: AngularFire, public firebaseservice: FirebaseService) {
 
@@ -30,41 +32,80 @@ export class AgendasPage {
             if (auth !== null) {
                 this.af.database.object('/users/' + auth.uid).subscribe(usr => {
                     this.user = usr;
-                    af.database.list('/agendas')
-                        .subscribe(agendas => {
-                            this.agendasArray = [];
-                            agendas.forEach(agenda => {
-                                if (!agenda.isactive) return;
-                                if (this.user.councils.includes(agenda.councilid)) {
-                                    this.agendasArray.push(agenda);
-                                }
-                            });
 
-                            let count = this.agendasArray.length;
-                            count = count ? count : null;
-                            this.count$.next(count);
+                    this.firebaseservice.getAgendasNotifications(auth.uid).subscribe(notifications => {
 
-                            this.agendasArray.sort(function (a, b) {
-                                return (a.createddate > b.createddate) ? -1 : ((a.createddate < b.createddate) ? 1 : 0);
-                            });
+                        this.unreadAgendas = [];
 
+                        notifications.forEach(notification => {
+                            if (notification.nodename === 'agendas' && notification.isread === false && notification.action === 'create') {
+                                this.unreadAgendas.push(notification);
+                            }
                         });
+
+                        this.agendasCount = this.unreadAgendas.length;
+
+                        af.database.list('/agendas')
+                            .subscribe(agendas => {
+                                this.agendasArray = [];
+                                agendas.forEach(agenda => {
+                                    if (!agenda.isactive) return;
+                                    agenda['isread'] = true;
+                                    if (this.user.councils.includes(agenda.councilid)) {
+                                        var unreadAgenda = this.unreadAgendas.find(not => not.nodeid === agenda.$key);
+                                        if (unreadAgenda) {
+                                            agenda['isread'] = false;
+                                            agenda['notificationKey'] = unreadAgenda.$key;
+                                        }
+                                        this.agendasArray.push(agenda);
+                                    }
+                                });
+
+                                let count = this.agendasArray.length;
+                                count = count ? count : null;
+                                this.count$.next(count);
+
+                                this.agendasArray.sort(function (a, b) {
+                                    return (a.createddate > b.createddate) ? -1 : ((a.createddate < b.createddate) ? 1 : 0);
+                                });
+
+                            });
+
+                    });
+
                 });
             }
         });
 
-        firebaseservice.getNotCnt().subscribe(count => {           
+        firebaseservice.getNotCnt().subscribe(count => {
             this.notificationsCount = count;
         });
+
+        // firebaseservice.getAgendasNotCnt().subscribe(count => {
+        //     this.agendasCount = count;
+        // });
 
     }
 
     agendaSelected(agendaselected) {
+
         if (agendaselected.islite) {
-            this.nav.push(AgendaLiteEditPage, { agendaselected: agendaselected }, { animate: true, animation: 'transition', direction: 'forward' });
+            this.nav.push(AgendaLiteEditPage, { agendaselected: agendaselected }, { animate: true, animation: 'transition', direction: 'forward' })
+                .then(() => {
+                    if (!agendaselected.isread) {
+                        this.firebaseservice.updateIsReadInNotifications(agendaselected.notificationKey);
+                        agendaselected.isread = true;
+                    }
+                });
         }
         else {
-            this.nav.push(AgendaEditPage, { agendaselected: agendaselected }, { animate: true, animation: 'transition', direction: 'forward' });
+            this.nav.push(AgendaEditPage, { agendaselected: agendaselected }, { animate: true, animation: 'transition', direction: 'forward' })
+                .then(() => {
+                    if (!agendaselected.isread) {
+                        this.firebaseservice.updateIsReadInNotifications(agendaselected.notificationKey);
+                        agendaselected.isread = true;
+                    }
+                });
         }
     }
 

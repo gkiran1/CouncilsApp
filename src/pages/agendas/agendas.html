@@ -1,45 +1,47 @@
 <ion-header>
-  <ion-navbar hideBackButton>
-    <ion-buttons class="menu-button" left>
-      <button ion-button menuToggle>
-      <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" ></ion-icon>
+	<ion-navbar hideBackButton>
+		<ion-buttons class="menu-button" left>
+			<button ion-button menuToggle>
+      <ion-icon class="icon councils-icon__left_menu menu-icon" name="menu" >
+          <ion-badge item-right class="notification-badge"  color='danger' *ngIf="agendasCount">{{agendasCount}}</ion-badge>
+      </ion-icon>
     </button>
-    </ion-buttons>
-    <ion-title>Agendas</ion-title>
-    <ion-buttons class="menu-button" end>
-      <button ion-button (click)="notificationsPage()">
+		</ion-buttons>
+		<ion-title>Agendas</ion-title>
+		<ion-buttons class="menu-button" end>
+			<button ion-button (click)="notificationsPage()">
      <ion-icon class="icon councils-icon__notifications menu-icon">
          <ion-badge item-right class="notification-badge"  color='danger' *ngIf="notificationsCount">{{notificationsCount}}</ion-badge>
       </ion-icon> 
       </button>
-    </ion-buttons>
-  </ion-navbar>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 <ion-content class="list-page">
-  <ng-container *ngIf="agendasArray.length">
-    <ion-list>
-      <ion-item class="ion-item-middle" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
-        <!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
-        <ion-row>
-          <ion-icon class="councils-icon__agenda menu-icon menu-style" color="primary"></ion-icon>
-          <ion-col>
-            <p class="agendadate-styles">{{(item.agendadate)|date:'MMMM d'}}</p>
-            <p><span class="agendacouncil-styles">{{item.agendacouncil}}</span>
-            </p>
-          </ion-col>
-          <ion-col>
-            <button class="button button-clik" ion-button item-right clear>
+	<ng-container *ngIf="agendasArray.length">
+		<ion-list>
+			<ion-item class="ion-item-middle" (click)="agendaSelected(item)" *ngFor="let item of agendasArray">
+				<!--<ion-icon name="list" color="secondary" item-left></ion-icon>-->
+				<ion-row>
+					<ion-icon class="councils-icon__agenda menu-icon menu-style" color="primary"></ion-icon>
+					<ion-col>
+						<p [ngClass]="item.isread ? 'agendadate-styles' : 'agendadate-styles-bold'">{{(item.agendadate)|date:'MMMM d'}}</p>
+						<p><span [ngClass]="item.isread ? 'agendacouncil-styles' : 'agendacouncil-styles-bold'">{{item.agendacouncil}}</span>
+						</p>
+					</ion-col>
+					<ion-col>
+						<button class="button button-clik" ion-button item-right clear>
         <ion-icon item-right class="councils-icon__chevron_right fwd-arrow-grey right-align"></ion-icon>
       </button>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-    </ion-list>
-  </ng-container>
-  <ng-container *ngIf="!agendasArray.length">
-    <div class="no-content">
-      <ion-label text-center class="nocontent">There are no agendas</ion-label>
-    </div>
-  </ng-container>
+					</ion-col>
+				</ion-row>
+			</ion-item>
+		</ion-list>
+	</ng-container>
+	<ng-container *ngIf="!agendasArray.length">
+		<div class="no-content">
+			<ion-label text-center class="nocontent">There are no agendas</ion-label>
+		</div>
+	</ng-container>
 
 </ion-content>
