@@ -102,6 +102,7 @@ import { CouncilSpinnerComponent } from '../components/council-spinner/council-s
 import { LoadingControllerService } from '../services/LoadingControllerService';
 import { InviteAdminPage } from '../pages/invite-admin/invite-admin.component';
 import { InviteAdminSuccessPage } from '../pages/invite-admin/success.component';
+import { TypingsExclude } from '../pipes/typings-exclude';
 // //Cloud Settings - Push Messaging
 // const cloudSettings: CloudSettings = {
 //   'core': {
@@ -206,7 +207,8 @@ import { InviteAdminSuccessPage } from '../pages/invite-admin/success.component'
     CouncilSpinnerComponent,
     //LoadingControllerService,
     InviteAdminPage,
-    InviteAdminSuccessPage
+    InviteAdminSuccessPage,
+    TypingsExclude
   ],
 
   imports: [
