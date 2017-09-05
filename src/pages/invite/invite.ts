@@ -29,8 +29,6 @@ export class InviteMemberPage {
     addedCouncils = [];
     adminname;
 
-    firstShown;
-
     constructor(public http: Http,
         public navctrl: NavController,
         public fs: FirebaseService,
@@ -85,19 +83,6 @@ export class InviteMemberPage {
                                 }
                             }
 
-                            if (this.areaCouncils.length > 0) {
-                                this.firstShown = 'Area';
-                            }
-                            else if (this.stakeCouncils.length > 0) {
-                                this.firstShown = 'Stake';
-                            }
-                            else if (this.wardCouncils.length > 0) {
-                                this.firstShown = 'Ward';
-                            }
-                            else if (this.addedCouncils.length > 0) {
-                                this.firstShown = 'Added';
-                            }
-
                         });
 
                     });
@@ -133,7 +118,7 @@ export class InviteMemberPage {
     }
 
     keyup($event) {
-        this.isValidEmail = true;      
+        this.isValidEmail = true;
         if ((new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test($event.target.value))) {
             this.emailErr = false;
         }

@@ -19,8 +19,6 @@ export class UserCouncilsModalPage {
   wardCouncils = [];
   addedCouncils = [];
 
-  firstShown;
-
   constructor(private ele: ElementRef, public af: AngularFire, public navParams: NavParams, public fs: FirebaseService, public navCtrl: NavController, public viewCtrl: ViewController) {
     let usercouncils = navParams.get('usercouncils');
     this.selectedCouncilObj = navParams.get('selectedCouncil');
@@ -73,20 +71,7 @@ export class UserCouncilsModalPage {
           else {
             this.wardCouncils.push(council);
           }
-        }
-
-        if (this.areaCouncils.length > 0) {
-          this.firstShown = 'Area';
-        }
-        else if (this.stakeCouncils.length > 0) {
-          this.firstShown = 'Stake';
-        }
-        else if (this.wardCouncils.length > 0) {
-          this.firstShown = 'Ward';
-        }
-        else if (this.addedCouncils.length > 0) {
-          this.firstShown = 'Added';
-        }
+        }    
 
       });
     });

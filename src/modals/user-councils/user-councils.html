@@ -6,28 +6,28 @@
   <ion-searchbar (ionInput)="searchFn($event)" *ngIf="!fromPage" class="font1" placeholder="Which council will see this agenda?"></ion-searchbar>-->
   <ion-list radio-group class="ionlist">
 
-    <ion-item *ngIf="(areaCouncils.length)" [ngClass]="firstShown === 'Area' ? 'unittype' : 'unittype1'">Area</ion-item>
+    <ion-item *ngIf="(areaCouncils.length)" class="unittype1">Area</ion-item>
     <ion-item [ngClass]="areaCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === areaCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))"
       *ngFor="let council of areaCouncils | search:term:'council'; let i = index">
       <ion-label color="dark">{{council.council}}</ion-label>
       <ion-radio [checked]="council.isActCouncil" (click)="dismiss(council)"></ion-radio>
     </ion-item>
 
-    <ion-item *ngIf="(stakeCouncils.length)" [ngClass]="firstShown === 'Stake' ? 'unittype' : 'unittype1'">Stake</ion-item>
+    <ion-item *ngIf="(stakeCouncils.length)" class="unittype1">Stake</ion-item>
     <ion-item [ngClass]="stakeCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === stakeCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))"
       *ngFor="let council of stakeCouncils | search:term:'council'; let i = index">
       <ion-label color="dark">{{council.council}}</ion-label>
       <ion-radio [checked]="council.isActCouncil" (click)="dismiss(council)"></ion-radio>
     </ion-item>
 
-    <ion-item *ngIf="(wardCouncils.length)" [ngClass]="firstShown === 'Ward' ? 'unittype' : 'unittype1'">Ward</ion-item>
+    <ion-item *ngIf="(wardCouncils.length)" class="unittype1">Ward</ion-item>
     <ion-item [ngClass]="wardCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === wardCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))"
       *ngFor="let council of wardCouncils | search:term:'council'; let i = index">
       <ion-label color="dark">{{council.council}}</ion-label>
       <ion-radio [checked]="council.isActCouncil" (click)="dismiss(council)"></ion-radio>
     </ion-item>
 
-    <ion-item *ngIf="(addedCouncils.length)" [ngClass]="firstShown === 'Added' ? 'unittype' : 'unittype1'">Added</ion-item>
+    <ion-item *ngIf="(addedCouncils.length)" class="unittype1">Added</ion-item>
     <ion-item [ngClass]="addedCouncils.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first' : (i === addedCouncils.length - 1? 'ion-item-last' : 'ion-item-middle'))"
       *ngFor="let council of addedCouncils | search:term:'council'; let i = index">
       <ion-label color="dark">{{council.council}}</ion-label>
