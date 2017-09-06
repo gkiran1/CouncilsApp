@@ -33,7 +33,7 @@ export class AgendasPage {
                 this.af.database.object('/users/' + auth.uid).subscribe(usr => {
                     this.user = usr;
 
-                    this.firebaseservice.getAgendasNotifications(auth.uid).subscribe(notifications => {
+                    this.firebaseservice.getNotificationsByUserId(auth.uid).subscribe(notifications => {
 
                         this.unreadAgendas = [];
 

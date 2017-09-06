@@ -13,7 +13,7 @@
                 </button>
 
         </ion-row>
-        <button clear menuToggle ion-button class="listbtn2" id="agendasPage" name="agendasPage" block (click)="agendasPage('agendasPage')"
+        <button clear menuToggle ion-button [ngClass]="isNewAgenda ? 'listbtn2 header-bold' : 'listbtn2'" id="agendasPage" name="agendasPage" block (click)="agendasPage('agendasPage')"
             text-capitalize>
             Agendas <span class="count">{{agendasCount | async}}</span>
             </button>

@@ -39,6 +39,10 @@ export class slide2Page {
   userObj: FirebaseObjectObservable<any>;
   userSubscription: Subscription;
   isAdmin: boolean = false;
+
+  unreadAgendas = [];
+  isNewAgenda = false;
+
   constructor(public nav: NavController,
     public af: AngularFire,
     public appService: AppService,
@@ -63,9 +67,23 @@ export class slide2Page {
       if (auth !== null) {
         this.firebaseService.getUsersByKey(auth.uid).subscribe(usrs => {
           this.userObj = usrs[0];
-          localStorage.setItem('unitType', usrs[0].unittype)
-          localStorage.setItem('unitNumber', usrs[0].unitnumber.toString())
-          localStorage.setItem('userCouncils', usrs[0].councils.toString())
+          localStorage.setItem('unitType', usrs[0].unittype);
+          localStorage.setItem('unitNumber', usrs[0].unitnumber.toString());
+          localStorage.setItem('userCouncils', usrs[0].councils.toString());
+          this.firebaseService.getNotificationsByUserId(auth.uid).subscribe(notifications => {
+            this.unreadAgendas = [];
+            notifications.forEach(notification => {
+              if (notification.nodename === 'agendas' && notification.isread === false && notification.action === 'create') {
+                this.unreadAgendas.push(notification);
+              }
+            });
+            if (this.unreadAgendas.length > 0) {
+              this.isNewAgenda = true;
+            }
+            else {
+              this.isNewAgenda = false;
+            }
+          });
         });
       };
     });
@@ -74,6 +92,7 @@ export class slide2Page {
     this.assignmentsCount = assignmentsListPage.getCount();
     this.councilDiscussionsCount = councilDiscussionsListPage.getCount();
     this.privateDiscussionsCount = privateDiscussionsListPage.getCount();
+
     this.agendasCount = agendaPage.getCount();
     this.notesCount = notesPage.getCount();
     this.filesCount = filesListPage.getCount();

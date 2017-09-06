@@ -929,7 +929,7 @@ export class FirebaseService {
         });
     }
 
-    getAgendasNotifications(userId) {
+    getNotificationsByUserId(userId) {
         return this.af.database.list('notifications', {
             query: {
                 orderByChild: 'userid',
