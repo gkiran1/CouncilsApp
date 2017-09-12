@@ -34,4 +34,35 @@ notifications-page {
     .toolbar-title-md {
         margin: 0px 20px 3px 0px !important;
     }
+    .text-content {
+        font-family: Bernina-Regular, sans-serif;
+        font-size: 15px !important;
+        color: #35373a !important;
+        line-height: 20px;
+        margin-bottom: 8px;
+    }
+    .text-content-bold {
+        font-family: Bernina-Regular, sans-serif;
+        font-size: 15px !important;
+        color: #35373a !important;
+        line-height: 20px;
+        margin-bottom: 8px;
+        font-weight: bolder;
+    }
+    .timestamp {
+        font-family: Bernina-Regular, sans-serif;
+        font-size: 13px !important;
+        color: #a9aaac !important;
+        line-height: 17px
+    }
+    .timestamp-bold {
+        font-family: Bernina-Regular, sans-serif;
+        font-size: 13px !important;
+        color: #a9aaac !important;
+        line-height: 17px;
+        font-weight: bolder;
+    }
+    .username {
+        color: #32b38a;
+    }
 }

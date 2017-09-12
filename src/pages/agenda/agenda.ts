@@ -90,7 +90,8 @@ export class AgendaPage {
             createdby: localStorage.getItem('securityToken'),
             createddate: new Date().toISOString(),
             isactive: true,
-            // lastupdateddate: ''
+            // lastupdateddate: '',
+            //  createdusername: this.user.firstname + ' ' + this.user.lastname
         });
     }
 
@@ -115,6 +116,7 @@ export class AgendaPage {
     agendasArray = [];
 
     createagenda(agenda) {
+        agenda.createdusername = this.user.firstname + ' ' + this.user.lastname;
         this.dateErr = false;
         var isFirstError = false;
         let assigneddate = agenda.assigneddate.replace(/T/, ' ').replace(/Z/, '');
@@ -178,7 +180,6 @@ export class AgendaPage {
                     if (agenda.closingprayeruserid) {
                         this.createActivity(key, agenda.closingprayeruserid, 'closing prayer');
                     }
-
                     this.nav.setRoot(AgendasPage);
                 }).catch(err => this.showAlert('Connection error.'));
         }
@@ -688,9 +689,10 @@ export class AgendaPage {
             timestamp: new Date().toISOString(),
             createdUserId: this.user.$key,
             createdUserName: this.user.firstname + ' ' + this.user.lastname,
-            createdUserAvatar: this.user.avatar
+            createdUserAvatar: this.user.avatar,          
+            nodename: 'agendas'
         }
-        this.firebaseservice.createActivity(activity);
+        return this.firebaseservice.createActivity1(activity);
     }
 
     toggleGroup() {

@@ -18,6 +18,7 @@ import { Badge } from '@ionic-native/badge';
 export class NotificationsPage {
 
     notifications;
+    user;
 
     constructor(private nav: NavController,
         public navParams: NavParams,
@@ -25,13 +26,19 @@ export class NotificationsPage {
         public toast: ToastController,
         public alertCtrl: AlertController,
         public badge: Badge) {
-        var userId = localStorage.getItem('securityToken');
-        if (userId !== null) {
-            this.notifications = [];
-            this.firebaseService.getNotifications(userId).subscribe(notifications => {
-                this.notifications = notifications.reverse();
+
+        let uid = localStorage.getItem('securityToken');
+        if (!uid) return;
+
+        this.firebaseService.getUsersByKey(uid).subscribe(u => {
+            this.user = u[0];
+            this.firebaseService.getNotifications(uid).subscribe(notifications => {
+                notifications.sort(function (a, b) {
+                    return (a.createddate > b.createddate) ? -1 : ((b.createddate > a.createddate) ? 1 : 0);
+                });
+                this.notifications = notifications;
             });
-        }
+        });
     }
 
     ActivityPage(notification) {

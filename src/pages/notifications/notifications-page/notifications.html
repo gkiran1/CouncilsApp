@@ -13,19 +13,34 @@
 	</ion-navbar>
 </ion-header>
 <ion-content class="list-page">
-	<ng-container *ngIf="(notifications.length)">
+	<ng-container *ngIf="notifications && notifications.length">
 		<ion-list>
 			<ion-item [ngClass]="notifications.length === 1 ? 'ion-idv-item' : (i === 0 ? 'ion-item-first': (i === notifications.length-1 ? 'ion-item-last' : 'ion-item-middle'))"
 			    *ngFor="let notification of notifications; let i = index" text-wrap (click)="ActivityPage(notification)">
-				<h3 [innerHTML]="notification.text"></h3>
-				<p class="createddate-lbl">{{notification.createddate| customtimeformat}}</p>
+
+				<div *ngIf="notification.type === 'Notifications'">
+					<p [ngClass]="notification.isread ? 'text-content' : 'text-content-bold'" *ngIf="notification.nodename === 'privatediscussions'"><span class="username">{{notification.description}}</span>{{notification.text}}</p>
+					<p [ngClass]="notification.isread ? 'text-content' : 'text-content-bold'" *ngIf="notification.nodename !== 'privatediscussions'">{{notification.text}}</p>
+					<p [ngClass]="notification.isread ? 'timestamp' : 'timestamp-bold'">{{notification.createddate| customdateformat}}</p>
+				</div>
+
+				<div *ngIf="notification.type === 'Mentions'">
+					<p [ngClass]="notification.isread ? 'text-content' : 'text-content-bold'" *ngIf="notification.entity === 'Agenda'"><span class="username">@{{user.firstname + user.lastname}}</span> you’ve been invited to give the {{notification.action}}</p>
+					<p [ngClass]="notification.isread ? 'text-content' : 'text-content-bold'" *ngIf="notification.entity === 'Assignment'"><span class="username">@{{user.firstname + user.lastname}}</span> has been asked to "{{notification.text}}"</p>
+					<p [ngClass]="notification.isread ? 'text-content' : 'text-content-bold'" *ngIf="notification.entity === 'Discussion'" [innerHTML]="notification.entityDescription | addtagcolor"></p>
+					<p [ngClass]="notification.isread ? 'timestamp' : 'timestamp-bold'">{{notification.createddate | customdateformat}}</p>
+					<p [ngClass]="notification.isread ? 'timestamp' : 'timestamp-bold'" *ngIf="notification.entity !== 'Discussion'">{{notification.description}} {{notification.entity}}</p>
+					<p [ngClass]="notification.isread ? 'timestamp' : 'timestamp-bold'" *ngIf="notification.entity === 'Discussion'">{{notification.createdusername}} {{notification.entity}}</p>
+				</div>
+
 				<button class="button button-clik" ion-button item-right clear>
                  <ion-icon class="councils-icon__chevron_right fwd-arrow-grey"></ion-icon>
                 </button>
+
 			</ion-item>
 		</ion-list>
 	</ng-container>
-	<ng-container *ngIf="!(notifications.length)">
+	<ng-container *ngIf="!notifications || !notifications.length">
 		<div class="no-content">
 			<ion-label text-center class="nocontent">There are no notifications</ion-label>
 		</div>

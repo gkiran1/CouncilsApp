@@ -922,9 +922,10 @@ export class AgendaEditPage {
             timestamp: new Date().toISOString(),
             createdUserId: this.user.$key,
             createdUserName: this.user.firstname + ' ' + this.user.lastname,
-            createdUserAvatar: this.user.avatar
+            createdUserAvatar: this.user.avatar,
+            nodename: 'agendas'
         }
-        this.firebaseservice.createActivity(activity);
+        this.firebaseservice.createActivity1(activity);
     }
 
     toggleGroup() {
