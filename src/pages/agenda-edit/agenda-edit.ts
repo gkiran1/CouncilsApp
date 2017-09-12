@@ -426,7 +426,7 @@ export class AgendaEditPage {
     delete() {
         this.firebaseservice.removeAgenda(this.agendaKey, this.agenda)
             .then(res => {
-                this.firebaseservice.removeActivities(this.agendaKey);
+                //this.firebaseservice.removeActivities(this.agendaKey);
                 this.nav.pop();
             }).catch(err => { this.showAlert('Connection error.') });
     }

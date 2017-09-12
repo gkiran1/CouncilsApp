@@ -88,6 +88,7 @@ export class NewAssignmentPage {
         });
 
         if (assignment) {
+          this.assignment.createdusername = this.user.firstname + ' ' + this.user.lastname;
           firebaseservice.getCouncilByCouncilKey(assignment.councilid).subscribe(council => {
             this.updateUsers(council.$key);
             setTimeout(() => {
@@ -167,7 +168,8 @@ export class NewAssignmentPage {
       notes: value.notes,
       isCompleted: value.isCompleted,
       assignedusername: value.assigneduser,
-      completedby: value.completedby
+      completedby: value.completedby,
+      createdusername: this.user.firstname + ' ' + this.user.lastname,
     }
   }
   onChange($event) {
@@ -257,7 +259,7 @@ export class NewAssignmentPage {
     this.firebaseservice.removeAssignment(this.assignmentKey, this.assignment)
       .then(res => {
 
-        this.firebaseservice.removeActivities(this.assignmentKey);
+        // this.firebaseservice.removeActivities(this.assignmentKey);
 
         // this.createActivity(this.assignmentKey, 'deleted');
         this.nav.pop();
@@ -352,9 +354,10 @@ export class NewAssignmentPage {
       timestamp: new Date().toISOString(),
       createdUserId: this.user.$key,
       createdUserName: this.user.firstname + ' ' + this.user.lastname,
-      createdUserAvatar: this.user.avatar
+      createdUserAvatar: this.user.avatar,
+      nodename: 'assignments'
     }
-    this.firebaseservice.createActivity(activity);
+    this.firebaseservice.createActivity1(activity);
   }
 
   keypressed($event) {
